@@ -81,11 +81,11 @@ const AccountMenu = React.forwardRef((props, ref) => {
     }
 
     return (
-        <aside className={rootClass}>
+        <div className={rootClass}>
             <div ref={ref} className={contentsClass}>
                 {accountMenuIsOpen ? dropdownContents : null}
             </div>
-        </aside>
+        </div>
     );
 });
 
