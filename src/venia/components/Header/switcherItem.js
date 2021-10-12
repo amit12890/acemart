@@ -3,7 +3,7 @@ import { Check } from 'react-feather';
 import { bool, func, shape, string } from 'prop-types';
 
 import { useStyle } from '../../classify';
-import Icon from '../Icon/icon';
+import Icon from '@magento/venia-ui/lib/components/Icon/icon';
 import defaultClasses from './switcherItem.css';
 
 const SwitcherItem = props => {

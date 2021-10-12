@@ -2,7 +2,7 @@ import React, { Fragment, Suspense } from 'react';
 import { shape, string } from 'prop-types';
 import { Link, Route } from 'react-router-dom';
 
-import Logo from '../Logo';
+import Logo from '@magento/venia-ui/lib/components/Logo';
 import AccountTrigger from './accountTrigger';
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
@@ -13,12 +13,12 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
 import { useStyle } from '../../classify';
 import defaultClasses from './header.css';
-import PageLoadingIndicator from '../PageLoadingIndicator';
+import PageLoadingIndicator from '@magento/venia-ui/lib/components/PageLoadingIndicator';
 import StoreSwitcher from './storeSwitcher';
 import CurrencySwitcher from './currencySwitcher';
-import MegaMenu from '../MegaMenu';
+import MegaMenu from '@magento/venia-ui/lib/components/MegaMenu';
 
-const SearchBar = React.lazy(() => import('../SearchBar'));
+const SearchBar = React.lazy(() => import('@magento/venia-ui/lib/components/SearchBar'));
 
 const Header = props => {
     const {

@@ -6,20 +6,19 @@ import { useToasts } from '@magento/peregrine';
 import { useApp } from '@magento/peregrine/lib/talons/App/useApp';
 
 import globalCSS from '../../index.css';
-import { HeadProvider, StoreTitle } from '../Head';
+import { HeadProvider, StoreTitle } from '@magento/venia-ui/lib/components/Head';
 import Main from '../Main';
-import Mask from '../Mask';
-import Routes from '../Routes';
-import ToastContainer from '../ToastContainer';
-import Icon from '../Icon';
+import Mask from '@magento/venia-ui/lib/components/Mask';
+import Navigation from '@magento/venia-ui/lib/components/Navigation';
+import Routes from '@magento/venia-ui/lib/components/Routes';
+import ToastContainer from '@magento/venia-ui/lib/components/ToastContainer';
+import Icon from '@magento/venia-ui/lib/components/Icon';
 
 import {
     AlertCircle as AlertCircleIcon,
     CloudOff as CloudOffIcon,
     Wifi as WifiIcon
 } from 'react-feather';
-
-const Navigation = React.lazy(() => import('../Navigation'));
 
 const OnlineIcon = <Icon src={WifiIcon} attrs={{ width: 18 }} />;
 const OfflineIcon = <Icon src={CloudOffIcon} attrs={{ width: 18 }} />;

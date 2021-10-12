@@ -6,11 +6,11 @@ import { useIntl } from 'react-intl';
 import { useCartTrigger } from '@magento/peregrine/lib/talons/Header/useCartTrigger';
 
 import { useStyle } from '../../classify';
-import Icon from '../Icon';
+import Icon from '@magento/venia-ui/lib/components/Icon';
 import defaultClasses from './cartTrigger.css';
 import { GET_ITEM_COUNT_QUERY } from './cartTrigger.gql';
 
-const MiniCart = React.lazy(() => import('../MiniCart'));
+const MiniCart = React.lazy(() => import('@magento/venia-ui/lib/components/MiniCart'));
 
 const CartTrigger = props => {
     const {
