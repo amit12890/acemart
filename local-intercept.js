@@ -20,10 +20,22 @@
 function localIntercept(targets) {
     targets.of("@magento/venia-ui").routes.tap(routes => {
         routes.push({
+            name: "Landing Page",
+            pattern: "/",
+            exact: true,
+            path: require.resolve("./src/components/LandingPage")
+        });
+        routes.push({
             name: "Login Page",
             pattern: "/customer/account/login",
             exact: true,
             path: require.resolve("./src/components/LoginPage")
+        });
+        routes.push({
+            name: "Signup Page",
+            pattern: "/customer/account/create",
+            exact: true,
+            path: require.resolve("./src/components/SignupPage")
         });
         return routes;
     });
