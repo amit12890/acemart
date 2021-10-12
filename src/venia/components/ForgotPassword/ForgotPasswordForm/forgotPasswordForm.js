@@ -4,7 +4,7 @@ import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
 
 import { useStyle } from '../../../classify';
-import { isRequired } from '../../../util/formValidators';
+import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import Button from '../../Button';
 import Field from '../../Field';
 import TextInput from '../../TextInput';

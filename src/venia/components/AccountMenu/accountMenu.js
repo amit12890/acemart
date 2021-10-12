@@ -4,7 +4,7 @@ import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountM
 
 import { useStyle } from '../../classify';
 import CreateAccount from '../CreateAccount';
-import SignIn from '../SignIn/signIn';
+import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
 import ForgotPassword from '../ForgotPassword';
 import defaultClasses from './accountMenu.css';

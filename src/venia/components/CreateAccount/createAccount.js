@@ -6,19 +6,19 @@ import { Redirect } from 'react-router-dom';
 import { useCreateAccount } from '@magento/peregrine/lib/talons/CreateAccount/useCreateAccount';
 
 import { useStyle } from '../../classify';
-import combine from '../../util/combineValidators';
+import combine from '@magento/venia-ui/lib/util/combineValidators';
 import {
     hasLengthAtLeast,
     isRequired,
     validatePassword
-} from '../../util/formValidators';
+} from '@magento/venia-ui/lib/util/formValidators';
 import Button from '../Button';
-import Checkbox from '../Checkbox';
+import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
 import Field from '../Field';
 import TextInput from '../TextInput';
 import defaultClasses from './createAccount.css';
-import FormError from '../FormError';
-import Password from '../Password';
+import FormError from '@magento/venia-ui/lib/components/FormError';
+import Password from '@magento/venia-ui/lib/components/Password';
 
 const CreateAccount = props => {
     const talonProps = useCreateAccount({

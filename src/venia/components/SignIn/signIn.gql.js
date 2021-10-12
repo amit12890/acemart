@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-import { CartPageFragment } from '../CartPage/cartPageFragments.gql';
+import { CartPageFragment } from '@magento/venia-ui/lib/components/CartPage/cartPageFragments.gql';
 
 export const GET_CART_DETAILS_QUERY = gql`
     query GetCartDetailsAfterSignIn($cartId: String!) {
