@@ -3,6 +3,7 @@ import { shape, string } from 'prop-types';
 import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountMenu';
 
 import { useStyle } from '../../classify';
+import { Portal } from '@magento/venia-ui/lib/components/Portal';
 import CreateAccount from '../CreateAccount';
 import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
@@ -81,11 +82,13 @@ const AccountMenu = React.forwardRef((props, ref) => {
     }
 
     return (
-        <aside className={rootClass}>
-            <div ref={ref} className={contentsClass}>
-                {accountMenuIsOpen ? dropdownContents : null}
+        <Portal>
+            <div className={rootClass}>
+                <div ref={ref} className={contentsClass}>
+                    {accountMenuIsOpen ? dropdownContents : null}
+                </div>
             </div>
-        </aside>
+        </Portal>
     );
 });
 

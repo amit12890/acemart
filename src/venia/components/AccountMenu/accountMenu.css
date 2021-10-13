@@ -5,7 +5,7 @@
     overflow: visible;
     left: -100vw;
     opacity: 0;
-    position: absolute;
+    position: fixed;
     top: 100%;
     transition: opacity 192ms var(--venia-global-anim-out),
         visibility 192ms var(--venia-global-anim-out),
@@ -23,10 +23,11 @@
 
 .root_open {
     composes: root;
-    left: 50%;
+    left: 20%;
+    top: 30%;
     opacity: 1;
     transition: opacity 224ms var(--venia-global-anim-in),
-        visibility 224ms var(--venia-global-anim-in), left 0s;
+        visibility 224ms var(--venia-global-anim-in), left 0s, top 0s;
     visibility: visible;
 }
 
