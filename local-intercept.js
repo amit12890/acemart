@@ -26,16 +26,10 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/LandingPage")
         });
         routes.push({
-            name: "Login Page",
-            pattern: "/customer/account/login",
+            name: "Authentication Page",
+            pattern: "/customer/account/:auth",
             exact: true,
-            path: require.resolve("./src/components/LoginPage")
-        });
-        routes.push({
-            name: "Signup Page",
-            pattern: "/customer/account/create",
-            exact: true,
-            path: require.resolve("./src/components/SignupPage")
+            path: require.resolve("./src/components/AuthenticationPage")
         });
         return routes;
     });
