@@ -2,7 +2,7 @@ import React, { Fragment, Suspense } from 'react';
 import { shape, string } from 'prop-types';
 import { Link, Route } from 'react-router-dom';
 
-import Logo from '@magento/venia-ui/lib/components/Logo';
+import Logo from '../Logo';
 import AccountTrigger from './accountTrigger';
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
