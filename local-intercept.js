@@ -26,6 +26,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/LandingPage")
         });
         routes.push({
+            name: "Account Page",
+            pattern: "/customer/account",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "Authentication Page",
             pattern: "/customer/account/:auth",
             exact: true,

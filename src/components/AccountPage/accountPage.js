@@ -1,17 +1,16 @@
 import React from 'react';
 
 import { useStyle } from '../../venia/classify';
-// import CreateAccount from '../../venia/components/CreateAccount';
-import defaultClasses from './signupPage.css';
+import defaultClasses from './accountPage.css';
 
-const SignupPage = (props) => {
+const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
 
     return (
         <div className={classes.wrapper}>
-            This Will be signupPage
+            This Will be AccountPage
         </div>
     );
 }
 
-export default SignupPage
+export default AccountPage
