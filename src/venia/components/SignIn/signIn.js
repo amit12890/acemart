@@ -4,17 +4,19 @@ import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
 import { useSignIn } from '@magento/peregrine/lib/talons/SignIn/useSignIn';
 
-import { useStyle } from '../../classify';
-import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import Button from '../Button';
 import Field from '../Field';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import TextInput from '../TextInput';
-import defaultClasses from './signIn.css';
-import { GET_CART_DETAILS_QUERY } from './signIn.gql';
+import Password from '../Password';
 import LinkButton from '../LinkButton';
-import Password from '@magento/venia-ui/lib/components/Password';
 import FormError from '@magento/venia-ui/lib/components/FormError/formError';
+
+import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
+import { useStyle } from '../../classify';
+import { GET_CART_DETAILS_QUERY } from './signIn.gql';
+import defaultClasses from './signIn.css';
+
 
 const SignIn = props => {
     const classes = useStyle(defaultClasses, props.classes);

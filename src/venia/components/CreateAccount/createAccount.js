@@ -16,9 +16,9 @@ import Button from '../Button';
 import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
 import Field from '../Field';
 import TextInput from '../TextInput';
+import Password from '../Password';
 import defaultClasses from './createAccount.css';
 import FormError from '@magento/venia-ui/lib/components/FormError';
-import Password from '@magento/venia-ui/lib/components/Password';
 
 const CreateAccount = props => {
     const talonProps = useCreateAccount({
