@@ -4,15 +4,34 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 import { useStyle } from '../../classify';
-import { useAccountMenuItems } from '@magento/peregrine/lib/talons/AccountMenu/useAccountMenuItems';
 
 import defaultClasses from './accountMenuItems.css';
 
 const AccountMenuItems = props => {
-    const { onSignOut } = props;
+    const { onSignOut: handleSignOut } = props;
 
-    const talonProps = useAccountMenuItems({ onSignOut });
-    const { handleSignOut, menuItems } = talonProps;
+    const menuItems = [
+        {
+            name: 'My Account',
+            id: 'accountMenu.myAccount',
+            url: '/customer/account'
+        },
+        {
+            name: 'Order History',
+            id: 'accountMenu.orderHistoryLink',
+            url: '/sales/order/history/'
+        },
+        {
+            name: 'Manage Addresses',
+            id: 'accountMenu.manageAddresses',
+            url: '/address-book'
+        },
+        {
+            name: 'View Wishlists',
+            id: 'accountMenu.viewWishlists',
+            url: 'wishlist/'
+        }
+    ];
 
     const classes = useStyle(defaultClasses, props.classes);
 
