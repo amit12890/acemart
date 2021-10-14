@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AccountMenuItems from "../../venia/components/AccountMenu/accountMenuItems";
+
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';
 
@@ -8,7 +10,7 @@ const AccountPage = (props) => {
 
     return (
         <div className={classes.wrapper}>
-            This Will be AccountPage
+            <AccountMenuItems />
         </div>
     );
 }

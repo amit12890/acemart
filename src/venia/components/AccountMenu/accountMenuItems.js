@@ -46,16 +46,18 @@ const AccountMenuItems = props => {
     return (
         <div className={classes.root}>
             {menu}
-            <button
-                className={classes.signOut}
-                onClick={handleSignOut}
-                type="button"
-            >
-                <FormattedMessage
-                    id={'accountMenu.signOutButtonText'}
-                    defaultMessage={'Sign Out'}
-                />
-            </button>
+            {!!handleSignOut &&
+                <button
+                    className={classes.signOut}
+                    onClick={handleSignOut}
+                    type="button"
+                >
+                    <FormattedMessage
+                        id={'accountMenu.LogoutButtonText'}
+                        defaultMessage={'Logout'}
+                    />
+                </button>
+            }
         </div>
     );
 };
@@ -67,5 +69,6 @@ AccountMenuItems.propTypes = {
         link: string,
         signOut: string
     }),
+    // if parent don't pass onSignOut prop don't show extra signOut button
     onSignOut: func
 };
