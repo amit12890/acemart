@@ -53,8 +53,8 @@ Logo.propTypes = {
 };
 
 Logo.defaultProps = {
-    height: 18,
-    width: 102
+    height: 75,
+    width: 108
 };
 
 export default Logo;
