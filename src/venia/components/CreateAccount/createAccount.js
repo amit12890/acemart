@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from 'informed';
 import { func, shape, string, bool } from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { useCreateAccount } from '@magento/peregrine/lib/talons/CreateAccount/useCreateAccount';
+import zxcvbn from 'zxcvbn';
 
 import { useStyle } from '../../classify';
+import { useCreateAccount } from '@magento/peregrine/lib/talons/CreateAccount/useCreateAccount';
 import combine from '@magento/venia-ui/lib/util/combineValidators';
 import {
     hasLengthAtLeast,
@@ -19,8 +20,13 @@ import TextInput from '../TextInput';
 import Password from '../Password';
 import defaultClasses from './createAccount.css';
 import FormError from '@magento/venia-ui/lib/components/FormError';
+import PasswordStrengthMeter from './passwordStrengthMeter';
+
 
 const CreateAccount = props => {
+    const [passwordScore, setPasswordScore] = useState(0);
+    const [showPassScore, setShowPassScore] = useState(false);
+
     const talonProps = useCreateAccount({
         initialValues: props.initialValues,
         onSubmit: props.onSubmit,
@@ -40,6 +46,17 @@ const CreateAccount = props => {
 
     if (isSignedIn) {
         return <Redirect to="/" />;
+    }
+
+    const handlePasswordUpdate = (e) => {
+        const passwordText = e.target.value || "";
+        if (passwordText.length) {
+            setPasswordScore(zxcvbn(passwordText).score);
+            setShowPassScore(true);
+        } else {
+            setPasswordScore(0);
+            setShowPassScore(false);
+        }
     }
 
     const cancelButton = props.isCancelButtonHidden ? null : (
@@ -135,6 +152,7 @@ const CreateAccount = props => {
                 <Password
                     autoComplete="new-password"
                     fieldName="password"
+                    onChange={handlePasswordUpdate}
                     isToggleButtonHidden={false}
                     label={formatMessage({
                         id: 'createAccount.passwordText',
@@ -149,6 +167,9 @@ const CreateAccount = props => {
                     mask={value => value && value.trim()}
                     maskOnBlur={true}
                 />
+
+                {showPassScore && <PasswordStrengthMeter score={passwordScore} />}
+                
                 <div className={classes.subscribe}>
                     <Checkbox
                         field="subscribe"
