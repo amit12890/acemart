@@ -91,10 +91,16 @@ const AccountMenu = React.forwardRef((props, ref) => {
 
     return (
         <Portal>
-            <Mask isActive={accountMenuIsOpen} />
-            <div className={rootClass}>
-                <div ref={ref} className={contentsClass}>
-                    {accountMenuIsOpen ? dropdownContents : null}
+            <div className={classes.portalWrapper}>
+                <Mask isActive={accountMenuIsOpen} />
+                <div className={rootClass}>
+                
+                    <div ref={ref} className={contentsClass}>
+                        <div 
+                            className={classes.myClose}
+                            onClick={() => setAccountMenuIsOpen(false)}>close</div>
+                        {accountMenuIsOpen ? dropdownContents : null}
+                    </div>
                 </div>
             </div>
         </Portal>
