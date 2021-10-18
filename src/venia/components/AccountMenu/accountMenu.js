@@ -5,6 +5,7 @@ import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountM
 
 import { useStyle } from '../../classify';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 import CreateAccount from '../CreateAccount';
 import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
@@ -90,6 +91,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
 
     return (
         <Portal>
+            <Mask isActive={accountMenuIsOpen} />
             <div className={rootClass}>
                 <div ref={ref} className={contentsClass}>
                     {accountMenuIsOpen ? dropdownContents : null}
