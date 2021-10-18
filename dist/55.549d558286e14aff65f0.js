@@ -1,5 +1,5 @@
 /*!
- * @version 3f81286-dev
+ * @version db4e724-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[55],{ayyG:function(n,a,e){(a=n.exports=e("JPst")(!1)).push([n.i,".landingPage-wrapper-2GQ {\n    max-width: 800px;\n    margin: 100px auto;\n    text-align: center;\n}",""]),a.locals={wrapper:"landingPage-wrapper-2GQ"}},rcu4:function(n,a,e){"use strict"
