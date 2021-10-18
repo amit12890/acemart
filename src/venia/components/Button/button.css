@@ -5,7 +5,7 @@
     border-color: rgb(var(--stroke));
     border-radius: 0;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     color: rgb(var(--stroke));
     font-size: var(--venia-global-fontSize-100);
     font-weight: var(--venia-global-fontWeight-bold);
@@ -22,7 +22,9 @@
 }
 
 .root:hover {
-    --stroke: var(--venia-brand-color-1-800);
+    background-color: var(--venia-global-color-gray-50);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
 }
 
 .root:focus {

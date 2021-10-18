@@ -41,20 +41,24 @@ const ForgotPassword = props => {
         <FormSubmissionSuccessful email={forgotPasswordEmail} />
     ) : (
         <Fragment>
-            <h2 className={classes.title}>
+            <h1 className={classes.title}>
                 <FormattedMessage
                     id={'forgotPassword.recoverPasswordText'}
                     defaultMessage={'Recover Password'}
                 />
-            </h2>
-            <p className={classes.instructions}>{INSTRUCTIONS}</p>
-            <ForgotPasswordForm
-                initialValues={initialValues}
-                isResettingPassword={isResettingPassword}
-                onSubmit={handleFormSubmit}
-                onCancel={handleCancel}
-            />
-            <FormErrors errors={formErrors} />
+            </h1>
+            <div className={classes.loginContainer}>
+            <div className={classes.forgotPasswordBlock}>
+                <p className={classes.instructions}>{INSTRUCTIONS}</p>
+                <ForgotPasswordForm
+                    initialValues={initialValues}
+                    isResettingPassword={isResettingPassword}
+                    onSubmit={handleFormSubmit}
+                    onCancel={handleCancel}
+                />
+                <FormErrors errors={formErrors} />
+            </div>
+            </div>
         </Fragment>
     );
 
