@@ -60,7 +60,7 @@
 /* derived classes */
 .root_lowPriority {
     composes: root;
-    --stroke: var(--venia-global-color-gray-700);
+    background-color: var(--venia-global-color-gray-50);
 }
 .root_lowPriority:hover {
     background-color: rgb(var(--venia-global-color-blue-700));
@@ -76,6 +76,11 @@
 
 .root_normalPriority {
     composes: root;
+    background-color: rgba(255 255 255);
+}
+.root_normalPriority:hover {
+    background-color: rgb(var(--venia-global-color-blue-700));
+    color: rgb(var(--venia-global-color-gray-50));
 }
 .root_normalPriorityNegative {
     composes: root_normalPriority;
