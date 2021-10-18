@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from 'informed';
 import { func, shape, string, bool } from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { useCreateAccount } from '@magento/peregrine/lib/talons/CreateAccount/useCreateAccount';
+import zxcvbn from 'zxcvbn';
 
 import { useStyle } from '../../classify';
+import { useCreateAccount } from '@magento/peregrine/lib/talons/CreateAccount/useCreateAccount';
 import combine from '@magento/venia-ui/lib/util/combineValidators';
 import {
     hasLengthAtLeast,
@@ -19,8 +20,12 @@ import TextInput from '../TextInput';
 import Password from '../Password';
 import defaultClasses from './createAccount.css';
 import FormError from '@magento/venia-ui/lib/components/FormError';
+import PasswordStrengthMeter from './passwordStrengthMeter';
+
 
 const CreateAccount = props => {
+    const [passwordScore, setPasswordScore] = useState(null);
+
     const talonProps = useCreateAccount({
         initialValues: props.initialValues,
         onSubmit: props.onSubmit,
@@ -40,6 +45,15 @@ const CreateAccount = props => {
 
     if (isSignedIn) {
         return <Redirect to="/" />;
+    }
+
+    const handlePasswordUpdate = (e) => {
+        const passwordText = e.target.value || "";
+        if (passwordText.length) {
+            setPasswordScore(zxcvbn(passwordText).score);
+        } else {
+            setPasswordScore(null);
+        }
     }
 
     const cancelButton = props.isCancelButtonHidden ? null : (
@@ -77,89 +91,98 @@ const CreateAccount = props => {
             initialValues={initialValues}
             onSubmit={handleSubmit}
         >
-            <h2 className={classes.title}>
+            <h1 className={classes.title}>
                 <FormattedMessage
                     id={'createAccount.createAccountText'}
                     defaultMessage={'Create an Account'}
                 />
-            </h2>
-            <FormError errors={Array.from(errors.values())} />
-            <Field
-                label={formatMessage({
-                    id: 'createAccount.firstNameText',
-                    defaultMessage: 'First Name'
-                })}
-            >
-                <TextInput
-                    field="customer.firstname"
-                    autoComplete="given-name"
-                    validate={isRequired}
-                    validateOnBlur
-                    mask={value => value && value.trim()}
-                    maskOnBlur={true}
-                />
-            </Field>
-            <Field
-                label={formatMessage({
-                    id: 'createAccount.lastNameText',
-                    defaultMessage: 'Last Name'
-                })}
-            >
-                <TextInput
-                    field="customer.lastname"
-                    autoComplete="family-name"
-                    validate={isRequired}
-                    validateOnBlur
-                    mask={value => value && value.trim()}
-                    maskOnBlur={true}
-                />
-            </Field>
-            <Field
-                label={formatMessage({
-                    id: 'createAccount.emailText',
-                    defaultMessage: 'Email'
-                })}
-            >
-                <TextInput
-                    field="customer.email"
-                    autoComplete="email"
-                    validate={isRequired}
-                    validateOnBlur
-                    mask={value => value && value.trim()}
-                    maskOnBlur={true}
-                />
-            </Field>
-            <Password
-                autoComplete="new-password"
-                fieldName="password"
-                isToggleButtonHidden={false}
-                label={formatMessage({
-                    id: 'createAccount.passwordText',
-                    defaultMessage: 'Password'
-                })}
-                validate={combine([
-                    isRequired,
-                    [hasLengthAtLeast, 8],
-                    validatePassword
-                ])}
-                validateOnBlur
-                mask={value => value && value.trim()}
-                maskOnBlur={true}
-            />
-            <div className={classes.subscribe}>
-                <Checkbox
-                    field="subscribe"
-                    id="subscribe"
+            </h1>
+            <div className={classes.loginContainer}>
+               
+                <FormError errors={Array.from(errors.values())} />
+                <div className={classes.createAccountBlock}>
+                <Field
                     label={formatMessage({
-                        id: 'createAccount.subscribeText',
-                        defaultMessage: 'Subscribe to news and updates'
+                        id: 'createAccount.firstNameText',
+                        defaultMessage: 'First Name'
                     })}
+                >
+                    <TextInput
+                        field="customer.firstname"
+                        autoComplete="given-name"
+                        validate={isRequired}
+                        validateOnBlur
+                        mask={value => value && value.trim()}
+                        maskOnBlur={true}
+                    />
+                </Field>
+                <Field
+                    label={formatMessage({
+                        id: 'createAccount.lastNameText',
+                        defaultMessage: 'Last Name'
+                    })}
+                >
+                    <TextInput
+                        field="customer.lastname"
+                        autoComplete="family-name"
+                        validate={isRequired}
+                        validateOnBlur
+                        mask={value => value && value.trim()}
+                        maskOnBlur={true}
+                    />
+                </Field>
+                <Field
+                    label={formatMessage({
+                        id: 'createAccount.emailText',
+                        defaultMessage: 'Email'
+                    })}
+                >
+                    <TextInput
+                        field="customer.email"
+                        autoComplete="email"
+                        validate={isRequired}
+                        validateOnBlur
+                        mask={value => value && value.trim()}
+                        maskOnBlur={true}
+                    />
+                </Field>
+                <Password
+                    autoComplete="new-password"
+                    fieldName="password"
+                    onChange={handlePasswordUpdate}
+                    isToggleButtonHidden={false}
+                    label={formatMessage({
+                        id: 'createAccount.passwordText',
+                        defaultMessage: 'Password'
+                    })}
+                    validate={combine([
+                        isRequired,
+                        [hasLengthAtLeast, 8],
+                        validatePassword
+                    ])}
+                    validateOnBlur
+                    mask={value => value && value.trim()}
+                    maskOnBlur={true}
                 />
+
+                <PasswordStrengthMeter score={passwordScore} />
+                
+                <div className={classes.subscribe}>
+                    <Checkbox
+                        field="subscribe"
+                        id="subscribe"
+                        label={formatMessage({
+                            id: 'createAccount.subscribeText',
+                            defaultMessage: 'Subscribe to news and updates'
+                        })}
+                    />
+                </div>
+                <div className={classes.actions}>
+                    {submitButton}
+                    {cancelButton}
+                </div>
             </div>
-            <div className={classes.actions}>
-                {submitButton}
-                {cancelButton}
-            </div>
+        </div>
         </Form>
     );
 };

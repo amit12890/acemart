@@ -58,59 +58,68 @@ const SignIn = props => {
 
     return (
         <div className={classes.root}>
-            <h2 className={classes.title}>
+            <h1 className={classes.title}>
                 <FormattedMessage
                     id={'signIn.titleText'}
                     defaultMessage={'Sign-in to Your Account'}
                 />
-            </h2>
+            </h1>
+            <div className={classes.loginContainer}>
+            
             <FormError errors={Array.from(errors.values())} />
             <Form
                 getApi={setFormApi}
                 className={classes.form}
                 onSubmit={handleSubmit}
             >
-                <Field
-                    label={formatMessage({
-                        id: 'signIn.emailAddressText',
-                        defaultMessage: 'Email address'
-                    })}
-                >
-                    <TextInput
-                        autoComplete="email"
-                        field="email"
-                        validate={isRequired}
-                    />
-                </Field>
-                <Password
-                    fieldName="password"
-                    label={formatMessage({
-                        id: 'signIn.passwordText',
-                        defaultMessage: 'Password'
-                    })}
-                    validate={isRequired}
-                    autoComplete="current-password"
-                    isToggleButtonHidden={false}
-                />
-                <div className={classes.forgotPasswordButtonContainer}>
-                    <LinkButton
-                        classes={forgotPasswordClasses}
-                        type="button"
-                        onClick={handleForgotPassword}
+                <div className={classes.loginBlock}>
+                    <Field
+                        label={formatMessage({
+                            id: 'signIn.emailAddressText',
+                            defaultMessage: 'Email address'
+                        })}
                     >
-                        <FormattedMessage
-                            id={'signIn.forgotPasswordText'}
-                            defaultMessage={'Forgot Password?'}
+                        <TextInput
+                            autoComplete="email"
+                            field="email"
+                            validate={isRequired}
                         />
-                    </LinkButton>
+                    </Field>
+                    <Password
+                        fieldName="password"
+                        label={formatMessage({
+                            id: 'signIn.passwordText',
+                            defaultMessage: 'Password'
+                        })}
+                        validate={isRequired}
+                        autoComplete="current-password"
+                        isToggleButtonHidden={false}
+                    />
+
+                    <div className={classes.actionToolbarLogin}>
+                        <Button priority="high" type="submit">
+                            <FormattedMessage
+                                id={'signIn.signInText'}
+                                defaultMessage={'Sign In'}
+                            />
+                        </Button>
+                        <div className={classes.forgotPasswordButtonContainer}>
+                            <LinkButton
+                                classes={forgotPasswordClasses}
+                                type="button"
+                                onClick={handleForgotPassword}
+                            >
+                                <FormattedMessage
+                                    id={'signIn.forgotPasswordText'}
+                                    defaultMessage={'Forgot Password?'}
+                                />
+                            </LinkButton>
+                        </div>
+                    </div>
                 </div>
-                <div className={classes.buttonsContainer}>
-                    <Button priority="high" type="submit">
-                        <FormattedMessage
-                            id={'signIn.signInText'}
-                            defaultMessage={'Sign In'}
-                        />
-                    </Button>
+                <div className={classes.blockFooter}>
+            
+                   
                     <Button
                         priority="normal"
                         type="button"
@@ -123,6 +132,8 @@ const SignIn = props => {
                     </Button>
                 </div>
             </Form>
+            </div>
+            
         </div>
     );
 };
