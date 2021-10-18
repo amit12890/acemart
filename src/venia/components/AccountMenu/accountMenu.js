@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountMenu';
 
@@ -9,9 +10,11 @@ import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
 import ForgotPassword from '../ForgotPassword';
 import defaultClasses from './accountMenu.css';
+import { FORGOT_PASSWORD_URL, SIGNUP_URL } from "../../../components/AuthenticationPage/constants";
 
 const AccountMenu = React.forwardRef((props, ref) => {
     const { accountMenuIsOpen, setAccountMenuIsOpen } = props;
+    const history = useHistory();
     const talonProps = useAccountMenu({
         accountMenuIsOpen,
         setAccountMenuIsOpen
@@ -21,12 +24,16 @@ const AccountMenu = React.forwardRef((props, ref) => {
         username,
         handleAccountCreation,
         handleSignOut,
-        handleForgotPassword,
         handleCancel,
-        handleCreateAccount,
         updateUsername
     } = talonProps;
 
+    const handleCreateAccount = useCallback(() => {
+        history.push(SIGNUP_URL);
+    }, []);
+    const handleForgotPassword = useCallback(() => {
+        history.push(FORGOT_PASSWORD_URL);
+    }, []);
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = accountMenuIsOpen ? classes.root_open : classes.root;
     const contentsClass = accountMenuIsOpen
