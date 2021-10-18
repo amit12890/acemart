@@ -24,8 +24,7 @@ import PasswordStrengthMeter from './passwordStrengthMeter';
 
 
 const CreateAccount = props => {
-    const [passwordScore, setPasswordScore] = useState(0);
-    const [showPassScore, setShowPassScore] = useState(false);
+    const [passwordScore, setPasswordScore] = useState(null);
 
     const talonProps = useCreateAccount({
         initialValues: props.initialValues,
@@ -52,10 +51,8 @@ const CreateAccount = props => {
         const passwordText = e.target.value || "";
         if (passwordText.length) {
             setPasswordScore(zxcvbn(passwordText).score);
-            setShowPassScore(true);
         } else {
-            setPasswordScore(0);
-            setShowPassScore(false);
+            setPasswordScore(null);
         }
     }
 
@@ -168,7 +165,7 @@ const CreateAccount = props => {
                     maskOnBlur={true}
                 />
 
-                {showPassScore && <PasswordStrengthMeter score={passwordScore} />}
+                <PasswordStrengthMeter score={passwordScore} />
                 
                 <div className={classes.subscribe}>
                     <Checkbox

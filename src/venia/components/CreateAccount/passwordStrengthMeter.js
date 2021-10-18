@@ -4,35 +4,33 @@ import { useStyle } from '../../classify';
 import defaultClasses from './passwordStrengthMeter.css'
 
 
-const getStrengthText = (score) => {
+const getMeterConfig = (score) => {
     switch (score) {
+        case 0:
+            return ["Weak", "25%", "weak"];
+
         case 1:
-            return "Very Weak";
+            return ["Medium", "50%", "medium"];
 
         case 2:
-            return "Weak";
+            return ["Strong", "75%", "strong"];
 
         case 3:
-            return "Strong";
-
-        case 4:
-        return "Very Strong";
-
-        case 5:
-        return "Super Strong";
+            return ["Very Strong", "100%", "very-strong"];
     
         default:
-            return "Very Weak"
+            return ["No Password", "10%", "disabled"];
     }
 }
 
 const PasswordStrengthMeter = ({score}) => {
     const classes = useStyle(defaultClasses);
+    const [meterText, divWidth, divClass] = getMeterConfig(score);
 
     return (
-        <div className={classes.meter_wrapper}>
-            <div className={classes.meter} style={{width: `${score*20}%`}} />
-            <span className={classes.meter_text}>{getStrengthText(score)}</span>
+        <div className={[classes.meter_wrapper, classes[divClass]].join(" ")}>
+            <div className={classes.meter} style={{width: divWidth}} />
+            <span className={classes.meter_text}>{meterText}</span>
         </div>
     )
 }

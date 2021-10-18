@@ -8,7 +8,7 @@ import { useApp } from '@magento/peregrine/lib/talons/App/useApp';
 import globalCSS from '../../index.css';
 import { HeadProvider, StoreTitle } from '@magento/venia-ui/lib/components/Head';
 import Main from '../Main';
-import Mask from '@magento/venia-ui/lib/components/Mask';
+import Mask from '../Mask';
 import Navigation from '@magento/venia-ui/lib/components/Navigation';
 import Routes from '@magento/venia-ui/lib/components/Routes';
 import ToastContainer from '@magento/venia-ui/lib/components/ToastContainer';
