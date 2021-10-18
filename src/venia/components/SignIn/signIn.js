@@ -118,11 +118,8 @@ const SignIn = props => {
                     </div>
                 </div>
                 <div className={classes.blockFooter}>
-                <FormattedMessage
-                    id={'signIn.titleTextOne'}
-                    defaultMessage={'my custom text'}
-                />
-                    <div>test</div>
+            
+                   
                     <Button
                         priority="normal"
                         type="button"
