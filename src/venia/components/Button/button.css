@@ -61,7 +61,8 @@
     --stroke: var(--venia-global-color-gray-700);
 }
 .root_lowPriority:hover {
-    --stroke: var(--venia-global-color-gray-900);
+    background-color: rgb(var(--venia-global-color-blue-700));
+    color: rgb(var(--venia-global-color-gray-50));
 }
 .root_lowPriorityNegative {
     composes: root_lowPriority;
@@ -88,7 +89,7 @@
     color: rgb(var(--venia-global-color-gray-50));
 }
 .root_highPriorityNegative {
-    composes: root_highPriority;
+    composes: root_highPriority; 
     --stroke: var(--venia-global-color-red-700);
 }
 .root_highPriorityNegative:hover {
