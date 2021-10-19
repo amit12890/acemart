@@ -4,10 +4,7 @@
     justify-items: stretch;
 }
 
-.root_left_align {
-    compose: root;
-    text-align: left;
-}
+
 
 .forgotPassword {
     display: block;
@@ -49,20 +46,29 @@
 .forgotPasswordButtonContainer {
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     justify-self: start;
     text-align: center;
+    margin-top: 15px;
 }
 
 .forgotPasswordButton {
     composes: root from '../LinkButton/linkButton.css';
-    padding: 0;
+    padding: 0 0 5px 0 ;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid;
+    font-size: 14px;
+
 }
 
 .title {
     text-align: center;
     font-weight: bold;
     text-transform: capitalize;
+}
+.actionToolbar {
+
 }
 .actionToolbarLogin {
     margin-top: 20px;
@@ -71,7 +77,13 @@
     justify-content: space-between;
     justify-self: start;
     text-align: center;
+    flex-direction: column;
 }
+
+.actionToolbarLogin button {
+    width: 100%;
+}
+
 .loginContainer {
     border: 1px solid #e9eaec;
 }
@@ -89,6 +101,11 @@
     width: 100%;
     max-width: 400px;
     margin-bottom: 20px;
+}
+
+.loginBlock .label {
+    background-color: red;
+    
 }
 
 .form {
@@ -141,3 +158,50 @@ h3 {
 
 
 
+.root_left_align {
+    compose: root;
+    text-align: left;
+}
+
+.root_left_align .title { 
+    display: none;
+}
+
+.root_left_align .loginContainer {
+    border: none;
+}
+
+.root_left_align .blockHeaderContent {
+    text-align: left;
+}
+
+.root_left_align .loginBlock {
+    max-width: 100%;
+}
+
+.root_left_align .actionToolbar {
+    margin-top: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    justify-self: start;
+    text-align: center;
+}
+.root_left_align .actionToolbarLogin {
+    margin-top: 0;
+
+}
+
+.root_left_align .blockFooter {
+    background-color: #ddd;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.root_left_align .blockFooterContent {
+    max-width: 100%;
+}
+
+.root_left_align .blockFooterAction button {
+    width: auto;
+}

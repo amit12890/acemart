@@ -105,26 +105,28 @@ const SignIn = props => {
                         autoComplete="current-password"
                         isToggleButtonHidden={false}
                     />
-
-                    <div className={classes.actionToolbarLogin}>
-                        <Button priority="high" type="submit">
-                            <FormattedMessage
-                                id={'signIn.signInText'}
-                                defaultMessage={'Sign In'}
-                            />
-                        </Button>
-                        <div className={classes.forgotPasswordButtonContainer}>
-                            <LinkButton
-                                classes={forgotPasswordClasses}
-                                type="button"
-                                onClick={handleForgotPassword}
-                            >
+                    <div className={classes.actionToolbar}>
+                        <div className={classes.actionToolbarLogin}>
+                            <Button priority="high" type="submit">
                                 <FormattedMessage
-                                    id={'signIn.forgotPasswordText'}
-                                    defaultMessage={'Forgot Password?'}
+                                    id={'signIn.signInText'}
+                                    defaultMessage={'Sign In'}
                                 />
-                            </LinkButton>
+                            </Button>
                         </div>
+                            <div className={classes.forgotPasswordButtonContainer}>
+                                <LinkButton
+                                    classes={forgotPasswordClasses}
+                                    type="button"
+                                    onClick={handleForgotPassword}
+                                >
+                                    <FormattedMessage
+                                        id={'signIn.forgotPasswordText'}
+                                        defaultMessage={'Forgot Password?'}
+                                    />
+                                </LinkButton>
+                            </div>
+                       
                     </div>
                 </div>
                 </div>
