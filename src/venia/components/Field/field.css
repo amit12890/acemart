@@ -2,18 +2,22 @@
     color: rgb(var(--venia-global-color-text));
     display: grid;
     align-content: start;
-    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.root:first-child {
+    margin-top: 0; 
 }
 
 .label {
     align-items: center;
     display: flex;
-    font-size: 1rem;
+    font-size: .85rem;
     font-weight: var(--venia-global-fontWeight-semibold);
     justify-content: space-between;
     line-height: 1rem;
     padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-weight: 700;
     
 }
 
@@ -22,6 +26,7 @@
 .input {
     background: white;
     border: var(--form-element-input__border-width) solid rgb(var(--form-element-input__border-color));
+    border-width: 0 0 1px 0;
     border-radius: 0;
     color: rgb(var(--venia-global-color-text));
     display: inline-flex;
@@ -30,7 +35,7 @@
     height: 40px;
     margin: 0;
     max-width: 100%;
-    padding: 10px; 
+    padding: 10px 10px 10px 0; 
     width: 100%;
     -webkit-appearance: none;
 }

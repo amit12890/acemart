@@ -68,6 +68,7 @@
     text-transform: capitalize;
 }
 .actionToolbar {
+    text-align: inherit;
 
 }
 .actionToolbarLogin {
@@ -102,9 +103,10 @@
 }
 
 .loginBlock .label {
-    background-color: red;
+    justify-content: center;
     
 }
+
 
 .form {
     display: inherit;
@@ -211,4 +213,16 @@ h3 {
 .label_left_align {
     composes: label from '../Field/field.css';
     text-align: right;
+}
+
+.password_label {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    font-weight: var(--venia-global-fontWeight-semibold);
+    line-height: 1rem;
+    padding: 0;
+    margin-bottom: 10px;
+    
 }

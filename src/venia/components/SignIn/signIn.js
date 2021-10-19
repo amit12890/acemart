@@ -64,6 +64,11 @@ const SignIn = props => {
         label: props.isPopup
             ? classes.label_left_align : classes.label
     }
+    const password_label = 
+    {
+        label: props.isPopup
+            ? classes.label_left_align : classes.password_label
+    }
 
     return (
         <div className={root_class}>
@@ -91,8 +96,8 @@ const SignIn = props => {
                 <div className={classes.loginBlock}>
                     <Field
                         label= {formatMessage({
-                            id: 'signIn.emailAddressText',
-                            defaultMessage: 'Email address'
+                            id: 'signIn.emailText',
+                            defaultMessage: 'Email'
                         })}
                         classes={label_class}
                     >
@@ -110,6 +115,7 @@ const SignIn = props => {
                             defaultMessage: 'Password'
                         })}
                         validate={isRequired}
+                        classes={password_label}
                         autoComplete="current-password"
                         isToggleButtonHidden={false}
                     />
