@@ -59,6 +59,12 @@ const SignIn = props => {
     const root_class = props.isPopup ?
         classes.root_left_align : classes.root;
 
+    const label_class = 
+    {
+        label: props.isPopup
+            ? classes.label_left_align : classes.label
+    }
+
     return (
         <div className={root_class}>
             <h1 className={classes.title}>
@@ -88,7 +94,7 @@ const SignIn = props => {
                             id: 'signIn.emailAddressText',
                             defaultMessage: 'Email address'
                         })}
-                        className={classes.testMy}
+                        classes={label_class}
                     >
                         <TextInput
                             autoComplete="email"

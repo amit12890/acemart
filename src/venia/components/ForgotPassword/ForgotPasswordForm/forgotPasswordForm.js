@@ -42,10 +42,7 @@ const ForgotPasswordForm = props => {
                     priority="low"
                     onClick={onCancel}
                 >
-                    <FormattedMessage
-                        id={'forgotPasswordForm.cancelButtonText'}
-                        defaultMessage={'Cancel'}
-                    />
+                    Go Back
                 </Button>
                 <Button
                     className={classes.submitButton}
