@@ -87,9 +87,7 @@
 .loginContainer {
     border: 1px solid #e9eaec;
 }
-.loginContainerTwo {
-    
-}
+
 .blockContentWrapper {
     display: flex;
     align-items: center;
@@ -187,9 +185,9 @@ h3 {
     justify-self: start;
     text-align: center;
 }
+
 .root_left_align .actionToolbarLogin {
     margin-top: 0;
-
 }
 
 .root_left_align .blockFooter {
