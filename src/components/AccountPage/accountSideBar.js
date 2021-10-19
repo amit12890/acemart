@@ -12,22 +12,27 @@ const AccountSideBar = props => {
         {
             name: 'My Account',
             id: 'myAccount',
-            url: '/customer/account'
+            url: '/customer/account/'
         },
         {
             name: 'My Orders',
             id: 'orderHistory',
-            url: '/sales/order/history'
+            url: '/sales/order/history/'
         },
         {
             name: 'My Wish List',
             id: 'viewWishlists',
-            url: '/wishlist'
+            url: '/wishlist/'
         },
         {
             name: 'Address Book',
             id: 'manageAddresses',
-            url: '/address-book'
+            url: '/customer/address/new/'
+        },
+        {
+            name: 'Account Information',
+            id: 'manageAddresses',
+            url: '/customer/account/edit/'
         }
     ];
 

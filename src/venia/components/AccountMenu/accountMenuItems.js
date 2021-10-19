@@ -14,7 +14,7 @@ const AccountMenuItems = props => {
         {
             name: 'My Account',
             id: 'accountMenu.myAccount',
-            url: '/customer/account'
+            url: '/customer/account/'
         },
         {
             name: 'Order History',
@@ -24,12 +24,12 @@ const AccountMenuItems = props => {
         {
             name: 'Manage Addresses',
             id: 'accountMenu.manageAddresses',
-            url: '/address-book'
+            url: '/customer/account/edit/'
         },
         {
             name: 'View Wishlists',
             id: 'accountMenu.viewWishlists',
-            url: 'wishlist/'
+            url: '/wishlist/'
         }
     ];
 

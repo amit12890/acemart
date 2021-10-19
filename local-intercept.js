@@ -25,15 +25,29 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/components/LandingPage")
         });
+        // -------------- Account Page urls --------------
         routes.push({
             name: "Account Page",
-            pattern: "/customer/account",
+            pattern: "/customer/account/",
             exact: true,
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Orders Page",
+            pattern: "/sales/order/history/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "My WishList Page",
+            pattern: "/wishlist/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        // -------------- Auth Urls --------------
+        routes.push({
             name: "Authentication Page",
-            pattern: "/customer/account/:auth",
+            pattern: "/customer/account/:auth/",
             exact: true,
             path: require.resolve("./src/components/AuthenticationPage")
         });
