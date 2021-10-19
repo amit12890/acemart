@@ -35,20 +35,15 @@ const ForgotPasswordForm = props => {
                 />
             </Field>
             <div className={classes.buttonContainer}>
-                <div className={[classes.myclass, classes.myclass1].join(" ")}>
-                    <Button
-                        className={classes.cancelButton}
-                        disabled={isResettingPassword}
-                        type="button"
-                        priority="low"
-                        onClick={onCancel}
-                    >
-                        <FormattedMessage
-                            id={'forgotPasswordForm.cancelButtonText'}
-                            defaultMessage={'Cancel'}
-                        />
-                    </Button>
-                </div>
+                <Button
+                    className={classes.cancelButton}
+                    disabled={isResettingPassword}
+                    type="button"
+                    priority="low"
+                    onClick={onCancel}
+                >
+                    Go Back
+                </Button>
                 <Button
                     className={classes.submitButton}
                     disabled={isResettingPassword}

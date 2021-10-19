@@ -203,6 +203,12 @@ h3 {
 .root_left_align .blockFooterAction button {
     width: auto;
 }
-.testMy {
-    text-align: left; 
+
+.label {
+    composes: label from '../Field/field.css';
+}
+
+.label_left_align {
+    composes: label from '../Field/field.css';
+    text-align: right;
 }
