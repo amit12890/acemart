@@ -4,6 +4,10 @@
     justify-items: stretch;
 }
 
+.root_left_align {
+    compose: root;
+    text-align: left;
+}
 
 .forgotPassword {
     display: block;

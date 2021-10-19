@@ -56,8 +56,11 @@ const SignIn = props => {
         root: classes.forgotPasswordButton
     };
 
+    const root_class = props.isPopup ?
+        classes.root : classes.root_left_align;
+
     return (
-        <div className={classes.root}>
+        <div className={root_class}>
             <h1 className={classes.title}>
                 <FormattedMessage
                     id={'signIn.titleText'}
@@ -119,7 +122,8 @@ const SignIn = props => {
                 </div>
                 <div className={classes.blockFooter}>
             
-                   
+                   <h3>New Customers</h3>
+                   <div>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</div>
                     <Button
                         priority="normal"
                         type="button"

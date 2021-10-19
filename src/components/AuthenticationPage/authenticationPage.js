@@ -71,6 +71,7 @@ const AuthenticationPage = (props) => {
             default: {
                 content = (
                     <SignIn
+                        isPopup={false}
                         showCreateAccount={handleCreateAccount}
                         showForgotPassword={handleForgotPassword}
                     />

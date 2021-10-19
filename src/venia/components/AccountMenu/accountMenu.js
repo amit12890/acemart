@@ -82,6 +82,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
                     classes={{
                         modal_active: classes.loading
                     }}
+                    isPopup={true}
                     setDefaultUsername={updateUsername}
                     showCreateAccount={handleCreateAccount}
                     showForgotPassword={handleForgotPassword}
