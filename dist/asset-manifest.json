@@ -2,13 +2,13 @@
   "RootCmp_CMS_PAGE__default.js": "/RootCmp_CMS_PAGE__default.4eda4f93108eb2778a2b.js",
   "RootCmp_SEARCH__default.js": "/RootCmp_SEARCH__default.e39d82ab5766a4fab03d.js",
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
-  "client.js": "/client.9806cdb54a0e2e8e2f3b.js",
+  "client.js": "/client.fb47ed51c8435fa27866.js",
   "entrypoints": {
     "client": {
       "js": [
-        "/runtime.af4f3d1012d3891ee253.js",
+        "/runtime.514f09989e2c58448ef3.js",
         "/vendors.9ee71f41ba51e42f58f0.js",
-        "/client.9806cdb54a0e2e8e2f3b.js"
+        "/client.fb47ed51c8435fa27866.js"
       ]
     }
   },
@@ -17,7 +17,7 @@
   "i18n-en_US.js": "/i18n-en_US.715f5fbc7f0be7453563.js",
   "logo.svg": "/logo-qeq.svg",
   "noProductsFound.png": "/noProductsFound-e9n.png",
-  "runtime.js": "/runtime.af4f3d1012d3891ee253.js",
+  "runtime.js": "/runtime.514f09989e2c58448ef3.js",
   "vendors.js": "/vendors.9ee71f41ba51e42f58f0.js",
   "vendors~RootCmp_CATEGORY__default.js": "/vendors~RootCmp_CATEGORY__default.9d4857630fd21ef807c2.js",
   "vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default.32b9f7c3bd0576317c3b.js",
@@ -25,9 +25,9 @@
   "vendors~RootCmp_PRODUCT__default.js": "/vendors~RootCmp_PRODUCT__default.1c32badb7249cc02d0ba.js",
   "bundles": {
     "load": [
-      "/runtime.af4f3d1012d3891ee253.js",
+      "/runtime.514f09989e2c58448ef3.js",
       "/vendors.9ee71f41ba51e42f58f0.js",
-      "/client.9806cdb54a0e2e8e2f3b.js"
+      "/client.fb47ed51c8435fa27866.js"
     ],
     "prefetch": [
       "/RootCmp_CMS_PAGE__default.4eda4f93108eb2778a2b.js",
@@ -37,9 +37,9 @@
   "js": {
     "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.4eda4f93108eb2778a2b.js",
     "RootCmp_SEARCH__default": "/RootCmp_SEARCH__default.e39d82ab5766a4fab03d.js",
-    "client": "/client.9806cdb54a0e2e8e2f3b.js",
+    "client": "/client.fb47ed51c8435fa27866.js",
     "i18n-en_US": "/i18n-en_US.715f5fbc7f0be7453563.js",
-    "runtime": "/runtime.af4f3d1012d3891ee253.js",
+    "runtime": "/runtime.514f09989e2c58448ef3.js",
     "vendors": "/vendors.9ee71f41ba51e42f58f0.js",
     "vendors~RootCmp_CATEGORY__default": "/vendors~RootCmp_CATEGORY__default.9d4857630fd21ef807c2.js",
     "vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default.32b9f7c3bd0576317c3b.js",
