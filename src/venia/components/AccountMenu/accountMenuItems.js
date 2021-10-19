@@ -3,6 +3,12 @@ import { func, shape, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
+import {
+    MY_ACCOUNT_URL,
+    MY_WISHLIST_URL,
+    MY_ORDERS_LIST_URL,
+} from '../../../components/AccountPage/constants';
+
 import { useStyle } from '../../classify';
 
 import defaultClasses from './accountMenuItems.css';
@@ -14,12 +20,12 @@ const AccountMenuItems = props => {
         {
             name: 'My Account',
             id: 'accountMenu.myAccount',
-            url: '/customer/account/'
+            url: MY_ACCOUNT_URL
         },
         {
             name: 'Order History',
             id: 'accountMenu.orderHistoryLink',
-            url: '/sales/order/history/'
+            url: MY_ORDERS_LIST_URL
         },
         {
             name: 'Manage Addresses',
@@ -29,7 +35,7 @@ const AccountMenuItems = props => {
         {
             name: 'View Wishlists',
             id: 'accountMenu.viewWishlists',
-            url: '/wishlist/'
+            url: MY_WISHLIST_URL
         }
     ];
 
