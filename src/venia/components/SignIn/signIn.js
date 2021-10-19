@@ -57,7 +57,7 @@ const SignIn = props => {
     };
 
     const root_class = props.isPopup ?
-        classes.root : classes.root_left_align;
+        classes.root_left_align : classes.root;
 
     return (
         <div className={root_class}>
@@ -68,13 +68,20 @@ const SignIn = props => {
                 />
             </h1>
             <div className={classes.loginContainer}>
-            
+                <div className={classes.blockHeader}>
+                    <div className={classes.blockHeaderContent}>
+                        <h2>REGISTERED CUSTOMERS</h2>
+                        <p>If you have an account, sign in with your email address.</p> 
+
+                    </div>
+                </div>
             <FormError errors={Array.from(errors.values())} />
             <Form
                 getApi={setFormApi}
                 className={classes.form}
                 onSubmit={handleSubmit}
             >
+                <div className={classes.blockContentWrapper}>
                 <div className={classes.loginBlock}>
                     <Field
                         label={formatMessage({
@@ -120,22 +127,29 @@ const SignIn = props => {
                         </div>
                     </div>
                 </div>
+                </div>
+         
                 <div className={classes.blockFooter}>
+                    <div className={classes.blockFooterContent}>
             
-                   <h3>New Customers</h3>
-                   <div>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</div>
-                    <Button
-                        priority="normal"
-                        type="button"
-                        onClick={handleCreateAccount}
-                    >
-                        <FormattedMessage
-                            id={'signIn.createAccountText'}
-                            defaultMessage={'Create an Account'}
-                        />
-                    </Button>
+                    <h3>New Customers</h3>
+                    <p>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
+                    <div className={classes.blockFooterAction}>
+                        <Button
+                            priority="high"
+                            type="button"
+                            onClick={handleCreateAccount}
+                        >
+                            <FormattedMessage
+                                id={'signIn.createAccountText'}
+                                defaultMessage={'Create an Account'}
+                            />
+                        </Button>
+                    </div>
+                    </div>
                 </div>
             </Form>
+           
             </div>
             
         </div>

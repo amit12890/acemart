@@ -75,7 +75,7 @@ const Header = props => {
                     >
                         <Logo classes={{ logo: classes.logo }} />
                     </Link>
-                    <MegaMenu />
+                    
                     <div className={classes.secondaryActions}>
                         <SearchTrigger
                             onClick={handleSearchTriggerClick}
@@ -87,6 +87,9 @@ const Header = props => {
                 </div>
                 {searchBar}
             </header>
+            <div className={classes.navContainer}>
+                <MegaMenu />
+            </div>
         </Fragment>
     );
 };
