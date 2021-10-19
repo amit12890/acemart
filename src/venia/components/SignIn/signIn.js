@@ -84,15 +84,17 @@ const SignIn = props => {
                 <div className={classes.blockContentWrapper}>
                 <div className={classes.loginBlock}>
                     <Field
-                        label={formatMessage({
+                        label= {formatMessage({
                             id: 'signIn.emailAddressText',
                             defaultMessage: 'Email address'
                         })}
+                        className={classes.testMy}
                     >
                         <TextInput
                             autoComplete="email"
                             field="email"
                             validate={isRequired}
+                            
                         />
                     </Field>
                     <Password
