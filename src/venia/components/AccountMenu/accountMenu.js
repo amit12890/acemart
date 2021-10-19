@@ -3,9 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountMenu';
 
+import { X as XIcon } from 'react-feather';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+
 import { useStyle } from '../../classify';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
-import Mask from '../Mask';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 import CreateAccount from '../CreateAccount';
 import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
@@ -98,7 +101,19 @@ const AccountMenu = React.forwardRef((props, ref) => {
                     <div ref={ref} className={contentsClass}>
                         <div 
                             className={classes.myClose}
-                            onClick={() => setAccountMenuIsOpen(false)}>close</div>
+                            onClick={() => setAccountMenuIsOpen(false)}> 
+                                
+                            <Icon 
+                                src={XIcon}
+                                classes={{
+                                    root:classes.myRoot,
+                                    icon:classes.myIcon
+                                }} />
+                
+           
+
+
+                            </div>
                         {accountMenuIsOpen ? dropdownContents : null}
                     </div>
                 </div>
