@@ -100,7 +100,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
                 
                     <div ref={ref} className={contentsClass}>
                         <div 
-                            className={classes.myClose}
+                            className={classes.modalClose}
                             onClick={() => setAccountMenuIsOpen(false)}> 
                                 
                             <Icon 
@@ -113,8 +113,10 @@ const AccountMenu = React.forwardRef((props, ref) => {
            
 
 
-                            </div>
-                        {accountMenuIsOpen ? dropdownContents : null}
+                        </div>
+                        <div className={classes.modalContent}>
+                            {accountMenuIsOpen ? dropdownContents : null}
+                        </div>
                     </div>
                 </div>
             </div>

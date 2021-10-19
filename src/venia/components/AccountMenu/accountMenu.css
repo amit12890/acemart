@@ -58,6 +58,8 @@
     width: 100%;
     max-width: 650px;
     margin: 0 auto;
+    position: relative;
+    padding: 2.5rem;
 }
 
 .contents_open {
@@ -89,12 +91,24 @@
 }
 
 .myRoot {
-    
+    display: inline-flex;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    top: .875rem;
+    right: 1rem;
 }
-.myClose {
+.modalClose {
     text-align: right;
-    
 }
 .myIcon {
-    color: #333;
+    color: #8f94ab;
+}
+.myIcon:hover {
+    color: var(--venia-brand-color-1-800); 
+}
+
+
+.modalContent {
+    
 }
