@@ -3,9 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountMenu';
 
+import { X as XIcon } from 'react-feather';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+
 import { useStyle } from '../../classify';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
-import Mask from '../Mask';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 import CreateAccount from '../CreateAccount';
 import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
@@ -79,6 +82,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
                     classes={{
                         modal_active: classes.loading
                     }}
+                    isPopup={true}
                     setDefaultUsername={updateUsername}
                     showCreateAccount={handleCreateAccount}
                     showForgotPassword={handleForgotPassword}
@@ -91,10 +95,30 @@ const AccountMenu = React.forwardRef((props, ref) => {
 
     return (
         <Portal>
-            <Mask isActive={accountMenuIsOpen} />
-            <div className={rootClass}>
-                <div ref={ref} className={contentsClass}>
-                    {accountMenuIsOpen ? dropdownContents : null}
+            <div className={classes.portalWrapper}>
+                <Mask isActive={accountMenuIsOpen} />
+                <div className={rootClass}>
+                
+                    <div ref={ref} className={contentsClass}>
+                        <div 
+                            className={classes.modalClose}
+                            onClick={() => setAccountMenuIsOpen(false)}> 
+                                
+                            <Icon 
+                                src={XIcon}
+                                classes={{
+                                    root:classes.myRoot,
+                                    icon:classes.myIcon
+                                }} />
+                
+           
+
+
+                        </div>
+                        <div className={classes.modalContent}>
+                            {accountMenuIsOpen ? dropdownContents : null}
+                        </div>
+                    </div>
                 </div>
             </div>
         </Portal>

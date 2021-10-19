@@ -2,9 +2,12 @@
     display: grid;
     gap: 1.5rem;
     justify-items: stretch;
-    padding: 1rem 1.5rem;
 }
 
+.root_left_align {
+    compose: root;
+    text-align: left;
+}
 
 .forgotPassword {
     display: block;
@@ -53,7 +56,6 @@
 
 .forgotPasswordButton {
     composes: root from '../LinkButton/linkButton.css';
-
     padding: 0;
 }
 
@@ -85,5 +87,6 @@
     text-align: center;
     padding: 20px;
 }
+
 
 

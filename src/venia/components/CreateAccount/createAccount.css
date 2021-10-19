@@ -52,7 +52,8 @@
 }
 
 .subscribe {
-    margin-left: -0.375rem;
+    margin: 20px 0 0 0; 
+    
 }
 
 @media (max-width: 960px) {
