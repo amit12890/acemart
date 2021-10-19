@@ -1,4 +1,14 @@
 .wrapper {
-    max-width: 500px;
-    margin: 50px auto;
+    padding-top: 15px;
+    width: 100%;
+}
+
+.sidebar_wrapper {
+    width: 25%;
+    float: left;
+}
+
+.content_wrapper {
+    width: 75%;
+    float: right;
 }
