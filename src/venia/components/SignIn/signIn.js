@@ -94,6 +94,7 @@ const SignIn = props => {
             >
                 <div className={classes.blockContentWrapper}>
                 <div className={classes.loginBlock}>
+
                     <Field
                         label= {formatMessage({
                             id: 'signIn.emailText',

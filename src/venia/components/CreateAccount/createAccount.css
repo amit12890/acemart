@@ -53,6 +53,12 @@
     padding-bottom: 10px;
     font-size: 14px;
 }
+.icon {
+    display: inline-flex;
+}
+.svgIcon {
+    fill: currentColor;
+}
 
 .cancelButton {
     composes: root_highPriority from '../Button/button.css';
