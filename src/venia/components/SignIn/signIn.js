@@ -59,16 +59,18 @@ const SignIn = props => {
     const root_class = props.isPopup ?
         classes.root_left_align : classes.root;
 
-    const label_class = 
+    const password_classes = props.isPopup ?
     {
-        label: props.isPopup
-            ? classes.label_left_align : classes.label
+        label: classes.label_left_align,
+        input: classes.input_borderPassword
     }
-    const password_label = 
-    {
-        label: props.isPopup
-            ? classes.label_left_align : classes.password_label
+    :{ input: classes.password_label };
+
+    const label_class = { label: props.isPopup
+        ? classes.label_left_align : classes.label
     }
+    const input_class = props.isPopup ?
+        {input: classes.input_border} : {}
 
     return (
         <div className={root_class}>
@@ -105,7 +107,7 @@ const SignIn = props => {
                             autoComplete="email"
                             field="email"
                             validate={isRequired}
-                            
+                            classes={input_class}
                         />
                     </Field>
                     <Password
@@ -115,7 +117,7 @@ const SignIn = props => {
                             defaultMessage: 'Password'
                         })}
                         validate={isRequired}
-                        classes={password_label}
+                        classes={password_classes}
                         autoComplete="current-password"
                         isToggleButtonHidden={false}
                     />

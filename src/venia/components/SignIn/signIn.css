@@ -179,11 +179,11 @@ h3 {
     max-width: 100%;
 }
 
-.root_left_align .input_border {
+.input_border {
     border-width: 1px;
 }
 
-.root_left_align .input_borderPassword {
+.input_borderPassword {
     border-width: 1px;
 }
 
