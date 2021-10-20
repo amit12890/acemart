@@ -35,7 +35,7 @@ const ForgotPassword = props => {
     const INSTRUCTIONS = formatMessage({
         id: 'forgotPassword.instructions',
         defaultMessage:
-            'Please enter the email address associated with this account.'
+            'Please enter your email address below to receive a password reset link.'
     });
     const children = hasCompleted ? (
         <FormSubmissionSuccessful email={forgotPasswordEmail} />

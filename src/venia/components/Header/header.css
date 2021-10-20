@@ -177,3 +177,7 @@
         box-shadow: 0 var(--dot-size) 0 0;
     }
 }
+
+.navContainer {
+    background-color: var(--venia-brand-color-1-800);
+}
