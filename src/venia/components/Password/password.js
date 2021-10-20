@@ -44,6 +44,7 @@ const Password = props => {
             <TextInput
                 after={!isToggleButtonHidden && passwordButton}
                 autoComplete={autoComplete}
+                classes={propClasses}
                 field={fieldName}
                 type={fieldType}
                 validate={validate}

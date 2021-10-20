@@ -64,7 +64,7 @@ const SignIn = props => {
         label: classes.label_left_align,
         input: classes.input_borderPassword
     }
-    :{ input: classes.password_label };
+    :{ label: classes.password_label };
 
     const label_class = { label: props.isPopup
         ? classes.label_left_align : classes.label
