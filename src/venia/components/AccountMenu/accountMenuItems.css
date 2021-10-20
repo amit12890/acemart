@@ -9,18 +9,18 @@
 .link {
     composes: root from '../LinkButton/linkButton.css';
 
-    color: rgb(var(--venia-global-color-gray-700));
+    color: rgb(var(--link-color));
     justify-content: start;
     text-decoration: none;
 }
 
 .link:hover {
-    color: rgb(var(--venia-global-color-gray-600));
+    color: rgb(var(--link-color-hover));
 }
 
 .signOut {
     composes: link;
 
-    border-top: 2px solid rgb(var(--venia-global-color-gray));
+    border-top: 2px solid rgb(var(--border-color-base));
     padding-top: 1rem;
 }

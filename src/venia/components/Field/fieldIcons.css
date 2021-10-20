@@ -15,8 +15,8 @@
 }
 
 .input > input {
-    padding-left: 0;
-    padding-right: calc(1.875rem * var(--iconsAfter) + 0.625rem);
+    padding-right: calc(1.875rem * var(--iconsAfter) + 0.625rem); 
+    
 }
 
 .before,
@@ -44,5 +44,5 @@
 }
 
 .before svg {
-    stroke: rgb(var(--venia-global-color-gray-600));
+    stroke: rgb(var(--color-gray-darken0));
 }

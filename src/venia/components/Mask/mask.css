@@ -1,5 +1,5 @@
 .root {
-    background-color: black;
+    background-color: rgb(var(--color-black));
     cursor: pointer;
     display: block;
     height: 100%;

@@ -17,8 +17,8 @@
 }
 
 .menu {
-    background-color: rgb(var(--venia-global-color-gray-50));
-    border: 1px solid rgb(var(--venia-global-color-gray-dark));
+    background-color: rgb(var(--color-white));
+    border: 1px solid rgb(var(--color-gray-middle2));
     border-radius: 0.25rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     max-height: 24rem;
@@ -46,11 +46,11 @@
 }
 
 .menuItem:hover {
-    background-color: rgb(var(--venia-global-color-gray));
+    background-color: rgb(var(--color-gray-middle1));
 }
 
 .menuItem:not(:last-child) {
-    border-bottom: 1px solid rgb(var(--venia-global-color-gray-dark));
+    border-bottom: 1px solid rgb(var(--color-gray-middle2));
 }
 
 .symbol {
@@ -63,8 +63,8 @@
 }
 
 .root:last-child:not(:only-child):before {
-    border-left: 1px solid rgb(var(--venia-global-color-gray-darker));
-    border-left: 1px solid rgb(var(--venia-global-color-border));
+    border-left: 1px solid rgb(var(--color-gray-darken0));
+    border-left: 1px solid rgb(var(--border-color-base));
     content: '';
     height: 1em;
     width: 1rem;

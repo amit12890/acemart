@@ -1,4 +1,6 @@
 .root {
+    --content-width: 27.5rem;
+    
     height: 0;
     overflow: visible;
     opacity: 0;
@@ -41,9 +43,9 @@
 }
 
 .contents {
-    background-color: rgb(var(--venia-global-color-background));
+    background-color: rgb(var(--page-background-color));
     border-radius: 1px;
-    box-shadow: 0 1px 6px rgb(var(--venia-global-color-gray-900) / 0.2);
+    box-shadow: 0 1px 6px rgb(var(--color-gray40) / 0.2);
     display: grid;
     min-height: 10rem;
     transform: translate3d(0, -8px, 0);
@@ -102,7 +104,7 @@
     color: #8f94ab;
 }
 .myIcon:hover {
-    color: var(--venia-brand-color-1-800); 
+    
 }
 
 

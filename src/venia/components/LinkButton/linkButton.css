@@ -1,13 +1,13 @@
 .root {
     composes: root from '../clickable.css';
-    color: rgb(var(--venia-brand-color-1-700));
-    font-size: var(--venia-global-fontSize-200);
-    font-weight: var(--venia-global-fontWeight-semibold);
+    color: rgb(var(--theme-color-primary));
+    font-size: var(--fontSize-200);
+    font-weight: var(--font-weight-semibold);
     text-decoration: underline;
     line-height: 1.25rem;
     max-width: 100%;
 }
 
 .root:hover {
-    color: rgb(var(--venia-global-color-gray-900));
+    color: rgb(var(--color-gray40));
 }

@@ -1,16 +1,24 @@
 .megaMenuItem {
-    padding: 0 10px;
+    
 }
 
 .megaMenuLink {
+    color: rgb(var(--color-white));
     align-items: center;
     display: inline-flex;
-    min-height: 5rem;
+    min-height: 50px;
+    padding: 12px 20px;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+
+}
+.megaMenuLink:hover {
+    text-decoration: none;
 }
 
 .megaMenuLinkActive {
     composes: megaMenuLink;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .megaMenuItem:hover > div,
@@ -20,5 +28,6 @@
 
 .megaMenuItem:hover .megaMenuLink,
 .megaMenuItem:focus .megaMenuLink {
-    text-decoration: underline;
+    text-decoration: none;
+    background-color: rgb(116 116 116);
 }

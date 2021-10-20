@@ -4,12 +4,10 @@
     justify-items: stretch;
 }
 
-
-
 .forgotPassword {
     display: block;
     text-decoration: underline;
-    color: rgb(var(--venia-global-color-error));
+    color: rgb(var(--color-error));
     font-size: 0.8rem;
 }
 
@@ -22,7 +20,7 @@
     visibility: hidden;
     height: 100%;
     width: 100%;
-    background-color: rgb(var(--venia-global-color-gray));
+    background-color: rgb(var(--color-gray-light0));
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -65,7 +63,9 @@
 .title {
     text-align: center;
     font-weight: bold;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    color: rgb(var(--theme-color-primary));
+    font-size: var(--fontSize-600);
 }
 .actionToolbar {
     text-align: inherit;
@@ -180,11 +180,17 @@ h3 {
 }
 
 .input_border {
+    composes: input from '../Field/field.css';
     border-width: 1px;
+    padding-left: 10px;
+    
 }
 
 .input_borderPassword {
+    composes: input from '../Field/field.css';
     border-width: 1px;
+    padding-left: 10px;
+    
 }
 
 .root_left_align .actionToolbar {
