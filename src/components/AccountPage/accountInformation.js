@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useAccountInformationPage } from '@magento/peregrine/lib/talons/AccountInformationPage/useAccountInformationPage';
 
 import { useStyle } from '../../venia/classify';
@@ -10,9 +10,11 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 
 import defaultClasses from './accountInformation.css';
 import AccountInformationPageOperations from './accountInformation.gql.js';
+import { EDIT_ACCOUNT_INFO, EDIT_ACCOUNT_PASSWROD } from './constants';
 
 const AccountInformation = props => {
     const classes = useStyle(defaultClasses, props.classes);
+    const history = useHistory()
 
     const talonProps = useAccountInformationPage({
         ...AccountInformationPageOperations
@@ -24,9 +26,12 @@ const AccountInformation = props => {
         loadDataError
     } = talonProps;
 
-    const showUpdateMode = () => {
-        // redirect to account info form
-    }
+    const goToAccountInfoEdit = useCallback(() => {
+        history.push(EDIT_ACCOUNT_INFO)
+    }, [])
+    const goToAccountInfoEditPassword = useCallback(() => {
+        history.push(EDIT_ACCOUNT_PASSWROD)
+    }, [])
 
     if (!isSignedIn) {
         return <Redirect to="/" />;
@@ -76,13 +81,18 @@ const AccountInformation = props => {
                     <Button
                         className={classes.editInformationButton}
                         disabled={false}
-                        onClick={showUpdateMode}
+                        onClick={goToAccountInfoEdit}
                         priority="normal"
                     >
-                        <FormattedMessage
-                            id={'global.editButton'}
-                            defaultMessage={'Edit'}
-                        />
+                        Edit
+                    </Button>
+                    <Button
+                        className={classes.editInformationButton}
+                        disabled={false}
+                        onClick={goToAccountInfoEditPassword}
+                        priority="normal"
+                    >
+                        Change Password
                     </Button>
                 </div>
             </div>
