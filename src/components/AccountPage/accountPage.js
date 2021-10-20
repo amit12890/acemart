@@ -37,7 +37,7 @@ const AccountPage = (props) => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.sidebar_wrapper}>
-                <AccountSideBar />
+                <AccountSideBar activeUrl={path} />
             </div>
             <div className={classes.content_wrapper}>
                 {content}

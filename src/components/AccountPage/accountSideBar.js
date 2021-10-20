@@ -41,8 +41,10 @@ const AccountSideBar = props => {
     return (
         <div className={classes.root}>
             {sidebarItems.map(item => {
+                const linkClass = item.url === props.activeUrl ?
+                    [classes.link, classes.link_active].join(" ") : classes.link
                 return (
-                    <Link className={classes.link} key={item.id} to={item.url}>
+                    <Link className={linkClass} key={item.id} to={item.url}>
                         {item.name}
                     </Link>
                 );
@@ -57,4 +59,5 @@ AccountSideBar.propTypes = {
     classes: shape({
         link: string,
     }),
+    activeUrl: string,
 };
