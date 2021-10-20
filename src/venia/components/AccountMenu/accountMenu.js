@@ -110,9 +110,6 @@ const AccountMenu = React.forwardRef((props, ref) => {
                                     root:classes.myRoot,
                                     icon:classes.myIcon
                                 }} />
-                
-           
-
 
                         </div>
                         <div className={classes.modalContent}>

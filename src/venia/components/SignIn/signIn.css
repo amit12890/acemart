@@ -4,10 +4,7 @@
     justify-items: stretch;
 }
 
-.root_left_align {
-    compose: root;
-    text-align: left;
-}
+
 
 .forgotPassword {
     display: block;
@@ -49,20 +46,30 @@
 .forgotPasswordButtonContainer {
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     justify-self: start;
     text-align: center;
+    margin-top: 15px;
 }
 
 .forgotPasswordButton {
     composes: root from '../LinkButton/linkButton.css';
-    padding: 0;
+    padding: 0 0 5px 0 ;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid;
+    font-size: 14px;
+
 }
 
 .title {
     text-align: center;
     font-weight: bold;
     text-transform: capitalize;
+}
+.actionToolbar {
+    text-align: inherit;
+
 }
 .actionToolbarLogin {
     margin-top: 20px;
@@ -71,22 +78,151 @@
     justify-content: space-between;
     justify-self: start;
     text-align: center;
+    flex-direction: column;
 }
+
+.actionToolbarLogin button {
+    width: 100%;
+}
+
 .loginContainer {
-    border: 1px solid #ccc;
+    border: 1px solid #e9eaec;
 }
-.loginContainerTwo {
-    border: 1px solid red;
-}
-.loginBlock {
-    margin-bottom: 20px;
-    padding:  20px;
-}
-.blockFooter {
-    background-color: #ccc;
-    text-align: center;
+
+.blockContentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
     padding: 20px;
 }
+.loginBlock {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.loginBlock .label {
+    justify-content: center;
+    
+}
+
+
+.form {
+    display: inherit;
+}
+
+.blockHeader {
+    text-align: center;
+    padding: 20px; 
+}
+.blockHeaderContent {
+    text-align: center;
+}
+.blockFooter {
+    background-color: #eee;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.blockFooterContent {
+    max-width: 400px;
+    font-size: 14px;
+}
+
+.blockFooterContent p{
+        font-size: 14px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+h3 {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.blockFooterAction {
+    margin-top: 10px;
+}
+.blockFooterAction button {
+    width: 100%;
+}
 
 
 
+.root_left_align {
+    compose: root;
+    text-align: left;
+}
+
+.root_left_align .title { 
+    display: none;
+}
+
+.root_left_align .loginContainer {
+    border: none;
+}
+
+.root_left_align .blockHeaderContent {
+    text-align: left;
+}
+
+.root_left_align .loginBlock {
+    max-width: 100%;
+}
+
+.root_left_align .actionToolbar {
+    margin-top: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    justify-self: start;
+    text-align: center;
+}
+
+.root_left_align .actionToolbarLogin {
+    margin-top: 0;
+}
+
+.root_left_align .blockFooter {
+    background-color: #ddd;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.root_left_align .blockFooterContent {
+    max-width: 100%;
+}
+
+.root_left_align .blockFooterAction button {
+    width: auto;
+}
+
+.label {
+    composes: label from '../Field/field.css';
+}
+
+.label_left_align {
+    composes: label from '../Field/field.css';
+    text-align: right;
+}
+
+.password_label {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    font-weight: var(--venia-global-fontWeight-semibold);
+    line-height: 1rem;
+    padding: 0;
+    margin-bottom: 10px;
+    
+}

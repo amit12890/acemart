@@ -57,7 +57,18 @@ const SignIn = props => {
     };
 
     const root_class = props.isPopup ?
-        classes.root : classes.root_left_align;
+        classes.root_left_align : classes.root;
+
+    const label_class = 
+    {
+        label: props.isPopup
+            ? classes.label_left_align : classes.label
+    }
+    const password_label = 
+    {
+        label: props.isPopup
+            ? classes.label_left_align : classes.password_label
+    }
 
     return (
         <div className={root_class}>
@@ -68,24 +79,33 @@ const SignIn = props => {
                 />
             </h1>
             <div className={classes.loginContainer}>
-            
+                <div className={classes.blockHeader}>
+                    <div className={classes.blockHeaderContent}>
+                        <h2>REGISTERED CUSTOMERS</h2>
+                        <p>If you have an account, sign in with your email address.</p> 
+
+                    </div>
+                </div>
             <FormError errors={Array.from(errors.values())} />
             <Form
                 getApi={setFormApi}
                 className={classes.form}
                 onSubmit={handleSubmit}
             >
+                <div className={classes.blockContentWrapper}>
                 <div className={classes.loginBlock}>
                     <Field
-                        label={formatMessage({
-                            id: 'signIn.emailAddressText',
-                            defaultMessage: 'Email address'
+                        label= {formatMessage({
+                            id: 'signIn.emailText',
+                            defaultMessage: 'Email'
                         })}
+                        classes={label_class}
                     >
                         <TextInput
                             autoComplete="email"
                             field="email"
                             validate={isRequired}
+                            
                         />
                     </Field>
                     <Password
@@ -95,47 +115,57 @@ const SignIn = props => {
                             defaultMessage: 'Password'
                         })}
                         validate={isRequired}
+                        classes={password_label}
                         autoComplete="current-password"
                         isToggleButtonHidden={false}
                     />
-
-                    <div className={classes.actionToolbarLogin}>
-                        <Button priority="high" type="submit">
-                            <FormattedMessage
-                                id={'signIn.signInText'}
-                                defaultMessage={'Sign In'}
-                            />
-                        </Button>
-                        <div className={classes.forgotPasswordButtonContainer}>
-                            <LinkButton
-                                classes={forgotPasswordClasses}
-                                type="button"
-                                onClick={handleForgotPassword}
-                            >
+                    <div className={classes.actionToolbar}>
+                        <div className={classes.actionToolbarLogin}>
+                            <Button priority="high" type="submit">
                                 <FormattedMessage
-                                    id={'signIn.forgotPasswordText'}
-                                    defaultMessage={'Forgot Password?'}
+                                    id={'signIn.signInText'}
+                                    defaultMessage={'Sign In'}
                                 />
-                            </LinkButton>
+                            </Button>
                         </div>
+                            <div className={classes.forgotPasswordButtonContainer}>
+                                <LinkButton
+                                    classes={forgotPasswordClasses}
+                                    type="button"
+                                    onClick={handleForgotPassword}
+                                >
+                                    <FormattedMessage
+                                        id={'signIn.forgotPasswordText'}
+                                        defaultMessage={'Forgot Password?'}
+                                    />
+                                </LinkButton>
+                            </div>
+                       
                     </div>
                 </div>
+                </div>
+         
                 <div className={classes.blockFooter}>
+                    <div className={classes.blockFooterContent}>
             
-                   <h3>New Customers</h3>
-                   <div>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</div>
-                    <Button
-                        priority="normal"
-                        type="button"
-                        onClick={handleCreateAccount}
-                    >
-                        <FormattedMessage
-                            id={'signIn.createAccountText'}
-                            defaultMessage={'Create an Account'}
-                        />
-                    </Button>
+                    <h3>New Customers</h3>
+                    <p>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
+                    <div className={classes.blockFooterAction}>
+                        <Button
+                            priority="high"
+                            type="button"
+                            onClick={handleCreateAccount}
+                        >
+                            <FormattedMessage
+                                id={'signIn.createAccountText'}
+                                defaultMessage={'Create an Account'}
+                            />
+                        </Button>
+                    </div>
+                    </div>
                 </div>
             </Form>
+           
             </div>
             
         </div>
