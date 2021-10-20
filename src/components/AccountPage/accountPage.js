@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import AccountSideBar from './accountSideBar';
 import UserAccount from './userAccount';
 import UserWishlist from './userWishlist';
-import UserOrderList from './UserOrderList';
+import UserOrderList from './userOrderList';
 
 import { 
     MY_ACCOUNT_URL,
