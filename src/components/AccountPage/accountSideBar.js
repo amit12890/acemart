@@ -11,27 +11,27 @@ const AccountSideBar = props => {
     const sidebarItems = [
         {
             name: 'My Account',
-            id: 'myAccount',
+            id: 0,
             url: '/customer/account/'
         },
         {
             name: 'My Orders',
-            id: 'orderHistory',
+            id: 1,
             url: '/sales/order/history/'
         },
         {
             name: 'My Wish List',
-            id: 'viewWishlists',
+            id: 2,
             url: '/wishlist/'
         },
         {
             name: 'Address Book',
-            id: 'manageAddresses',
+            id: 3,
             url: '/customer/address/new/'
         },
         {
             name: 'Account Information',
-            id: 'manageAddresses',
+            id: 4,
             url: '/customer/account/edit/'
         }
     ];
@@ -41,8 +41,10 @@ const AccountSideBar = props => {
     return (
         <div className={classes.root}>
             {sidebarItems.map(item => {
+                const linkClass = item.url === props.activeUrl ?
+                    [classes.link, classes.link_active].join(" ") : classes.link
                 return (
-                    <Link className={classes.link} key={item.id} to={item.url}>
+                    <Link className={linkClass} key={item.id} to={item.url}>
                         {item.name}
                     </Link>
                 );
@@ -57,4 +59,5 @@ AccountSideBar.propTypes = {
     classes: shape({
         link: string,
     }),
+    activeUrl: string,
 };

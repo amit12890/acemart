@@ -25,10 +25,29 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/components/LandingPage")
         });
+        // -------------- Auth Urls --------------
+        routes.push({
+            name: "Authentication Page",
+            pattern: "/customer/account/:auth/",
+            exact: true,
+            path: require.resolve("./src/components/AuthenticationPage")
+        });
         // -------------- Account Page urls --------------
         routes.push({
             name: "Account Page",
             pattern: "/customer/account/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Account Info Form",
+            pattern: "/customer/account/edit/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Account Info Form",
+            pattern: "/customer/account/edit/changepass/1/",
             exact: true,
             path: require.resolve("./src/components/AccountPage")
         });
@@ -43,13 +62,6 @@ function localIntercept(targets) {
             pattern: "/wishlist/",
             exact: true,
             path: require.resolve("./src/components/AccountPage")
-        });
-        // -------------- Auth Urls --------------
-        routes.push({
-            name: "Authentication Page",
-            pattern: "/customer/account/:auth/",
-            exact: true,
-            path: require.resolve("./src/components/AuthenticationPage")
         });
         return routes;
     });

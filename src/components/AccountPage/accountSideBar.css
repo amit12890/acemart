@@ -6,6 +6,12 @@
 }
 
 .link {
+    cursor: pointer;
     display: flex;
+    padding: 15px;
     flex: 1 1;
+}
+
+.link_active {
+    font-weight: bold;
 }
