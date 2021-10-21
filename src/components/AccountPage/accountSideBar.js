@@ -33,7 +33,27 @@ const AccountSideBar = props => {
             name: 'Account Information',
             id: 4,
             url: '/customer/account/edit/'
-        }
+        },
+        {
+            name: 'Stored Payment Methods',
+            id: 5,
+            url: '/vault/cards/listaction/'
+        },
+        {
+            name: 'My Product Reviews',
+            id: 6,
+            url: '/review/customer/'
+        },
+        {
+            name: 'Newsletter Subscription',
+            id: 7,
+            url: '/newsletter/manage/'
+        },
+        {
+            name: 'Questions/Answers',
+            id: 8,
+            url: '/itorisproductQa/customer/'
+        },
     ];
 
     const classes = useStyle(defaultClasses, props.classes);
