@@ -2,12 +2,12 @@ import { useMutation, useQuery } from '@apollo/client';
 import { get } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import Button from '../../venia/components/Button';
-import { GET_CUSTOMER_SUBSCRIPTION, SET_CUSTOMER_SUBSCRIPTION } from './newsletterSubscription.gql';
+import { GET_CUSTOMER_SUBSCRIPTION, UPDATE_CUSTOMER } from './newsletterSubscription.gql';
 
 
 const NewsletterSubscription = () => {
     const [subscription, setSubscription] = useState(false);
-    const [onSubmit, { data: res }] = useMutation(SET_CUSTOMER_SUBSCRIPTION);
+    const [onSubmit, { data: res }] = useMutation(UPDATE_CUSTOMER);
     const { loading, error, data } = useQuery(GET_CUSTOMER_SUBSCRIPTION);
 
     useEffect(() => {
@@ -20,9 +20,8 @@ const NewsletterSubscription = () => {
     }
 
     const submit = useCallback(() => {
-        console.log(data.customer.email)
-        onSubmit({ variables: { email: data.customer.email}})
-    }, [])
+        onSubmit({ variables: { input: {is_subscribed: subscription}}})
+    }, [subscription])
 
     return(
         <div>

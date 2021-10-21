@@ -15,3 +15,16 @@ export const SET_CUSTOMER_SUBSCRIPTION = gql`
         }
     }
 `;
+
+export const UPDATE_CUSTOMER = gql`
+mutation updateCustomer($input: CustomerInput!){
+    updateCustomer(
+      input: $input
+    ) {
+      customer {
+        email
+        id
+        is_subscribed
+      }
+    }
+  }`
