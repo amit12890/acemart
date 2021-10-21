@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form } from 'informed';
 
 import {
@@ -9,12 +9,15 @@ import {
     isRequired,
     hasLengthAtLeast,
     validatePassword,
-    isNotEqualToField
+    isNotEqualToField,
+    isEqualToField
 } from '@magento/venia-ui/lib/util/formValidators';
+import combine from '@magento/venia-ui/lib/util/combineValidators';
 
 import Field from '../../venia/components/Field';
 import Button from '../../venia/components/Button';
 import TextInput from '../../venia/components/TextInput';
+import Password from '../../venia/components/Password';
 
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
@@ -42,9 +45,7 @@ const EditAccountInfo = ({path}) => {
     const [showEmail, setShowEmail] = useState(false)
     const [showPassword, setShowPassword] = useState(path.includes("changepass"))
     const classes = useStyle(defaultClasses);
-    const onSubmit = (aargs) => {
-        console.log(aargs)
-    }
+
     let sectionTitle = ""
     if (showEmail)
         sectionTitle = showPassword ? "Change Email & " : "Change Email"
@@ -53,7 +54,9 @@ const EditAccountInfo = ({path}) => {
 
     return (
         <div className={classes.root}>
-            <Form className={classes.form} initialValues={initialValues.customer} onSubmit={onSubmit}>
+            <Form className={classes.form} initialValues={initialValues.customer} 
+                onSubmit={handleSubmit}>
+
                 <div className={classes.firstname}>
                     <Field
                         id="firstname"
@@ -103,7 +106,51 @@ const EditAccountInfo = ({path}) => {
                         </Field>
                     </div>
                 }
-                <Button type="submit">Submit</Button>
+                {(showEmail || showPassword) &&
+                    <div className={classes.password}>
+                        <Password
+                            fieldName="password"
+                            label="Current Password"
+                            validate={isRequired}
+                            autoComplete="current-password"
+                            isToggleButtonHidden={false}
+                        />
+                    </div>
+                }
+                {showPassword &&
+                    <>
+                    <div className={classes.newPassword}>
+                        <Password
+                            fieldName="newPassword"
+                            label='New Password'
+                            validate={combine([
+                                isRequired,
+                                [hasLengthAtLeast, 8],
+                                validatePassword,
+                                [isNotEqualToField, 'password']
+                            ])}
+                            isToggleButtonHidden={false}
+                        />
+                    </div>
+                    <div className={classes.newPassword}>
+                        <Password
+                            fieldName="confirmPassword"
+                            label='Confirm Password'
+                            validate={combine([
+                                isRequired,
+                                [hasLengthAtLeast, 8],
+                                validatePassword,
+                                [isNotEqualToField, 'password'],
+                                [isEqualToField, 'newPassword'],
+                            ])}
+                            isToggleButtonHidden={false}
+                        />
+                    </div>
+                    </>
+                }
+                <Button type="submit" disabled={isDisabled}>
+                    {isDisabled ? "Loading" : "Submit"}
+                </Button>
             </Form>
         </div>
     )

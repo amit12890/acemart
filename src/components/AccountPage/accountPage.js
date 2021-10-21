@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { useLocation } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import AccountSideBar from './accountSideBar';
 import UserAccount from './userAccount';
@@ -20,6 +21,11 @@ import EditAccountInfo from './editAccountInfo';
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
     const path = useLocation().pathname;
+    const [{ isSignedIn }] = useUserContext();
+
+    if (!isSignedIn) {
+        return <Redirect to="/" />;
+    }
 
     const content = useMemo(() => {
         switch (path) {
