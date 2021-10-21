@@ -1,14 +1,14 @@
 .root {
     composes: root from '../clickable.css';
-    --stroke: var(--venia-brand-color-1-700);
+    --stroke: var(--theme-color-primary);
     background: none;
     border-color: rgb(var(--stroke));
     border-radius: 0;
     border-style: solid;
     border-width: 1px;
     color: rgb(var(--stroke));
-    font-size: var(--venia-global-fontSize-100);
-    font-weight: var(--venia-global-fontWeight-bold);
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
     line-height: 1.25rem;
     max-width: 100%;
     min-width: 10rem;
@@ -24,7 +24,7 @@
 }
 
 .root:hover {
-    background-color: var(--venia-global-color-gray-50);
+    background-color: var(--color-white);
     color: rgb(var(--stroke));
     border-color: rgb(var(--stroke));
 }
@@ -35,7 +35,7 @@
 
 .root:active {
     transition-duration: 128ms;
-    --stroke: var(--venia-brand-color-1-800);
+    --stroke: var(--theme-color-primary);
 }
 
 /**
@@ -45,7 +45,7 @@
 .root:disabled,
 .root:hover:disabled {
     pointer-events: none;
-    --stroke: var(--venia-global-color-gray-400);
+    --stroke: var(--color-gray-darken1);
 }
 
 .content {
@@ -60,18 +60,18 @@
 /* derived classes */
 .root_lowPriority {
     composes: root;
-    background-color: var(--venia-global-color-gray-50);
+    background-color: var(--color-white);
 }
 .root_lowPriority:hover {
-    background-color: rgb(var(--venia-global-color-blue-700));
-    color: rgb(var(--venia-global-color-gray-50));
+    background-color: rgb(var(--color-red));
+    color: rgb(var(--color-white));
 }
 .root_lowPriorityNegative {
     composes: root_lowPriority;
-    --stroke: var(--venia-global-color-red-700);
+    --stroke: var(--color-red);
 }
 .root_lowPriorityNegative:hover {
-    --stroke: var(--venia-global-color-red-800);
+    --stroke: var(--color-red1);
 }
 
 .root_normalPriority {
@@ -79,26 +79,26 @@
     background-color: rgba(255 255 255);
 }
 .root_normalPriority:hover {
-    background-color: rgb(var(--venia-global-color-blue-700));
-    color: rgb(var(--venia-global-color-gray-50));
+    background-color: rgb(var(--color-red));
+    color: rgb(var(--color-white));
 }
 .root_normalPriorityNegative {
     composes: root_normalPriority;
-    --stroke: var(--venia-global-color-red-700);
+    --stroke: var(--color-red);
 }
 .root_normalPriorityNegative:hover {
-    --stroke: var(--venia-global-color-red-800);
+    --stroke: var(--color-red1);
 }
 
 .root_highPriority {
     composes: root;
     background-color: rgb(var(--stroke));
-    color: rgb(var(--venia-global-color-gray-50));
+    color: rgb(var(--color-white));
 }
 .root_highPriorityNegative {
     composes: root_highPriority; 
-    --stroke: var(--venia-global-color-red-700);
+    --stroke: var(--color-red);
 }
 .root_highPriorityNegative:hover {
-    --stroke: var(--venia-global-color-red-800);
+    --stroke: var(--color-red1);
 }

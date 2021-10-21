@@ -7,8 +7,8 @@
 :global(html) {
     background-color: rgb(var(--venia-global-color-gray-50));
     font-size: 100%;
-    font-weight: var(--venia-global-fontWeight-normal);
-    line-height: var(--venia-global-lineHeight-100);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
@@ -28,12 +28,12 @@
 :global(input),
 :global(select),
 :global(textarea) {
-    color: rgb(var(--venia-global-color-text));
-    font-family: var(--venia-global-fontFamily-sansSerif);
+    color: rgb(var(--text-color));
+    font-family: var(--font-family-base);
 }
 
 :global(body) {
-    background-color: rgb(var(--venia-global-color-gray-50));
+    background-color: rgb(var(--page-background-color));
     margin: 0;
     padding: 0;
 }
@@ -45,7 +45,7 @@
 :global(h5),
 :global(h6) {
     font-size: var(--venia-global-fontSize-200);
-    font-weight: var(--venia-global-fontWeight-normal);
+    font-weight: var(--font-weight-regular);
     margin: 0;
 }
 

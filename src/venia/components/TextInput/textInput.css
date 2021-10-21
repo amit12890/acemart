@@ -1,9 +1,11 @@
+
 .input {
     composes: input from '../Field/field.css';
+
 }
 
 .input:focus {
-    border-color: rgb(var(--venia-global-color-blue-400));
+    border-color: rgb(var(--color-blue1));
 }
 .input:disabled {
     color: rgb(var(--venia-global-color-gray-darker));
