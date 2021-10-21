@@ -228,6 +228,9 @@
 .pageTop .action {
     padding: 0;
 }
+.pageTop .action:hover {
+    background-color: none;
+}
 .action {
     padding: 5px;
     display: inline-flex;
@@ -247,12 +250,51 @@
 }
 .rightLinks {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .rightLinks li{
-    margin-left: 15px;
+    margin-left: 10px;
+}
+.iconWrapper {
+    margin-left: 10px;
+    margin-right: 5px;
+    display: inline-flex;
+}
+.svgIcon {
+    fill: currentColor;
+}
+.checkmark {
+    fill: #8bd1d1;
+}
+.store {
+    fill: #9dd666;
 }
 
 .toolbarContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     padding: 10px 0;
+}
+
+
+.csContainer {
+    display: flex;
+    align-items: center;
+}
+
+.csContent {
+    display: flex;
+    flex-direction: column;
+    color: rgb(var(--theme-color-primary));
+}
+.csLabel {
+    font-size: var(--fontSize-300);
+    line-height: var(--fontSize-300);
+}
+.csAction {
+    font-size: var(--fontSize-500);
+    line-height: var(--fontSize-500);
 }
