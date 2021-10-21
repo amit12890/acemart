@@ -13,10 +13,12 @@ import {
     MY_ORDERS_LIST_URL,
     EDIT_ACCOUNT_INFO,
     EDIT_ACCOUNT_PASSWROD,
+    NEWSLETTER_URL,
 } from './constants';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';
 import EditAccountInfo from './editAccountInfo';
+import NewsletterSubscription from './newsletterSubscription';
 
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -43,6 +45,9 @@ const AccountPage = (props) => {
                 
             case EDIT_ACCOUNT_PASSWROD:
                 return <EditAccountInfo path={path} />
+
+            case NEWSLETTER_URL:
+                return <NewsletterSubscription />
         
             default:
                 return <div>Page Not Found</div>
