@@ -1,12 +1,7 @@
 .root {
-    background-color: rgb(var(--color-white));
-    box-shadow: 0 2px rgb(var(--color-gray-light0));
     display: grid;
     grid-auto-columns: 100%;
     justify-items: center;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
     width: 100%;
     z-index: 10;
     --header-height: 5rem;
@@ -185,4 +180,79 @@
     top: 0;
     width: 100%;
     z-index: 10;
+}
+
+.panelWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.headerNotice {
+    padding: 6px;
+    text-align: center;
+    background-color: rgb(var(--color-gray-light02));
+    color: rgb(var(--color-gray20));
+}
+
+.panelBody {
+    max-width: 1366px;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.pageTop {
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+}
+
+.topMenuWrapper {
+    background-color: rgb(var(--color-gray-middle1));
+    color: rgb(var(--color-white));
+}
+
+.topMenuContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuItem {
+    font-size: var(--fontSize-100);
+}
+.icon {
+    margin-right: 10px;
+    display: inline-flex;
+}
+.pageTop .action {
+    padding: 0;
+}
+.action {
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+.action:hover {
+    background-color: rgb(var(--color-gray-light03));
+}
+
+.leftMenu {
+    flex-grow: 1; 
+    margin-right: 20px;
+}
+
+.rightMenu { 
+  
+}
+.rightLinks {
+    display: flex;
+}
+
+.rightLinks li{
+    margin-left: 15px;
+}
+
+.toolbarContainer {
+    padding: 10px 0;
 }
