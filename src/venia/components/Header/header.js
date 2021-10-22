@@ -178,13 +178,14 @@ const Header = props => {
                 <div className={[classes.panelWrapper, classes.toolbarWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>
 
-
+                        <div className={classes.logowrapper}>
                         <Link
                                 to={resourceUrl('/')}
                                 className={classes.logoContainer}
                             >
                                 <Logo classes={{ logo: classes.logo }} />
                             </Link>
+                            </div>
                         
                         <div className={classes.csContainer}>
                             <i className={classes.iconWrapper}>
@@ -202,6 +203,8 @@ const Header = props => {
                                  <strong>888-898-8079</strong>
                             </Link>
                             </div>
+
+                            
                                
                         </div>
 

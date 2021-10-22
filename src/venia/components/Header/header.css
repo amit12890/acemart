@@ -276,19 +276,30 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
+.logowrapper {
+    margin-right: 20px;
+}
 
 .csContainer {
     display: flex;
     align-items: center;
+    color: rgb(var(--theme-color-primary));
+
+}
+
+.csContainer .iconWrapper {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .csContent {
     display: flex;
     flex-direction: column;
-    color: rgb(var(--theme-color-primary));
+    
 }
 .csLabel {
     font-size: var(--fontSize-300);
@@ -297,4 +308,7 @@
 .csAction {
     font-size: var(--fontSize-500);
     line-height: var(--fontSize-500);
+}
+.csAction:hover {
+    color: rgb(var(--color-gray20));
 }
