@@ -63,6 +63,12 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/components/AccountPage")
         });
+        routes.push({
+            name: "Newsletter Subscription",
+            pattern: "/newsletter/manage/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
         return routes;
     });
 }
