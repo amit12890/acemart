@@ -9,6 +9,8 @@ import { useStyle } from '../../classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import defaultClasses from './cartTrigger.css';
 import { GET_ITEM_COUNT_QUERY } from './cartTrigger.gql';
+import { Portal } from '@magento/venia-ui/lib/components/Portal';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 
 const MiniCart = React.lazy(() => import('../MiniCart'));
 
@@ -71,11 +73,14 @@ const CartTrigger = props => {
                 {maybeItemCounter}
             </button>
             <Suspense fallback={null}>
-                <MiniCart
-                    isOpen={miniCartIsOpen}
-                    setIsOpen={setMiniCartIsOpen}
-                    ref={miniCartRef}
-                />
+                <Portal>
+                    <Mask isActive={miniCartIsOpen} />
+                    <MiniCart
+                        isOpen={miniCartIsOpen}
+                        setIsOpen={setMiniCartIsOpen}
+                        ref={miniCartRef}
+                    />
+                </Portal>
             </Suspense>
         </Fragment>
     );

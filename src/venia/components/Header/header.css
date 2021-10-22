@@ -20,28 +20,18 @@
 }
 
 .toolbar {
-    z-index: 3;
     align-content: center;
     align-items: center;
-    display: grid;
-    grid-template-areas: 'primary title secondary';
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 3rem;
-    justify-items: center;
-    max-width: var(--venia-global-maxWidth);
-    min-height: var(--venia-global-header-minHeight);
-    padding: 0 0.5rem;
-    width: 100%;
+    display: flex;
 }
 
 @media (min-width: 641px) {
     .switchers {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: max-content;
-        justify-content: flex-end;
-        max-width: var(--venia-global-maxWidth);
-        width: 100%;
+                
+        
+        
+        
+        
         position: relative;
         z-index: 11;
         margin: 0 auto;
@@ -54,10 +44,8 @@
     }
 
     .toolbar {
-        grid-template-areas: 'primary title secondary';
-        grid-template-columns: auto auto 1fr;
-        min-height: var(--venia-global-header-minHeight);
-        padding: 0 1rem;
+
+        
     }
 }
 
@@ -311,4 +299,11 @@
 }
 .csAction:hover {
     color: rgb(var(--color-gray20));
+}
+
+.searchBarWrapper {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
 }

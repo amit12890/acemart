@@ -166,13 +166,13 @@ const Header = props => {
                     <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>
 
                         <div className={classes.logowrapper}>
-                        <Link
+                            <Link
                                 to={resourceUrl('/')}
                                 className={classes.logoContainer}
                             >
                                 <Logo classes={{ logo: classes.logo }} />
                             </Link>
-                            </div>
+                        </div>
                         
                         <div className={classes.csContainer}>
                             <i className={classes.iconWrapper}>
@@ -187,12 +187,15 @@ const Header = props => {
                                     to={resourceUrl('/')}
                                     className={classes.csAction}
                                 >
-                                 <strong>888-898-8079</strong>
-                            </Link>
+                                    <strong>888-898-8079</strong>
+                                </Link>
                             </div>
-
+                        </div>
+                        <div className={classes.searchBarWrapper}>
+                            <SearchBar isOpen={true} ref={searchRef} />
+                        </div>
+                        <div className={classes.storeLocationWrapper}>
                             
-                               
                         </div>
 
                         <div className={classes.toolbar}>
@@ -213,7 +216,7 @@ const Header = props => {
                         </div>
                     </div>
                 </div>
-                <SearchBar isOpen={true} ref={searchRef} />
+                
             </header>
             <div className={classes.navContainer}>
                 <MegaMenu />

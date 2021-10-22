@@ -1,6 +1,6 @@
 .root {
     align-items: center;
-    display: none;
+    
     justify-items: center;
     max-width: var(--venia-global-maxWidth);
     padding: 0 1rem;
@@ -9,7 +9,7 @@
 
 .root_open {
     composes: root;
-    display: grid;
+    
 }
 
 .form {
