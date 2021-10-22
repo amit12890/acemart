@@ -45,6 +45,7 @@ const Header = props => {
                 </div>
             </div>
             <header className={rootClass}>
+                {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>
                         <p>
@@ -57,6 +58,7 @@ const Header = props => {
                         </p>
                     </div>
                 </div>
+                {/** This is top CMSMenuBar */}
                 <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.topMenuContainer].join(" ")}>
                         <div className={[classes.menuItem, classes.leftMenu].join(" ")}>
@@ -159,6 +161,7 @@ const Header = props => {
                     </div>
 
                 </div>
+                {/** This is top ToolBar with search and other functions */}
                 <div className={[classes.panelWrapper, classes.toolbarWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>
 
