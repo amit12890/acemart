@@ -71,6 +71,9 @@
 
     --color-gray-light0: 244 245 245;
     --color-gray-light01: 233 234 236;
+    --color-gray-light02: 238 238 238;
+    --color-gray-light03: 116 116 116;
+    
 
     --color-gray-middle1: 77 77 77;
     --color-gray-middle2: 225 225 225;
@@ -116,7 +119,7 @@
     --fontSize-1200: 3.5rem; /* 56px */
 
     /* font family */
-    --font-family-base: 'Muli', sans-serif;
+    --font-family-base: sans-serif;
     --font-family-serif: 'Source Serif Pro', serif;
 
     /*  Weights */
@@ -211,6 +214,68 @@
     );
 
 
+    /* custom Variable */
+    --color-blue: 0 0 102;
+    --color-blue1: 61 132 255;
+    --color-blue2: 0 110 142;
+
+    --color-red: 201 37 45;
+    --color-red1: 161 30 36;
+
+    --color-white: 255 255 255;
+    --color-black: 0 0 0;
+
+    --color-gray20: 51 51 51;
+    --color-gray40: 23 32 38;
+
+    --color-gray-light0: 244 245 245;
+    --color-gray-light01: 233 234 236;
+    --color-gray-light02: 238 238 238;
+    --color-gray-light03: 116 116 116;
+    
+
+    --color-gray-middle1: 77 77 77;
+    --color-gray-middle2: 225 225 225;
+    --color-gray-middle3: 149 154 157;
+
+    --color-gray-darken0: 118 123 127;
+    --color-gray-darken1: 181 184 186;
+    --color-gray-darken2: 84 93 99;
+    
+    
+
+    --theme-color-primary: var(--color-blue);
+    --theme-color-primary-alt: var(--color-blue2);
+    --theme-color-secondary: var(--color-blue2);
+
+    --primary-color: var(--color-gray20);
+    --secondary-color: var(--color-gray-middle1);
+
+    --color-error: var(--color-red);
+
+    --text-color: var(--primary-color);
+    
+
+    --link-color: var(--theme-color-primary);
+    --link-color-hover: var(--secondary-color);
+
+    --font-size-base: .875rem;
+    --font-size-m: 1rem;
+
+    --fontSize-50: 0.6875rem; /* 11px */
+    --fontSize-75: 0.75rem; /* 12px */
+    --fontSize-100: 0.875rem; /* 14px */
+    --fontSize-200: 1rem; /* 16px */
+    --fontSize-300: 1.125rem; /* 18px */
+    --fontSize-400: 1.25rem; /* 20px */
+    --fontSize-500: 1.375rem; /* 22px */
+    --fontSize-600: 1.5rem; /* 24px */
+    --fontSize-700: 1.75rem; /* 28px */
+    --fontSize-800: 2rem; /* 32px */
+    --fontSize-900: 2.25rem; /* 36px */
+    --fontSize-1000: 2.5rem; /* 40px */
+    --fontSize-1100: 3rem; /* 48px */
+    --fontSize-1200: 3.5rem; /* 56px */
 
 
 }
