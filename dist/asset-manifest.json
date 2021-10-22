@@ -1,0 +1,58 @@
+{
+  "RootCmp_CMS_PAGE__default.js": "/RootCmp_CMS_PAGE__default.77f32fa19c751e9d9046.js",
+  "RootCmp_SEARCH__default.js": "/RootCmp_SEARCH__default.c951834490d828308fef.js",
+  "VeniaLogo.svg": "/VeniaLogo-n77.svg",
+  "client.js": "/client.767389c10bef36f15d7b.js",
+  "entrypoints": {
+    "client": {
+      "js": [
+        "/runtime.aded7799b4090dafffff.js",
+        "/vendors.9ee71f41ba51e42f58f0.js",
+        "/client.767389c10bef36f15d7b.js"
+      ]
+    }
+  },
+  "errorViewBackground-1400x600.png": "/errorViewBackground-1400x600-h5e.png",
+  "errorViewBackground-380x600.png": "/errorViewBackground-380x600-ikK.png",
+  "i18n-en_US.js": "/i18n-en_US.d7cfc2329db39261cabc.js",
+  "logo.svg": "/logo-qeq.svg",
+  "noProductsFound.png": "/noProductsFound-e9n.png",
+  "runtime.js": "/runtime.aded7799b4090dafffff.js",
+  "vendors.js": "/vendors.9ee71f41ba51e42f58f0.js",
+  "vendors~RootCmp_CATEGORY__default.js": "/vendors~RootCmp_CATEGORY__default.392be6757349e91faf4d.js",
+  "vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default.b2aefe813291e4e92c7a.js",
+  "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.3c217ca0399a8eede513.js",
+  "vendors~RootCmp_PRODUCT__default.js": "/vendors~RootCmp_PRODUCT__default.70283599e94a7ef77c26.js",
+  "bundles": {
+    "load": [
+      "/runtime.aded7799b4090dafffff.js",
+      "/vendors.9ee71f41ba51e42f58f0.js",
+      "/client.767389c10bef36f15d7b.js"
+    ],
+    "prefetch": [
+      "/RootCmp_CMS_PAGE__default.77f32fa19c751e9d9046.js",
+      "/RootCmp_SEARCH__default.c951834490d828308fef.js"
+    ]
+  },
+  "js": {
+    "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.77f32fa19c751e9d9046.js",
+    "RootCmp_SEARCH__default": "/RootCmp_SEARCH__default.c951834490d828308fef.js",
+    "client": "/client.767389c10bef36f15d7b.js",
+    "i18n-en_US": "/i18n-en_US.d7cfc2329db39261cabc.js",
+    "runtime": "/runtime.aded7799b4090dafffff.js",
+    "vendors": "/vendors.9ee71f41ba51e42f58f0.js",
+    "vendors~RootCmp_CATEGORY__default": "/vendors~RootCmp_CATEGORY__default.392be6757349e91faf4d.js",
+    "vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_CMS_PAGE__default.b2aefe813291e4e92c7a.js",
+    "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.3c217ca0399a8eede513.js",
+    "vendors~RootCmp_PRODUCT__default": "/vendors~RootCmp_PRODUCT__default.70283599e94a7ef77c26.js"
+  },
+  "svg": {
+    "VeniaLogo": "/VeniaLogo-n77.svg",
+    "logo": "/logo-qeq.svg"
+  },
+  "png": {
+    "errorViewBackground-1400x600": "/errorViewBackground-1400x600-h5e.png",
+    "errorViewBackground-380x600": "/errorViewBackground-380x600-ikK.png",
+    "noProductsFound": "/noProductsFound-e9n.png"
+  }
+}

@@ -1,12 +1,11 @@
 import React, { Fragment, Suspense } from 'react';
 import { shape, string } from 'prop-types';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Logo from '../Logo';
 import AccountTrigger from './accountTrigger';
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
-import SearchTrigger from './searchTrigger';
 import OnlineIndicator from './onlineIndicator';
 import { useHeader } from '@magento/peregrine/lib/talons/Header/useHeader';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
@@ -14,11 +13,10 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import defaultClasses from './header.css';
 import PageLoadingIndicator from '@magento/venia-ui/lib/components/PageLoadingIndicator';
+import SearchBar from '../SearchBar';
 import StoreSwitcher from './storeSwitcher';
 import CurrencySwitcher from './currencySwitcher';
 import MegaMenu from '../MegaMenu';
-
-const SearchBar = React.lazy(() => import('@magento/venia-ui/lib/components/SearchBar'));
 
 const Header = props => {
     const {
@@ -33,20 +31,6 @@ const Header = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = isSearchOpen ? classes.open : classes.closed;
-    const searchBarFallback = (
-        <div className={classes.searchFallback} ref={searchRef}>
-            <div className={classes.input}>
-                <div className={classes.loader} />
-            </div>
-        </div>
-    );
-    const searchBar = isSearchOpen ? (
-        <Suspense fallback={searchBarFallback}>
-            <Route>
-                <SearchBar isOpen={isSearchOpen} ref={searchRef} />
-            </Route>
-        </Suspense>
-    ) : null;
     const pageLoadingIndicator = isPageLoading ? (
         <PageLoadingIndicator />
     ) : null;
@@ -61,6 +45,7 @@ const Header = props => {
                 </div>
             </div>
             <header className={rootClass}>
+                {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>
                         <p>
@@ -73,6 +58,7 @@ const Header = props => {
                         </p>
                     </div>
                 </div>
+                {/** This is top CMSMenuBar */}
                 <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.topMenuContainer].join(" ")}>
                         <div className={[classes.menuItem, classes.leftMenu].join(" ")}>
@@ -175,6 +161,7 @@ const Header = props => {
                     </div>
 
                 </div>
+                {/** This is top ToolBar with search and other functions */}
                 <div className={[classes.panelWrapper, classes.toolbarWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>
 
@@ -220,17 +207,13 @@ const Header = props => {
 
                             
                             <div className={classes.secondaryActions}>
-                                <SearchTrigger
-                                    onClick={handleSearchTriggerClick}
-                                    ref={searchTriggerRef}
-                                />
                                 <AccountTrigger />
                                 <CartTrigger />
                             </div>
                         </div>
                     </div>
                 </div>
-                {searchBar}
+                <SearchBar isOpen={true} ref={searchRef} />
             </header>
             <div className={classes.navContainer}>
                 <MegaMenu />
