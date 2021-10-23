@@ -4,3 +4,6 @@ export const EDIT_ACCOUNT_PASSWROD = '/customer/account/edit/changepass/1/';
 export const MY_WISHLIST_URL = '/wishlist/';
 export const MY_ORDERS_LIST_URL = '/sales/order/history/';
 export const NEWSLETTER_URL = '/newsletter/manage/';
+export const ADDRESSBOOK_PAGE_URL = '/customer/address/'
+export const ADDRESS_ADD_URL = '/customer/address/new/'
+export const ADDRESS_EDIT_URL = '/customer/address/edit/'

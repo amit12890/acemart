@@ -40,6 +40,24 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Address Book",
+            pattern: "/customer/address/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Address Book",
+            pattern: "/customer/address/new/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Address Book",
+            pattern: "/customer/address/edit",
+            exact: false,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "Account Info Form",
             pattern: "/customer/account/edit/",
             exact: true,
