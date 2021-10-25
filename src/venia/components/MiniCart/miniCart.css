@@ -29,21 +29,20 @@
 }
 
 .contents {
-    background-color: rgb(var(--color-gray-light0));
-    border-radius: 1px;
+    background-color: rgb(var(--color-white));
     box-shadow: 0 1px 6px rgb(var(--venia-global-color-gray-900) / 0.2);
     /* These heights may change based on PWA-605 and should be based on 1.5 and 2.5 visible items. */
-    overflow: hidden;
     position: absolute;
     right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    padding:  56px 56px 56px 28px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    overflow: hidden scroll;
+    height: 100%;
+    width: 100%;
+
+    
 }
 
 .contents_open {
@@ -53,18 +52,19 @@
     transition-duration: 224ms;
     transition-timing-function: var(--venia-global-anim-in);
 }
+.panelRow {
+    padding: 0 25px; 
+}
 
 .header {
+    flex-shrink: 0;
+    position: relative;
     align-items: center;
-    border-bottom: 2px solid rgb(var(--venia-global-color-gray-100));
-    display: grid;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    
     font-size: var(--venia-global-typography-heading-XS-fontSize);
     font-weight: 600;
-    grid-template-columns: 1fr auto;
     line-height: var(--venia-global-typography-heading-lineHeight);
-    margin: 0 1rem;
-    padding: 1rem 0.5rem 0.5rem;
-    row-gap: 1rem;
 }
 
 .stockStatusMessageContainer {
@@ -108,6 +108,9 @@
 }
 
 .footer {
+    flex-shrink: 0;
+    position: relative;
+
     align-items: center;
     border-top: 2px solid rgb(var(--venia-global-color-gray));
     display: grid;

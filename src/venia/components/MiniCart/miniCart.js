@@ -112,34 +112,41 @@ const MiniCart = React.forwardRef((props, ref) => {
         </div>
     ) : (
         <Fragment>
-            <div className={classes.header}>{header}</div>
+            <div className={classes.header}>
+                <div className={classes.panelRow}>
+                    {header}
+                </div>
+            </div>
             <div className={classes.body}>
-                <ProductList
-                    items={productList}
-                    loading={loading}
-                    handleRemoveItem={handleRemoveItem}
-                    closeMiniCart={closeMiniCart}
-                    configurableThumbnailSource={configurableThumbnailSource}
-                />
+                <div className={classes.panelRow}>
+                    <ProductList
+                        items={productList}
+                        loading={loading}
+                        handleRemoveItem={handleRemoveItem}
+                        closeMiniCart={closeMiniCart}
+                        configurableThumbnailSource={configurableThumbnailSource}
+                    />
+                </div>
             </div>
             <div className={classes.footer}>
-                <Button
-                    onClick={handleProceedToCheckout}
-                    priority="high"
-                    className={classes.checkoutButton}
-                    disabled={loading || isCartEmpty}
-                >
-                    <Icon
-                        size={16}
-                        src={LockIcon}
-                        classes={{
-                            icon: classes.checkoutIcon
-                        }}
-                    />
-                    <FormattedMessage
-                        id={'miniCart.checkout'}
-                        defaultMessage={'CHECKOUT'}
-                    />
+                <div className={classes.panelRow}>
+                    <Button
+                        onClick={handleProceedToCheckout}
+                        priority="high"
+                        className={classes.checkoutButton}
+                        disabled={loading || isCartEmpty}
+                    >
+                        <Icon
+                            size={16}
+                            src={LockIcon}
+                            classes={{
+                                icon: classes.checkoutIcon
+                            }}
+                        />
+                        <FormattedMessage
+                            id={'miniCart.checkout'}
+                            defaultMessage={'CHECKOUT'}
+                        />
                 </Button>
                 <Button
                     onClick={handleEditCart}
@@ -152,6 +159,7 @@ const MiniCart = React.forwardRef((props, ref) => {
                         defaultMessage={'Edit Shopping Bag'}
                     />
                 </Button>
+            </div>
             </div>
         </Fragment>
     );
