@@ -51,15 +51,6 @@ const AddressCard = props => {
         );
     });
 
-    const defaultBadge = default_shipping ? (
-        <span className={classes.defaultBadge}>
-            <FormattedMessage
-                id={'addressCard.defaultText'}
-                defaultMessage={'Default'}
-            />
-        </span>
-    ) : null;
-
     const nameString = [firstname, middlename, lastname]
         .filter(name => !!name)
         .join(' ');
@@ -110,7 +101,6 @@ const AddressCard = props => {
     return (
         <div className={classes.root}>
             <div className={classes.contentContainer}>
-                {defaultBadge}
                 <span className={classes.name}>{nameString}</span>
                 {streetRows}
                 <span className={classes.additionalAddress}>
@@ -169,7 +159,6 @@ AddressCard.propTypes = {
         additionalAddress: string,
         contentContainer: string,
         country: string,
-        defaultBadge: string,
         defaultCard: string,
         deleteButton: string,
         editButton: string,

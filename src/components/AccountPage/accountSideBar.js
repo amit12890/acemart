@@ -27,7 +27,7 @@ const AccountSideBar = props => {
         {
             name: 'Address Book',
             id: 3,
-            url: '/customer/address/new/'
+            url: '/customer/address/'
         },
         {
             name: 'Account Information',

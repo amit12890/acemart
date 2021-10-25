@@ -14,10 +14,7 @@
 }
 
 .content {
-    display: grid;
-    gap: 1rem;
-    grid-auto-rows: minmax(6rem, max-content);
-    grid-template-columns: 1fr 1fr 1fr;
+    display: block;
 }
 
 .addButton {
@@ -45,12 +42,21 @@
     }
 
     .content {
-        grid-template-columns: 1fr 1fr;
+        /* grid-template-columns: 1fr 1fr; */
     }
 }
 
 @media (max-width: 640px) {
     .content {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
+}
+
+.addrBlockWrapper {
+    display: block;
+    width: 100%;
+}
+
+.addrBlock {
+    display: block;
 }

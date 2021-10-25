@@ -143,7 +143,13 @@ const AddressForm = props => {
                 <div className={classes.default_address_check}>
                     <Checkbox
                         field="default_shipping"
-                        label={defaultAddressCheckLabel}
+                        label="Default Shipping Address"
+                    />
+                </div>
+                <div className={classes.default_address_check}>
+                    <Checkbox
+                        field="default_billing"
+                        label="Default billing address"
                     />
                 </div>
             </div>

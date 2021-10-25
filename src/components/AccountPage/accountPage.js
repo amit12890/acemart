@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Redirect, Switch, Route, useLocation } from 'react-router-dom';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import AccountSideBar from './accountSideBar';
@@ -15,14 +15,12 @@ import {
     EDIT_ACCOUNT_PASSWROD,
     NEWSLETTER_URL,
     ADDRESSBOOK_PAGE_URL,
-    ADDRESS_ADD_URL,
 } from './constants';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';
 import EditAccountInfo from './editAccountInfo';
 import NewsletterSubscription from './newsletterSubscription';
 import AddressBookPage from '../../venia/components/AddressBookPage/addressBookPage';
-import AddressForm from '../../venia/components/AddressBookPage/addressForm';
 
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -33,51 +31,38 @@ const AccountPage = (props) => {
         return <Redirect to="/" />;
     }
 
-    const content = useMemo(() => {
-        switch (path) {
-            case MY_ACCOUNT_URL:
-                return <UserAccount />
-
-            case MY_WISHLIST_URL:
-                return <UserWishlist />
-
-            case MY_ORDERS_LIST_URL:
-                return <UserOrderList />
-            
-            case EDIT_ACCOUNT_INFO:
-                return <EditAccountInfo path={path} />
-                
-            case EDIT_ACCOUNT_PASSWROD:
-                return <EditAccountInfo path={path} />
-
-            case NEWSLETTER_URL:
-                return <NewsletterSubscription />
-
-            case ADDRESSBOOK_PAGE_URL:
-                return <AddressBookPage />
-
-            case ADDRESS_ADD_URL:
-                return <AddressForm 
-                    formErrors={new Map()}
-                    formProps={{initialValues: {country_code: "US"}}}
-                    isBusy={false}
-                    isEditMode={false}
-                    onCancel={() => {}}
-                    onConfirm={() => {}}
-                />
-        
-            default:
-                return <div>Page Not Found</div>
-        }
-    }, [path])
-
     return (
         <div className={classes.wrapper}>
             <div className={classes.sidebar_wrapper}>
                 <AccountSideBar activeUrl={path} />
             </div>
             <div className={classes.content_wrapper}>
-                {content}
+                <Switch>
+                    <Route exact path={MY_ACCOUNT_URL}>
+                        <UserAccount />
+                    </Route>
+                    <Route exact path={MY_WISHLIST_URL}>
+                        <UserWishlist />
+                    </Route>
+                    <Route exact path={MY_ORDERS_LIST_URL}>
+                        <UserOrderList />
+                    </Route>
+                    <Route exact path={EDIT_ACCOUNT_INFO}>
+                        <EditAccountInfo path={path} />
+                    </Route>
+                    <Route exact path={EDIT_ACCOUNT_PASSWROD}>
+                        <EditAccountInfo path={path} />
+                    </Route>
+                    <Route exact path={NEWSLETTER_URL}>
+                        <NewsletterSubscription />
+                    </Route>
+                    <Route path={ADDRESSBOOK_PAGE_URL}>
+                        <AddressBookPage path={path} />
+                    </Route>
+                    <Route exact path="*">
+                        <div>Page Not Found !!</div>
+                    </Route>
+                </Switch>
             </div>
         </div>
     );
