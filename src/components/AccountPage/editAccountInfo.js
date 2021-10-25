@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import { useHistory } from 'react-router';
 import { Form } from 'informed';
 
 import {
-    useAccountInformationPage
-} from '@magento/peregrine/lib/talons/AccountInformationPage/useAccountInformationPage';
-import AccountInformationPageOperations from './accountInformation.gql.js';
+    GET_CUSTOMER_INFORMATION,
+    SET_CUSTOMER_INFORMATION,
+    CHANGE_CUSTOMER_PASSWORD,
+} from './accountInformation.gql.js';
 import {
     isRequired,
     hasLengthAtLeast,
@@ -21,30 +24,84 @@ import Password from '../../venia/components/Password';
 
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
+import { MY_ACCOUNT_URL } from './constants.js';
 
 
 const EditAccountInfo = ({path}) => {
-    const talonProps = useAccountInformationPage({
-        ...AccountInformationPageOperations
-    });
-
-    const {
-        handleCancel,
-        formErrors,
-        handleChangePassword,
-        handleSubmit,
-        initialValues,
-        isDisabled,
-        isSignedIn,
-        isUpdateMode,
-        loadDataError,
-        shouldShowNewPassword,
-        showUpdateMode
-    } = talonProps;
-
+    const history = useHistory();
     const [showEmail, setShowEmail] = useState(false)
     const [showPassword, setShowPassword] = useState(path.includes("changepass"))
+    const [showError, setError] = useState(null)
     const classes = useStyle(defaultClasses);
+
+    const { data: accountInformationData, error: loadDataError } = useQuery(
+        GET_CUSTOMER_INFORMATION,
+        {
+            fetchPolicy: 'cache-and-network',
+            nextFetchPolicy: 'cache-first'
+        }
+    );
+    const initialValues = useMemo(() => {
+        if (accountInformationData) {
+            return { customer: accountInformationData.customer };
+        }
+    }, [accountInformationData]);
+
+    const [
+        setCustomerInformation,
+        {
+            error: customerInformationUpdateError,
+            loading: isUpdatingCustomerInformation
+        }
+    ] = useMutation(SET_CUSTOMER_INFORMATION);
+    const [
+        changeCustomerPassword,
+        {
+            error: customerPasswordChangeError,
+            loading: isChangingCustomerPassword
+        }
+    ] = useMutation(CHANGE_CUSTOMER_PASSWORD);
+
+    const handleSubmit = useCallback(
+        async ({ email, firstname, lastname, password, newPassword }) => {
+        setError(null);
+        try {
+            if (
+                initialValues.customer.email !== email
+            ) {
+                await setCustomerInformation({
+                    variables: {
+                        customerInput: {email, firstname, lastname, password}
+                    }
+                });
+            }
+            else if (
+                initialValues.customer.firstname !== firstname ||
+                initialValues.customer.lastname !== lastname
+            ) {
+                await setCustomerInformation({
+                    variables: {
+                        customerInput: {firstname, lastname,}
+                    }
+                });
+            }
+            // password update
+            if (password && newPassword) {
+                await changeCustomerPassword({
+                    variables: {
+                        currentPassword: password,
+                        newPassword: newPassword
+                    }
+                });
+            }
+            history.push(MY_ACCOUNT_URL)
+        } catch (error) {
+            console.log(error);
+            setError("Your data was not updated due to an error !!");
+        }
+    }, []);
+
+    const isLoading = isUpdatingCustomerInformation || isChangingCustomerPassword;
 
     let sectionTitle = ""
     if (showEmail)
@@ -54,6 +111,7 @@ const EditAccountInfo = ({path}) => {
 
     return (
         <div className={classes.root}>
+            {showError && <div>{showError}</div>}
             <Form className={classes.form} initialValues={initialValues.customer} 
                 onSubmit={handleSubmit}>
 
@@ -148,8 +206,8 @@ const EditAccountInfo = ({path}) => {
                     </div>
                     </>
                 }
-                <Button type="submit" disabled={isDisabled}>
-                    {isDisabled ? "Loading" : "Submit"}
+                <Button type="submit" disabled={isLoading}>
+                    {isLoading ? "Loading" : "Submit"}
                 </Button>
             </Form>
         </div>
