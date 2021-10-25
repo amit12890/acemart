@@ -14,11 +14,15 @@ import {
     EDIT_ACCOUNT_INFO,
     EDIT_ACCOUNT_PASSWROD,
     NEWSLETTER_URL,
+    ADDRESSBOOK_PAGE_URL,
+    ADDRESS_ADD_URL,
 } from './constants';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';
 import EditAccountInfo from './editAccountInfo';
 import NewsletterSubscription from './newsletterSubscription';
+import AddressBookPage from '../../venia/components/AddressBookPage/addressBookPage';
+import AddressForm from '../../venia/components/AddressBookPage/addressForm';
 
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -48,6 +52,19 @@ const AccountPage = (props) => {
 
             case NEWSLETTER_URL:
                 return <NewsletterSubscription />
+
+            case ADDRESSBOOK_PAGE_URL:
+                return <AddressBookPage />
+
+            case ADDRESS_ADD_URL:
+                return <AddressForm 
+                    formErrors={new Map()}
+                    formProps={{initialValues: {country_code: "US"}}}
+                    isBusy={false}
+                    isEditMode={false}
+                    onCancel={() => {}}
+                    onConfirm={() => {}}
+                />
         
             default:
                 return <div>Page Not Found</div>
