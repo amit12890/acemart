@@ -1,13 +1,17 @@
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useMutation, useQuery } from '@apollo/client';
 import { get } from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+
 import Button from '../../venia/components/Button';
+import { MY_ACCOUNT_URL } from './constants';
 import { GET_CUSTOMER_SUBSCRIPTION, UPDATE_CUSTOMER } from './newsletterSubscription.gql';
 
 
 const NewsletterSubscription = () => {
+    const history = useHistory();
     const [subscription, setSubscription] = useState(false);
-    const [onSubmit, { data: res }] = useMutation(UPDATE_CUSTOMER);
+    const [onSubmit, { loading: isDataUpdating }] = useMutation(UPDATE_CUSTOMER);
     const { loading, error, data } = useQuery(GET_CUSTOMER_SUBSCRIPTION);
 
     useEffect(() => {
@@ -19,8 +23,9 @@ const NewsletterSubscription = () => {
         return <div>Loading....</div>
     }
 
-    const submit = useCallback(() => {
-        onSubmit({ variables: { input: {is_subscribed: subscription}}})
+    const submit = useCallback(async () => {
+        await onSubmit({ variables: { input: {is_subscribed: subscription}}})
+        history.push(MY_ACCOUNT_URL)
     }, [subscription])
 
     return(
@@ -37,7 +42,9 @@ const NewsletterSubscription = () => {
                     General Subscription
                 </label>
 
-                <Button onClick={submit}>Save</Button>
+                <Button onClick={submit} disabled={isDataUpdating}>
+                    {isDataUpdating ? "Loading..." : "Save"}
+                </Button>
             </div>
         </div>
     )

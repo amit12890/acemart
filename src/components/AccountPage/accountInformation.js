@@ -11,6 +11,8 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import defaultClasses from './accountInformation.css';
 import AccountInformationPageOperations from './accountInformation.gql.js';
 import { EDIT_ACCOUNT_INFO, EDIT_ACCOUNT_PASSWROD } from './constants';
+import AccountNewsletterBlock from './accountNewsletterBlock';
+
 
 const AccountInformation = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -56,45 +58,48 @@ const AccountInformation = props => {
         const customerName = `${customer.firstname} ${customer.lastname}`;
 
         pageContent = (
-            <div className={classes.accountDetails}>
-                <div className={classes.lineItemsContainer}>
-                    <span className={classes.nameLabel}>
-                        <FormattedMessage
-                            id={'global.name'}
-                            defaultMessage={'Name'}
-                        />
-                    </span>
-                    <span className={classes.nameValue}>
-                        {customerName}
-                    </span>
-                    <span className={classes.emailLabel}>
-                        <FormattedMessage
-                            id={'global.email'}
-                            defaultMessage={'Email'}
-                        />
-                    </span>
-                    <span className={classes.emailValue}>
-                        {customer.email}
-                    </span>
+            <div className={classes.accountInfoWrapper}>
+                <div className={classes.accountDetails}>
+                    <div className={classes.lineItemsContainer}>
+                        <span className={classes.nameLabel}>
+                            <FormattedMessage
+                                id={'global.name'}
+                                defaultMessage={'Name'}
+                            />
+                        </span>
+                        <span className={classes.nameValue}>
+                            {customerName}
+                        </span>
+                        <span className={classes.emailLabel}>
+                            <FormattedMessage
+                                id={'global.email'}
+                                defaultMessage={'Email'}
+                            />
+                        </span>
+                        <span className={classes.emailValue}>
+                            {customer.email}
+                        </span>
+                    </div>
+                    <div className={classes.editButtonContainer}>
+                        <Button
+                            className={classes.editInformationButton}
+                            disabled={false}
+                            onClick={goToAccountInfoEdit}
+                            priority="normal"
+                        >
+                            Edit
+                        </Button>
+                        <Button
+                            className={classes.editInformationButton}
+                            disabled={false}
+                            onClick={goToAccountInfoEditPassword}
+                            priority="normal"
+                        >
+                            Change Password
+                        </Button>
+                    </div>
                 </div>
-                <div className={classes.editButtonContainer}>
-                    <Button
-                        className={classes.editInformationButton}
-                        disabled={false}
-                        onClick={goToAccountInfoEdit}
-                        priority="normal"
-                    >
-                        Edit
-                    </Button>
-                    <Button
-                        className={classes.editInformationButton}
-                        disabled={false}
-                        onClick={goToAccountInfoEditPassword}
-                        priority="normal"
-                    >
-                        Change Password
-                    </Button>
-                </div>
+                <AccountNewsletterBlock />
             </div>
         );
     }
