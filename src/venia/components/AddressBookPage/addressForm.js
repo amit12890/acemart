@@ -9,7 +9,7 @@ import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
 import Country from '@magento/venia-ui/lib/components/Country';
 import Field from '../Field';
-import FormError from '@magento/venia-ui/lib/components/FormError';
+import FormError from '../FormError';
 import Postcode from '@magento/venia-ui/lib/components/Postcode';
 import Region from '@magento/venia-ui/lib/components/Region';
 import TextInput from '../TextInput';

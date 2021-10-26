@@ -20,7 +20,7 @@ import Field from '../Field';
 import TextInput from '../TextInput';
 import Password from '../Password';
 import defaultClasses from './createAccount.css';
-import FormError from '@magento/venia-ui/lib/components/FormError';
+import FormError from '../FormError';
 import PasswordStrengthMeter from './passwordStrengthMeter';
 
 
