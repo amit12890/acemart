@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 import { useAccountChip } from '@magento/peregrine/lib/talons/AccountChip/useAccountChip';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 
-import {
-    MY_ACCOUNT_URL,
-    MY_WISHLIST_URL,
-    MY_ORDERS_LIST_URL,
-} from '../../../components/AccountPage/constants';
-
 import { useStyle } from '../../classify';
 
+import {
+    accountPageUrl,
+    addressBookPage,
+    myOrderListPage,
+    myWishlistPage
+} from '../../../url.utils';
 import defaultClasses from './accountMenuItems.css';
+
 
 const AccountMenuItems = props => {
     const { onSignOut: handleSignOut } = props;
@@ -34,22 +35,22 @@ const AccountMenuItems = props => {
         {
             name: 'My Account',
             id: 'accountMenu.myAccount',
-            url: MY_ACCOUNT_URL
+            url: accountPageUrl()
         },
         {
             name: 'Order History',
             id: 'accountMenu.orderHistoryLink',
-            url: MY_ORDERS_LIST_URL
+            url: myOrderListPage()
         },
         {
             name: 'Manage Addresses',
             id: 'accountMenu.manageAddresses',
-            url: '/customer/account/edit/'
+            url: addressBookPage()
         },
         {
             name: 'View Wishlists',
             id: 'accountMenu.viewWishlists',
-            url: MY_WISHLIST_URL
+            url: myWishlistPage()
         }
     ];
 

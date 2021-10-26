@@ -24,7 +24,7 @@ import Password from '../../venia/components/Password';
 
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
-import { MY_ACCOUNT_URL } from './constants.js';
+import { accountPageUrl } from '../../url.utils.js';
 
 
 const EditAccountInfo = ({path}) => {
@@ -94,7 +94,7 @@ const EditAccountInfo = ({path}) => {
                     }
                 });
             }
-            history.push(MY_ACCOUNT_URL)
+            history.push(accountPageUrl())
         } catch (error) {
             console.log(error);
             setError("Your data was not updated due to an error !!");

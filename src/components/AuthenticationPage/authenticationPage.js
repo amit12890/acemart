@@ -10,11 +10,11 @@ import ForgotPassword from '../../venia/components/ForgotPassword';
 import defaultClasses from './authenticationPage.css';
 
 import {
-    LOGIN_URL,
-    SIGNUP_URL,
-    FORGOT_PASSWORD_URL,
-    ACCOUNT_PAGE_URL,
-} from "./constants";
+    accountPageUrl,
+    forgotPasswordPage,
+    loginPage,
+    signupPage
+} from '../../url.utils';
 
 const AuthenticationPage = (props) => {
     const { auth: authType } = useParams();
@@ -24,19 +24,19 @@ const AuthenticationPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
 
     const handleForgotPassword = useCallback(() => {
-        history.push(FORGOT_PASSWORD_URL);
+        history.push(forgotPasswordPage());
     }, []);
 
     const handleCancel = useCallback(() => {
-        history.push(LOGIN_URL);
+        history.push(loginPage());
     }, []);
 
     const handleCreateAccount = useCallback(() => {
-        history.push(SIGNUP_URL);
+        history.push(signupPage());
     }, []);
     // called after user signUp
     const handleAccountCreation = useCallback(() => {
-        history.push(ACCOUNT_PAGE_URL);
+        history.push(accountPageUrl());
     }, []);
 
     let content;
