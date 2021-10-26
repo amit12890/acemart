@@ -7,11 +7,12 @@ import { useStyle } from '../../venia/classify';
 import Button from '../../venia/components/Button';
 import { Message } from '../../venia/components/Field';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import AccountAddressBlock from './accountAddressBlock';
+import AccountNewsletterBlock from './accountNewsletterBlock';
 
 import defaultClasses from './accountInformation.css';
 import AccountInformationPageOperations from './accountInformation.gql.js';
 import { EDIT_ACCOUNT_INFO, EDIT_ACCOUNT_PASSWROD } from './constants';
-import AccountNewsletterBlock from './accountNewsletterBlock';
 
 
 const AccountInformation = props => {
@@ -99,7 +100,6 @@ const AccountInformation = props => {
                         </Button>
                     </div>
                 </div>
-                <AccountNewsletterBlock />
             </div>
         );
     }
@@ -113,6 +113,9 @@ const AccountInformation = props => {
                 />
             </h1>
             {errorMessage ? errorMessage : pageContent}
+
+            <AccountNewsletterBlock />
+            <AccountAddressBlock />
         </div>
     );
 };
