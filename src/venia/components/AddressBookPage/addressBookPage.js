@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { useHistory } from 'react-router';
+import React, { useEffect, useMemo } from 'react';
 import { filter, find, size } from 'lodash-es';
 import { PlusSquare } from 'react-feather';
 
-import { useAddressBookPage } from '@magento/peregrine/lib/talons/AddressBookPage/useAddressBookPage';
+import { useAddressBookPage } from './useAddressBookPage';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import LinkButton from '../LinkButton';
@@ -23,7 +22,6 @@ import { addAddress, addressBookPage } from '../../../url.utils';
  * "/edit/{id}" - show editAddress form; 404 if address with id not found
  */
 const AddressBookPage = props => {
-    const history = useHistory();
     const talonProps = useAddressBookPage();
     const {
         confirmDeleteAddressId,
@@ -48,12 +46,8 @@ const AddressBookPage = props => {
     useEffect(() => {
         if(!isLoading) {
             // check current route
-            // if path is form but Dialog state is closed than re route to address book page
-            if ((props.path === addAddress() || props.path.includes("edit")) && !isDialogOpen) {
-                history.push(addressBookPage());
-            }
             // if new path call handleAddAddress
-            else if (props.path === addAddress()) {
+            if (props.path === addAddress()) {
                 handleAddAddress();
             }
             // if edit path
@@ -79,7 +73,7 @@ const AddressBookPage = props => {
                 handleCancelDialog();
             }
         }
-    }, [isLoading, customerAddresses, props.path, isDialogOpen])
+    }, [isLoading, customerAddresses, props.path])
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -91,16 +85,6 @@ const AddressBookPage = props => {
         return [defShAddr, defBillAddr, additionalAddr];
     }, [customerAddresses]);
 
-    const handleFormCancel = useCallback(() => {
-        handleCancelDialog();
-        history.push(addressBookPage());
-    }, [handleCancelDialog])
-
-    const onAddAddress = useCallback(() => {
-        handleAddAddress();
-        history.push(addAddress());
-    }, [handleAddAddress])
-
     if (isLoading) {
         return fullPageLoadingIndicator;
     }
@@ -111,8 +95,7 @@ const AddressBookPage = props => {
             formProps={formProps}
             isBusy={isDialogBusy}
             isEditMode={isDialogEditMode}
-            isOpen={isDialogOpen}
-            onCancel={handleFormCancel}
+            onCancel={handleCancelDialog}
             onConfirm={handleConfirmDialog}
         />
     }
@@ -198,7 +181,7 @@ const AddressBookPage = props => {
                 <LinkButton
                     className={classes.addButton}
                     key="addAddressButton"
-                    onClick={onAddAddress}
+                    onClick={handleAddAddress}
                 >
                     <Icon
                         classes={{
