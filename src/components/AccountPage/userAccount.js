@@ -1,10 +1,13 @@
 import React from 'react';
 import AccountInformation from './accountInformation';
 
+
 const UserAccount = props => {
     return (
         <div>
-            <h3>This is user account page</h3>
+            <div>  
+                <h1><span>My Account</span></h1>          
+            </div>
             <AccountInformation />
         </div>
     )

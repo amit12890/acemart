@@ -76,11 +76,13 @@
 
 .root_normalPriority {
     composes: root;
-    background-color: rgba(255 255 255);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
 }
 .root_normalPriority:hover {
-    background-color: rgb(var(--color-red));
-    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-white));
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
 }
 .root_normalPriorityNegative {
     composes: root_normalPriority;

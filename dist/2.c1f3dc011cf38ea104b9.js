@@ -1,5 +1,5 @@
 /*!
- * @version c718964-dev
+ * @version f78ba83-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[2],{"6QXU":function(e,t,n){"use strict"
