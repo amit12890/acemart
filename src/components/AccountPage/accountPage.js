@@ -3,7 +3,6 @@ import { Redirect, Switch, Route, useLocation } from 'react-router-dom';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import AccountSideBar from './accountSideBar';
-import UserAccount from './userAccount';
 import UserWishlist from './userWishlist';
 import UserOrderList from './userOrderList';
 
@@ -21,6 +20,7 @@ import defaultClasses from './accountPage.css';
 import EditAccountInfo from './editAccountInfo';
 import NewsletterSubscription from './newsletterSubscription';
 import AddressBookPage from '../../venia/components/AddressBookPage/addressBookPage';
+import AccountInformation from './accountInformation';
 
 
 const AccountPage = (props) => {
@@ -40,7 +40,7 @@ const AccountPage = (props) => {
             <div className={classes.content_wrapper}>
                 <Switch>
                     <Route exact path={accountPageUrl()}>
-                        <UserAccount />
+                        <AccountInformation />
                     </Route>
                     <Route exact path={myWishlistPage()}>
                         <UserWishlist />
