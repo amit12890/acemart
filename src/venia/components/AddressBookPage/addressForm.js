@@ -73,10 +73,6 @@ const AddressForm = props => {
         id: 'global.phoneNumber',
         defaultMessage: 'Phone Number'
     });
-    const defaultAddressCheckLabel = formatMessage({
-        id: 'addressBookPage.makeDefaultAddress',
-        defaultMessage: 'Make this my default address'
-    });
 
     return (
         <Form className={classes.form} {...formProps} onSubmit={onConfirm}>
