@@ -8,7 +8,7 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 
 import AddressCard from '../../venia/components/AddressBookPage/addressCard';
 import defaultClasses from '../../venia/components/AddressBookPage/addressBookPage.css';
-import { ADDRESSBOOK_PAGE_URL } from './constants';
+import { addressBookPage } from '../../url.utils';
 
 
 /**
@@ -48,7 +48,7 @@ const AccountAddressBlock = props => {
         <div className={classes.root}>
             <div className={classes.heading}>
                 Address Book
-                <Link to={ADDRESSBOOK_PAGE_URL}>Manage Address</Link>
+                <Link to={addressBookPage()}>Manage Address</Link>
             </div>
             <div className={classes.content}>
                 <div className={classes.addrBlockWrapper}>

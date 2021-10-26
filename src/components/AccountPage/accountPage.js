@@ -7,20 +7,21 @@ import UserAccount from './userAccount';
 import UserWishlist from './userWishlist';
 import UserOrderList from './userOrderList';
 
-import { 
-    MY_ACCOUNT_URL,
-    MY_WISHLIST_URL,
-    MY_ORDERS_LIST_URL,
-    EDIT_ACCOUNT_INFO,
-    EDIT_ACCOUNT_PASSWROD,
-    NEWSLETTER_URL,
-    ADDRESSBOOK_PAGE_URL,
-} from './constants';
+import {
+    accountPageUrl,
+    addressBookPage,
+    editAccountInfo,
+    editAccountPassword,
+    myOrderListPage,
+    myWishlistPage,
+    newsletterPage,
+} from '../../url.utils';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';
 import EditAccountInfo from './editAccountInfo';
 import NewsletterSubscription from './newsletterSubscription';
 import AddressBookPage from '../../venia/components/AddressBookPage/addressBookPage';
+
 
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -38,25 +39,25 @@ const AccountPage = (props) => {
             </div>
             <div className={classes.content_wrapper}>
                 <Switch>
-                    <Route exact path={MY_ACCOUNT_URL}>
+                    <Route exact path={accountPageUrl()}>
                         <UserAccount />
                     </Route>
-                    <Route exact path={MY_WISHLIST_URL}>
+                    <Route exact path={myWishlistPage()}>
                         <UserWishlist />
                     </Route>
-                    <Route exact path={MY_ORDERS_LIST_URL}>
+                    <Route exact path={myOrderListPage()}>
                         <UserOrderList />
                     </Route>
-                    <Route exact path={EDIT_ACCOUNT_INFO}>
+                    <Route exact path={editAccountInfo()}>
                         <EditAccountInfo path={path} />
                     </Route>
-                    <Route exact path={EDIT_ACCOUNT_PASSWROD}>
+                    <Route exact path={editAccountPassword()}>
                         <EditAccountInfo path={path} />
                     </Route>
-                    <Route exact path={NEWSLETTER_URL}>
+                    <Route exact path={newsletterPage()}>
                         <NewsletterSubscription />
                     </Route>
-                    <Route path={ADDRESSBOOK_PAGE_URL}>
+                    <Route path={addressBookPage()}>
                         <AddressBookPage path={path} />
                     </Route>
                     <Route exact path="*">

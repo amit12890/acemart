@@ -4,8 +4,8 @@ import { useMutation, useQuery } from '@apollo/client';
 import { get } from 'lodash';
 
 import Button from '../../venia/components/Button';
-import { MY_ACCOUNT_URL } from './constants';
 import { GET_CUSTOMER_SUBSCRIPTION, UPDATE_CUSTOMER } from './newsletterSubscription.gql';
+import { accountPageUrl } from '../../url.utils';
 
 
 const NewsletterSubscription = () => {
@@ -25,7 +25,7 @@ const NewsletterSubscription = () => {
 
     const submit = useCallback(async () => {
         await onSubmit({ variables: { input: {is_subscribed: subscription}}})
-        history.push(MY_ACCOUNT_URL)
+        history.push(accountPageUrl())
     }, [subscription])
 
     return(

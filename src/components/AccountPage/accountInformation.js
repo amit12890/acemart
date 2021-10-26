@@ -12,7 +12,7 @@ import AccountNewsletterBlock from './accountNewsletterBlock';
 
 import defaultClasses from './accountInformation.css';
 import AccountInformationPageOperations from './accountInformation.gql.js';
-import { EDIT_ACCOUNT_INFO, EDIT_ACCOUNT_PASSWROD } from './constants';
+import { editAccountInfo, editAccountPassword } from '../../url.utils';
 
 
 const AccountInformation = props => {
@@ -30,10 +30,10 @@ const AccountInformation = props => {
     } = talonProps;
 
     const goToAccountInfoEdit = useCallback(() => {
-        history.push(EDIT_ACCOUNT_INFO)
+        history.push(editAccountInfo())
     }, [])
     const goToAccountInfoEditPassword = useCallback(() => {
-        history.push(EDIT_ACCOUNT_PASSWROD)
+        history.push(editAccountPassword())
     }, [])
 
     if (!isSignedIn) {

@@ -12,7 +12,7 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import AddressCard from './addressCard';
 import defaultClasses from './addressBookPage.css';
 import AddressForm from './addressForm';
-import { ADDRESSBOOK_PAGE_URL, ADDRESS_ADD_URL } from '../../../components/AccountPage/constants';
+import { addAddress, addressBookPage } from '../../../url.utils';
 
 
 /**
@@ -49,11 +49,11 @@ const AddressBookPage = props => {
         if(!isLoading) {
             // check current route
             // if path is form but Dialog state is closed than re route to address book page
-            if ((props.path === ADDRESS_ADD_URL || props.path.includes("edit")) && !isDialogOpen) {
-                history.push(ADDRESSBOOK_PAGE_URL);
+            if ((props.path === addAddress() || props.path.includes("edit")) && !isDialogOpen) {
+                history.push(addressBookPage());
             }
             // if new path call handleAddAddress
-            else if (props.path === ADDRESS_ADD_URL) {
+            else if (props.path === addAddress()) {
                 handleAddAddress();
             }
             // if edit path
@@ -93,12 +93,12 @@ const AddressBookPage = props => {
 
     const handleFormCancel = useCallback(() => {
         handleCancelDialog();
-        history.push(ADDRESSBOOK_PAGE_URL);
+        history.push(addressBookPage());
     }, [handleCancelDialog])
 
     const onAddAddress = useCallback(() => {
         handleAddAddress();
-        history.push(ADDRESS_ADD_URL);
+        history.push(addAddress());
     }, [handleAddAddress])
 
     if (isLoading) {

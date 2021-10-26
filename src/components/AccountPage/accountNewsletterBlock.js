@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { get } from 'lodash';
 
-import { NEWSLETTER_URL } from './constants';
 import { GET_CUSTOMER_SUBSCRIPTION } from './newsletterSubscription.gql';
+import { newsletterPage } from '../../url.utils';
 
 
 const AccountNewsletterBlock = () => {
@@ -26,7 +26,7 @@ const AccountNewsletterBlock = () => {
                     :
                     'You are NOT subscribed to "General Subscription"'}
                 </div>
-                <Link to={NEWSLETTER_URL}>
+                <Link to={newsletterPage()}>
                     Edit
                 </Link>
             </div>
