@@ -62,6 +62,8 @@
 
     --color-red: 201 37 45;
     --color-red1: 161 30 36;
+    --color-red2: 250 229 229;
+    
 
     --color-white: 255 255 255;
     --color-black: 0 0 0;
@@ -93,6 +95,7 @@
     --secondary-color: var(--color-gray-middle1);
 
     --color-error: var(--color-red);
+    --color-error-background: var(--color-red2);
 
     --text-color: var(--primary-color);
     

@@ -103,7 +103,7 @@
 }
 
 .loginBlock .label {
-    justify-content: center;
+    
     
 }
 
@@ -231,7 +231,5 @@ h3 {
 
 .password_label {
     composes: label from '../Field/field.css';
-    justify-content: center;
-    
-    
+   
 }

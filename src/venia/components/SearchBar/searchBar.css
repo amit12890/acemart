@@ -23,10 +23,10 @@
     align-items: center;
     display: inline-flex;
     justify-content: center;
-    max-width: 24rem;
     padding-bottom: 1rem;
     position: relative;
     width: 100%;
+    z-index: 11;
 }
 
 .search {

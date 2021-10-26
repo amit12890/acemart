@@ -18,7 +18,9 @@
     z-index: 11;
     right: 0;
     left: auto;
+   
 }
+
 
 .root_open {
     composes: root;
@@ -61,10 +63,16 @@
     position: relative;
     align-items: center;
     border-bottom: 1px solid rgb(var(--border-color-base));
-    
+    padding-bottom: 10px;
     font-size: var(--venia-global-typography-heading-XS-fontSize);
     font-weight: 600;
     line-height: var(--venia-global-typography-heading-lineHeight);
+}
+.headerPanelContent {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .stockStatusMessageContainer {
@@ -76,10 +84,13 @@
 }
 
 .body {
-    max-height: 25rem;
     min-height: 10rem;
     overflow-y: scroll;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
+
 
 .quantity {
     opacity: 1;
@@ -87,6 +98,7 @@
     transition-duration: 384ms;
     transition-property: opacity;
     transition-timing-function: var(--venia-global-anim-standard);
+    margin-right: 10px;
 }
 
 .quantity_loading {
@@ -113,16 +125,24 @@
 
     align-items: center;
     border-top: 2px solid rgb(var(--venia-global-color-gray));
-    display: grid;
-    gap: 0.5rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: var(--venia-typography-body-S-fontSize);
     justify-items: center;
     line-height: var(--venia-typography-body-lineHeight);
-    margin: 0 1rem;
     min-height: 3rem;
     overflow: hidden;
-    padding: 1rem;
+
+    
 }
+
+.footer .panelRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 
 .checkoutButton {
     composes: root_highPriority from '../Button/button.css';
@@ -130,8 +150,13 @@
     width: 10rem;
     margin: auto;
     background-color: rgb(var(--venia-brand-color-1-700));
-    border: none;
+    border: 2px solid rgb(var(--venia-brand-color-1-700));
     font-weight: bold;
+    margin-bottom: 10px;
+}
+.checkoutButton:hover {
+    color: rgb(var(--venia-brand-color-1-700)); 
+    border-color: rgb(var(--venia-brand-color-1-700));
 }
 
 .editCartButton {

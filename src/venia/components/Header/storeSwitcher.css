@@ -12,6 +12,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    color: rgb(var(--theme-color-primary));
 }
 
 .menu {

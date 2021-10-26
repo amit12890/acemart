@@ -8,7 +8,7 @@
 }
 
 .switchersContainer {
-    display: none;
+    
 }
 
 .open {
@@ -38,9 +38,7 @@
     }
 
     .switchersContainer {
-        display: block;
         width: 100%;
-        background-color: rgb(var(--color-gray-light0));
     }
 
     .toolbar {
@@ -306,4 +304,8 @@
     align-items: center;
     display: flex;
     flex-grow: 1;
+}
+
+.storeLocationWrapper {
+
 }

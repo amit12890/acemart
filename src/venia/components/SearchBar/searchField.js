@@ -7,25 +7,31 @@ import Icon from '@magento/venia-ui/lib/components/Icon';
 import TextInput from '../TextInput';
 import Trigger from '@magento/venia-ui/lib/components/Trigger';
 
+import defaultClasses from './searchField.css'
+import { useStyle } from '../../classify';
+
 const clearIcon = <Icon src={ClearIcon} size={24} />;
 const searchIcon = <Icon src={SearchIcon} size={24} />;
 
 const SearchField = props => {
+    const classes = useStyle(defaultClasses)
     const { isSearchOpen, onChange, onFocus } = props;
     const { inputRef, resetForm, value } = useSearchField({ isSearchOpen });
 
     const resetButton = value ? (
         <Trigger action={resetForm}>{clearIcon}</Trigger>
     ) : null;
-
+    console.log(value)
     return (
         <TextInput
-            after={resetButton}
-            before={searchIcon}
+            after={value ? resetButton : searchIcon}    
             field="search_query"
             onFocus={onFocus}
             onValueChange={onChange}
             forwardedRef={inputRef}
+            classes={{
+                input:classes.searchTextInput
+            }}
         />
     );
 };

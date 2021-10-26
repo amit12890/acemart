@@ -1,8 +1,11 @@
 .root {
+    background-color: rgb(var(--color-error-background));
+    padding: 10px 20px;
+    border:1px solid rgb(var(--color-error));
 }
 
 .errorMessage {
-    color: rgb(var(--venia-global-color-error));
+    color: rgb(var(--color-error));
     font-size: var(--venia-typography-body-S-fontSize);
     font-weight: var(--venia-global-fontWeight-semibold);
     line-height: var(--venia-global-lineHeight-300);
