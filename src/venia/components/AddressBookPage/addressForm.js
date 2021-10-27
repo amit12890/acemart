@@ -6,8 +6,8 @@ import { Form } from 'informed';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 
-import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
-import Country from '@magento/venia-ui/lib/components/Country';
+import Checkbox from '../Checkbox';
+import Country from '../Country';
 import Field from '../Field';
 import FormError from '../FormError';
 import Postcode from '@magento/venia-ui/lib/components/Postcode';
