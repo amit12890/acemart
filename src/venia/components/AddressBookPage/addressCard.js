@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
 import { Trash2 as TrashIcon, Edit2 as EditIcon } from 'react-feather';
@@ -12,7 +11,6 @@ import LinkButton from '../LinkButton';
 
 
 const AddressCard = props => {
-    const history = useHistory();
     const {
         address,
         classes: propClasses,
@@ -123,7 +121,7 @@ const AddressCard = props => {
             <div className={classes.actionContainer}>
                 <LinkButton
                     classes={{ root: classes.editButton }}
-                    onClick={() => {onEdit(); history.push(`/customer/address/edit/id/${id}`);}}
+                    onClick={onEdit}
                 >
                     <Icon classes={{ icon: null }} size={16} src={EditIcon} />
                     <span className={classes.actionLabel}>
