@@ -11,7 +11,7 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import AddressCard from './addressCard';
 import defaultClasses from './addressBookPage.css';
 import AddressForm from './addressForm';
-import { addAddress, addressBookPage } from '../../../url.utils';
+import { addAddress } from '../../../url.utils';
 
 
 /**
