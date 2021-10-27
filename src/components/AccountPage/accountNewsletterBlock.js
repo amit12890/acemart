@@ -19,7 +19,6 @@ const AccountNewsletterBlock = () => {
         <div>
             <h2>Newsletters</h2>
             <div>
-                
                 <div>
                     {subscription ?
                     'You are subscribed to "General Subscription"'

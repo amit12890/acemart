@@ -1,7 +1,5 @@
 .root {
-    padding: 2.5rem 3rem;
-    max-width: var(--venia-global-maxWidth);
-    margin: 0 auto;
+
 }
 
 .heading {
@@ -11,10 +9,23 @@
     margin-bottom: 2rem;
     text-align: center;
     text-transform: capitalize;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h2 {
+    font-size: var(--fontSize-300);
+    font-weight: var(--font-weight-bold);
+    text-transform: capitalize;
+    margin:0;
 }
 
 .content {
     display: block;
+}
+
+.actionToolbar {
+
 }
 
 .addButton {
@@ -53,10 +64,26 @@
 }
 
 .addrBlockWrapper {
-    display: block;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.blockSubTitle {
+    font-size: var(--fontSize-200);
+    font-weight: var(--font-weight-bold);
+    text-transform: capitalize;
+    margin-bottom: 10px;
 }
 
 .addrBlock {
-    display: block;
+    margin-left: 20px;
+}
+.addrBlock:first-child { 
+    margin-left: 0; 
+}
+
+.addressCard  {
+    font-size: 14px;
+    margin-bottom: 10px;
 }

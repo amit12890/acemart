@@ -104,3 +104,18 @@
 .root_highPriorityNegative:hover {
     --stroke: var(--color-red1);
 }
+
+
+.button_asLink {
+    background-color: transparent;
+    border: none;
+    min-height: auto;
+    min-width: auto;
+    color: rgb(var(--stroke));
+    padding: 0;
+    line-height: normal;
+}
+
+.button_asLink:hover {
+    text-decoration: underline;
+}
