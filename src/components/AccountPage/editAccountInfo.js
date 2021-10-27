@@ -210,7 +210,7 @@ const EditAccountInfo = ({path}) => {
                                         [isEqualToField, 'newPassword'],
                                     ])}
                                     isToggleButtonHidden={false}
-                                />
+                                /> 
                             </div>
                             </>
                         }

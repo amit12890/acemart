@@ -37,20 +37,26 @@ const NewsletterSubscription = () => {
                 <h1 className={classes.title}>Newsletter Subscription</h1>
             </div>
             
-            <div>
-                <h4>Subscription option</h4>
-                <label>
-                    <input
-                        name="subscription"
-                        type="checkbox"
-                        checked={subscription}
-                        onChange={() => setSubscription(val => !val)} />
-                    General Subscription
-                </label>
-
-                <Button onClick={submit} disabled={isDataUpdating}>
-                    {isDataUpdating ? "Loading..." : "Save"}
-                </Button>
+            <div className={classes.panelWrapper}>
+                <div className={classes.panelBody}>
+                    <h2 className={classes.panelBodyTitle}>Subscription option</h2>
+                    <div className={[classes.fieldWrapper, classes.region].join(" ")}>
+                   
+                        <label>
+                            <input
+                                name="subscription"
+                                type="checkbox"
+                                checked={subscription}
+                                onChange={() => setSubscription(val => !val)} />
+                            General Subscription
+                        </label>
+                    </div>
+                    <div className={classes.actionToolbar}>
+                        <Button onClick={submit} disabled={isDataUpdating}>
+                            {isDataUpdating ? "Loading..." : "Save"}
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     )

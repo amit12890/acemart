@@ -1,0 +1,41 @@
+.root {
+
+}
+
+.pageTitleWrapper {
+
+}
+.panelWrapper {
+    margin-bottom: 30px;
+    padding: 30px;
+    border: 1px solid #e9eaec;
+}
+
+.title {
+    justify-self: center;
+    background-color: #f5f5f5;
+    margin-bottom: 10px;
+    padding: 15px 30px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.panelBodyTitle {
+    font-size: var(--fontSize-300);
+    font-weight: var(--font-weight-bold);
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+
+.fieldWrapper {
+    margin-top: 25px;
+}
+
+
+
+
+.actionToolbar  {
+    margin-top: 20px;
+}

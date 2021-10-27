@@ -63,7 +63,7 @@
     background-color: var(--color-white);
 }
 .root_lowPriority:hover {
-    background-color: rgb(var(--color-red));
+    background-color: rgb(var(--stroke));
     color: rgb(var(--color-white));
 }
 .root_lowPriorityNegative {
@@ -119,3 +119,8 @@
 .button_asLink:hover {
     text-decoration: underline;
 }
+
+.cancelButton {
+    margin-right: 40px;
+}
+

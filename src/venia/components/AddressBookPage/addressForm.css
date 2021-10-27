@@ -31,10 +31,20 @@
 
 .fieldChoice {
     margin-bottom: 10px;
+    margin-top: 20px;
+}
+.fieldChoice:last-child {
+    margin-top: 0;
 }
 
-.actionToolbar {
-
+.actionToolbar button {
+    margin-right: 20px;
+}
+.cancelButton {
+    margin-right: 20px;
+}
+.confirmButton {
+    
 }
 
 /*

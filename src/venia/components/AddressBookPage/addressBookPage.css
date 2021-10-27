@@ -58,8 +58,10 @@ h2 {
 .addButton {
     composes: root from '../Button/button.css';
     composes: root_highPriority from '../Button/button.css';
-    
+}
 
+.addrBLockWrapper {
+    
 }
 
 .addButton:focus {
