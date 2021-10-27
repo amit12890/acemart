@@ -7,7 +7,7 @@ import { useStyle } from '../../venia/classify';
 import Button from '../../venia/components/Button';
 import { GET_CUSTOMER_SUBSCRIPTION, UPDATE_CUSTOMER } from './newsletterSubscription.gql';
 import { accountPageUrl } from '../../url.utils';
-import defaultClasses from 'newsletterSubscription.css';
+import defaultClasses from './newsletterSubscription.css';
 
 
 const NewsletterSubscription = () => {
