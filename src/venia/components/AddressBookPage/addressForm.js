@@ -75,100 +75,110 @@ const AddressForm = props => {
     });
 
     return (
-        <Form className={classes.form} {...formProps} onSubmit={onConfirm}>
-            <h2>{title}</h2>
-            <FormError
-                classes={{ root: classes.errorContainer }}
-                errors={Array.from(formErrors.values())}
-            />
-            <div className={classes.root}>
-                <div className={classes.firstname}>
-                    <Field id="firstname" label={firstNameLabel}>
-                        <TextInput field="firstname" validate={isRequired} />
-                    </Field>
+        <div className={classes.root}>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>{title}</h1>
+            </div>
+            <div className={classes.panelWrapper}>
+                <div className={classes.panelBody}>
+            <Form className={classes.form} {...formProps} onSubmit={onConfirm}>
+                <FormError
+                    classes={{ root: classes.errorContainer }}
+                    errors={Array.from(formErrors.values())}
+                />
+                <div className={classes.root}>
+                    <div className={[classes.fieldWrapper, classes.firstname].join(" ")}>
+                        <Field id="firstname" label={firstNameLabel}>
+                            <TextInput field="firstname" validate={isRequired} />
+                        </Field>
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.middlename].join(" ")}>
+                        <Field
+                            id="middlename"
+                            label={middleNameLabel}
+                            optional={true}
+                        >
+                            <TextInput field="middlename" />
+                        </Field>
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.lastname].join(" ")}>
+                        <Field id="lastname" label={lastNameLabel}>
+                            <TextInput field="lastname" validate={isRequired} />
+                        </Field>
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.country].join(" ")}>
+                        <Country field={'country_code'} validate={isRequired} />
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.street1].join(" ")}>
+                        <Field id="street1" label={street1Label}>
+                            <TextInput field="street[0]" validate={isRequired} />
+                        </Field>
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.street2].join(" ")}>
+                        <Field id="street2" label={street2Label} optional={true}>
+                            <TextInput field="street[1]" />
+                        </Field>
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.city].join(" ")}>
+                        <Field id="city" label={cityLabel}>
+                            <TextInput field="city" validate={isRequired} />
+                        </Field>
+                    </div>
+
+                    <div className={[classes.fieldWrapper, classes.region].join(" ")}>
+                        <Region
+                            countryCodeField={'country_code'}
+                            fieldInput={'region[region]'}
+                            fieldSelect={'region[region_id]'}
+                            optionValueKey="id"
+                            validate={isRequired}
+                        />
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.postcode].join(" ")}>
+                        <Postcode validate={isRequired} />
+                    </div>
+                    <div className={[classes.fieldWrapper, classes.telephone].join(" ")}>
+                        <Field id="telephone" label={telephoneLabel}>
+                            <TextInput field="telephone" validate={isRequired} />
+                        </Field>
+                    </div>
+                    <div className={classes.fieldChoice}>
+                    
+                        <Checkbox
+                            field="default_shipping"
+                            label="Default Shipping Address"
+                        />
+                    </div>
+                    <div className={classes.fieldChoice}>
+                        <Checkbox
+                            field="default_billing"
+                            label="Default billing address"
+                        />
+                    </div>
                 </div>
-                <div className={classes.middlename}>
-                    <Field
-                        id="middlename"
-                        label={middleNameLabel}
-                        optional={true}
+                <div className={classes.actionToolbar}>
+                    <Button
+                        classes={classes.cancelButton}
+                        disabled={isBusy}
+                        onClick={onCancel}
+                        priority="low"
+                        type="reset"
                     >
-                        <TextInput field="middlename" />
-                    </Field>
+                        Cancle
+                    </Button>
+                    <Button
+                        classes={classes.confirmButton}
+                        disabled={isBusy}
+                        priority="high"
+                        type="submit"
+                    >
+                        Confirm
+                    </Button>
                 </div>
-                <div className={classes.lastname}>
-                    <Field id="lastname" label={lastNameLabel}>
-                        <TextInput field="lastname" validate={isRequired} />
-                    </Field>
-                </div>
-                <div className={classes.country}>
-                    <Country field={'country_code'} validate={isRequired} />
-                </div>
-                <div className={classes.street1}>
-                    <Field id="street1" label={street1Label}>
-                        <TextInput field="street[0]" validate={isRequired} />
-                    </Field>
-                </div>
-                <div className={classes.street2}>
-                    <Field id="street2" label={street2Label} optional={true}>
-                        <TextInput field="street[1]" />
-                    </Field>
-                </div>
-                <div className={classes.city}>
-                    <Field id="city" label={cityLabel}>
-                        <TextInput field="city" validate={isRequired} />
-                    </Field>
-                </div>
-                <div className={classes.region}>
-                    <Region
-                        countryCodeField={'country_code'}
-                        fieldInput={'region[region]'}
-                        fieldSelect={'region[region_id]'}
-                        optionValueKey="id"
-                        validate={isRequired}
-                    />
-                </div>
-                <div className={classes.postcode}>
-                    <Postcode validate={isRequired} />
-                </div>
-                <div className={classes.telephone}>
-                    <Field id="telephone" label={telephoneLabel}>
-                        <TextInput field="telephone" validate={isRequired} />
-                    </Field>
-                </div>
-                <div className={classes.default_address_check}>
-                    <Checkbox
-                        field="default_shipping"
-                        label="Default Shipping Address"
-                    />
-                </div>
-                <div className={classes.default_address_check}>
-                    <Checkbox
-                        field="default_billing"
-                        label="Default billing address"
-                    />
-                </div>
+            </Form>
             </div>
-            <div className={classes.buttons}>
-                <Button
-                    classes={classes.cancelButton}
-                    disabled={isBusy}
-                    onClick={onCancel}
-                    priority="low"
-                    type="reset"
-                >
-                    Cancle
-                </Button>
-                <Button
-                    classes={classes.confirmButton}
-                    disabled={isBusy}
-                    priority="high"
-                    type="submit"
-                >
-                    Confirm
-                </Button>
             </div>
-        </Form>
+        </div>
     );
 };
 
