@@ -4,10 +4,13 @@ import { useQuery } from '@apollo/client';
 import { get } from 'lodash';
 
 import { GET_CUSTOMER_SUBSCRIPTION } from './newsletterSubscription.gql';
+import defaultClasses from './accountNewsletterBlock.css';
+import { useStyle } from '../../venia/classify';
 import { newsletterPage } from '../../url.utils';
 
 
 const AccountNewsletterBlock = () => {
+    const classes = useStyle(defaultClasses);
     const { loading, error, data } = useQuery(GET_CUSTOMER_SUBSCRIPTION);
     const subscription = get(data, "customer.is_subscribed", false)
 
@@ -17,7 +20,7 @@ const AccountNewsletterBlock = () => {
 
     return(
         <div>
-            <h2>Newsletters</h2>
+            <h2 className={classes.red}>Newsletters</h2>
             <div>
                 <div>
                     {subscription ?
