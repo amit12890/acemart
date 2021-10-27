@@ -102,79 +102,92 @@ const AddressBookPage = props => {
 
     return (
         <div className={classes.root}>
-            <h1 className={classes.heading}>Address Book</h1>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
+                    Address Book
+                </h1>
+            </div>
+
             <div className={classes.content}>
-                <div className={classes.addrBlockWrapper}>
-                    <h2>Default Address Entries</h2>
-                    <div className={classes.addrBlock}>
-                        <h3>Default Billing Address</h3>
-                        {!!defaultBillingAddress ?
-                            <AddressCard
-                                address={defaultBillingAddress}
-                                countryName={countryDisplayNameMap.get(
-                                    defaultBillingAddress.country_code
-                                )}
-                                isConfirmingDelete={confirmDeleteAddressId === defaultBillingAddress.id}
-                                isDeletingCustomerAddress={isDeletingCustomerAddress}
-                                key={defaultBillingAddress.id}
-                                onCancelDelete={handleCancelDeleteAddress}
-                                onConfirmDelete={handleConfirmDeleteAddress}
-                                onDelete={() => handleDeleteAddress(defaultBillingAddress.id)}
-                                onEdit={() => handleEditAddress(defaultBillingAddress)}
-                            />
-                            :
-                            <div>No address entry in your address book</div>
-                        }
-                    </div>
-                    <div className={classes.addrBlock}>
-                        <h3>Default Shipping Address</h3>
-                        {!!defaultShippingAddress ?
-                            <AddressCard
-                                address={defaultShippingAddress}
-                                countryName={countryDisplayNameMap.get(
-                                    defaultShippingAddress.country_code
-                                )}
-                                isConfirmingDelete={confirmDeleteAddressId === defaultShippingAddress.id}
-                                isDeletingCustomerAddress={isDeletingCustomerAddress}
-                                key={defaultShippingAddress.id}
-                                onCancelDelete={handleCancelDeleteAddress}
-                                onConfirmDelete={handleConfirmDeleteAddress}
-                                onDelete={() => handleDeleteAddress(defaultShippingAddress.id)}
-                                onEdit={() => handleEditAddress(defaultShippingAddress)}
-                            />
-                            :
-                            <div>No address entry in your address book</div>
-                        }
+                    <div className={classes.panelWrapper}>
+                        <div className={classes.panelBody}>
+                        <h2 className={classes.panelBodyTitle}>Default Address Entries</h2>
+                            <div className={classes.addrBlockWrapper}>
+                                <div className={classes.addrBlock}>
+                                    <h3 className={classes.blockSubTitle}>Default Billing Address</h3>
+                                    {!!defaultBillingAddress ?
+                                        <AddressCard
+                                            address={defaultBillingAddress}
+                                            countryName={countryDisplayNameMap.get(
+                                                defaultBillingAddress.country_code
+                                            )}
+                                            isConfirmingDelete={confirmDeleteAddressId === defaultBillingAddress.id}
+                                            isDeletingCustomerAddress={isDeletingCustomerAddress}
+                                            key={defaultBillingAddress.id}
+                                            onCancelDelete={handleCancelDeleteAddress}
+                                            onConfirmDelete={handleConfirmDeleteAddress}
+                                            onDelete={() => handleDeleteAddress(defaultBillingAddress.id)}
+                                            onEdit={() => handleEditAddress(defaultBillingAddress)}
+                                        />
+                                        :
+                                        <div>No address entry in your address book</div>
+                                    }
+                                </div>
+                                <div className={classes.addrBlock}>
+                                    <h3 className={classes.blockSubTitle}>Default Shipping Address</h3>
+                                    {!!defaultShippingAddress ?
+                                        <AddressCard
+                                            address={defaultShippingAddress}
+                                            countryName={countryDisplayNameMap.get(
+                                                defaultShippingAddress.country_code
+                                            )}
+                                            isConfirmingDelete={confirmDeleteAddressId === defaultShippingAddress.id}
+                                            isDeletingCustomerAddress={isDeletingCustomerAddress}
+                                            key={defaultShippingAddress.id}
+                                            onCancelDelete={handleCancelDeleteAddress}
+                                            onConfirmDelete={handleConfirmDeleteAddress}
+                                            onDelete={() => handleDeleteAddress(defaultShippingAddress.id)}
+                                            onEdit={() => handleEditAddress(defaultShippingAddress)}
+                                        />
+                                        :
+                                        <div>No address entry in your address book</div>
+                                    }
+                                </div>
+                        </div>
+
                     </div>
                 </div>
+                <div className={classes.panelWrapper}>
+                    <div className={classes.panelBody}>
+                            <h2 className={classes.panelBodyTitle}>Additional Addresses Entries</h2>
+                        <div className={classes.addrBLockWrapper}>    
+                            <div className={classes.addrBlock}>
+                                {!!size(additionalAddresses) ?
+                                <>
+                                    {additionalAddresses.map((addressEntry) => {
+                                        const boundEdit = () => handleEditAddress(addressEntry);
+                                        const boundDelete = () => handleDeleteAddress(addressEntry.id);
 
-                <div className={classes.addrBLockWrapper}>
-                    <h2>Additional Addresses Entries</h2>
-                    <div className={classes.addrBlock}>
-                        {!!size(additionalAddresses) ?
-                        <>
-                            {additionalAddresses.map((addressEntry) => {
-                                const boundEdit = () => handleEditAddress(addressEntry);
-                                const boundDelete = () => handleDeleteAddress(addressEntry.id);
-
-                                return <AddressCard
-                                    address={addressEntry}
-                                    countryName={countryDisplayNameMap.get(
-                                        addressEntry.country_code
-                                    )}
-                                    isConfirmingDelete={confirmDeleteAddressId === addressEntry.id}
-                                    isDeletingCustomerAddress={isDeletingCustomerAddress}
-                                    key={addressEntry.id}
-                                    onCancelDelete={handleCancelDeleteAddress}
-                                    onConfirmDelete={handleConfirmDeleteAddress}
-                                    onDelete={boundDelete}
-                                    onEdit={boundEdit}
-                                />
-                            })}
-                        </>
-                        :
-                        <div>You have no other address entries in your address book.</div>
-                        }
+                                        return <AddressCard
+                                            address={addressEntry}
+                                            countryName={countryDisplayNameMap.get(
+                                                addressEntry.country_code
+                                            )}
+                                            isConfirmingDelete={confirmDeleteAddressId === addressEntry.id}
+                                            isDeletingCustomerAddress={isDeletingCustomerAddress}
+                                            key={addressEntry.id}
+                                            onCancelDelete={handleCancelDeleteAddress}
+                                            onConfirmDelete={handleConfirmDeleteAddress}
+                                            onDelete={boundDelete}
+                                            onEdit={boundEdit}
+                                        />
+                                    })}
+                                </>
+                                :
+                                <div>You have no other address entries in your address book.</div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -182,14 +195,8 @@ const AddressBookPage = props => {
                     className={classes.addButton}
                     key="addAddressButton"
                     onClick={handleAddAddress}
+                    
                 >
-                    <Icon
-                        classes={{
-                            icon: classes.addIcon
-                        }}
-                        size={24}
-                        src={PlusSquare}
-                    />
                     <span className={classes.addText}>
                         Add New Address
                     </span>

@@ -41,9 +41,7 @@
     composes: trigger;
     display: none;
 }
-svg {
-    fill: currentColor;
-}
+
 
 /*
  * Mobile-specific styles.

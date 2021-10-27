@@ -29,8 +29,11 @@ const NewsletterSubscription = () => {
     }, [subscription])
 
     return(
-        <div>
-            <h2>Newsletter Subscription</h2>
+        <div className={classes.root}>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>Newsletter Subscription</h1>
+            </div>
+            
             <div>
                 <h4>Subscription option</h4>
                 <label>
