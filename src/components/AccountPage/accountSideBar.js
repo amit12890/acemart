@@ -65,8 +65,8 @@ const AccountSideBar = props => {
                 const linkClass = item.url === props.activeUrl ?
                     [classes.link, classes.link_active].join(" ") : classes.link
                 return (
-                    <li className={[classes.navItem, classes.item].join(" ")}>
-                        <Link className={linkClass} key={item.id} to={item.url}>
+                    <li key={item.id} className={[classes.navItem, classes.item].join(" ")}>
+                        <Link className={linkClass} to={item.url}>
                            <span>{item.name}</span>
                         </Link>
                     </li>
