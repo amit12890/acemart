@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Redirect } from 'react-router-dom';
 
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
@@ -41,9 +41,7 @@ const AuthenticationPage = (props) => {
 
     let content;
     if (isSignedIn) {
-        content = (
-            <div>Your are already logged In</div>
-        )
+        return <Redirect to={accountPageUrl()} />
     } else {
         // show auth alternate pages
         switch (authType) {
