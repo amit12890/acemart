@@ -234,55 +234,6 @@ const Footer = props => {
                         <p className={classes.copyright}>{copyrightText || null}</p>
                     </div>
                 </div>
-            </div>            
-
-            <div className={classes.links}>
-                {linkGroups}
-                <div className={classes.callout}>
-                    <h3 className={classes.calloutHeading}>
-                        <FormattedMessage
-                            id={'footer.followText'}
-                            defaultMessage={'Follow Us!'}
-                        />
-                    </h3>
-                    <p className={classes.calloutBody}>
-                        <FormattedMessage
-                            id={'footer.calloutText'}
-                            defaultMessage={LOREM_IPSUM}
-                        />
-                    </p>
-                    <ul className={classes.socialLinks}>
-                        <li>
-                            <Instagram size={20} />
-                        </li>
-                        <li>
-                            <Facebook size={20} />
-                        </li>
-                        <li>
-                            <Twitter size={20} />
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div className={classes.branding}>
-                <ul className={classes.legal}>
-                    <li className={classes.terms}>
-                        <FormattedMessage
-                            id={'footer.termsText'}
-                            defaultMessage={'Terms of Use'}
-                        />
-                    </li>
-                    <li className={classes.privacy}>
-                        <FormattedMessage
-                            id={'footer.privacyText'}
-                            defaultMessage={'Privacy Policy'}
-                        />
-                    </li>
-                </ul>
-                
-                <Link className={classes.logo} to="/">
-                    <Logo />
-                </Link>
             </div>
         </footer>
     );
