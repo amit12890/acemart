@@ -7,8 +7,8 @@ import { useFooter } from '@magento/peregrine/lib/talons/Footer/useFooter';
 
 import Logo from '@magento/venia-ui/lib/components/Logo';
 import { useStyle } from '../../classify';
-// import Image from '../Image';
-// import testImg from '../../../assets/test.png';
+import Image from '../Image';
+import testImg from '../../../assets/test.png';
 import defaultClasses from './footer.css';
 import { DEFAULT_LINKS, LOREM_IPSUM } from './sampleData';
 
@@ -114,7 +114,7 @@ const Footer = props => {
                                         className={classes.action}
                                     >termsText</Link>
 
-                                    {/* <Image src={testImg} /> */}
+                                    <Image src={testImg} /> 
                                 </div>
                             </div>                                                        
 
@@ -130,31 +130,107 @@ const Footer = props => {
                                 <div className={classes.footerBox}>
                                     <h3 className={classes.groupTitle}>Customer Center</h3>
                                     <ul className={classes.groupLinks}>
-                                        <li className={classes.link}><a href="#">My Account</a></li>
-                                        <li className={classes.link}><a href="#">Customer Service</a></li>
-                                        <li className={classes.link}><a href="#">Help Center</a></li>
-                                        <li className={classes.link}><a href="#">Returns</a></li>
-                                        <li className={classes.link}><a href="#">Shipping Policies</a></li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}
+                                            >My Account</Link>
+                                        </li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}
+                                            >Customer Service</Link>
+                                        </li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Help Center
+                                            </Link>
+                                            </li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Returns
+                                            </Link>
+                                        </li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Shipping Policies
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div className={classes.footerBox}>
                                     <h3 className={classes.groupTitle}>Company Info</h3>
                                     <ul className={classes.groupLinks}>
-                                        <li className={classes.link}><a href="#">About Us</a></li>
-                                        <li className={classes.link}><a href="#">Careers</a></li>
-                                        <li className={classes.link}><a href="#">Terms of Use</a></li>
-                                        <li className={classes.link}><a href="#">FAQs</a></li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Careers
+                                            </Link>                                            
+                                        </li>
+                                        <li className={classes.link}>
+                                        <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Careers
+                                            </Link> 
+                                        </li>
+                                        <li className={classes.link}>
+                                        <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Terms of Use
+                                            </Link> 
+                                        </li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                FAQs
+                                            </Link> 
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div className={classes.footerBox}>
                                     <h3 className={classes.groupTitle}>Tools & Services</h3>
                                     <ul className={classes.groupLinks}>
-                                        <li className={classes.link}><a href="#">Store Locator</a></li>
-                                        <li className={classes.link}><a href="#">Resources</a></li>
-                                        <li className={classes.link}><a href="#">Financing</a></li>
-                                        <li className={classes.link}><a href="#">Commercial Kitchen Design</a></li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Careers
+                                            </Link>                                            
+                                            <a href="#">Store Locator</a></li>
+                                        <li className={classes.link}>
+                                        <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Resources
+                                            </Link> 
+                                        </li>
+                                        <li className={classes.link}>
+                                        <Link
+                                                to="/"
+                                                className={classes.action}>
+                                                Financing
+                                            </Link> 
+                                        </li>
+                                        <li className={classes.link}>
+                                            <Link
+                                                to="/"
+                                                className={classes.action}>
+                                               Commercial Kitchen Design
+                                            </Link> 
+                                        </li>
                                     </ul>
                                 </div>
 
