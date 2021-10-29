@@ -56,16 +56,6 @@ const AccountAddressBlock = props => {
                 <div className={classes.addrBlockWrapper}>
                     <div className={classes.addrBlock}>
                         <h3 className={classes.blockSubTitle}>Default Billing Address</h3>
-                        <div className={classes.addressCard}>
-                        <p><strong>FirstName LastName</strong></p>
-                            Street Address1<br/>
-                            Street Address2<br/>
-                            City<br/>
-                            Zipcode<br/>
-                            State<br/>
-                            Country<br/>
-                            Phone: 8888888
-                        </div>
                         {!!defaultBillingAddress ?
                             <AddressCard
                                 address={defaultBillingAddress}
@@ -87,16 +77,6 @@ const AccountAddressBlock = props => {
                     
                     <div className={classes.addrBlock}>
                     <h3 className={classes.blockSubTitle}>Default Shipping Address</h3>
-                        <div className={classes.addressCard}>
-                        <p><strong>FirstName LastName</strong></p>
-                            Street Address1<br/>
-                            Street Address2<br/>
-                            City<br/>
-                            Zipcode<br/>
-                            State<br/>
-                            Country<br/>
-                            Phone: 8888888
-                        </div>
                         {!!defaultShippingAddress ?
                             <AddressCard
                                 address={defaultShippingAddress}
