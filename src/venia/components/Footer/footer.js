@@ -8,7 +8,7 @@ import { useFooter } from '@magento/peregrine/lib/talons/Footer/useFooter';
 import Logo from '@magento/venia-ui/lib/components/Logo';
 import { useStyle } from '../../classify';
 import Image from '../Image';
-import testImg from '../../../assets/test.png';
+import footerPayment from '../../../assets/footer-payment.png';
 import defaultClasses from './footer.css';
 import { DEFAULT_LINKS, LOREM_IPSUM } from './sampleData';
 
@@ -114,7 +114,7 @@ const Footer = props => {
                                         className={classes.action}
                                     >termsText</Link>
 
-                                    <Image src={testImg} /> 
+                                    
                                 </div>
                             </div>                                                        
 
@@ -209,7 +209,7 @@ const Footer = props => {
                                                 className={classes.action}>
                                                 Careers
                                             </Link>                                            
-                                            <a href="#">Store Locator</a></li>
+                                            </li>
                                         <li className={classes.link}>
                                         <Link
                                                 to="/"
@@ -289,11 +289,6 @@ const Footer = props => {
                                                 <span>Linkedin</span>
                                             </a>
                                         </li>                                        
-                                        
-                                                                                                                        
-
-
-                                        
                                     </ul>
                                 </div>                                
 
@@ -302,6 +297,9 @@ const Footer = props => {
                         <div className={classes.blockRight}>
                             <div className={classes.blockNewsletter}>
                                 <h3 className={classes.groupTitle}>Subscribe</h3>
+                            </div>
+                            <div className={classes.blockPaymentAccepted}>
+                                <Image src={footerPayment} /> 
                             </div>
                             <div className={classes.blockCustomerId}>
                                     <span>Customer WebID:</span> 185 273 042
