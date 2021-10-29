@@ -7,6 +7,8 @@ import { useFooter } from '@magento/peregrine/lib/talons/Footer/useFooter';
 
 import Logo from '@magento/venia-ui/lib/components/Logo';
 import { useStyle } from '../../classify';
+// import Image from '../Image';
+// import testImg from '../../../assets/test.png';
 import defaultClasses from './footer.css';
 import { DEFAULT_LINKS, LOREM_IPSUM } from './sampleData';
 
@@ -107,6 +109,12 @@ const Footer = props => {
                                 <div className={classes.itemContent}>
                                     <h4 className={classes.itemTitle}>Excellent Customer Service</h4>
                                     <p className={classes.itemSubTitle}>Support number 1-888-898-8079</p>
+                                    <Link
+                                        to="/"
+                                        className={classes.action}
+                                    >termsText</Link>
+
+                                    {/* <Image src={testImg} /> */}
                                 </div>
                             </div>                                                        
 
