@@ -9,6 +9,8 @@ export const editAccountInfo = () => '/customer/account/edit/';
 export const editAccountPassword = () => '/customer/account/edit/changepass/1/';
 export const myWishlistPage = () => '/wishlist/';
 export const myOrderListPage = () => '/sales/order/history/';
+export const myOrderDetailsPage = (tab=":tab", orderId=":orderId") =>
+    `/sales/order/${tab}/order_id/${orderId}/`;
 export const newsletterPage = () => '/newsletter/manage/';
 export const addressBookPage = () => '/customer/address/'
 export const addAddress = () => '/customer/address/new/'

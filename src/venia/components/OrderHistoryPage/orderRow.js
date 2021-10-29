@@ -1,5 +1,6 @@
 import React from 'react';
-import { arrayOf, number, shape, string } from 'prop-types';
+import { Link } from 'react-router-dom';
+import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { ChevronDown, ChevronUp } from 'react-feather';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Price from '@magento/venia-ui/lib/components/Price';
@@ -11,9 +12,11 @@ import CollapsedImageGallery from './collapsedImageGallery';
 import OrderProgressBar from './orderProgressBar';
 import OrderDetails from './OrderDetails';
 import defaultClasses from './orderRow.css';
+import { myOrderDetailsPage } from '../../../url.utils';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 const OrderRow = props => {
-    const { order } = props;
+    const { order, showDetails } = props;
     const { formatMessage } = useIntl();
     const {
         invoices,
@@ -65,20 +68,21 @@ const OrderRow = props => {
 
     const talonProps = useOrderRow({ items });
     const { loading, isOpen, handleContentToggle, imagesData } = talonProps;
+    const openDetails = isOpen || showDetails;
 
     const classes = useStyle(defaultClasses, props.classes);
 
-    const contentClass = isOpen ? classes.content : classes.content_collapsed;
+    const contentClass = openDetails ? classes.content : classes.content_collapsed;
 
-    const contentToggleIconSrc = isOpen ? ChevronUp : ChevronDown;
+    const contentToggleIconSrc = openDetails ? ChevronUp : ChevronDown;
 
     const contentToggleIcon = <Icon src={contentToggleIconSrc} size={24} />;
 
-    const collapsedImageGalleryElement = isOpen ? null : (
+    const collapsedImageGalleryElement = openDetails ? null : (
         <CollapsedImageGallery items={imagesData} />
     );
 
-    const orderDetails = loading ? null : (
+    const orderDetails = loading ? <LoadingIndicator /> : (
         <OrderDetails orderData={order} imagesData={imagesData} />
     );
 
@@ -91,7 +95,9 @@ const OrderRow = props => {
                         defaultMessage={'Order #'}
                     />
                 </span>
-                <span className={classes.orderNumber}>{orderNumber}</span>
+                <Link to={myOrderDetailsPage("view", order.id)}>
+                    <span className={classes.orderNumber}>{orderNumber}</span>
+                </Link>
             </div>
             <div className={classes.orderDateContainer}>
                 <span className={classes.orderDateLabel}>
@@ -122,13 +128,15 @@ const OrderRow = props => {
                 </span>
                 <OrderProgressBar status={derivedStatus} />
             </div>
-            <button
-                className={classes.contentToggleContainer}
-                onClick={handleContentToggle}
-                type="button"
-            >
-                {contentToggleIcon}
-            </button>
+            {!showDetails &&
+                <button
+                    className={classes.contentToggleContainer}
+                    onClick={handleContentToggle}
+                    type="button"
+                >
+                    {contentToggleIcon}
+                </button>
+            }
             <div className={contentClass}>{orderDetails}</div>
         </li>
     );
@@ -159,6 +167,7 @@ OrderRow.propTypes = {
         content: string,
         content_collapsed: string
     }),
+    showDetails: bool,
     order: shape({
         billing_address: shape({
             city: string,

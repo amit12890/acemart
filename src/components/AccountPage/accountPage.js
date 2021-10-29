@@ -9,6 +9,7 @@ import {
     addressBookPage,
     editAccountInfo,
     editAccountPassword,
+    myOrderDetailsPage,
     myOrderListPage,
     myWishlistPage,
     newsletterPage,
@@ -21,6 +22,7 @@ import AddressBookPage from '../../venia/components/AddressBookPage/addressBookP
 import OrderHistoryPage from '../../venia/components/OrderHistoryPage/orderHistoryPage';
 import AccountInformation from './accountInformation';
 import WishlistPage from '../WishList';
+import OrderDetailsPage from './orderDetailsPage';
 
 
 const AccountPage = (props) => {
@@ -59,6 +61,9 @@ const AccountPage = (props) => {
                     </Route>
                     <Route path={addressBookPage()}>
                         <AddressBookPage path={path} />
+                    </Route>
+                    <Route path={myOrderDetailsPage()}>
+                        <OrderDetailsPage />
                     </Route>
                     <Route exact path="*">
                         <div>Page Not Found !!</div>

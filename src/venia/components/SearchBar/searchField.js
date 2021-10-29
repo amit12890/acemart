@@ -21,7 +21,7 @@ const SearchField = props => {
     const resetButton = value ? (
         <Trigger action={resetForm}>{clearIcon}</Trigger>
     ) : null;
-    console.log(value)
+
     return (
         <TextInput
             after={value ? resetButton : searchIcon}    
