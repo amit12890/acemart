@@ -76,6 +76,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Orders Page",
+            pattern: "/sales/order/:tab/order_id/:orderId/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "My WishList Page",
             pattern: "/wishlist/",
             exact: true,
