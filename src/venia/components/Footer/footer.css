@@ -2,6 +2,7 @@
     font-size: var(--venia-typography-body-S-fontSize);
     min-height: 15rem;
     width: 100%;
+    margin-top: 20px;
 }
 
 .footerSectionWrapper {
@@ -81,7 +82,7 @@
 
 }
 .action {
-    color: #333;
+    color: rgb(var(--color-white));
 }
 
 .containerMiddle {
@@ -195,6 +196,10 @@
 }
 .blockCustomerId span {
     color: rgb(var(--color-white));
+}
+
+.blockPaymentAccepted {
+    margin: 15px 0;
 }
 
 @media (max-width: 960px) {

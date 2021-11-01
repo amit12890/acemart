@@ -2,10 +2,10 @@
     align-content: flex-start;
     border-bottom: 1px solid rgb(var(--color-gray-light01));
     display: grid;
-    grid-template-columns: 1fr max-content;
     position: relative;
     margin-bottom: 15px;
     padding-bottom: 15px;
+    row-gap: 1rem;
 }
 .root:last-child {
     border-bottom: none;
@@ -53,6 +53,7 @@
 .contentContainer {
     display: grid;
     row-gap: 0.125rem;
+    font-size: 14px;
 }
 
 .actionContainer {

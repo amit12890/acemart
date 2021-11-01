@@ -54,14 +54,14 @@
        --venia-global-color-warning-light: var(--venia-global-color-gray-100);
 
 
-       --color-gray10: rgb(77 77 77); /*----- #4D4D4D [gray] Regular text -----*/
-       --color-gray20: rgb(56 56 56); /*----- #383838 [Dark gray]  section backgrounds, for differentiating between footer -----*/
-       --color-gray30: rgb(116 116 116); /*----- #747474 [Middle gray]  Nav menu sub/child category text and background colors -----*/
-       --color-gray40: rgb(238 238 238); /*----- #EEEEEE [Light gray]  section background, i.e. announcement bar in header -----*/
-       --color-blue10: rgb(0 110 142); /*----- #006E8E [blue] Secondary Buttons add-to-cart, view-more, wishlist -----*/
-       --color-blue20: rgb(0 0 102); /*----- #000066 [blue] Primary Buttons -----*/
-       --color-red10: rgb(204 0 0); /*----- #CC0000 [red]  Sale prices, warnings/errors/etc  -----*/
-       --color-green10: rgb(72 129 17); /*----- #488111 [green]  Stock quantity messages -----*/
+       --color-gray10: 77 77 77; /*----- #4D4D4D [gray] Regular text -----*/
+       --color-gray20: 56 56 56; /*----- #383838 [Dark gray]  section backgrounds, for differentiating between footer -----*/
+       --color-gray30: 116 116 116; /*----- #747474 [Middle gray]  Nav menu sub/child category text and background colors -----*/
+       --color-gray40: 238 238 238; /*----- #EEEEEE [Light gray]  section background, i.e. announcement bar in header -----*/
+       --color-blue10: 0 110 142; /*----- #006E8E [blue] Secondary Buttons add-to-cart, view-more, wishlist -----*/
+       --color-blue20: 0 0 102; /*----- #000066 [blue] Primary Buttons -----*/
+       --color-red10: 204 0 0; /*----- #CC0000 [red]  Sale prices, warnings/errors/etc  -----*/
+       --color-green10: 72 129 17; /*----- #488111 [green]  Stock quantity messages -----*/
    
 
 
