@@ -8,8 +8,17 @@ import Wishlist from './wishlist';
 import defaultClasses from './wishlistPage.css';
 
 import CreateWishlist from './createWishlist';
+import { useApiData } from '../../data.utils';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+
 
 const WishlistPage = props => {
+    const [{currentUser}, _] = useUserContext();
+    console.log("🚀 ~ file: WishlistPage.js ~ line 17 ~ currentUser", currentUser)
+    const {callApi} = useApiData({
+        // url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/getlist/1/${currentUser.id}`,
+        url: `/rest/V1/bsscommerce/multiwishlist/getlist/1/${currentUser.id}`
+    })
     const talonProps = useWishlistPage();
     const {
         errors,

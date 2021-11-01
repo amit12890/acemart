@@ -3,10 +3,11 @@ import { useQuery } from '@apollo/client';
 import { get } from 'lodash';
 
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import RichContent from '@magento/venia-ui/lib/components/RichContent';
+import RichContent from '../../venia/components/RichContent';
 import { GET_CMS_PAGE } from './cmsPage.gql';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './landingPage.css';
+
 
 const LandingPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
