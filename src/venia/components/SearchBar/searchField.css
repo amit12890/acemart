@@ -1,0 +1,13 @@
+
+
+.searchTextInput {
+    border: 2px solid rgb(var(--color-gray-middle2));
+    height: 40px;
+    width: 100%;
+    border-radius: 0;
+}
+.searchTextInput:focus,
+.searchTextInput:focus-visible {
+    border-color: rgb(var(--theme-color-primary)); 
+    border-radius: 0;
+}

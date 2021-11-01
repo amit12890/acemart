@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:dist/15.7766c86660f5a4ec514f.js
  * @version f2442e6-dev
+=======
+ * @version f78ba83-dev
+>>>>>>> origin/development:dist/14.0c78a444499cae1f9b4f.js
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[15],{"681v":function(e,t,r){(t=e.exports=r("JPst")(!1)).push([e.i,".filterSidebar-root-1gp {\n    --borderColor: var(--venia-global-color-border);\n    background-color: white;\n    bottom: 0;\n    display: none;\n    grid-template-rows: 1fr 7rem;\n    max-width: 360px;\n    width: 100%;\n    z-index: 3;\n}\n\n.filterSidebar-body-gMc {\n    overflow: auto;\n}\n\n.filterSidebar-header-3K3 {\n    display: flex;\n    justify-content: space-between;\n    padding: 1.25rem 1.25rem 0;\n}\n\n.filterSidebar-headerTitle-3NW {\n    display: flex;\n    align-items: center;\n    font-size: var(--venia-global-typography-heading-L-fontSize);\n    line-height: 0.875rem;\n}\n\n.filterSidebar-action-2cT {\n    padding: 1rem 1.25rem 0;\n}\n\n.filterSidebar-action-2cT button {\n    font-size: var(--venia-typography-body-S-fontSize);\n    text-decoration: none;\n}\n\n.filterSidebar-blocks-2NG {\n    padding: 1rem 1.25rem 0;\n}\n\n.filterSidebar-blocks-2NG > li:last-child {\n    border-bottom: 2px solid rgb(var(--borderColor));\n}\n\n@media (min-width: 1024px) {\n    .filterSidebar-root-1gp {\n        display: grid;\n    }\n}\n",""]),t.locals={root:"filterSidebar-root-1gp",body:"filterSidebar-body-gMc",header:"filterSidebar-header-3K3",headerTitle:"filterSidebar-headerTitle-3NW",action:"filterSidebar-action-2cT",blocks:"filterSidebar-blocks-2NG"}},SAkj:function(e,t,r){"use strict"

@@ -1,8 +1,15 @@
 /*!
+<<<<<<< HEAD:dist/26.c427fd475bd3a377d39c.js
  * @version f2442e6-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[26],{"+sVj":function(e,n,t){"use strict"
+=======
+ * @version f78ba83-dev
+ * 
+ */
+(window.webpackJsonp=window.webpackJsonp||[]).push([[27],{"+sVj":function(e,n,t){"use strict"
+>>>>>>> origin/development:dist/27.604ffd57b41a676d01ba.js
 function _createForOfIteratorHelper(t,r){var a="undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"]
 if(!a){if(Array.isArray(t)||(a=function _unsupportedIterableToArray(e,n){if(!e)return
 if("string"==typeof e)return _arrayLikeToArray(e,n)

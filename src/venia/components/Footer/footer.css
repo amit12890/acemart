@@ -1,0 +1,243 @@
+.root {
+    font-size: var(--venia-typography-body-S-fontSize);
+    min-height: 15rem;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.footerSectionWrapper {
+
+}
+
+.footerContainer {
+    max-width: var(--venia-global-maxWidth); 
+    padding-left:15px;
+    padding-right: 15px;    
+    margin: 0 auto;
+}
+
+.contentBlock {
+    text-align: center; 
+}
+
+.sectionTop {
+    
+    background-color: #f6f7f9;
+}
+
+.sectionMiddle {
+    background-color: #4d4d4d;
+    color: rgb(var(--color-white));
+}
+
+.sectionLower {
+    background-color: #383838;
+    color: rgb(var(--color-white));
+}
+
+
+.containerTop {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.companyService {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.serviceItem {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 0px 10px
+}
+.itemIcon {
+    margin-right: 20px;
+    width: 40px;
+
+}
+.iconWrapper {
+
+}
+.itemContent {
+
+}
+
+.itemTitle {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+.itemSubTitle {
+    font-size: 12px;
+    font-style: italic;
+    margin: 0;
+}
+.iconWrapper {
+
+}
+.svgIcon {
+
+}
+.action {
+    color: rgb(var(--color-white));
+}
+
+.containerMiddle {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.blockMiddle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.blockLeft {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.footerBox {
+    text-align: left;
+   margin-left: 50px;
+}
+.footerBox:first-child {
+    margin-left: 0;
+}
+.groupTitle {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.link {
+    margin-bottom: 10px;
+    letter-spacing: .05em;
+    font-size: 16px;
+}
+.storeAddress {
+    letter-spacing: .05em;
+    font-size: 16px;
+    line-height: 1.35;
+}
+.storeAddress p {
+    margin-bottom:10px;
+}
+
+.groupSocial {
+    display: flex;
+    align-items: center;
+}
+.socialLinks {
+
+}
+.socialLinks a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    -moz-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    color: #131210;
+    background: #fff;
+}
+
+.socialLinks span {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    
+}
+
+.socialLinks .iconWrapper{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.blockRight {
+    width: 100%;
+    max-width: 340px;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.containerLow {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.blockNewsletter {
+    margin-bottom: 20px;
+}
+
+.blockCustomerId {
+   color: rgb(255 105 180);
+   font-size: 18px;
+}
+.blockCustomerId span {
+    color: rgb(var(--color-white));
+}
+
+.blockPaymentAccepted {
+    margin: 15px 0;
+}
+
+@media (max-width: 960px) {
+    .root {
+    }
+}
+
+
+
+@media (max-width: 960px) {
+   
+}
+
+
+
+
+
+@media (max-width: 960px) {
+  
+}
+
+
+
+
+
+
+@media (max-width: 960px) {
+   
+}
+
+
+
+@media (max-width: 960px) {
+   
+}
+
+
+
+@media (max-width: 960px) {
+  
+}

@@ -37,13 +37,6 @@ const Header = props => {
 
     return (
         <Fragment>  
-
-            <div className={classes.switchersContainer}>
-                <div className={classes.switchers}>
-                    <StoreSwitcher />
-                    <CurrencySwitcher />
-                </div>
-            </div>
             <header className={rootClass}>
                 {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
@@ -195,7 +188,12 @@ const Header = props => {
                             <SearchBar isOpen={true} ref={searchRef} />
                         </div>
                         <div className={classes.storeLocationWrapper}>
-                            
+                            <div className={classes.switchersContainer}>
+                                <div className={classes.switchers}>
+                                    <StoreSwitcher />
+                                    <CurrencySwitcher />
+                                </div>
+                            </div>
                         </div>
 
                         <div className={classes.toolbar}>

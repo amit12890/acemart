@@ -11,7 +11,8 @@ import combine from '@magento/venia-ui/lib/util/combineValidators';
 import {
     hasLengthAtLeast,
     isRequired,
-    validatePassword
+    validatePassword,
+    isEqualToField,
 } from '@magento/venia-ui/lib/util/formValidators';
 import Button from '../Button';
 import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
@@ -19,7 +20,7 @@ import Field from '../Field';
 import TextInput from '../TextInput';
 import Password from '../Password';
 import defaultClasses from './createAccount.css';
-import FormError from '@magento/venia-ui/lib/components/FormError';
+import FormError from '../FormError';
 import PasswordStrengthMeter from './passwordStrengthMeter';
 
 
@@ -188,7 +189,17 @@ const CreateAccount = props => {
                         />
 
                         <PasswordStrengthMeter score={passwordScore} />
-                
+                        <Password
+                            fieldName="confirmPassword"
+                            label='Confirm Password'
+                            validate={combine([
+                                isRequired,
+                                [hasLengthAtLeast, 8],
+                                validatePassword,
+                                [isEqualToField, 'password'],
+                            ])}
+                            isToggleButtonHidden={false}
+                        />
 
                     <div className={classes.actions}>
                         {submitButton}

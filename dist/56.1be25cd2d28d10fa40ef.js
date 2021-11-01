@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:dist/56.1be25cd2d28d10fa40ef.js
  * @version f2442e6-dev
+=======
+ * @version f78ba83-dev
+>>>>>>> origin/development:dist/55.549d558286e14aff65f0.js
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[56],{ayyG:function(n,a,e){(a=n.exports=e("JPst")(!1)).push([n.i,".landingPage-wrapper-2GQ {\n    max-width: 800px;\n    margin: 100px auto;\n    text-align: center;\n}",""]),a.locals={wrapper:"landingPage-wrapper-2GQ"}},rcu4:function(n,a,e){"use strict"

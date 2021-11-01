@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:dist/52.fb6438c01089fc5fdc5e.js
  * @version f2442e6-dev
+=======
+ * @version f78ba83-dev
+>>>>>>> origin/development:dist/51.332b126e8ca5fd49e0c9.js
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[52],{"0nsX":function(e,n,t){(n=e.exports=t("JPst")(!1)).push([e.i,".video-root-3Cy {\n    font-size: 0;\n}\n\n.video-inner-2rl {\n    display: inline-block;\n    width: 100%;\n}\n\n.video-wrapper-27_ {\n    overflow: hidden;\n    transform: translateZ(0px);\n}\n\n.video-container-1Jd {\n    overflow: hidden;\n    padding-top: 56.25%;\n    position: relative;\n}\n\n.video-video-1FY {\n    height: 100%;\n    left: 0;\n    position: absolute;\n    top: 0;\n    width: 100%;\n}\n",""]),n.locals={root:"video-root-3Cy",inner:"video-inner-2rl",wrapper:"video-wrapper-27_",container:"video-container-1Jd",video:"video-video-1FY"}},"7iuD":function(e,n,t){"use strict"

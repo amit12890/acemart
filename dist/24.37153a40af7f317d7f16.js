@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:dist/24.37153a40af7f317d7f16.js
  * @version f2442e6-dev
+=======
+ * @version f78ba83-dev
+>>>>>>> origin/development:dist/23.491fb8f514c8813a9825.js
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[24],{"+sVj":function(e,t,n){"use strict"

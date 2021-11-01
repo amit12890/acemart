@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:dist/58.8d570240f2a481c02cf3.js
  * @version f2442e6-dev
+=======
+ * @version f78ba83-dev
+>>>>>>> origin/development:dist/57.88488cc4eb9d72554893.js
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[58],{MHbn:function(n,r,t){"use strict"

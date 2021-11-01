@@ -22,6 +22,7 @@
     min-width: 3rem;
     position: relative;
     z-index: 1;
+    color: rgb(var(--theme-color-primary));
 }
 
 .triggerContainer {
@@ -29,6 +30,7 @@
     display: grid;
     /* The full height of the site header minus (box shadow height * 2). */
     height: calc(5rem - 8px);
+    
 }
 
 .triggerContainer_open {
@@ -39,6 +41,7 @@
     composes: trigger;
     display: none;
 }
+
 
 /*
  * Mobile-specific styles.

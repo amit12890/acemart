@@ -3,39 +3,54 @@ import { func, shape, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-import {
-    MY_ACCOUNT_URL,
-    MY_WISHLIST_URL,
-    MY_ORDERS_LIST_URL,
-} from '../../../components/AccountPage/constants';
+import { useAccountChip } from '@magento/peregrine/lib/talons/AccountChip/useAccountChip';
+import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 
 import { useStyle } from '../../classify';
 
+import {
+    accountPageUrl,
+    addressBookPage,
+    myOrderListPage,
+    myWishlistPage
+} from '../../../url.utils';
 import defaultClasses from './accountMenuItems.css';
+
 
 const AccountMenuItems = props => {
     const { onSignOut: handleSignOut } = props;
+    const talonProps = useAccountChip({
+        queries: {
+            getCustomerDetailsQuery: GET_CUSTOMER_DETAILS
+        }
+    });
+    const { currentUser, isLoadingUserName, isUserSignedIn } = talonProps;
+
+    let headerText = "Welcome back";
+    if (!isLoadingUserName) {
+        headerText = `Welcome back, ${currentUser.firstname}`
+    }
 
     const menuItems = [
         {
             name: 'My Account',
             id: 'accountMenu.myAccount',
-            url: MY_ACCOUNT_URL
+            url: accountPageUrl()
         },
         {
             name: 'Order History',
             id: 'accountMenu.orderHistoryLink',
-            url: MY_ORDERS_LIST_URL
+            url: myOrderListPage()
         },
         {
             name: 'Manage Addresses',
             id: 'accountMenu.manageAddresses',
-            url: '/customer/account/edit/'
+            url: addressBookPage()
         },
         {
             name: 'View Wishlists',
             id: 'accountMenu.viewWishlists',
-            url: MY_WISHLIST_URL
+            url: myWishlistPage()
         }
     ];
 
@@ -51,6 +66,7 @@ const AccountMenuItems = props => {
 
     return (
         <div className={classes.root}>
+            <div>{headerText}</div>
             {menu}
             {!!handleSignOut &&
                 <button

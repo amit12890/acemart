@@ -51,7 +51,7 @@ MegaMenuItem.propTypes = {
         name: PropTypes.string.isRequired,
         path: PropTypes.array.isRequired,
         position: PropTypes.number.isRequired,
-        url_path: PropTypes.string.isRequired,
+        url_path: PropTypes.string,
         url_suffix: PropTypes.string
     }).isRequired,
     activeCategoryId: PropTypes.number,

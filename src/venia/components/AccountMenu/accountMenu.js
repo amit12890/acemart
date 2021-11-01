@@ -14,7 +14,7 @@ import SignIn from '../SignIn';
 import AccountMenuItems from './accountMenuItems';
 import ForgotPassword from '../ForgotPassword';
 import defaultClasses from './accountMenu.css';
-import { FORGOT_PASSWORD_URL, SIGNUP_URL } from "../../../components/AuthenticationPage/constants";
+import { forgotPasswordPage, signupPage } from '../../../url.utils';
 
 const AccountMenu = React.forwardRef((props, ref) => {
     const { accountMenuIsOpen, setAccountMenuIsOpen } = props;
@@ -33,10 +33,10 @@ const AccountMenu = React.forwardRef((props, ref) => {
     } = talonProps;
 
     const handleCreateAccount = useCallback(() => {
-        history.push(SIGNUP_URL);
+        history.push(signupPage());
     }, []);
     const handleForgotPassword = useCallback(() => {
-        history.push(FORGOT_PASSWORD_URL);
+        history.push(forgotPasswordPage());
     }, []);
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = accountMenuIsOpen ? classes.root_open : classes.root;

@@ -53,25 +53,28 @@ const Item = props => {
 
     return (
         <div className={rootClass}>
-            <Link
-                className={classes.thumbnailContainer}
-                to={itemLink}
-                onClick={closeMiniCart}
-            >
-                <Image
-                    alt={product.name}
-                    classes={{
-                        root: classes.thumbnail
-                    }}
-                    width={100}
-                    resource={
-                        configurableThumbnailSource === 'itself' &&
-                        configured_variant
-                            ? configured_variant.thumbnail.url
-                            : product.thumbnail.url
-                    }
-                />
-            </Link>
+            <div className={classes.itemThumbnailWrapper}>
+                <Link
+                    className={classes.thumbnailContainer}
+                    to={itemLink}
+                    onClick={closeMiniCart}
+                >
+                    <Image
+                        alt={product.name}
+                        classes={{
+                            root: classes.thumbnail
+                        }}
+                        width={100}
+                        resource={
+                            configurableThumbnailSource === 'itself' &&
+                            configured_variant
+                                ? configured_variant.thumbnail.url
+                                : product.thumbnail.url
+                        }
+                    />
+                </Link>
+            </div>
+            <div className={classes.itemDetails}>
             <Link
                 className={classes.name}
                 to={itemLink}
@@ -85,23 +88,25 @@ const Item = props => {
                     options: classes.options
                 }}
             />
-            <span className={classes.quantity}>
-                <FormattedMessage
-                    id={'productList.quantity'}
-                    defaultMessage={'Qty :'}
-                    values={{ quantity }}
-                />
-            </span>
-            <span className={classes.price}>
-                <Price
-                    currencyCode={prices.price.currency}
-                    value={prices.price.value}
-                />
-                <FormattedMessage
-                    id={'productList.each'}
-                    defaultMessage={' ea.'}
-                />
-            </span>
+             <div className={classes.itemQtyPriceWrapper}>  
+                <span className={classes.quantity}>
+                    <FormattedMessage
+                        id={'productList.quantity'}
+                        defaultMessage={'Qty :'}
+                        values={{ quantity }}
+                    />
+                </span>
+                <span className={classes.price}>
+                    <Price
+                        currencyCode={prices.price.currency}
+                        value={prices.price.value}
+                    />
+                    <FormattedMessage
+                        id={'productList.each'}
+                        defaultMessage={' ea.'}
+                    />
+                </span>
+            </div>
             <span className={classes.stockStatus}>{stockStatusText}</span>
             <button
                 onClick={removeItem}
@@ -117,6 +122,7 @@ const Item = props => {
                     }}
                 />
             </button>
+            </div>
         </div>
     );
 };

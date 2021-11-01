@@ -9,6 +9,7 @@ import Icon from '@magento/venia-ui/lib/components/Icon';
 import defaultClasses from './addressCard.css';
 import LinkButton from '../LinkButton';
 
+
 const AddressCard = props => {
     const {
         address,
@@ -23,6 +24,7 @@ const AddressCard = props => {
     } = props;
 
     const {
+        id,
         city,
         country_code,
         default_shipping,

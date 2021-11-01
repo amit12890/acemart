@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:dist/55.dc4df0e69eb7275300a9.js
  * @version f2442e6-dev
+=======
+ * @version f78ba83-dev
+>>>>>>> origin/development:dist/54.c2c654418e46c615ff11.js
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[55],{oK3t:function(e,a,t){(a=e.exports=t("JPst")(!1)).push([e.i,".authenticationPage-wrapper-3iI {\n    max-width: 670px;\n    margin: 50px auto;\n}",""]),a.locals={wrapper:"authenticationPage-wrapper-3iI"}},tVFI:function(e,a,t){"use strict"

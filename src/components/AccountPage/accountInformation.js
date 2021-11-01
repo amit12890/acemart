@@ -7,10 +7,13 @@ import { useStyle } from '../../venia/classify';
 import Button from '../../venia/components/Button';
 import { Message } from '../../venia/components/Field';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import AccountAddressBlock from './accountAddressBlock';
+import AccountNewsletterBlock from './accountNewsletterBlock';
 
 import defaultClasses from './accountInformation.css';
 import AccountInformationPageOperations from './accountInformation.gql.js';
-import { EDIT_ACCOUNT_INFO, EDIT_ACCOUNT_PASSWROD } from './constants';
+import { editAccountInfo, editAccountPassword } from '../../url.utils';
+
 
 const AccountInformation = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -27,10 +30,10 @@ const AccountInformation = props => {
     } = talonProps;
 
     const goToAccountInfoEdit = useCallback(() => {
-        history.push(EDIT_ACCOUNT_INFO)
+        history.push(editAccountInfo())
     }, [])
     const goToAccountInfoEditPassword = useCallback(() => {
-        history.push(EDIT_ACCOUNT_PASSWROD)
+        history.push(editAccountPassword())
     }, [])
 
     if (!isSignedIn) {
@@ -56,44 +59,49 @@ const AccountInformation = props => {
         const customerName = `${customer.firstname} ${customer.lastname}`;
 
         pageContent = (
-            <div className={classes.accountDetails}>
-                <div className={classes.lineItemsContainer}>
-                    <span className={classes.nameLabel}>
-                        <FormattedMessage
-                            id={'global.name'}
-                            defaultMessage={'Name'}
-                        />
-                    </span>
-                    <span className={classes.nameValue}>
-                        {customerName}
-                    </span>
-                    <span className={classes.emailLabel}>
-                        <FormattedMessage
-                            id={'global.email'}
-                            defaultMessage={'Email'}
-                        />
-                    </span>
-                    <span className={classes.emailValue}>
-                        {customer.email}
-                    </span>
-                </div>
-                <div className={classes.editButtonContainer}>
-                    <Button
-                        className={classes.editInformationButton}
-                        disabled={false}
-                        onClick={goToAccountInfoEdit}
-                        priority="normal"
-                    >
-                        Edit
-                    </Button>
-                    <Button
-                        className={classes.editInformationButton}
-                        disabled={false}
-                        onClick={goToAccountInfoEditPassword}
-                        priority="normal"
-                    >
-                        Change Password
-                    </Button>
+            <div className={classes.panelWrapper}>
+                <div className={classes.panelBody}>
+                <h2 className={classes.panelBodyTitle}>Account Information</h2>
+                    <div className={classes.accountDetails}>
+                        <div className={classes.lineItemsContainer}>
+                            <span className={classes.nameLabel}>
+                                <FormattedMessage
+                                    id={'global.name'}
+                                    defaultMessage={'Name'}
+                                />
+                            </span>
+                            <span className={classes.nameValue}>
+                                {customerName}
+                            </span>
+                            <span className={classes.emailLabel}>
+                                <FormattedMessage
+                                    id={'global.email'}
+                                    defaultMessage={'Email'}
+                                />
+                            </span>
+                            <span className={classes.emailValue}>
+                                {customer.email}
+                            </span>
+                        </div>
+                        <div className={classes.editButtonContainer}>
+                            <Button
+                                className={classes.editInformationButton}
+                                disabled={false}
+                                onClick={goToAccountInfoEdit}
+                                priority="normal"
+                            >
+                                Edit
+                            </Button>
+                            <Button
+                                className={classes.editInformationButton}
+                                disabled={false}
+                                onClick={goToAccountInfoEditPassword}
+                                priority="normal"
+                            >
+                                Change Password
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -101,13 +109,25 @@ const AccountInformation = props => {
 
     return (
         <div className={classes.root}>
-            <h1 className={classes.title}>
-                <FormattedMessage
-                    id={'accountInformationPage.accountInformation'}
-                    defaultMessage={'Account Information'}
-                />
-            </h1>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
+                    <FormattedMessage
+                        id={'accountInformationPage.myAccount'}
+                        defaultMessage={'My Account'}
+                    />
+                </h1>
+            </div>
             {errorMessage ? errorMessage : pageContent}
+            <div className={classes.panelWrapper}>
+                <div className={classes.panelBody}>
+                    <AccountNewsletterBlock />
+                </div>
+            </div>
+            <div className={classes.panelWrapper}>
+                <div className={classes.panelBody}>
+                    <AccountAddressBlock />
+                </div>
+            </div>
         </div>
     );
 };

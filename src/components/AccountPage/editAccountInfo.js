@@ -24,7 +24,7 @@ import Password from '../../venia/components/Password';
 
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
-import { MY_ACCOUNT_URL } from './constants.js';
+import { accountPageUrl } from '../../url.utils.js';
 
 
 const EditAccountInfo = ({path}) => {
@@ -94,7 +94,7 @@ const EditAccountInfo = ({path}) => {
                     }
                 });
             }
-            history.push(MY_ACCOUNT_URL)
+            history.push(accountPageUrl())
         } catch (error) {
             console.log(error);
             setError("Your data was not updated due to an error !!");
@@ -111,105 +111,118 @@ const EditAccountInfo = ({path}) => {
 
     return (
         <div className={classes.root}>
-            {showError && <div>{showError}</div>}
-            <Form className={classes.form} initialValues={initialValues.customer} 
-                onSubmit={handleSubmit}>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>Edit Account Information</h1>
+            </div>
+            <div className={classes.panelWrapper}>
+                <div className={classes.panelBody}>
+                    {showError && <div>{showError}</div>}
+                    <Form className={classes.form} initialValues={initialValues.customer} 
+                        onSubmit={handleSubmit}>
+                        <div className={[classes.fieldWrapper, classes.firstname].join(" ")}>
+                            <Field
+                                id="firstname"
+                                label="First Name"
+                            >
+                                <TextInput field="firstname" validate={isRequired} />
+                            </Field>
+                        </div>
+                        <div className={[classes.fieldWrapper, classes.lastname].join(" ")}>
+                            <Field
+                                id="lastname"
+                                label='Last Name'
+                            >
+                                <TextInput field="lastname" validate={isRequired} />
+                            </Field>
+                        </div>
+                        <div className={[classes.fieldWrapper, classes.firstname].join(" ")}>
+                            <div className={classes.fieldChoice}>
+                                <label>
+                                    <input
+                                        name="showEmail"
+                                        type="checkbox"
+                                        checked={showEmail}
+                                        onChange={() => setShowEmail(val => !val)} />
+                                    Change Email
+                                </label>
+                                </div>
+                                <div className={[classes.field, classes.choice].join(" ")}>
+                                    <label>
+                                        <input
+                                            name="showPassword"
+                                            type="checkbox"
+                                            checked={showPassword}
+                                            onChange={() => setShowPassword(val => !val)} />
+                                        Change Password
+                                    </label>
+                            </div>
+                        </div>
+                        {(showEmail || showPassword) &&
+                            <h3 className={classes.blockSubTitle}>{sectionTitle}</h3>
+                        }
 
-                <div className={classes.firstname}>
-                    <Field
-                        id="firstname"
-                        label="First Name"
-                    >
-                        <TextInput field="firstname" validate={isRequired} />
-                    </Field>
-                </div>
-                <div className={classes.lastname}>
-                    <Field
-                        id="lastname"
-                        label='Last Name'
-                    >
-                        <TextInput field="lastname" validate={isRequired} />
-                    </Field>
-                </div>
-                <div>
-                    <label>
-                        Change Email
-                        <input
-                            name="showEmail"
-                            type="checkbox"
-                            checked={showEmail}
-                            onChange={() => setShowEmail(val => !val)} />
-                    </label>
+                        {showEmail &&
+                            <div className={[classes.fieldWrapper, classes.email].join(" ")}>
+                                <Field
+                                    id="email"
+                                    label='Email'
+                                >
+                                    <TextInput field="email" validate={isRequired} />
+                                </Field>
+                            </div>
+                        }
+                        {(showEmail || showPassword) &&
+                            <div className={[classes.fieldWrapper, classes.password].join(" ")}>                            
+                                <Password
+                                    fieldName="password"
+                                    label="Current Password"
+                                    validate={isRequired}
+                                    autoComplete="current-password"
+                                    isToggleButtonHidden={false}
+                                />
+                            </div>
+                        }
+                        {showPassword &&
+                            <>
+                            <div className={[classes.fieldWrapper, classes.newPassword].join(" ")}>                                                        
+                            
+                                <Password
+                                    fieldName="newPassword"
+                                    label='New Password'
+                                    validate={combine([
+                                        isRequired,
+                                        [hasLengthAtLeast, 8],
+                                        validatePassword,
+                                        [isNotEqualToField, 'password']
+                                    ])}
+                                    isToggleButtonHidden={false}
+                                />
+                            </div>
+                            <div className={[classes.fieldWrapper, classes.newPassword].join(" ")}> 
+                                <Password
+                                    fieldName="confirmPassword"
+                                    label='Confirm Password'
+                                    validate={combine([
+                                        isRequired,
+                                        [hasLengthAtLeast, 8],
+                                        validatePassword,
+                                        [isNotEqualToField, 'password'],
+                                        [isEqualToField, 'newPassword'],
+                                    ])}
+                                    isToggleButtonHidden={false}
+                                /> 
+                            </div>
+                            </>
+                        }
 
-                    <label>
-                        Change Password
-                        <input
-                            name="showPassword"
-                            type="checkbox"
-                            checked={showPassword}
-                            onChange={() => setShowPassword(val => !val)} />
-                    </label>
+                        <div className={classes.actionToolbar}>
+                            <Button type="submit" disabled={isLoading}>
+                                {isLoading ? "Loading" : "Submit"}
+                            </Button>
+                        </div>
+                    </Form>
                 </div>
-                {(showEmail || showPassword) &&
-                    <h3>{sectionTitle}</h3>
-                }
-
-                {showEmail &&
-                    <div className={classes.email}>
-                        <Field
-                            id="email"
-                            label='Email'
-                        >
-                            <TextInput field="email" validate={isRequired} />
-                        </Field>
-                    </div>
-                }
-                {(showEmail || showPassword) &&
-                    <div className={classes.password}>
-                        <Password
-                            fieldName="password"
-                            label="Current Password"
-                            validate={isRequired}
-                            autoComplete="current-password"
-                            isToggleButtonHidden={false}
-                        />
-                    </div>
-                }
-                {showPassword &&
-                    <>
-                    <div className={classes.newPassword}>
-                        <Password
-                            fieldName="newPassword"
-                            label='New Password'
-                            validate={combine([
-                                isRequired,
-                                [hasLengthAtLeast, 8],
-                                validatePassword,
-                                [isNotEqualToField, 'password']
-                            ])}
-                            isToggleButtonHidden={false}
-                        />
-                    </div>
-                    <div className={classes.newPassword}>
-                        <Password
-                            fieldName="confirmPassword"
-                            label='Confirm Password'
-                            validate={combine([
-                                isRequired,
-                                [hasLengthAtLeast, 8],
-                                validatePassword,
-                                [isNotEqualToField, 'password'],
-                                [isEqualToField, 'newPassword'],
-                            ])}
-                            isToggleButtonHidden={false}
-                        />
-                    </div>
-                    </>
-                }
-                <Button type="submit" disabled={isLoading}>
-                    {isLoading ? "Loading" : "Submit"}
-                </Button>
-            </Form>
+            </div>
         </div>
     )
 }

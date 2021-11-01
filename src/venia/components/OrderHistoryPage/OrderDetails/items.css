@@ -1,0 +1,23 @@
+.root {
+    padding-right: 1.5rem;
+}
+
+.heading {
+    font-weight: bold;
+    padding: 1rem 0;
+    margin: 0 0 1rem 0;
+    text-transform: none;
+
+}
+
+.itemsContainer {
+    display: grid;
+    row-gap: 2.5rem;
+}
+
+@media (max-width: 960px) {
+    .root {
+        display: grid;
+        padding-right: 0rem;
+    }
+}

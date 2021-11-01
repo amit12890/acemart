@@ -76,38 +76,44 @@ const MiniCart = React.forwardRef((props, ref) => {
 
     const header = subTotal ? (
         <Fragment>
-            <div className={classes.stockStatusMessageContainer}>
-                <StockStatusMessage cartItems={productList} />
-            </div>
-            <span className={quantityClassName}>
-                <FormattedMessage
-                    id={'miniCart.totalQuantity'}
-                    defaultMessage={'Items'}
-                    values={{ totalQuantity }}
-                />
-            </span>
-            <span className={priceClassName}>
-                <span>
+            <div className={classes.headerPanelContent}>
+                <div className={classes.stockStatusMessageContainer}>
+                    <StockStatusMessage cartItems={productList} />
+                </div>
+                <span className={quantityClassName}>
                     <FormattedMessage
-                        id={'miniCart.subtotal'}
-                        defaultMessage={'Subtotal: '}
+                        id={'miniCart.totalQuantity'}
+                        defaultMessage={'Items'}
+                        values={{ totalQuantity }}
                     />
                 </span>
-                <Price
-                    currencyCode={subTotal.currency}
-                    value={subTotal.value}
-                />
-            </span>
+                <span className={priceClassName}>
+                    <span>
+                        <FormattedMessage
+                            id={'miniCart.subtotal'}
+                            defaultMessage={'Subtotal: '}
+                        />
+                    </span>
+                    <Price
+                        currencyCode={subTotal.currency}
+                        value={subTotal.value}
+                    />
+                </span>
+            </div>
         </Fragment>
     ) : null;
 
     const contents = isCartEmpty ? (
-        <div className={classes.emptyCart}>
-            <div className={classes.emptyMessage}>
-                <FormattedMessage
-                    id={'miniCart.emptyMessage'}
-                    defaultMessage={'There are no items in your cart.'}
-                />
+        <div className={classes.body}>
+            <div className={classes.panelRow}>
+                <div className={classes.emptyCart}>
+                    <div className={classes.emptyMessage}>
+                        <FormattedMessage
+                            id={'miniCart.emptyMessage'}
+                            defaultMessage={'There are no items in your cart.'}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     ) : (

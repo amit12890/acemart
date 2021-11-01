@@ -1,10 +1,5 @@
 .root {
-    align-items: center;
-    display: grid;
-    justify-items: end;
     margin: 0 auto;
-    max-width: var(--venia-global-maxWidth);
-    padding: 0.5rem 1rem;
     position: relative;
 }
 
@@ -12,6 +7,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    color: rgb(var(--theme-color-primary));
 }
 
 .menu {
