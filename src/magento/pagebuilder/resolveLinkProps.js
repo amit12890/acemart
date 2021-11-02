@@ -4,7 +4,6 @@
  * @param {string} link
  */
 export default link => {
-console.log("🚀 ~ file: resolveLinkProps.js ~ line 7 ~ link", link)
     let isExternalUrl;
     const linkProps = {};
 

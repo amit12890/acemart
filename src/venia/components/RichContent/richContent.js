@@ -26,7 +26,6 @@ const RichContent = props => {
         ...props,
         classes
     };
-    console.log("🚀 ~ file: richContent.js ~ line 32 ~ PBcanRender(rendererProps.html)", PBcanRender(rendererProps.html))
     if (PBcanRender(rendererProps.html)) {
         return <PBComponent {...rendererProps} />;
     }

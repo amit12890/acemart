@@ -10,7 +10,6 @@ import parseStorageHtml from './parseStorageHtml';
  * @constructor
  */
 export default function PageBuilder({ html, classes }) {
-    console.log("AM I EVEN HERE ?????")
     const data = useMemo(() => parseStorageHtml(html), [html]);
     return data.children.map((child, i) => {
         return (
