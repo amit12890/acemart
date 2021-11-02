@@ -4,6 +4,9 @@ import defaultClasses from './richContent.css';
 import { shape, string } from 'prop-types';
 import richContentRenderers from '@magento/venia-ui/lib/components/RichContent/richContentRenderers';
 
+import PBComponent from '../../../magento/pagebuilder/pagebuilder';
+import PBcanRender from '../../../magento/pagebuilder/detectPageBuilder';
+
 /**
  * RichContent component.
  *
@@ -23,6 +26,9 @@ const RichContent = props => {
         ...props,
         classes
     };
+    if (PBcanRender(rendererProps.html)) {
+        return <PBComponent {...rendererProps} />;
+    }
     for (const Renderer of richContentRenderers) {
         const { Component, canRender } = Renderer;
         if (canRender(rendererProps.html)) {
