@@ -91,7 +91,9 @@
     composes: input from '../TextInput/textInput.css';
     max-width: 24rem;
 }
-
+.svgIcon {
+    fill: currentColor;
+}
 .loader,
 .loader:before,
 .loader:after {

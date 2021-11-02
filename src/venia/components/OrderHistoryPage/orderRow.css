@@ -4,6 +4,10 @@
     grid-template-columns: minmax(9rem, 1fr) minmax(9rem, 1fr) minmax(9rem, 1fr) 16rem 2fr 3rem;
 }
 
+.root:hover {
+    
+}
+
 
 .cell {
     border-left: 1px solid rgb(var(--venia-global-color-gray));

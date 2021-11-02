@@ -41,7 +41,9 @@
     composes: trigger;
     display: none;
 }
-
+.svgIcon {
+    fill: currentColor;
+}
 
 /*
  * Mobile-specific styles.

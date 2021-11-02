@@ -51,8 +51,17 @@ h2 {
     display: block;
 }
 
-.actionToolbar {
+.actionToolbar a {
+    color: rgb(var(--theme-color-primary));
+    text-decoration: underline;
+    font-weight: bold;
+}
+.actionToolbar a:hover {
+    text-decoration: none;
+}
 
+.action {
+    
 }
 
 .addButton {

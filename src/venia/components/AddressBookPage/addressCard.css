@@ -83,10 +83,17 @@
 
 .linkButton {
     composes: root from '../LinkButton/linkButton.css';
-    text-decoration: none;
+    text-decoration: underline;
     text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 14px;
+    color: rgb(var(--theme-color-primary));
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+.linkButton:hover {
+    text-decoration: none;
 }
 
 .editButton {

@@ -123,7 +123,6 @@ const AddressCard = props => {
                     classes={{ root: classes.editButton }}
                     onClick={onEdit}
                 >
-                    <Icon classes={{ icon: null }} size={16} src={EditIcon} />
                     <span className={classes.actionLabel}>
                         <FormattedMessage
                             id="addressBookPage.editAddress"

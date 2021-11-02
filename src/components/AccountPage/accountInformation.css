@@ -72,7 +72,12 @@
     composes: button_asLink from '../../venia/components/Button/button.css';
     font-weight: normal;
     margin-right: 10px;
-    color: inherit;
+    color: rgb(var(--theme-color-primary));
+    text-decoration: underline;
+    font-weight: bold;
+}
+.editInformationButton:hover {
+    text-decoration: none;
 }
 
 @media (min-width: 961px) {
