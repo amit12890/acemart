@@ -25,6 +25,12 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/components/LandingPage")
         });
+        routes.push({
+            name: "Page Not Found",
+            pattern: "/404/",
+            exact: true,
+            path: require.resolve("./src/venia/components/ErrorView")
+        });
         // -------------- Auth Urls --------------
         routes.push({
             name: "Authentication Page",
