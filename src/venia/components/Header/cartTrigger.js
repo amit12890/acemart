@@ -67,8 +67,9 @@ const CartTrigger = props => {
                         </svg>
                     </i> 
                     
-                    {maybeItemCounter}
+                    <span className={classes.cartLabel}>My Cart ({maybeItemCounter})</span>
                 </button>
+                
             </div>
             <button
                 aria-label={buttonAriaLabel}

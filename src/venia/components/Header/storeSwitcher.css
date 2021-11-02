@@ -65,6 +65,10 @@
     border-bottom: 1px solid rgb(var(--color-gray-darken0));
 }
 
+.svgIcon {
+    fill: currentColor;
+}
+
 /*
  * Mobile-specific styles.
  */

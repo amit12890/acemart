@@ -12,12 +12,11 @@
     align-items: center;
     display: flex;
     font-size: .85rem;
-    font-weight: var(--font-weight-semibold);
     justify-content: space-between;
     line-height: 1rem;
     padding: 0;
     margin-bottom: 5px;
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
 }
 
 

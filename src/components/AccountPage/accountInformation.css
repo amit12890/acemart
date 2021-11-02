@@ -74,7 +74,7 @@
     margin-right: 10px;
     color: rgb(var(--theme-color-primary));
     text-decoration: underline;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
 }
 .editInformationButton:hover {
     text-decoration: none;

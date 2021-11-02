@@ -36,7 +36,7 @@
 }
 
 .link_active {  
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     border-left-color: rgb(var(--theme-color-primary));
     color: rgb(var(--color-black));
     

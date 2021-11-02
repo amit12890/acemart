@@ -5,7 +5,7 @@
 }
 
 .input:focus {
-    border-color: rgb(var(--color-blue1));
+    border-color: rgb(var(--theme-color-secondary));
 }
 .input:disabled {
     color: rgb(var(--venia-global-color-gray-darker));

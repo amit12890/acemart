@@ -4,7 +4,7 @@
 }
 
 .heading {
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
     font-size: var(--fontSize-100);
 }
 

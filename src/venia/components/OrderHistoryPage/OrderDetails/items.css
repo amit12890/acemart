@@ -3,7 +3,7 @@
 }
 
 .heading {
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     padding: 1rem 0;
     margin: 0 0 1rem 0;
     text-transform: none;
