@@ -3,11 +3,12 @@ import { useQuery } from '@apollo/client';
 import { get } from 'lodash';
 
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import RichContent from '../../venia/components/RichContent';
+// import RichContent from '../../venia/components/RichContent';
 import { GET_CMS_PAGE } from './cmsPage.gql';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './landingPage.css';
 
+const toHTML = str => ({ __html: str });
 
 const LandingPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -22,7 +23,8 @@ const LandingPage = (props) => {
     if (cmsDataLoading) {
         return fullPageLoadingIndicator;
     } else {
-        return <RichContent html={get(cmsPageData, "cmsPage.content", "<div>Content Not Found</div>")} />
+        const html = get(cmsPageData, "cmsPage.content", "<div>Content Not Found</div>");
+        return <div className={classes.root} dangerouslySetInnerHTML={toHTML(html)} />;
     }
 }
 
