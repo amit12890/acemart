@@ -101,7 +101,7 @@ const CreateAccount = props => {
         >
             <h1 className={classes.title}>
                 <FormattedMessage
-                    id={'createAccount.createNewAccountText'}
+                    id={'signup.formTitle'}
                     defaultMessage={'Create New Customer Account'}
                 />
             </h1>
