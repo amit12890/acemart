@@ -168,9 +168,11 @@
     display: block;
     list-style: none;
     margin: 0;
-    padding: 20px 0 18px 0;
+    padding: 0;
     text-align: center;
     width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 .root :global .slick-dots li {
     cursor: pointer;
@@ -212,4 +214,15 @@
 
 .root :global .slick-current {
     z-index: 1;
+}
+
+.root.pagebuilder-slider-custom :global .slick-dots {
+    position: absolute;
+    bottom: 10px; 
+}
+
+
+.root.pagebuilder-slider-custom .slick-dots { 
+    position: absolute;
+    bottom: 10px; 
 }
