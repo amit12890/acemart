@@ -9,34 +9,53 @@ import FormError from '../../venia/components/FormError/formError';
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import { useStyle } from '../../venia/classify';
 import { useApiData } from '../../data.utils';
-import defaultClasses from './createWishlist.css';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import defaultClasses from './wishlistPage.css';
 
 
-const CreateWishlist = props => {
+const EditWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
+    const [{currentUser}, _] = useUserContext();
 
-    const {callApi, response, loading, error} = useApiData({
+    const {callApi: editWishlist, response, loading, error} = useApiData({
         url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
         onSuccess: () => props.refreshWishlist()
     })
-    const handleCreateList = useCallback((data) => {
+    const {callApi: deleteWishlist, loading: loadingDelete} = useApiData({
+        url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/delete/${props.multi_wishlist_id}`,
+        method: "delete",
+        isLazy: true,
+        onSuccess: () => props.refreshWishlist()
+    })
+    
+    const handleEditWishlist = useCallback((data) => {
         if (loading) return;
-        callApi(null, {
+
+        const postData = {
             "multiwishlist": {
                 "customerId" : props.customerId,
-                "wishlist_name": data.name
+                "wishlist_name": data.name,
+                "multi_wishlist_id": props.multi_wishlist_id,
             }
-        })
+        }
+        console.log("🚀 ~ file: editWishlist.js ~ line 35 ~ handleEditWishlist ~ data", postData);
+        editWishlist(null, postData);
     }, [props.customerId, loading])
+
+    const handleDelete = useCallback(() => {
+        if (loadingDelete || loading) return;
+
+        deleteWishlist();
+    }, [loading, loadingDelete])
 
     return (
         <div className={classes.root}>
             
             <div className={classes.form}>
-                <Form className={classes.form} initialValues={{ visibility: 'PRIVATE' }} 
-                    onSubmit={handleCreateList}>
+                <Form className={classes.form} initialValues={{ name: props.name || "" }} 
+                    onSubmit={handleEditWishlist}>
                     {/* <FormError errors={Array.from(formErrors.values())} /> */}
                     <Field
                         classes={{ root: classes.listName }}
@@ -55,13 +74,20 @@ const CreateWishlist = props => {
                             priority="high"
                             type="submit"
                         >
-                            {loading ? "Loading..." : "Create"}
+                            {loading ? "Loading..." : "Edit"}
                         </Button>
                     </div>
                 </Form>
+                <Button
+                    classes={classes.confirmButton}
+                    disabled={loadingDelete}
+                    onClick={handleDelete}
+                >
+                    {loadingDelete ? "Loading..." : "Delete"}
+                </Button>
             </div>
         </div>
     )
 };
 
-export default CreateWishlist;
+export default EditWishlist;

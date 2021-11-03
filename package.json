@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@magento/pwa-buildpack": "~10.0.0",
+    "axios": "^0.24.0",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
