@@ -55,16 +55,14 @@ Items.propTypes = {
                 quantity_ordered: number
             })
         ),
-        imagesData: arrayOf(
-            shape({
-                id: number,
-                sku: string,
-                thumbnail: shape({
-                    url: string
-                }),
-                url_key: string,
-                url_suffix: string
-            })
-        )
+        imagesData: shape({
+            id: number,
+            sku: string,
+            thumbnail: shape({
+                url: string
+            }),
+            url_key: string,
+            url_suffix: string
+        })
     })
 };

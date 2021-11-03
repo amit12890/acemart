@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { shape, string, arrayOf, number } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -15,24 +15,66 @@ import Icon from '../../Icon';
 import Button from '../../Button';
 
 import defaultClasses from './orderDetails.css';
+import { Link } from 'react-router-dom';
+import { myOrderDetailsPage } from '../../../../url.utils';
 
 const OrderDetails = props => {
-    const { classes: propClasses, imagesData, orderData } = props;
+    const { classes: propClasses, imagesData, tab, orderData } = props;
     const {
+        id,
         billing_address,
         items,
+        invoices,
         payment_methods,
         shipping_address,
         shipping_method,
         shipments,
         total
     } = orderData;
+        console.log("🚀 ~ file: orderDetails.js ~ line 32 ~ shipments", shipments)
+        console.log("🚀 ~ file: orderDetails.js ~ line 32 ~ invoices", invoices)
+
+    const hasInvoice = !!invoices.length;
+    const hasShipment = !!shipments.length;
     const classes = useStyle(defaultClasses, propClasses);
 
     const shippingMethodData = {
         shippingMethod: shipping_method,
         shipments
     };
+
+    const content = useMemo(() => {
+        switch (tab) {
+
+            case "invoice":
+                if (hasInvoice)
+                    return (
+                        <div className={classes.contentWrapper}>
+                            Invoice Content here
+                        </div>
+                    );
+
+            case "shipping":
+                if (hasShipment)
+                    return (
+                        <div className={classes.contentWrapper}>
+                            Shipping Content here
+                        </div>
+                    );
+        
+            default:
+                return(
+                    <div className={classes.contentWrapper}>
+                        <div className={classes.itemsContainer}>
+                            <Items data={{ imagesData, items }} />
+                        </div>
+                        <div className={classes.orderTotalContainer}>
+                            <OrderTotal data={total} />
+                        </div>
+                    </div>
+                )
+        }
+    }, [tab, orderData])
 
     return (
         <div className={classes.root}>
@@ -48,12 +90,23 @@ const OrderDetails = props => {
             <div className={classes.paymentMethodContainer}>
                 <PaymentMethod data={payment_methods} />
             </div>
-            <div className={classes.itemsContainer}>
-                <Items data={{ imagesData, items }} />
+
+            <div className={classes.tabsContainer}>
+                <Link to={myOrderDetailsPage("view", id)}>
+                    <div className={classes.tabs}>Items Ordered</div>
+                </Link>
+                {hasInvoice &&
+                    <Link to={myOrderDetailsPage("invoice", id)}>
+                        <div className={classes.tabs}>Invoices</div>
+                    </Link>
+                }
+                {hasShipment &&
+                    <Link to={myOrderDetailsPage("shipping", id)}>
+                        <div className={classes.tabs}>Order Shipments</div>
+                    </Link>
+                }
             </div>
-            <div className={classes.orderTotalContainer}>
-                <OrderTotal data={total} />
-            </div>
+            {content}
             <Button
                 className={classes.printButton}
                 onClick={() => {
@@ -87,17 +140,15 @@ OrderDetails.propTypes = {
         printButton: string,
         printLabel: string
     }),
-    imagesData: arrayOf(
-        shape({
-            id: number,
-            sku: string,
-            thumbnail: shape({
-                url: string
-            }),
-            url_key: string,
-            url_suffix: string
-        })
-    ),
+    imagesData: shape({
+        id: number,
+        sku: string,
+        thumbnail: shape({
+            url: string
+        }),
+        url_key: string,
+        url_suffix: string
+    }),
     orderData: shape({
         billing_address: shape({
             city: string,
