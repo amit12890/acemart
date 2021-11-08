@@ -20,6 +20,11 @@
 function localIntercept(targets) {
     targets.of("@magento/venia-ui").routes.tap(routes => {
         routes.push({
+            name: "404 page",
+            pattern: "*",
+            path: require.resolve("./src/venia/components/ErrorView")
+        });
+        routes.push({
             name: "Landing Page",
             pattern: "/",
             exact: true,
