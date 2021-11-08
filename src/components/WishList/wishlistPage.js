@@ -31,7 +31,7 @@ const WishlistPage = props => {
             }
         }
     })
-
+    console.log("🚀 ~ file: WishlistPage.js ~ line 27 ~ wishlists", wishlists)
     const refreshWishlist = useCallback(() => {
         getWishlist(
             `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/getlist/${customerData.customer.id}`
@@ -39,7 +39,8 @@ const WishlistPage = props => {
     }, [getWishlist, customerData])
 
     useEffect(() => {
-        refreshWishlist()
+        if (!!customerData)
+            refreshWishlist();
     }, [loadingCustomerDetails, customerData])
 
     const classes = useStyle(defaultClasses, props.classes);
