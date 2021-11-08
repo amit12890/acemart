@@ -41,7 +41,7 @@ const SimpleImage = props => {
 };
 
 SimpleImage.propTypes = {
-    alt: string.isRequired,
+    alt: string,
     className: string,
     handleError: func,
     handleLoad: func,

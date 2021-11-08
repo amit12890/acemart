@@ -16,7 +16,7 @@ import { myOrderDetailsPage } from '../../../url.utils';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 const OrderRow = props => {
-    const { order, showDetails } = props;
+    const { order, tab, showDetails } = props;
     const { formatMessage } = useIntl();
     const {
         invoices,
@@ -83,7 +83,7 @@ const OrderRow = props => {
     );
 
     const orderDetails = loading ? <LoadingIndicator /> : (
-        <OrderDetails orderData={order} imagesData={imagesData} />
+        <OrderDetails orderData={order} tab={tab} imagesData={imagesData} />
     );
 
     return (
@@ -128,7 +128,7 @@ const OrderRow = props => {
                 </span>
                 <OrderProgressBar status={derivedStatus} />
             </div>
-            {!showDetails &&
+            {!showDetails &&  // for showDetails true; collapssible btn is not needed
                 <button
                     className={classes.contentToggleContainer}
                     onClick={handleContentToggle}
