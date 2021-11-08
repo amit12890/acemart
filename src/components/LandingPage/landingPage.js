@@ -20,6 +20,7 @@ const LandingPage = (props) => {
             nextFetchPolicy: 'cache-first'
         }
     );
+    console.log(cmsPageData)
     if (cmsDataLoading) {
         return fullPageLoadingIndicator;
     } else {

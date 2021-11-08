@@ -49,7 +49,7 @@ const ErrorView = props => {
 
     const style = {
         '--backroundImageUrl': `url("${backgroundUrl}")`,
-        '--mobileBackgroundImageUrl': `url("${mobileBackgroundUrl}")`
+        '--mobileBackgroundImageUrl': `url("${mobileBackgroundUrl}")` 
     };
 
     return (

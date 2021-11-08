@@ -4,6 +4,10 @@
     grid-template-columns: minmax(9rem, 1fr) minmax(9rem, 1fr) minmax(9rem, 1fr) 16rem 2fr 3rem;
 }
 
+.root:hover {
+    
+}
+
 
 .cell {
     border-left: 1px solid rgb(var(--venia-global-color-gray));
@@ -22,7 +26,7 @@
 
 .label {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
 }
 
 .value {
@@ -65,7 +69,7 @@
 .orderStatusBadge {
     composes: label;
     border: 1px solid #e6e6e6;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     justify-self: flex-start;
     padding: 0.25rem 1.25rem;
 }

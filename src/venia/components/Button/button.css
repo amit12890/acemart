@@ -45,7 +45,7 @@
 .root:disabled,
 .root:hover:disabled {
     pointer-events: none;
-    --stroke: var(--color-gray-darken1);
+    --stroke: var(--color-gray-darken10);
 }
 
 .content {

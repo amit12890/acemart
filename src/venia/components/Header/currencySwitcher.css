@@ -56,7 +56,9 @@
 .symbol {
     margin-right: 0.5rem;
 }
-
+.svgIcon {
+    fill: currentColor;
+}
 .root:last-child:not(:only-child) {
     padding-left: 0;
     grid-auto-flow: column;

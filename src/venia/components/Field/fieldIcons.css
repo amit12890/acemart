@@ -15,7 +15,9 @@
 }
 
 .input > input {
-    padding-right: calc(1.875rem * var(--iconsAfter) + 0.625rem); 
+    padding-left: calc(1.875rem * var(--iconsBefore) + 0.625rem);
+    padding-right: calc(1.875rem * var(--iconsAfter) + 0.625rem);
+
     
 }
 

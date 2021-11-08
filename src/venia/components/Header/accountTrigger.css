@@ -9,6 +9,9 @@
     composes: root;
 
 }
+.svgIcon {
+    fill: currentColor;
+}
 
 .trigger {
     composes: root from '../clickable.css';

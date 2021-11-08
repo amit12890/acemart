@@ -9,12 +9,28 @@ import defaultClasses from './wishlistPage.css';
 
 import EditWishlist from './editWishlist';
 import CreateWishlist from './createWishlist';
-import { useApiData } from '../../data.utils';
+//import { useApiData } from '../../data.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 
 
 const WishlistPage = props => {
+<<<<<<< HEAD
+    const [{currentUser}, _] = useUserContext();
+    console.log("🚀 ~ file: WishlistPage.js ~ line 17 ~ currentUser", currentUser)
+    // const {callApi} = useApiData({
+    //     // url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/getlist/1/${currentUser.id}`,
+    //     url: `/rest/V1/bsscommerce/multiwishlist/getlist/1/${currentUser.id}`
+    // })
+    const talonProps = useWishlistPage();
+    const {
+        errors,
+        loading,
+        shouldRenderVisibilityToggle,
+        wishlists
+    } = talonProps;
+    const error = errors.get('getCustomerWishlistQuery');
+=======
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
@@ -41,6 +57,7 @@ const WishlistPage = props => {
     useEffect(() => {
         refreshWishlist()
     }, [loadingCustomerDetails, customerData])
+>>>>>>> c066b59d853738568be382571bf8a9bd0e7dc745
 
     const classes = useStyle(defaultClasses, props.classes);
     const wishlistTabs = useMemo(() => {

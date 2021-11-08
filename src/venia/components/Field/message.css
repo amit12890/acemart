@@ -1,7 +1,7 @@
 .root {
     color: rgb(var(--text-color));
     font-size: 0.875rem;
-    font-weight: 400;
+    font-weight: var(--font-weight-bold);;
     line-height: 1rem;
     padding: 0.625rem 0.125rem 0.125rem;
 }
@@ -13,5 +13,5 @@
 .root_error {
     composes: root;
     color: rgb(var(--color-error));
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);;
 }

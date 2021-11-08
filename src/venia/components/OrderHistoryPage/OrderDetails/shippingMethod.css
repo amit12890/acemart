@@ -6,7 +6,7 @@
 
 .heading {
     padding-bottom: 0.375rem;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
 }
 
 .method:empty {

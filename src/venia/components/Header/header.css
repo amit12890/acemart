@@ -91,7 +91,9 @@
     composes: input from '../TextInput/textInput.css';
     max-width: 24rem;
 }
-
+.svgIcon {
+    fill: currentColor;
+}
 .loader,
 .loader:before,
 .loader:after {
@@ -173,7 +175,6 @@
     top: 0;
     width: 100%;
     z-index: 10;
-    margin-bottom: 30px;
 }
 
 .panelWrapper {
@@ -185,7 +186,7 @@
 .headerNotice {
     padding: 6px;
     text-align: center;
-    background-color: rgb(var(--color-gray-light02));
+    background-color: rgb(var(--color-gray40));
     color: rgb(var(--color-gray20));
 }
 
@@ -202,8 +203,9 @@
     text-align: center;
 }
 
+
 .topMenuWrapper {
-    background-color: rgb(var(--color-gray-middle1));
+    background-color: rgb(var(--color-gray10));
     color: rgb(var(--color-white));
 }
 
@@ -221,17 +223,21 @@
 }
 .pageTop .action {
     padding: 0;
+    color: rgb(var(--text-color));
 }
 .pageTop .action:hover {
-    background-color: none;
+    
+    background-color: transparent;
 }
 .action {
+    color: rgb(var(--color-white)); 
     padding: 5px;
     display: inline-flex;
     align-items: center;
+    font-size: 15px;
 }
 .action:hover {
-    background-color: rgb(var(--color-gray-light03));
+    background-color: rgb(var(--color-gray30));
 }
 
 .leftMenu {
@@ -249,10 +255,10 @@
 }
 
 .rightLinks li{
-    margin-left: 10px;
+    
 }
 .iconWrapper {
-    margin-left: 10px;
+    margin-left: 5px;
     margin-right: 5px;
     display: inline-flex;
 }
@@ -304,7 +310,7 @@
     line-height: var(--fontSize-500);
 }
 .csAction:hover {
-    color: rgb(var(--color-gray20));
+    color: rgb(var(--text-color));
 }
 
 .searchBarWrapper {

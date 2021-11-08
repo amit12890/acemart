@@ -1,10 +1,10 @@
 .root {
     align-items: center;
-    
     justify-items: center;
     max-width: var(--venia-global-maxWidth);
-    padding: 0 1rem;
+    padding: 0 20px;
     width: 100%;
+    max-width: 475px;
 }
 
 .root_open {
