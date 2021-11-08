@@ -50,7 +50,16 @@ const OrderDetails = props => {
                 if (hasInvoice)
                     return (
                         <div className={classes.contentWrapper}>
-                            Invoice Content here
+                             <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
+                                <div className={classes.actions-toolbar}> 
+                                    <Link className={classes.printAllInvoice}>
+                                        <span>Print All Invoices</span>
+                                    </Link>
+                                </div>
+                             </div>
+                             <div className={classes.orderTotalContainer}> 
+                                <OrderTotal data={total} />
+                            </div>
                         </div>
                     );
 
@@ -58,7 +67,15 @@ const OrderDetails = props => {
                 if (hasShipment)
                     return (
                         <div className={classes.contentWrapper}>
-                            Shipping Content here
+
+                        <div className={classes.itemsContainer}>
+                                Shipping Content here
+                        </div>
+
+                            
+                            <div className={classes.orderTotalContainer}> 
+                            <OrderTotal data={total} />
+                        </div>
                         </div>
                     );
         
@@ -92,36 +109,45 @@ const OrderDetails = props => {
             </div>
 
             <div className={classes.tabsContainer}>
-                <Link to={myOrderDetailsPage("view", id)}>
-                    <div className={classes.tabs}>Items Ordered</div>
-                </Link>
+                <div className={classes.tabsItem}>
+                    <Link className={classes.itemSwitch} to={myOrderDetailsPage("view", id)}>
+                        <div className={classes.tabs}>Items Ordered</div>
+                    </Link>
+                </div>
+                <div className={classes.tabsItem}>
                 {hasInvoice &&
-                    <Link to={myOrderDetailsPage("invoice", id)}>
+                    <Link className={classes.itemSwitch} to={myOrderDetailsPage("invoice", id)}>
                         <div className={classes.tabs}>Invoices</div>
                     </Link>
                 }
+                </div>
+                <div className={classes.tabsItem}>
                 {hasShipment &&
-                    <Link to={myOrderDetailsPage("shipping", id)}>
+                    <Link className={classes.itemSwitch} to={myOrderDetailsPage("shipping", id)}>
                         <div className={classes.tabs}>Order Shipments</div>
                     </Link>
                 }
+                </div>
             </div>
             {content}
-            <Button
-                className={classes.printButton}
-                onClick={() => {
-                    // TODO will be implemented in PWA-978
-                    console.log('Printing Receipt');
-                }}
-            >
-                <Icon src={Printer} />
-                <span className={classes.printLabel}>
-                    <FormattedMessage
-                        id="orderDetails.printLabel"
-                        defaultMessage="Print Receipt"
-                    />
-                </span>
-            </Button>
+            <div className={classes.buttons}>
+                <Button
+                    className={classes.printButton}
+                    priority="high"
+                    onClick={() => {
+                        // TODO will be implemented in PWA-978
+                        console.log('Printing Receipt');
+                    }}
+                >
+                    <Icon src={Printer} />
+                    <span className={classes.printLabel}>
+                        <FormattedMessage
+                            id="orderDetails.printLabel"
+                            defaultMessage="Print Receipt"
+                        />
+                    </span>
+                </Button>
+            </div>
         </div>
     );
 };
