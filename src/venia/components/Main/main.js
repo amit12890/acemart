@@ -7,6 +7,8 @@ import Footer from '../Footer';
 import Header from '../Header';
 import defaultClasses from '@magento/venia-ui/lib/components/Main/main.css';
 
+
+
 const Main = props => {
     const { children, isMasked } = props;
     const classes = useStyle(defaultClasses, props.classes);
@@ -19,7 +21,7 @@ const Main = props => {
     return (
         <main className={rootClass}>
             <Header />
-            <div className={pageClass}>{children}</div>
+            <div className={pageClass}>{children}</div> 
             <Footer />
         </main>
     );
