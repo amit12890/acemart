@@ -14,11 +14,11 @@ import defaultClasses from './category.css';
 import NoProductsFound from './NoProductsFound';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import SortedByContainer from '@magento/venia-ui/lib/components/SortedByContainer';
-import FilterModalOpenButton from '@magento/venia-ui/lib/components/FilterModalOpenButton';
+import FilterModalOpenButton from '../../venia/components/FilterModalOpenButton';
 
-const FilterModal = React.lazy(() => import('@magento/venia-ui/lib/components/FilterModal'));
+const FilterModal = React.lazy(() => import('../../venia/components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
-    import('@magento/venia-ui/lib/components/FilterSidebar')
+    import('../../venia/components/FilterSidebar')
 );
 
 const CategoryContent = props => {
