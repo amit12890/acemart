@@ -77,13 +77,13 @@ const FilterList = props => {
 
         const label = isListExpanded
             ? formatMessage({
-                  id: 'filterList.showLess',
-                  defaultMessage: 'Show Less'
-              })
+                id: 'filterList.showLess',
+                defaultMessage: 'Show Less'
+            })
             : formatMessage({
-                  id: 'filterList.showMore',
-                  defaultMessage: 'Show More'
-              });
+                id: 'filterList.showMore',
+                defaultMessage: 'Show More'
+            });
 
         return (
             <li className={classes.showMoreLessItem}>
