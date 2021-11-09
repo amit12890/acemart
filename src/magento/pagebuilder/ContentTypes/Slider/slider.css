@@ -230,3 +230,7 @@
     background-color: red !important; 
     
 }
+
+.mycustom {
+    border: 10px solid red !important;
+}
