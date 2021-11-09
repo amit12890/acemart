@@ -51,9 +51,15 @@ const OrderDetails = props => {
                     return (
                         <div className={classes.contentWrapper}>
                              <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
-                                <div className={classes.actions-toolbar}> 
-                                    <Link className={classes.printAllInvoice}>
+                                <div className={classes.actionsToolbar}> 
+                                    <Link className={classes.printLink}>
                                         <span>Print All Invoices</span>
+                                    </Link>
+                                </div>
+                                <div className={classes.orderTitle}> 
+                                    <strong>Invoice #000000003</strong>
+                                    <Link className={classes.printLink}>
+                                        <span>Print Invoices</span>
                                     </Link>
                                 </div>
                              </div>

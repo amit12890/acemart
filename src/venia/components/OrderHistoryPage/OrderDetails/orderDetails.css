@@ -103,12 +103,26 @@
 
 }
 
-.actions-toolbar { 
+.actionsToolbar { 
     text-align: left;
 }
-.printAllInvoice {
+
+
+.printLink {
     text-decoration: underline;
     font-weight: bold;
+    font-size: 0.875rem;
+}
+
+.orderTitle {
+
+}
+.orderTitle > strong {
+    font-size: var(--fontSize-600);
+    font-weight: var(--font-weight-regular);
+}
+.printInvoice {
+
 }
 /*
  * Mobile-specific styles.
