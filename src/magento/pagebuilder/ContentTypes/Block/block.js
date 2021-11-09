@@ -1,6 +1,7 @@
 import React from 'react';
 import CmsBlock from '@magento/venia-ui/lib/components/CmsBlock/block';
 import { arrayOf, string } from 'prop-types';
+import { get } from 'lodash'
 
 /**
  * Page Builder Block component.
@@ -49,8 +50,13 @@ const Block = props => {
         paddingLeft
     };
 
+    // mapping classes with js as pagebuilder not providing css style add
+    const mapClasses = cssClasses.map((className) => {
+        return get(classes, className, className)
+    })
+
     return (
-        <div style={dynamicStyles} className={cssClasses.join(' ')}>
+        <div style={dynamicStyles} className={mapClasses.join(' ')}>
             <CmsBlock content={richContent} />
         </div>
     );
