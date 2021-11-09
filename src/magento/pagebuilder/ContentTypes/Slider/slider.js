@@ -4,6 +4,7 @@ import SlickSlider from 'react-slick';
 import defaultClasses from './slider.css';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { jarallax } from 'jarallax';
+import { get } from 'lodash'
 
 /**
  * Page Builder Slider component.
@@ -19,6 +20,7 @@ import { jarallax } from 'jarallax';
  */
 const Slider = props => {
     const classes = useStyle(defaultClasses, props.classes);
+    console.log("🚀 ~ file: slider.js ~ line 22 ~ classes", classes)
 
     const {
         minHeight,
@@ -45,6 +47,7 @@ const Slider = props => {
         children
     } = props;
 
+    console.log("🚀 ~ file: slider.js ~ line 45 ~ cssClasses", cssClasses)
     const dynamicStyles = {
         minHeight,
         textAlign,
@@ -95,11 +98,15 @@ const Slider = props => {
         return child;
     });
 
+    // mapping classes with js as pagebuilder not providing css style add
+    const mapClasses = cssClasses.map((className) => {
+        return get(classes, className, className)
+    })
+
     return (
         <div
-            className={[classes.root, ...cssClasses].join(' ')}
-            style={dynamicStyles}
-        >
+            className={[classes.root, ...mapClasses].join(' ')}
+            style={dynamicStyles}>
             <SlickSlider {...sliderSettings}>{children}</SlickSlider>
         </div>
     );
