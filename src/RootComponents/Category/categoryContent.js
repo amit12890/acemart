@@ -1,7 +1,7 @@
 import React, { Fragment, Suspense, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { array, number, shape, string } from 'prop-types';
-import { useCategoryContent } from '@magento/peregrine/lib/talons/RootComponents/Category';
+import { useCategoryContent } from './data';
 
 import { useStyle } from '../../venia/classify';
 import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';

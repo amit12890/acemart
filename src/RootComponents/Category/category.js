@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { number, shape, string } from 'prop-types';
-import { useCategory } from '@magento/peregrine/lib/talons/RootComponents/Category';
+import { useCategory } from './data';
 import { useStyle } from '../../venia/classify';
 
 import CategoryContent from './categoryContent';
@@ -28,6 +28,7 @@ const Category = props => {
         sortProps,
         pageSize
     } = talonProps;
+    console.log("🚀 ~ file: category.js ~ line 31 ~ categoryData", categoryData)
 
     const classes = useStyle(defaultClasses, props.classes);
 
