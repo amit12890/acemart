@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import resolveLinkProps from '../../resolveLinkProps';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import resourceUrl from '../../../peregrine/makeUrl';
+import { get } from 'lodash';
 
 /**
  * Page Builder Image component.
@@ -98,12 +99,17 @@ const Image = props => {
         </>
     );
 
+    // mapping classes with js as pagebuilder not providing css style add
+    const mapClasses = cssClasses.map((className) => {
+        return get(classes, className, className)
+    })
+
     if (typeof link === 'string') {
         const linkProps = resolveLinkProps(link);
         const LinkComponent = linkProps.to ? Link : 'a';
 
         return (
-            <figure style={figureStyles} className={cssClasses.join(' ')}>
+            <figure style={figureStyles} className={mapClasses.join(' ')}>
                 <LinkComponent
                     {...linkProps}
                     {...(openInNewTab ? { target: '_blank' } : '')}
@@ -114,7 +120,7 @@ const Image = props => {
         );
     } else {
         return (
-            <figure style={figureStyles} className={cssClasses.join(' ')}>
+            <figure style={figureStyles} className={mapClasses.join(' ')}>
                 {PictureFragment}
             </figure>
         );

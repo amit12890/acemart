@@ -3,6 +3,7 @@ import defaultClasses from './column.css';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { arrayOf, oneOf, shape, string, bool } from 'prop-types';
 import resourceUrl from '../../../peregrine/makeUrl';
+import { get } from 'lodash'
 
 const { matchMedia } = globalThis;
 
@@ -151,11 +152,16 @@ const Column = props => {
         }
     }, [backgroundSize, image, setBgImageStyle]);
 
+    // mapping classes with js as pagebuilder not providing css style add
+    const mapClasses = cssClasses.map((className) => {
+        return get(classes, className, className)
+    })
+
     return (
         <div
             style={dynamicStyles}
             ref={columnElement}
-            className={[classes.root, ...cssClasses].join(' ')}
+            className={[classes.root, ...mapClasses].join(' ')}
         >
             {children}
         </div>

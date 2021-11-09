@@ -6,6 +6,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Gallery from '@magento/venia-ui/lib/components/Gallery';
 import Carousel from './Carousel/carousel';
 import defaultClasses from './products.css';
+import { get } from 'lodash'
 /**
  * Sort products based on the original order of SKUs
  *
@@ -93,6 +94,11 @@ const Products = props => {
 
     const items = restoreSortOrder(skus, data.products.items);
 
+    // mapping classes with js as pagebuilder not providing css style add
+    const mapClasses = cssClasses.map((className) => {
+        return get(classes, className, className)
+    })
+
     if (appearance === 'carousel') {
         //Settings conditions was made due to react-slick issues
         const carouselCenterMode =
@@ -142,7 +148,7 @@ const Products = props => {
                 style={dynamicStyles}
                 className={[
                     classes.carousel,
-                    ...cssClasses,
+                    ...mapClasses,
                     centerModeClass,
                     centerModeSmallClass
                 ].join(' ')}
@@ -155,7 +161,7 @@ const Products = props => {
     return (
         <div
             style={dynamicStyles}
-            className={[classes.root, ...cssClasses].join(' ')}
+            className={[classes.root, ...mapClasses].join(' ')}
         >
             <Gallery items={items} classes={{ items: classes.galleryItems }} />
         </div>
