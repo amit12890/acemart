@@ -20,7 +20,6 @@ import { get } from 'lodash'
  */
 const Slider = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    console.log("🚀 ~ file: slider.js ~ line 22 ~ classes", classes)
 
     const {
         minHeight,
@@ -47,7 +46,6 @@ const Slider = props => {
         children
     } = props;
 
-    console.log("🚀 ~ file: slider.js ~ line 45 ~ cssClasses", cssClasses)
     const dynamicStyles = {
         minHeight,
         textAlign,
