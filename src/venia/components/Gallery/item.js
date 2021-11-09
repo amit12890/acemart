@@ -5,12 +5,13 @@ import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
-import resourceUrl from '../../../../peregrine/makeUrl';
+import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
-import { useStyle } from '@magento/venia-ui/lib/classify';
-import Image from '../../../../../venia/components/Image';
-import defaultClasses from '@magento/venia-ui/lib/components/Gallery/item.css';
+import { useStyle } from '../../classify';
+import Image from '../Image';
+import defaultClasses from './item.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
+// import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop } from 'lodash'
 
 // The placeholder image is 4:5, so we should make sure to size our product
@@ -47,10 +48,12 @@ const getOriginalImage = (url) => {
     return smallImageUrlArr[0] + subUrl
 }
 
+
 const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
+
     const classes = useStyle(defaultClasses, props.classes);
 
     if (!item) {
@@ -60,6 +63,7 @@ const GalleryItem = props => {
     const { name, price, small_image, url_key, url_suffix } = item;
     const { url: smallImageURL } = small_image;
     const originalUrl = getOriginalImage(smallImageURL)
+
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
 
     const wishlistButton = wishlistButtonProps ? (
@@ -81,7 +85,7 @@ const GalleryItem = props => {
                     }}
                     height={IMAGE_HEIGHT}
                     src={originalUrl}
-                    // src={smallImageURL}
+                    // resource={smallImageURL}
                     widths={IMAGE_WIDTHS}
                 />
             </Link>

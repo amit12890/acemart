@@ -5,7 +5,7 @@ import { useCategoryContent } from './data';
 
 import { useStyle } from '../../venia/classify';
 import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
-import Gallery from '@magento/venia-ui/lib/components/Gallery';
+import Gallery from '../../venia/components/Gallery';
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
 import Pagination from '@magento/venia-ui/lib/components/Pagination';
 import ProductSort from '@magento/venia-ui/lib/components/ProductSort';
