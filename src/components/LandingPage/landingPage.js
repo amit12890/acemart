@@ -15,12 +15,11 @@ const LandingPage = (props) => {
     const { data: cmsPageData, loading: cmsDataLoading, error: loadDataError } = useQuery(
         GET_CMS_PAGE,
         {
-            variables: {identifier: "ace-mart-home-page"},
+            variables: { identifier: "ace-mart-home-page" },
             fetchPolicy: 'cache-and-network',
             nextFetchPolicy: 'cache-first'
         }
     );
-    console.log(cmsPageData)
     if (cmsDataLoading) {
         return fullPageLoadingIndicator;
     } else {

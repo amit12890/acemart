@@ -164,9 +164,9 @@ const Row = props => {
                 speed: enableParallax ? parallaxSpeed : 1,
                 imgSrc: videoFallbackSrc
                     ? resourceUrl(videoFallbackSrc, {
-                          type: 'image-wysiwyg',
-                          quality: 85
-                      })
+                        type: 'image-wysiwyg',
+                        quality: 85
+                    })
                     : null,
                 videoSrc,
                 videoLoop,
@@ -238,8 +238,13 @@ const Row = props => {
         );
     }
 
+    // mapping classes with js as pagebuilder not providing css style add
+    const mapClasses = cssClasses.map((className) => {
+        return get(classes, className, className)
+    })
+
     return (
-        <div className={[classes.contained, ...cssClasses].join(' ')}>
+        <div className={[classes.contained, ...mapClasses].join(' ')}>
             <div
                 ref={backgroundElement}
                 className={classes.inner}
