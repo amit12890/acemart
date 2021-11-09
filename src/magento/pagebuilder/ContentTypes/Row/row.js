@@ -4,6 +4,7 @@ import { verticalAlignmentToFlex } from '../../utils';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { arrayOf, oneOf, shape, bool, string, number } from 'prop-types';
 import resourceUrl from '../../../peregrine/makeUrl';
+import { get } from 'lodash'
 
 const { matchMedia } = globalThis;
 
