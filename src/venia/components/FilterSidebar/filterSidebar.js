@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useRef, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { array, arrayOf, shape, string, number } from 'prop-types';
-import { useFilterSidebar } from '@magento/peregrine/lib/talons/FilterSidebar';
+import { useFilterSidebar } from '../../../magento/peregrine/talons/FilterSidebar';
 
 import { useStyle } from '../../classify';
 import LinkButton from '../LinkButton';
@@ -27,6 +27,7 @@ const FilterSidebar = props => {
         handleApply,
         handleReset
     } = talonProps;
+    console.log("🚀 ~ file: filterSidebar.js ~ line 30 ~ filterItems", filterItems)
 
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
