@@ -12,11 +12,13 @@ export const myOrderListPage = () => '/sales/order/history/';
 export const myOrderDetailsPage = (tab=":tab", orderId=":orderId") =>
     `/sales/order/${tab}/order_id/${orderId}/`;
 export const newsletterPage = () => '/newsletter/manage/';
-export const addressBookPage = () => '/customer/address/'
-export const addAddress = () => '/customer/address/new/'
+export const addressBookPage = () => '/customer/address/';
+export const addAddress = () => '/customer/address/new/';
 export const editAddress = (id=null) => {
     if (id) {
         return `/customer/address/edit/id/${id}/`
     }
     return '/customer/address/edit/'
-}
+};
+
+export const compareListPage = () => '/catalog/product_compare/';
