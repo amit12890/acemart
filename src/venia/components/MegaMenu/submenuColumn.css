@@ -22,7 +22,14 @@
 
 .link {
     color: rgb(var(--color-white));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
  
+}
+.link svg {
+   padding: 0 5px;
 }
 
 .link:hover,

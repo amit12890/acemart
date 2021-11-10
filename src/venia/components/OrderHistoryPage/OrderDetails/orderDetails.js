@@ -17,6 +17,7 @@ import Button from '../../Button';
 import defaultClasses from './orderDetails.css';
 import { Link } from 'react-router-dom';
 import { myOrderDetailsPage } from '../../../../url.utils';
+import { size } from 'lodash-es';
 
 const OrderDetails = props => {
     const { classes: propClasses, imagesData, tab, orderData } = props;
@@ -43,34 +44,36 @@ const OrderDetails = props => {
         shipments
     };
 
+    let activeTabIndex = 0
     const content = useMemo(() => {
         switch (tab) {
-
             case "invoice":
-                if (hasInvoice)
-                    return (
-                        <div className={classes.contentWrapper}>
-                             <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
-                                <div className={classes.actionsToolbar}> 
-                                    <Link className={classes.printLink}>
-                                        <span>Print All Invoices</span>
-                                    </Link>
+                if (hasInvoice) {
+                        activeTabIndex = 1
+                        return (
+                            <div className={classes.contentWrapper}>
+                                <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
+                                    <div className={classes.actionsToolbar}> 
+                                        <Link className={classes.printLink}>
+                                            <span>Print All Invoices</span>
+                                        </Link>
+                                    </div>
+                                    <div className={classes.orderTitle}> 
+                                        <strong>Invoice #000000003</strong>
+                                        <Link className={classes.printLink}>
+                                            <span>Print Invoices</span>
+                                        </Link>
+                                    </div>
                                 </div>
-                                <div className={classes.orderTitle}> 
-                                    <strong>Invoice #000000003</strong>
-                                    <Link className={classes.printLink}>
-                                        <span>Print Invoices</span>
-                                    </Link>
+                                <div className={classes.orderTotalContainer}> 
+                                    <OrderTotal data={total} />
                                 </div>
-                             </div>
-                             <div className={classes.orderTotalContainer}> 
-                                <OrderTotal data={total} />
                             </div>
-                        </div>
-                    );
-
+                        );
+                    }
             case "shipping":
-                if (hasShipment)
+                if (hasShipment) {
+                    activeTabIndex = 2
                     return (
                         <div className={classes.contentWrapper}>
 
@@ -84,8 +87,9 @@ const OrderDetails = props => {
                         </div>
                         </div>
                     );
-        
-            default:
+                    }
+            default: {
+                activeTabIndex = 0
                 return(
                     <div className={classes.contentWrapper}>
                         <div className={classes.itemsContainer}>
@@ -96,6 +100,7 @@ const OrderDetails = props => {
                         </div>
                     </div>
                 )
+            }
         }
     }, [tab, orderData])
 
@@ -115,19 +120,19 @@ const OrderDetails = props => {
             </div>
 
             <div className={classes.tabsContainer}>
-                <div className={classes.tabsItem}>
+                <div className={[classes.tabsItem,activeTabIndex === 0 ? classes.active : ""].join(" ")}>
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("view", id)}>
                         <div className={classes.tabs}>Items Ordered</div>
                     </Link>
                 </div>
-                <div className={classes.tabsItem}>
+                <div className={[classes.tabsItem,activeTabIndex === 1 ? classes.active : ""].join(" ")}>
                 {hasInvoice &&
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("invoice", id)}>
                         <div className={classes.tabs}>Invoices</div>
                     </Link>
                 }
                 </div>
-                <div className={classes.tabsItem}>
+                <div className={[classes.tabsItem,activeTabIndex === 2 ? classes.active : ""].join(" ")}>
                 {hasShipment &&
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("shipping", id)}>
                         <div className={classes.tabs}>Order Shipments</div>
