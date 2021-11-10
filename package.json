@@ -118,9 +118,6 @@
     "workbox-strategies": "~6.0.2",
     "workbox-webpack-plugin": "~6.0.2"
   },
-  "optionalDependencies": {
-    "sharp": "~0.23.3"
-  },
   "resolutions": {
     "workbox-build": "~6.0.2"
   },
