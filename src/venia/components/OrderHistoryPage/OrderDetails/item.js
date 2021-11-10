@@ -53,7 +53,8 @@ const Item = props => {
                 {thumbnailElement}
             </Link>
             <div className={classes.nameContainer}>
-                <Link to={itemLink}>{product_name}</Link>
+                <div className={classes.name}><Link to={itemLink}>{product_name}</Link></div>
+                <div className={classes.sku}>SKU Value</div>
             </div>
             <ProductOptions
                 options={mappedOptions}
@@ -61,22 +62,24 @@ const Item = props => {
                     options: classes.options
                 }}
             />
-            <div className={classes.sku}><strong>SKU</strong></div>
-            <div className={classes.sku}><strong>Qty</strong>
-                <FormattedMessage
-                    id="orderDetails.quantity"
-                    defaultMessage="Qty"
-                    values={{
-                        quantity: quantity_ordered
-                    }}
-                />
-                <div className={classes.qtyWrapper}><span>Ordered</span>  1</div>
-                <div className={classes.qtyWrapper}><span>Shipped</span>  1</div>
+            <div className={[classes.col, classes.qty].join(" ")}>
+                <div className={classes.label}><strong>Qty</strong></div>
+                <div className={classes.value}>
+                    <div className={classes.qtyWrapper}><span>Ordered</span>  1</div>
+                    <div className={classes.qtyWrapper}><span>Shipped</span>  1</div>
+                    <div className={classes.qtyWrapper}><span>Invoiced</span>  1</div>
+                </div>
             </div>
-            <div className={classes.price}>
-                <Price currencyCode={currency} value={unitPrice} />
+            <div className={[classes.col, classes.price].join(" ")}>
+                <div className={classes.label}><strong>Price</strong></div>
+                <div className={classes.value}><Price currencyCode={currency} value={unitPrice} /></div>
             </div>
-            <div className={classes.itemSubTotal}><strong>Subtotal</strong></div>
+
+            <div className={[classes.col, classes.price].join(" ")}>
+                <div className={classes.label}><strong>Subtotal</strong></div>
+                <div className={classes.value}>SubTotal Value</div>
+            </div>
+
             <Button
                 onClick={() => {
                     // TODO will be implemented in PWA-979

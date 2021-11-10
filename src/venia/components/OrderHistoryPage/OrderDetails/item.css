@@ -13,7 +13,26 @@
 
 .nameContainer {
     grid-column: 2 / -1;
-    font-weight: var(--font-weight-bold);
+    margin-bottom: 10px;
+    
+}
+
+.productDetails {
+    margin-bottom: 15px;
+}
+.name {
+    font-weight: var(--font-weight-bold); 
+    font-size: var(--fontSize-200);
+    margin-bottom: 5px;
+}
+
+.sku {
+    font-size: var(--fontSize-75);
+    color: rgb(var(--color-gray-middle1));
+}
+
+.value {
+    color: rgb(var(--color-gray-middle1));
 }
 
 .buyAgainButton {

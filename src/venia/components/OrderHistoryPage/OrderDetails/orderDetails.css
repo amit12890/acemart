@@ -117,7 +117,10 @@
     font-weight: bold;
     font-size: 0.875rem;
     color: rgb(var(--theme-color-primary-alt));
+    margin-right: 10px;
 }
+
+
 
 .orderTitle {
     display: flex;

@@ -64,6 +64,11 @@ const OrderDetails = props => {
                                             <span>Print Invoices</span>
                                         </Link>
                                     </div>
+                                    <div className={classes.itemWrapper}> 
+                                        <Items data={{ imagesData, items }} />
+                                    </div>
+                                    
+
                                 </div>
                                 <div className={classes.orderTotalContainer}> 
                                     <OrderTotal data={total} />
@@ -76,16 +81,31 @@ const OrderDetails = props => {
                     activeTabIndex = 2
                     return (
                         <div className={classes.contentWrapper}>
-
-                        <div className={classes.itemsContainer}>
-                                Shipping Content here
-                        </div>
-
+                        <div className={[classes.itemsContainer, classes.shipmentContainer].join(" ")}>
+                            <div className={classes.actionsToolbar}> 
+                                <Link className={classes.printLink}>
+                                    <span>Print All Shipments</span>
+                                </Link>
+                            </div>
+                            <div className={classes.orderTitle}> 
+                                <strong>Shipment #000000003</strong>
+                                <Link className={classes.printLink}>
+                                    <span>Print Shipments</span>
+                                </Link>
+                                <Link className={classes.printLink}>
+                                    <span>Track this shipment</span>
+                                </Link>
+                            </div>
+                            <div className={classes.itemWrapper}> 
+                                <Items data={{ imagesData, items }} />
+                            </div>
                             
-                            <div className={classes.orderTotalContainer}> 
+
+                        </div>
+                        <div className={classes.orderTotalContainer}> 
                             <OrderTotal data={total} />
                         </div>
-                        </div>
+                    </div>
                     );
                     }
             default: {
