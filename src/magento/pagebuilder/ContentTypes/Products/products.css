@@ -33,6 +33,10 @@
     height: 72px;
 }
 
+.products-home-slider {
+    
+}
+
 .galleryItems {
     composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.css';
     grid-template-columns: repeat(5, 1fr);

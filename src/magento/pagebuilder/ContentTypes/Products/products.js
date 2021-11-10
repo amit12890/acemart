@@ -30,7 +30,7 @@ function CustomArrows(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "red" }}
+            style={style}
             onClick={onClick}
         />
     );
