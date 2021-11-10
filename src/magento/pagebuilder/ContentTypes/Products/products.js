@@ -4,7 +4,7 @@ import { arrayOf, bool, number, oneOf, shape, string } from 'prop-types';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Gallery from '@magento/venia-ui/lib/components/Gallery';
-import Carousel from './Carousel/carousel';
+import Carousel from './Carousel';
 import defaultClasses from './products.css';
 import { get } from 'lodash'
 /**
@@ -22,6 +22,19 @@ const restoreSortOrder = (skus, products) => {
     return skus.map(sku => productsBySku.get(sku)).filter(Boolean);
 };
 
+/**
+ * overridded arrow of products slider in pagebuilder
+ */
+function CustomArrows(props) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", background: "red" }}
+            onClick={onClick}
+        />
+    );
+}
 /**
  * Page Builder Products component.
  *
@@ -112,8 +125,10 @@ const Products = props => {
             draggable,
             autoplay,
             autoplaySpeed,
-            arrows,
+            arrows: true,
             dots,
+            nextArrow: <CustomArrows />,
+            prevArrow: <CustomArrows />,
             centerMode: carouselCenterMode,
             responsive: [
                 {
@@ -130,14 +145,14 @@ const Products = props => {
                         ...{
                             infinite:
                                 items.length > slideToShowSmall && infinite
-                        }
+                        },
+                        arrows: true,
                     }
                 }
             ],
             ...(carouselCenterMode && { centerPadding }),
             ...{ infinite: items.length > slidesToShow && infinite }
         };
-
         const centerModeClass = carouselCenterMode ? classes.centerMode : null;
         const centerModeSmallClass = carouselSmallCenterMode
             ? classes.centerModeSmall

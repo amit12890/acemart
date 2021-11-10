@@ -9,7 +9,7 @@ import resourceUrl from '../../../../peregrine/makeUrl';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Image from '../../../../../venia/components/Image';
-import defaultClasses from '@magento/venia-ui/lib/components/Gallery/item.css';
+import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 import { drop } from 'lodash'
 
