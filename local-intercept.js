@@ -98,6 +98,12 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/components/AccountPage")
         });
+        routes.push({
+            name: "Compare List",
+            pattern: "/catalog/product_compare/",
+            exact: true,
+            path: require.resolve("./src/components/CompareList")
+        });
         return routes;
     });
 }
