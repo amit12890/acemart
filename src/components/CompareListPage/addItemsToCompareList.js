@@ -14,7 +14,7 @@ const AddItemsToCompareList = (props) => {
 
         await addProductToCompareList([itemId]);
     }, [
-        removeProductFromCompareList, removeProductFromCompareListLoading,
+        addProductToCompareList, addProductToCompareListLoading,
         itemId
     ])
 

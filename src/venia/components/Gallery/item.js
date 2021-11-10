@@ -13,6 +13,7 @@ import defaultClasses from './item.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes } from 'lodash'
+import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -58,7 +59,6 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
-    console.log("🚀 ~ file: item.js ~ line 54 ~ item", item);
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -66,10 +66,8 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { name, price, small_image, url_key, url_suffix } = item;
-    console.log("🚀 ~ file: item.js ~ line 67 ~ small_image", small_image)
+    const { id: itemId, name, price, small_image, url_key, url_suffix } = item;
     const { url: smallImageURL } = small_image;
-    console.log("🚀 ~ file: item.js ~ line 66 ~ smallImageURL", smallImageURL)
     const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
@@ -111,6 +109,10 @@ const GalleryItem = props => {
                 />
             </div>
             <div className={classes.actionsContainer}>{wishlistButton}</div>
+            <AddItemsToCompareList itemId={itemId}
+                Child={() => <div className={classes.actionsContainer}>+ add To Compare</div>}
+                Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
+            />
         </div>
     );
 };
