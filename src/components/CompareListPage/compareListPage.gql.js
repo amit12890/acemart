@@ -18,7 +18,7 @@ export const UserCompareListFragment = gql`
 export const GET_CUSTOMER_COMPARE_LIST = gql`
     query customer {
         customer {
-            id
+            id email
             compare_list {
                 uid
                 ...UserCompareListFragment

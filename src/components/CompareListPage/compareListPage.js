@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { get } from 'lodash-es';
 
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import { useCompareList } from './useCompareList';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './compareListPage.css';
 import {
@@ -14,13 +15,20 @@ import RemoveItemFromCompareList from './removeItemFromCompareList';
 
 const CompareListPage = () => {
     const classes = useStyle(defaultClasses);
-
+    // const {
+    //     addProductToCompareList, 
+    //     addProductToCompareListLoading, 
+    //     addProductToCompareListError} = useCompareList()
+    // console.log("🚀 ~ file: compareListPage.js ~ line 22 ~ CompareListPage ~ addProductToCompareListError", addProductToCompareListError)
     // get compare list
     const { loading: loadingCompareList, error, data: compareListData } = useQuery(
         GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
     );
     console.log("🚀 ~ file: compareListPage.js ~ line 29 ~ CompareListPage ~ compareListData", compareListData)
-
+    // useEffect( async () => {
+    //     const res = await addProductToCompareList([88489, 88491]);
+    //     console.log("🚀 ~ file: compareListPage.js ~ line 29 ~ useEffect ~ res", res)
+    // }, [])
 
     if (loadingCompareList) {
         return fullPageLoadingIndicator;

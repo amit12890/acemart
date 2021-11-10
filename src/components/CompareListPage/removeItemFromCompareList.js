@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useCompareList } from './useCompareList';
 
 const RemoveItemFromCompareList = (props) => {
-    const { itemId, listId , Child, Loader } = props
+    const { itemId, listId , Child, Loader, disabled=false } = props
     const {
         removeProductFromCompareList, 
         removeProductFromCompareListLoading, 
@@ -10,7 +10,7 @@ const RemoveItemFromCompareList = (props) => {
     console.log("🚀 ~ file: removeItemFromCompareList.js ~ line 10 ~ RemoveItemFromCompareList ~ removeProductFromCompareListError", removeProductFromCompareListError)
 
     const handleRemoveItem = useCallback( async () => {
-        if (removeProductFromCompareListLoading) return;
+        if (removeProductFromCompareListLoading || disabled) return;
 
         await removeProductFromCompareList([itemId], listId);
     }, [
