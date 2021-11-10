@@ -12,7 +12,7 @@ import Image from '../Image';
 import defaultClasses from './item.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
-import { drop,size } from 'lodash'
+import { drop, includes } from 'lodash'
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -43,11 +43,14 @@ const ItemPlaceholder = ({ classes }) => (
 
 // TODO: remove temp image
 const getOriginalImage = (url) => {
-    console.log("==url",url)
-    if(size(url) === 0) return url
-    const smallImageUrlArr = url.split("cache/")
-    const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-    return smallImageUrlArr[0] + subUrl
+    console.log("🚀 ~ file: item.js ~ line 46 ~ getOriginalImage ~ url", url)
+    if (includes(url, "/cache/")) {
+        const smallImageUrlArr = url.split("cache/")
+        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+        return smallImageUrlArr[0] + subUrl
+    } else {
+        return url
+    }
 }
 
 
@@ -55,6 +58,7 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
+    console.log("🚀 ~ file: item.js ~ line 54 ~ item", item);
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -63,7 +67,9 @@ const GalleryItem = props => {
     }
 
     const { name, price, small_image, url_key, url_suffix } = item;
+    console.log("🚀 ~ file: item.js ~ line 67 ~ small_image", small_image)
     const { url: smallImageURL } = small_image;
+    console.log("🚀 ~ file: item.js ~ line 66 ~ smallImageURL", smallImageURL)
     const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
