@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { get } from 'lodash-es';
 
@@ -11,6 +12,7 @@ import defaultClasses from './compareListBlock.css';
 import {
     GET_CUSTOMER_COMPARE_LIST,
 } from './compareListPage.gql';
+import { compareListPage } from '../../url.utils';
 
 
 const CompareListBlock = () => {
@@ -46,6 +48,7 @@ const CompareListBlock = () => {
                             </div>
                         )
                     })}
+                    <Link to={compareListPage()}>Compare</Link>
                 </div>
                 :
                 <div>No Items in compare list</div>
