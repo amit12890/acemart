@@ -217,7 +217,9 @@ const Header = props => {
                 
             </header>
             <div className={classes.navContainer}>
-                <MegaMenu />
+                <div className={classes.navSection}>
+                    <MegaMenu />
+                </div>
             </div>
         </Fragment>
     );
