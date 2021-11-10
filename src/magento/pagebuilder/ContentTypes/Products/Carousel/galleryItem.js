@@ -11,7 +11,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-import { drop } from 'lodash'
+import { drop, includes } from 'lodash'
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -42,9 +42,14 @@ const ItemPlaceholder = ({ classes }) => (
 
 // TODO: remove temp image
 const getOriginalImage = (url) => {
-    const smallImageUrlArr = url.split("cache/")
-    const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-    return smallImageUrlArr[0] + subUrl
+    console.log("origina limage : ", includes(url, "/cache/"))
+    if (includes(url, "/cache/")) {
+        const smallImageUrlArr = url.split("cache/")
+        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+        return smallImageUrlArr[0] + subUrl
+    } else {
+        return url
+    }
 }
 
 const GalleryItem = props => {
