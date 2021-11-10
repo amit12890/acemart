@@ -1,12 +1,11 @@
 import { useCallback } from "react";
+import { useMutation } from '@apollo/client';
 import {
     CREATE_COMPARE_LIST,
-    GET_CUSTOMER_COMPARE_LIST,
     REMOVE_ITEM_FROM_COMPARE_LIST,
 } from './compareListPage.gql';
 
 export const useCompareList = props => {
-    const compareListUid = props.uid;
 
     // create compaer list
     const [
@@ -35,14 +34,14 @@ export const useCompareList = props => {
         }
     ] = useMutation(REMOVE_ITEM_FROM_COMPARE_LIST)
 
-    useEffect(async () => {
+    const removeProductFromCompareList = useCallback(async (products, uid) => {
         const res = await removeItemsFromCompareList({
             variables: {
-                input: {products: [88491], uid: "AXg4vwl7K9AYGsOYFN94eJ8y1oiH7Ibe"}
+                input: {products, uid}
             }
         });
         console.log("🚀 ~ file: compareListPage.js ~ line 61 ~ useEffect ~ res", res);
-    }, [])
+    }, [removeItemsFromCompareList])
 
     return {
         addProductToCompareList, addProductToCompareListError, addProductToCompareListLoading,

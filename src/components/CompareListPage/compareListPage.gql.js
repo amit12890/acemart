@@ -6,9 +6,10 @@ export const UserCompareListFragment = gql`
         items {
             uid
             product {
-                sku uom availability brand
+                id sku
+                name uom availability brand
                 description { html } short_description { html }
-                
+                image { url label }
             }
         }
     }
@@ -17,7 +18,7 @@ export const UserCompareListFragment = gql`
 export const GET_CUSTOMER_COMPARE_LIST = gql`
     query customer {
         customer {
-            id
+            id email
             compare_list {
                 uid
                 ...UserCompareListFragment
