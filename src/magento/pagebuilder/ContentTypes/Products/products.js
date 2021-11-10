@@ -4,6 +4,7 @@ import { arrayOf, bool, number, oneOf, shape, string } from 'prop-types';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Gallery from '@magento/venia-ui/lib/components/Gallery';
+import { ChevronRight } from 'react-feather'
 import Carousel from './Carousel';
 import defaultClasses from './products.css';
 import { get } from 'lodash'
@@ -27,13 +28,7 @@ const restoreSortOrder = (skus, products) => {
  */
 function CustomArrows(props) {
     const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={style}
-            onClick={onClick}
-        />
-    );
+    return <ChevronRight />
 }
 /**
  * Page Builder Products component.
@@ -169,11 +164,11 @@ const Products = props => {
                     centerModeSmallClass
                 ].join(' ')}
             >
-                <Carousel settings={carouselSettings} items={items} classes={mapClasses}/>
+                <Carousel settings={carouselSettings} items={items} classes={mapClasses} />
             </div>
         );
     }
-    
+
 
     return (
         <div
