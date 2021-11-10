@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'react-feather'
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import defaultClasses from './submenuColumn.css';
@@ -43,6 +44,7 @@ const SubmenuColumn = props => {
         <div className={classes.submenuColumn}>
             <Link className={classes.link} to={categoryUrl}>
                 <h3 className={classes.heading}>{category.name}</h3>
+                <ChevronRight />
             </Link>
             {children}
         </div>
