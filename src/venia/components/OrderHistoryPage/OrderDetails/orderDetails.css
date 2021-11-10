@@ -93,10 +93,14 @@
     display: block;
     margin: 0 -1px 0 0;
 }
-.tabsItem.active  {
-    background-color: #fff;
+.tabsItem.active   {
+    background-color: rgb(var(--color-white));
     font-weight: bold;
     margin-bottom: -2px;
+}
+
+.tabsItem.active .itemSwitch  {
+    background-color: rgb(var(--color-white));
 }
 
 .invoiceContainer {
@@ -112,14 +116,18 @@
     text-decoration: underline;
     font-weight: bold;
     font-size: 0.875rem;
+    color: rgb(var(--theme-color-primary-alt));
 }
 
 .orderTitle {
+    display: flex;
+    align-items: center;
 
 }
 .orderTitle > strong {
     font-size: var(--fontSize-600);
     font-weight: var(--font-weight-regular);
+    margin-right: 10px;
 }
 .printInvoice {
 

@@ -24,11 +24,18 @@ const restoreSortOrder = (skus, products) => {
 };
 
 /**
- * overridded arrow of products slider in pagebuilder
+ * overridded arrow of products slider in pagebuilder slick-arrow
  */
 function CustomArrows(props) {
     const { className, style, onClick } = props;
-    return <ChevronRight />
+    return (
+        <div
+            className={className} 
+            style={style}
+            onClick={onClick}>
+            <ChevronRight />
+        </div>
+    )
 }
 /**
  * Page Builder Products component.
@@ -107,6 +114,7 @@ const Products = props => {
         return get(classes, className, className)
     })
 
+    console.log("classes",classes)
     if (appearance === 'carousel') {
         //Settings conditions was made due to react-slick issues
         const carouselCenterMode =
@@ -122,8 +130,8 @@ const Products = props => {
             autoplaySpeed,
             arrows: true,
             dots,
-            nextArrow: <CustomArrows />,
-            prevArrow: <CustomArrows />,
+            nextArrow: <CustomArrows className={[classes.slickArrow,classes.slickNext].join(" ")}/>,
+            prevArrow: <CustomArrows className={[classes.slickArrow,classes.slickPrev].join(" ")}/>,
             centerMode: carouselCenterMode,
             responsive: [
                 {

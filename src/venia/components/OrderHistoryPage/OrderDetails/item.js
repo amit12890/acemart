@@ -61,7 +61,8 @@ const Item = props => {
                     options: classes.options
                 }}
             />
-            <span className={classes.quantity}>
+            <div className={classes.sku}><strong>SKU</strong></div>
+            <div className={classes.sku}><strong>Qty</strong>
                 <FormattedMessage
                     id="orderDetails.quantity"
                     defaultMessage="Qty"
@@ -69,10 +70,13 @@ const Item = props => {
                         quantity: quantity_ordered
                     }}
                 />
-            </span>
+                <div className={classes.qtyWrapper}><span>Ordered</span>  1</div>
+                <div className={classes.qtyWrapper}><span>Shipped</span>  1</div>
+            </div>
             <div className={classes.price}>
                 <Price currencyCode={currency} value={unitPrice} />
             </div>
+            <div className={classes.itemSubTotal}><strong>Subtotal</strong></div>
             <Button
                 onClick={() => {
                     // TODO will be implemented in PWA-979
