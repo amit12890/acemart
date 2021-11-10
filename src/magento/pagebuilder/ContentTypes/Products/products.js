@@ -143,6 +143,7 @@ const Products = props => {
             ? classes.centerModeSmall
             : null;
 
+        console.log(mapClasses)
         return (
             <div
                 style={dynamicStyles}
@@ -153,10 +154,11 @@ const Products = props => {
                     centerModeSmallClass
                 ].join(' ')}
             >
-                <Carousel settings={carouselSettings} items={items} />
+                <Carousel settings={carouselSettings} items={items} classes={mapClasses}/>
             </div>
         );
     }
+    
 
     return (
         <div

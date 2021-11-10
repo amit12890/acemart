@@ -15,6 +15,8 @@
 .centerMode :global .slick-slide {
     opacity: 0.5;
     transition: 0.3s;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .centerMode :global .slick-slide:hover {
@@ -23,6 +25,12 @@
 
 .centerMode :global .slick-slide.slick-current {
     opacity: 1;
+}
+
+.products-home-slider .slick-slider .slick-prev,
+.products-home-slider .slick-slider .slick-next {
+    width: 32px;
+    height: 72px;
 }
 
 .galleryItems {
@@ -56,3 +64,19 @@
     composes: root;
     composes: root from '../Slider/slider.css';
 }
+    
+.home-slider {
+
+}
+.home-slider .slick-arrow,
+.home-slider .slick-arrow {
+    width: 32px;
+    height: 72px;
+}
+
+.custombtn{
+    width: 32px;
+    height: 72px;
+    background-color: coral;
+}
+
