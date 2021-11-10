@@ -53,6 +53,7 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
+    console.log("🚀 ~ file: item.js ~ line 54 ~ item", item);
 
     const classes = useStyle(defaultClasses, props.classes);
 

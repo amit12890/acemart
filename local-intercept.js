@@ -102,7 +102,7 @@ function localIntercept(targets) {
             name: "Compare List",
             pattern: "/catalog/product_compare/",
             exact: true,
-            path: require.resolve("./src/components/CompareList")
+            path: require.resolve("./src/components/CompareListPage")
         });
         return routes;
     });
