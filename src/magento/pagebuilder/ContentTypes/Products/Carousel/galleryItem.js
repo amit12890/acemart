@@ -97,13 +97,17 @@ const GalleryItem = props => {
             >
                 <span>{name}</span>
             </Link>
+            <div className={classes.sku}>
+               <span>SKU</span>
+            </div>            
             <div className={classes.price}>
                 <Price
                     value={price.regularPrice.amount.value}
                     currencyCode={price.regularPrice.amount.currency}
                 />
+                <span className={classes.unit}>Each</span>
             </div>
-            <div className={classes.actionsContainer}>{wishlistButton}</div>
+            <div className={classes.productLabel}></div>
         </div>
     );
 };

@@ -78,6 +78,10 @@
        --color-gray-middle10:  var(--color-gray30);
        --color-gray-light10:  var(--color-gray40);       
 
+       --product-name-color:  var(--color-gray10);
+       --product-price-color: var(--color-blue20);
+       --product-unit-color: var(--color-gray10);
+
 
        --link-color: var(--theme-color-primary);
        --link-color-hover: var(--color-gray-middle10);

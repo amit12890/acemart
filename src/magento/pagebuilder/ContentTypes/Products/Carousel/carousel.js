@@ -4,7 +4,7 @@ import GalleryItem from './galleryItem';
 import { useCarousel } from './useCarousel';
 
 const Carousel = props => {
-    const { settings, items } = props;
+    const { settings, items, classes = [] } = props;
 
     const { storeConfig } = useCarousel();
 
@@ -14,7 +14,7 @@ const Carousel = props => {
         );
     });
 
-    return <SlickSlider {...settings}>{galleryItems}</SlickSlider>;
+    return (<SlickSlider  {...settings}>{galleryItems}</SlickSlider>);
 };
 
 export default Carousel;

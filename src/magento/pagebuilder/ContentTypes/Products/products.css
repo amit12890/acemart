@@ -15,6 +15,8 @@
 .centerMode :global .slick-slide {
     opacity: 0.5;
     transition: 0.3s;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .centerMode :global .slick-slide:hover {
@@ -25,9 +27,80 @@
     opacity: 1;
 }
 
+.products-home-slider .slick-slider .slick-prev,
+.products-home-slider .slick-slider .slickNext {
+    width: 32px;
+    height: 72px;
+}
+
+.products-home-slider {
+    
+}
+
 .galleryItems {
     composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.css';
     grid-template-columns: repeat(5, 1fr);
+}
+
+
+
+.root :global .slick-arrow.slick-hidden {
+    display: none;
+}
+
+.root :global .slick-arrow svg {
+    stroke: white;
+}
+
+.root :global .slick-prev,
+.root :global .slick-next {
+    opacity: 0;
+    transition: 0.3s;
+    
+}
+.root:hover :global .slick-prev,
+.root:hover :global .slick-next {
+    opacity: 1;
+}
+
+.root :global .slick-prev {
+    left: 0;
+}
+
+.root :global .slick-prev svg {
+    transform: rotate(180deg);
+}
+.root :global .slick-prev:before {
+    /* content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 24 24' fill='none' stroke='white' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='19' y1='12' x2='5' y2='12' /><polyline points='12 19 5 12 12 5' /></svg>"); */
+    
+}
+
+.root :global .slick-next {
+    right: 0;
+}
+.root :global .slick-next:before {
+    /* content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 24 24' fill='none' stroke='white' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='5' y1='12' x2='19' y2='12' /><polyline points='12 5 19 12 12 19' /></svg>"); */
+}
+
+.root :global .slick-prev,
+.root :global .slick-next {
+    background: rgba(0, 0, 102, 1);
+    border: none;
+    border-radius: 0; 
+    color: transparent;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    font-size: 0;
+    height: 72px;
+    line-height: 0;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 32px;
+    z-index: 101;
 }
 
 @media (max-width: 640px) {
@@ -56,3 +129,19 @@
     composes: root;
     composes: root from '../Slider/slider.css';
 }
+    
+.home-slider {
+
+}
+.home-slider .slick-arrow,
+.home-slider .slick-arrow {
+    width: 32px;
+    height: 72px;
+}
+
+.custombtn{
+    width: 32px;
+    height: 72px;
+    background-color: coral;
+}
+

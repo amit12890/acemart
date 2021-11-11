@@ -30,6 +30,7 @@
   "dependencies": {
     "@magento/pwa-buildpack": "~10.0.0",
     "axios": "^0.24.0",
+    "react-feather": "^2.0.9",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
@@ -117,9 +118,6 @@
     "workbox-routing": "~6.0.2",
     "workbox-strategies": "~6.0.2",
     "workbox-webpack-plugin": "~6.0.2"
-  },
-  "optionalDependencies": {
-    "sharp": "~0.23.3"
   },
   "resolutions": {
     "workbox-build": "~6.0.2"
