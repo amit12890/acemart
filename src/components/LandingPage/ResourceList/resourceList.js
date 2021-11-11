@@ -3,6 +3,7 @@ import SlickSlider from 'react-slick';
 import { get, size } from 'lodash';
 import defaultClasses from './resourceList.css';
 import { useStyle } from '@magento/venia-ui/lib/classify';
+import RichText from '../../../venia/components/RichText'
 
 
 /**
@@ -26,15 +27,18 @@ function CustomArrows(props) {
 export default ({ data, onItemClick }) => {
     const classes = useStyle(defaultClasses);
     const renderItem = useCallback((item) => {
+        console.log("===", item.short_filtered_content)
         const imageUrl = get(item, "featured_image", "")
         // TODO: UI work for individual item
         return (
             <div className={classes.resourcesItem}>
                 <div className={classes.resouresImage}>
-                    <img src={imageUrl} style={{ height: '100px', width: '100px' }} />
+                    <img src={imageUrl} />
                 </div>
-                <div className={classes.resouresDetails}>{item.title}</div>
-                <div className={classes.resouresDetails}>{item.short_filtered_content}</div>
+                <div className={classes.resouresDetails}>
+                    <h4>{item.title}</h4>
+                    <RichText content={item.short_filtered_content} />
+                </div>
             </div>
         )
     }, [])
