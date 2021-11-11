@@ -25,12 +25,14 @@ function CustomArrows(props) {
  */
 export default ({ data, onItemClick }) => {
     const classes = useStyle(defaultClasses);
+
     const renderItem = useCallback((item) => {
         const imageUrl = get(item, "brand_thumbnail", "")
         return (
-            <div className={classes.root} onClick={onItemClick}>
-                <img src={imageUrl} style={{ height: 100, width: 100 }} />
-                <div>{item.title}</div>
+            <div className={classes.brandItem}>
+                <div className={classes.brandImage}>
+                    <img src={imageUrl} />
+                </div>
             </div>
         )
     }, [])
@@ -40,6 +42,19 @@ export default ({ data, onItemClick }) => {
     return (
         renderItem(data[0])
     )
+
+    return (
+        <div className={classes.root} onClick={onItemClick}>
+            <div className={classes.homeSection}>
+                <h3>Featured Brands</h3>
+                <div className={classes.brandWrapper}>
+                    {renderItem(data[0])}
+                </div>
+            </div>
+        </div>
+    )
+
+
 
     return (
         <SlickSlider

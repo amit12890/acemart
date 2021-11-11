@@ -30,17 +30,51 @@
 }
 
 .resourcesWrapper {
-background-color: orange;
+    display: flex;
+
 }
 
 .resourcesItem {
-    background-color: blue;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding:0 5px;
+    width: 33.3333%;
+    position: relative;
 }
 
 .resouresImage {
-
+    display: block;
+}
+.resouresImage img {
+    max-width: 100%;
 }
 
 .resouresDetails {
-    
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    background: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 100%);
+}
+
+.resouresDetails h4 {
+    font-size: var(--fontSize-100);
+    color: rgb(var(--color-white));
+    border-bottom: 1px solid rgb(var(--color-white));
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.resouresDetails p {
+    margin-bottom: 0;
+    font-size: var(--fontSize-75);
+
+}
+
+.on_sale {
+    background-color: red;
 }
