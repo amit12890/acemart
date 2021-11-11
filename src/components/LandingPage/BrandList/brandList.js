@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react'
 import SlickSlider from 'react-slick';
 import { get, size } from 'lodash';
+import defaultClasses from './brandList.css'; 
+import { useStyle } from '@magento/venia-ui/lib/classify';
 
 
 /**
@@ -22,11 +24,11 @@ function CustomArrows(props) {
  *      LandingPage
  */
 export default ({ data, onItemClick }) => {
-
+    const classes = useStyle(defaultClasses);
     const renderItem = useCallback((item) => {
         const postUrl = get(item, "post_url", "")
         return (
-            <div onClick={onItemClick}>
+            <div className={classes.root} onClick={onItemClick}>
                 <img src={postUrl} style={{ height: 100, width: 100 }} />
                 <div>{item.title}</div>
             </div>
@@ -34,6 +36,10 @@ export default ({ data, onItemClick }) => {
     }, [])
 
     if (size(data) === 0) return null
+
+    return (
+        renderItem(data[0]) 
+    )
 
     return (
         <SlickSlider
