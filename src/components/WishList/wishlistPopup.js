@@ -1,10 +1,9 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { get, find, size } from 'lodash';
+import { get, size } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
-import Wishlist from './wishlist';
 import defaultClasses from './wishlistPopup.css';
 
 import CreateWishlist from './createWishlist';
@@ -19,8 +18,6 @@ const WishlistPopup = props => {
     const { closeWishlistPopup, productId, productQty = 1 } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
-
-    console.log("🚀 ~ file: wishlistPopup.js ~ line 22 ~ selectedWishlist", selectedWishlist)
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
@@ -60,7 +57,7 @@ const WishlistPopup = props => {
         if (loading || loadingCustomerDetails)
             return <LoadingIndicator />;
         if (size(wishlists) === 0)
-            return <Wishlist />
+            return <div>You have no wishlist to choose from !!</div>
 
         return (
             <div>
@@ -80,8 +77,11 @@ const WishlistPopup = props => {
                 <CreateWishlist customerId={get(customerData, 'customer.id', null)}
                     refreshWishlist={refreshWishlist} />
 
-                <Button onClick={handleSubmit}>Add To Wishlist</Button>
-                <Button onClick={closeWishlistPopup}>Close</Button>
+                {addToWishlistLoading ?
+                    <Button disabled>Loading...</Button>
+                    :
+                    <Button onClick={handleSubmit}>Add To Wishlist</Button>
+                }
             </div>
         )
     }, [wishlists, loading, customerData, loadingCustomerDetails, handleSubmit]);
@@ -108,6 +108,7 @@ const WishlistPopup = props => {
                 Please choose a Wish List for the selected product:
             </h1>
             {content}
+            <Button onClick={closeWishlistPopup}>Close</Button>
         </div>
     );
 };
