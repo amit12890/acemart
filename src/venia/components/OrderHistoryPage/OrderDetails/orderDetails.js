@@ -17,7 +17,6 @@ import Button from '../../Button';
 import defaultClasses from './orderDetails.css';
 import { Link } from 'react-router-dom';
 import { myOrderDetailsPage } from '../../../../url.utils';
-import { size } from 'lodash-es';
 
 const OrderDetails = props => {
     const { classes: propClasses, imagesData, tab, orderData } = props;
@@ -33,7 +32,7 @@ const OrderDetails = props => {
         total
     } = orderData;
         console.log("🚀 ~ file: orderDetails.js ~ line 32 ~ shipments", shipments)
-        console.log("🚀 ~ file: orderDetails.js ~ line 32 ~ invoices", invoices)
+        // console.log("🚀 ~ file: orderDetails.js ~ line 32 ~ invoices", invoices)
 
     const hasInvoice = !!invoices.length;
     const hasShipment = !!shipments.length;
@@ -44,12 +43,10 @@ const OrderDetails = props => {
         shipments
     };
 
-    let activeTabIndex = 0
     const content = useMemo(() => {
         switch (tab) {
             case "invoice":
                 if (hasInvoice) {
-                        activeTabIndex = 1
                         return (
                             <div className={classes.contentWrapper}>
                                 <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
@@ -58,17 +55,21 @@ const OrderDetails = props => {
                                             <span>Print All Invoices</span>
                                         </Link>
                                     </div>
-                                    <div className={classes.orderTitle}> 
-                                        <strong>Invoice #000000003</strong>
-                                        <Link className={classes.printLink}>
-                                            <span>Print Invoices</span>
-                                        </Link>
-                                    </div>
-                                    <div className={classes.itemWrapper}> 
-                                        <Items data={{ imagesData, items }} />
-                                    </div>
-                                    
-
+                                    {invoices.map((invoice) => {
+                                        return (
+                                            <>
+                                            <div className={classes.orderTitle}> 
+                                                <strong>Invoice #{invoice.number}</strong>
+                                                <Link className={classes.printLink}>
+                                                    <span>Print Invoices</span>
+                                                </Link>
+                                            </div>
+                                            <div className={classes.itemWrapper}> 
+                                                <Items data={{ imagesData, items }} />
+                                            </div>
+                                            </>
+                                        )
+                                    })}
                                 </div>
                                 <div className={classes.orderTotalContainer}> 
                                     <OrderTotal data={total} />
@@ -78,7 +79,6 @@ const OrderDetails = props => {
                     }
             case "shipping":
                 if (hasShipment) {
-                    activeTabIndex = 2
                     return (
                         <div className={classes.contentWrapper}>
                         <div className={[classes.itemsContainer, classes.shipmentContainer].join(" ")}>
@@ -109,7 +109,6 @@ const OrderDetails = props => {
                     );
                     }
             default: {
-                activeTabIndex = 0
                 return(
                     <div className={classes.contentWrapper}>
                         <div className={classes.itemsContainer}>
@@ -140,19 +139,19 @@ const OrderDetails = props => {
             </div>
 
             <div className={classes.tabsContainer}>
-                <div className={[classes.tabsItem,activeTabIndex === 0 ? classes.active : ""].join(" ")}>
+                <div className={[classes.tabsItem,tab === "view" ? classes.active : ""].join(" ")}>
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("view", id)}>
                         <div className={classes.tabs}>Items Ordered</div>
                     </Link>
                 </div>
-                <div className={[classes.tabsItem,activeTabIndex === 1 ? classes.active : ""].join(" ")}>
+                <div className={[classes.tabsItem,tab === "invoice" ? classes.active : ""].join(" ")}>
                 {hasInvoice &&
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("invoice", id)}>
                         <div className={classes.tabs}>Invoices</div>
                     </Link>
                 }
                 </div>
-                <div className={[classes.tabsItem,activeTabIndex === 2 ? classes.active : ""].join(" ")}>
+                <div className={[classes.tabsItem,tab === "shipping" ? classes.active : ""].join(" ")}>
                 {hasShipment &&
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("shipping", id)}>
                         <div className={classes.tabs}>Order Shipments</div>

@@ -15,7 +15,7 @@ const CustomerOrdersFragment = gql`
             }
             id
             invoices {
-                id
+                id number
                 items {
                     id
                     product_name
