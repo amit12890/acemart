@@ -16,17 +16,19 @@ import { apiAddToWishlist, apiGetWishlistData } from '../../url.utils';
 
 
 const WishlistPopup = props => {
-    const { closeWishlistPopup, productId, productQty=1} = props;
+    const { closeWishlistPopup, productId, productQty = 1 } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+
     console.log("🚀 ~ file: wishlistPopup.js ~ line 22 ~ selectedWishlist", selectedWishlist)
+
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first',
         skip: !isUserSignedIn
     });
     // response shape : Array of {multi_wishlist_id, customer_id, wishlist_name}
-    const {callApi: getWishlist, response: wishlists, loading, error} = useApiData({
+    const { callApi: getWishlist, response: wishlists, loading, error } = useApiData({
         isLazy: true,
     })
 
@@ -34,17 +36,18 @@ const WishlistPopup = props => {
         getWishlist(apiGetWishlistData(customerData.customer.id));
     }, [getWishlist, customerData])
 
-    const {callApi: addToWishlist, response: addResponse, loading: addToWishlistLoading, error: addToWishlistError} = useApiData({
+    const { callApi: addToWishlist, response: addResponse, loading: addToWishlistLoading, error: addToWishlistError } = useApiData({
         method: "post", isLazy: true,
     })
 
-    const handleSubmit = useCallback(() => {
-        const data = {product_id : productId, qty: productQty};
-        console.log("🚀 ~ file: wishlistPopup.js ~ line 43 ~ handleSubmit ~ data", data)
-        addToWishlist(
-            apiAddToWishlist(selectedWishlist),
-            data,
-        )
+    const handleSubmit = useCallback(async () => {
+        const data = { product_id: productId, qty: productQty };
+        if (!!selectedWishlist) {
+            await addToWishlist(
+                apiAddToWishlist(selectedWishlist),
+                data,
+            )
+        }
     }, [selectedWishlist, productId, productQty])
 
     useEffect(() => {
@@ -56,7 +59,7 @@ const WishlistPopup = props => {
     const wishlistTabs = useMemo(() => {
         if (loading || loadingCustomerDetails)
             return <LoadingIndicator />;
-        if (wishlists.length === 0)
+        if (size(wishlists) === 0)
             return <Wishlist />
 
         return (
@@ -68,20 +71,20 @@ const WishlistPopup = props => {
                                 name={wishlist.wishlist_name}
                                 type="checkbox"
                                 checked={!!selectedWishlist &&
-                                    wishlist.multi_wishlist_id == selectedWishlist}
+                                    wishlist.multi_wishlist_id === selectedWishlist}
                                 onChange={() => setSelectedWishlist(wishlist.multi_wishlist_id)} />
                             {wishlist.wishlist_name}
                         </label>
                     </div>
                 ))}
-                <CreateWishlist customerId={get(customerData, 'customer.id', null)} 
+                <CreateWishlist customerId={get(customerData, 'customer.id', null)}
                     refreshWishlist={refreshWishlist} />
 
                 <Button onClick={handleSubmit}>Add To Wishlist</Button>
                 <Button onClick={closeWishlistPopup}>Close</Button>
             </div>
         )
-    }, [wishlists, loading, customerData, loadingCustomerDetails]);
+    }, [wishlists, loading, customerData, loadingCustomerDetails, handleSubmit]);
 
     let content;
     if (error) {
