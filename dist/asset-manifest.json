@@ -1,49 +1,49 @@
 {
-  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.23b892f1a37712c35e71.js",
-  "RootCmp_SEARCH__default.js": "/RootCmp_SEARCH__default.677feb6742f6daa3b843.js",
+  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.6599bbe26d48be5609b2.js",
+  "RootCmp_SEARCH__default.js": "/RootCmp_SEARCH__default.5aadd10b643aa6d644aa.js",
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
-  "client.js": "/client.d9325314e10d1ae84665.js",
+  "client.js": "/client.17a8a046597e6c1d0b55.js",
   "entrypoints": {
     "client": {
       "js": [
-        "/runtime.c97b2b10d3f7285cd076.js",
+        "/runtime.11ec2a5632d2bd65395c.js",
         "/vendors.8ec6f3a21f58e6258a04.js",
-        "/client.d9325314e10d1ae84665.js"
+        "/client.17a8a046597e6c1d0b55.js"
       ]
     }
   },
   "errorViewBackground-1400x600.png": "/errorViewBackground-1400x600-gFa.png",
   "errorViewBackground-380x600.png": "/errorViewBackground-380x600-chy.png",
   "footer-payment.png": "/footer-payment-gfh.png",
-  "i18n-en_US.js": "/i18n-en_US.27ffdb8ea4407e832616.js",
+  "i18n-en_US.js": "/i18n-en_US.75f50d6782b140ffb6f2.js",
   "logo.svg": "/logo-qeq.svg",
   "noProductsFound.png": "/noProductsFound-e9n.png",
-  "runtime.js": "/runtime.c97b2b10d3f7285cd076.js",
+  "runtime.js": "/runtime.11ec2a5632d2bd65395c.js",
   "vendors.js": "/vendors.8ec6f3a21f58e6258a04.js",
-  "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.1e67c675636bd33aa76b.js",
-  "vendors~RootCmp_CMS_PAGE__default.js": "/vendors~RootCmp_CMS_PAGE__default.13066bef54153abbfdf0.js",
-  "vendors~RootCmp_PRODUCT__default.js": "/vendors~RootCmp_PRODUCT__default.4bd4abbd9e2ca232cfa8.js",
+  "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.77f27935a8513981fd7f.js",
+  "vendors~RootCmp_CMS_PAGE__default.js": "/vendors~RootCmp_CMS_PAGE__default.5c796259a96d7cc48ece.js",
+  "vendors~RootCmp_PRODUCT__default.js": "/vendors~RootCmp_PRODUCT__default.7eb0e4b88700cf836f1c.js",
   "bundles": {
     "load": [
-      "/runtime.c97b2b10d3f7285cd076.js",
+      "/runtime.11ec2a5632d2bd65395c.js",
       "/vendors.8ec6f3a21f58e6258a04.js",
-      "/client.d9325314e10d1ae84665.js"
+      "/client.17a8a046597e6c1d0b55.js"
     ],
     "prefetch": [
-      "/RootCmp_CATEGORY__default.23b892f1a37712c35e71.js",
-      "/RootCmp_SEARCH__default.677feb6742f6daa3b843.js"
+      "/RootCmp_CATEGORY__default.6599bbe26d48be5609b2.js",
+      "/RootCmp_SEARCH__default.5aadd10b643aa6d644aa.js"
     ]
   },
   "js": {
-    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.23b892f1a37712c35e71.js",
-    "RootCmp_SEARCH__default": "/RootCmp_SEARCH__default.677feb6742f6daa3b843.js",
-    "client": "/client.d9325314e10d1ae84665.js",
-    "i18n-en_US": "/i18n-en_US.27ffdb8ea4407e832616.js",
-    "runtime": "/runtime.c97b2b10d3f7285cd076.js",
+    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.6599bbe26d48be5609b2.js",
+    "RootCmp_SEARCH__default": "/RootCmp_SEARCH__default.5aadd10b643aa6d644aa.js",
+    "client": "/client.17a8a046597e6c1d0b55.js",
+    "i18n-en_US": "/i18n-en_US.75f50d6782b140ffb6f2.js",
+    "runtime": "/runtime.11ec2a5632d2bd65395c.js",
     "vendors": "/vendors.8ec6f3a21f58e6258a04.js",
-    "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.1e67c675636bd33aa76b.js",
-    "vendors~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CMS_PAGE__default.13066bef54153abbfdf0.js",
-    "vendors~RootCmp_PRODUCT__default": "/vendors~RootCmp_PRODUCT__default.4bd4abbd9e2ca232cfa8.js"
+    "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.77f27935a8513981fd7f.js",
+    "vendors~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CMS_PAGE__default.5c796259a96d7cc48ece.js",
+    "vendors~RootCmp_PRODUCT__default": "/vendors~RootCmp_PRODUCT__default.7eb0e4b88700cf836f1c.js"
   },
   "svg": {
     "VeniaLogo": "/VeniaLogo-n77.svg",

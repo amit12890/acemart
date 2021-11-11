@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { drop, includes } from 'lodash';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
@@ -10,9 +11,6 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import defaultClasses from './item.css';
-import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-// import WishlistGalleryButton from '../Wishlist/AddToListButton';
-import { drop, includes } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 
@@ -60,7 +58,7 @@ const GalleryItem = props => {
         props
     );
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
-    console.log("🚀 ~ file: item.js ~ line 60 ~ item", item)
+
     const openWishlistPopup = useCallback(() => {
         setShowWishlistPopup(true)
     }, [setShowWishlistPopup])
