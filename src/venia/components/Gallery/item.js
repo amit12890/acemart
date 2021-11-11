@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 import Price from '@magento/venia-ui/lib/components/Price';
@@ -14,6 +14,7 @@ import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/Add
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
+import WishlistPopup from '../../../components/WishList/wishlistPopup';
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -58,7 +59,14 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
+    const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     console.log("🚀 ~ file: item.js ~ line 60 ~ item", item)
+    const openWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(true)
+    }, [setShowWishlistPopup])
+    const closeWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(false)
+    }, [setShowWishlistPopup])
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -71,10 +79,6 @@ const GalleryItem = props => {
     const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
-
-    const wishlistButton = wishlistButtonProps ? (
-        <WishlistGalleryButton {...wishlistButtonProps} />
-    ) : null;
 
     return (
         <div className={classes.root}>
@@ -108,11 +112,17 @@ const GalleryItem = props => {
                     currencyCode={price.regularPrice.amount.currency}
                 />
             </div>
-            <div className={classes.actionsContainer}>{wishlistButton}</div>
+            <div className={classes.actionsContainer} onClick={openWishlistPopup}>
+                Add To Wishlist
+            </div>
             <AddItemsToCompareList itemId={itemId}
                 Child={() => <div className={classes.actionsContainer}>+ add To Compare</div>}
                 Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
             />
+            {showWishlistPopup &&
+                <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
+                    closeWishlistPopup={closeWishlistPopup} />
+            }
         </div>
     );
 };
