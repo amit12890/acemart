@@ -30,7 +30,7 @@ function CustomArrows(props) {
     const { className, style, onClick } = props;
     return (
         <div
-            className={className} 
+            className={className}
             style={style}
             onClick={onClick}>
             <ChevronRight />
@@ -114,7 +114,6 @@ const Products = props => {
         return get(classes, className, className)
     })
 
-    console.log("classes",classes)
     if (appearance === 'carousel') {
         //Settings conditions was made due to react-slick issues
         const carouselCenterMode =
@@ -130,8 +129,8 @@ const Products = props => {
             autoplaySpeed,
             arrows: true,
             dots,
-            nextArrow: <CustomArrows className={[classes.slickArrow,classes.slickNext].join(" ")}/>,
-            prevArrow: <CustomArrows className={[classes.slickArrow,classes.slickPrev].join(" ")}/>,
+            nextArrow: <CustomArrows className={[classes.slickArrow, classes.slickNext].join(" ")} />,
+            prevArrow: <CustomArrows className={[classes.slickArrow, classes.slickPrev].join(" ")} />,
             centerMode: carouselCenterMode,
             responsive: [
                 {
@@ -161,7 +160,6 @@ const Products = props => {
             ? classes.centerModeSmall
             : null;
 
-        console.log(mapClasses)
         return (
             <div
                 style={dynamicStyles}
