@@ -7,7 +7,6 @@ const AddItemsToCompareList = (props) => {
         addProductToCompareList, 
         addProductToCompareListLoading, 
         addProductToCompareListError} = useCompareList()
-    console.log("🚀 ~ file: AddItemsToCompareList.js ~ line 10 ~ AddItemsToCompareList ~ addProductToCompareListError", addProductToCompareListError)
 
     const handleAddItem = useCallback( async () => {
         if (addProductToCompareListLoading || disabled) return;

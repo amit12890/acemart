@@ -7,7 +7,6 @@ const RemoveItemFromCompareList = (props) => {
         removeProductFromCompareList, 
         removeProductFromCompareListLoading, 
         removeProductFromCompareListError} = useCompareList()
-    console.log("🚀 ~ file: removeItemFromCompareList.js ~ line 10 ~ RemoveItemFromCompareList ~ removeProductFromCompareListError", removeProductFromCompareListError)
 
     const handleRemoveItem = useCallback( async () => {
         if (removeProductFromCompareListLoading || disabled) return;

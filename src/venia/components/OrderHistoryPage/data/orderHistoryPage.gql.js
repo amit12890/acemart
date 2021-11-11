@@ -50,7 +50,7 @@ const CustomerOrdersFragment = gql`
                 }
             }
             shipments {
-                id
+                id number
                 tracking {
                     carrier
                     title

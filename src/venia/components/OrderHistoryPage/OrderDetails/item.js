@@ -3,6 +3,7 @@ import { shape, string, number, arrayOf } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { useOrderHistoryContext } from '@magento/peregrine/lib/talons/OrderHistoryPage/orderHistoryContext';
+import { isNil } from 'lodash-es';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Button from '../../Button';
@@ -18,6 +19,7 @@ const Item = props => {
         product_sale_price,
         product_url_key,
         quantity_ordered,
+        quantity,
         selected_options,
         sku,
         thumbnail
@@ -66,7 +68,9 @@ const Item = props => {
             <div className={[classes.col, classes.qty].join(" ")}>
                 <div className={classes.label}><strong>Qty</strong></div>
                 <div className={classes.value}>
-                    <div className={classes.qtyWrapper}><span>Ordered</span>  {quantity_ordered}</div>
+                    <div className={classes.qtyWrapper}>
+                        {isNil(quantity) ? quantity_ordered : quantity}
+                    </div>
                 </div>
             </div>
             <div className={[classes.col, classes.price].join(" ")}>
