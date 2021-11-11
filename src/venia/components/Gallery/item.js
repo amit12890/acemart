@@ -44,7 +44,6 @@ const ItemPlaceholder = ({ classes }) => (
 
 // TODO: remove temp image
 const getOriginalImage = (url) => {
-    console.log("🚀 ~ file: item.js ~ line 46 ~ getOriginalImage ~ url", url)
     if (includes(url, "/cache/")) {
         const smallImageUrlArr = url.split("cache/")
         const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
@@ -59,6 +58,7 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
+    console.log("🚀 ~ file: item.js ~ line 60 ~ item", item)
 
     const classes = useStyle(defaultClasses, props.classes);
 

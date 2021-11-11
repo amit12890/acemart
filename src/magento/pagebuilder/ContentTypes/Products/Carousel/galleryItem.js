@@ -42,7 +42,6 @@ const ItemPlaceholder = ({ classes }) => (
 
 // TODO: remove temp image
 const getOriginalImage = (url) => {
-    console.log("origina limage : ", includes(url, "/cache/"))
     if (includes(url, "/cache/")) {
         const smallImageUrlArr = url.split("cache/")
         const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
@@ -98,8 +97,8 @@ const GalleryItem = props => {
                 <span>{name}</span>
             </Link>
             <div className={classes.sku}>
-               <span>SKU</span>
-            </div>            
+                <span>SKU</span>
+            </div>
             <div className={classes.price}>
                 <Price
                     value={price.regularPrice.amount.value}
