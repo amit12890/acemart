@@ -3,6 +3,7 @@ import { shape, string, number, arrayOf } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { useOrderHistoryContext } from '@magento/peregrine/lib/talons/OrderHistoryPage/orderHistoryContext';
+import { isNil } from 'lodash-es';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Button from '../../Button';
@@ -18,7 +19,9 @@ const Item = props => {
         product_sale_price,
         product_url_key,
         quantity_ordered,
+        quantity,
         selected_options,
+        sku,
         thumbnail
     } = props;
     const { currency, value: unitPrice } = product_sale_price;
@@ -54,7 +57,7 @@ const Item = props => {
             </Link>
             <div className={classes.nameContainer}>
                 <div className={classes.name}><Link to={itemLink}>{product_name}</Link></div>
-                <div className={classes.sku}>SKU Value</div>
+                <div className={classes.sku}>{sku}</div>
             </div>
             <ProductOptions
                 options={mappedOptions}
@@ -65,9 +68,9 @@ const Item = props => {
             <div className={[classes.col, classes.qty].join(" ")}>
                 <div className={classes.label}><strong>Qty</strong></div>
                 <div className={classes.value}>
-                    <div className={classes.qtyWrapper}><span>Ordered</span>  1</div>
-                    <div className={classes.qtyWrapper}><span>Shipped</span>  1</div>
-                    <div className={classes.qtyWrapper}><span>Invoiced</span>  1</div>
+                    <div className={classes.qtyWrapper}>
+                        {isNil(quantity) ? quantity_ordered : quantity}
+                    </div>
                 </div>
             </div>
             <div className={[classes.col, classes.price].join(" ")}>
@@ -77,7 +80,7 @@ const Item = props => {
 
             <div className={[classes.col, classes.price].join(" ")}>
                 <div className={classes.label}><strong>Subtotal</strong></div>
-                <div className={classes.value}>SubTotal Value</div>
+                <div className={classes.value}><Price currencyCode={currency} value={unitPrice*quantity_ordered} /></div>
             </div>
 
             <Button

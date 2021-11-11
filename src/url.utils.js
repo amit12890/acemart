@@ -1,3 +1,5 @@
+const HOST_URL = "https://dev-acemart.magedelight.magentoprojects.net";
+
 /** Handle all url routes */
 
 export const loginPage = () => "/customer/account/login/";
@@ -22,3 +24,9 @@ export const editAddress = (id=null) => {
 };
 
 export const compareListPage = () => '/catalog/product_compare/';
+
+
+/** API urls */
+
+export const apiGetWishlistData = (customerId) => `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/getlist/${customerId}`
+export const apiAddToWishlist = (wishlistId) => `${HOST_URL}/rest/V2/wishlist/add?wishlist_id=${wishlistId}`

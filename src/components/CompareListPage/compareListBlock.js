@@ -22,7 +22,6 @@ const CompareListBlock = () => {
     const { loading: loadingCompareList, error, data: compareListData } = useQuery(
         GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
     );
-    console.log("🚀 ~ file: compareListBlock.js ~ line 29 ~ CompareListBlock ~ compareListData", compareListData)
 
     if (loadingCompareList) {
         return <LoadingIndicator />;
