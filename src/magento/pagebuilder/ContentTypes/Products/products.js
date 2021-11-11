@@ -31,7 +31,6 @@ function CustomArrows(props) {
     return (
         <div
             className={className}
-            style={style}
             onClick={onClick}>
             <ChevronRight />
         </div>
