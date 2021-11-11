@@ -12,7 +12,7 @@ import Image from '../Image';
 import defaultClasses from './item.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
-import { drop, includes } from 'lodash'
+import { drop, includes, get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 
 // The placeholder image is 4:5, so we should make sure to size our product
@@ -71,6 +71,10 @@ const GalleryItem = props => {
     const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
+    const productDimensions = get(item, "prod_dimensions", false)
+    const productNote = get(item, "prod_note", false)
+    const certifications = get(item, "certifications", false)
+    const capacity = get(item, "capacity", false)
 
     const wishlistButton = wishlistButtonProps ? (
         <WishlistGalleryButton {...wishlistButtonProps} />
@@ -100,13 +104,27 @@ const GalleryItem = props => {
                 to={productLink}
                 className={classes.name}
             >
-                <span>{name}</span>
+                <span>{get(item, "product_name", "")}</span>
+                <div>{get(item, "sku", "")}</div>
+                {productDimensions && (
+                    <div>Dimensions: {productDimensions}</div>
+                )}
+                {productNote && (
+                    <div>Product Note: {productNote}</div>
+                )}
+                {certifications && (
+                    <div>Certifications: {certifications}</div>
+                )}
+                {capacity && (
+                    <div>Capacity: {capacity}</div>
+                )}
             </Link>
             <div className={classes.price}>
                 <Price
                     value={price.regularPrice.amount.value}
                     currencyCode={price.regularPrice.amount.currency}
                 />
+                <span> /{get(item, "uom", "")}</span>
             </div>
             <div className={classes.actionsContainer}>{wishlistButton}</div>
             <AddItemsToCompareList itemId={itemId}
