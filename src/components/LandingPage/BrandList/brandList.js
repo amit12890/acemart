@@ -39,9 +39,9 @@ export default ({ data, onItemClick }) => {
 
     if (size(data) === 0) return null
 
-    return (
-        renderItem(data[0])
-    )
+    // return (
+    //     renderItem(data[0])
+    // )
 
     return (
         <div className={classes.root} onClick={onItemClick}>
@@ -49,6 +49,11 @@ export default ({ data, onItemClick }) => {
                 <h3>Featured Brands</h3>
                 <div className={classes.brandWrapper}>
                     {renderItem(data[0])}
+                    {renderItem(data[1])}
+                    {renderItem(data[2])}
+                    {renderItem(data[3])}
+                    {renderItem(data[4])}
+                    {renderItem(data[5])}
                 </div>
             </div>
         </div>

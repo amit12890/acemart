@@ -51,6 +51,8 @@ export default ({ data, onItemClick }) => {
                 <h3>Resources</h3>
                 <div className={classes.resourcesWrapper}>
                     {renderItem(data[0])}
+                    {renderItem(data[1])}
+                    {renderItem(data[2])}
                 </div>
             </div>
         </div>
