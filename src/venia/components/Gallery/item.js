@@ -12,7 +12,8 @@ import Image from '../Image';
 import defaultClasses from './item.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
-import { drop } from 'lodash'
+import { drop, includes } from 'lodash'
+import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -43,9 +44,13 @@ const ItemPlaceholder = ({ classes }) => (
 
 // TODO: remove temp image
 const getOriginalImage = (url) => {
-    const smallImageUrlArr = url.split("cache/")
-    const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-    return smallImageUrlArr[0] + subUrl
+    if (includes(url, "/cache/")) {
+        const smallImageUrlArr = url.split("cache/")
+        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+        return smallImageUrlArr[0] + subUrl
+    } else {
+        return url
+    }
 }
 
 
@@ -53,7 +58,7 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
-    console.log("🚀 ~ file: item.js ~ line 54 ~ item", item);
+    console.log("🚀 ~ file: item.js ~ line 60 ~ item", item)
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -61,7 +66,7 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { name, price, small_image, url_key, url_suffix } = item;
+    const { id: itemId, name, price, small_image, url_key, url_suffix } = item;
     const { url: smallImageURL } = small_image;
     const originalUrl = getOriginalImage(smallImageURL)
 
@@ -104,6 +109,10 @@ const GalleryItem = props => {
                 />
             </div>
             <div className={classes.actionsContainer}>{wishlistButton}</div>
+            <AddItemsToCompareList itemId={itemId}
+                Child={() => <div className={classes.actionsContainer}>+ add To Compare</div>}
+                Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
+            />
         </div>
     );
 };

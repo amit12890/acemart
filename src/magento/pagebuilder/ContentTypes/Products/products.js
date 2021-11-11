@@ -4,6 +4,7 @@ import { arrayOf, bool, number, oneOf, shape, string } from 'prop-types';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Gallery from '@magento/venia-ui/lib/components/Gallery';
+import { ChevronRight } from 'react-feather'
 import Carousel from './Carousel';
 import defaultClasses from './products.css';
 import { get } from 'lodash'
@@ -23,17 +24,18 @@ const restoreSortOrder = (skus, products) => {
 };
 
 /**
- * overridded arrow of products slider in pagebuilder
+ * overridded arrow of products slider in pagebuilder slick-arrow
  */
 function CustomArrows(props) {
     const { className, style, onClick } = props;
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "red" }}
-            onClick={onClick}
-        />
-    );
+            style={style}
+            onClick={onClick}>
+            <ChevronRight />
+        </div>
+    )
 }
 /**
  * Page Builder Products component.
@@ -127,8 +129,8 @@ const Products = props => {
             autoplaySpeed,
             arrows: true,
             dots,
-            nextArrow: <CustomArrows />,
-            prevArrow: <CustomArrows />,
+            nextArrow: <CustomArrows className={[classes.slickArrow, classes.slickNext].join(" ")} />,
+            prevArrow: <CustomArrows className={[classes.slickArrow, classes.slickPrev].join(" ")} />,
             centerMode: carouselCenterMode,
             responsive: [
                 {
@@ -168,10 +170,11 @@ const Products = props => {
                     centerModeSmallClass
                 ].join(' ')}
             >
-                <Carousel settings={carouselSettings} items={items} />
+                <Carousel settings={carouselSettings} items={items} classes={mapClasses} />
             </div>
         );
     }
+
 
     return (
         <div

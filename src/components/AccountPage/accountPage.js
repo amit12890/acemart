@@ -23,6 +23,7 @@ import OrderHistoryPage from '../../venia/components/OrderHistoryPage/orderHisto
 import AccountInformation from './accountInformation';
 import WishlistPage from '../WishList';
 import OrderDetailsPage from './orderDetailsPage';
+import CompareListBlock from '../CompareListPage/compareListBlock';
 
 
 const AccountPage = (props) => {
@@ -38,6 +39,7 @@ const AccountPage = (props) => {
         <div className={classes.wrapper}>
             <div className={classes.sidebar_wrapper}>
                 <AccountSideBar activeUrl={path} />
+                <CompareListBlock />
             </div>
             <div className={classes.content_wrapper}>
                 <Switch>

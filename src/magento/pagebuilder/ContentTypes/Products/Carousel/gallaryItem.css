@@ -1,8 +1,9 @@
 .root {
     align-content: start;
     display: grid;
-    row-gap: 0.5rem;
-    border:10px solid red;
+    row-gap: 0.5rem; 
+    padding: 0px 15px;
+    
 }
 
 .images {
@@ -12,6 +13,8 @@
 
 .imageContainer {
     grid-area: main;
+    justify-content: center;
+
 }
 
 .image {
@@ -42,13 +45,34 @@
 }
 
 .name {
-    font-weight: var(--venia-global-fontWeight-semibold);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--fontSize-300);
+    text-align: left;
+    color: rgb(var(--product-name-color));
 }
 
 .name,
+.sku,
 .price {
-    font-size: var(--venia-typography-detail-XL-fontSize);
     min-height: 1rem;
+    text-align: left;
+}
+.price {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--fontSize-300);
+    color: rgb(var(--product-price-color)); 
+}
+.sku {
+    font-size: var(--fontSize-100);
+    color: rgb(var(--color-gray-middle3));
+}
+.unit {
+    margin-left: 5px;
+    font-weight: var(--font-weight-regular);
+    color: rgb(var(--product-unit-color));
+}
+.unit:before {
+    content: "/"
 }
 
 /* state: pending */
