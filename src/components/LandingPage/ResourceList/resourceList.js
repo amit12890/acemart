@@ -26,15 +26,15 @@ function CustomArrows(props) {
 export default ({ data, onItemClick }) => {
     const classes = useStyle(defaultClasses);
     const renderItem = useCallback((item) => {
-        const postUrl = get(item, "post_url", "")
+        const imageUrl = get(item, "featured_image", "")
         // TODO: UI work for individual item
         return (
             <div className={classes.resourcesItem}>
                 <div className={classes.resouresImage}>
-
-                    <img src={postUrl} style={{ height: '100px', width: '100px' }} />
+                    <img src={imageUrl} style={{ height: '100px', width: '100px' }} />
                 </div>
                 <div className={classes.resouresDetails}>{item.title}</div>
+                <div className={classes.resouresDetails}>{item.short_filtered_content}</div>
             </div>
         )
     }, [])
