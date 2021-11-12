@@ -1,13 +1,84 @@
 .root {
-    display: grid;
-    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
     row-gap: 2rem;
 }
 
-.heading {
+.pageTitleWrapper {
+
+}
+
+
+.title {
     justify-self: center;
-    font-family: var(--venia-global-fontFamily-serif);
-    font-weight: var(--venia-global-fontWeight-bold);
+    background-color: #f5f5f5;
+    margin-bottom: 10px;
+    padding: 15px 30px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+
+.tabsContainer {
+    grid-column: 1 / span 4;
+    grid-row: 2;
+    display: flex;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    
+}
+
+.tabsItem {
+    
+
+}
+
+.tabsItem:first-child {
+   
+
+}
+
+.itemSwitch {
+    line-height: 40px;
+    font-size: 1rem;
+    color: #6d6d6d;
+    text-decoration: none;
+    background: #f6f6f6;
+    border: 1px solid rgb(var(--border-color-base));
+    border-bottom: none;
+    height: 40px;
+    padding: 1px 35px 1px 35px;
+    display: block;
+    margin: 0 -1px 0 0;
+}
+.tabsItem.active   {
+    background-color: rgb(var(--color-white));
+    font-weight: bold;
+    margin-bottom: -2px;
+}
+
+.tabsItem.active .itemSwitch  {
+    background-color: rgb(var(--color-white));
+}
+
+.editForm {
+    display: flex;
+}
+
+.listName {
+    margin-right: 10px;
+}
+
+.listName label {
+    display: none;
+}
+
+.actionsToolbar button {
+    margin-right: 10px;
+}
+
+.editWishlistWrapper {
+
 }
 
 .errorContainer {
@@ -20,6 +91,54 @@
     font-size: var(--venia-typography-body-S-fontSize);
     font-weight: var(--venia-global-fontWeight-semibold);
     padding: 0.625rem 0 0.625rem 1rem;
+}
+
+
+
+
+
+/* item CSS */
+
+.galleryItemsWrapper { 
+
+}
+
+.galleryItem {
+
+}
+
+.galleryItemImage {
+
+}
+
+.galleryItemDetails {
+
+}
+
+.itemName {
+
+
+}
+.itemPrice {
+
+}
+
+.itemComment {
+
+}
+.itemQty {
+
+}
+.addtocartActions {
+
+}
+
+.productItemActions {
+
+}
+
+.action {
+
 }
 
 @media (max-width: 960px) {

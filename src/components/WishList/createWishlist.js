@@ -15,7 +15,7 @@ import defaultClasses from './createWishlist.css';
 const CreateWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
-    const {callApi, response, loading, error} = useApiData({
+    const { callApi, response, loading, error } = useApiData({
         url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
@@ -25,7 +25,7 @@ const CreateWishlist = props => {
         if (loading) return;
         callApi(null, {
             "multiwishlist": {
-                "customerId" : props.customerId,
+                "customerId": props.customerId,
                 "wishlist_name": data.name
             }
         })
@@ -33,22 +33,22 @@ const CreateWishlist = props => {
 
     return (
         <div className={classes.root}>
-            
-            <div className={classes.form}>
-                <Form className={classes.form} initialValues={{ visibility: 'PRIVATE' }} 
+
+            <div className={classes.formWrapper}>
+                <Form className={classes.createWishlistform} initialValues={{ visibility: 'PRIVATE' }}
                     onSubmit={handleCreateList}>
                     {/* <FormError errors={Array.from(formErrors.values())} /> */}
                     <Field
                         classes={{ root: classes.listName }}
-                        label="List Name"
                     >
                         <TextInput
                             field="name"
                             validate={isRequired}
                             validateOnBlur
+                            placeholder="List Name"
                         />
                     </Field>
-                    <div className={classes.buttons}>
+                    <div className={classes.actionsToolbar}>
                         <Button
                             classes={classes.confirmButton}
                             disabled={loading}

@@ -15,27 +15,27 @@ import defaultClasses from './wishlistPage.css';
 
 const EditWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    const [{currentUser}, _] = useUserContext();
+    const [{ currentUser }, _] = useUserContext();
 
-    const {callApi: editWishlist, response, loading, error} = useApiData({
+    const { callApi: editWishlist, response, loading, error } = useApiData({
         url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
         onSuccess: () => props.refreshWishlist()
     })
-    const {callApi: deleteWishlist, loading: loadingDelete} = useApiData({
+    const { callApi: deleteWishlist, loading: loadingDelete } = useApiData({
         url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/delete/${props.multi_wishlist_id}`,
         method: "delete",
         isLazy: true,
         onSuccess: () => props.refreshWishlist()
     })
-    
+
     const handleEditWishlist = useCallback((data) => {
         if (loading) return;
 
         const postData = {
             "multiwishlist": {
-                "customerId" : props.customerId,
+                "customerId": props.customerId,
                 "wishlist_name": data.name,
                 "multi_wishlist_id": props.multi_wishlist_id,
             }
@@ -51,15 +51,22 @@ const EditWishlist = props => {
     }, [loading, loadingDelete])
 
     return (
+
+
+
+
         <div className={classes.root}>
-            
-            <div className={classes.form}>
-                <Form className={classes.form} initialValues={{ name: props.name || "" }} 
+
+
+
+
+
+            <div className={classes.editWishlistWrapper}>
+                <Form className={classes.editForm} initialValues={{ name: props.name || "" }}
                     onSubmit={handleEditWishlist}>
                     {/* <FormError errors={Array.from(formErrors.values())} /> */}
                     <Field
                         classes={{ root: classes.listName }}
-                        label="List Name"
                     >
                         <TextInput
                             field="name"
@@ -67,7 +74,7 @@ const EditWishlist = props => {
                             validateOnBlur
                         />
                     </Field>
-                    <div className={classes.buttons}>
+                    <div className={classes.actionsToolbar}>
                         <Button
                             classes={classes.confirmButton}
                             disabled={loading}
@@ -76,15 +83,46 @@ const EditWishlist = props => {
                         >
                             {loading ? "Loading..." : "Edit"}
                         </Button>
+                        <Button
+                            classes={classes.confirmButton}
+                            disabled={loadingDelete}
+                            onClick={handleDelete}
+                        >
+                            {loadingDelete ? "Loading..." : "Delete"}
+                        </Button>
                     </div>
                 </Form>
-                <Button
-                    classes={classes.confirmButton}
-                    disabled={loadingDelete}
-                    onClick={handleDelete}
-                >
-                    {loadingDelete ? "Loading..." : "Delete"}
-                </Button>
+            </div>
+
+
+            <div className={classes.galleryItemsWrapper}>
+                <div className={classes.galleryItem}>
+                    <div className={classes.galleryItemImage}>
+                        Image Goes Here
+                    </div>
+
+                    <div className={classes.galleryItemDetails}>
+                        <div className={classes.itemName}>Name</div>
+                        <div className={classes.itemPrice}>Price</div>
+                        <div className={classes.itemComment}>Comment</div>
+                        <div className={classes.itemQty}>Qty</div>
+                        <div className={classes.addtocartActions}>Add to cart</div>
+
+                        <div className={classes.productItemActions}>
+
+
+                            <div className={classes.action}><span>Edit</span></div>
+                            <div className={classes.action}><span>Copy</span></div>
+
+                            <div className={classes.action}><span>move</span></div>
+
+                            <div className={classes.action}><span>Remove</span></div>
+
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     )
