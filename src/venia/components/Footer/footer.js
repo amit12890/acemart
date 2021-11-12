@@ -1,50 +1,21 @@
 import React from 'react';
-import { Facebook, Instagram, Twitter } from 'react-feather';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { useFooter } from '@magento/peregrine/lib/talons/Footer/useFooter';
 
-import Logo from '@magento/venia-ui/lib/components/Logo';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import footerPayment from '../../../assets/footer-payment.png';
 import defaultClasses from './footer.css';
-import { DEFAULT_LINKS, LOREM_IPSUM } from './sampleData';
+import * as UrlFuncs from '../../../url.utils';
+
 
 const Footer = props => {
-    const { links } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useFooter();
 
     const { copyrightText } = talonProps;
-
-    const linkGroups = Array.from(links, ([groupKey, linkProps]) => {
-        const linkElements = Array.from(linkProps, ([text, path]) => {
-            const itemKey = `text: ${text} path:${path}`;
-            const child = path ? (
-                <Link className={classes.link} to={path}>
-                    <FormattedMessage id={text} defaultMessage={text} />
-                </Link>
-            ) : (
-                <span className={classes.label}>
-                    <FormattedMessage id={text} defaultMessage={text} />
-                </span>
-            );
-
-            return (
-                <li key={itemKey} className={classes.linkItem}>
-                    {child}
-                </li>
-            );
-        });
-
-        return (
-            <ul key={groupKey} className={classes.linkGroup}>
-                {linkElements}
-            </ul>
-        );
-    });
 
     return (
         <footer className={classes.root}>
@@ -128,33 +99,33 @@ const Footer = props => {
                                     <ul className={classes.groupLinks}>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.accountPageUrl()}
                                                 className={classes.action}
                                             >My Account</Link>
                                         </li>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.customerServiceUrl()}
                                                 className={classes.action}
                                             >Customer Service</Link>
                                         </li>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.helpCenterUrl()}
                                                 className={classes.action}>
                                                 Help Center
                                             </Link>
                                             </li>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.returnPolicyUrl()}
                                                 className={classes.action}>
                                                 Returns
                                             </Link>
                                         </li>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.shippingPolicyUrl()}
                                                 className={classes.action}>
                                                 Shipping Policies
                                             </Link>
@@ -167,28 +138,28 @@ const Footer = props => {
                                     <ul className={classes.groupLinks}>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.aboutUsUrl()}
                                                 className={classes.action}>
-                                                Careers
+                                                About Us
                                             </Link>                                            
                                         </li>
                                         <li className={classes.link}>
-                                        <Link
-                                                to="/"
+                                            <Link
+                                                to={UrlFuncs.careersUrl()}
                                                 className={classes.action}>
                                                 Careers
                                             </Link> 
                                         </li>
                                         <li className={classes.link}>
-                                        <Link
-                                                to="/"
+                                            <Link
+                                                to={UrlFuncs.termsOfUseUrl()}
                                                 className={classes.action}>
                                                 Terms of Use
                                             </Link> 
                                         </li>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.faqUrl()}
                                                 className={classes.action}>
                                                 FAQs
                                             </Link> 
@@ -201,28 +172,28 @@ const Footer = props => {
                                     <ul className={classes.groupLinks}>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.storeLocatorUrl()}
                                                 className={classes.action}>
-                                                Careers
+                                                Store Locator
                                             </Link>                                            
                                             </li>
                                         <li className={classes.link}>
-                                        <Link
-                                                to="/"
+                                            <Link
+                                                to={UrlFuncs.resourcesUrl()}
                                                 className={classes.action}>
                                                 Resources
                                             </Link> 
                                         </li>
                                         <li className={classes.link}>
-                                        <Link
-                                                to="/"
+                                            <Link
+                                                to={UrlFuncs.financingUrl()}
                                                 className={classes.action}>
                                                 Financing
                                             </Link> 
                                         </li>
                                         <li className={classes.link}>
                                             <Link
-                                                to="/"
+                                                to={UrlFuncs.cdsUrl()}
                                                 className={classes.action}>
                                                Commercial Kitchen Design
                                             </Link> 
@@ -239,7 +210,7 @@ const Footer = props => {
                                     </div>
                                     <ul className={[classes.groupLinks, classes.groupSocial].join(" ")}>
                                         <li className={classes.socialLinks}>
-                                            <a href="#">
+                                            <a target="_blank" href="https://www.facebook.com/acemart/">
                                                 <i className={classes.iconWrapper}>
                                                     <svg className={[classes.svgIcon, classes.resources].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="19" height="14" viewBox="0 0 19 32">
                                                         <title>facebook</title>
@@ -251,7 +222,7 @@ const Footer = props => {
                                         </li>
 
                                         <li className={classes.socialLinks}>
-                                            <a href="#">
+                                            <a href="https://twitter.com/AceMart" target="_blank">
                                                 <i className={classes.iconWrapper}>
                                                     <svg className={[classes.svgIcon, classes.resources].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="30" height="14" viewBox="0 0 30 32">
                                                         <title>twitter</title>
@@ -263,7 +234,7 @@ const Footer = props => {
                                         </li>
 
                                         <li className={classes.socialLinks}>
-                                            <a href="#">
+                                            <a href="https://www.instagram.com/acemartrestaurantsupply" target="_blank">
                                                 <i className={classes.iconWrapper}>
                                                     <svg className={[classes.svgIcon, classes.resources].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="27" height="14" viewBox="0 0 27 32">
                                                         <title>instagram</title>
@@ -275,7 +246,7 @@ const Footer = props => {
                                         </li>
 
                                         <li className={classes.socialLinks}>
-                                            <a href="#">
+                                            <a href="https://www.linkedin.com/company/ace-mart-restaurant-supply/" target="_blank">
                                                 <i className={classes.iconWrapper}>
                                                     <svg className={[classes.svgIcon, classes.resources].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="27" height="14" viewBox="0 0 27 32">
                                                         <title>linkedin</title>
@@ -298,8 +269,8 @@ const Footer = props => {
                                 <Image src={footerPayment} /> 
                             </div>
                             <div className={classes.blockCustomerId}>
-                                    <span>Customer WebID:</span> 185 273 042
-                                </div>
+                                <span>Customer WebID:</span> 185 273 042
+                            </div>
                         </div>
 
                     </div>
@@ -318,10 +289,6 @@ const Footer = props => {
 };
 
 export default Footer;
-
-Footer.defaultProps = {
-    links: DEFAULT_LINKS
-};
 
 Footer.propTypes = {
     classes: shape({
