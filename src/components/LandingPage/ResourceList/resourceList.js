@@ -4,6 +4,7 @@ import { get, size } from 'lodash';
 import defaultClasses from './resourceList.css';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import RichText from '../../../venia/components/RichText'
+import Slider from '../../../magento/pagebuilder/ContentTypes/Slider';
 
 
 /**
@@ -27,7 +28,6 @@ function CustomArrows(props) {
 export default ({ data, onItemClick }) => {
     const classes = useStyle(defaultClasses);
     const renderItem = useCallback((item) => {
-        console.log("===", item.short_filtered_content)
         const imageUrl = get(item, "featured_image", "")
         // TODO: UI work for individual item
         return (
@@ -45,18 +45,30 @@ export default ({ data, onItemClick }) => {
 
     if (size(data) === 0) return null
 
-    return (
-        <div className={classes.root} onClick={onItemClick}>
-            <div className={classes.homeSection}>
-                <h3>Resources</h3>
-                <div className={classes.resourcesWrapper}>
-                    {renderItem(data[0])}
-                    {renderItem(data[1])}
-                    {renderItem(data[2])}
-                </div>
-            </div>
-        </div>
-    )
+    // return (
+    //     <div className={classes.root} onClick={onItemClick}>
+    //         <div className={classes.homeSection}>
+    //             <h3>Resources</h3>
+    //             <div className={classes.resourcesWrapper}>
+    //                 {renderItem(data[0])}
+    //                 {renderItem(data[1])}
+    //                 {renderItem(data[2])}
+    //             </div>
+    //         </div>
+    //     </div>
+    // )
+    // return (
+    //     <div className={classes.root} onClick={onItemClick}>
+    //         <div className={classes.homeSection}>
+    //             <h3>Resources</h3>
+    //             <div className={classes.resourcesWrapper}>
+    //                 <Slider>
+    //                     {data.map(renderItem)}
+    //                 </Slider>
+    //             </div>
+    //         </div>
+    //     </div>
+    // )
     return (
         <div className={classes.root} onClick={onItemClick}>
             <div className={classes.homeSection}>
@@ -67,6 +79,7 @@ export default ({ data, onItemClick }) => {
                         slidesToShow={3}
                         arrows={true}
                         draggable={true}
+                        variableWidth={true}
                         nextArrow={<CustomArrows />}
                         prevArrow={<CustomArrows />}>
                         {data.map(renderItem)}
