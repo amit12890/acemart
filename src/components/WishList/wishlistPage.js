@@ -1,9 +1,9 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { get, find, size } from 'lodash';
+import { get, size } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
-import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import Wishlist from './wishlist';
 import defaultClasses from './wishlistPage.css';
 
@@ -12,6 +12,7 @@ import CreateWishlist from './createWishlist';
 import { useApiData } from '../../data.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
+import { apiGetWishlistData } from '../../url.utils';
 
 
 const WishlistPage = props => {
@@ -33,9 +34,7 @@ const WishlistPage = props => {
     })
 
     const refreshWishlist = useCallback(() => {
-        getWishlist(
-            `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/getlist/${customerData.customer.id}`
-        );
+        getWishlist(apiGetWishlistData(customerData.customer.id))
     }, [getWishlist, customerData])
 
     useEffect(() => {
@@ -45,7 +44,8 @@ const WishlistPage = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
     const wishlistTabs = useMemo(() => {
-        if (loading || loadingCustomerDetails) return null
+        if (loading || loadingCustomerDetails)
+            return <LoadingIndicator />;
         if (wishlists.length === 0) {
             return <Wishlist />;
         }
@@ -58,10 +58,6 @@ const WishlistPage = props => {
             </div>
         ));
     }, [wishlists, loading, loadingCustomerDetails]);
-
-    if (loading || loadingCustomerDetails) {
-        return fullPageLoadingIndicator;
-    }
 
     let content;
     if (error) {
