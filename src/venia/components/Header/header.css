@@ -201,6 +201,9 @@
     background-color: rgb(var(--color-gray40));
     color: rgb(var(--color-gray20));
 }
+.baloonIcon {
+    margin-right: 10px;
+}
 
 .panelBody {
     max-width: var(--venia-global-maxWidth);
@@ -255,6 +258,13 @@
 .leftMenu {
     flex-grow: 1; 
     margin-right: 20px;
+}
+
+.leftMenu .iconWrapper{
+    margin-right: 5px;
+}
+.leftMenu .iconWrapper div {
+    display: flex;
 }
 
 .rightMenu { 
