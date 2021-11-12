@@ -6,6 +6,11 @@ export const CategoryFragment = gql`
         meta_title
         meta_keywords
         meta_description
+        children{
+            id
+            name
+            image
+        }
     }
 `;
 
