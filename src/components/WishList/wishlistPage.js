@@ -45,7 +45,8 @@ const WishlistPage = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
     const wishlistTabs = useMemo(() => {
-        if (loading || loadingCustomerDetails) return null
+        if (loading || loadingCustomerDetails)
+            return null;
         if (wishlists.length === 0) {
             return <Wishlist />;
         }
