@@ -95,7 +95,7 @@
     background-color: rgb(var(--theme-color-primary-alt));
     border-color: rgb(var(--theme-color-primary-alt));
     margin-right: 10px;
-    padding: 7px 15px;
+    padding: 3px 15px;
     min-width: auto;
     min-height: auto;
     line-height: auto;
@@ -108,6 +108,20 @@
 .productOptions {
     margin-bottom: 10px;
 
+}
+
+.iconWrapper {
+    composes: root_highPriority from '../../components/Button/button.css';
+    border-width: 1px;
+    margin-right: 10px;
+    padding: 3px;
+    min-width: auto;
+    min-height: auto;
+    line-height: auto;
+}
+
+.svgIcon {
+    fill: white;
 }
 
 /* state: pending */
