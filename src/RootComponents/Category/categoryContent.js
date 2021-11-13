@@ -16,6 +16,7 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import SortedByContainer from '@magento/venia-ui/lib/components/SortedByContainer';
 import FilterModalOpenButton from '../../venia/components/FilterModalOpenButton';
 import ProductCategory from '../../components/ProductCategory/productCategory';
+import { get } from 'lodash-es';
 
 const FilterModal = React.lazy(() => import('../../venia/components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
@@ -31,7 +32,6 @@ const CategoryContent = props => {
         sortProps,
         pageSize
     } = props;
-    console.log("🚀 ~ file: categoryContent.js ~ line 34 ~ data", data)
     const [currentSort] = sortProps;
 
     const talonProps = useCategoryContent({
@@ -95,7 +95,6 @@ const CategoryContent = props => {
         if (totalPagesFromData) {
             return (
                 <Fragment>
-                    {/* <ProductCategory data={data.children} /> */}
                     <section className={classes.gallery}>
                         <Gallery items={items} />
                     </section>
@@ -138,7 +137,12 @@ const CategoryContent = props => {
                                 </div>
                             </h1>
                             {categoryDescriptionElement}
+                            <div style={{ height: '100px' }}>
+                                <ProductCategory
+                                    data={get(data, "category.children", [])} />
+                            </div>
                         </div>
+
                         <div className={classes.heading}>
                             <div className={classes.categoryInfo}>
                                 {categoryResultsHeading}
