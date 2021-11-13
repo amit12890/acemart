@@ -124,7 +124,7 @@ const CategoryContent = props => {
         <Fragment>
             <Breadcrumbs categoryId={categoryId} />
             <StoreTitle>{categoryName}</StoreTitle>
-            <article className={classes.root}>
+            <div className={classes.root}>
                 <div className={classes.contentWrapper}>
                     <div className={classes.sidebar}>
                         <Suspense fallback={null}>{sidebar}</Suspense>
@@ -136,8 +136,10 @@ const CategoryContent = props => {
                                     {categoryName || '...'}
                                 </div>
                             </h1>
-                            {categoryDescriptionElement}
-                            <div style={{ height: '100px' }}>
+                            <div className={classes.categoryDescription}>
+                                {categoryDescriptionElement}
+                            </div>
+                            <div className={classes.subcategoryWrapper}>
                                 <ProductCategory
                                     data={get(data, "category.children", [])} />
                             </div>
@@ -157,7 +159,7 @@ const CategoryContent = props => {
                         <Suspense fallback={null}>{filtersModal}</Suspense>
                     </div>
                 </div>
-            </article>
+            </div>
         </Fragment>
     );
 };

@@ -18,8 +18,8 @@ import WishlistPopup from '../../../components/WishList/wishlistPopup';
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
-const IMAGE_WIDTH = 300;
-const IMAGE_HEIGHT = 375;
+const IMAGE_WIDTH = 240;
+const IMAGE_HEIGHT = 300;
 
 // Gallery switches from two columns to three at 640px.
 const IMAGE_WIDTHS = new Map()
@@ -86,62 +86,99 @@ const GalleryItem = props => {
 
     return (
         <div className={classes.root}>
-            <Link
-                onClick={handleLinkClick}
-                to={productLink}
-                className={classes.images}
-            >
-                <Image
-                    alt={name}
-                    classes={{
-                        image: classes.image,
-                        root: classes.imageContainer
-                    }}
-                    height={IMAGE_HEIGHT}
-                    src={originalUrl}
-                    // resource={smallImageURL}
-                    widths={IMAGE_WIDTHS}
-                />
-            </Link>
-            <Link
-                onClick={handleLinkClick}
-                to={productLink}
-                className={classes.name}
-            >
-                <span>{get(item, "product_name", "")}</span>
-                <div>{get(item, "sku", "")}</div>
-                {productDimensions && (
-                    <div>Dimensions: {productDimensions}</div>
-                )}
-                {productNote && (
-                    <div>Product Note: {productNote}</div>
-                )}
-                {certifications && (
-                    <div>Certifications: {certifications}</div>
-                )}
-                {capacity && (
-                    <div>Capacity: {capacity}</div>
-                )}
-            </Link>
-            <div className={classes.price}>
-                <Price
-                    value={price.regularPrice.amount.value}
-                    currencyCode={price.regularPrice.amount.currency}
-                />
-                <span> /{get(item, "uom", "")}</span>
+            <div className={classes.itemImageContainer}>
+                <Link
+                    onClick={handleLinkClick}
+                    to={productLink}
+                    className={classes.images}
+                >
+                    <Image
+                        alt={name}
+                        classes={{
+                            image: classes.image,
+                            root: classes.imageContainer
+                        }}
+                        height={IMAGE_HEIGHT}
+                        src={originalUrl}
+                        // resource={smallImageURL}
+                        widths={IMAGE_WIDTHS}
+                    />
+                </Link>
             </div>
-            <div className={classes.actionsContainer} onClick={openWishlistPopup}>
-                Add To Wishlist
+            <div className={classes.itemDetails}>
+                <div className={classes.nameContainer}>
+                    <Link
+                        onClick={handleLinkClick}
+                        to={productLink}
+                        className={classes.name}
+                    >
+                        <span>{get(item, "product_name", "")}</span>
+                    </Link>
+                </div>
+                <div className={classes.sku}>{get(item, "sku", "")}</div>
+                <div className={classes.price}>
+                    <Price
+                        value={price.regularPrice.amount.value}
+                        currencyCode={price.regularPrice.amount.currency}
+                    />
+                    <span className={classes.unit}>{get(item, "uom", "")}</span>
+                </div>
+                <div className={classes.productInner}>
+                    <div className={classes.productActions}>
+                        <div className={classes.viewMore}>
+                            <Link
+                                onClick={handleLinkClick}
+                                to={productLink}
+                            >
+                                <span>View More</span>
+                            </Link>
+                        </div>
+                        <div className={classes.actionsContainer} onClick={openWishlistPopup}>
+                            Add To Wishlist
+                        </div>
+                        <AddItemsToCompareList itemId={itemId}
+                            Child={() => <div className={classes.actionsContainer}>+ add To Compare</div>}
+                            Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
+                        />
+                        {showWishlistPopup &&
+                            <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
+                                closeWishlistPopup={closeWishlistPopup} />
+                        }
+                    </div>
+
+                    <div className={classes.description}>
+                        {productDimensions && (
+                            <div className={classes.productOptions}>
+                                <strong>Dimensions:</strong>
+                                {productDimensions}
+                            </div>
+                        )}
+                        {productNote && (
+                            <div className={classes.productOptions}>
+                                <strong>Product Note:</strong>
+                                {productNote}
+                            </div>
+                        )}
+                        {certifications && (
+                            <div className={classes.productOptions}>
+                                <strong>Certifications:</strong>
+                                {certifications}
+                            </div>
+                        )}
+                        {capacity && (
+                            <div className={classes.productOptions}>
+                                <strong>Capacity:</strong>
+                                {capacity}
+                            </div>
+                        )}
+
+                    </div>
+
+                </div>
+
+
             </div>
-            <AddItemsToCompareList itemId={itemId}
-                Child={() => <div className={classes.actionsContainer}>+ add To Compare</div>}
-                Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
-            />
-            {showWishlistPopup &&
-                <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
-                    closeWishlistPopup={closeWishlistPopup} />
-            }
-        </div>
+        </div >
     );
 };
 

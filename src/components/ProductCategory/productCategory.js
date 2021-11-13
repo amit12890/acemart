@@ -16,15 +16,18 @@ export default ({ data }) => {
         return data.map((item) => {
             const image = get(item, "image", "")
             return (
-                <div>
-                    <Image src={image} />
+                <div className={defaultClasses.subcatListItem}>
+                    <Image
+                        width="100"
+                        src={image}
+                    />
                 </div>
             )
         })
     }, [data])
 
     return (
-        <div className={defaultClasses.container}>
+        <div className={defaultClasses.subcatWrapper}>
             {productCategoryList}
         </div>
     )
