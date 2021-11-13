@@ -1,8 +1,7 @@
-import { get, size } from 'lodash-es'
+import { get, size } from 'lodash'
 import React, { useMemo } from 'react'
 
 import Image from '../../venia/components/Image'
-import { get } from 'lodash'
 
 import defaultClasses from './productCategory.css'
 
@@ -10,21 +9,25 @@ import defaultClasses from './productCategory.css'
  * render product categories based data size
  */
 export default ({ data }) => {
+    console.log("🚀 ~ file: productCategory.js ~ line 12 ~ data", data)
     if (size(data) === 0) return null
 
     const productCategoryList = useMemo(() => {
         return data.map((item) => {
             const image = get(item, "image", "")
             return (
-                <div>
-                    <Image src={image} />
+                <div className={defaultClasses.subcatListItem}>
+                    <Image
+                        width="100"
+                        src={image}
+                    />
                 </div>
             )
         })
     }, [data])
 
     return (
-        <div>
+        <div className={defaultClasses.subcatWrapper}>
             {productCategoryList}
         </div>
     )

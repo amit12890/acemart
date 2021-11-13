@@ -4,7 +4,7 @@ import { array, number, shape, string } from 'prop-types';
 import { useCategoryContent } from './data';
 
 import { useStyle } from '../../venia/classify';
-import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
+import Breadcrumbs from '../../venia/components/Breadcrumbs';
 import Gallery from '../../venia/components/Gallery';
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
 import Pagination from '@magento/venia-ui/lib/components/Pagination';
@@ -16,6 +16,7 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import SortedByContainer from '@magento/venia-ui/lib/components/SortedByContainer';
 import FilterModalOpenButton from '../../venia/components/FilterModalOpenButton';
 import ProductCategory from '../../components/ProductCategory/productCategory';
+import { get } from 'lodash-es';
 
 const FilterModal = React.lazy(() => import('../../venia/components/FilterModal'));
 const FilterSidebar = React.lazy(() =>
@@ -31,7 +32,6 @@ const CategoryContent = props => {
         sortProps,
         pageSize
     } = props;
-    console.log("🚀 ~ file: categoryContent.js ~ line 34 ~ data", data)
     const [currentSort] = sortProps;
 
     const talonProps = useCategoryContent({
@@ -92,11 +92,9 @@ const CategoryContent = props => {
     ) : null;
 
     const content = useMemo(() => {
-        console.log(data.children)
         if (totalPagesFromData) {
             return (
                 <Fragment>
-                    <ProductCategory data={data.children} />
                     <section className={classes.gallery}>
                         <Gallery items={items} />
                     </section>
@@ -119,28 +117,34 @@ const CategoryContent = props => {
         isLoading,
         items,
         pageControl,
-        totalPagesFromData,
-        data.children
+        totalPagesFromData
     ]);
 
     return (
         <Fragment>
             <Breadcrumbs categoryId={categoryId} />
             <StoreTitle>{categoryName}</StoreTitle>
-            <article className={classes.root}>
-                <div className={classes.categoryHeader}>
-                    <h1 className={classes.title}>
-                        <div className={classes.categoryTitle}>
-                            {categoryName || '...'}
-                        </div>
-                    </h1>
-                    {categoryDescriptionElement}
-                </div>
+            <div className={classes.root}>
                 <div className={classes.contentWrapper}>
                     <div className={classes.sidebar}>
                         <Suspense fallback={null}>{sidebar}</Suspense>
                     </div>
                     <div className={classes.categoryContent}>
+                        <div className={classes.categoryHeader}>
+                            <h1 className={classes.title}>
+                                <div className={classes.categoryTitle}>
+                                    {categoryName || '...'}
+                                </div>
+                            </h1>
+                            <div className={classes.categoryDescription}>
+                                {categoryDescriptionElement}
+                            </div>
+                            <div className={classes.subcategoryWrapper}>
+                                <ProductCategory
+                                    data={get(data, "category.children", [])} />
+                            </div>
+                        </div>
+
                         <div className={classes.heading}>
                             <div className={classes.categoryInfo}>
                                 {categoryResultsHeading}
@@ -155,7 +159,7 @@ const CategoryContent = props => {
                         <Suspense fallback={null}>{filtersModal}</Suspense>
                     </div>
                 </div>
-            </article>
+            </div>
         </Fragment>
     );
 };

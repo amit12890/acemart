@@ -43,6 +43,9 @@ export const ProductsFragment = gql`
             }
             url_key
             url_suffix
+            on_sale
+            prod_temp
+            uom
         }
         page_info {
             total_pages

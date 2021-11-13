@@ -28,7 +28,7 @@
 :global(input),
 :global(select),
 :global(textarea) {
-    color: rgb(var(--text-color));
+    color: rgb(var(--text-color)); 
     font-family: var(--font-family-base);
 }
 

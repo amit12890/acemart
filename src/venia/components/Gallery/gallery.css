@@ -11,8 +11,8 @@
     display: grid;
     grid-area: items;
     grid-gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 20px;
 }
 
 @media (max-width: 640px) {

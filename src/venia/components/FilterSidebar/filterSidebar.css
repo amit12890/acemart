@@ -16,7 +16,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 1.25rem 1.25rem 0;
+    
 }
 
 .headerTitle {
@@ -36,7 +36,7 @@
 }
 
 .blocks {
-    padding: 1rem 1.25rem 0;
+    
 }
 
 .blocks > li:last-child {
@@ -47,5 +47,8 @@
 @media (min-width: 1024px) {
     .root {
         display: grid;
+    }
+    .blocks {
+       
     }
 }
