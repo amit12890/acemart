@@ -43,31 +43,39 @@ export default ({ data, onItemClick }) => {
     //     renderItem(data[0])
     // )
 
+    // return (
+    //     <div className={classes.root} onClick={onItemClick}>
+    //         <div className={classes.homeSection}>
+    //             <h3>Featured Brands</h3>
+    //             <div className={classes.brandWrapper}>
+    //                 {renderItem(data[0])}
+    //                 {renderItem(data[1])}
+    //                 {renderItem(data[2])}
+    //                 {renderItem(data[3])}
+    //                 {renderItem(data[4])}
+    //                 {renderItem(data[5])}
+    //             </div>
+    //         </div>
+    //     </div>
+    // )
+
+
+
     return (
         <div className={classes.root} onClick={onItemClick}>
             <div className={classes.homeSection}>
                 <h3>Featured Brands</h3>
                 <div className={classes.brandWrapper}>
-                    {renderItem(data[0])}
-                    {renderItem(data[1])}
-                    {renderItem(data[2])}
-                    {renderItem(data[3])}
-                    {renderItem(data[4])}
-                    {renderItem(data[5])}
+                    <SlickSlider
+                        slidesToScroll={3}
+                        slidesToShow={3}
+                        variableWidth={true}
+                        nextArrow={<CustomArrows />}
+                        prevArrow={<CustomArrows />}>
+                        {data.map(renderItem)}
+                    </SlickSlider>
                 </div>
             </div>
         </div>
-    )
-
-
-
-    return (
-        <SlickSlider
-            slidesToScroll={3}
-            slidesToShow={3}
-            nextArrow={<CustomArrows />}
-            prevArrow={<CustomArrows />}>
-            {data.map(renderItem)}
-        </SlickSlider>
     )
 }
