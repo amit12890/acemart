@@ -126,19 +126,19 @@ const CategoryContent = props => {
             <Breadcrumbs categoryId={categoryId} />
             <StoreTitle>{categoryName}</StoreTitle>
             <article className={classes.root}>
-                <div className={classes.categoryHeader}>
-                    <h1 className={classes.title}>
-                        <div className={classes.categoryTitle}>
-                            {categoryName || '...'}
-                        </div>
-                    </h1>
-                    {categoryDescriptionElement}
-                </div>
                 <div className={classes.contentWrapper}>
                     <div className={classes.sidebar}>
                         <Suspense fallback={null}>{sidebar}</Suspense>
                     </div>
                     <div className={classes.categoryContent}>
+                        <div className={classes.categoryHeader}>
+                            <h1 className={classes.title}>
+                                <div className={classes.categoryTitle}>
+                                    {categoryName || '...'}
+                                </div>
+                            </h1>
+                            {categoryDescriptionElement}
+                        </div>
                         <div className={classes.heading}>
                             <div className={classes.categoryInfo}>
                                 {categoryResultsHeading}
