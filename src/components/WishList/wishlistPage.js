@@ -24,7 +24,7 @@ const WishlistPage = props => {
         skip: !isUserSignedIn
     });
     // response shape : Array of {multi_wishlist_id, customer_id, wishlist_name}
-    const {callApi: getWishlist, response: wishlists, loading, error} = useApiData({
+    const { callApi: getWishlist, response: wishlists, loading, error } = useApiData({
         isLazy: true,
         onSuccess: (data) => {
             if (!selectedWishlist && !!size(data)) {
@@ -50,13 +50,20 @@ const WishlistPage = props => {
             return <Wishlist />;
         }
 
-        return wishlists.map((wishlist) => (
-            <div key={wishlist.multi_wishlist_id}
-                onClick={() => setSelectedWishlist(wishlist)}
-            >
-                <div>{wishlist.wishlist_name}</div>
+        return (
+            <div className={classes.tabsContainer}>
+                {wishlists.map((wishlist) => (
+                    <div
+                        className={classes.tabsItem}
+                        key={wishlist.multi_wishlist_id}
+                        onClick={() => setSelectedWishlist(wishlist)}>
+                        <div className={classes.itemSwitch}>
+                            {wishlist.wishlist_name}
+                        </div>
+                    </div>
+                ))}
             </div>
-        ));
+        )
     }, [wishlists, loading, loadingCustomerDetails]);
 
     let content;
@@ -70,7 +77,7 @@ const WishlistPage = props => {
     } else {
         content = (
             <Fragment>
-                <CreateWishlist customerId={get(customerData, 'customer.id', null)} 
+                <CreateWishlist customerId={get(customerData, 'customer.id', null)}
                     refreshWishlist={refreshWishlist} />
                 {wishlistTabs}
 
@@ -87,9 +94,11 @@ const WishlistPage = props => {
 
     return (
         <div className={classes.root}>
-            <h1 className={classes.heading}>
-                Wishlist
-            </h1>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
+                    Wishlist
+                </h1>
+            </div>
             {content}
         </div>
     );

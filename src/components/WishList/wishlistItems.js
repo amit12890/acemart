@@ -33,7 +33,9 @@ const WishlistItems = props => {
 
     return (
         <Fragment>
-            <div className={classes.root}>{itemElements}</div>
+            <div className={classes.root}>
+                {itemElements}
+            </div>
             <AddToCartDialog
                 item={activeAddToCartItem}
                 onClose={handleCloseAddToCartDialog}

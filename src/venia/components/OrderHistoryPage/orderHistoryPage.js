@@ -160,7 +160,7 @@ const OrderHistoryPage = props => {
                 </div>
                 <div className={classes.filterRow}>
                     <span className={classes.pageInfo}>{pageInfoLabel}</span>
-                    <Form className={classes.search} onSubmit={handleSubmit}> 
+                    <Form className={classes.search} onSubmit={handleSubmit}>
                         <TextInput
                             after={resetButtonElement}
                             before={searchIcon}

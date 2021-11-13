@@ -42,23 +42,23 @@ const Wishlist = props => {
     const itemsCountMessage =
         itemsCount && isOpen
             ? formatMessage(
-                  {
-                      id: 'wishlist.itemCountOpen',
-                      defaultMessage:
-                          'Showing {currentCount} of {count} items in this list'
-                  },
-                  { currentCount: items.length, count: itemsCount }
-              )
+                {
+                    id: 'wishlist.itemCountOpen',
+                    defaultMessage:
+                        'Showing {currentCount} of {count} items in this list'
+                },
+                { currentCount: items.length, count: itemsCount }
+            )
             : formatMessage(
-                  {
-                      id: 'wishlist.itemCountClosed',
-                      defaultMessage: `You have {count} {count, plural,
+                {
+                    id: 'wishlist.itemCountClosed',
+                    defaultMessage: `You have {count} {count, plural,
                         one {item}
                         other {items}
                       } in this list`
-                  },
-                  { count: itemsCount }
-              );
+                },
+                { count: itemsCount }
+            );
     const loadMoreButton =
         items && items.length < itemsCount ? (
             <div>

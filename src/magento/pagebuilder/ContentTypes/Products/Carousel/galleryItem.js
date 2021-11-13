@@ -15,8 +15,8 @@ import { drop, includes } from 'lodash'
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
-const IMAGE_WIDTH = 300;
-const IMAGE_HEIGHT = 375;
+const IMAGE_WIDTH = 200;
+const IMAGE_HEIGHT = 200;
 
 // Gallery switches from two columns to three at 640px.
 const IMAGE_WIDTHS = new Map()
