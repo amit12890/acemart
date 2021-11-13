@@ -4,7 +4,7 @@ import { array, number, shape, string } from 'prop-types';
 import { useCategoryContent } from './data';
 
 import { useStyle } from '../../venia/classify';
-import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
+import Breadcrumbs from '../../venia/components/Breadcrumbs';
 import Gallery from '../../venia/components/Gallery';
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
 import Pagination from '@magento/venia-ui/lib/components/Pagination';
