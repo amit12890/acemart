@@ -1,8 +1,7 @@
-import { get, size } from 'lodash-es'
+import { get, size } from 'lodash'
 import React, { useMemo } from 'react'
 
 import Image from '../../venia/components/Image'
-import { get } from 'lodash'
 
 import defaultClasses from './productCategory.css'
 

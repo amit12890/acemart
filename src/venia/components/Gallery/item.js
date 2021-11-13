@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { drop, includes } from 'lodash';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
@@ -11,12 +10,9 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import defaultClasses from './item.css';
-<<<<<<< HEAD
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes, get } from 'lodash'
-=======
->>>>>>> b579ac2855d1be5661ecdb883f1523456a4d12be
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 

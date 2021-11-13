@@ -92,11 +92,10 @@ const CategoryContent = props => {
     ) : null;
 
     const content = useMemo(() => {
-        console.log(data.children)
         if (totalPagesFromData) {
             return (
                 <Fragment>
-                    <ProductCategory data={data.children} />
+                    {/* <ProductCategory data={data.children} /> */}
                     <section className={classes.gallery}>
                         <Gallery items={items} />
                     </section>
@@ -119,8 +118,7 @@ const CategoryContent = props => {
         isLoading,
         items,
         pageControl,
-        totalPagesFromData,
-        data.children
+        totalPagesFromData
     ]);
 
     return (
