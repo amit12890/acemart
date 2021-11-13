@@ -53,9 +53,18 @@
     text-align: left;
     padding: 0px 10px
 }
+.serviceItem a{
+   color: rgb(var(--color-black));
+   display: flex;
+   align-items: center;
+}
 .itemIcon {
-    margin-right: 20px;
-    width: 40px;
+    margin-right: 20px; 
+}
+.serviceItem .svgIcon { 
+    
+    width: 24px; 
+    height: 24px;
 
 }
 .iconWrapper {
