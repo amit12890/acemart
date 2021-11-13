@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { drop, includes } from 'lodash';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
@@ -10,10 +11,14 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import defaultClasses from './item.css';
+<<<<<<< HEAD
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes, get } from 'lodash'
+=======
+>>>>>>> b579ac2855d1be5661ecdb883f1523456a4d12be
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
+import WishlistPopup from '../../../components/WishList/wishlistPopup';
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -58,7 +63,14 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
-    console.log("🚀 ~ file: item.js ~ line 60 ~ item", item)
+    const [showWishlistPopup, setShowWishlistPopup] = useState(false);
+
+    const openWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(true)
+    }, [setShowWishlistPopup])
+    const closeWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(false)
+    }, [setShowWishlistPopup])
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -75,10 +87,6 @@ const GalleryItem = props => {
     const productNote = get(item, "prod_note", false)
     const certifications = get(item, "certifications", false)
     const capacity = get(item, "capacity", false)
-
-    const wishlistButton = wishlistButtonProps ? (
-        <WishlistGalleryButton {...wishlistButtonProps} />
-    ) : null;
 
     return (
         <div className={classes.root}>
@@ -126,11 +134,17 @@ const GalleryItem = props => {
                 />
                 <span> /{get(item, "uom", "")}</span>
             </div>
-            <div className={classes.actionsContainer}>{wishlistButton}</div>
+            <div className={classes.actionsContainer} onClick={openWishlistPopup}>
+                Add To Wishlist
+            </div>
             <AddItemsToCompareList itemId={itemId}
                 Child={() => <div className={classes.actionsContainer}>+ add To Compare</div>}
                 Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
             />
+            {showWishlistPopup &&
+                <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
+                    closeWishlistPopup={closeWishlistPopup} />
+            }
         </div>
     );
 };
