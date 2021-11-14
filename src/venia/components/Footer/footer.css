@@ -53,14 +53,38 @@
     text-align: left;
     padding: 0px 10px
 }
+
+
+.serviceItem a{
+   color: rgb(var(--color-black));
+   display: flex;
+   align-items: center;
+}
 .itemIcon {
-    margin-right: 20px;
-    width: 40px;
-
+    margin-right: 20px; 
+    -moz-transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
-.iconWrapper {
 
+.serviceItem:hover .itemIcon{
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
+.serviceItem .svgIcon { 
+    height: 24px;
+}
+
+h4:hover {
+    color: rgb(92 106 195);
+}
+
 .itemContent {
 
 }
@@ -275,6 +299,11 @@
 
 .blockPaymentAccepted {
     margin: 15px 0;
+}
+
+.copyright {
+    margin: 0;
+    font-size: var(--fontSize-100);
 }
 
 @media (max-width: 960px) {
