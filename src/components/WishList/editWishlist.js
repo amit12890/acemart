@@ -93,37 +93,6 @@ const EditWishlist = props => {
                     </div>
                 </Form>
             </div>
-
-
-            <div className={classes.galleryItemsWrapper}>
-                <div className={classes.galleryItem}>
-                    <div className={classes.galleryItemImage}>
-                        Image Goes Here
-                    </div>
-
-                    <div className={classes.galleryItemDetails}>
-                        <div className={classes.itemName}>Name</div>
-                        <div className={classes.itemPrice}>Price</div>
-                        <div className={classes.itemComment}>Comment</div>
-                        <div className={classes.itemQty}>Qty</div>
-                        <div className={classes.addtocartActions}>Add to cart</div>
-
-                        <div className={classes.productItemActions}>
-
-
-                            <div className={classes.action}><span>Edit</span></div>
-                            <div className={classes.action}><span>Copy</span></div>
-
-                            <div className={classes.action}><span>move</span></div>
-
-                            <div className={classes.action}><span>Remove</span></div>
-
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     )
 };

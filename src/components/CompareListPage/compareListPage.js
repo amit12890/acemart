@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { get } from 'lodash-es';
 
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { useCompareList } from './useCompareList';
+import RichContent from '../../venia/components/RichContent';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './compareListPage.css';
 import {
@@ -15,20 +15,10 @@ import RemoveItemFromCompareList from './removeItemFromCompareList';
 
 const CompareListPage = () => {
     const classes = useStyle(defaultClasses);
-    // const {
-    //     addProductToCompareList, 
-    //     addProductToCompareListLoading, 
-    //     addProductToCompareListError} = useCompareList()
-    // console.log("🚀 ~ file: compareListPage.js ~ line 22 ~ CompareListPage ~ addProductToCompareListError", addProductToCompareListError)
     // get compare list
     const { loading: loadingCompareList, error, data: compareListData } = useQuery(
         GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
     );
-    console.log("🚀 ~ file: compareListPage.js ~ line 29 ~ CompareListPage ~ compareListData", compareListData)
-    // useEffect( async () => {
-    //     const res = await addProductToCompareList([88489, 88491]);
-    //     console.log("🚀 ~ file: compareListPage.js ~ line 29 ~ useEffect ~ res", res)
-    // }, [])
 
     if (loadingCompareList) {
         return fullPageLoadingIndicator;
@@ -37,8 +27,8 @@ const CompareListPage = () => {
     const listId = get(compareListData, 'customer.compare_list.uid')
     const items = get(compareListData, 'customer.compare_list.items', [])
     const productCompareFields = [
-        {name: 'Name', path: "name"},
-        {name: 'Description', path: "description.html"},
+        {hideName: true, name: 'Header Block', renderer: itemHeaderBlock},
+        {name: 'Description', path: "description.html", renderer: itemDescriptionBlock},
         {name: 'Unit Of Measure', path: "uom"},
         {name: 'SKU', path: "sku"},
         {name: 'Availability', path: "availability"},
@@ -66,12 +56,15 @@ const CompareListPage = () => {
                         // table row of each field in productCompareFields list
                         return (
                             <tr key={compareField.path}>
-                                <td>{compareField.name}</td>
+                                <td>{!compareField.hideName && compareField.name}</td>
                                 {items.map((item) => {
                                     const product = item.product;
                                     return (
                                         <td key={item.uid}>
-                                            {get(product, compareField.path, "")}
+                                            {!!compareField.renderer
+                                                ? compareField.renderer(product)
+                                                : (<div>{get(product, compareField.path, "")}</div>)
+                                            }
                                         </td>
                                     )
                                 })}
@@ -87,3 +80,20 @@ const CompareListPage = () => {
 }
 
 export default CompareListPage
+
+
+const itemHeaderBlock = (item) => {
+    return (
+        <div>
+            <img src={get(item, 'image.url', "")} style={{maxWidth: '200px'}} />
+            <div>{item.name}</div>
+            <div>{item.price}</div>
+        </div>
+    )
+}
+
+const itemDescriptionBlock = (item) => {
+    return (
+        <RichContent html={get(item, "description.html", "")} />
+    )
+}
