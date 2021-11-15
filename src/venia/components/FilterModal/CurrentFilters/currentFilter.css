@@ -1,18 +1,29 @@
 .root {
     align-items: center;
-    background-color: rgb(var(--venia-global-color-gray-700));
-    border-radius: 6px;
-    color: rgb(var(--venia-global-color-gray-50));
     display: inline-grid;
-    font-weight: var(--venia-global-fontWeight-semibold);
     gap: 0.5rem;
     grid-auto-flow: column;
     justify-content: center;
-    min-height: 2.5rem;
-    padding: 0.625rem 0.75rem 0.625rem 0.5rem;
+    padding: 5px;
     white-space: nowrap;
+    font-size: var(--fontSize-100); 
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
 }
 
 .root svg {
-    stroke: rgb(var(--venia-global-color-gray-50));
+    width: 14px;
 }
+.root button {
+    padding: 0 3px;
+}
+
+.root:hover button {
+   background-color: rgb(var(--color-gray30));
+}
+
+.root:hover svg {
+    stroke: white;
+}
+

@@ -85,8 +85,9 @@
 /* =============================================== */
 
 
-.sliderRoot .slick-slider {
+.resourcesWrapper :global .slick-slider {
     min-height: inherit;
+    background-color: red;
 }
 
 .sliderRoot .slick-list {
