@@ -1,4 +1,4 @@
-import mergeOperations from '../../util/shallowMerge';
+import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
 import DEFAULT_OPERATIONS from './megaMenu.gql';
 import { useQuery } from '@apollo/client';
 import { useMemo, useState, useCallback, useEffect } from 'react';

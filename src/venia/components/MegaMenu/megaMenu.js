@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useMegaMenu } from '../../../magento/peregrine/talons/MegaMenu';
+import { useMegaMenu } from '../../../magento/peregrine/talons/MegaMenu/useMegaMenu';
 import { useStyle } from '../../classify';
 import defaultClasses from './megaMenu.css';
 import MegaMenuItem from './megaMenuItem';

@@ -31,7 +31,7 @@ const SubmenuColumn = props => {
                         className={isActive ? classes.linkActive : classes.link}
                         to={subcategoryUrl}
                     >
-                        {name} {categoryUrl} {subcategoryUrl}
+                        {name}
                     </Link>
                 </li>
             );

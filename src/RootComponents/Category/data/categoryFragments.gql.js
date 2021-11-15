@@ -50,6 +50,13 @@ export const ProductsFragment = gql`
             }
             url_key
             url_suffix
+            url_rewrites {
+                url
+                parameters {
+                  name
+                  value
+                }
+            }
             on_sale
             prod_temp
             uom

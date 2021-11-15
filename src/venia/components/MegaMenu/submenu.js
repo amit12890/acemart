@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
  */
 const Submenu = props => {
     const { items, mainNavWidth } = props;
-    console.log("🚀 ~ file: submenu.js ~ line 15 ~ items", items)
     const PADDING_OFFSET = 20;
     const classes = useStyle(defaultClasses, props.classes);
 
