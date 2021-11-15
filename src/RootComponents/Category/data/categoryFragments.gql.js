@@ -6,6 +6,7 @@ export const CategoryFragment = gql`
         meta_title
         meta_keywords
         meta_description
+        canonical_url
         children{
             id
             name
@@ -49,6 +50,13 @@ export const ProductsFragment = gql`
             }
             url_key
             url_suffix
+            url_rewrites {
+                url
+                parameters {
+                  name
+                  value
+                }
+            }
             on_sale
             prod_temp
             uom
