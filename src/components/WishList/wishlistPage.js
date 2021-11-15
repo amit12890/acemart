@@ -84,13 +84,13 @@ const WishlistPage = props => {
 
                 {!!selectedWishlist &&
                     <div>
-                    <EditWishlist key={`${selectedWishlist.multi_wishlist_id}-${selectedWishlist.wishlist_name}`}
-                        refreshWishlist={refreshWishlist}
-                        customerId={get(customerData, 'customer.id', null)}
-                        multi_wishlist_id={selectedWishlist.multi_wishlist_id}
-                        name={selectedWishlist.wishlist_name} />
+                        <EditWishlist key={`${selectedWishlist.multi_wishlist_id}-${selectedWishlist.wishlist_name}`}
+                            refreshWishlist={refreshWishlist}
+                            customerId={get(customerData, 'customer.id', null)}
+                            multi_wishlist_id={selectedWishlist.multi_wishlist_id}
+                            name={selectedWishlist.wishlist_name} />
 
-                    <ProductListing wishlist={selectedWishlist} />
+                        <ProductListing wishlist={selectedWishlist} />
                     </div>
                 }
             </Fragment>
@@ -113,47 +113,56 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const {wishlist} = props;
+    const { wishlist } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const itemList = get(wishlist, 'product', [])
 
     if (!size(itemList)) {
         return (
-            <div>No Items added to this wishlist.</div>
+            <div className={classes.emptyWishlist}>No Items added to this wishlist.</div>
         )
     }
 
     return (
-        <div>
-        {itemList.map((item) => {
-            const {product, qty, wishlist_item_id} = item
-            const {name, price, small_image, short_description} = product
-            return (
-                <div key={wishlist_item_id} className={classes.galleryItemsWrapper}>
-                    <div className={classes.galleryItem}>
-                        <div className={classes.galleryItemImage}>
-                            <img src={small_image} />
-                        </div>
+        <div className={classes.galleryItemsWrapper}>
+            <div className={classes.galleryItemsGrid}>
+                {itemList.map((item) => {
+                    const { product, qty, wishlist_item_id } = item
+                    const { name, price, small_image, short_description } = product
+                    return (
+                        <div key={wishlist_item_id} className={classes.galleryItem}>
+                            <div className={classes.galleryItemInfo}>
+                                <div className={classes.galleryItemImageContainer}>
+                                    <div className={classes.galleryItemImage}>
+                                        <img src={small_image} />
+                                    </div>
 
-                        <div className={classes.galleryItemDetails}>
-                            <div className={classes.itemName}>{name}</div>
-                            <div className={classes.itemPrice}>{price}</div>
-                            <div className={classes.itemComment}>{short_description}</div>
-                            <div className={classes.itemQty}>{qty}</div>
-                            <div className={classes.addtocartActions}>Add to cart</div>
+                                </div>
 
-                            <div className={classes.productItemActions}>
-                                <div className={classes.action}><span>Edit</span></div>
-                                <div className={classes.action}><span>Copy</span></div>
-                                <div className={classes.action}><span>move</span></div>
-                                <div className={classes.action}><span>Remove</span></div>
+                                <div className={classes.galleryItemDetails}>
+                                    <div className={classes.itemName}>{name}</div>
+                                    <div className={classes.itemPrice}>{price}</div>
+                                    {/* <div className={classes.itemComment}>{short_description}</div> */}
+                                    <div className={classes.itemComment}>
+                                        <textarea className={classes.textarea}>
+                                        </textarea>
+                                    </div>
+                                    <div className={classes.itemQty}>{qty}</div>
+                                    <div className={classes.addtocartActions}>Add to cart</div>
+
+                                    <div className={classes.productItemActions}>
+                                        <div className={classes.action}><span>Edit</span></div>
+                                        <div className={classes.action}><span>Copy</span></div>
+                                        <div className={classes.action}><span>Move</span></div>
+                                        <div className={classes.action}><span>Remove</span></div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-
-                    </div>
-                </div>
-            )
-        })}
+                    )
+                })}
+            </div>
         </div>
     )
 }
