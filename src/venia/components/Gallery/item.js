@@ -74,11 +74,12 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { id: itemId, name, price, small_image, url_key, url_suffix } = item;
+    const { id: itemId, name, price, small_image, url_key, url_suffix, canonical_url } = item;
     const { url: smallImageURL } = small_image;
     const originalUrl = getOriginalImage(smallImageURL)
 
-    const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
+    const productLink = resourceUrl(`/${canonical_url}${url_suffix || ""}`);
+    console.log("🚀 ~ file: item.js ~ line 82 ~ productLink", productLink)
     const productDimensions = get(item, "prod_dimensions", false)
     const productNote = get(item, "prod_note", false)
     const certifications = get(item, "certifications", false)

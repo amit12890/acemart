@@ -6,6 +6,7 @@ export const CategoryFragment = gql`
         meta_title
         meta_keywords
         meta_description
+        canonical_url
         children{
             id
             name
