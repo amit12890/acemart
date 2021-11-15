@@ -1,12 +1,12 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { get, size } from 'lodash';
+import { size } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
+import { Portal } from '@magento/venia-ui/lib/components/Portal';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import defaultClasses from './wishlistPopup.css';
 
-import CreateWishlist from './createWishlist';
 import { useApiData } from '../../data.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
@@ -14,8 +14,9 @@ import Button from '../../venia/components/Button';
 import { apiAddToWishlist, apiGetWishlistData } from '../../url.utils';
 
 
-const WishlistPopup = props => {
-    const { closeWishlistPopup, productId, productQty = 1 } = props;
+const WishlistProductPopup = props => {
+    const { closeWishlistPopup, productId, productQty = 1 ,
+        btnText = "Copy Item"} = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
 
@@ -74,13 +75,11 @@ const WishlistPopup = props => {
                         </label>
                     </div>
                 ))}
-                <CreateWishlist customerId={get(customerData, 'customer.id', null)}
-                    refreshWishlist={refreshWishlist} />
 
                 {addToWishlistLoading ?
                     <Button disabled>Loading...</Button>
                     :
-                    <Button onClick={handleSubmit}>Add To Wishlist</Button>
+                    <Button onClick={handleSubmit}>{btnText}</Button>
                 }
             </div>
         )
@@ -103,14 +102,16 @@ const WishlistPopup = props => {
     }
 
     return (
-        <div className={classes.root}>
-            <h1 className={classes.heading}>
-                Please choose a Wish List for the selected product:
-            </h1>
-            {content}
-            <Button onClick={closeWishlistPopup}>Close</Button>
-        </div>
+        <Portal>
+            <div className={classes.root}>
+                <h1 className={classes.heading}>
+                    Please choose a Wish List for the selected product:
+                </h1>
+                {content}
+                <Button onClick={closeWishlistPopup}>Close</Button>
+            </div>
+        </Portal>
     );
 };
 
-export default WishlistPopup;
+export default WishlistProductPopup;

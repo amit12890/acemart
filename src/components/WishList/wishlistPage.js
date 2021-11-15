@@ -5,6 +5,7 @@ import { get, size } from 'lodash';
 import { useStyle } from '../../venia/classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import Wishlist from './wishlist';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 import defaultClasses from './wishlistPage.css';
 
 import EditWishlist from './editWishlist';
@@ -13,6 +14,7 @@ import { useApiData } from '../../data.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 import { apiGetWishlistData } from '../../url.utils';
+import WishlistProductPopup from './wishlistProductPopup';
 
 
 const WishlistPage = props => {
@@ -114,8 +116,18 @@ export default WishlistPage;
 
 const ProductListing = props => {
     const { wishlist } = props;
+    // { productId, productQty }
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    // null | copy | move
+    const [actionType, setActionType] = useState(null);
     const classes = useStyle(defaultClasses, props.classes);
+
+    const handlePopupClose = useCallback(() => {
+        setSelectedProduct(null);
+        setActionType(null);
+    }, [setSelectedProduct, setActionType]);
     const itemList = get(wishlist, 'product', [])
+    console.log("🚀 ~ file: WishlistPage.js ~ line 124 ~ itemList", itemList)
 
     if (!size(itemList)) {
         return (
@@ -125,9 +137,10 @@ const ProductListing = props => {
 
     return (
         <div className={classes.galleryItemsWrapper}>
+            <Mask isActive={!!selectedProduct} />
             <div className={classes.galleryItemsGrid}>
                 {itemList.map((item) => {
-                    const { product, qty, wishlist_item_id } = item
+                    const { product, qty, wishlist_item_id, product_id } = item
                     const { name, price, small_image, short_description } = product
                     return (
                         <div key={wishlist_item_id} className={classes.galleryItem}>
@@ -152,7 +165,8 @@ const ProductListing = props => {
 
                                     <div className={classes.productItemActions}>
                                         <div className={classes.action}><span>Edit</span></div>
-                                        <div className={classes.action}><span>Copy</span></div>
+                                        <div className={classes.action} onClick={() => setSelectedProduct({productId: product_id, productQty: qty})}>
+                                            <span>Copy</span></div>
                                         <div className={classes.action}><span>Move</span></div>
                                         <div className={classes.action}><span>Remove</span></div>
                                     </div>
@@ -163,6 +177,10 @@ const ProductListing = props => {
                     )
                 })}
             </div>
+            {!!selectedProduct && 
+                <WishlistProductPopup closeWishlistPopup={handlePopupClose}
+                    {...selectedProduct} />
+            }
         </div>
     )
 }

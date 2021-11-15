@@ -30,6 +30,7 @@ export const compareListPage = () => '/catalog/product_compare/';
 
 export const apiGetWishlistData = (customerId) => `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/getlist/${customerId}`
 export const apiAddToWishlist = (wishlistId) => `${HOST_URL}/rest/V2/wishlist/add?wishlist_id=${wishlistId}`
+export const apiUpdateProductWishlist = () => `rest/V2/wishlist/update`
 
 
 /** Footer Other Urls */
