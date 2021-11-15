@@ -143,16 +143,10 @@ const ProductListing = props => {
                             <div className={classes.addtocartActions}>Add to cart</div>
 
                             <div className={classes.productItemActions}>
-
-
                                 <div className={classes.action}><span>Edit</span></div>
                                 <div className={classes.action}><span>Copy</span></div>
-
                                 <div className={classes.action}><span>move</span></div>
-
                                 <div className={classes.action}><span>Remove</span></div>
-
-
                             </div>
                         </div>
 
