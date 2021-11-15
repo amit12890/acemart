@@ -10,6 +10,12 @@ export const CategoryFragment = gql`
             id
             name
             image
+            url_key
+            url_suffix
+        }
+        sub_cat{
+            name
+            url
         }
     }
 `;
@@ -46,6 +52,10 @@ export const ProductsFragment = gql`
             on_sale
             prod_temp
             uom
+            product_label {
+                label
+                image
+            }
         }
         page_info {
             total_pages
