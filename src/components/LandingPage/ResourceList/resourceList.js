@@ -74,16 +74,18 @@ export default ({ data, onItemClick }) => {
             <div className={classes.homeSection}>
                 <h3>Resources</h3>
                 <div className={classes.resourcesWrapper}>
-                    <SlickSlider
-                        slidesToScroll={3}
-                        slidesToShow={3}
-                        arrows={true}
-                        draggable={true}
-                        variableWidth={true}
-                        nextArrow={<CustomArrows />}
-                        prevArrow={<CustomArrows />}>
-                        {data.map(renderItem)}
-                    </SlickSlider>
+                    <div className={classes.sliderRoot}>
+                        <SlickSlider
+                            slidesToScroll={3}
+                            slidesToShow={3}
+                            arrows={true}
+                            draggable={true}
+                            variableWidth={true}
+                            nextArrow={<CustomArrows />}
+                            prevArrow={<CustomArrows />}>
+                            {data.map(renderItem)}
+                        </SlickSlider>
+                    </div>
                 </div>
             </div>
         </div>
