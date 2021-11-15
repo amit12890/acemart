@@ -109,19 +109,28 @@
     margin-bottom: 10px;
 
 }
+.actionsContainer {
+
+}
 
 .iconWrapper {
     composes: root_highPriority from '../../components/Button/button.css';
     border-width: 1px;
-    margin-right: 10px;
-    padding: 3px;
+    margin: 0 5px;
+    padding: 7px;
     min-width: auto;
     min-height: auto;
-    line-height: auto;
+    line-height: normal;
+    
+}
+.iconWrapper:hover .svgIcon {
+    fill: rgb(var(--theme-color-primary));
 }
 
 .svgIcon {
-    fill: white;
+    fill: rgb(var(--color-white));
+    width: auto;
+    height: 14px;
 }
 
 /* state: pending */
