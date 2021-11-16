@@ -19,7 +19,6 @@ const MegaMenuItem = props => {
     const categoryUrl = resourceUrl(
         `/${category.canonical_url}${category.url_suffix || ''}`
     );
-    console.log("🚀 ~ file: megaMenuItem.js ~ line 22 ~ categoryUrl", categoryUrl)
 
     const children = category.children.length ? (
         <Submenu items={category.children} mainNavWidth={mainNavWidth} />
