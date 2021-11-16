@@ -95,7 +95,7 @@
     --color-white: 255 255 255;
     --color-black: 0 0 0;
 
-    --color-gray-light0: 244 245 245;
+    --color-gray-light0: 245 245 245;
     --color-gray-light01: 233 234 236;
     --color-gray-light02: 238 238 238;
     --color-gray-light03: 116 116 116;
@@ -113,6 +113,7 @@
 
     --fontSize-50: 0.6875rem; /* 11px */
     --fontSize-75: 0.75rem; /* 12px */
+    --fontSize-90: 0.8125rem; /* 13px */
     --fontSize-100: 0.875rem; /* 14px */
     --fontSize-200: 1rem; /* 16px */
     --fontSize-300: 1.125rem; /* 18px */

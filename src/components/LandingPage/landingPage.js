@@ -25,7 +25,7 @@ const LandingPage = (props) => {
             nextFetchPolicy: 'cache-first'
         }
     );
-    console.log("🚀 ~ file: landingPage.js ~ line 16 ~ LandingPage ~ landingPageData", landingPageData)
+
     if (dataLoading) {
         return fullPageLoadingIndicator;
     } else {

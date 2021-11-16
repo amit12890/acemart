@@ -50,13 +50,15 @@
     display: none;
 }
 .nameContainer {
+    margin-bottom: 5px;
 }
 
 .name {
     font-size: var(--fontSize-200);
     font-weight: var(--font-weight-bold);
     color: var(--product-name-color);
-    margin-bottom: 5px;
+    
+    line-height: normal;
 }
 
 .sku {
@@ -84,7 +86,7 @@
 }
 
 .productActions {
-    margin-bottom: 10px;
+    margin: 20px 0;
     display: flex;
     align-items: center;
     
@@ -111,6 +113,20 @@
 }
 .actionsContainer {
 
+}
+.productInner {
+    
+}
+
+.labelWrapper {
+
+}
+.labelItem {
+    color: red;
+}
+
+.allowStorePickup {
+    background-color: green;
 }
 
 .iconWrapper {

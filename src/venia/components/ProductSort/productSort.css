@@ -35,7 +35,20 @@
 
 .sortButton {
     composes: root_lowPriority from '../../components/Button/button.css';
-    min-width: 6.25rem;
+    border-width: 1px;
+    border-color: rgb(var(--border-color-light));
+    border-radius: 0;
+    font-weight: var(--venia-global-fontWeight-normal);
+    color: rgb(var(--text-color));
+    text-transform: none;
+
+}
+.sortButton:hover {
+
+}
+
+.sortButton svg {
+    width: 15px;
 }
 
 .desktopText {
@@ -58,13 +71,6 @@
 }
 
 @media (min-width: 1024px) {
-    .sortButton {
-        border-width: 2px;
-        border-color: rgb(var(--venia-global-color-gray-500));
-        border-radius: 6px;
-        font-weight: var(--venia-global-fontWeight-normal);
-        text-transform: none;
-    }
 
     .mobileText {
         display: none;
