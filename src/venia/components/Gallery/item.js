@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
+import { size, camelCase } from "lodash";
 import { Link } from 'react-router-dom';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
@@ -74,7 +75,10 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { id: itemId, name, price, small_image, url_key, url_suffix, canonical_url, url_rewrites } = item;
+    const { id: itemId, name, price, small_image,
+        url_key, url_suffix, canonical_url, url_rewrites,
+        product_label
+    } = item;
     const { url: smallImageURL } = small_image;
     const originalUrl = getOriginalImage(smallImageURL)
 
@@ -186,6 +190,17 @@ const GalleryItem = props => {
                         )}
 
                     </div>
+                    {!!size(product_label) &&
+                        <div>
+                            {product_label.map((labelObj) => {
+                                return (
+                                    <div className={[classes.label, `${camelCase(labelObj.label)}`].join("")}>
+                                        <span>{camelCase(labelObj.label)}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    }
 
                 </div>
 
