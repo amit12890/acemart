@@ -191,10 +191,10 @@ const GalleryItem = props => {
 
                     </div>
                     {!!size(product_label) &&
-                        <div>
+                        <div className={classes.labelWrapper}>
                             {product_label.map((labelObj) => {
                                 return (
-                                    <div className={[classes.label, `${camelCase(labelObj.label)}`].join("")}>
+                                    <div className={[classes.labelItem, `${camelCase(labelObj.label)}`].join(" ")}>
                                         <span>{camelCase(labelObj.label)}</span>
                                     </div>
                                 )

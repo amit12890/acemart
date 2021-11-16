@@ -118,6 +118,17 @@
     
 }
 
+.labelWrapper {
+
+}
+.labelItem {
+    color: red;
+}
+
+.allowStorePickup {
+    background-color: green;
+}
+
 .iconWrapper {
     composes: root_highPriority from '../../components/Button/button.css';
     border-width: 1px;
