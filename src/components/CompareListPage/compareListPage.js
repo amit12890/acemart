@@ -40,10 +40,18 @@ const CompareListPage = () => {
                     Compare Products
                 </h1>
 
-                <Button>Print This page</Button>
+
             </div>
             {hasItems ?
                 <div className={classes.tableWrapper}>
+                    <div className={classes.actionToolbar}>
+                        <Button
+                            priority="low"
+                            type="button"
+                        >
+                            Print This page
+                        </Button>
+                    </div>
                     <table className={[classes.data, classes.table, classes.compare].join(" ")} >
                         <thead>
                             {/** Header of the table for remove item buttons */}
@@ -105,10 +113,10 @@ export default CompareListPage
 
 const itemHeaderBlock = (classes, item) => {
     return (
-        <div className={classes.pageTitleWrapper}>
+        <div className={classes.productInfo}>
             <img src={get(item, 'image.url', "")} style={{ maxWidth: '200px' }} />
-            <div>{item.name}</div>
-            <div>{item.price}</div>
+            <div className={classes.name}>{item.name}</div>
+            <div className={classes.price}>{item.price}</div>
         </div>
 
     )
