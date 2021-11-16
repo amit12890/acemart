@@ -45,29 +45,32 @@ const CompareListPage = () => {
             {hasItems ?
                 <div className={classes.tableWrapper}>
                     <table className={[classes.data, classes.table, classes.compare].join(" ")} >
-                        <tbody>
+                        <thead>
                             {/** Header of the table for remove item buttons */}
                             <tr>
                                 <th></th>
                                 {items.map((item) => {
                                     return (
                                         <th className={classes.remove} key={item.uid}>
-                                            <i className={classes.iconWrapper}>
-                                                <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                    <title>remove</title>
-                                                    <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
-                                                </svg>
-                                            </i>
 
 
                                             <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
-                                                Child={() => <Button>Remove</Button>}
+                                                Child={() => (
+                                                    <i className={classes.iconWrapper}>
+                                                        <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                            <title>remove</title>
+                                                            <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
+                                                        </svg>
+                                                    </i>
+                                                )}
                                                 Loader={() => <div>Loading...</div>}
                                             />
                                         </th>
                                     )
                                 })}
                             </tr>
+                        </thead>
+                        <tbody>
                             {productCompareFields.map((compareField) => {
                                 {/** table row of each field in productCompareFields list */ }
                                 return (
@@ -78,7 +81,7 @@ const CompareListPage = () => {
                                             return (
                                                 <td className={classes.attribute} key={item.uid}>
                                                     {!!compareField.renderer
-                                                        ? compareField.renderer(product)
+                                                        ? compareField.renderer(classes, product)
                                                         : (<div>{get(product, compareField.path, "")}</div>)
                                                     }
                                                 </td>
@@ -100,9 +103,9 @@ const CompareListPage = () => {
 export default CompareListPage
 
 
-const itemHeaderBlock = (item) => {
+const itemHeaderBlock = (classes, item) => {
     return (
-        <div>
+        <div className={classes.pageTitleWrapper}>
             <img src={get(item, 'image.url', "")} style={{ maxWidth: '200px' }} />
             <div>{item.name}</div>
             <div>{item.price}</div>
@@ -111,7 +114,7 @@ const itemHeaderBlock = (item) => {
     )
 }
 
-const itemDescriptionBlock = (item) => {
+const itemDescriptionBlock = (classes, item) => {
     return (
         <RichContent html={get(item, "description.html", "")} />
     )
