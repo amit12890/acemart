@@ -22,7 +22,6 @@
 
 .cancelButton {
     composes: root_lowPriority from '../../venia/components/Button/button.css';
-
     min-width: 9rem;
 }
 

@@ -41,10 +41,11 @@
     font-weight: var(--venia-global-fontWeight-normal);
     color: rgb(var(--text-color));
     text-transform: none;
-
+    padding: 5px 15px;
 }
 .sortButton:hover {
-
+    background-color: transparent;
+    color: rgb(var(--text-color));
 }
 
 .sortButton svg {
@@ -57,7 +58,7 @@
 
 .sortText {
     line-height: 24px;
-    font-size: var(--venia-global-fontSize-200);
+    font-size: var(--fontSize-100);
 }
 
 .desktopIconWrapper {

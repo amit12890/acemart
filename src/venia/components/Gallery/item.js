@@ -10,12 +10,18 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
+import productLabel from '../../../assets/labelSprite.png';
 import defaultClasses from './item.css';
+
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 // import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes, get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
+
+const style = {
+    '--productLabel': `url("${productLabel}")`,
+};
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -87,6 +93,8 @@ const GalleryItem = props => {
     const productNote = get(item, "prod_note", false)
     const certifications = get(item, "certifications", false)
     const capacity = get(item, "capacity", false)
+
+    console.log(product_label)
 
     return (
         <div className={classes.root}>
@@ -194,7 +202,9 @@ const GalleryItem = props => {
                         <div className={classes.labelWrapper}>
                             {product_label.map((labelObj) => {
                                 return (
-                                    <div className={[classes.label, classes[camelCase(labelObj.label)]].join("")}>
+                                    <div
+                                        className={[classes.labelItem, classes[camelCase(labelObj.label)]].join(" ")}
+                                        style={style}>
                                         <span>{camelCase(labelObj.label)}</span>
                                     </div>
                                 )
