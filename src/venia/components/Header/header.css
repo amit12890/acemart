@@ -27,11 +27,6 @@
 
 @media (min-width: 641px) {
     .switchers {
-                
-        
-        
-        
-        
         position: relative;
         z-index: 11;
         margin: 0 auto;
@@ -340,5 +335,19 @@
     align-items: center;
     display: flex;
     flex-grow: 1;
+}
+
+
+@media print {
+    .headerNotice,
+    .topMenuWrapper,
+    .switchers,
+    .csContainer,
+    .searchBarWrapper,
+    .storeLocationWrapper,
+    .toolbar,
+    .navContainer {
+        display: none;
+    }
 }
 

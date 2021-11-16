@@ -35,17 +35,31 @@ const CompareListPage = () => {
     ]
     return (
         <div className={classes.root}>
-            <h1>This is Compare List Page</h1>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
+                    Compare Products
+                </h1>
+
+                <Button>Print This page</Button>
+            </div>
             {hasItems ?
-                <div className={tableWrapper}>
+                <div className={classes.tableWrapper}>
                     <table className={[classes.data, classes.table, classes.compare].join(" ")} >
                         <tbody>
                             {/** Header of the table for remove item buttons */}
                             <tr>
-                                <th><Button>Print This page</Button></th>
+                                <th></th>
                                 {items.map((item) => {
                                     return (
-                                        <th key={item.uid}>
+                                        <th className={classes.remove} key={item.uid}>
+                                            <i className={classes.iconWrapper}>
+                                                <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                    <title>remove</title>
+                                                    <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
+                                                </svg>
+                                            </i>
+
+
                                             <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
                                                 Child={() => <Button>Remove</Button>}
                                                 Loader={() => <div>Loading...</div>}
@@ -55,14 +69,14 @@ const CompareListPage = () => {
                                 })}
                             </tr>
                             {productCompareFields.map((compareField) => {
-                                // table row of each field in productCompareFields list
+                                {/** table row of each field in productCompareFields list */ }
                                 return (
                                     <tr key={compareField.path}>
-                                        <td>{!compareField.hideName && compareField.name}</td>
+                                        <th className={classes.label}>{!compareField.hideName && compareField.name}</th>
                                         {items.map((item) => {
                                             const product = item.product;
                                             return (
-                                                <td key={item.uid}>
+                                                <td className={classes.attribute} key={item.uid}>
                                                     {!!compareField.renderer
                                                         ? compareField.renderer(product)
                                                         : (<div>{get(product, compareField.path, "")}</div>)
@@ -73,12 +87,13 @@ const CompareListPage = () => {
                                     </tr>
                                 )
                             })}
-                        </tbody></table>
+                        </tbody>
+                    </table>
                 </div>
                 :
                 <div>No Items here To compare</div>
             }
-        </div >
+        </div>
     )
 }
 
@@ -92,6 +107,7 @@ const itemHeaderBlock = (item) => {
             <div>{item.name}</div>
             <div>{item.price}</div>
         </div>
+
     )
 }
 

@@ -1,6 +1,7 @@
 .root {
     position: relative;
     z-index: 1;
+
 }
 
 .root_masked {
@@ -11,6 +12,8 @@
     margin: 0 auto;
     max-width: var(--venia-global-maxWidth);
     min-height: 40rem;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .page_masked {
