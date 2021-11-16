@@ -22,7 +22,6 @@ export const useCompareList = props => {
                 input: {products}
             }
         });
-        console.log("🚀 ~ file: compareListPage.js ~ line 61 ~ useEffect ~ res", res);
     }, [createCompareList])
 
     // remove item from compaer list
@@ -40,7 +39,6 @@ export const useCompareList = props => {
                 input: {products, uid}
             }
         });
-        console.log("🚀 ~ file: compareListPage.js ~ line 61 ~ useEffect ~ res", res);
     }, [removeItemsFromCompareList])
 
     return {

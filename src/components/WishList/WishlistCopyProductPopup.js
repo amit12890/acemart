@@ -1,41 +1,26 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import React, { Fragment, useCallback, useMemo, useState } from 'react';
 import { size } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
-import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import defaultClasses from './wishlistPopup.css';
 
 import { useApiData } from '../../data.utils';
-import { useUserContext } from '@magento/peregrine/lib/context/user';
-import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 import Button from '../../venia/components/Button';
-import { apiAddToWishlist, apiGetWishlistData } from '../../url.utils';
+import { apiAddToWishlist } from '../../url.utils';
 
 
-const WishlistProductPopup = props => {
-    const { closeWishlistPopup, productId, productQty = 1 ,
+const WishlistCopyProductPopup = props => {
+    const { wishlists, refreshWishlist, closeWishlistPopup, productId, productQty = 1 ,
         btnText = "Copy Item"} = props;
-    const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
 
-    const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
-        fetchPolicy: 'cache-and-network',
-        nextFetchPolicy: 'cache-first',
-        skip: !isUserSignedIn
-    });
-    // response shape : Array of {multi_wishlist_id, customer_id, wishlist_name}
-    const { callApi: getWishlist, response: wishlists, loading, error } = useApiData({
-        isLazy: true,
-    })
 
-    const refreshWishlist = useCallback(() => {
-        getWishlist(apiGetWishlistData(customerData.customer.id));
-    }, [getWishlist, customerData])
-
-    const { callApi: addToWishlist, response: addResponse, loading: addToWishlistLoading, error: addToWishlistError } = useApiData({
+    const { callApi: addToWishlist, response: addResponse,
+        loading: addToWishlistLoading, error: addToWishlistError } = useApiData({
         method: "post", isLazy: true,
+        // refresh wishlist data on success
+        onSuccess: () => {refreshWishlist(); closeWishlistPopup();}
     })
 
     const handleSubmit = useCallback(async () => {
@@ -48,15 +33,8 @@ const WishlistProductPopup = props => {
         }
     }, [selectedWishlist, productId, productQty])
 
-    useEffect(() => {
-        if (!!customerData)
-            refreshWishlist();
-    }, [loadingCustomerDetails, customerData])
-
     const classes = useStyle(defaultClasses, props.classes);
     const wishlistTabs = useMemo(() => {
-        if (loading || loadingCustomerDetails)
-            return <LoadingIndicator />;
         if (size(wishlists) === 0)
             return <div>You have no wishlist to choose from !!</div>
 
@@ -83,10 +61,10 @@ const WishlistProductPopup = props => {
                 }
             </div>
         )
-    }, [wishlists, loading, addToWishlistLoading, customerData, loadingCustomerDetails, handleSubmit]);
+    }, [wishlists, addToWishlistLoading, handleSubmit]);
 
     let content;
-    if (error) {
+    if (addToWishlistError) {
         const errorElement =
             <p className={classes.fetchError}>
                 Something went wrong. Please refresh and try again.
@@ -114,4 +92,4 @@ const WishlistProductPopup = props => {
     );
 };
 
-export default WishlistProductPopup;
+export default WishlistCopyProductPopup;

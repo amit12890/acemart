@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { get, size } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
@@ -14,13 +14,15 @@ import { useApiData } from '../../data.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 import { apiGetWishlistData } from '../../url.utils';
-import WishlistProductPopup from './wishlistProductPopup';
+import WishlistCopyProductPopup from './WishlistCopyProductPopup';
+import { REMOVE_PRODUCTS_FROM_WISHLIST } from '@magento/peregrine/lib/talons/WishlistPage/wishlistItem.gql';
+import WishlistMoveProductPopup from './WishlistMoveProductPopup';
 
 
 const WishlistPage = props => {
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
-    console.log("🚀 ~ file: WishlistPage.js ~ line 21 ~ selectedWishlist", selectedWishlist)
+
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first',
@@ -46,28 +48,34 @@ const WishlistPage = props => {
     }, [loadingCustomerDetails, customerData])
 
     const classes = useStyle(defaultClasses, props.classes);
-    const wishlistTabs = useMemo(() => {
-        if (loading || loadingCustomerDetails)
-            return <LoadingIndicator />;
-        if (wishlists.length === 0) {
-            return <Wishlist />;
-        }
-
-        return (
+    let wishlistTabs;
+    if (loading || loadingCustomerDetails) {
+        wishlistTabs = <LoadingIndicator />;
+    }
+    else if (wishlists.length === 0) {
+        wishlistTabs = <Wishlist />;
+    }
+    else {
+        wishlistTabs = (
             <div className={classes.tabsContainer}>
-                {wishlists.map((wishlist) => (
-                    <div
-                        className={classes.tabsItem}
-                        key={wishlist.multi_wishlist_id}
-                        onClick={() => setSelectedWishlist(wishlist)}>
-                        <div className={classes.itemSwitch}>
-                            {wishlist.wishlist_name}
+                {wishlists.map((wishlist) => {
+                    const selectedWishListId = !!selectedWishlist ? selectedWishlist.multi_wishlist_id : null;
+                    return (
+                        <div
+                            className={`${classes.tabsItem} ${
+                                wishlist.multi_wishlist_id === selectedWishListId
+                                ? classes.tabsItem_active : ""
+                            }`}
+                            key={wishlist.multi_wishlist_id}
+                            onClick={() => setSelectedWishlist(wishlist)}>
+                            <div className={classes.itemSwitch}>
+                                {wishlist.wishlist_name}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    )})}
             </div>
         )
-    }, [wishlists, loading, loadingCustomerDetails]);
+    }
 
     let content;
     if (error) {
@@ -92,7 +100,8 @@ const WishlistPage = props => {
                             multi_wishlist_id={selectedWishlist.multi_wishlist_id}
                             name={selectedWishlist.wishlist_name} />
 
-                        <ProductListing wishlist={selectedWishlist} />
+                        <ProductListing selectedWishlist={selectedWishlist} wishlists={wishlists}
+                            refreshWishlist={refreshWishlist} />
                     </div>
                 }
             </Fragment>
@@ -115,19 +124,35 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const { wishlist } = props;
+    const { selectedWishlist, wishlists, refreshWishlist } = props;
     // { productId, productQty }
     const [selectedProduct, setSelectedProduct] = useState(null);
     // null | copy | move
     const [actionType, setActionType] = useState(null);
     const classes = useStyle(defaultClasses, props.classes);
+    const [
+        removeProductFromWishlist,
+        {
+            error: removeProductError,
+            loading: removeProductLoading
+        }
+    ] = useMutation(REMOVE_PRODUCTS_FROM_WISHLIST);
 
     const handlePopupClose = useCallback(() => {
         setSelectedProduct(null);
         setActionType(null);
     }, [setSelectedProduct, setActionType]);
-    const itemList = get(wishlist, 'product', [])
-    console.log("🚀 ~ file: WishlistPage.js ~ line 124 ~ itemList", itemList)
+    const handleRemoveProduct = useCallback( async (wishlistId, itemId) => {
+        if (removeProductLoading) return;
+        await removeProductFromWishlist({
+            variables: {
+                wishlistId: wishlistId,
+                wishlistItemsId: [itemId]
+            }
+        });
+        await refreshWishlist();
+    }, [removeProductLoading, removeProductFromWishlist])
+    const itemList = get(selectedWishlist, 'product', [])
 
     if (!size(itemList)) {
         return (
@@ -140,7 +165,7 @@ const ProductListing = props => {
             <Mask isActive={!!selectedProduct} />
             <div className={classes.galleryItemsGrid}>
                 {itemList.map((item) => {
-                    const { product, qty, wishlist_item_id, product_id } = item
+                    const { product, qty, wishlist_item_id, wishlist_id, product_id } = item
                     const { name, price, small_image, short_description } = product
                     return (
                         <div key={wishlist_item_id} className={classes.galleryItem}>
@@ -155,7 +180,6 @@ const ProductListing = props => {
                                 <div className={classes.galleryItemDetails}>
                                     <div className={classes.itemName}>{name}</div>
                                     <div className={classes.itemPrice}>{price}</div>
-                                    {/* <div className={classes.itemComment}>{short_description}</div> */}
                                     <div className={classes.itemComment}>
                                         <textarea className={classes.textarea}>
                                         </textarea>
@@ -165,10 +189,19 @@ const ProductListing = props => {
 
                                     <div className={classes.productItemActions}>
                                         <div className={classes.action}><span>Edit</span></div>
-                                        <div className={classes.action} onClick={() => setSelectedProduct({productId: product_id, productQty: qty})}>
+                                        <div className={classes.action} onClick={() => {
+                                                setSelectedProduct({productId: product_id, productQty: qty});
+                                                setActionType("copy");
+                                            }}>
                                             <span>Copy</span></div>
-                                        <div className={classes.action}><span>Move</span></div>
-                                        <div className={classes.action}><span>Remove</span></div>
+                                        <div className={classes.action} onClick={() => {
+                                                setSelectedProduct({productId: wishlist_item_id, productQty: qty});
+                                                setActionType("move");
+                                            }}>
+                                            <span>Move</span></div>
+                                        <div className={classes.action} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
+                                            {removeProductLoading ? <span>Loading...</span>:<span>Remove</span> }
+                                        </div>
                                     </div>
                                 </div>
 
@@ -177,9 +210,14 @@ const ProductListing = props => {
                     )
                 })}
             </div>
-            {!!selectedProduct && 
-                <WishlistProductPopup closeWishlistPopup={handlePopupClose}
-                    {...selectedProduct} />
+            {(!!selectedProduct && actionType ==="copy") && 
+                <WishlistCopyProductPopup closeWishlistPopup={handlePopupClose}
+                    wishlists={wishlists} refreshWishlist={refreshWishlist} {...selectedProduct} />
+            }
+
+            {(!!selectedProduct && actionType ==="move") && 
+                <WishlistMoveProductPopup closeWishlistPopup={handlePopupClose}
+                    wishlists={wishlists} refreshWishlist={refreshWishlist} {...selectedProduct} />
             }
         </div>
     )

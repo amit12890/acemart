@@ -33,6 +33,10 @@
 
 }
 
+.tabsItem_active {
+    background-color: blue;
+}
+
 .tabsItem:first-child {
    
 
