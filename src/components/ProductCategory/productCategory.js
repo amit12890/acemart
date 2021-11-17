@@ -9,7 +9,6 @@ import defaultClasses from './productCategory.css'
  * render product categories based data size
  */
 export default ({ data }) => {
-    console.log("🚀 ~ file: productCategory.js ~ line 12 ~ data", data)
     if (size(data) === 0) return null
 
     const productCategoryList = useMemo(() => {

@@ -94,8 +94,6 @@ const GalleryItem = props => {
     const certifications = get(item, "certifications", false)
     const capacity = get(item, "capacity", false)
 
-    console.log(product_label)
-
     return (
         <div className={classes.root}>
             <div className={classes.itemImageContainer}>

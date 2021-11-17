@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback, useRef, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { array, arrayOf, shape, string, number } from 'prop-types';
+import { find } from 'lodash-es';
 import { useFilterSidebar } from '../../../magento/peregrine/talons/FilterSidebar';
 
 import { useStyle } from '../../classify';
@@ -27,7 +28,6 @@ const FilterSidebar = props => {
         handleApply,
         handleReset
     } = talonProps;
-    console.log("🚀 ~ file: filterSidebar.js ~ line 30 ~ filterItems", filterItems)
 
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
@@ -55,10 +55,14 @@ const FilterSidebar = props => {
             Array.from(filterItems, ([group, items], iteration) => {
                 const blockState = filterState.get(group);
                 const groupName = filterNames.get(group);
+                const filterData = find(filters, ["attribute_code", group])
+                let count = 0;
+                if (!!filterData) count = filterData.count
 
                 return (
                     <FilterBlock
                         key={group}
+                        count={count}
                         filterApi={filterApi}
                         filterState={blockState}
                         group={group}
