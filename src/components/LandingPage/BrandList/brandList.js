@@ -41,6 +41,8 @@ export default ({ data, onItemClick }) => {
                         isPlaying={true}
                         visibleSlides={6}
                         totalSlides={size(data)}
+                        infinite={true}
+                        isIntrinsicHeight={true}
                     >
                         <div className={classes.brandSliderWrapper}>
                             <Slider

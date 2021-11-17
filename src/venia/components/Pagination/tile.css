@@ -1,15 +1,22 @@
 .root {
     align-items: center;
-    border: 1px none currentColor;
-    border-radius: 2px;
+    border: 1px solid rgb(var(--border-color-light));
     display: flex;
     justify-content: center;
-    min-height: 2rem;
+    min-height: 32px;
     outline: none;
     position: relative;
+    font-size: var(--fontSize-75);
+}
+
+.root:hover {
+    background-color: rgb(var(--theme-color-primary));
+    color: rgb(var(--color-white));
+
 }
 
 .root_active {
     composes: root;
-    border-style: solid;
+    background-color: rgb(var(--theme-color-primary));
+    color: rgb(var(--color-white));
 }

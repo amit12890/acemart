@@ -54,9 +54,7 @@
 }
 
 
-.brandSliderList {
 
-}
 
 .brandCarouselProvider {
 
@@ -81,7 +79,7 @@
     border-radius: 0; 
     color: transparent;
     cursor: pointer;
-    display: inline-flex;
+    display: none;
     align-items: center;
     font-size: 0;
     height: 72px;
@@ -111,6 +109,10 @@
 
 .navArrorw:disabled {
     opacity: 0.5;
+}
+
+.brandSliderWrapper:hover .navArrow {
+    display: inline-flex;
 }
 
 
