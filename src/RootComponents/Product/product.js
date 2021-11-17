@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useProduct } from '@magento/peregrine/lib/talons/RootComponents/Product/useProduct';
+import { useProduct } from '../../magento/peregrine/talons/Product/useProduct';
 
 import ErrorView from '@magento/venia-ui/lib/components/ErrorView';
 import { StoreTitle, Meta } from '@magento/venia-ui/lib/components/Head';
