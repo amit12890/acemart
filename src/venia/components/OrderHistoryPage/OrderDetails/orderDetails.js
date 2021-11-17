@@ -46,93 +46,98 @@ const OrderDetails = props => {
         switch (tab) {
             case "invoice":
                 if (hasInvoice) {
-                        return (
-                            <div className={classes.contentWrapper}>
-                                <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
-                                    <div className={classes.actionsToolbar}> 
-                                        <Link className={classes.printLink}>
-                                            <span>Print All Invoices</span>
-                                        </Link>
-                                    </div>
-                                    {invoices.map((invoice) => {
-                                        let updatedItems = [];
-                                        for (let itemInd = 0; itemInd < items.length; itemInd++) {
-                                            const currItem = items[itemInd];
-                                            const invItem = find(invoice.items, ['product_sku', currItem.product_sku])
-                                            if (invItem)
-                                                updatedItems.push({
-                                                    ...currItem, quantity: invItem.quantity_invoiced
-                                                });
-                                        }
-                                        return (
-                                            <Fragment key={invoice.id}>
-                                            <div className={classes.orderTitle}> 
+                    return (
+                        <div className={classes.contentWrapper}>
+                            <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
+                                <div className={classes.actionsToolbar}>
+                                    <Link className={classes.printLink}>
+                                        <span>Print All Invoices</span>
+                                    </Link>
+                                </div>
+                                {invoices.map((invoice) => {
+                                    let updatedItems = [];
+                                    for (let itemInd = 0; itemInd < items.length; itemInd++) {
+                                        const currItem = items[itemInd];
+                                        const invItem = find(invoice.items, ['product_sku', currItem.product_sku])
+                                        if (invItem)
+                                            updatedItems.push({
+                                                ...currItem, quantity: invItem.quantity_invoiced
+                                            });
+                                    }
+                                    return (
+                                        <Fragment key={invoice.id}>
+                                            <div className={classes.orderTitle}>
                                                 <strong>Invoice #{invoice.number}</strong>
                                                 <Link className={classes.printLink}>
                                                     <span>Print Invoices</span>
                                                 </Link>
                                             </div>
-                                            <div className={classes.itemWrapper}> 
+                                            <div className={classes.itemWrapper}>
                                                 <Items data={{ imagesData, items: updatedItems }} />
                                             </div>
-                                            </Fragment>
-                                        )
-                                    })}
-                                </div>
-                                <div className={classes.orderTotalContainer}> 
-                                    <OrderTotal data={total} />
-                                </div>
+                                        </Fragment>
+                                    )
+                                })}
                             </div>
-                        );
-                    }
+                            <div className={classes.orderTotalContainer}>
+                                <OrderTotal data={total} />
+                            </div>
+                        </div>
+                    );
+                }
             case "shipping":
                 if (hasShipment) {
                     return (
                         <div className={classes.contentWrapper}>
-                        <div className={[classes.itemsContainer, classes.shipmentContainer].join(" ")}>
-                            <div className={classes.actionsToolbar}> 
-                                <Link className={classes.printLink}>
-                                    <span>Print All Shipments</span>
-                                </Link>
+                            <div className={[classes.itemsContainer, classes.shipmentContainer].join(" ")}>
+                                <div className={classes.actionsToolbar}>
+                                    <Link className={classes.printLink}>
+                                        <span>Print All Shipments</span>
+                                    </Link>
+                                </div>
+                                {shipments.map((shipment) => {
+                                    let updatedItems = [];
+                                    for (let itemInd = 0; itemInd < items.length; itemInd++) {
+                                        const currItem = items[itemInd];
+                                        const invItem = find(shipment.items, ['product_sku', currItem.product_sku])
+                                        if (invItem)
+                                            updatedItems.push({
+                                                ...currItem, quantity: invItem.quantity_shipped
+                                            });
+                                    }
+                                    return (
+                                        <Fragment key={shipment.id}>
+                                            <div className={classes.orderTitle}>
+                                                <strong>Shipment {shipment.number}</strong>
+                                                <Link className={classes.printLink}>
+                                                    <span>Print Shipments</span>
+                                                </Link>
+                                                <Link className={classes.printLink}>
+                                                    <span>Track this shipment</span>
+                                                </Link>
+                                            </div>
+                                            <div className={classes.itemWrapper}>
+                                                <Items data={{ imagesData, items: updatedItems }} />
+                                            </div>
+                                        </Fragment>
+                                    )
+                                })}
                             </div>
-                            {shipments.map((shipment) => {
-                                let updatedItems = [];
-                                for (let itemInd = 0; itemInd < items.length; itemInd++) {
-                                    const currItem = items[itemInd];
-                                    const invItem = find(shipment.items, ['product_sku', currItem.product_sku])
-                                    if (invItem)
-                                        updatedItems.push({
-                                            ...currItem, quantity: invItem.quantity_shipped
-                                        });
-                                }
-                                return (
-                                    <Fragment key={shipment.id}>
-                                    <div className={classes.orderTitle}> 
-                                        <strong>Shipment {shipment.number}</strong>
-                                        <Link className={classes.printLink}>
-                                            <span>Print Shipments</span>
-                                        </Link>
-                                        <Link className={classes.printLink}>
-                                            <span>Track this shipment</span>
-                                        </Link>
-                                    </div>
-                                    <div className={classes.itemWrapper}> 
-                                        <Items data={{ imagesData, items: updatedItems }} />
-                                    </div>
-                                    </Fragment>
-                                )
-                            })}
+                            <div className={classes.orderTotalContainer}>
+                                <OrderTotal data={total} />
+                            </div>
                         </div>
-                        <div className={classes.orderTotalContainer}> 
-                            <OrderTotal data={total} />
-                        </div>
-                    </div>
                     );
-                    }
+                }
             default: {
-                return(
+                return (
                     <div className={classes.contentWrapper}>
                         <div className={classes.itemsContainer}>
+                            <div className={classes.actionsToolbar}>
+                                <Link className={classes.printLink}>
+                                    <span>Print Order</span>
+                                </Link>
+                            </div>
                             <Items data={{ imagesData, items }} />
                         </div>
                         <div className={classes.orderTotalContainer}>
@@ -160,24 +165,24 @@ const OrderDetails = props => {
             </div>
 
             <div className={classes.tabsContainer}>
-                <div className={[classes.tabsItem,tab === "view" ? classes.active : ""].join(" ")}>
+                <div className={[classes.tabsItem, tab === "view" ? classes.active : ""].join(" ")}>
                     <Link className={classes.itemSwitch} to={myOrderDetailsPage("view", id)}>
                         <div className={classes.tabs}>Items Ordered</div>
                     </Link>
                 </div>
-                <div className={[classes.tabsItem,tab === "invoice" ? classes.active : ""].join(" ")}>
-                {hasInvoice &&
-                    <Link className={classes.itemSwitch} to={myOrderDetailsPage("invoice", id)}>
-                        <div className={classes.tabs}>Invoices</div>
-                    </Link>
-                }
+                <div className={[classes.tabsItem, tab === "invoice" ? classes.active : ""].join(" ")}>
+                    {hasInvoice &&
+                        <Link className={classes.itemSwitch} to={myOrderDetailsPage("invoice", id)}>
+                            <div className={classes.tabs}>Invoices</div>
+                        </Link>
+                    }
                 </div>
-                <div className={[classes.tabsItem,tab === "shipping" ? classes.active : ""].join(" ")}>
-                {hasShipment &&
-                    <Link className={classes.itemSwitch} to={myOrderDetailsPage("shipping", id)}>
-                        <div className={classes.tabs}>Order Shipments</div>
-                    </Link>
-                }
+                <div className={[classes.tabsItem, tab === "shipping" ? classes.active : ""].join(" ")}>
+                    {hasShipment &&
+                        <Link className={classes.itemSwitch} to={myOrderDetailsPage("shipping", id)}>
+                            <div className={classes.tabs}>Order Shipments</div>
+                        </Link>
+                    }
                 </div>
             </div>
             {content}

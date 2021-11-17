@@ -78,22 +78,26 @@
 
 }
 
-.opq {
+.resourceSliderList {
 
 }
 
-.xyz {
+.resourceCarouselProvider    {
 
+}
+
+.resourceSlide {
+    
 }
 
 
 
-.testClass {
+.resourceSliderWrapper {
     position: relative;
 }
 
-.carousel__inner-slide {
-    padding: 0 20px ;
+.slideInner___2mfX9 {
+    display: flex;
 }
 
 .navArrorw {
