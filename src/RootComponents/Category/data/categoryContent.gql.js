@@ -7,11 +7,11 @@ export const GET_PRODUCT_FILTERS_BY_CATEGORY = gql`
         products(filter: { category_id: $categoryIdFilter }) {
             aggregations {
                 label
-                count
                 attribute_code
                 options {
                     label
                     value
+                    count
                 }
             }
         }

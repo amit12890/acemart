@@ -7,7 +7,7 @@ import FilterDefault from './filterDefault';
 const FilterItem = props => {
     const { filterApi, filterState, group, item, isExpanded, onApply } = props;
     const { toggleItem } = filterApi;
-    const { title, value } = item;
+    const { title, value, count } = item;
     const isSelected = filterState && filterState.has(item);
 
     // create and memoize an item that matches the tile interface
@@ -28,6 +28,7 @@ const FilterItem = props => {
     }, [group, item, toggleItem, onApply]);
 
     return (
+        <>
         <FilterDefault
             isSelected={isSelected}
             isExpanded={isExpanded}
@@ -36,6 +37,8 @@ const FilterItem = props => {
             title={title}
             value={value}
         />
+        <span>{count}</span>
+        </>
     );
 };
 
