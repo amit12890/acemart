@@ -15,7 +15,6 @@ const FilterBlock = props => {
     const {
         filterApi,
         filterState,
-        count,
         group,
         items,
         name,
@@ -75,7 +74,6 @@ const FilterBlock = props => {
                 aria-expanded={isExpanded}
                 aria-label={toggleItemOptionsAriaLabel}
             >
-                <span>{count}</span>
                 <span className={classes.header}>
                     <span className={classes.name}>{name}</span>
                     <Icon src={iconSrc} />

@@ -35,11 +35,6 @@ const AccountSideBar = props => {
             url: '/customer/account/edit/'
         },
         {
-            name: 'Stored Payment Methods',
-            id: 5,
-            url: '/vault/cards/listaction/'
-        },
-        {
             name: 'My Product Reviews',
             id: 6,
             url: '/review/customer/'
@@ -61,17 +56,17 @@ const AccountSideBar = props => {
     return (
         <div className={classes.root}>
             <ul>
-            {sidebarItems.map(item => {
-                const linkClass = item.url === props.activeUrl ?
-                    [classes.link, classes.link_active].join(" ") : classes.link
-                return (
-                    <li key={item.id} className={[classes.navItem, classes.item].join(" ")}>
-                        <Link className={linkClass} to={item.url}>
-                           <span>{item.name}</span>
-                        </Link>
-                    </li>
-                );
-            })}
+                {sidebarItems.map(item => {
+                    const linkClass = item.url === props.activeUrl ?
+                        [classes.link, classes.link_active].join(" ") : classes.link
+                    return (
+                        <li key={item.id} className={[classes.navItem, classes.item].join(" ")}>
+                            <Link className={linkClass} to={item.url}>
+                                <span>{item.name}</span>
+                            </Link>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
