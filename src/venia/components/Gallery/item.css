@@ -120,10 +120,9 @@
 
 .labelWrapper {
     display: flex;
-
 }
+
 .labelItem {
-    color: red;
     background-image: var(--productLabel);
     background-repeat: no-repeat;
     width: 50px;
@@ -131,12 +130,15 @@
     background-size: 210px;
     margin-left: 5px;;
 }
+
 .labelItem:first-child {
     margin-left: 0;
 }
+
 .labelItem  span {
     font-size: 0;
 }
+
 .onSale {
     background-position: -150px -80px;
     

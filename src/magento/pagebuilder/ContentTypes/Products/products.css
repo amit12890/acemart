@@ -64,22 +64,22 @@
 }
 
 .root :global .slick-prev {
-    left: 0;
+    left: -32px;
 }
 
 .root :global .slick-prev svg {
     transform: rotate(180deg);
 }
 .root :global .slick-prev:before {
-    /* content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 24 24' fill='none' stroke='white' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='19' y1='12' x2='5' y2='12' /><polyline points='12 19 5 12 12 5' /></svg>"); */
+
     
 }
 
 .root :global .slick-next {
-    right: 0;
+    right: -32px;
 }
 .root :global .slick-next:before {
-    /* content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 24 24' fill='none' stroke='white' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='5' y1='12' x2='19' y2='12' /><polyline points='12 5 19 12 12 19' /></svg>"); */
+
 }
 
 .root :global .slick-prev,
@@ -139,6 +139,14 @@
     width: 32px;
     height: 72px;
 }
+
+.home-slider .slick-prev {
+    left: -32px;
+}
+.home-slider .slick-next {
+    right: -32px;
+}
+
 
 .custombtn{
     width: 32px;

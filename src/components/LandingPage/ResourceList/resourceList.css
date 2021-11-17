@@ -1,4 +1,5 @@
 .root {
+    margin-bottom: 60px;
 }
 
 
@@ -30,11 +31,8 @@
 }
 
 .resourcesWrapper {
-    display: block;
     position: relative;
-    touch-action: pan-y;
-    user-select: none;
-    --leftViewportElement: -99999px;
+
 }
 
 .resourcesItem {
@@ -42,13 +40,13 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding:0 5px;
     position: relative;
-    width: 100%;
+    margin-right: 6px;
 }
 
 .resouresImage {
     display: block;
+    padding: 0 5px;
 }
 .resouresImage img {
     max-width: 100%;
@@ -60,6 +58,7 @@
     padding: 20px;
     bottom: 0;
     left: 0;
+    right: 0;
     color: #fff;
     background: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 100%);
 }
@@ -70,6 +69,7 @@
     border-bottom: 1px solid rgb(var(--color-white));
     padding-bottom: 10px;
     margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
 .resouresDetails p {
@@ -78,156 +78,25 @@
 
 }
 
-.on_sale {
-    background-color: red;
-}
-
-/* =============================================== */
-
-
-.resourcesWrapper :global .slick-slider {
-    min-height: inherit;
-}
-
-.sliderRoot {
+.opq {
 
 }
 
-.sliderRoot {
-    display: block;
+.xyz {
+
+}
+
+
+
+.testClass {
     position: relative;
-    touch-action: pan-y;
-    user-select: none;
-    --leftViewportElement: -99999px;
-}
-.sliderRoot :global .slick-current {
-    --leftViewportElement: 0;
 }
 
-.sliderRoot :global .slick-slider {
-    min-height: inherit;
+.carousel__inner-slide {
+    padding: 0 20px ;
 }
 
-.sliderRoot :global .slick-list {
-    display: block;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-    min-height: inherit;
-}
-
-.sliderRoot :global .slick-list:focus {
-    outline: none;
-}
-
-.sliderRoot :global .slick-list.dragging {
-    cursor: pointer;
-}
-
-.sliderRoot :global .slick-track {
-    display: block;
-    left: 0;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    top: 0;
-    min-height: inherit;
-}
-
-.sliderRoot :global .slick-track .slick-slide > div {
-    min-height: inherit;
-    width: 100%;
-    background-color: green;
-}
-
-.sliderRoot :global .slick-track:before,
-.sliderRoot :global .slick-track:after {
-    content: '';
-    display: table;
-}
-
-.sliderRoot :global .slick-track:after {
-    clear: both;
-}
-
-.sliderRoot :global .slick-loading .slick-track {
-    visibility: hidden;
-}
-
-.sliderRoot :global .slick-slide {
-    display: none;
-    float: left;
-    height: 100%;
-    min-height: inherit;
-}
-
-[dir='rtl'] .root :global .slick-slide {
-    float: right;
-}
-
-.sliderRoot :global .slick-slide img {
-    display: block;
-}
-.sliderRoot :global .slick-slide.slick-loading img {
-    display: none;
-}
-
-.sliderRoot :global .slick-slide.dragging img {
-    pointer-events: none;
-}
-
-.sliderRoot :global .slick-initialized .slick-slide {
-    display: block;
-}
-
-.sliderRoot :global .slick-loading .slick-slide {
-    visibility: hidden;
-}
-
-.sliderRoot :global .slick-vertical .slick-loading {
-    border: 1px solid transparent;
-    display: block;
-    height: auto;
-}
-
-.sliderRoot :global .slick-slider .slick-track,
-.sliderRoot :global .slick-slider .slick-list {
-    transform: translate3d(0, 0, 0);
-}
-
-.sliderRoot :global .slick-arrow.slick-hidden {
-    display: none;
-}
-
-.sliderRoot :global .slick-prev,
-.sliderRoot :global .slick-next {
-    opacity: 0;
-    transition: 0.3s;
-    
-}
-.sliderRoot:hover :global .slick-prev,
-.sliderRoot:hover :global .slick-next {
-    opacity: 1;
-}
-
-.sliderRoot :global .slick-prev {
-    left: 0;
-}
-.sliderRoot :global .slick-prev:before {
-    /* content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 24 24' fill='none' stroke='white' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='19' y1='12' x2='5' y2='12' /><polyline points='12 19 5 12 12 5' /></svg>"); */
-    
-}
-
-.sliderRoot :global .slick-next {
-    right: 0;
-}
-.sliderRoot :global .slick-next:before {
-    /* content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 24 24' fill='none' stroke='white' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='5' y1='12' x2='19' y2='12' /><polyline points='12 5 19 12 12 19' /></svg>"); */
-}
-
-.sliderRoot :global .slick-prev,
-.sliderRoot :global .slick-next {
+.navArrorw {
     background: rgba(0, 0, 102, 1);
     border: none;
     border-radius: 0; 
@@ -245,68 +114,22 @@
     transform: translate(0, -50%);
     width: 32px;
     z-index: 101;
+    justify-content: center;
 }
 
-.sliderRoot :global .slick-dots {
-    display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    bottom: 10px;
-}
-.sliderRoot :global .slick-dots li {
-    cursor: pointer;
-    display: inline-block;
-    height: 11px;
-    margin: 0 2px;
-    padding: 0;
-    position: relative;
-    vertical-align: middle;
-    width: 11px;
-}
-.sliderRoot :global .slick-dots li button {
-    outline: none;
-    background: rgb(var(--color-gray10));
-    filter: brightness(100%);
-    border-radius: 10px;
-    box-shadow: none;
-    cursor: pointer;
-    display: block;
-    height: 11px;
-    padding: 0;
-    text-indent: -99999px;
-    transition: 0.5s;
-    width: 11px;
-    opacity: 0.4;
-    -webkit-transform: scale(.8);
-    -moz-transform: scale(.8);
-    -ms-transform: scale(.8);
-    -o-transform: scale(.8);
-}
-.sliderRoot :global .slick-dots li button:hover {
-    filter: brightness(80%);
+.previous {
+    left: -32px;
 }
 
-.sliderRoot :global .slick-dots li button:active,
-.sliderRoot :global .slick-dots li button:focus,
-.sliderRoot :global .slick-dots li button:not(.primary) {
-    box-shadow: none;
+.next {
+    right: -32px;
+    left: auto;
 }
 
-.sliderRoot :global .slick-dots li.slick-active button {
-    background: #1c1918;
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
+.navArrorw svg {
+    fill: white;
 }
 
-.sliderRoot :global .slick-current {
-    z-index: 1;
+.navArrorw:disabled {
+    opacity: 0.5;
 }
-
-
-

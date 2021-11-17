@@ -66,14 +66,14 @@ export default ({ data, onItemClick }) => {
             <div className={classes.homeSection}>
                 <h3>Featured Brands</h3>
                 <div className={classes.brandWrapper}>
-                    <SlickSlider
+                    {/* <SlickSlider
                         slidesToScroll={3}
                         slidesToShow={3}
                         variableWidth={true}
                         nextArrow={<CustomArrows />}
                         prevArrow={<CustomArrows />}>
                         {data.map(renderItem)}
-                    </SlickSlider>
+                    </SlickSlider> */}
                 </div>
             </div>
         </div>
