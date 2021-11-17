@@ -80,6 +80,8 @@
 
        --product-name-color:  var(--color-gray10);
        --product-price-color: var(--color-blue20);
+       --product-special-price-color: var(--color-red10);
+       
        --product-unit-color: var(--color-gray10);
 
 
