@@ -6,10 +6,17 @@ export const CategoryFragment = gql`
         meta_title
         meta_keywords
         meta_description
+        canonical_url
         children{
             id
             name
             image
+            url_key
+            url_suffix
+        }
+        sub_cat{
+            name
+            url
         }
     }
 `;
@@ -43,9 +50,20 @@ export const ProductsFragment = gql`
             }
             url_key
             url_suffix
+            url_rewrites {
+                url
+                parameters {
+                  name
+                  value
+                }
+            }
             on_sale
             prod_temp
             uom
+            product_label {
+                label
+                image
+            }
         }
         page_info {
             total_pages

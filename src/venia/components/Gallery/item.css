@@ -50,13 +50,15 @@
     display: none;
 }
 .nameContainer {
+    margin-bottom: 5px;
 }
 
 .name {
     font-size: var(--fontSize-200);
     font-weight: var(--font-weight-bold);
     color: var(--product-name-color);
-    margin-bottom: 5px;
+    
+    line-height: normal;
 }
 
 .sku {
@@ -84,7 +86,7 @@
 }
 
 .productActions {
-    margin-bottom: 10px;
+    margin: 20px 0;
     display: flex;
     align-items: center;
     
@@ -109,19 +111,81 @@
     margin-bottom: 10px;
 
 }
+.actionsContainer {
+
+}
+.productInner {
+    
+}
+
+.labelWrapper {
+    display: flex;
+}
+
+.labelItem {
+    background-image: var(--productLabel);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    background-size: 210px;
+    margin-left: 5px;;
+}
+
+.labelItem:first-child {
+    margin-left: 0;
+}
+
+.labelItem  span {
+    font-size: 0;
+}
+
+.onSale {
+    background-position: -150px -80px;
+    
+}
+
+.freeShipping {
+    background-position: -150px ​-10px;
+   
+}
+.onlinePrice {
+    background-position: -80px -80px;
+   
+}
+
+.bulkSavings {
+    background-position: -10px -80px;
+}
+
+.newItem {
+    background-position: -80px ​-10px;
+}
+.disallowPickupatstore {
+    background-position: -10px -80px;
+}
+
+.allowStorePickup {
+    background-position: -10px -10px;
+}
 
 .iconWrapper {
     composes: root_highPriority from '../../components/Button/button.css';
     border-width: 1px;
-    margin-right: 10px;
-    padding: 3px;
+    margin: 0 5px;
+    padding: 7px;
     min-width: auto;
     min-height: auto;
-    line-height: auto;
+    line-height: normal;
+    
+}
+.iconWrapper:hover .svgIcon {
+    fill: rgb(var(--theme-color-primary));
 }
 
 .svgIcon {
-    fill: white;
+    fill: rgb(var(--color-white));
+    width: auto;
+    height: 14px;
 }
 
 /* state: pending */

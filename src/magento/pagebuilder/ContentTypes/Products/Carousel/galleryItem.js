@@ -11,7 +11,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-import { drop, includes } from 'lodash'
+import { drop, includes, camelCase, size } from 'lodash'
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -61,7 +61,7 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { name, price, small_image, url_key, url_suffix } = item;
+    const { name, price, sku, product_label, small_image, url_key, url_suffix, uom } = item;
     const { url: smallImageURL } = small_image;
     const originalUrl = getOriginalImage(smallImageURL)
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
@@ -97,14 +97,26 @@ const GalleryItem = props => {
                 <span>{name}</span>
             </Link>
             <div className={classes.sku}>
-                <span>SKU</span>
+                <span>SKU - {sku}</span>
             </div>
+            {!!size(product_label) &&
+                <div className={classes.labelWrapper}>
+                    {product_label.map((labelObj) => {
+                        return (
+                            <div
+                                className={[classes.labelItem, classes[camelCase(labelObj.label)]].join(" ")}>
+                                <span>{camelCase(labelObj.label)}</span>
+                            </div>
+                        )
+                    })}
+                </div>
+            }
             <div className={classes.price}>
                 <Price
                     value={price.regularPrice.amount.value}
                     currencyCode={price.regularPrice.amount.currency}
                 />
-                <span className={classes.unit}>Each</span>
+                <span className={classes.unit}>{uom}</span>
             </div>
             <div className={classes.productLabel}></div>
         </div>

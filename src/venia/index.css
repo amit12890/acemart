@@ -103,5 +103,9 @@
     margin-inline-end: 0;
 }
 
+:global(a) {
+    cursor: pointer;
+}
+
 
 

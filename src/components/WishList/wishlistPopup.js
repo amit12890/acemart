@@ -84,7 +84,7 @@ const WishlistPopup = props => {
                 }
             </div>
         )
-    }, [wishlists, loading, customerData, loadingCustomerDetails, handleSubmit]);
+    }, [wishlists, loading, addToWishlistLoading, customerData, loadingCustomerDetails, handleSubmit]);
 
     let content;
     if (error) {

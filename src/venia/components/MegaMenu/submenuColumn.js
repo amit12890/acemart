@@ -16,20 +16,20 @@ const SubmenuColumn = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     const categoryUrl = resourceUrl(
-        `/${category.url_path}${category.url_suffix || ''}`
+        `/${category.canonical_url}${category.url_suffix || ''}`
     );
     let children = null;
 
     if (category.children.length) {
-        const childrenItems = category.children.map((category, index) => {
-            const { url_path, url_suffix, isActive, name } = category;
-            const categoryUrl = resourceUrl(`/${url_path}${url_suffix || ''}`);
+        const childrenItems = category.children.map((subCategory, index) => {
+            const { url_path: sub_url_path, url_suffix: sub_url_suffix, isActive, name, canonical_url } = subCategory;
+            const subcategoryUrl = resourceUrl(`/${canonical_url}${sub_url_suffix || ''}`);
 
             return (
                 <li key={index} className={classes.submenuChildItem}>
                     <Link
                         className={isActive ? classes.linkActive : classes.link}
-                        to={categoryUrl}
+                        to={subcategoryUrl}
                     >
                         {name}
                     </Link>

@@ -1,6 +1,8 @@
 .root {
     overflow: auto;
-    padding: 0 1.125rem;
+    padding: 0 10px;
+    background-color: rgb(var(--color-gray-light02));
+    
 }
 
 .root:empty {
@@ -8,6 +10,5 @@
 }
 
 .root li {
-    float: left;
-    padding: 1rem 1rem 0 0;
+    padding: 0 0 0;
 }
