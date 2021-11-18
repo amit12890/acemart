@@ -5,7 +5,7 @@ import { useProduct } from '../../magento/peregrine/talons/Product/useProduct';
 import ErrorView from '@magento/venia-ui/lib/components/ErrorView';
 import { StoreTitle, Meta } from '@magento/venia-ui/lib/components/Head';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import ProductFullDetail from '@magento/venia-ui/lib/components/ProductFullDetail';
+import ProductFullDetail from "../../venia/components/ProductFullDetail"
 import mapProduct from '@magento/venia-ui/lib/util/mapProduct';
 
 /*

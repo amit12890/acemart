@@ -30,9 +30,15 @@ export const ProductDetailsFragment = gql`
                 }
             }
         }
-        sku
+        sku uom
+        availability
         small_image {
             url
+        }
+        additional_information {
+            data {
+                code label value
+            }
         }
         url_key
         ... on ConfigurableProduct {
