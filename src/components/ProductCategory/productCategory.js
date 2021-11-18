@@ -1,5 +1,5 @@
-import { get, size } from 'lodash'
 import React, { useMemo } from 'react'
+import { get, size } from 'lodash'
 
 import Image from '../../venia/components/Image'
 
@@ -15,13 +15,15 @@ export default ({ data }) => {
 
     const productCategoryList = useMemo(() => {
         return data.map((item) => {
-            const image = get(item, "image", "")
+            const image = get(item, "image", "");
             return (
                 <div className={defaultClasses.subcatListItem}>
-                    <Image
-                        classes={{image: classes.image}}
-                        src={image}
-                    />
+                    {image &&
+                        <Image
+                            classes={{image: classes.image}}
+                            src={image}
+                        />
+                    }
                 </div>
             )
         })
