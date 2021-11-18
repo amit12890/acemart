@@ -35,16 +35,18 @@ export default ({ data, onItemClick }) => {
                 <h3>Featured Brands</h3>
                 <div className={classes.brandWrapper}>
                     <CarouselProvider
-                        className={classes.xyz}
-                        naturalSlideWidth={200}
-                        naturalSlideHeight={100}
+                        className={classes.brandCarouselProvider}
+                        naturalSlideWidth={120}
+                        naturalSlideHeight={60}
                         isPlaying={true}
-                        visibleSlides={3}
+                        visibleSlides={6}
                         totalSlides={size(data)}
+                        infinite={true}
+                        isIntrinsicHeight={true}
                     >
-                        <div className={classes.testClass}>
+                        <div className={classes.brandSliderWrapper}>
                             <Slider
-                                className={classes.opq}
+                                className={classes.brandSliderList}
                             >
                                 {data.map((item, i) => {
                                     const imageUrl = get(item, "brand_thumbnail", "")

@@ -5,7 +5,7 @@
     gap: 0.25rem;
     grid-auto-columns: minmax(2rem, auto);
     grid-auto-flow: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 1rem 0;
-    text-align: center;
+    text-align: justify;
 }

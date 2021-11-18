@@ -52,15 +52,6 @@ const Pagination = props => {
     return (
         <div className={classes.root}>
             <NavButton
-                name={navButtons.firstPage.name}
-                active={isActiveLeft}
-                onClick={handleLeftSkip}
-                buttonLabel={formatMessage({
-                    id: 'pagination.firstPage',
-                    defaultMessage: navButtons.firstPage.buttonLabel
-                })}
-            />
-            <NavButton
                 name={navButtons.prevPage.name}
                 active={isActiveLeft}
                 onClick={handleNavBack}
@@ -77,15 +68,6 @@ const Pagination = props => {
                 buttonLabel={formatMessage({
                     id: 'pagination.nextPage',
                     defaultMessage: navButtons.nextPage.buttonLabel
-                })}
-            />
-            <NavButton
-                name={navButtons.lastPage.name}
-                active={isActiveRight}
-                onClick={handleRightSkip}
-                buttonLabel={formatMessage({
-                    id: 'pagination.lastPage',
-                    defaultMessage: navButtons.lastPage.buttonLabel
                 })}
             />
         </div>

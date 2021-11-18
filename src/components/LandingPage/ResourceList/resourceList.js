@@ -36,7 +36,7 @@ export default ({ data, onItemClick }) => {
                 <h3>Resources</h3>
                 <div className={classes.resourcesWrapper}>
                     <CarouselProvider
-                        className={classes.xyz}
+                        className={classes.resourceCarouselProvider}
                         naturalSlideWidth={200}
                         naturalSlideHeight={100}
                         isPlaying={true}
@@ -44,15 +44,15 @@ export default ({ data, onItemClick }) => {
                         totalSlides={size(data)}
                     >
 
-                        <div className={classes.testClass}>
+                        <div className={classes.resourceSliderWrapper}>
                             <Slider
-                                className={classes.opq}
+                                className={classes.resourceSliderList}
                             >
                                 {data.map((item, i) => {
                                     const imageUrl = get(item, "featured_image", "")
                                     return (
                                         <Slide
-                                            className={classes.mycustomclass}
+                                            className={classes.resourceSlide}
                                             index={i}>
                                             <div className={classes.resourcesItem}>
                                                 <div className={classes.resouresImage}>

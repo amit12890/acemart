@@ -1,7 +1,6 @@
 .root {
     align-content: start;
     display: grid;
-    row-gap: 0.5rem; 
     padding: 0px 15px;
     
 }
@@ -10,7 +9,9 @@
     display: grid;
     grid-template-areas: 'main';
 }
-
+.itemImageContainer {
+    margin-bottom: 1rem;
+}
 .imageContainer {
     grid-area: main;
     justify-content: center;
@@ -48,6 +49,8 @@
     font-size: var(--fontSize-300);
     text-align: left;
     color: rgb(var(--product-name-color));
+    line-height: normal;
+    margin-bottom: 5px;
 }
 
 .name,
@@ -55,24 +58,78 @@
 .price {
     min-height: 1rem;
     text-align: left;
+    
 }
 .price {
     font-weight: var(--font-weight-bold);
     font-size: var(--fontSize-300);
-    color: rgb(var(--product-price-color)); 
+    color: rgb(var(--product-special-price-color)); 
 }
 .sku {
     font-size: var(--fontSize-100);
     color: rgb(var(--color-gray-middle3));
+    margin-bottom: 5px;
 }
 .unit {
     margin-left: 5px;
     font-weight: var(--font-weight-regular);
     color: rgb(var(--product-unit-color));
+    font-size: var(--fontSize-100);
 }
 .unit:before {
     content: "/"
 }
+
+.labelWrapper {
+    display: flex;
+}
+
+.labelItem {
+    background-image: var(--productLabel);
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    background-size: 195px;
+    margin-left: 5px;;
+}
+
+.labelItem:first-child {
+    margin-left: 0;
+}
+
+.labelItem  span {
+    font-size: 0;
+}
+
+.onSale {
+    background-position: -140px -75px;
+    
+}
+
+.freeShipping {
+    background-position: -140px ​-10px;
+   
+}
+.onlinePrice {
+    background-position: -75px -75px;
+   
+}
+
+.bulkSavings {
+    background-position: -10px -75px;
+}
+
+.newItem {
+    background-position: -75px ​-10px;
+}
+.disallowPickupatstore {
+    background-position: -10px -10px;
+}
+
+.allowStorePickup {
+    background-position: -10px -10px;
+}
+
 
 /* state: pending */
 

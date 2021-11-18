@@ -8,10 +8,17 @@ import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
 import resourceUrl from '../../../../peregrine/makeUrl';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
+// import productLabel from '../../assets/labelSprite.png';
+import productLabel from '../../../../../assets/labelSprite.png';
 import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 import { drop, includes, camelCase, size } from 'lodash'
+
+
+const style = {
+    '--productLabel': `url("${productLabel}")`,
+};
 
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
@@ -72,23 +79,25 @@ const GalleryItem = props => {
 
     return (
         <div className={classes.root}>
-            <Link
-                onClick={handleLinkClick}
-                to={productLink}
-                className={classes.images}
-            >
-                <Image
-                    alt={name}
-                    classes={{
-                        image: classes.image,
-                        root: classes.imageContainer
-                    }}
-                    height={IMAGE_HEIGHT}
-                    src={originalUrl}
-                    // src={smallImageURL}
-                    widths={IMAGE_WIDTHS}
-                />
-            </Link>
+            <div className={classes.itemImageContainer}>
+                <Link
+                    onClick={handleLinkClick}
+                    to={productLink}
+                    className={classes.images}
+                >
+                    <Image
+                        alt={name}
+                        classes={{
+                            image: classes.image,
+                            root: classes.imageContainer
+                        }}
+                        height={IMAGE_HEIGHT}
+                        src={originalUrl}
+                        // src={smallImageURL}
+                        widths={IMAGE_WIDTHS}
+                    />
+                </Link>
+            </div>
             <Link
                 onClick={handleLinkClick}
                 to={productLink}
@@ -97,20 +106,9 @@ const GalleryItem = props => {
                 <span>{name}</span>
             </Link>
             <div className={classes.sku}>
-                <span>SKU - {sku}</span>
+                <span>{sku}</span>
             </div>
-            {!!size(product_label) &&
-                <div className={classes.labelWrapper}>
-                    {product_label.map((labelObj) => {
-                        return (
-                            <div
-                                className={[classes.labelItem, classes[camelCase(labelObj.label)]].join(" ")}>
-                                <span>{camelCase(labelObj.label)}</span>
-                            </div>
-                        )
-                    })}
-                </div>
-            }
+
             <div className={classes.price}>
                 <Price
                     value={price.regularPrice.amount.value}
@@ -118,7 +116,21 @@ const GalleryItem = props => {
                 />
                 <span className={classes.unit}>{uom}</span>
             </div>
-            <div className={classes.productLabel}></div>
+
+            {!!size(product_label) &&
+                <div className={classes.labelWrapper}>
+                    {product_label.map((labelObj) => {
+                        return (
+                            <div
+                                className={[classes.labelItem, classes[camelCase(labelObj.label)]].join(" ")}
+                                style={style}>
+                                <span>{camelCase(labelObj.label)}</span>
+                            </div>
+                        )
+                    })}
+                </div>
+            }
+
         </div>
     );
 };
