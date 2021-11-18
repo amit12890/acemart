@@ -42,7 +42,7 @@
     justify-self: start;
 }
 .label:hover {
-    color: rgb(var(--color-gray-middle2));
+    color: rgb(var(--link-color-hover));
 }
 
 .input:disabled {

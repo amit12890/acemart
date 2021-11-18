@@ -72,6 +72,8 @@
        --text-color: var(--color-gray10);
        --text-color-alt: var(--color-gray20);
 
+       --text-color-light: var(--color-gray10);
+
        --color-gray-darken0: 118 123 127;
        --color-gray-darken10: var(--color-gray20);
 

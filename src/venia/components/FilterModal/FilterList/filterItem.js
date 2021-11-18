@@ -29,15 +29,15 @@ const FilterItem = props => {
 
     return (
         <>
-        <FilterDefault
-            isSelected={isSelected}
-            isExpanded={isExpanded}
-            item={tileItem}
-            onClick={handleClick}
-            title={title}
-            value={value}
-        />
-        <span>{count}</span>
+            <FilterDefault
+                isSelected={isSelected}
+                isExpanded={isExpanded}
+                item={tileItem}
+                onClick={handleClick}
+                title={title}
+                value={value}
+            />
+            <strong>{count}</strong>
         </>
     );
 };

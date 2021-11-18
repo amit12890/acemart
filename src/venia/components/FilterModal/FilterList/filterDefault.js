@@ -21,23 +21,23 @@ const FilterDefault = props => {
 
     const ariaLabel = !isSelected
         ? formatMessage(
-              {
-                  id: 'filterModal.item.applyFilter',
-                  defaultMessage: 'Apply filter'
-              },
-              {
-                  optionName: label
-              }
-          )
+            {
+                id: 'filterModal.item.applyFilter',
+                defaultMessage: 'Apply filter'
+            },
+            {
+                optionName: label
+            }
+        )
         : formatMessage(
-              {
-                  id: 'filterModal.item.clearFilter',
-                  defaultMessage: 'Remove filter'
-              },
-              {
-                  optionName: label
-              }
-          );
+            {
+                id: 'filterModal.item.clearFilter',
+                defaultMessage: 'Remove filter'
+            },
+            {
+                optionName: label
+            }
+        );
 
     return (
         <Checkbox

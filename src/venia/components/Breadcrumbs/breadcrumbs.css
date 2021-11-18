@@ -11,7 +11,7 @@
 .text {
     padding: 0 0.25rem;
     color: rgb(var(--color-black));
-    font-weight: var(-font-weight-bold);
+    font-weight: var(--font-weight-bold);
 }
 
 .divider {
@@ -26,4 +26,5 @@
 
 .currentCategory {
     composes: text;
+    font-weight: var(--font-weight-regular);
 }
