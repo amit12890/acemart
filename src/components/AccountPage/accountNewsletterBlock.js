@@ -18,19 +18,21 @@ const AccountNewsletterBlock = () => {
         return <div>Loading....</div>
     }
 
-    return(
-        <div>
+    return (
+        <div className={classes.newsletterBlock}>
             <h2 className={classes.red}>Newsletters</h2>
-            <div>
-                <div>
-                    {subscription ?
+            <div className={classes.panelContent}>
+                {subscription ?
                     'You are subscribed to "General Subscription"'
                     :
                     'You are NOT subscribed to "General Subscription"'}
+                <div className={classes.actionToolbar}>
+                    <Link
+                        className={classes.action}
+                        to={newsletterPage()}>
+                        Edit
+                    </Link>
                 </div>
-                <Link to={newsletterPage()}>
-                    Edit
-                </Link>
             </div>
         </div>
     )

@@ -9,5 +9,5 @@
 }
 
 .root:hover {
-    color: rgb(var(--color-gray40));
+    text-decoration: none;
 }

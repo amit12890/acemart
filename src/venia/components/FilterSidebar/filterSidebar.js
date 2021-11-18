@@ -7,8 +7,14 @@ import { useFilterSidebar } from '../../../magento/peregrine/talons/FilterSideba
 import { useStyle } from '../../classify';
 import LinkButton from '../LinkButton';
 import CurrentFilters from '../FilterModal/CurrentFilters';
+import productLabel from '../../../assets/labelSprite.png';
 import FilterBlock from '../FilterModal/filterBlock';
 import defaultClasses from './filterSidebar.css';
+
+
+const style = {
+    '--productLabel': `url("${productLabel}")`,
+};
 
 const SCROLL_OFFSET = 150;
 
@@ -28,7 +34,7 @@ const FilterSidebar = props => {
         handleApply,
         handleReset
     } = talonProps;
-        console.log("🚀 ~ file: filterSidebar.js ~ line 31 ~ filterItems", filterItems)
+    console.log("🚀 ~ file: filterSidebar.js ~ line 31 ~ filterItems", filterItems)
 
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
@@ -92,7 +98,13 @@ const FilterSidebar = props => {
                     const groupName = filterNames.get(group);
 
                     return (
-                        <div className={classes[camelCase(group)]}>{groupName}</div>
+                        <div className={classes.labelItem}>
+                            <i
+                                className={classes[camelCase(group)]}
+                                style={style}
+                            ></i>
+                            <span className={classes.filterLabel}>{groupName}</span>
+                        </div>
                     );
                 }
             }),
@@ -137,7 +149,7 @@ const FilterSidebar = props => {
                     />
                     {clearAll}
                     <ul className={classes.blocks}>{filtersList}</ul>
-                    <div>{toggleFiltersList}</div>
+                    <div className={classes.labelWrapper}>{toggleFiltersList}</div>
                 </div>
             </aside>
         </Fragment>

@@ -57,10 +57,9 @@
 }
 
 .actionContainer {
-    align-content: start;
-    display: grid;
+display: flex;
     justify-items: start;
-    row-gap: 0.5rem;
+    
 }
 
 .defaultBadge {
@@ -98,10 +97,12 @@
 
 .editButton {
     composes: linkButton;
+    margin-right: 25px;
 }
 
 .deleteButton {
     composes: linkButton;
+
 }
 
 @media (max-width: 640px) {

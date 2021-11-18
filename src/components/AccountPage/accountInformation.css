@@ -78,6 +78,7 @@
 }
 .editInformationButton:hover {
     text-decoration: none;
+    color: rgb(var(--theme-color-primary));
 }
 
 @media (min-width: 961px) {

@@ -32,22 +32,31 @@ const CompareListBlock = () => {
 
     return (
         <div className={classes.root}>
-            <h1>This is Compare List Block</h1>
+            <div className={classes.blockTitle}>Compare Products</div>
             {hasItems ?
                 <div>
                     {items.map((item) => {
                         const product = item.product;
                         return (
-                            <div key={item.uid}>
-                                <span>{product.name}</span>
-                                <RemoveItemFromCompareList listId={listId} itemId={item.product.id} 
-                                    Child={() => <Button>Remove</Button>}
+                            <div key={item.uid} className={classes.compareItem}>
+                                <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
+                                    Child={() =>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                <title>remove</title>
+                                                <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
+                                            </svg>
+                                        </i>
+                                    }
                                     Loader={() => <div>Loading...</div>}
                                 />
+                                <span>{product.name}</span>
                             </div>
                         )
                     })}
-                    <Link to={compareListPage()}>Compare</Link>
+                    <div className={classes.actionToolbar}>
+                        <Link className={classes.action} to={compareListPage()}>Compare</Link>
+                    </div>
                 </div>
                 :
                 <div>No Items in compare list</div>

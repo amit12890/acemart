@@ -163,6 +163,7 @@
 
     /* dimensions */
     --venia-global-maxWidth: 1366px;
+    --layout-indent-width: 15px;
     --venia-global-header-minHeight: 5rem;
 
 }

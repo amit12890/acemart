@@ -118,6 +118,7 @@
 
 .button_asLink:hover {
     text-decoration: underline;
+    color: rgb(var(--stroke));
 }
 
 .cancelButton {

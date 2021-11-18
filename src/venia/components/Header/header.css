@@ -203,8 +203,8 @@
 .panelBody {
     max-width: var(--venia-global-maxWidth);
     width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: var(--layout-indent-width);
+    padding-right: var(--layout-indent-width);
 }
 
 .pageTop {

@@ -33,7 +33,7 @@ const LandingPage = (props) => {
         // return <div className="wholewrapper" dangerouslySetInnerHTML={toHTML(html)} />;
 
         return (
-            <div>
+            <div className={classes.homePageWrapper}>
                 <RichContent html={html} />
                 <ResourceList
                     data={get(landingPageData, "blogPosts.items", [])}
