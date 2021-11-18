@@ -28,6 +28,8 @@ const Category = props => {
         sortProps,
         pageSize
     } = talonProps;
+        console.log("🚀 ~ file: category.js ~ line 31 ~ error", error)
+        console.log("🚀 ~ file: category.js ~ line 31 ~ categoryData", categoryData)
 
     const classes = useStyle(defaultClasses, props.classes);
 

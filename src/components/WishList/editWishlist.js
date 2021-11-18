@@ -4,27 +4,25 @@ import { Form } from 'informed';
 import Field from '../../venia/components/Field';
 import Button from '../../venia/components/Button';
 import TextInput from '../../venia/components/TextInput';
-import FormError from '../../venia/components/FormError/formError';
 
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import { useStyle } from '../../venia/classify';
 import { useApiData } from '../../data.utils';
-import { useUserContext } from '@magento/peregrine/lib/context/user';
 import defaultClasses from './wishlistPage.css';
+import { HOST_URL } from '../../url.utils';
 
 
 const EditWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    const [{ currentUser }, _] = useUserContext();
-
+    
     const { callApi: editWishlist, response, loading, error } = useApiData({
-        url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/save`,
+        url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
         onSuccess: () => props.refreshWishlist()
     })
     const { callApi: deleteWishlist, loading: loadingDelete } = useApiData({
-        url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/delete/${props.multi_wishlist_id}`,
+        url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/delete/${props.multi_wishlist_id}`,
         method: "delete",
         isLazy: true,
         onSuccess: () => props.refreshWishlist()
@@ -40,7 +38,6 @@ const EditWishlist = props => {
                 "multi_wishlist_id": props.multi_wishlist_id,
             }
         }
-        console.log("🚀 ~ file: editWishlist.js ~ line 35 ~ handleEditWishlist ~ data", postData);
         editWishlist(null, postData);
     }, [props.customerId, loading])
 
@@ -51,16 +48,7 @@ const EditWishlist = props => {
     }, [loading, loadingDelete])
 
     return (
-
-
-
-
         <div className={classes.root}>
-
-
-
-
-
             <div className={classes.editWishlistWrapper}>
                 <Form className={classes.editForm} initialValues={{ name: props.name || "" }}
                     onSubmit={handleEditWishlist}>
