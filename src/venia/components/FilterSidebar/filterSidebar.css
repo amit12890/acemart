@@ -43,6 +43,10 @@
     
 }
 
+.freeShipping {
+    background-color: red;
+}
+
 @media (min-width: 1024px) {
     .root {
         display: grid;
