@@ -1,5 +1,5 @@
 /*!
- * @version 56254ba-dev
+ * @version 458bb7c-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[73],{Oaag:function(t,n,r){(n=t.exports=r("JPst")(!1)).push([t.i,".buttons-root-ya1 {\n    max-width: 100%;\n}\n.buttons-root-ya1 > div {\n    display: inline-block;\n    margin-bottom: 0.5rem;\n    max-width: 100%;\n}\n.buttons-root-ya1 button[class] {\n    max-width: 100%;\n    overflow: hidden;\n    min-width: var(--buttonMinWidth);\n}\n.buttons-stacked-1PR {\n    display: flex;\n    flex-wrap: wrap;\n    flex-direction: column;\n}\n.buttons-inline-1A0 > div {\n    margin-inline-end: 0.5rem;\n}\n",""]),n.locals={root:"buttons-root-ya1",stacked:"buttons-stacked-1PR",inline:"buttons-inline-1A0"}},PblN:function(t,n,r){"use strict"

@@ -48,7 +48,6 @@ export const useProduct = props => {
 
     const sku = pathname.split('/').pop();
     const urlKey =  productUrlSuffix ? sku.replace(productUrlSuffix, '') : sku;
-    // "valueline-acf-08-p-8-1-2-natural-finish-aluminum-fry-pan-aaaacf-08-p"
 
     const { error, loading, data } = useQuery(getProductDetailQuery, {
         fetchPolicy: 'cache-and-network',

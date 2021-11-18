@@ -1,5 +1,5 @@
 /*!
- * @version 56254ba-dev
+ * @version 458bb7c-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[46],{A1Hx:function(e,t,n){(t=e.exports=n("JPst")(!1)).push([e.i,".wishlistItems-root-2Hs {\n    display: grid;\n    grid-gap: 2rem;\n    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));\n}\n\n@media (max-width: 480px) {\n    .wishlistItems-root-2Hs {\n        column-gap: 1rem;\n    }\n}\n",""]),t.locals={root:"wishlistItems-root-2Hs"}},ACyH:function(e,t,n){"use strict"
