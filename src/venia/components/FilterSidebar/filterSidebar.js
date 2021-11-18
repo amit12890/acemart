@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback, useRef, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { array, arrayOf, shape, string, number } from 'prop-types';
+import { camelCase } from 'lodash-es';
 import { useFilterSidebar } from '../../../magento/peregrine/talons/FilterSidebar';
 
 import { useStyle } from '../../classify';
@@ -27,9 +28,13 @@ const FilterSidebar = props => {
         handleApply,
         handleReset
     } = talonProps;
+        console.log("🚀 ~ file: filterSidebar.js ~ line 31 ~ filterItems", filterItems)
 
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
+    const staticLabelGroups = new Set([
+        "on_sale", "free_shipping", "online_price", "bulk_savings", "new_item", "disallow_pickupatstore"
+    ]);
 
     const handleApplyFilter = useCallback(
         (...args) => {
@@ -52,21 +57,44 @@ const FilterSidebar = props => {
     const filtersList = useMemo(
         () =>
             Array.from(filterItems, ([group, items], iteration) => {
-                const blockState = filterState.get(group);
-                const groupName = filterNames.get(group);
+                if (!staticLabelGroups.has(group)) {
+                    const blockState = filterState.get(group);
+                    const groupName = filterNames.get(group);
 
-                return (
-                    <FilterBlock
-                        key={group}
-                        filterApi={filterApi}
-                        filterState={blockState}
-                        group={group}
-                        items={items}
-                        name={groupName}
-                        onApply={handleApplyFilter}
-                        initialOpen={iteration < filterCountToOpen}
-                    />
-                );
+                    return (
+                        <FilterBlock
+                            key={group}
+                            filterApi={filterApi}
+                            filterState={blockState}
+                            group={group}
+                            items={items}
+                            name={groupName}
+                            onApply={handleApplyFilter}
+                            initialOpen={true}
+                        />
+                    );
+                }
+            }),
+        [
+            filterApi,
+            filterItems,
+            filterNames,
+            filterState,
+            filterCountToOpen,
+            handleApplyFilter
+        ]
+    );
+
+    const toggleFiltersList = useMemo(
+        () =>
+            Array.from(filterItems, ([group, items], iteration) => {
+                if (staticLabelGroups.has(group)) {
+                    const groupName = filterNames.get(group);
+
+                    return (
+                        <div className={classes[camelCase(group)]}>{groupName}</div>
+                    );
+                }
             }),
         [
             filterApi,
@@ -109,6 +137,7 @@ const FilterSidebar = props => {
                     />
                     {clearAll}
                     <ul className={classes.blocks}>{filtersList}</ul>
+                    <div>{toggleFiltersList}</div>
                 </div>
             </aside>
         </Fragment>
