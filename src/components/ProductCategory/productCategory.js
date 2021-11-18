@@ -19,7 +19,8 @@ export default ({ data }) => {
             return (
                 <div className={defaultClasses.subcatListItem}>
                     <Image
-                        classes={{image: classes.image}}
+                        width="100"
+                        classes={{ image: classes.image }}
                         src={image}
                     />
                 </div>
