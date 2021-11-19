@@ -1,4 +1,5 @@
-const HOST_URL = "https://dev-acemart.magedelight.magentoprojects.net";
+export const HOST_URL = "https://dev-acemart.magedelight.magentoprojects.net";
+// export const HOST_URL = "https://qa-acemart-backend.magedelight.magentoprojects.net";
 
 /** Handle all url routes */
 

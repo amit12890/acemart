@@ -14,10 +14,6 @@ export const CategoryFragment = gql`
             url_key
             url_suffix
         }
-        sub_cat{
-            name
-            url
-        }
     }
 `;
 

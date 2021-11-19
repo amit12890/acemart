@@ -19,7 +19,6 @@ export const WishlistItemFragment = gql`
                 }
             }
             sku
-            stock_status
             ... on ConfigurableProduct {
                 configurable_options {
                     id

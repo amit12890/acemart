@@ -4,19 +4,19 @@ import { Form } from 'informed';
 import Field from '../../venia/components/Field';
 import Button from '../../venia/components/Button';
 import TextInput from '../../venia/components/TextInput';
-import FormError from '../../venia/components/FormError/formError';
 
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import { useStyle } from '../../venia/classify';
 import { useApiData } from '../../data.utils';
 import defaultClasses from './createWishlist.css';
+import { HOST_URL } from '../../url.utils';
 
 
 const CreateWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     const { callApi, response, loading, error } = useApiData({
-        url: `https://dev-acemart.magedelight.magentoprojects.net/rest/V1/bsscommerce/multiwishlist/save`,
+        url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
         onSuccess: () => props.refreshWishlist()
