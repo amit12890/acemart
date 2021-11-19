@@ -3,6 +3,7 @@
 - All required translation text will be in JSON file under i18n base folder
 - Add text with its id as key ( see example below )
 - Use text as required in component with react-intl third-party library
+- more on: https://magento.github.io/pwa-studio/technologies/basic-concepts/internationalization/
 
 ## example i18n json entry
 
