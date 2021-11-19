@@ -187,12 +187,37 @@ const ProductListing = props => {
                                     <div className={classes.itemQty}>
                                         <span className={classes.qtyLabel}>Qty</span>
                                         <span className={classes.qtyValue}>{qty}</span></div>
-                                    <div className={classes.addtocartActions}>
+                                    <div className={classes.boxCart}>
+
                                         Add to cart
                                     </div>
 
+                                    <div className={classes.productItemQuickActions}>
+                                        <div className={[classes.action, classes.delete].join(" ")}>
+                                            <span>
+                                                <i className={classes.iconWrapper}>
+                                                    <svg className={[classes.svgIcon, classes.deleteIcon].join(" ")} width="32" height="32" viewBox="0 0 32 32">
+                                                        <title>remove</title>
+                                                        <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
+                                                    </svg>
+                                                </i>
+                                            </span>
+                                        </div>
+
+                                        <div className={[classes.action, classes.edit].join(" ")} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
+                                            {removeProductLoading ? <span>Loading...</span> :
+                                                <span>
+                                                    <i className={classes.iconWrapper}>
+                                                        <svg className={[classes.svgIcon, classes.editIcon].join(" ")} width="27" height="32" viewBox="0 0 27 32">
+                                                            <title>edit</title>
+                                                            <path d="M6.469 27.719l1.625-1.625-4.188-4.188-1.625 1.625v1.906h2.281v2.281h1.906zM15.813 11.156q0-0.188-0.109-0.297t-0.266-0.109q-0.094 0-0.172 0.031t-0.141 0.094l-9.688 9.688q-0.063 0.063-0.094 0.141t-0.031 0.141q0 0.188 0.109 0.297t0.297 0.109q0.063 0 0.141-0.031t0.172-0.094l9.656-9.688q0.063-0.063 0.094-0.141t0.031-0.141v0zM14.844 7.719l7.438 7.438-14.844 14.844h-7.438v-7.438zM27.063 9.438q0 0.438-0.188 0.859t-0.469 0.734l-2.969 2.969-7.438-7.438 2.969-2.938q0.313-0.313 0.734-0.5t0.859-0.188q0.469 0 0.891 0.188t0.734 0.5l4.219 4.188q0.281 0.313 0.469 0.734t0.188 0.891v0z"></path>
+                                                        </svg>
+                                                    </i>
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
                                     <div className={classes.productItemActions}>
-                                        <div className={classes.action}><span>Edit</span></div>
                                         <div className={classes.action} onClick={() => {
                                             setSelectedProduct({ productId: product_id, productQty: qty });
                                             setActionType("copy");
@@ -203,9 +228,6 @@ const ProductListing = props => {
                                             setActionType("move");
                                         }}>
                                             <span>Move</span></div>
-                                        <div className={classes.action} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
-                                            {removeProductLoading ? <span>Loading...</span> : <span>Remove</span>}
-                                        </div>
                                     </div>
                                 </div>
 
