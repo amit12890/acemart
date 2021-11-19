@@ -62,17 +62,17 @@ const WishlistPage = props => {
                     const selectedWishListId = !!selectedWishlist ? selectedWishlist.multi_wishlist_id : null;
                     return (
                         <div
-                            className={`${classes.tabsItem} ${
-                                wishlist.multi_wishlist_id === selectedWishListId
+                            className={`${classes.tabsItem} ${wishlist.multi_wishlist_id === selectedWishListId
                                 ? classes.tabsItem_active : ""
-                            }`}
+                                }`}
                             key={wishlist.multi_wishlist_id}
                             onClick={() => setSelectedWishlist(wishlist)}>
                             <div className={classes.itemSwitch}>
                                 {wishlist.wishlist_name}
                             </div>
                         </div>
-                    )})}
+                    )
+                })}
             </div>
         )
     }
@@ -142,7 +142,7 @@ const ProductListing = props => {
         setSelectedProduct(null);
         setActionType(null);
     }, [setSelectedProduct, setActionType]);
-    const handleRemoveProduct = useCallback( async (wishlistId, itemId) => {
+    const handleRemoveProduct = useCallback(async (wishlistId, itemId) => {
         if (removeProductLoading) return;
         await removeProductFromWishlist({
             variables: {
@@ -184,23 +184,27 @@ const ProductListing = props => {
                                         <textarea className={classes.textarea}>
                                         </textarea>
                                     </div>
-                                    <div className={classes.itemQty}>{qty}</div>
-                                    <div className={classes.addtocartActions}>Add to cart</div>
+                                    <div className={classes.itemQty}>
+                                        <span className={classes.qtyLabel}>Qty</span>
+                                        <span className={classes.qtyValue}>{qty}</span></div>
+                                    <div className={classes.addtocartActions}>
+                                        Add to cart
+                                    </div>
 
                                     <div className={classes.productItemActions}>
                                         <div className={classes.action}><span>Edit</span></div>
                                         <div className={classes.action} onClick={() => {
-                                                setSelectedProduct({productId: product_id, productQty: qty});
-                                                setActionType("copy");
-                                            }}>
+                                            setSelectedProduct({ productId: product_id, productQty: qty });
+                                            setActionType("copy");
+                                        }}>
                                             <span>Copy</span></div>
                                         <div className={classes.action} onClick={() => {
-                                                setSelectedProduct({productId: wishlist_item_id, productQty: qty});
-                                                setActionType("move");
-                                            }}>
+                                            setSelectedProduct({ productId: wishlist_item_id, productQty: qty });
+                                            setActionType("move");
+                                        }}>
                                             <span>Move</span></div>
                                         <div className={classes.action} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
-                                            {removeProductLoading ? <span>Loading...</span>:<span>Remove</span> }
+                                            {removeProductLoading ? <span>Loading...</span> : <span>Remove</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -210,12 +214,12 @@ const ProductListing = props => {
                     )
                 })}
             </div>
-            {(!!selectedProduct && actionType ==="copy") && 
+            {(!!selectedProduct && actionType === "copy") &&
                 <WishlistCopyProductPopup closeWishlistPopup={handlePopupClose}
                     wishlists={wishlists} refreshWishlist={refreshWishlist} {...selectedProduct} />
             }
 
-            {(!!selectedProduct && actionType ==="move") && 
+            {(!!selectedProduct && actionType === "move") &&
                 <WishlistMoveProductPopup closeWishlistPopup={handlePopupClose}
                     wishlists={wishlists} refreshWishlist={refreshWishlist} {...selectedProduct} />
             }

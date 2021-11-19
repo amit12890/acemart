@@ -34,10 +34,6 @@ const FilterSidebar = props => {
         handleApply,
         handleReset
     } = talonProps;
-<<<<<<< HEAD
-    console.log("🚀 ~ file: filterSidebar.js ~ line 31 ~ filterItems", filterItems)
-=======
->>>>>>> c205fe6ab604d4ed5568731dd0a013ffacf466cd
 
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
