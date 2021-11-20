@@ -7,6 +7,7 @@ import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useI
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
@@ -164,8 +165,11 @@ const GalleryItem = props => {
                             Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
                         />
                         {showWishlistPopup &&
+                            <>
+                            <Mask isActive={true} />
                             <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
                                 closeWishlistPopup={closeWishlistPopup} />
+                            </>
                         }
                     </div>
 
