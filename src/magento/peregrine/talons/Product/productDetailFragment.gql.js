@@ -22,6 +22,7 @@ export const ProductDetailsFragment = gql`
         }
         meta_description
         name
+        product_name
         price {
             regularPrice {
                 amount {
@@ -30,8 +31,8 @@ export const ProductDetailsFragment = gql`
                 }
             }
         }
-        sku uom
-        availability
+        sku uom mpn
+        youtube_filename
         small_image {
             url
         }

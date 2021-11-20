@@ -10,7 +10,7 @@ import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullD
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 
 import { useStyle } from '../../classify';
-import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
+import Breadcrumbs from "../Breadcrumbs"
 import Button from '../Button';
 import Carousel from '@magento/venia-ui/lib/components/ProductImageCarousel';
 import FormError from '@magento/venia-ui/lib/components/FormError';
@@ -165,9 +165,11 @@ const ProductFullDetail = props => {
                 </div>
                 <div>
                     <h1 className={classes.productName}>
-                        {productDetails.name}
+                        {product.product_name}
                     </h1>
-                    <div>Sku: {productDetails.sku} | Model Number:</div>
+                    <div>
+                        Sku: {productDetails.sku} | Model Number: {product.mpn}
+                    </div>
                     <div>
                         <Price
                             currencyCode={productDetails.price.currency}
@@ -176,6 +178,18 @@ const ProductFullDetail = props => {
                         <div>/ {product.uom}</div>
                     </div>
                     <div>{product.availability} In Stock</div>
+                    {productDetails.price.value > 500 && (
+                        <div>
+                            {"Finance for as low as "}
+                            <Price
+                                currencyCode={productDetails.price.currency}
+                                value={productDetails.price.value / 39.5}
+                            />/month
+                        </div>
+                    )}
+                    {product.youtube_filename &&
+                        <iframe src={`https://www.youtube.com/embed/${product.youtube_filename}`}/>
+                    }
                 </div>
                 <Form onSubmit={handleAddToCart}>
                     {/* form */}
