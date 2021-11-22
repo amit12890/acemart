@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-import { ProductDetailsFragment } from './productDetailFragment.gql';
+import { ProductDetailsFragment, ProductBasicDetailsFragment } from './productDetailFragment.gql';
 
 export const GET_STORE_CONFIG_DATA = gql`
     query getStoreConfigData {
@@ -17,10 +17,17 @@ export const GET_PRODUCT_DETAIL_QUERY = gql`
             items {
                 id
                 ...ProductDetailsFragment
+                upsell_products {
+                    ...ProductBasicDetailsFragment
+                }
+                related_products {
+                    ...ProductBasicDetailsFragment
+                }
             }
         }
     }
     ${ProductDetailsFragment}
+    ${ProductBasicDetailsFragment}
 `;
 
 export default {

@@ -1,22 +1,28 @@
-import React, { Fragment, Suspense } from 'react';
+import React, { Fragment, Suspense, useState, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
 import { Info } from 'react-feather';
-import { get } from 'lodash';
+import { get, size } from 'lodash';
+import { Link } from 'react-router-dom';
 
 import Price from '@magento/venia-ui/lib/components/Price';
-import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
-import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
-
-import { useStyle } from '../../classify';
-import Breadcrumbs from "../Breadcrumbs"
-import Button from '../Button';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 import Carousel from '@magento/venia-ui/lib/components/ProductImageCarousel';
 import FormError from '@magento/venia-ui/lib/components/FormError';
+import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
+import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { QuantityFields } from '@magento/venia-ui/lib/components/CartPage/ProductListing/quantity';
+
+import { useStyle } from '../../classify';
+import Breadcrumbs from '../Breadcrumbs';
+import Button from '../Button';
 import RichText from '../RichText';
+import WishlistPopup from '../../../components/WishList/wishlistPopup';
+import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
+import Gallery from '../Gallery';
+
 import defaultClasses from './productFullDetail.css';
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
@@ -39,9 +45,17 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 const ProductFullDetail = props => {
     console.log('line 39 ~ props', props);
     const { product } = props;
+    const [showWishlistPopup, setShowWishlistPopup] = useState(false);
 
     const talonProps = useProductFullDetail({ product });
     console.log('line 43 ~ talonProps', talonProps);
+
+    const openWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(true);
+    }, [setShowWishlistPopup]);
+    const closeWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(false);
+    }, [setShowWishlistPopup]);
 
     const {
         breadcrumbCategoryId,
@@ -155,9 +169,13 @@ const ProductFullDetail = props => {
         </div>
     );
 
+    const upsellProducts = get(product, 'upsell_products', []);
+    const relatedProducts = get(product, 'related_products', []);
+
     return (
         <Fragment>
             {breadcrumbs}
+            <Mask isActive={showWishlistPopup} />
             <div>
                 <div>
                     {/* Carousel */}
@@ -180,16 +198,21 @@ const ProductFullDetail = props => {
                     <div>{product.availability} In Stock</div>
                     {productDetails.price.value > 500 && (
                         <div>
-                            {"Finance for as low as "}
+                            {'Finance for as low as '}
                             <Price
                                 currencyCode={productDetails.price.currency}
                                 value={productDetails.price.value / 39.5}
-                            />/month
+                            />
+                            /month
                         </div>
                     )}
-                    {product.youtube_filename &&
-                        <iframe src={`https://www.youtube.com/embed/${product.youtube_filename}`}/>
-                    }
+                    {product.youtube_filename && (
+                        <iframe
+                            src={`https://www.youtube.com/embed/${
+                                product.youtube_filename
+                            }`}
+                        />
+                    )}
                 </div>
                 <Form onSubmit={handleAddToCart}>
                     {/* form */}
@@ -211,6 +234,43 @@ const ProductFullDetail = props => {
                         <Suspense fallback={null}>
                             <WishlistButton {...wishlistButtonProps} />
                         </Suspense>
+                        <div>
+                            <Button onClick={openWishlistPopup}>
+                                ADD TO WISHLIST
+                            </Button>
+                        </div>
+                        <div>
+                            <AddItemsToCompareList
+                                itemId={product.id}
+                                Child={() => <Button>ADD TO COMPARE</Button>}
+                                Loader={() => (
+                                    <div className={classes.actionsContainer}>
+                                        Loading....
+                                    </div>
+                                )}
+                            />
+                        </div>
+                        <div>
+                            <Button>SHARE THIS ITEM</Button>
+                        </div>
+                        <div>
+                            <Button onClick={() => window.print()}>
+                                PRINT THIS PAGE
+                            </Button>
+                        </div>
+                        {product.specsheet && (
+                            <div>
+                                <img src="/pub/media/attribute/pdf-logo32px.svg.png" />
+                                <Link
+                                    to={`/pub/media/specsheets/${
+                                        product.specsheet
+                                    }.pdf`}
+                                    target="_blank"
+                                >
+                                    Specsheet
+                                </Link>
+                            </div>
+                        )}
                     </div>
                     <FormError
                         classes={{
@@ -248,7 +308,9 @@ const ProductFullDetail = props => {
                                 return (
                                     <tr>
                                         <td>{info.label}</td>
-                                        <td>{info.value}</td>
+                                        <td>
+                                            <RichText content={info.value} />
+                                        </td>
                                     </tr>
                                 );
                             })}
@@ -263,7 +325,26 @@ const ProductFullDetail = props => {
                         />
                     </h2>
                 </section>
+                {!!size(upsellProducts) && (
+                    <section className={classes.gallery}>
+                        <strong>We found other products you might like!</strong>
+                        <Gallery items={upsellProducts} />
+                    </section>
+                )}
+                {!!size(relatedProducts) && (
+                    <section className={classes.gallery}>
+                        <strong>We found other related products</strong>
+                        <Gallery items={relatedProducts} />
+                    </section>
+                )}
             </div>
+            {showWishlistPopup && (
+                <WishlistPopup
+                    productId={product.id}
+                    productQty={wishlistButtonProps.item.quantity}
+                    closeWishlistPopup={closeWishlistPopup}
+                />
+            )}
         </Fragment>
     );
 };
