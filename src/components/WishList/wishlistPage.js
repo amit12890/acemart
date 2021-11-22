@@ -52,7 +52,7 @@ const WishlistPage = props => {
     if (loading || loadingCustomerDetails) {
         wishlistTabs = <LoadingIndicator />;
     }
-    else if (wishlists.length === 0) {
+    else if (size(wishlists) === 0) {
         wishlistTabs = <Wishlist />;
     }
     else if (error) {
@@ -61,7 +61,7 @@ const WishlistPage = props => {
     else {
         wishlistTabs = (
             <div className={classes.tabsContainer}>
-                {wishlists.map((wishlist) => {
+                {(!!size(wishlists)) && wishlists.map((wishlist) => {
                     const selectedWishListId = !!selectedWishlist ? selectedWishlist.multi_wishlist_id : null;
                     return (
                         <div

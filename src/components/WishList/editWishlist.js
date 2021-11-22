@@ -71,7 +71,7 @@ const EditWishlist = props => {
                         >
                             {loading ? "Loading..." : "Edit"}
                         </Button>
-                        {props.multi_wishlist_id !== 0 &&
+                        {(props.multi_wishlist_id !== 0) &&
                             <Button
                                 classes={classes.confirmButton}
                                 disabled={loadingDelete}
