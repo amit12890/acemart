@@ -18,7 +18,9 @@ import FilterModalOpenButton from '../../venia/components/FilterModalOpenButton'
 import ProductCategory from '../../components/ProductCategory/productCategory';
 import { get } from 'lodash-es';
 
-const FilterModal = React.lazy(() => import('../../venia/components/FilterModal'));
+const FilterModal = React.lazy(() =>
+    import('../../venia/components/FilterModal')
+);
 const FilterSidebar = React.lazy(() =>
     import('../../venia/components/FilterSidebar')
 );
@@ -78,13 +80,10 @@ const CategoryContent = props => {
 
     const categoryResultsHeading =
         totalCount > 0 ? (
-            <FormattedMessage
-                id={'categoryContent.resultCount'}
-                values={{
-                    count: totalCount
-                }}
-                defaultMessage={'{count} Results'}
-            />
+            <div>
+                Items 1-{Math.floor(totalCount / totalPagesFromData)} of{' '}
+                {totalCount}
+            </div>
         ) : null;
 
     const categoryDescriptionElement = categoryDescription ? (
@@ -141,7 +140,8 @@ const CategoryContent = props => {
                             </div>
                             <div className={classes.subcategoryWrapper}>
                                 <ProductCategory
-                                    data={get(data, "category.children", [])} />
+                                    data={get(data, 'category.children', [])}
+                                />
                             </div>
                         </div>
 
