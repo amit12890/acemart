@@ -18,13 +18,11 @@ export default ({ data }) => {
             const image = get(item, "image", "");
             return (
                 <div className={defaultClasses.subcatListItem}>
-                    {image &&
-                        <Image
-                            width="100"
-                            classes={{ image: classes.image }}
-                            src={image}
-                        />
-                    }
+                    <Image
+                        width="100"
+                        classes={{ image: classes.image }}
+                        src={image}
+                    />
                 </div>
             )
         })

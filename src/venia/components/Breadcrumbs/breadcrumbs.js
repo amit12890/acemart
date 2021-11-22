@@ -8,7 +8,7 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import defaultClasses from './breadcrumbs.css';
 
-const DELIMITER = '/';
+const DELIMITER = '>';
 /**
  * Breadcrumbs! Generates a sorted display of category links.
  *
@@ -61,7 +61,7 @@ const Breadcrumbs = props => {
     const currentProductNode = currentProduct ? (
         <Fragment>
             <span className={classes.divider}>{DELIMITER}</span>
-            <span className={classes.text}>{currentProduct}</span>
+            <span className={classes.currentState}>{currentProduct}</span>
         </Fragment>
     ) : null;
 

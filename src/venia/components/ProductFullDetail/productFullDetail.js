@@ -183,11 +183,9 @@ const ProductFullDetail = props => {
                 </div>
                 <div>
                     <h1 className={classes.productName}>
-                        {product.product_name}
+                        {productDetails.name}
                     </h1>
-                    <div>
-                        Sku: {productDetails.sku} | Model Number: {product.mpn}
-                    </div>
+                    <div>Sku: {productDetails.sku} | Model Number:</div>
                     <div>
                         <Price
                             currencyCode={productDetails.price.currency}
