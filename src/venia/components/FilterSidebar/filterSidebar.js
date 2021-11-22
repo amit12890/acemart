@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useRef, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { array, arrayOf, shape, string, number } from 'prop-types';
-import { camelCase } from 'lodash-es';
+import { camelCase, find } from 'lodash';
 import { useFilterSidebar } from '../../../magento/peregrine/talons/FilterSidebar';
 
 import { useStyle } from '../../classify';
@@ -11,12 +11,21 @@ import productLabel from '../../../assets/labelSprite.png';
 import FilterBlock from '../FilterModal/filterBlock';
 import defaultClasses from './filterSidebar.css';
 
-
 const style = {
-    '--productLabel': `url("${productLabel}")`,
+    '--productLabel': `url("${productLabel}")`
 };
 
 const SCROLL_OFFSET = 150;
+
+// here purpose is apply positive filter on single click
+const staticLabelValue = {
+    on_sale: 'Yes',
+    free_shipping: 'Yes',
+    online_price: 'Yes',
+    bulk_savings: 'Yes',
+    new_item: 'Yes',
+    disallow_pickupatstore: '0'
+};
 
 /**
  * A view that displays applicable and applied filters.
@@ -38,7 +47,12 @@ const FilterSidebar = props => {
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
     const staticLabelGroups = new Set([
-        "on_sale", "free_shipping", "online_price", "bulk_savings", "new_item", "disallow_pickupatstore"
+        'on_sale',
+        'free_shipping',
+        'online_price',
+        'bulk_savings',
+        'new_item',
+        'disallow_pickupatstore'
     ]);
 
     const handleApplyFilter = useCallback(
@@ -57,6 +71,17 @@ const FilterSidebar = props => {
             handleApply(...args);
         },
         [handleApply, filterRef]
+    );
+
+    const handleStaticApplyFilter = useCallback(
+        (group, item) => () => {
+            const { toggleItem } = filterApi;
+            // toggle in selected state
+            toggleItem({ group, item });
+            // apply and refetch data
+            handleApplyFilter(group, item);
+        },
+        [filterApi, handleApplyFilter]
     );
 
     const filtersList = useMemo(
@@ -95,16 +120,27 @@ const FilterSidebar = props => {
             Array.from(filterItems, ([group, items], iteration) => {
                 if (staticLabelGroups.has(group)) {
                     const groupName = filterNames.get(group);
+                    const item = find(items, [
+                        'title',
+                        staticLabelValue[group]
+                    ]);
 
-                    return (
-                        <div className={classes.labelItem}>
-                            <i
-                                className={classes[camelCase(group)]}
-                                style={style}
-                            ></i>
-                            <span className={classes.filterLabel}>{groupName}</span>
-                        </div>
-                    );
+                    if (item) {
+                        return (
+                            <div
+                                className={classes.labelItem}
+                                onClick={handleStaticApplyFilter(group, item)}
+                            >
+                                <i
+                                    className={classes[camelCase(group)]}
+                                    style={style}
+                                />
+                                <span className={classes.filterLabel}>
+                                    {groupName}
+                                </span>
+                            </div>
+                        );
+                    }
                 }
             }),
         [
@@ -148,7 +184,9 @@ const FilterSidebar = props => {
                     />
                     {clearAll}
                     <ul className={classes.blocks}>{filtersList}</ul>
-                    <div className={classes.labelWrapper}>{toggleFiltersList}</div>
+                    <div className={classes.labelWrapper}>
+                        {toggleFiltersList}
+                    </div>
                 </div>
             </aside>
         </Fragment>
