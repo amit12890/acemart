@@ -10,7 +10,7 @@ import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullD
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 
 import { useStyle } from '../../classify';
-import Breadcrumbs from "../Breadcrumbs"
+import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
 import Button from '../Button';
 import Carousel from '@magento/venia-ui/lib/components/ProductImageCarousel';
 import FormError from '@magento/venia-ui/lib/components/FormError';
@@ -165,11 +165,9 @@ const ProductFullDetail = props => {
                 </div>
                 <div>
                     <h1 className={classes.productName}>
-                        {product.product_name}
+                        {productDetails.name}
                     </h1>
-                    <div>
-                        Sku: {productDetails.sku} | Model Number: {product.mpn}
-                    </div>
+                    <div>Sku: {productDetails.sku} | Model Number:</div>
                     <div>
                         <Price
                             currencyCode={productDetails.price.currency}
@@ -178,65 +176,35 @@ const ProductFullDetail = props => {
                         <div>/ {product.uom}</div>
                     </div>
                     <div>{product.availability} In Stock</div>
-                    {productDetails.price.value > 500 && (
+                </div>
+                <Form onSubmit={handleAddToCart}>
+                    {/* form */}
+                    <div>
                         <div>
-                            {"Finance for as low as "}
                             <Price
                                 currencyCode={productDetails.price.currency}
-                                value={productDetails.price.value / 39.5}
-                            />/month
+                                value={productDetails.price.value}
+                            />
+                            <div>/ {product.uom}</div>
                         </div>
-                    )}
-                    {product.youtube_filename &&
-                        <iframe src={`https://www.youtube.com/embed/${product.youtube_filename}`} />
-                    }
-                </div>
-                <Form onSubmit={handleAddToCart}>
-            {/* form */}
-                <div>
-                <div>
-                <Price
-                currencyCode={productDetails.price.currency}
-                value={productDetails.price.value}
-                />
-                <div>/ {product.uom}</div>
-                </div>
-                <div>{product.availability} In Stock</div>
-                </div>
-                <div className={classes.productMedia}>
-            {/* Carousel */}
-                <Carousel images={mediaGalleryEntries} />
-                </div>
-                <div className={classes.productAction}>
-                <Form onSubmit={handleAddToCart}>
-            {/* form */}
-                <div>
-                <div>
-                <Price
-                currencyCode={productDetails.price.currency}
-                value={productDetails.price.value}
-                />
-                <div>/ {product.uom}</div>
-                </div>
-                <div>{product.availability} In Stock</div>
-                <QuantityFields
-                classes={{ root: classes.quantityRoot }}
-                min={1}
-                message={errors.get ('quantity')}
-                />
-            {cartActionContent}
-                <Suspense fallback={null}>
-                <WishlistButton {...wishlistButtonProps} />
-                </Suspense>
-                </div>
-                <FormError
-                classes={{
-                root: classes.formErrors
-            }}
-                errors={errors.get ('form') ||[]}
-                />
+                        <div>{product.availability} In Stock</div>
+                        <QuantityFields
+                            classes={{ root: classes.quantityRoot }}
+                            min={1}
+                            message={errors.get('quantity')}
+                        />
+                        {cartActionContent}
+                        <Suspense fallback={null}>
+                            <WishlistButton {...wishlistButtonProps} />
+                        </Suspense>
+                    </div>
+                    <FormError
+                        classes={{
+                            root: classes.formErrors
+                        }}
+                        errors={errors.get('form') || []}
+                    />
                 </Form>
-                </div>
             </div>
             <div>
                 {/* details */}
@@ -282,8 +250,7 @@ const ProductFullDetail = props => {
                     </h2>
                 </section>
             </div>
-        </div>
-        </Fragment >
+        </Fragment>
     );
 };
 
