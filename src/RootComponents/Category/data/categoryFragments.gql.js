@@ -12,6 +12,7 @@ export const CategoryFragment = gql`
             name
             image
             url_key
+            url_path
             url_suffix
         }
     }

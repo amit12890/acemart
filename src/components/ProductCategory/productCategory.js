@@ -1,36 +1,44 @@
-import React, { useMemo } from 'react'
-import { get, size } from 'lodash'
+import React, { useMemo } from 'react';
+import { get, size } from 'lodash';
+import { Link } from 'react-router-dom';
 
-import Image from '../../venia/components/Image'
+import Image from '../../venia/components/Image';
 
 import { useStyle } from '../../venia/classify';
-import defaultClasses from './productCategory.css'
+import defaultClasses from './productCategory.css';
 
+const getUrlPath = (path, key) => {
+    return '/' + path + '/' + key;
+};
 /**
  * render product categories based data size
  */
 export default ({ data }) => {
     const classes = useStyle(defaultClasses);
-    if (size(data) === 0) return null
+    if (size(data) === 0) return null;
 
     const productCategoryList = useMemo(() => {
-        return data.map((item) => {
-            const image = get(item, "image", "");
+        return data.map(item => {
+            const image = get(item, 'image', '');
             return (
-                <div className={defaultClasses.subcatListItem}>
+                <Link
+                    to={getUrlPath(item.url_path, item.url_key)}
+                    className={defaultClasses.subcatListItem}
+                >
                     <Image
                         width="100"
                         classes={{ image: classes.image }}
                         src={image}
                     />
-                </div>
-            )
-        })
-    }, [data])
+                    <div>{item.name}</div>
+                </Link>
+            );
+        });
+    }, [data]);
 
     return (
         <div className={defaultClasses.subcatWrapper}>
             {productCategoryList}
         </div>
-    )
-}
+    );
+};
