@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { get, size } from 'lodash';
+import { get, size, isNil } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
@@ -40,7 +40,7 @@ const WishlistPopup = props => {
 
     const handleSubmit = useCallback(async () => {
         const data = { product_id: productId, qty: productQty };
-        if (!!selectedWishlist) {
+        if (!isNil(selectedWishlist)) {
             await addToWishlist(
                 apiAddToWishlist(selectedWishlist),
                 data,
@@ -62,19 +62,25 @@ const WishlistPopup = props => {
 
         return (
             <div>
-                {wishlists.map((wishlist) => (
-                    <div key={wishlist.multi_wishlist_id}>
-                        <label>
-                            <input
-                                name={wishlist.wishlist_name}
-                                type="checkbox"
-                                checked={!!selectedWishlist &&
-                                    wishlist.multi_wishlist_id === selectedWishlist}
-                                onChange={() => setSelectedWishlist(wishlist.multi_wishlist_id)} />
-                            {wishlist.wishlist_name}
-                        </label>
-                    </div>
-                ))}
+                {wishlists.map((wishlist) => {
+                    const checked = !isNil(selectedWishlist) &&
+                        wishlist.multi_wishlist_id === selectedWishlist
+                    return (
+                        <div key={wishlist.multi_wishlist_id}>
+                            <label>
+                                <input
+                                    name={wishlist.wishlist_name}
+                                    type="checkbox"
+                                    checked={checked}
+                                    onChange={() =>
+                                        setSelectedWishlist(checked ? null: wishlist.multi_wishlist_id)
+                                    }
+                                />
+                                {wishlist.wishlist_name}
+                            </label>
+                        </div>
+                    )
+                })}
                 <CreateWishlist customerId={get(customerData, 'customer.id', null)}
                     refreshWishlist={refreshWishlist} />
 

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { number, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { useBreadcrumbs } from '@magento/peregrine/lib/talons/Breadcrumbs/useBreadcrumbs';
+import { useBreadcrumbs } from '../../../magento/peregrine/talons/Breadcrumbs/useBreadcrumbs';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import defaultClasses from './breadcrumbs.css';
@@ -24,7 +24,6 @@ const Breadcrumbs = props => {
 
     const {
         currentCategory,
-        currentCategoryPath,
         hasError,
         isLoading,
         normalizedData
@@ -33,6 +32,15 @@ const Breadcrumbs = props => {
     // For all links generate a fragment like "/ Text"
     const links = useMemo(() => {
         return normalizedData.map(({ text, path }) => {
+            // do not add link if current text is last one in breadcrumbs
+            if (!currentProduct && currentCategory === text) {
+                return (
+                    <Fragment>
+                        <span className={classes.divider}>{DELIMITER}</span>
+                        <span className={classes.text}>{text}</span>
+                    </Fragment>
+                );
+            }
             return (
                 <Fragment key={text}>
                     <span className={classes.divider}>{DELIMITER}</span>
@@ -50,6 +58,7 @@ const Breadcrumbs = props => {
         return <div className={classes.root} />;
     }
 
+<<<<<<< HEAD
     // If we have a "currentProduct" it means we're on a PDP so we want the last
     // category text to be a link. If we don't have a "currentProduct" we're on
     // a category page so it should be regular text.
@@ -61,6 +70,8 @@ const Breadcrumbs = props => {
         <span className={classes.currentState}>{currentCategory}</span>
     );
 
+=======
+>>>>>>> a50c66f9e2a1c09ccbebe9f110d644b029af4129
     const currentProductNode = currentProduct ? (
         <Fragment>
             <span className={classes.divider}>{DELIMITER}</span>
@@ -74,8 +85,6 @@ const Breadcrumbs = props => {
                 <FormattedMessage id={'global.home'} defaultMessage={'Home'} />
             </Link>
             {links}
-            <span className={classes.divider}>{DELIMITER}</span>
-            {currentCategoryLink}
             {currentProductNode}
         </div>
     );

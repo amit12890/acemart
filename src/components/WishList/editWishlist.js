@@ -71,13 +71,15 @@ const EditWishlist = props => {
                         >
                             {loading ? "Loading..." : "Edit"}
                         </Button>
-                        <Button
-                            classes={classes.confirmButton}
-                            disabled={loadingDelete}
-                            onClick={handleDelete}
-                        >
-                            {loadingDelete ? "Loading..." : "Delete"}
-                        </Button>
+                        {props.multi_wishlist_id !== 0 &&
+                            <Button
+                                classes={classes.confirmButton}
+                                disabled={loadingDelete}
+                                onClick={handleDelete}
+                            >
+                                {loadingDelete ? "Loading..." : "Delete"}
+                            </Button>
+                        }
                     </div>
                 </Form>
             </div>

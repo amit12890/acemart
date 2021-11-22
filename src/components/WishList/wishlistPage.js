@@ -55,6 +55,9 @@ const WishlistPage = props => {
     else if (wishlists.length === 0) {
         wishlistTabs = <Wishlist />;
     }
+    else if (error) {
+        wishlistTabs = <div />;
+    }
     else {
         wishlistTabs = (
             <div className={classes.tabsContainer}>
