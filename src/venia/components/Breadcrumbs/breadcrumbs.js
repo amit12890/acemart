@@ -2,6 +2,7 @@ import React, { Fragment, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { number, string } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'react-feather'
 
 import { useBreadcrumbs } from '../../../magento/peregrine/talons/Breadcrumbs/useBreadcrumbs';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
@@ -36,14 +37,14 @@ const Breadcrumbs = props => {
             if (!currentProduct && currentCategory === text) {
                 return (
                     <Fragment>
-                        <span className={classes.divider}>{DELIMITER}</span>
-                        <span className={classes.text}>{text}</span>
+                        <span className={classes.divider}><ChevronRight /></span>
+                        <span className={classes.currentState}>{text}</span>
                     </Fragment>
                 );
             }
             return (
                 <Fragment key={text}>
-                    <span className={classes.divider}>{DELIMITER}</span>
+                    <span className={classes.divider}><ChevronRight /></span>
                     <Link className={classes.link} to={resourceUrl(path)}>
                         {text}
                     </Link>

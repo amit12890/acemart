@@ -5,12 +5,14 @@ import { Form } from 'informed';
 import { Info } from 'react-feather';
 import { get } from 'lodash';
 
+
 import Price from '@magento/venia-ui/lib/components/Price';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 
 import { useStyle } from '../../classify';
-import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
+import productLabel from '../../../assets/labelSprite.png';
+import Breadcrumbs from '../Breadcrumbs';
 import Button from '../Button';
 import Carousel from '@magento/venia-ui/lib/components/ProductImageCarousel';
 import FormError from '@magento/venia-ui/lib/components/FormError';
@@ -18,6 +20,12 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import { QuantityFields } from '@magento/venia-ui/lib/components/CartPage/ProductListing/quantity';
 import RichText from '../RichText';
 import defaultClasses from './productFullDetail.css';
+
+
+const style = {
+    '--productLabel': `url("${productLabel}")`,
+};
+
 
 const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
@@ -158,97 +166,240 @@ const ProductFullDetail = props => {
     return (
         <Fragment>
             {breadcrumbs}
-            <div>
-                <div>
-                    {/* Carousel */}
-                    <Carousel images={mediaGalleryEntries} />
-                </div>
-                <div>
-                    <h1 className={classes.productName}>
-                        {productDetails.name}
-                    </h1>
-                    <div>Sku: {productDetails.sku} | Model Number:</div>
-                    <div>
-                        <Price
-                            currencyCode={productDetails.price.currency}
-                            value={productDetails.price.value}
-                        />
-                        <div>/ {product.uom}</div>
+            <div className={classes.productViewWrapper}>
+                <section className={classes.productInfoSection}>
+                    <div className={classes.productMedia}>
+                        {/* Carousel */}
+                        <Carousel images={mediaGalleryEntries} />
                     </div>
-                    <div>{product.availability} In Stock</div>
-                </div>
-                <Form onSubmit={handleAddToCart}>
-                    {/* form */}
-                    <div>
-                        <div>
-                            <Price
-                                currencyCode={productDetails.price.currency}
-                                value={productDetails.price.value}
-                            />
-                            <div>/ {product.uom}</div>
+                    <div className={classes.productInfo}>
+
+                        {/* Product Name */}
+                        <h1 className={classes.productName}>
+                            {productDetails.name}
+                        </h1>
+
+                        {/* Product SKU and Model Number */}
+                        <div className={classes.sectionRow}>
+                            <div className={[classes.attributeContainer, classes.sku].join(" ")}>
+                                <span className={classes.attributeLabel}>Sku</span>
+                                <span className={classes.attributeValue}>{productDetails.sku}</span>
+                            </div>
+                            <div className={[classes.attributeContainer, classes.modelNumber].join(" ")}>
+                                <span className={classes.attributeLabel}>Model Number</span>
+                                <span className={classes.attributeValue}>Sample Model Number</span>
+                            </div>
                         </div>
-                        <div>{product.availability} In Stock</div>
-                        <QuantityFields
-                            classes={{ root: classes.quantityRoot }}
-                            min={1}
-                            message={errors.get('quantity')}
-                        />
-                        {cartActionContent}
-                        <Suspense fallback={null}>
-                            <WishlistButton {...wishlistButtonProps} />
-                        </Suspense>
+
+                        {/* Product Price */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.priceBox}>
+                                <Price
+                                    currencyCode={productDetails.price.currency}
+                                    value={productDetails.price.value}
+                                />
+                                <span className={classes.unit}>/ {product.uom}</span>
+                            </div>
+                        </div>
+
+                        {/* Product Stock Avialability */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.stock}>
+                                {product.availability} In Stock
+                            </div>
+                        </div>
+
+                        {/* Product Label */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.labelWrapper}>
+                                <div className={[classes.labelItem, classes.onSale].join(" ")} style={style}>
+                                    <span></span>
+                                </div>
+                                <div className={classes.labelHelper}>
+                                    <span>What's this</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Finance Offer */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.finance}>
+                                <i className={classes.iconWrapper}>
+                                    <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="34" height="32" viewBox="0 0 34 32">
+                                        <title>store</title>
+                                        <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>
+                                    </svg>
+                                </i>
+                                <strong>Finance for as low as $155.64/month</strong>
+                            </div>
+                        </div>
+
+
+                        {/* Product Review   */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.productReview}>
+                                <span>Review Goes Here</span>
+                            </div>
+                        </div>
+
+
+
+                        {/* Product  Short Additional Info  */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.shortAdditionalInof}>
+                                <span>Short additional Information Goes Here</span>
+                            </div>
+                        </div>
+
+                        {/* Product  Video  */}
+                        <div className={classes.sectionRow}>
+                            <div className={classes.productVideo}>
+                                <span>Product Video Goes Here</span>
+                            </div>
+                        </div>
+
+
+
                     </div>
-                    <FormError
-                        classes={{
-                            root: classes.formErrors
-                        }}
-                        errors={errors.get('form') || []}
-                    />
-                </Form>
-            </div>
-            <div>
-                {/* details */}
-                <section className={classes.description}>
-                    <h2 className={classes.descriptionTitle}>
-                        <FormattedMessage
-                            id={'productFullDetail.productDescription'}
-                            defaultMessage={'DESCRIPTION'}
-                        />
-                    </h2>
-                    <RichText content={productDetails.description} />
+                    <div className={classes.productAction}>
+                        <Form onSubmit={handleAddToCart}>
+                            {/* form */}
+                            <div>
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.priceBox}>
+                                        <Price
+                                            currencyCode={productDetails.price.currency}
+                                            value={productDetails.price.value}
+                                        />
+                                        <span className={classes.unit}>/ {product.uom}</span>
+                                    </div>
+                                </div>
+
+                                {/* Product Stock Avialability */}
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.stock}>
+                                        {product.availability} In Stock
+                                    </div>
+                                </div>
+
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.boxToCart}>
+                                        <QuantityFields
+                                            classes={{ root: classes.quantityRoot }}
+                                            min={1}
+                                            message={errors.get('quantity')}
+                                        />
+                                        {cartActionContent}
+                                    </div>
+                                </div>
+
+
+                                {/* Store Locator */}
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.storeLocator}>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                <title>location</title>
+                                                <path d="M16 0q-2.063 0-3.906 0.781-1.813 0.781-3.172 2.141t-2.141 3.172q-0.781 1.844-0.781 3.906 0 3.75 1.563 7.656t3.438 7.094 3.438 5.219l1.563 2.031 1.563-2.031t3.438-5.219 3.438-7.094 1.563-7.656q0-2.063-0.781-3.906-0.781-1.813-2.141-3.172t-3.172-2.141q-1.844-0.781-3.906-0.781zM16 16q-2.5 0-4.25-1.75t-1.75-4.25 1.75-4.25 4.25-1.75 4.25 1.75 1.75 4.25-1.75 4.25-4.25 1.75z"></path>
+                                            </svg>
+                                        </i>
+                                        <strong>Check Your Local Store</strong>
+                                    </div>
+                                </div>
+
+                                {/* Product selling Instruction*/}
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.sellingInstruction}>
+                                        <span>We reserve the right to limit purchases on items in high demand due to current supply chain issues</span>
+                                    </div>
+                                </div>
+
+                                {/* Product Shipping Infor */}
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.shippingInfo}>
+                                        <span>Usually ships from our warehouse in Schertz, TX within 1-2 business days.</span>
+                                    </div>
+                                </div>
+
+                                {/* Product Add To Links */}
+                                <div className={classes.sectionRow}>
+                                    <div className={classes.addToLinks}>
+                                        <div className={[classes.action, classes.toWishList].join(" ")}>
+                                            <Suspense fallback={null}>
+                                                <WishlistButton {...wishlistButtonProps} />
+                                            </Suspense>
+                                        </div>
+
+                                        <div className={[classes.action, classes.toCompare].join(" ")}>
+                                            Add to Compare
+                                        </div>
+
+                                        <div className={[classes.action, classes.toShare].join(" ")}>
+                                            Share this item
+                                        </div>
+                                        <div className={[classes.action, classes.toShare].join(" ")}>
+                                            share Item
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <FormError
+                                classes={{
+                                    root: classes.formErrors
+                                }}
+                                errors={errors.get('form') || []}
+                            />
+                        </Form>
+                    </div>
                 </section>
-                <section className={classes.description}>
-                    <h2 className={classes.descriptionTitle}>
-                        <FormattedMessage
-                            id={'productFullDetail.additionalInformation'}
-                            defaultMessage={'ADDITIONAL INFORMATION'}
-                        />
-                    </h2>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>SKU</td>
-                                <td>{productDetails.sku}</td>
-                            </tr>
-                            {additionalInformation.map(info => {
-                                return (
-                                    <tr>
-                                        <td>{info.label}</td>
-                                        <td>{info.value}</td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </section>
-                <section className={classes.description}>
-                    <h2 className={classes.descriptionTitle}>
-                        <FormattedMessage
-                            id={'productFullDetail.questions'}
-                            defaultMessage={'QUESTIONS AND ANSWERS'}
-                        />
-                    </h2>
-                </section>
+                <div>
+                    {/* details */}
+                    <section className={classes.description}>
+                        <h2 className={classes.descriptionTitle}>
+                            <FormattedMessage
+                                id={'productFullDetail.productDescription'}
+                                defaultMessage={'DESCRIPTION'}
+                            />
+                        </h2>
+                        <RichText content={productDetails.description} />
+                    </section>
+                    <section className={classes.description}>
+                        <h2 className={classes.descriptionTitle}>
+                            <FormattedMessage
+                                id={'productFullDetail.additionalInformation'}
+                                defaultMessage={'ADDITIONAL INFORMATION'}
+                            />
+                        </h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>SKU</td>
+                                    <td>{productDetails.sku}</td>
+                                </tr>
+                                {additionalInformation.map(info => {
+                                    return (
+                                        <tr>
+                                            <td>{info.label}</td>
+                                            <td>{info.value}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </section>
+                    <section className={classes.description}>
+                        <h2 className={classes.descriptionTitle}>
+                            <FormattedMessage
+                                id={'productFullDetail.questions'}
+                                defaultMessage={'QUESTIONS AND ANSWERS'}
+                            />
+                        </h2>
+                    </section>
+                </div>
             </div>
         </Fragment>
     );
