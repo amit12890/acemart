@@ -24,6 +24,7 @@ import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import Gallery from '../Gallery';
 
+import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 
 const style = {
@@ -470,11 +471,9 @@ const ProductFullDetail = props => {
                                         </div>
                                         {product.specsheet && (
                                             <div>
-                                                <img src="/pub/media/attribute/pdf-logo32px.svg.png" />
+                                                <img src={productSpecsheetLogoUrl()} />
                                                 <Link
-                                                    to={`/pub/media/specsheets/${
-                                                        product.specsheet
-                                                    }.pdf`}
+                                                    to={productSpecsheetUrl(product.specsheet)}
                                                     target="_blank"
                                                 >
                                                     Specsheet
