@@ -101,7 +101,7 @@
     text-align: right;
 }
 .myIcon {
-    color: #8f94ab;
+    color: rgb(var(--color-gray-middle3));
 }
 .myIcon:hover {
     

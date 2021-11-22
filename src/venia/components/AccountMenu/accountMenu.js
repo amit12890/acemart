@@ -98,17 +98,17 @@ const AccountMenu = React.forwardRef((props, ref) => {
             <div className={classes.portalWrapper}>
                 <Mask isActive={accountMenuIsOpen} />
                 <div className={rootClass}>
-                
+
                     <div ref={ref} className={contentsClass}>
-                        <div 
+                        <div
                             className={classes.modalClose}
-                            onClick={() => setAccountMenuIsOpen(false)}> 
-                                
-                            <Icon 
+                            onClick={() => setAccountMenuIsOpen(false)}>
+
+                            <Icon
                                 src={XIcon}
                                 classes={{
-                                    root:classes.myRoot,
-                                    icon:classes.myIcon
+                                    root: classes.myRoot,
+                                    icon: classes.myIcon
                                 }} />
 
                         </div>
