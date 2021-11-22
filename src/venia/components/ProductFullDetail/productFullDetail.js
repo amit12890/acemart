@@ -10,7 +10,7 @@ import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullD
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 
 import { useStyle } from '../../classify';
-import Breadcrumbs from '@magento/venia-ui/lib/components/Breadcrumbs';
+import Breadcrumbs from '../Breadcrumbs';
 import Button from '../Button';
 import Carousel from '@magento/venia-ui/lib/components/ProductImageCarousel';
 import FormError from '@magento/venia-ui/lib/components/FormError';
@@ -158,28 +158,13 @@ const ProductFullDetail = props => {
     return (
         <Fragment>
             {breadcrumbs}
-            <div>
-                <div>
-                    {/* Carousel */}
-                    <Carousel images={mediaGalleryEntries} />
-                </div>
-                <div>
-                    <h1 className={classes.productName}>
-                        {productDetails.name}
-                    </h1>
-                    <div>Sku: {productDetails.sku} | Model Number:</div>
-                    <div>
-                        <Price
-                            currencyCode={productDetails.price.currency}
-                            value={productDetails.price.value}
-                        />
-                        <div>/ {product.uom}</div>
-                    </div>
-                    <div>{product.availability} In Stock</div>
-                </div>
-                <Form onSubmit={handleAddToCart}>
-                    {/* form */}
-                    <div>
+            <div className={classes.productViewWrapper}>
+                <div className={classes.productInfoSection}>
+                    <div className={classes.productInfo}>
+                        <h1 className={classes.productName}>
+                            {productDetails.name}
+                        </h1>
+                        <div>Sku: {productDetails.sku} | Model Number:</div>
                         <div>
                             <Price
                                 currencyCode={productDetails.price.currency}
@@ -188,67 +173,86 @@ const ProductFullDetail = props => {
                             <div>/ {product.uom}</div>
                         </div>
                         <div>{product.availability} In Stock</div>
-                        <QuantityFields
-                            classes={{ root: classes.quantityRoot }}
-                            min={1}
-                            message={errors.get('quantity')}
-                        />
-                        {cartActionContent}
-                        <Suspense fallback={null}>
-                            <WishlistButton {...wishlistButtonProps} />
-                        </Suspense>
                     </div>
-                    <FormError
-                        classes={{
-                            root: classes.formErrors
-                        }}
-                        errors={errors.get('form') || []}
-                    />
-                </Form>
-            </div>
-            <div>
-                {/* details */}
-                <section className={classes.description}>
-                    <h2 className={classes.descriptionTitle}>
-                        <FormattedMessage
-                            id={'productFullDetail.productDescription'}
-                            defaultMessage={'DESCRIPTION'}
-                        />
-                    </h2>
-                    <RichText content={productDetails.description} />
-                </section>
-                <section className={classes.description}>
-                    <h2 className={classes.descriptionTitle}>
-                        <FormattedMessage
-                            id={'productFullDetail.additionalInformation'}
-                            defaultMessage={'ADDITIONAL INFORMATION'}
-                        />
-                    </h2>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>SKU</td>
-                                <td>{productDetails.sku}</td>
-                            </tr>
-                            {additionalInformation.map(info => {
-                                return (
-                                    <tr>
-                                        <td>{info.label}</td>
-                                        <td>{info.value}</td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </section>
-                <section className={classes.description}>
-                    <h2 className={classes.descriptionTitle}>
-                        <FormattedMessage
-                            id={'productFullDetail.questions'}
-                            defaultMessage={'QUESTIONS AND ANSWERS'}
-                        />
-                    </h2>
-                </section>
+                    <div className={classes.productMedia}>
+                        {/* Carousel */}
+                        <Carousel images={mediaGalleryEntries} />
+                    </div>
+                    <div className={classes.productAction}>
+                        <Form onSubmit={handleAddToCart}>
+                            {/* form */}
+                            <div>
+                                <div>
+                                    <Price
+                                        currencyCode={productDetails.price.currency}
+                                        value={productDetails.price.value}
+                                    />
+                                    <div>/ {product.uom}</div>
+                                </div>
+                                <div>{product.availability} In Stock</div>
+                                <QuantityFields
+                                    classes={{ root: classes.quantityRoot }}
+                                    min={1}
+                                    message={errors.get('quantity')}
+                                />
+                                {cartActionContent}
+                                <Suspense fallback={null}>
+                                    <WishlistButton {...wishlistButtonProps} />
+                                </Suspense>
+                            </div>
+                            <FormError
+                                classes={{
+                                    root: classes.formErrors
+                                }}
+                                errors={errors.get('form') || []}
+                            />
+                        </Form>
+                    </div>
+                </div>
+                <div>
+                    {/* details */}
+                    <section className={classes.description}>
+                        <h2 className={classes.descriptionTitle}>
+                            <FormattedMessage
+                                id={'productFullDetail.productDescription'}
+                                defaultMessage={'DESCRIPTION'}
+                            />
+                        </h2>
+                        <RichText content={productDetails.description} />
+                    </section>
+                    <section className={classes.description}>
+                        <h2 className={classes.descriptionTitle}>
+                            <FormattedMessage
+                                id={'productFullDetail.additionalInformation'}
+                                defaultMessage={'ADDITIONAL INFORMATION'}
+                            />
+                        </h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>SKU</td>
+                                    <td>{productDetails.sku}</td>
+                                </tr>
+                                {additionalInformation.map(info => {
+                                    return (
+                                        <tr>
+                                            <td>{info.label}</td>
+                                            <td>{info.value}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </section>
+                    <section className={classes.description}>
+                        <h2 className={classes.descriptionTitle}>
+                            <FormattedMessage
+                                id={'productFullDetail.questions'}
+                                defaultMessage={'QUESTIONS AND ANSWERS'}
+                            />
+                        </h2>
+                    </section>
+                </div>
             </div>
         </Fragment>
     );

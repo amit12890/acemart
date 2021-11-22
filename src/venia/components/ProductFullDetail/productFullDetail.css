@@ -1,6 +1,33 @@
 .root {
     padding: 1rem 0;
 }
+.productViewWrapper {
+display: flex;
+flex-direction: column;
+  
+   
+}
+.productInfoSection {
+    display: flex;
+    width: 100%;
+}
+
+.productMedia {
+    order: 1;
+    width: 40%
+}
+
+.productInfo {
+    order: 2;
+    width: 40%
+}
+
+.productAction {
+    order: 3;
+    width: 20%;
+    background-color: #f6f6f6;
+}
+
 
 @media (min-width: 1024px) {
     .root {

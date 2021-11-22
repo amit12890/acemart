@@ -24,7 +24,7 @@
     
 }
 
-.currentCategory {
+.currentState {
     composes: text;
     font-weight: var(--font-weight-regular);
 }
