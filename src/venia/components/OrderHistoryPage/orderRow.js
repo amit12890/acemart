@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { ChevronDown, ChevronUp } from 'react-feather';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { useOrderRow } from '@magento/peregrine/lib/talons/OrderHistoryPage/useOrderRow';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import { useStyle } from '../../classify';
 import Icon from '../Icon';
@@ -13,7 +14,7 @@ import OrderProgressBar from './orderProgressBar';
 import OrderDetails from './OrderDetails';
 import defaultClasses from './orderRow.css';
 import { myOrderDetailsPage } from '../../../url.utils';
-import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
+import { useReorderItems } from "./data/useReorderItems"
 
 const OrderRow = props => {
     const { order, tab, showDetails } = props;
@@ -66,6 +67,13 @@ const OrderRow = props => {
         });
     }
 
+    const { reorderItems, reorderItemsError, reorderItemsLoading } = useReorderItems()
+
+    const handleReorder = useCallback((orderNumber) => async () => {
+        if (reorderItemsLoading) return;
+        await reorderItems(orderNumber)
+    }, [reorderItems, reorderItemsLoading])
+
     const talonProps = useOrderRow({ items });
     const { loading, isOpen, handleContentToggle, imagesData } = talonProps;
     const openDetails = isOpen || showDetails;
@@ -98,6 +106,11 @@ const OrderRow = props => {
                 <Link to={myOrderDetailsPage("view", order.id)}>
                     <span className={classes.orderNumber}>{orderNumber}</span>
                 </Link>
+                <div
+                    style={{cursor: "pointer"}}
+                    onClick={handleReorder(orderNumber)}>
+                    {reorderItemsLoading ? "Loading..." : "Reorder"}
+                </div>
             </div>
             <div className={classes.orderDateContainer}>
                 <span className={classes.orderDateLabel}>

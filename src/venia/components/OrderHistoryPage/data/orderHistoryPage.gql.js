@@ -122,6 +122,34 @@ export const GET_CUSTOMER_ORDERS = gql`
     ${CustomerOrdersFragment}
 `;
 
+export const GET_REPORDER_ITEMS = gql`
+mutation ReorderItems($orderNumber: String!) {
+    reorderItems(orderNumber: $orderNumber) {
+      cart {
+        id
+        items {
+          uid
+          product {
+            sku
+          }
+          quantity
+          prices {
+            price {
+              value
+            }
+          }
+        }
+      }
+      userInputErrors {
+        code
+        message
+        path
+      }
+    }
+  }  
+`
+
 export default {
-    getCustomerOrdersQuery: GET_CUSTOMER_ORDERS
+    getCustomerOrdersQuery: GET_CUSTOMER_ORDERS,
+    reOrderItemsMutation: GET_REPORDER_ITEMS
 };
