@@ -57,6 +57,7 @@ flex-direction: column;
 
 .apSectionRow {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin: 10px 0;
     font-size: var(--fontSize-100);
@@ -252,6 +253,23 @@ flex-direction: column;
 .shippingInfo {
 
 }
+
+.shippingNote {
+    margin-top: 15px;
+
+}
+
+
+.shippingNote h3 {
+    text-transform: uppercase;
+    font-size: var(--fontSize-100);
+    color: rgb(204 0 0);
+    margin: 0;
+}
+.shippingNote h3:after {
+    content: ":";
+}
+
 .addToLinks {
     width: 100%;
     justify-content: center;
@@ -376,6 +394,15 @@ flex-direction: column;
     font-size: var(--fontSize-650);
 }
 
+.sectionSubTitle {
+    font-size: var(--fontSize-600);
+    font-weight: var(--font-weight-regular);
+    text-align: left;
+    margin-bottom: 20px;
+    text-transform: none;
+    
+    }
+
 .sectionContent {
 
 }
@@ -432,6 +459,23 @@ tbody tr:nth-child(odd) {
 
 /* Product Review Section */
 .productReviewSection {
+
+}
+
+/* Upsell Product Section */
+
+.upsellProducts {
+
+}
+
+.gallery {
+    
+}
+
+
+
+/* Related Product Section */
+.relatedProducts {
 
 }
 

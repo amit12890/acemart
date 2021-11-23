@@ -404,6 +404,13 @@ const ProductFullDetail = props => {
                                             days.
                                         </span>
                                     </div>
+
+                                    <div className={classes.shippingNote}>
+                                        <h3>Note</h3>
+                                        <span>
+                                            Supply chain issues are creating longer lead times than normal. Contact customer service for help on a time-specific order.
+                                        </span>
+                                    </div>
                                 </div>
 
                                 {/* Product Add To Links */}
@@ -621,25 +628,41 @@ const ProductFullDetail = props => {
                     </div>
                 </section>
 
+                {!!size(upsellProducts) && (
+                    <section className={[classes.productViewSection, classes.upsellProducts].join(" ")}>
+                        <div className={classes.sectionTitleWrapper}>
+                            <h2 className={classes.sectionSubTitle}>
+                                <span>
+                                    We found other products you might like!
+                                </span>
+                            </h2>
+                        </div>
+                        <div className={classes.sectionContent}>
+                            <div className={classes.gallery}>
+                                <Gallery items={upsellProducts} />
+                            </div>
+                        </div>
+                    </section>
+                )}
 
+                {!!size(relatedProducts) && (
+                    <section className={[classes.productViewSection, classes.relatedProducts].join(" ")}>
+                        <div className={classes.sectionTitleWrapper}>
+                            <h2 className={classes.sectionSubTitle}>
+                                <span>
+                                    We found other related products
+                                </span>
+                            </h2>
+                        </div>
+                        <div className={classes.sectionContent}>
+                            <div className={classes.gallery}>
+                                <strong>We found other related products</strong>
+                                <Gallery items={relatedProducts} />
+                            </div>
+                        </div>
+                    </section>
+                )}
 
-                <div>
-
-                    {!!size(upsellProducts) && (
-                        <section className={classes.gallery}>
-                            <strong>
-                                We found other products you might like!
-                            </strong>
-                            <Gallery items={upsellProducts} />
-                        </section>
-                    )}
-                    {!!size(relatedProducts) && (
-                        <section className={classes.gallery}>
-                            <strong>We found other related products</strong>
-                            <Gallery items={relatedProducts} />
-                        </section>
-                    )}
-                </div>
             </div>
             {showWishlistPopup && (
                 <WishlistPopup
