@@ -20,6 +20,7 @@
 
 .image {
     height: auto;
+    object-fit: contain;
 }
 .subcatListItem:hover .name {
     color: rgb(var(--link-color-hover));

@@ -9,7 +9,7 @@ import { useStyle } from '../../classify';
 import defaultClasses from './thumbnail.css';
 import Image from '../Image';
 
-const DEFAULT_THUMBNAIL_HEIGHT = 170;
+const DEFAULT_THUMBNAIL_HEIGHT = 135;
 const DEFAULT_THUMBNAIL_WIDTH = 135;
 
 /**

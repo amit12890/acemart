@@ -109,13 +109,13 @@ Quantity.defaultProps = {
     label: 'Quantity',
     min: 0,
     initialValue: 1,
-    onChange: () => {}
+    onChange: () => { }
 };
 
 QuantityFields.defaultProps = {
     min: 0,
     initialValue: 1,
-    onChange: () => {}
+    onChange: () => { }
 };
 
 export default Quantity;
