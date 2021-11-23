@@ -27,6 +27,7 @@ export default ({ data }) => {
                 >
                     <Image
                         width="85"
+                        height=""
                         classes={{ image: classes.image }}
                         src={image}
                     />

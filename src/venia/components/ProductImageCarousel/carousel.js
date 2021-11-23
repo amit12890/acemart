@@ -14,7 +14,7 @@ import Image from '../Image';
 import defaultClasses from './carousel.css';
 import Thumbnail from './thumbnail';
 
-const IMAGE_WIDTH = 640;
+const IMAGE_WIDTH = 535;
 
 /**
  * Carousel component for product images
