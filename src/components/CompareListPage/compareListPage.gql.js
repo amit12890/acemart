@@ -7,9 +7,39 @@ export const UserCompareListFragment = gql`
             uid
             product {
                 id sku
-                name uom availability brand
-                description { html } short_description { html }
+                name uom availability
+                brand_name
+                capacity
+                ship_info
+                prod_dimensions
+                mpn material
+                manufacturer
+                country_of_origin
+                color
+                certifications
+                connection
+                electrical
+                energy_consume
+                prod_temp
+                output
+                description { html }
+                short_description { html }
                 image { url label }
+                url_rewrites {
+                    url
+                    parameters {
+                      name
+                      value
+                    }
+                }
+                price {
+                    regularPrice {
+                        amount {
+                            currency
+                            value
+                        }
+                    }
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useMutation } from '@apollo/client';
 import {
     CREATE_COMPARE_LIST,
+    GET_CUSTOMER_COMPARE_LIST,
     REMOVE_ITEM_FROM_COMPARE_LIST,
 } from './compareListPage.gql';
 
@@ -31,7 +32,11 @@ export const useCompareList = props => {
             error: removeProductFromCompareListError,
             loading: removeProductFromCompareListLoading,
         }
-    ] = useMutation(REMOVE_ITEM_FROM_COMPARE_LIST)
+    ] = useMutation(REMOVE_ITEM_FROM_COMPARE_LIST, {
+        refetchQueries : [
+            { query : GET_CUSTOMER_COMPARE_LIST },
+        ]
+    })
 
     const removeProductFromCompareList = useCallback(async (products, uid) => {
         const res = await removeItemsFromCompareList({
