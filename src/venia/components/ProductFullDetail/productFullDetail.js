@@ -23,6 +23,7 @@ import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import Gallery from '../Gallery';
 import Carousel from '../ProductImageCarousel';
+import SharePopup from '../../../components/SharePopup';
 
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
@@ -52,6 +53,7 @@ const ProductFullDetail = props => {
     console.log('line 39 ~ props', props);
     const { product } = props;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
+    const [showSharePopup, setShowSharePopup] = useState(false);
 
     const talonProps = useProductFullDetail({ product });
     console.log('line 43 ~ talonProps', talonProps);
@@ -62,6 +64,13 @@ const ProductFullDetail = props => {
     const closeWishlistPopup = useCallback(() => {
         setShowWishlistPopup(false);
     }, [setShowWishlistPopup]);
+
+    const openSharePopup = useCallback(() => {
+        setShowSharePopup(true);
+    }, [setShowSharePopup]);
+    const closeSharePopup = useCallback(() => {
+        setShowSharePopup(false);
+    }, [setShowSharePopup]);
 
     const {
         breadcrumbCategoryId,
@@ -187,7 +196,7 @@ const ProductFullDetail = props => {
     return (
         <Fragment>
             {breadcrumbs}
-            <Mask isActive={showWishlistPopup} />
+            <Mask isActive={showWishlistPopup || showSharePopup} />
             <div className={classes.productViewWrapper}>
                 <section className={classes.productInfoSection}>
                     <div className={classes.productMedia}>
@@ -469,7 +478,7 @@ const ProductFullDetail = props => {
                                                 classes.toCompare
                                             ].join(' ')}
                                         >
-                                            <Button>Share this item</Button>
+                                            <Button onClick={openSharePopup}>Share this item</Button>
                                         </div>
                                         <div
                                             className={[
@@ -569,6 +578,12 @@ const ProductFullDetail = props => {
                     productId={product.id}
                     productQty={wishlistButtonProps.item.quantity}
                     closeWishlistPopup={closeWishlistPopup}
+                />
+            )}
+            {showSharePopup && (
+                <SharePopup
+                    productId={product.id}
+                    closeSharePopup={closeSharePopup}
                 />
             )}
         </Fragment>
