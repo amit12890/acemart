@@ -210,31 +210,33 @@ const ProductFullDetail = props => {
 
                         {/* Product SKU and Model Number */}
                         <div className={classes.piSectionRow}>
-                            <div
-                                className={[
-                                    classes.attributeContainer,
-                                    classes.sku
-                                ].join(' ')}
-                            >
-                                <span className={classes.attributeLabel}>
-                                    Sku
-                                </span>
-                                <span className={classes.attributeValue}>
-                                    {productDetails.sku}
-                                </span>
-                            </div>
-                            <div
-                                className={[
-                                    classes.attributeContainer,
-                                    classes.modelNumber
-                                ].join(' ')}
-                            >
-                                <span className={classes.attributeLabel}>
-                                    Model Number
-                                </span>
-                                <span className={classes.attributeValue}>
-                                    Sample Model Number
-                                </span>
+                            <div className={classes.attributeWrapper}>
+                                <div
+                                    className={[
+                                        classes.attributeContainer,
+                                        classes.sku
+                                    ].join(' ')}
+                                >
+                                    <span className={classes.attributeLabel}>
+                                        Sku
+                                    </span>
+                                    <span className={classes.attributeValue}>
+                                        {productDetails.sku}
+                                    </span>
+                                </div>
+                                <div
+                                    className={[
+                                        classes.attributeContainer,
+                                        classes.modelNumber
+                                    ].join(' ')}
+                                >
+                                    <span className={classes.attributeLabel}>
+                                        Model Number
+                                    </span>
+                                    <span className={classes.attributeValue}>
+                                        Sample Model Number
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -316,21 +318,28 @@ const ProductFullDetail = props => {
                             </div>
                         </div>
 
+
                         {/* Product  Short Additional Info  */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.shortAdditionalInof}>
-                                {moreInformation.map(info => {
-                                    return (
-                                        <tr>
-                                            <td>{info.label}</td>
-                                            <td>
-                                                <RichText
-                                                    content={info.value}
-                                                />
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
+                                <div className={classes.tableWrapper}>
+                                    <table className={[classes.data, classes.table, classes.shortAdditional].join(" ")}>
+                                        <tbody>
+                                            {moreInformation.map(info => {
+                                                return (
+                                                    <tr>
+                                                        <th scope="row" className={[classes.col, classes.label].join(" ")}>{info.label}</th>
+                                                        <td data-th={info.label} className={[classes.col, classes.data].join(" ")}>
+                                                            <RichText
+                                                                content={info.value}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -531,7 +540,7 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 {product.ship_info && (
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.extraShipInfo}>
