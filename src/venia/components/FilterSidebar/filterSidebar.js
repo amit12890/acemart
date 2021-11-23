@@ -27,6 +27,15 @@ const staticLabelValue = {
     disallow_pickupatstore: '0'
 };
 
+const staticLabelGroups = new Set([
+    'on_sale',
+    'free_shipping',
+    'online_price',
+    'bulk_savings',
+    'new_item',
+    'disallow_pickupatstore'
+]);
+
 /**
  * A view that displays applicable and applied filters.
  *
@@ -34,7 +43,7 @@ const staticLabelValue = {
  */
 const FilterSidebar = props => {
     const { filters, filterCountToOpen } = props;
-    const talonProps = useFilterSidebar({ filters });
+    const talonProps = useFilterSidebar({ filters, staticLabelGroups });
     const {
         filterApi,
         filterItems,
@@ -46,14 +55,6 @@ const FilterSidebar = props => {
 
     const filterRef = useRef();
     const classes = useStyle(defaultClasses, props.classes);
-    const staticLabelGroups = new Set([
-        'on_sale',
-        'free_shipping',
-        'online_price',
-        'bulk_savings',
-        'new_item',
-        'disallow_pickupatstore'
-    ]);
 
     const handleApplyFilter = useCallback(
         (...args) => {
@@ -126,6 +127,9 @@ const FilterSidebar = props => {
                     ]);
 
                     if (item) {
+                        const blockState = filterState.get(group);
+                        // to show selected filter
+                        const isSelected = blockState && blockState.has(item);
                         return (
                             <div
                                 className={classes.labelItem}

@@ -35,7 +35,9 @@ const CurrentFilter = props => {
             <Trigger action={handleClick} ariaLabel={ariaLabel}>
                 <Icon size={20} src={Remove} />
             </Trigger>
-            <span className={classes.text}>{item.title}</span>
+            <span className={classes.text}>
+                {item.display ? item.display : item.title}
+            </span>
         </span>
     );
 };

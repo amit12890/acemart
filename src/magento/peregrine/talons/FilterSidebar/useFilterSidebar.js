@@ -13,12 +13,13 @@ import {
 } from '../FilterModal/helpers';
 
 import DEFAULT_OPERATIONS from '../FilterModal/filterModal.gql';
-import { orderBy } from 'lodash-es';
+import { orderBy, startCase } from 'lodash-es';
 
 const DRAWER_NAME = 'filter';
 
 export const useFilterSidebar = props => {
-    const { filters } = props;
+    // use staticLabelGroups to detect static single click filters
+    const { filters, staticLabelGroups } = props;
 
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const { getFilterInputsQuery } = operations;
@@ -93,9 +94,14 @@ export const useFilterSidebar = props => {
                 // add filter key permutations
                 keys.add(`${group}[filter]`);
 
-                // add items
+                // add items, define "display" for static filter
                 for (const { label, value, count } of options) {
-                    items.push({ title: stripHtml(label), value, count });
+                    items.push({ 
+                        title: stripHtml(label), 
+                        value, 
+                        count, 
+                        display: staticLabelGroups.has(group) ? startCase(group) : undefined
+                    });
                 }
                 itemsByGroup.set(group, items);
             }
