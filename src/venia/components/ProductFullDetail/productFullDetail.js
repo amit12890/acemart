@@ -21,7 +21,7 @@ import Button from '../Button';
 import RichText from '../RichText';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
-import Gallery from '../Gallery';
+import GalleryGrid from '../GalleryGrid';
 import Carousel from '../ProductImageCarousel';
 import SharePopup from '../../../components/SharePopup';
 
@@ -661,7 +661,7 @@ const ProductFullDetail = props => {
                         </div>
                         <div className={classes.sectionContent}>
                             <div className={classes.gallery}>
-                                <Gallery items={upsellProducts} />
+                                <GalleryGrid items={upsellProducts} />
                             </div>
                         </div>
                     </section>
@@ -679,7 +679,7 @@ const ProductFullDetail = props => {
                         <div className={classes.sectionContent}>
                             <div className={classes.gallery}>
                                 <strong>We found other related products</strong>
-                                <Gallery items={relatedProducts} />
+                                <GalleryGrid items={relatedProducts} />
                             </div>
                         </div>
                     </section>
