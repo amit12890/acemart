@@ -326,7 +326,7 @@ const ProductFullDetail = props => {
                     <div className={classes.productAction}>
                         <Form onSubmit={handleAddToCart}>
                             {/* form */}
-                            <div>
+                            <div className={classes.paContent}>
                                 <div className={classes.apSectionRow}>
                                     <div className={classes.priceBox}>
                                         <Price
@@ -376,18 +376,22 @@ const ProductFullDetail = props => {
                                                 <path d="M16 0q-2.063 0-3.906 0.781-1.813 0.781-3.172 2.141t-2.141 3.172q-0.781 1.844-0.781 3.906 0 3.75 1.563 7.656t3.438 7.094 3.438 5.219l1.563 2.031 1.563-2.031t3.438-5.219 3.438-7.094 1.563-7.656q0-2.063-0.781-3.906-0.781-1.813-2.141-3.172t-3.172-2.141q-1.844-0.781-3.906-0.781zM16 16q-2.5 0-4.25-1.75t-1.75-4.25 1.75-4.25 4.25-1.75 4.25 1.75 1.75 4.25-1.75 4.25-4.25 1.75z" />
                                             </svg>
                                         </i>
-                                        <strong>Check Your Local Store</strong>
+                                        <strong className={classes.actionLink}>Check Your Local Store</strong>
                                     </div>
                                 </div>
 
                                 {/* Product selling Instruction*/}
                                 <div className={classes.apSectionRow}>
                                     <div className={classes.sellingInstruction}>
-                                        <span>
+                                        <Link
+                                            to="/supply-chain"
+                                            className={classes.action}
+                                        >
                                             We reserve the right to limit
                                             purchases on items in high demand
                                             due to current supply chain issues
-                                        </span>
+                                        </Link>
+
                                     </div>
                                 </div>
 

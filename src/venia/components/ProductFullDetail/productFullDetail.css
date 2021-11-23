@@ -51,6 +51,9 @@ flex-direction: column;
     margin: 10px 0;
     font-size: var(--fontSize-100);
 }
+.apSectionRow:first-child {
+    margin-top: 0;
+}
 
 .attributeContainer {
     display: flex;
@@ -185,16 +188,28 @@ flex-direction: column;
 }
 
 
+
+.paContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .boxToCart {
 
 }
-
+.boxToCart button {
+    margin-top: 10px;
+}
 .storeLocator {
+    color: rgb(var(--theme-color-primary-alt));
+    display: flex;
 
 }
 
 .storeLocator .iconWrapper {
     margin-right: 5px;
+    display: inline-flex;
 }
 
 .storeLocator .svgIcon {
@@ -203,9 +218,24 @@ flex-direction: column;
     fill: currentColor;
 }
 
+.actionLink {
+    color: rgb(var(--theme-color-primary-alt));
+    font-weight: var(--font-weight-regular);
+}
+
 .sellingInstruction {
+
     
 }
+.sellingInstruction .action {
+    text-decoration: underline;
+}
+
+.sellingInstruction .action:hover {
+    color: rgb(var(--link-color-hover));
+}
+
+
 
 .shippingInfo {
 
