@@ -19,7 +19,7 @@
 }
 
 .image {
-    min-height: 120px;
+    height: auto;
 }
 .subcatListItem:hover .name {
     color: rgb(var(--link-color-hover));
