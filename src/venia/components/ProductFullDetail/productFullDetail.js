@@ -12,7 +12,7 @@ import FormError from '@magento/venia-ui/lib/components/FormError';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { QuantityFields } from '@magento/venia-ui/lib/components/CartPage/ProductListing/quantity';
+import { QuantityFields } from './quantity';
 
 import { useStyle } from '../../classify';
 import productLabel from '../../../assets/labelSprite.png';
