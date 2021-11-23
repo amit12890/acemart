@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 import Price from '@magento/venia-ui/lib/components/Price';
 import Mask from '@magento/venia-ui/lib/components/Mask';
-import Carousel from '@magento/venia-ui/lib/components/ProductImageCarousel';
 import FormError from '@magento/venia-ui/lib/components/FormError';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
@@ -23,6 +22,7 @@ import RichText from '../RichText';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import Gallery from '../Gallery';
+import Carousel from '../ProductImageCarousel';
 
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
