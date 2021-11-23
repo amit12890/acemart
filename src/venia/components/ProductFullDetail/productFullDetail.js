@@ -195,7 +195,7 @@ const ProductFullDetail = props => {
                         </h1>
 
                         {/* Product SKU and Model Number */}
-                        <div className={classes.sectionRow}>
+                        <div className={classes.piSectionRow}>
                             <div
                                 className={[
                                     classes.attributeContainer,
@@ -225,7 +225,7 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Product Price */}
-                        <div className={classes.sectionRow}>
+                        <div className={classes.piSectionRow}>
                             <div className={classes.priceBox}>
                                 <Price
                                     currencyCode={productDetails.price.currency}
@@ -238,14 +238,14 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Product Stock Avialability */}
-                        <div className={classes.sectionRow}>
+                        <div className={classes.piSectionRow}>
                             <div className={classes.stock}>
                                 {product.availability} In Stock
                             </div>
                         </div>
 
                         {/* Product Label */}
-                        <div className={classes.sectionRow}>
+                        <div className={classes.piSectionRow}>
                             <div className={classes.labelWrapper}>
                                 <div
                                     className={[
@@ -264,7 +264,7 @@ const ProductFullDetail = props => {
 
                         {/* Finance Offer */}
                         {productDetails.price.value > 500 && (
-                            <div className={classes.sectionRow}>
+                            <div className={classes.piSectionRow}>
                                 <div className={classes.finance}>
                                     <i className={classes.iconWrapper}>
                                         <svg
@@ -296,14 +296,14 @@ const ProductFullDetail = props => {
                         )}
 
                         {/* Product Review   */}
-                        <div className={classes.sectionRow}>
+                        <div className={classes.piSectionRow}>
                             <div className={classes.productReview}>
                                 <span>Review Goes Here</span>
                             </div>
                         </div>
 
                         {/* Product  Short Additional Info  */}
-                        <div className={classes.sectionRow}>
+                        <div className={classes.piSectionRow}>
                             <div className={classes.shortAdditionalInof}>
                                 <span>
                                     Short additional Information Goes Here
@@ -313,12 +313,11 @@ const ProductFullDetail = props => {
 
                         {/* Product  Video  */}
                         {product.youtube_filename && (
-                            <div className={classes.sectionRow}>
+                            <div className={classes.piSectionRow}>
                                 <div className={classes.productVideo}>
                                     <iframe
-                                        src={`https://www.youtube.com/embed/${
-                                            product.youtube_filename
-                                        }`}
+                                        src={`https://www.youtube.com/embed/${product.youtube_filename
+                                            }`}
                                     />
                                 </div>
                             </div>
@@ -328,7 +327,7 @@ const ProductFullDetail = props => {
                         <Form onSubmit={handleAddToCart}>
                             {/* form */}
                             <div>
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.priceBox}>
                                         <Price
                                             currencyCode={
@@ -343,13 +342,13 @@ const ProductFullDetail = props => {
                                 </div>
 
                                 {/* Product Stock Avialability */}
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.stock}>
                                         {product.availability} In Stock
                                     </div>
                                 </div>
 
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.boxToCart}>
                                         <QuantityFields
                                             classes={{
@@ -363,7 +362,7 @@ const ProductFullDetail = props => {
                                 </div>
 
                                 {/* Store Locator */}
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.storeLocator}>
                                         <i className={classes.iconWrapper}>
                                             <svg
@@ -382,7 +381,7 @@ const ProductFullDetail = props => {
                                 </div>
 
                                 {/* Product selling Instruction*/}
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.sellingInstruction}>
                                         <span>
                                             We reserve the right to limit
@@ -393,7 +392,7 @@ const ProductFullDetail = props => {
                                 </div>
 
                                 {/* Product Shipping Infor */}
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.shippingInfo}>
                                         <span>
                                             Usually ships from our warehouse in
@@ -404,7 +403,7 @@ const ProductFullDetail = props => {
                                 </div>
 
                                 {/* Product Add To Links */}
-                                <div className={classes.sectionRow}>
+                                <div className={classes.apSectionRow}>
                                     <div className={classes.addToLinks}>
                                         <div
                                             className={[

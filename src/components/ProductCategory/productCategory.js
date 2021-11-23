@@ -26,11 +26,11 @@ export default ({ data }) => {
                     className={defaultClasses.subcatListItem}
                 >
                     <Image
-                        width="100"
+                        width="85"
                         classes={{ image: classes.image }}
                         src={image}
                     />
-                    <div>{item.name}</div>
+                    <div className={classes.name}>{item.name}</div>
                 </Link>
             );
         });

@@ -38,7 +38,14 @@ flex-direction: column;
     margin-bottom: 10px;
 }
 
-.sectionRow {
+.piSectionRow {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: var(--fontSize-100);
+}
+
+.apSectionRow {
     display: flex;
     align-items: center;
     margin: 10px 0;
