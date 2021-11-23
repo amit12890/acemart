@@ -472,12 +472,7 @@ const ProductFullDetail = props => {
                                         {product.specsheet && (
                                             <div>
                                                 <img src={productSpecsheetLogoUrl()} />
-                                                <Link
-                                                    to={productSpecsheetUrl(product.specsheet)}
-                                                    target="_blank"
-                                                >
-                                                    Specsheet
-                                                </Link>
+                                                <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >Specsheet</a>
                                             </div>
                                         )}
                                     </div>

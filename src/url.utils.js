@@ -53,6 +53,6 @@ export const cdsUrl = () => '/cds';
 
 /** Other Urls */
 export const productSpecsheetUrl = specsheet =>
-    `/pub/media/specsheets/${specsheet}.pdf`;
+    `${HOST_URL}/pub/media/specsheets/${specsheet}.pdf`;
 export const productSpecsheetLogoUrl = () =>
     `${HOST_URL}/pub/media/attribute/pdf-logo32px.svg.png`;
