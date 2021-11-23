@@ -100,6 +100,12 @@ const ProductFullDetail = props => {
         []
     );
 
+    const moreInformation = get(
+        product,
+        'more_information.data',
+        []
+    );
+
     // Fill a map with field/section -> error.
     const errors = new Map();
     if (errorMessage) {
@@ -305,9 +311,18 @@ const ProductFullDetail = props => {
                         {/* Product  Short Additional Info  */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.shortAdditionalInof}>
-                                <span>
-                                    Short additional Information Goes Here
-                                </span>
+                                {moreInformation.map(info => {
+                                    return (
+                                        <tr>
+                                            <td>{info.label}</td>
+                                            <td>
+                                                <RichText
+                                                    content={info.value}
+                                                />
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </div>
                         </div>
 

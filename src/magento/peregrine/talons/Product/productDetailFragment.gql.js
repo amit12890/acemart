@@ -43,6 +43,11 @@ export const ProductDetailsFragment = gql`
                 code label value
             }
         }
+        more_information {
+            data {
+                code label value
+            }
+        }
         prod_list_attribute {
             data {
                 code label value
