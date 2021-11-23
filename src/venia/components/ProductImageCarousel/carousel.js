@@ -102,7 +102,7 @@ const ProductImageCarousel = props => {
                     <Icon
                         classes={chevronClasses}
                         src={ChevronLeftIcon}
-                        size={40}
+                        size={80}
                     />
                 </button>
                 {image}
@@ -114,7 +114,7 @@ const ProductImageCarousel = props => {
                     <Icon
                         classes={chevronClasses}
                         src={ChevronRightIcon}
-                        size={40}
+                        size={80}
                     />
                 </button>
             </div>
