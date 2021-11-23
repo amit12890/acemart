@@ -32,7 +32,6 @@ const style = {
     '--productLabel': `url("${productLabel}")`
 };
 
-const WishlistButton = React.lazy(() => import('../Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('../ProductOptions'));
 
 // Correlate a GQL error message to a field. GQL could return a longer error
@@ -415,33 +414,9 @@ const ProductFullDetail = props => {
                                     </div>
                                 </div>
 
-                                {/* Product Shipping Infor */}
-                                <div className={classes.apSectionRow}>
-                                    <div className={classes.shippingInfo}>
-                                        <span>
-                                            Usually ships from our warehouse in
-                                            Schertz, TX within 1-2 business
-                                            days.
-                                        </span>
-                                    </div>
-                                </div>
-
                                 {/* Product Add To Links */}
                                 <div className={classes.apSectionRow}>
                                     <div className={classes.addToLinks}>
-                                        <div
-                                            className={[
-                                                classes.action,
-                                                classes.toWishList
-                                            ].join(' ')}
-                                        >
-                                            <Suspense fallback={null}>
-                                                <WishlistButton
-                                                    {...wishlistButtonProps}
-                                                />
-                                            </Suspense>
-                                        </div>
-
                                         <div
                                             className={[
                                                 classes.action,
@@ -492,6 +467,16 @@ const ProductFullDetail = props => {
                                                 Print this page
                                             </Button>
                                         </div>
+
+                                        {/* Product Shipping Infor */}
+                                        {product.ship_info &&
+                                            <div className={classes.apSectionRow}>
+                                                <div className={classes.shippingInfo}>
+                                                    <span>{product.ship_info}</span>
+                                                </div>
+                                            </div>
+                                        }
+
                                         {product.specsheet && (
                                             <div>
                                                 <img src={productSpecsheetLogoUrl()} />

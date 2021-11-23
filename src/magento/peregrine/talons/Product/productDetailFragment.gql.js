@@ -11,6 +11,7 @@ export const ProductDetailsFragment = gql`
         youtube_filename
         url_key
         specsheet
+        ship_info
         categories {
             id
             breadcrumbs {
