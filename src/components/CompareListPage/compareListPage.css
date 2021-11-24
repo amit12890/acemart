@@ -64,6 +64,7 @@
 .remove {
     text-align: right;
     padding-right: 25px;
+    border-right: 1px solid rgb(var(--border-color-base));
 }
 
 thead tr {
@@ -78,6 +79,10 @@ tbody tr:nth-child(even) {
     background-color: rgb(var(--color-gray-light0));
 }
 
+tbody tr:nth-child(even) td:nth-child(even) {
+    background-color: #fff;
+}
+
 .label {
     border-right: 1px solid rgb(var(--border-color-base));
     padding: 15px;
@@ -90,6 +95,7 @@ tbody tr:nth-child(even) {
     padding: 15px;
     width: 180px;
     vertical-align: top;
+    border: 1px solid rgb(var(--border-color-base));
 }
 .iconWrapper {
 
@@ -97,8 +103,28 @@ tbody tr:nth-child(even) {
 
 .svgIcon {
     width: 18px;
+    height: auto;
+    fill: currentColor;
 }
 
+.actionWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.actionWrapper {
+    min-width: auto;
+}
+.actionsContainer {
+    display: flex;
+    align-items: center;
+    color: rgb(var(--color-white));
+    padding: 0 10px;
+    background-color: rgb(var(--theme-color-primary));
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+}
 
 .productInfo {
 
@@ -107,8 +133,10 @@ tbody tr:nth-child(even) {
 .name {
     font-size: var(--fontSize-100);
     font-weight: var(--font-weight-bold); 
+    margin-bottom: 10px;
 }
 
 .price {
-
+    margin-bottom: 10px;
+    color: rgb(var(--product-price-color));
 }

@@ -170,8 +170,10 @@ const GalleryItem = props => {
                         />
                         {showWishlistPopup &&
                             <>
-                                <Mask isActive={true} />
-                                <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
+                                <WishlistPopup
+                                    isPopupVisible={showWishlistPopup}
+                                    productId={item.id}
+                                    productQty={wishlistButtonProps.item.quantity}
                                     closeWishlistPopup={closeWishlistPopup} />
                             </>
                         }

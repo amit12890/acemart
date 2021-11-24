@@ -208,7 +208,6 @@ const ProductFullDetail = props => {
     return (
         <Fragment>
             {breadcrumbs}
-            <Mask isActive={showWishlistPopup || showSharePopup} />
             <div className={classes.productViewWrapper}>
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
@@ -711,6 +710,7 @@ const ProductFullDetail = props => {
             </div>
             {showWishlistPopup && (
                 <WishlistPopup
+                    isPopupVisible={showWishlistPopup}
                     productId={product.id}
                     productQty={wishlistButtonProps.item.quantity}
                     closeWishlistPopup={closeWishlistPopup}
