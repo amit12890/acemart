@@ -162,13 +162,19 @@ const GalleryItem = props => {
                                     </svg>
                                 </i>
                             </div>}
-                            Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
+                            Loader={() => <div className={classes.actionsContainer}>
+
+
+
+                            </div>}
                         />
                         {showWishlistPopup &&
                             <>
-                            <Mask isActive={true} />
-                            <WishlistPopup productId={item.id} productQty={wishlistButtonProps.item.quantity}
-                                closeWishlistPopup={closeWishlistPopup} />
+                                <WishlistPopup
+                                    isPopupVisible={showWishlistPopup}
+                                    productId={item.id}
+                                    productQty={wishlistButtonProps.item.quantity}
+                                    closeWishlistPopup={closeWishlistPopup} />
                             </>
                         }
                     </div>

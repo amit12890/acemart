@@ -5,6 +5,7 @@ import { useStyle } from '../../classify';
 import Image from '../Image';
 
 import defaultClasses from './collapsedImageGallery.css';
+import { getOriginalImage } from '../../../app.utils';
 
 const DISPLAY_COUNT = 4;
 
@@ -21,12 +22,12 @@ const CollapsedImageGallery = props => {
                 .map((item, index) => {
                     const { thumbnail } = item;
                     const { label, url } = thumbnail;
-
+                    const originalImageUrl = getOriginalImage(url)
                     return (
                         <Image
                             key={Object.keys(items)[index]}
                             alt={label}
-                            src={url}
+                            src={originalImageUrl}
                             width={48}
                         />
                     );

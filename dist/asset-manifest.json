@@ -1,16 +1,16 @@
 {
-  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.8cdc19f84fd47108eb15.js",
-  "RootCmp_PRODUCT__default.js": "/RootCmp_PRODUCT__default.8223020da4ad0f82ea30.js",
+  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.06c3eb4644b7e98f6a15.js",
+  "RootCmp_PRODUCT__default.js": "/RootCmp_PRODUCT__default.da594ef4e4217c4bc022.js",
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
   "balloons.png": "/balloons-miQ.png",
-  "client.js": "/client.6a274a592caacaadccb9.js",
+  "client.js": "/client.ead2f7cd791bafb01d34.js",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
     "client": {
       "js": [
-        "/runtime.0959605e343cd762b2ca.js",
+        "/runtime.ebb9b6fb6bd5d88fab65.js",
         "/vendors.8ec6f3a21f58e6258a04.js",
-        "/client.6a274a592caacaadccb9.js"
+        "/client.ead2f7cd791bafb01d34.js"
       ]
     }
   },
@@ -24,7 +24,7 @@
   "logo.svg": "/logo-qeq.svg",
   "noProductsFound.png": "/noProductsFound-e9n.png",
   "pinterest.svg": "/pinterest-m58.svg",
-  "runtime.js": "/runtime.0959605e343cd762b2ca.js",
+  "runtime.js": "/runtime.ebb9b6fb6bd5d88fab65.js",
   "truckicon.png": "/truckicon-7ZC.png",
   "twitter.svg": "/twitter-obp.svg",
   "vendors.js": "/vendors.8ec6f3a21f58e6258a04.js",
@@ -33,21 +33,21 @@
   "vendors~RootCmp_SEARCH__default.js": "/vendors~RootCmp_SEARCH__default.136bb112652ca7b81c55.js",
   "bundles": {
     "load": [
-      "/runtime.0959605e343cd762b2ca.js",
+      "/runtime.ebb9b6fb6bd5d88fab65.js",
       "/vendors.8ec6f3a21f58e6258a04.js",
-      "/client.6a274a592caacaadccb9.js"
+      "/client.ead2f7cd791bafb01d34.js"
     ],
     "prefetch": [
-      "/RootCmp_CATEGORY__default.8cdc19f84fd47108eb15.js",
-      "/RootCmp_PRODUCT__default.8223020da4ad0f82ea30.js"
+      "/RootCmp_CATEGORY__default.06c3eb4644b7e98f6a15.js",
+      "/RootCmp_PRODUCT__default.da594ef4e4217c4bc022.js"
     ]
   },
   "js": {
-    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.8cdc19f84fd47108eb15.js",
-    "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.8223020da4ad0f82ea30.js",
-    "client": "/client.6a274a592caacaadccb9.js",
+    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.06c3eb4644b7e98f6a15.js",
+    "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.da594ef4e4217c4bc022.js",
+    "client": "/client.ead2f7cd791bafb01d34.js",
     "i18n-en_US": "/i18n-en_US.75f50d6782b140ffb6f2.js",
-    "runtime": "/runtime.0959605e343cd762b2ca.js",
+    "runtime": "/runtime.ebb9b6fb6bd5d88fab65.js",
     "vendors": "/vendors.8ec6f3a21f58e6258a04.js",
     "vendors~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CMS_PAGE__default.93e21657781a188560bd.js",
     "vendors~RootCmp_PRODUCT__default": "/vendors~RootCmp_PRODUCT__default.b0d1f7fa9b81927638f7.js",

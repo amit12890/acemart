@@ -27,6 +27,7 @@ import SharePopup from '../../../components/SharePopup';
 
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
+import StoreLocator from '../../../components/StoreLocator';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -53,10 +54,12 @@ const ProductFullDetail = props => {
     const { product } = props;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
+    const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
 
     const talonProps = useProductFullDetail({ product });
     console.log('line 43 ~ talonProps', talonProps);
 
+    // handlers for wishlist popup
     const openWishlistPopup = useCallback(() => {
         setShowWishlistPopup(true);
     }, [setShowWishlistPopup]);
@@ -64,12 +67,22 @@ const ProductFullDetail = props => {
         setShowWishlistPopup(false);
     }, [setShowWishlistPopup]);
 
+    // handlers for share popup
     const openSharePopup = useCallback(() => {
         setShowSharePopup(true);
     }, [setShowSharePopup]);
     const closeSharePopup = useCallback(() => {
         setShowSharePopup(false);
     }, [setShowSharePopup]);
+
+    // handlers for storelocator popup
+    const openStoreLocatorPopup = useCallback(() => {
+        setStoreLocatorPopup(true);
+    }, [setStoreLocatorPopup]);
+
+    const closeStoreLocatorPopup = useCallback(() => {
+        setStoreLocatorPopup(false);
+    }, [setStoreLocatorPopup]);
 
     const {
         breadcrumbCategoryId,
@@ -195,7 +208,6 @@ const ProductFullDetail = props => {
     return (
         <Fragment>
             {breadcrumbs}
-            <Mask isActive={showWishlistPopup || showSharePopup} />
             <div className={classes.productViewWrapper}>
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
@@ -314,7 +326,7 @@ const ProductFullDetail = props => {
                         {/* Product Review   */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.productReview}>
-                                <span>Review Goes Here</span>
+                                <span>Be the first to review this product</span>
                             </div>
                         </div>
 
@@ -395,7 +407,8 @@ const ProductFullDetail = props => {
 
                                 {/* Store Locator */}
                                 <div className={classes.apSectionRow}>
-                                    <div className={classes.storeLocator}>
+                                    <div className={classes.storeLocator}
+                                        onClick={openStoreLocatorPopup}>
                                         <i className={classes.iconWrapper}>
                                             <svg
                                                 className={classes.svgIcon}
@@ -552,10 +565,11 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.specsheet}>
                                             <div className={classes.iconPDF}>
-                                                <img src={productSpecsheetLogoUrl()} />
+                                                <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >
+                                                    <img src={productSpecsheetLogoUrl()} />
+                                                </a>
                                             </div>
                                             <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >Specsheet</a>
-
                                         </div>
                                     </div>
                                 )}
@@ -697,6 +711,7 @@ const ProductFullDetail = props => {
             </div>
             {showWishlistPopup && (
                 <WishlistPopup
+                    isPopupVisible={showWishlistPopup}
                     productId={product.id}
                     productQty={wishlistButtonProps.item.quantity}
                     closeWishlistPopup={closeWishlistPopup}
@@ -704,9 +719,15 @@ const ProductFullDetail = props => {
             )}
             {showSharePopup && (
                 <SharePopup
+                    isPopupVisible={showSharePopup}
                     productId={product.id}
                     closeSharePopup={closeSharePopup}
                 />
+            )}
+            {showStoreLocatorPopup && (
+                <StoreLocator
+                    isPopupVisible={showStoreLocatorPopup}
+                    closeStoreLocatorPopup={closeStoreLocatorPopup} />
             )}
         </Fragment>
     );

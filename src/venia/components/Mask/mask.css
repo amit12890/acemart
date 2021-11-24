@@ -12,7 +12,7 @@
     transition-timing-function: linear;
     visibility: hidden;
     width: 100%;
-    z-index: 2;
+    z-index: 100; 
     -webkit-appearance: none;
 }
 

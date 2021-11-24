@@ -13,10 +13,11 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 import Button from '../../venia/components/Button';
 import { apiAddToWishlist, apiGetWishlistData } from '../../url.utils';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 
 
 const WishlistPopup = props => {
-    const { closeWishlistPopup, productId, productQty = 1 } = props;
+    const { closeWishlistPopup, productId, productQty = 1, isPopupVisible } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
 
@@ -61,19 +62,19 @@ const WishlistPopup = props => {
             return <div>You have no wishlist to choose from !!</div>
 
         return (
-            <div>
+            <div className={classes.wishlistItemWrapper}>
                 {wishlists.map((wishlist) => {
                     const checked = !isNil(selectedWishlist) &&
                         wishlist.multi_wishlist_id === selectedWishlist
                     return (
-                        <div key={wishlist.multi_wishlist_id}>
+                        <div className={classes.wishlistItem} key={wishlist.multi_wishlist_id}>
                             <label>
                                 <input
                                     name={wishlist.wishlist_name}
                                     type="checkbox"
                                     checked={checked}
                                     onChange={() =>
-                                        setSelectedWishlist(checked ? null: wishlist.multi_wishlist_id)
+                                        setSelectedWishlist(checked ? null : wishlist.multi_wishlist_id)
                                     }
                                 />
                                 {wishlist.wishlist_name}
@@ -81,8 +82,11 @@ const WishlistPopup = props => {
                         </div>
                     )
                 })}
-                <CreateWishlist customerId={get(customerData, 'customer.id', null)}
-                    refreshWishlist={refreshWishlist} />
+
+                <div className={classes.test}>
+                    <CreateWishlist customerId={get(customerData, 'customer.id', null)}
+                        refreshWishlist={refreshWishlist} />
+                </div>
 
                 {addToWishlistLoading ?
                     <Button disabled>Loading...</Button>
@@ -112,6 +116,7 @@ const WishlistPopup = props => {
     return (
         <Portal>
             <div className={classes.portalWrapper}>
+                <Mask isActive={isPopupVisible} dismiss={closeWishlistPopup} />
                 <div className={classes.root}>
                     <div className={classes.contentWrapper}>
                         <div className={classes.modalHeader}>
@@ -130,12 +135,14 @@ const WishlistPopup = props => {
                             <div className={classes.heading}>
                                 Please choose a Wish List for the selected product:
                             </div>
-                            {content}
+                            <div className={classes.contentContainer}>
+                                {content}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </Portal>
+        </Portal >
     );
 };
 
