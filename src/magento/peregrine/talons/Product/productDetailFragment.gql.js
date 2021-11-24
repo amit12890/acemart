@@ -36,6 +36,10 @@ export const ProductDetailsFragment = gql`
             disabled
             file
         }
+        media_gallery {
+            url
+            label
+        }
         small_image {
             url
         }
