@@ -25,12 +25,14 @@ export default ({ data }) => {
                     to={getUrlPath(item.url_path, item.url_key)}
                     className={defaultClasses.subcatListItem}
                 >
-                    <Image
-                        width="85"
-                        height=""
-                        classes={{ image: classes.image }}
-                        src={image}
-                    />
+                    <div className={classes.catImageWrapper}>
+                        <Image
+                            width="85"
+                            height=""
+                            classes={{ image: classes.image }}
+                            src={image}
+                        />
+                    </div>
                     <div className={classes.name}>{item.name}</div>
                 </Link>
             );

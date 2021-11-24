@@ -17,7 +17,9 @@
     
 
 }
-
+.catImageWrapper {
+    min-height: 130px;
+}
 .image {
     height: auto;
     object-fit: contain;

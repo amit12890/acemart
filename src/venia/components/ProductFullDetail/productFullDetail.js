@@ -208,7 +208,6 @@ const ProductFullDetail = props => {
     return (
         <Fragment>
             {breadcrumbs}
-            <Mask isActive={showWishlistPopup || showSharePopup} />
             <div className={classes.productViewWrapper}>
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
@@ -327,7 +326,7 @@ const ProductFullDetail = props => {
                         {/* Product Review   */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.productReview}>
-                                <span>Review Goes Here</span>
+                                <span>Be the first to review this product</span>
                             </div>
                         </div>
 
@@ -566,10 +565,11 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.specsheet}>
                                             <div className={classes.iconPDF}>
-                                                <img src={productSpecsheetLogoUrl()} />
+                                                <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >
+                                                    <img src={productSpecsheetLogoUrl()} />
+                                                </a>
                                             </div>
                                             <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >Specsheet</a>
-
                                         </div>
                                     </div>
                                 )}
@@ -711,6 +711,7 @@ const ProductFullDetail = props => {
             </div>
             {showWishlistPopup && (
                 <WishlistPopup
+                    isPopupVisible={showWishlistPopup}
                     productId={product.id}
                     productQty={wishlistButtonProps.item.quantity}
                     closeWishlistPopup={closeWishlistPopup}

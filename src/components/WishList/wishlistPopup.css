@@ -6,8 +6,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    z-index: 2;
-
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +38,7 @@ display: flex;
     width: var(--content-width);
     left: 0;
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
     margin: 0 auto;
     position: relative;
     padding: 20px;
@@ -109,4 +108,20 @@ display: flex;
 }
 .shareItem {
     
+}
+
+.contentContainer {
+
+}
+
+.wishlistItemWrapper {
+}
+
+.wishlistItem {
+    margin-bottom: 5px;
+}
+
+.test {
+margin-top: 10px;
+margin-bottom: 10px;
 }

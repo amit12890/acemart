@@ -22,7 +22,7 @@ const CompareListPage = () => {
     const { loading: loadingCompareList, error, data: compareListData } = useQuery(
         GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
     );
-        
+
     if (loadingCompareList) {
         return fullPageLoadingIndicator;
     }
@@ -73,7 +73,7 @@ const CompareListPage = () => {
                         <thead>
                             {/** Header of the table for remove item buttons */}
                             <tr>
-                                <th></th>
+                                <th className={classes.label}></th>
                                 {items.map((item) => {
                                     return (
                                         <th className={classes.remove} key={item.uid}>
@@ -141,19 +141,21 @@ const itemHeaderBlock = (classes, item) => {
                     currencyCode={get(item, "price.regularPrice.amount.currency")}
                 />
             </div>
-            <Button disabled={false} priority="high" type="submit">
-                <FormattedMessage
-                    id={'productFullDetail.cartAction'}
-                    defaultMessage={'Add to Cart'}
-                />
-            </Button>
-            <div className={classes.actionsContainer}>
-                <i className={classes.iconWrapper}>
-                    <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <title>wishlist-full</title>
-                        <path d="M23.594 2q-1.25 0-2.406 0.469t-2.141 1.25-1.766 1.781q-0.781 1.031-1.281 2.094-0.5-1.063-1.281-2.094-0.781-1-1.766-1.781t-2.141-1.25-2.406-0.469q-1.75 0-3.281 0.656t-2.672 1.797-1.797 2.672-0.656 3.281q0 3.531 1.594 5.969 1.594 2.469 3.984 4.688t5.172 4.656q2.813 2.406 5.25 5.906 2.313-3.469 5.094-5.938t5.203-4.719 4.078-4.688q1.625-2.469 1.625-5.875 0-1.75-0.656-3.281t-1.797-2.672-2.672-1.797-3.281-0.656z"></path>
-                    </svg>
-                </i>
+            <div className={classes.actionWrapper}>
+                <Button disabled={false} priority="high" type="submit">
+                    <FormattedMessage
+                        id={'productFullDetail.cartAction'}
+                        defaultMessage={'Add to Cart'}
+                    />
+                </Button>
+                <div className={classes.actionsContainer}>
+                    <i className={classes.iconWrapper}>
+                        <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <title>wishlist-full</title>
+                            <path d="M23.594 2q-1.25 0-2.406 0.469t-2.141 1.25-1.766 1.781q-0.781 1.031-1.281 2.094-0.5-1.063-1.281-2.094-0.781-1-1.766-1.781t-2.141-1.25-2.406-0.469q-1.75 0-3.281 0.656t-2.672 1.797-1.797 2.672-0.656 3.281q0 3.531 1.594 5.969 1.594 2.469 3.984 4.688t5.172 4.656q2.813 2.406 5.25 5.906 2.313-3.469 5.094-5.938t5.203-4.719 4.078-4.688q1.625-2.469 1.625-5.875 0-1.75-0.656-3.281t-1.797-2.672-2.672-1.797-3.281-0.656z"></path>
+                        </svg>
+                    </i>
+                </div>
             </div>
         </div>
 
