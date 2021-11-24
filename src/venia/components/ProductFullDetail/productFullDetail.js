@@ -27,6 +27,7 @@ import SharePopup from '../../../components/SharePopup';
 
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
+import StoreLocator from '../../../components/StoreLocator';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -53,10 +54,12 @@ const ProductFullDetail = props => {
     const { product } = props;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
+    const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
 
     const talonProps = useProductFullDetail({ product });
     console.log('line 43 ~ talonProps', talonProps);
 
+    // handlers for wishlist popup
     const openWishlistPopup = useCallback(() => {
         setShowWishlistPopup(true);
     }, [setShowWishlistPopup]);
@@ -64,12 +67,22 @@ const ProductFullDetail = props => {
         setShowWishlistPopup(false);
     }, [setShowWishlistPopup]);
 
+    // handlers for share popup
     const openSharePopup = useCallback(() => {
         setShowSharePopup(true);
     }, [setShowSharePopup]);
     const closeSharePopup = useCallback(() => {
         setShowSharePopup(false);
     }, [setShowSharePopup]);
+
+    // handlers for storelocator popup
+    const openStoreLocatorPopup = useCallback(() => {
+        setStoreLocatorPopup(true);
+    }, [setStoreLocatorPopup]);
+
+    const closeStoreLocatorPopup = useCallback(() => {
+        setStoreLocatorPopup(false);
+    }, [setStoreLocatorPopup]);
 
     const {
         breadcrumbCategoryId,
@@ -395,7 +408,8 @@ const ProductFullDetail = props => {
 
                                 {/* Store Locator */}
                                 <div className={classes.apSectionRow}>
-                                    <div className={classes.storeLocator}>
+                                    <div className={classes.storeLocator}
+                                        onClick={openStoreLocatorPopup}>
                                         <i className={classes.iconWrapper}>
                                             <svg
                                                 className={classes.svgIcon}
@@ -704,9 +718,15 @@ const ProductFullDetail = props => {
             )}
             {showSharePopup && (
                 <SharePopup
+                    isPopupVisible={showSharePopup}
                     productId={product.id}
                     closeSharePopup={closeSharePopup}
                 />
+            )}
+            {showStoreLocatorPopup && (
+                <StoreLocator
+                    isPopupVisible={showStoreLocatorPopup}
+                    closeStoreLocatorPopup={closeStoreLocatorPopup} />
             )}
         </Fragment>
     );

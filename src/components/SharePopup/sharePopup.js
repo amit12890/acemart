@@ -12,15 +12,17 @@ import iconEmail from '../../assets/email.svg';
 import Button from '../../venia/components/Button';
 import { useStyle } from '../../venia/classify';
 
-import defaultClasses from '../SharePopup/sharePopup.css';
+import defaultClasses from './sharePopup.css';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 
 const SharePopup = props => {
-    const { closeSharePopup, productId } = props;
+    const { closeSharePopup, productId, isPopupVisible } = props;
     const classes = useStyle(defaultClasses, props.classes);
 
     return (
         <Portal>
             <div className={classes.portalWrapper}>
+                <Mask isActive={isPopupVisible} dismiss={closeSharePopup} />
                 <div className={classes.root}>
                     <div className={classes.contentWrapper}>
                         <div className={classes.modalHeader}>
