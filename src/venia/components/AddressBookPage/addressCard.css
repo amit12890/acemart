@@ -40,9 +40,9 @@
 
 .confirmDeleteButton {
     composes: root_normalPriorityNegative from '../Button/button.css';
-
     background-color: white;
     order: 1;
+    color: rgb(var(--color-red));
 }
 .cancelDeleteButton {
     composes: root_lowPriority from '../Button/button.css';
