@@ -22,7 +22,7 @@ const CompareListPage = () => {
     const { loading: loadingCompareList, error, data: compareListData } = useQuery(
         GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
     );
-        
+
     if (loadingCompareList) {
         return fullPageLoadingIndicator;
     }
@@ -73,7 +73,7 @@ const CompareListPage = () => {
                         <thead>
                             {/** Header of the table for remove item buttons */}
                             <tr>
-                                <th></th>
+                                <th className={classes.label}></th>
                                 {items.map((item) => {
                                     return (
                                         <th className={classes.remove} key={item.uid}>

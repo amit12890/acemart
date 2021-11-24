@@ -1,5 +1,6 @@
 .root {
-   
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 
@@ -20,6 +21,9 @@
 .compare,
 .table {
 
+}
+.actionToolbar {
+    margin-bottom: 20px;
 }
 
 .actionToolbar button {
@@ -46,6 +50,7 @@
     overflow-x: auto;
     position: relative;
     font-size: var(--fontSize-90); 
+    
 }  
 .table {
     width: 100%;
@@ -53,21 +58,28 @@
     border-spacing: 0;
     max-width: 100%;
     table-layout: fixed; 
+    border: 1px solid rgb(var(--border-color-base));
 }
 
 .remove {
     text-align: right;
+    padding-right: 25px;
 }
+
+thead tr {
+    border-bottom: 1px solid rgb(var(--border-color-base));
+}
+
 tbody tr:first-child .label,
 tbody tr:first-child .attribute {
-    border-bottom: 1px solid #cccccc;;
+    border-bottom: 1px solid rgb(var(--border-color-base));
 }
 tbody tr:nth-child(even) {
     background-color: rgb(var(--color-gray-light0));
 }
 
 .label {
-    border-right: 1px solid #cccccc;
+    border-right: 1px solid rgb(var(--border-color-base));
     padding: 15px;
     width: 180px;
     text-align: left;
