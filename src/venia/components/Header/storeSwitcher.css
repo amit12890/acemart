@@ -65,8 +65,22 @@
     border-bottom: 1px solid rgb(var(--color-gray-darken0));
 }
 
+.storeLabelWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5px;
+}
+.storeLabel {
+    font-size: var(--fontSize-200);
+    margin-bottom: 4px;
+}
+
 .svgIcon {
     fill: currentColor;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
 }
 
 /*
