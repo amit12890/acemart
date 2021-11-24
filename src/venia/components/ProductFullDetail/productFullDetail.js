@@ -326,7 +326,7 @@ const ProductFullDetail = props => {
                         {/* Product Review   */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.productReview}>
-                                <span>Review Goes Here</span>
+                                <span>Be the first to review this product</span>
                             </div>
                         </div>
 
@@ -565,10 +565,11 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.specsheet}>
                                             <div className={classes.iconPDF}>
-                                                <img src={productSpecsheetLogoUrl()} />
+                                                <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >
+                                                    <img src={productSpecsheetLogoUrl()} />
+                                                </a>
                                             </div>
                                             <a href={productSpecsheetUrl(product.specsheet)} target="_blank" >Specsheet</a>
-
                                         </div>
                                     </div>
                                 )}
