@@ -107,7 +107,7 @@ const OrderRow = props => {
                     <span className={classes.orderNumber}>{orderNumber}</span>
                 </Link>
                 <div
-                    style={{cursor: "pointer"}}
+                    style={{ cursor: "pointer" }}
                     onClick={handleReorder(orderNumber)}>
                     {reorderItemsLoading ? "Loading..." : "Reorder"}
                 </div>
