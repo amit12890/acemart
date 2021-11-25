@@ -31,6 +31,7 @@ const IMAGE_WIDTH = 535;
  */
 const ProductImageCarousel = props => {
     const { images } = props;
+    console.log("🚀 ~ file: carousel.js ~ line 34 ~ images", images)
 
     const talonProps = useProductImageCarousel({
         images,

@@ -45,7 +45,7 @@ const Item = props => {
         width: 50
     };
     const thumbnailElement = thumbnail ? (
-        <Image {...thumbnailProps} resource={thumbnail.url} />
+        <Image {...thumbnailProps} src={thumbnail.url} />
     ) : (
         <PlaceholderImage {...thumbnailProps} />
     );
@@ -80,7 +80,7 @@ const Item = props => {
 
             <div className={[classes.col, classes.price].join(" ")}>
                 <div className={classes.label}><strong>Subtotal</strong></div>
-                <div className={classes.value}><Price currencyCode={currency} value={unitPrice*quantity_ordered} /></div>
+                <div className={classes.value}><Price currencyCode={currency} value={unitPrice * quantity_ordered} /></div>
             </div>
 
             <Button

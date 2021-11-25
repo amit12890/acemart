@@ -22,12 +22,13 @@ const CollapsedImageGallery = props => {
                 .map((item, index) => {
                     const { thumbnail } = item;
                     const { label, url } = thumbnail;
+                    console.log("🚀 ~ file: collapsedImageGallery.js ~ line 25 ~ .map ~ url", url)
                     const originalImageUrl = getOriginalImage(url)
                     return (
                         <Image
                             key={Object.keys(items)[index]}
                             alt={label}
-                            src={originalImageUrl}
+                            src={url}
                             width={48}
                         />
                     );

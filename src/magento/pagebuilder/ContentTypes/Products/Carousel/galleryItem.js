@@ -48,15 +48,15 @@ const ItemPlaceholder = ({ classes }) => (
 );
 
 // TODO: remove temp image
-const getOriginalImage = (url) => {
-    if (includes(url, "/cache/")) {
-        const smallImageUrlArr = url.split("cache/")
-        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-        return smallImageUrlArr[0] + subUrl
-    } else {
-        return url
-    }
-}
+// const getOriginalImage = (url) => {
+//     if (includes(url, "/cache/")) {
+//         const smallImageUrlArr = url.split("cache/")
+//         const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+//         return smallImageUrlArr[0] + subUrl
+//     } else {
+//         return url
+//     }
+// }
 
 const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
@@ -70,7 +70,6 @@ const GalleryItem = props => {
 
     const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom } = item;
     const { url: smallImageURL } = small_image;
-    const originalUrl = getOriginalImage(smallImageURL)
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
 
     const processedProductLabels = useMemo(() => {
@@ -98,8 +97,8 @@ const GalleryItem = props => {
                             root: classes.imageContainer
                         }}
                         height={IMAGE_HEIGHT}
-                        src={originalUrl}
-                        // src={smallImageURL}
+                        // src={originalUrl}
+                        src={smallImageURL}
                         widths={IMAGE_WIDTHS}
                     />
                 </Link>

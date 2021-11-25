@@ -47,7 +47,7 @@ export const useProduct = props => {
     }, [storeConfigData]);
 
     const sku = pathname.split('/').pop();
-    const urlKey =  productUrlSuffix ? sku.replace(productUrlSuffix, '') : sku;
+    const urlKey = productUrlSuffix ? sku.replace(productUrlSuffix, '') : sku;
 
     const { error, loading, data } = useQuery(getProductDetailQuery, {
         fetchPolicy: 'cache-and-network',
@@ -80,6 +80,7 @@ export const useProduct = props => {
 
         return mapProduct(product);
     }, [data, mapProduct, urlKey]);
+    console.log("🚀 ~ file: useProduct.js ~ line 83 ~ product ~ product", product)
 
     // Update the page indicator if the GraphQL query is in flight.
     useEffect(() => {

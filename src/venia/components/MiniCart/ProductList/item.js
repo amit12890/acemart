@@ -38,9 +38,9 @@ const Item = props => {
     const stockStatusText =
         product.stock_status === 'OUT_OF_STOCK'
             ? formatMessage({
-                  id: 'productList.outOfStock',
-                  defaultMessage: 'Out-of-stock'
-              })
+                id: 'productList.outOfStock',
+                defaultMessage: 'Out-of-stock'
+            })
             : '';
 
     const { isDeleting, removeItem } = useItem({
@@ -65,9 +65,9 @@ const Item = props => {
                             root: classes.thumbnail
                         }}
                         width={100}
-                        resource={
+                        src={
                             configurableThumbnailSource === 'itself' &&
-                            configured_variant
+                                configured_variant
                                 ? configured_variant.thumbnail.url
                                 : product.thumbnail.url
                         }
@@ -75,53 +75,53 @@ const Item = props => {
                 </Link>
             </div>
             <div className={classes.itemDetails}>
-            <Link
-                className={classes.name}
-                to={itemLink}
-                onClick={closeMiniCart}
-            >
-                {product.name}
-            </Link>
-            <ProductOptions
-                options={configurable_options}
-                classes={{
-                    options: classes.options
-                }}
-            />
-             <div className={classes.itemQtyPriceWrapper}>  
-                <span className={classes.quantity}>
-                    <FormattedMessage
-                        id={'productList.quantity'}
-                        defaultMessage={'Qty :'}
-                        values={{ quantity }}
-                    />
-                </span>
-                <span className={classes.price}>
-                    <Price
-                        currencyCode={prices.price.currency}
-                        value={prices.price.value}
-                    />
-                    <FormattedMessage
-                        id={'productList.each'}
-                        defaultMessage={' ea.'}
-                    />
-                </span>
-            </div>
-            <span className={classes.stockStatus}>{stockStatusText}</span>
-            <button
-                onClick={removeItem}
-                type="button"
-                className={classes.deleteButton}
-                disabled={isDeleting}
-            >
-                <Icon
-                    size={16}
-                    src={DeleteIcon}
+                <Link
+                    className={classes.name}
+                    to={itemLink}
+                    onClick={closeMiniCart}
+                >
+                    {product.name}
+                </Link>
+                <ProductOptions
+                    options={configurable_options}
                     classes={{
-                        icon: classes.editIcon
+                        options: classes.options
                     }}
                 />
-            </button>
+                <div className={classes.itemQtyPriceWrapper}>
+                    <span className={classes.quantity}>
+                        <FormattedMessage
+                            id={'productList.quantity'}
+                            defaultMessage={'Qty :'}
+                            values={{ quantity }}
+                        />
+                    </span>
+                    <span className={classes.price}>
+                        <Price
+                            currencyCode={prices.price.currency}
+                            value={prices.price.value}
+                        />
+                        <FormattedMessage
+                            id={'productList.each'}
+                            defaultMessage={' ea.'}
+                        />
+                    </span>
+                </div>
+                <span className={classes.stockStatus}>{stockStatusText}</span>
+                <button
+                    onClick={removeItem}
+                    type="button"
+                    className={classes.deleteButton}
+                    disabled={isDeleting}
+                >
+                    <Icon
+                        size={16}
+                        src={DeleteIcon}
+                        classes={{
+                            icon: classes.editIcon
+                        }}
+                    />
+                </button>
             </div>
         </div>
     );
