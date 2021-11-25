@@ -13,6 +13,7 @@ export const ProductDetailsFragment = gql`
         specsheet
         ship_info
         only_x_left_in_stock
+        stock_label
         pos_stock_manage {
             hide_add_to_cart
             locate_in_store

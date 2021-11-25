@@ -214,7 +214,7 @@ const GalleryItem = props => {
                             {processedProductLabels.map((labelObj, i) => {
                                 return (
                                     <div key={i}
-                                        className={[classes.labelItem, classes[camelCase(labelObj.label_text)]].join(" ")}
+                                        className={[classes.labelItem, classes[camelCase(labelObj.labelname)]].join(" ")}
                                         style={style}>
                                         <span>{camelCase(labelObj.labelname)}</span>
                                     </div>
