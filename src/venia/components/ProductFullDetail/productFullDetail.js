@@ -51,7 +51,7 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 const ProductFullDetail = props => {
     const { product } = props;
     const {pos_stock_manage, only_x_left_in_stock,
-        mpn, uom, productLabel, stock_label,
+        mpn, uom, productLabel,
     } = product;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
@@ -392,8 +392,8 @@ const ProductFullDetail = props => {
                                     </div>
                                 </div>
                                 
-                                {!stock_label &&
-                                    <div>{stock_label}</div>
+                                {!!pos_stock_manage.stock_label &&
+                                    <div>{pos_stock_manage.stock_label}</div>
                                 }
                                 {/* Product Stock Avialability */}
                                 <div className={classes.apSectionRow}>

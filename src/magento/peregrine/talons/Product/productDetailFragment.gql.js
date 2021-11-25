@@ -16,6 +16,7 @@ export const ProductDetailsFragment = gql`
         pos_stock_manage {
             hide_add_to_cart
             locate_in_store
+            stock_label
         }
         categories {
             id
