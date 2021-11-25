@@ -16,8 +16,6 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-
-    
 }
 
 
@@ -86,41 +84,359 @@ display: flex;
 
 
 
-.action {
+.contentContainer {
 
 }
-.shareButtons {
+
+.tabsContainer {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.tabsItem {
+    background: #f6f6f6;
+    position: relative;
+}
+.tabsItem.tabArea {
 
 }
-.shareItemWraper {
+
+.tabsItem.tabStore {
+
+}
+
+.tabsItem.tabStock {
+
+}
+
+.tabsItem.tabStock {
+
+}
+
+.tabsItem:not(:first-child):before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 0;
+    border-right: solid;
+    border-top: solid;
+    pointer-events: none;
+    box-sizing: border-box;
+    width: 28px;
+    height: 30px;
+    transform: rotate(30deg) skewy(30deg);
+    z-index: 1;
+    border-color: #fff;
+    border-width: 4px;
+    left: -16px;
+
+}
+
+
+
+.itemSwitch {
+    line-height: 46px;
+    font-size: 1rem;
+    color: #6d6d6d;
+    text-decoration: none;
+    
+    height: 46px;
+    padding: 12px 24px 12px 36px;
+    display: flex; 
+    align-items: center;
+}
+
+.tabsItem.active   {
+    background-color: #666;
+}
+
+.tabsItem.active+.tabsItem:before {
+    background-color:  #666;
+}
+
+.tabsItem.active .itemSwitch  {
+    font-weight: bold;
+}
+
+
+.tabsItem.active .itemSwitch  {
+    color: #fff
+}
+
+.switchContent {
+    display: flex;
+}
+
+.tabsItem.tabStock .tabLabel{
+    order: 2;
+}
+
+.tabsItem.tabStock .tabLabel:after{
+    content: '';
+}
+
+.tabsItem.tabStock .tabValue {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+.tabLabel {
+    font-weight: bold;
+}
+
+.tabLabel:after {
+    content: ":"
+}
+
+.tabValue {
+    margin-left: 5px;
+}
+
+.tabsContent {
+
+}
+
+.tabsItemContent {
+    font-size: var(--fontSize-100); 
+}
+
+.tabContentArea {
+
+}
+
+.instructions {
+    margin-bottom: 10px;
+}
+
+.areas {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 1%;
 }
-.shareItem {
-    margin: 0;
+
+.areaSwitcher {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke)); 
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    text-align: center;
+    margin-left: 10px;
+}
+
+.areaSwitcher:hover{
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+
+.areaSwitcher:first-child {
+    margin-left: 0;
+}
+
+
+
+/* Store List */
+
+.tabContentStore {
+
+}
+
+.storeInfo {
+
+}
+
+
+.selectStoreWrapper {
     display: flex;
-    text-align: left;
-    flex: 0 32%;
-    margin: 0 0 1%;
-
 }
 
-.shareLink {
-    padding: 10px;
+.mapContainer {
+    
+}
+
+.mapContainer img {
+    position: static;
+}
+
+.storeListContainer {
+}
+
+.listItem {
+    display: flex;
+    border-top: 2px solid rgb(var(--border-color-base));
+}
+.listItem:first-child {
+    border-top: none;
+}
+
+.listItem:hover {
+    background-color: rgb(var(--color-gray-light0));
+}
+
+.listLabel {
+    margin: 15px;    
+}
+.listLabel span {
+    background-color:rgb(var(--theme-color-primary));
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: rgb(var(--color-white));
+    font-weight: var(--font-weight-bold);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    text-align: center;
+    justify-content: center;
+}
+
+.storeAddressWrapper {
+    margin: 15px 0;
     font-size: var(--fontSize-100);
-    background-color: #ddd;
-    width: 100%;
 }
 
-.shareLink:hover {
-    color: rgb(var(--link-color-hover));
+.storeName {
+    font-weight: bold;
+    font-size: var(--fontSize-200);
+    margin: 0 0 10px 0;
 }
 
-.shareLink img {
-    margin-right: 10px;
+.storeAddress {
+    margin-bottom: 10px;
+}
+
+.stockInfo {
+
+}
+
+.stockLabel {
+
+}
+
+.stockvalue {
+    color: rgb(var(--color-green10));
+}
+
+
+
+/* Stock Tab Content */
+
+
+.stockInfo {
+
+}
+
+.qtyInfo {
+
+}
+
+.qtyInfo span {
+    color:rgb(var(--color-green10));
+}
+
+.callInfo {
+color: rgb(var(--color-red10));
+}
+
+.stocks {
+
+}
+
+.storeAddressHours {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 0;
+}
+
+.stocks .storeAddressWrapper {
+    flex-grow: 1;
+    margin: 0 0 20px;
+
+}
+
+.stocks .storeAddress {
+    font-weight: bold;
+    font-size: var(--fontSize-200);
+}
+
+.storeDirection {
+    color: rgb(var(--theme-color-primary));
+}
+
+.storeDirection a {
+    display: flex;
+    align-items: center;
+}
+
+.storeDirection .svgIcon{
+    width: 16px;
     height: auto;
+    display: inline-flex;
+}
+
+.iconWrapper {
+    display: inline-flex;
+    margin-right: 10px;
+}
+
+.storeHours {
+    font-size: var(--fontSize-100); 
+}
+
+.shopStore {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.shopStore a{
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke)); 
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    text-align: center;
+    
+}
+
+.shopStore a:hover{
+    background-color: rgb(var(--color-white));
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.storeNotes {
+    
+}
+
+.storeNotes p {
+    margin-bottom: 15px;
 }
