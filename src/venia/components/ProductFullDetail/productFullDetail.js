@@ -1,13 +1,12 @@
-import React, { Fragment, Suspense, useState, useCallback } from 'react';
+import React, { Fragment, Suspense, useState, useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
 import { Info } from 'react-feather';
-import { get, size } from 'lodash';
+import { get, size, filter, orderBy, camelCase } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import Price from '@magento/venia-ui/lib/components/Price';
-import Mask from '@magento/venia-ui/lib/components/Mask';
 import FormError from '@magento/venia-ui/lib/components/FormError';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
@@ -50,14 +49,15 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 };
 
 const ProductFullDetail = props => {
-    console.log('line 39 ~ props', props);
     const { product } = props;
+    const {pos_stock_manage, only_x_left_in_stock,
+        mpn, uom, productLabel, stock_label,
+    } = product;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
 
     const talonProps = useProductFullDetail({ product });
-    console.log('line 43 ~ talonProps', talonProps);
 
     // handlers for wishlist popup
     const openWishlistPopup = useCallback(() => {
@@ -114,6 +114,12 @@ const ProductFullDetail = props => {
             currentProduct={productDetails.name}
         />
     ) : null;
+
+    const processedProductLabels = useMemo(() => {
+        let resultLabels = filter(productLabel.items, ["status", 1]);
+        resultLabels = orderBy(resultLabels, ['priority'], ['asc']);
+        return resultLabels
+    }, [productLabel.items])
 
     const additionalInformation = get(
         product,
@@ -217,7 +223,7 @@ const ProductFullDetail = props => {
                     <div className={classes.productInfo}>
                         {/* Product Name */}
                         <h1 className={classes.productName}>
-                            {productDetails.name}
+                            {product.product_name}
                         </h1>
 
                         {/* Product SKU and Model Number */}
@@ -246,7 +252,7 @@ const ProductFullDetail = props => {
                                         Model Number
                                     </span>
                                     <span className={classes.attributeValue}>
-                                        Sample Model Number
+                                        {mpn}
                                     </span>
                                 </div>
                             </div>
@@ -260,7 +266,7 @@ const ProductFullDetail = props => {
                                     value={productDetails.price.value}
                                 />
                                 <span className={classes.unit}>
-                                    / {product.uom}
+                                    / {uom}
                                 </span>
                             </div>
                         </div>
@@ -268,22 +274,23 @@ const ProductFullDetail = props => {
                         {/* Product Stock Avialability */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.stock}>
-                                {product.availability} In Stock
+                                {only_x_left_in_stock} In Stock
                             </div>
                         </div>
 
                         {/* Product Label */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.labelWrapper}>
-                                <div
-                                    className={[
-                                        classes.labelItem,
-                                        classes.onSale
-                                    ].join(' ')}
-                                    style={style}
-                                >
-                                    <span />
-                                </div>
+                                {processedProductLabels.map((labelObj, i) => {
+                                    return (
+                                        <div key={i}
+                                            className={[classes.labelItem, classes[camelCase(labelObj.label_text)]].join(" ")}
+                                            style={style}
+                                        >
+                                            <span>{camelCase(labelObj.labelname)}</span>
+                                        </div>
+                                    )
+                                })}
                                 <div className={classes.labelHelper}>
                                     <span>What's this</span>
                                 </div>
@@ -384,46 +391,53 @@ const ProductFullDetail = props => {
                                         </span>
                                     </div>
                                 </div>
-
+                                
+                                {!stock_label &&
+                                    <div>{stock_label}</div>
+                                }
                                 {/* Product Stock Avialability */}
                                 <div className={classes.apSectionRow}>
                                     <div className={classes.stock}>
-                                        {product.availability} In Stock
+                                        {product.only_x_left_in_stock} In Stock
                                     </div>
                                 </div>
-
-                                <div className={classes.apSectionRow}>
-                                    <div className={classes.boxToCart}>
-                                        <QuantityFields
-                                            classes={{
-                                                root: classes.quantityRoot
-                                            }}
-                                            min={1}
-                                            message={errors.get('quantity')}
-                                        />
-                                        {cartActionContent}
+                                
+                                {!pos_stock_manage.hide_add_to_cart &&
+                                    <div className={classes.apSectionRow}>
+                                        <div className={classes.boxToCart}>
+                                            <QuantityFields
+                                                classes={{
+                                                    root: classes.quantityRoot
+                                                }}
+                                                min={1}
+                                                message={errors.get('quantity')}
+                                            />
+                                            {cartActionContent}
+                                        </div>
                                     </div>
-                                </div>
+                                }
 
                                 {/* Store Locator */}
-                                <div className={classes.apSectionRow}>
-                                    <div className={classes.storeLocator}
-                                        onClick={openStoreLocatorPopup}>
-                                        <i className={classes.iconWrapper}>
-                                            <svg
-                                                className={classes.svgIcon}
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="32"
-                                                height="32"
-                                                viewBox="0 0 32 32"
-                                            >
-                                                <title>location</title>
-                                                <path d="M16 0q-2.063 0-3.906 0.781-1.813 0.781-3.172 2.141t-2.141 3.172q-0.781 1.844-0.781 3.906 0 3.75 1.563 7.656t3.438 7.094 3.438 5.219l1.563 2.031 1.563-2.031t3.438-5.219 3.438-7.094 1.563-7.656q0-2.063-0.781-3.906-0.781-1.813-2.141-3.172t-3.172-2.141q-1.844-0.781-3.906-0.781zM16 16q-2.5 0-4.25-1.75t-1.75-4.25 1.75-4.25 4.25-1.75 4.25 1.75 1.75 4.25-1.75 4.25-4.25 1.75z" />
-                                            </svg>
-                                        </i>
-                                        <strong className={classes.actionLink}>Check Your Local Store</strong>
+                                {pos_stock_manage.locate_in_store &&
+                                    <div className={classes.apSectionRow}>
+                                        <div className={classes.storeLocator}
+                                            onClick={openStoreLocatorPopup}>
+                                            <i className={classes.iconWrapper}>
+                                                <svg
+                                                    className={classes.svgIcon}
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="32"
+                                                    height="32"
+                                                    viewBox="0 0 32 32"
+                                                >
+                                                    <title>location</title>
+                                                    <path d="M16 0q-2.063 0-3.906 0.781-1.813 0.781-3.172 2.141t-2.141 3.172q-0.781 1.844-0.781 3.906 0 3.75 1.563 7.656t3.438 7.094 3.438 5.219l1.563 2.031 1.563-2.031t3.438-5.219 3.438-7.094 1.563-7.656q0-2.063-0.781-3.906-0.781-1.813-2.141-3.172t-3.172-2.141q-1.844-0.781-3.906-0.781zM16 16q-2.5 0-4.25-1.75t-1.75-4.25 1.75-4.25 4.25-1.75 4.25 1.75 1.75 4.25-1.75 4.25-4.25 1.75z" />
+                                                </svg>
+                                            </i>
+                                            <strong className={classes.actionLink}>Check Your Local Store</strong>
+                                        </div>
                                     </div>
-                                </div>
+                                }
 
                                 {/* Product selling Instruction*/}
                                 <div className={classes.apSectionRow}>

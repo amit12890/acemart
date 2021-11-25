@@ -12,6 +12,12 @@ export const ProductDetailsFragment = gql`
         url_key
         specsheet
         ship_info
+        only_x_left_in_stock
+        stock_label
+        pos_stock_manage {
+            hide_add_to_cart
+            locate_in_store
+        }
         categories {
             id
             breadcrumbs {
@@ -57,6 +63,15 @@ export const ProductDetailsFragment = gql`
             data {
                 code label value
             }
+        }
+        productLabel {
+            items {
+                labelname
+                status
+                priority
+                label_text
+            }
+            totalCount
         }
         ... on ConfigurableProduct {
             configurable_options {
