@@ -28,7 +28,7 @@ const Thumbnail = props => {
 
     const {
         isActive,
-        item: { file, label },
+        item: { url, label },
         onClickHandler,
         itemIndex
     } = props;
@@ -48,12 +48,12 @@ const Thumbnail = props => {
             return null;
         }
 
-        return file ? (
+        return url ? (
             <Image
                 alt={label}
                 classes={{ image: classes.image }}
                 height={DEFAULT_THUMBNAIL_HEIGHT}
-                resource={file}
+                src={url}
                 width={DEFAULT_THUMBNAIL_WIDTH}
             />
         ) : (
@@ -63,7 +63,7 @@ const Thumbnail = props => {
                 src={transparentPlaceholder}
             />
         );
-    }, [file, isDesktop, label, classes.image]);
+    }, [url, isDesktop, label, classes.image]);
 
     return (
         <button
@@ -98,7 +98,7 @@ Thumbnail.propTypes = {
     isActive: bool,
     item: shape({
         label: string,
-        file: string.isRequired
+        url: string.isRequired
     }),
     itemIndex: number,
     onClickHandler: func.isRequired

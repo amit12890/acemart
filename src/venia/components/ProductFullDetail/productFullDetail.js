@@ -51,7 +51,7 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 const ProductFullDetail = props => {
     const { product } = props;
     const { pos_stock_manage, only_x_left_in_stock,
-        mpn, uom, productLabel, stock_label,
+        mpn, uom, productLabel, stock_label, media_gallery
     } = product;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
@@ -218,7 +218,9 @@ const ProductFullDetail = props => {
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
                         {/* Carousel */}
-                        <Carousel images={get(product, "media_gallary", [])} />
+                        <Carousel
+                            images={mediaGalleryEntries}
+                            media_gallery={media_gallery} />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}
