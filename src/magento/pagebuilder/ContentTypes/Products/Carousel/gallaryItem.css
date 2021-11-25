@@ -81,7 +81,7 @@
 }
 
 .labelWrapper {
-    display: flex;
+    display: flex; 
 }
 
 .labelItem {
@@ -99,6 +99,10 @@
 
 .labelItem  span {
     font-size: 0;
+}
+
+.storePickup {
+    background-position: -140px -75px;
 }
 
 .onSale {
@@ -127,6 +131,10 @@
 }
 
 .allowStorePickup {
+    background-position: -10px -10px;
+}
+
+.blackFriday {
     background-position: -10px -10px;
 }
 

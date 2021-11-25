@@ -132,7 +132,7 @@
 }
 
 .labelItem:first-child {
-    margin-left: 0;
+   
 }
 
 .labelItem  span {
@@ -141,16 +141,15 @@
 
 .onSale {
     background-position: -150px -80px;
-    
 }
 
 .freeShipping {
     background-position: -150px ​-10px;
    
 }
+
 .onlinePricing {
     background-position: -80px -80px;
-   
 }
 
 .bulkSavings {
@@ -160,8 +159,13 @@
 .newItem {
     background-position: -80px ​-10px;
 }
+
 .disallowPickupatstore {
     background-position: -10px -80px;
+}
+
+.storePickup {
+    background-position: -10px -10px;
 }
 
 .allowStorePickup {
