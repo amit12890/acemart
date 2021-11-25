@@ -48,15 +48,15 @@ const ItemPlaceholder = ({ classes }) => (
 );
 
 // TODO: remove temp image
-const getOriginalImage = (url) => {
-    if (includes(url, "/cache/")) {
-        const smallImageUrlArr = url.split("cache/")
-        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-        return smallImageUrlArr[0] + subUrl
-    } else {
-        return url
-    }
-}
+// const getOriginalImage = (url) => {
+//     if (includes(url, "/cache/")) {
+//         const smallImageUrlArr = url.split("cache/")
+//         const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+//         return smallImageUrlArr[0] + subUrl
+//     } else {
+//         return url
+//     }
+// }
 
 
 const GalleryItem = props => {
@@ -82,7 +82,8 @@ const GalleryItem = props => {
         url_suffix, url_rewrites,
     } = item;
     const { url: smallImageURL } = small_image;
-    const originalUrl = getOriginalImage(smallImageURL)
+    console.log("🚀 ~ file: item.js ~ line 85 ~ smallImageURL", smallImageURL)
+    // const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}${url_suffix || ""}`);
 
@@ -101,8 +102,7 @@ const GalleryItem = props => {
                                 image: classes.image,
                                 root: classes.imageContainer
                             }}
-                            src={originalUrl}
-                            // resource={smallImageURL}
+                            src={smallImageURL}
                             width={IMAGE_WIDTH}
                         />
                     </Link>

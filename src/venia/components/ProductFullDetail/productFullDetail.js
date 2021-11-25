@@ -50,8 +50,8 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const ProductFullDetail = props => {
     const { product } = props;
-    const {pos_stock_manage, only_x_left_in_stock,
-        mpn, uom, productLabel, stock_label,
+    const { pos_stock_manage, only_x_left_in_stock,
+        mpn, uom, productLabel, stock_label, media_gallery
     } = product;
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
@@ -218,7 +218,9 @@ const ProductFullDetail = props => {
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
                         {/* Carousel */}
-                        <Carousel images={mediaGalleryEntries} />
+                        <Carousel
+                            images={mediaGalleryEntries}
+                            media_gallery={media_gallery} />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}
@@ -284,7 +286,7 @@ const ProductFullDetail = props => {
                                 {processedProductLabels.map((labelObj, i) => {
                                     return (
                                         <div key={i}
-                                            className={[classes.labelItem, classes[camelCase(labelObj.label_text)]].join(" ")}
+                                            className={[classes.labelItem, classes[camelCase(labelObj.labelname)]].join(" ")}
                                             style={style}
                                         >
                                             <span>{camelCase(labelObj.labelname)}</span>
@@ -391,7 +393,7 @@ const ProductFullDetail = props => {
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 {!stock_label &&
                                     <div>{stock_label}</div>
                                 }
@@ -401,7 +403,7 @@ const ProductFullDetail = props => {
                                         {product.only_x_left_in_stock} In Stock
                                     </div>
                                 </div>
-                                
+
                                 {!pos_stock_manage.hide_add_to_cart &&
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.boxToCart}>
