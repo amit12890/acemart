@@ -76,6 +76,12 @@ const ProductSort = props => {
 
     return (
         <div ref={elementRef} className={classes.root}>
+            <span className={classes.sortText}>
+                <FormattedMessage
+                    id={'productSort.sortByButton'}
+                    defaultMessage={'Sort by'}
+                />
+            </span>
             <Button
                 priority={'low'}
                 classes={{
@@ -83,19 +89,9 @@ const ProductSort = props => {
                 }}
                 onClick={handleSortClick}
             >
-                <span className={classes.mobileText}>
-                    <FormattedMessage
-                        id={'productSort.sortButton'}
-                        defaultMessage={'Sort'}
-                    />
-                </span>
                 <span className={classes.desktopText}>
                     <span className={classes.sortText}>
-                        <FormattedMessage
-                            id={'productSort.sortByButton'}
-                            defaultMessage={'Sort by'}
-                        />
-                        &nbsp;{currentSort.sortText}
+                        {currentSort.sortText}
                     </span>
                     <Icon
                         src={ArrowDown}
@@ -134,26 +130,26 @@ ProductSort.propTypes = {
 ProductSort.defaultProps = {
     availableSortMethods: [
         {
-            text: 'Position',
-            id: 'sortItem.position',
-            attribute: 'position',
-            sortDirection: 'ASC'
-        },
-        {
-            id: 'sortItem.relevance',
-            text: 'Best Match',
+            id: 'sortItem.recommended',
+            text: 'Recommended',
             attribute: 'relevance',
             sortDirection: 'DESC'
         },
         {
-            id: 'sortItem.priceAsc',
-            text: 'Price: Low to High',
+            id: 'sortItem.name',
+            text: 'Product Name',
+            attribute: 'name',
+            sortDirection: 'ASC'
+        },
+        {
+            id: 'sortItem.price_asc',
+            text: 'Price Asc',
             attribute: 'price',
             sortDirection: 'ASC'
         },
         {
-            id: 'sortItem.priceDesc',
-            text: 'Price: High to Low',
+            id: 'sortItem.price_desc',
+            text: 'Price Desc',
             attribute: 'price',
             sortDirection: 'DESC'
         }

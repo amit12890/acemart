@@ -57,9 +57,14 @@ export const ProductsFragment = gql`
             on_sale
             prod_temp
             uom
-            product_label {
-                label
-                image
+            productLabel {
+                items {
+                    labelname
+                    status
+                    priority
+                    label_text
+                }
+                totalCount
             }
         }
         page_info {

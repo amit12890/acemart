@@ -1,27 +1,24 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { string, number, shape } from 'prop-types';
-import { size, camelCase } from "lodash";
+import { camelCase, filter, orderBy } from "lodash";
 import { Link } from 'react-router-dom';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
-import Mask from '@magento/venia-ui/lib/components/Mask';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
-import productLabel from '../../../assets/labelSprite.png';
+import productLabelImage from '../../../assets/labelSprite.png';
 import defaultClasses from './item.css';
 
-import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-// import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes, get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 
 const style = {
-    '--productLabel': `url("${productLabel}")`,
+    '--productLabel': `url("${productLabelImage}")`,
 };
 
 // The placeholder image is 4:5, so we should make sure to size our product
@@ -83,8 +80,8 @@ const GalleryItem = props => {
     }
 
     const { id: itemId, name, price, small_image,
-        url_key, url_suffix, canonical_url, url_rewrites,
-        product_label
+        url_suffix, url_rewrites,
+        productLabel
     } = item;
     const { url: smallImageURL } = small_image;
     const originalUrl = getOriginalImage(smallImageURL)
@@ -94,6 +91,12 @@ const GalleryItem = props => {
     const productNote = get(item, "prod_note", false)
     const certifications = get(item, "certifications", false)
     const capacity = get(item, "capacity", false)
+
+    const processedProductLabels = useMemo(() => {
+        let resultLabels = filter(productLabel.items, ["status", 1]);
+        resultLabels = orderBy(resultLabels, ['priority'], ['asc']);
+        return resultLabels
+    }, [productLabel.items])
 
     return (
         <div className={classes.root}>
@@ -206,14 +209,14 @@ const GalleryItem = props => {
                         )}
 
                     </div>
-                    {!!size(product_label) &&
+                    {!!productLabel.totalCount &&
                         <div className={classes.labelWrapper}>
-                            {product_label.map((labelObj) => {
+                            {processedProductLabels.map((labelObj) => {
                                 return (
                                     <div
-                                        className={[classes.labelItem, classes[camelCase(labelObj.label)]].join(" ")}
+                                        className={[classes.labelItem, classes[camelCase(labelObj.label_text)]].join(" ")}
                                         style={style}>
-                                        <span>{camelCase(labelObj.label)}</span>
+                                        <span>{camelCase(labelObj.labelname)}</span>
                                     </div>
                                 )
                             })}

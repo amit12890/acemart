@@ -54,7 +54,12 @@ export const useCategory = props => {
     const { currentPage, totalPages } = paginationValues;
     const { setCurrentPage, setTotalPages } = paginationApi;
 
-    const sortProps = useSort();
+    const sortProps = useSort({
+        sortId: 'sortItem.relevance',
+        sortText: 'Recommended',
+        sortAttribute: 'relevance',
+        sortDirection: 'DESC'
+    });
     const [currentSort] = sortProps;
 
     // Keep track of the sort criteria so we can tell when they change.
@@ -187,9 +192,9 @@ export const useCategory = props => {
         if (
             prevSearch.toString() !== nextSearch.toString() ||
             previousSort.current.sortAttribute.toString() !==
-            currentSort.sortAttribute.toString() ||
+                currentSort.sortAttribute.toString() ||
             previousSort.current.sortDirection.toString() !==
-            currentSort.sortDirection.toString()
+                currentSort.sortDirection.toString()
         ) {
             // The search term changed.
             setCurrentPage(1, true);
