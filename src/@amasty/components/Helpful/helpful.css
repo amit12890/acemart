@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.likeBtn {
+  margin-left: 0.5rem;
+  color: rgb(var(--venia-global-color-gray-dark));
+  outline: none;
+}
+
+.likeBtn svg {
+  stroke-width: 1;
+  stroke: currentColor;
+}
+
+.likeBtn:hover,
+.likeBtn.active {
+  color: #42b05b;
+}
+
+.count {
+  margin: 0 0 0 0.25rem;
+}
+
+.dislikeBtn {
+  composes: likeBtn;
+}
+
+.dislikeBtn:hover,
+.dislikeBtn.active {
+  color: rgb(var(--venia-global-color-error));
+}

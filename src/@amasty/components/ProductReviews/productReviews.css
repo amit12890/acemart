@@ -1,0 +1,203 @@
+.root {
+  composes: section from '~@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.css';
+  margin: 0 1.5rem;
+  padding: 1.5rem 0;
+}
+
+@media (min-width: 1024px) {
+  .root {
+    margin: 0 4rem 2.5rem 4rem;
+    padding: 0 1.5rem;
+  }
+}
+
+.title {
+  composes: sectionTitle from '~@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.css';
+  display: block;
+}
+
+.reviewsRoot {
+  padding-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .reviewsRoot {
+    padding-top: 4rem;
+  }
+}
+
+.list {
+  position: relative;
+}
+
+.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.loadingIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgb(var(--venia-global-color-gray));
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.filter {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .filter {
+    display: block;
+  }
+}
+
+.toolbarLabel {
+  composes: label from '~@magento/venia-ui/lib/components/Checkbox/checkbox.css';
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(var(--venia-global-color-gray-darker));
+  white-space: nowrap;
+}
+
+.toolbarCheckboxRoot {
+  composes: root from '~@magento/venia-ui/lib/components/Checkbox/checkbox.css';
+  line-height: 1;
+  justify-items: initial;
+  gap: 0.2rem;
+  display: inline-grid;
+}
+
+@media (min-width: 768px) {
+  .toolbarCheckboxRoot {
+    margin-left: 1rem;
+  }
+}
+
+.toolbarCheckbox {
+  composes: input from '~@magento/venia-ui/lib/components/Checkbox/checkbox.css';
+  width: 1rem;
+  height: 1rem;
+}
+
+.toolbarCheckIcon {
+  composes: icon from '~@magento/venia-ui/lib/components/Checkbox/checkbox.css';
+  width: 1rem;
+  height: 1rem;
+}
+
+.toolbarCheckIcon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .sort {
+    margin-left: 1rem;
+  }
+}
+
+.sort .toolbarLabel {
+  margin-right: 0.5rem;
+}
+
+.sort .toolbarLabel + span {
+  width: max-content;
+}
+
+.toolbarSelect {
+  composes: input from '~@magento/venia-ui/lib/components/Select/select.css';
+  height: 1.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 0.75rem;
+}
+
+.arrowBtn {
+  outline: none;
+  margin-left: 0.25rem;
+}
+.arrowBtn:hover {
+  color: rgb(var(--venia-global-color-teal));
+}
+
+.arrow {
+  display: block;
+  width: 1rem;
+  text-align: right;
+}
+
+.arrow:after {
+  content: ' \2193';
+}
+
+.arrow.ASC:after {
+  content: ' \2191';
+}
+
+.pagination {
+  composes: root from '~@magento/venia-ui/lib/components/Pagination/pagination.css';
+  padding-top: 0;
+  border: none;
+}
+
+.empty {
+  text-align: center;
+}
+
+.showAllBtn {
+  margin-left: 0.2rem;
+  font-size: 0.75rem;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  vertical-align: middle;
+  color: rgb(var(--venia-global-color-teal));
+  outline: none;
+}
+
+.showAllBtn:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 1px;
+  height: 1rem;
+  margin-right: 0.2rem;
+  background: rgb(var(--venia-global-color-border));
+}
+
+.showAllBtn:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .showAllBtn {
+    margin-left: 0.5rem;
+  }
+
+  .showAllBtn:before {
+    margin-right: 0.5rem;
+  }
+}
