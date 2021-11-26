@@ -145,11 +145,11 @@ flex-direction: column;
     
 }
 
-
 .freeShipping {
-    background-position: -150px ​-10px;
-   
+    background-color: green;
+    background-position: -150px -10px;
 }
+
 .onlinePricing {
     background-position: -80px -80px;
    
@@ -159,14 +159,15 @@ flex-direction: column;
     background-position: -10px -80px;
 }
 
-.newItem {
-    background-position: -80px ​-10px;
+.newItems {
+    background-color: red;
+    background-position: -80px -10px;
 }
-.disallowPickupatstore {
+.storePickup {
     background-position: -10px -80px;
 }
 
-.allowStorePickup {
+.storePickup {
     background-position: -10px -10px;
 }
 
