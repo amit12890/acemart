@@ -1,0 +1,82 @@
+.root {
+    position: fixed;
+    margin: auto;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+
+.portalWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.contentWrapper {
+    background-color: rgb(var(--page-background-color));
+    border-radius: 1px;
+    box-shadow: 0 1px 6px rgb(var(--color-gray40) / 0.2);
+    display: grid;
+    min-height: 10rem;
+    transform: translate3d(0, -8px, 0);
+    transition-duration: 192ms;
+    transition-property: transform;
+    transition-timing-function: var(--venia-global-anim-out);
+    width: var(--content-width);
+    left: 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.modalClose {
+    display: inline-flex;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    top: .875rem;
+    right: 1rem;
+}
+
+.modalClose button{
+    width: 24px;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    height: 24px;
+    min-height: auto;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.modalClose .svgIcon {
+    width: 24px;
+    height: 24px;
+    fill: rgb(var(--color-gray-middle3));
+}
+
+.heading {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    margin-bottom: 10px;
+}

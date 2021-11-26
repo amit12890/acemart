@@ -30,6 +30,7 @@ import AddItemsToCompareList from '../../../components/CompareListPage/addItemsT
 import GalleryGrid from '../GalleryGrid';
 import Carousel from '../ProductImageCarousel';
 import SharePopup from '../../../components/SharePopup';
+import LabelsPopup from '../../../components/LabelsPopup';
 
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
@@ -63,6 +64,7 @@ const ProductFullDetail = props => {
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
+    const [showLabelsPopup, setLabelsPopup] = useState(false)
 
     const talonProps = useProductFullDetail({ product });
 
@@ -90,6 +92,15 @@ const ProductFullDetail = props => {
     const closeStoreLocatorPopup = useCallback(() => {
         setStoreLocatorPopup(false);
     }, [setStoreLocatorPopup]);
+
+    // handlers for Labels popup
+    const openLabelsPopup = useCallback(() => {
+        setLabelsPopup(true);
+    }, [setLabelsPopup]);
+
+    const closeLabelsPopup = useCallback(() => {
+        setLabelsPopup(false);
+    }, [setLabelsPopup]);
 
     const {
         breadcrumbCategoryId,
@@ -301,7 +312,7 @@ const ProductFullDetail = props => {
                                     )
                                 })}
                                 <div className={classes.labelHelper}>
-                                    <span>What's this</span>
+                                    <span onClick={openLabelsPopup}>What's this</span>
                                 </div>
                             </div>
                         </div>
@@ -745,6 +756,13 @@ const ProductFullDetail = props => {
                     isPopupVisible={showSharePopup}
                     productId={product.id}
                     closeSharePopup={closeSharePopup}
+                />
+            )}
+            {showLabelsPopup && (
+                <LabelsPopup
+                    isPopupVisible={showLabelsPopup}
+                    productId={product.id}
+                    closeLabelsPopup={closeLabelsPopup}
                 />
             )}
             {showStoreLocatorPopup && (
