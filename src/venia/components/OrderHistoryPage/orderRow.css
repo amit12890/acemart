@@ -29,6 +29,16 @@
     font-weight: var(--font-weight-bold);
 }
 
+.orderAction {
+    color: rgb(var(--theme-color-primary-alt));
+    text-decoration: underline;
+}
+
+.reorderAction {
+    color: rgb(var(--theme-color-primary-alt));
+    text-decoration: underline;
+}
+
 .value {
     font-size: 14px;
 }
@@ -72,6 +82,8 @@
     font-weight: var(--font-weight-bold);
     justify-self: flex-start;
     padding: 0.25rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
 }
 
 .content {

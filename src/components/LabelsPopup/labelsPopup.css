@@ -80,3 +80,39 @@
     line-height: normal;
     margin-bottom: 10px;
 }
+
+.contentContainer {
+
+}
+
+.labelInfoWrapper {
+
+}
+
+.labelItem {
+    display: flex;
+    align-items: center;
+    font-size: var(--fontSize-100) ;
+    padding: 10px;
+}
+
+.labelItem:nth-child(odd) {
+    background-color: rgb(var(--color-gray-light01));
+}
+
+.labelItemImage {
+    position: relative;
+    margin-right: 15px;
+}
+
+.labelItemImage img {
+    
+}
+
+.labelInfo {
+
+}
+
+.test {
+
+}

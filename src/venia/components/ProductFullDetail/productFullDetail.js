@@ -15,13 +15,6 @@ import { QuantityFields } from './quantity';
 
 import { useStyle } from '../../classify';
 import productLabel from '../../../assets/labelSprite.png';
-import labelSale from '../../../assets/sale.png';
-import labelBulkSavings from '../../../assets/bulk-savings.png';
-import labelFreeShipping from '../../../assets/free-shipping.png';
-import labelNewItem from '../../../assets/new-item.png';
-import labelOnlinePrice from '../../../assets/online-price.png';
-import labelStorePickup from '../../../assets/store-pickup.png';
-
 import Breadcrumbs from '../Breadcrumbs';
 import Button from '../Button';
 import RichText from '../RichText';
