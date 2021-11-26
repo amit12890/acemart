@@ -122,33 +122,3 @@ export const ProductDetailsFragment = gql`
         }
     }
 `;
-
-export const ProductBasicDetailsFragment = gql`
-    fragment ProductBasicDetailsFragment on ProductInterface {
-        __typename
-        id
-        name
-        product_name
-        sku uom mpn
-        url_key
-        url_suffix
-        url_rewrites {
-            url
-            parameters {
-              name
-              value
-            }
-        }
-        small_image {
-            url
-        }
-        price {
-            regularPrice {
-                amount {
-                    currency
-                    value
-                }
-            }
-        }
-    }
-`;
