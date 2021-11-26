@@ -393,7 +393,7 @@ const ProductFullDetail = props => {
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 {!!pos_stock_manage.stock_label &&
                                     <div>{pos_stock_manage.stock_label}</div>
                                 }

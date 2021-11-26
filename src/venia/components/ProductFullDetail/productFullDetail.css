@@ -126,9 +126,9 @@ flex-direction: column;
 .labelItem {
     background-image: var(--productLabel);
     background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
-    background-size: 210px;
+    width: 45px;
+    height: 45px;
+    background-size: 205px;
     margin-left: 5px;;
 }
 
@@ -145,11 +145,12 @@ flex-direction: column;
     
 }
 
+
 .freeShipping {
     background-position: -150px ​-10px;
    
 }
-.onlinePrice {
+.onlinePricing {
     background-position: -80px -80px;
    
 }
