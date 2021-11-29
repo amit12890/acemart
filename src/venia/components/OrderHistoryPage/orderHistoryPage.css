@@ -88,3 +88,13 @@
         justify-self: center;
     }
 }
+
+
+@media print { 
+
+    .pageTitleWrapper,
+    .filterRow {
+        display: none;
+    }
+
+}

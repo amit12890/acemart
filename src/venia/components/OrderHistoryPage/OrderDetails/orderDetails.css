@@ -201,9 +201,7 @@
         
     }
     
-    .actionsToolbar {
-        display: none;
-    }
+
     
     .contentWrapper {
         border-top: 1px solid rgb(var(--border-color-base));
@@ -216,7 +214,8 @@
 
     }
 
-    .tabsContainer {
+    .tabsContainer,
+    .printLink {
         display: none;
     }
 

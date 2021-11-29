@@ -320,10 +320,6 @@ h4:hover {
         color: rgb(var(--color-white));
     }
 
-    .copyright {
-        page-break-before: avoid;
-        page-break-after: avoid;
-    }
 }
 
 
