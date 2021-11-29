@@ -91,6 +91,7 @@ const ReviewForm = props => {
   return (
     <div className={classes.root}>
       <Form
+        id="review-form"
         className={classes.form}
         initialValues={{ ...initialValues }}
         onSubmit={handleSubmit}

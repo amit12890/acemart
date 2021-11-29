@@ -29,6 +29,7 @@ import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
 import ProductReview from "../../../@amasty/amAdvancedReviews"
+import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -347,7 +348,7 @@ const ProductFullDetail = props => {
                         {/* Product Review   */}
                         <div className={classes.piSectionRow}>
                             <div className={classes.productReview}>
-                                <span>Be the first to review this product</span>
+                                <RatingMini percent={product.rating_summary} value={product.review_count} />
                             </div>
                         </div>
 

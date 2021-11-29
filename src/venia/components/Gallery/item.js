@@ -17,6 +17,7 @@ import defaultClasses from './item.css';
 import { get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
+import RatingMini from "../../../@amasty/components/Rating/rating_mini";
 
 const style = {
     '--productLabel': `url("${productLabelImage}")`,
@@ -65,6 +66,7 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
+
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
 
     const openWishlistPopup = useCallback(() => {
@@ -134,6 +136,19 @@ const GalleryItem = props => {
                     </Link>
                 </div>
                 <div className={classes.sku}>{get(item, "sku", "")}</div>
+                {!!(item.review_count) &&
+                    <div>
+                        <RatingMini
+                            percent={item.rating_summary}
+                            value={item.review_count}
+                            addReviewLink={
+                                <Link to={productLink} onClick={handleLinkClick}>
+                                    <span>add your review</span>
+                                </Link>
+                            }
+                        />
+                    </div>
+                }
                 <div className={classes.price}>
                     <Price
                         value={productPrice}

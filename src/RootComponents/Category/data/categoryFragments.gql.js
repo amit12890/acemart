@@ -42,6 +42,8 @@ export const ProductsFragment = gql`
             prod_note
             output
             sku
+            rating_summary
+            review_count
             small_image {
                 url
             }
