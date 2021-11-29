@@ -7,7 +7,7 @@ import CurrentFilter from './currentFilter';
 import defaultClasses from './currentFilters.css';
 
 const CurrentFilters = props => {
-    const { filterApi, filterState, onRemove } = props;
+    const { filterApi, filterState, filterNames, onRemove } = props;
     const { removeItem } = filterApi;
     const classes = useStyle(defaultClasses, props.classes);
     const { formatMessage } = useIntl();
@@ -16,11 +16,12 @@ const CurrentFilters = props => {
     const filterElements = useMemo(() => {
         const elements = [];
         for (const [group, items] of filterState) {
+            const itemElements = [];
             for (const item of items) {
                 const { title, value } = item || {};
                 const key = `${group}::${title}_${value}`;
 
-                elements.push(
+                itemElements.push(
                     <li key={key} className={classes.item}>
                         <CurrentFilter
                             group={group}
@@ -31,10 +32,17 @@ const CurrentFilters = props => {
                     </li>
                 );
             }
+            const groupName = filterNames.get(group);
+            elements.push(
+                <ul key={group}>
+                    <li>{groupName}</li>
+                    {itemElements}
+                </ul>
+            )
         }
 
         return elements;
-    }, [classes.item, filterState, removeItem, onRemove]);
+    }, [classes.item, filterState, filterNames, removeItem, onRemove]);
 
     const currentFiltersAriaLabel = formatMessage({
         id: 'filterModal.currentFilters.ariaLabel',
