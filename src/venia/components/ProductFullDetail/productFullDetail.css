@@ -612,10 +612,6 @@ tbody tr:nth-child(odd) {
     composes: sectionTitle;
 }
 
-
-
-
-
 .quantityRoot {
     composes: root from '../CartPage/ProductListing/quantity.css';
     grid-template-columns: auto 4rem auto;
@@ -634,4 +630,48 @@ tbody tr:nth-child(odd) {
     justify-content: start;
     padding: 0.75rem;
     width: 100%;
+}
+
+
+
+
+@media print { 
+    .productViewSection {
+        flex-direction: column;
+    }
+
+    .productMedia,
+    .productInfo,
+    .productAction {
+        width: 100%;
+        padding: 10px;
+        justify-content: center;
+    
+    }
+
+    .productInfo {
+        order: 2;
+    }
+
+    .productMedia {
+        order: 1;
+    }
+
+
+    .sectionTitle {
+        text-align: left;
+        border-bottom: 3px solid #ddd;
+        padding-bottom: 5px
+        }
+        
+    .sectionTitle:before{
+        display: none;
+
+    }
+    .sectionTitle span {
+        padding: 0 ;
+    }
+    
+
+
 }
