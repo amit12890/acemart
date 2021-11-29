@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { get, groupBy, size, find } from 'lodash-es';
+import { get, groupBy, size, difference } from 'lodash-es';
 
 import Image from '../../venia/components/Image';
 import Button from '../../venia/components/Button';
@@ -125,7 +125,7 @@ const ProductStoreLocatorPopup = props => {
     );
 
     const storeGroupData = groupBy(availableStores, 'store_group_name')
-    const groupList = Object.keys(storeGroupData)
+    const groupList = difference(Object.keys(storeGroupData), [DEFAULT_STORE_GROUP_NAME])
     const groupStoreList = !!selectedGroup ? get(storeGroupData, selectedGroup, []) : [];
 
     return (
