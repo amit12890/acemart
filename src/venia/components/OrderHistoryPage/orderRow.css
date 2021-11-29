@@ -29,6 +29,16 @@
     font-weight: var(--font-weight-bold);
 }
 
+.orderAction {
+    color: rgb(var(--theme-color-primary-alt));
+    text-decoration: underline;
+}
+
+.reorderAction {
+    color: rgb(var(--theme-color-primary-alt));
+    text-decoration: underline;
+}
+
 .value {
     font-size: 14px;
 }
@@ -72,6 +82,8 @@
     font-weight: var(--font-weight-bold);
     justify-self: flex-start;
     padding: 0.25rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
 }
 
 .content {
@@ -131,5 +143,65 @@
     .orderTotalContainer {
         border-bottom: 2px solid rgb(var(--venia-global-color-gray));
         border-top: 2px solid rgb(var(--venia-global-color-gray));
+    }
+}
+
+
+
+@media print { 
+    .root {
+       border: none;
+       display: flex;
+       flex-wrap: wrap;
+    }
+
+    .cell {
+        border: none;
+        padding: 0;
+    }
+
+    .stackedCell {
+        display: flex;
+        row-gap: 0;
+    }
+
+    .orderDateContainer {
+        flex-basis: 100%;
+        order: 3;
+    }
+    .orderDateContainer .label,
+    .orderTotalContainer,
+    .reorderAction {
+        display: none; 
+    }
+
+    .orderNumberContainer .value,
+    .orderNumberContainer .label {
+        font-size: 30px;
+    }
+
+    .orderNumberContainer {
+        order: 1;
+        margin-right: 10px;
+
+    }
+    .orderStatusContainer {
+        order: 2;
+        flex-grow: 1;
+    }
+    
+    .content  {
+        order: 10;
+        padding: 10px 0 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-basis: 100%;
+        margin-top: 10px;
+
+    }
+
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
     }
 }

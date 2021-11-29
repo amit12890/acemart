@@ -130,6 +130,10 @@ tbody tr:nth-child(even) td:nth-child(even) {
 
 }
 
+.itemThumbnail {
+    max-width: 200px;
+}
+
 .name {
     font-size: var(--fontSize-100);
     font-weight: var(--font-weight-bold); 
@@ -139,4 +143,44 @@ tbody tr:nth-child(even) td:nth-child(even) {
 .price {
     margin-bottom: 10px;
     color: rgb(var(--product-price-color));
+}
+
+
+@media print {  
+
+    .tableWrapper {
+        font-size: 9px;
+    }
+
+    .productInfo,
+    .name {
+        font-size: 9px;
+    }
+
+    .label {
+        padding: 5px;
+        border-bottom: 1px solid rgb(var(--border-color-base));
+    }
+    .attribute    {
+        padding: 5px;
+        width: auto;
+        border-bottom: 1px solid rgb(var(--border-color-base));
+    }
+
+    .compare thead {
+        display: none;
+    }
+
+    .itemThumbnail {
+        max-width: 100px;
+        height: auto;
+    }
+
+    .actionToolbar,
+    .actionWrapper,
+    .title {
+        display: none;
+    }
+
+
 }

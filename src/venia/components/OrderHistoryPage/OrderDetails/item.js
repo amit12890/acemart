@@ -58,13 +58,13 @@ const Item = props => {
             <div className={classes.nameContainer}>
                 <div className={classes.name}><Link to={itemLink}>{product_name}</Link></div>
                 <div className={classes.sku}>{sku}</div>
+                <ProductOptions
+                    options={mappedOptions}
+                    classes={{
+                        options: classes.options
+                    }}
+                />
             </div>
-            <ProductOptions
-                options={mappedOptions}
-                classes={{
-                    options: classes.options
-                }}
-            />
             <div className={[classes.col, classes.qty].join(" ")}>
                 <div className={classes.label}><strong>Qty</strong></div>
                 <div className={classes.value}>
@@ -78,7 +78,7 @@ const Item = props => {
                 <div className={classes.value}><Price currencyCode={currency} value={unitPrice} /></div>
             </div>
 
-            <div className={[classes.col, classes.price].join(" ")}>
+            <div className={[classes.col, classes.subtotal].join(" ")}>
                 <div className={classes.label}><strong>Subtotal</strong></div>
                 <div className={classes.value}><Price currencyCode={currency} value={unitPrice * quantity_ordered} /></div>
             </div>

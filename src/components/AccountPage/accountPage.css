@@ -44,3 +44,16 @@
         order: 2;
     }
 }
+
+
+
+@media print { 
+    .sidebar_wrapper {
+        display: none;  
+    }
+
+    .content_wrapper {
+        width: 100%;
+        float: none;
+    }
+}

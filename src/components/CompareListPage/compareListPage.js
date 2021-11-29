@@ -63,6 +63,7 @@ const CompareListPage = () => {
                 <div className={classes.tableWrapper}>
                     <div className={classes.actionToolbar}>
                         <Button
+                            onClick={() => window.print()}
                             priority="low"
                             type="button"
                         >
@@ -132,7 +133,7 @@ const itemHeaderBlock = (classes, item) => {
     return (
         <div className={classes.productInfo}>
             <a href={url}>
-                <img src={get(item, 'image.url', "")} style={{ maxWidth: '200px' }} />
+                <img src={get(item, 'image.url', "")} className={classes.itemThumbnail} />
                 <div className={classes.name}>{item.name}</div>
             </a>
             <div className={classes.price}>
