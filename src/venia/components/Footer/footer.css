@@ -306,42 +306,31 @@ h4:hover {
     font-size: var(--fontSize-100);
 }
 
-@media (max-width: 960px) {
-    .root {
+@media print { 
+    .sectionTop,
+    .sectionMiddle {
+        
+        display: none;
+    }
+    
+
+    
+    .sectionLower {
+        background-color: #383838;
+        color: rgb(var(--color-white));
+    }
+
+    .copyright {
+        page-break-before: avoid;
+        page-break-after: avoid;
     }
 }
 
 
 
-@media (max-width: 960px) {
-   
-}
-
-
-
-
-
-@media (max-width: 960px) {
-  
-}
 
 
 
 
 
 
-@media (max-width: 960px) {
-   
-}
-
-
-
-@media (max-width: 960px) {
-   
-}
-
-
-
-@media (max-width: 960px) {
-  
-}

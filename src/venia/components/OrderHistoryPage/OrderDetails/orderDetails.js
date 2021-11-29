@@ -50,7 +50,7 @@ const OrderDetails = props => {
                         <div className={classes.contentWrapper}>
                             <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
                                 <div className={classes.actionsToolbar}>
-                                    <Link className={classes.printLink}>
+                                    <Link onClick={() => window.print()} className={classes.printLink}>
                                         <span>Print All Invoices</span>
                                     </Link>
                                 </div>
@@ -91,7 +91,7 @@ const OrderDetails = props => {
                         <div className={classes.contentWrapper}>
                             <div className={[classes.itemsContainer, classes.shipmentContainer].join(" ")}>
                                 <div className={classes.actionsToolbar}>
-                                    <Link className={classes.printLink}>
+                                    <Link onClick={() => window.print()} className={classes.printLink}>
                                         <span>Print All Shipments</span>
                                     </Link>
                                 </div>
@@ -134,7 +134,7 @@ const OrderDetails = props => {
                     <div className={classes.contentWrapper}>
                         <div className={classes.itemsContainer}>
                             <div className={classes.actionsToolbar}>
-                                <Link className={classes.printLink}>
+                                <Link onClick={() => window.print()} className={classes.printLink}>
                                     <span>Print Order</span>
                                 </Link>
                             </div>

@@ -55,3 +55,28 @@
         padding: 1rem 0rem;
     }
 }
+
+
+
+@media print { 
+    .root {
+        display: grid;
+        row-gap: 0.5rem;
+        column-gap: 5px;
+        border-top: 1px solid #e9eaec;
+        padding-bottom: 0;
+    }
+    .heading  {
+        display: none;
+    }
+
+
+    .subTotal,
+    .discount,
+    .shipping,
+    .tax,
+    .total  {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

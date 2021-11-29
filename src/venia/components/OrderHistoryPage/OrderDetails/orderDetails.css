@@ -60,7 +60,6 @@
     grid-column: 1 / span 4;
     grid-row: 3;
     display: grid;
-
 }
 .tabsContainer {
     grid-column: 1 / span 4;
@@ -183,4 +182,42 @@
         grid-row: 7 / span 1;
         grid-column: 1 / span 1;
     }
+}
+
+
+@media print { 
+
+    .root {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .shippingInformationContainer,
+    .shippingMethodContainer,
+    .billingInformationContainer,
+    .paymentMethodContainer {
+        font-size: 12px;
+        
+    }
+    
+    .actionsToolbar {
+        display: none;
+    }
+    
+    .contentWrapper {
+        border-top: 1px solid rgb(var(--border-color-base));
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column; 
+        grid-row: auto;
+        grid-column: auto;
+        
+
+    }
+
+    .tabsContainer {
+        display: none;
+    }
+
 }

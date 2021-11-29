@@ -35,6 +35,22 @@
     color: rgb(var(--color-gray-middle1));
 }
 
+.col {
+
+}
+
+.col.qty {
+
+
+}
+.col.price {
+
+}
+.col.subtotal {
+
+}
+
+
 .buyAgainButton {
     align-self: start;
     grid-column-end: -1;
@@ -56,4 +72,59 @@
         grid-column-end: auto;
         justify-self: start;
     }
+}
+
+@media print {  
+
+    .root {
+        display: flex;
+        border-bottom: 1px solid rgb(var(--border-color-base));
+        justify-content: stretch;
+        flex-wrap: nowrap;
+        column-gap: 5px;
+        row-gap: .25rem;
+        padding: 0;
+        grid-row: auto;
+        grid-column: auto;
+    }
+    .thumbnailContainer {
+       
+        
+    }
+
+    .nameContainer { 
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 400px;
+    }
+
+    .col {
+        
+    }
+    
+    .col.qty {
+        flex-basis: 100px;
+        flex-shrink: 0;
+        
+        padding: 0 5px;
+
+    }
+    .col.price {
+        flex-basis: 100px;
+        flex-shrink: 0;
+        padding: 0 5px;
+    }
+    .col.subtotal {
+        flex-basis: 100px;
+        padding: 0 5px;
+        flex-shrink: 0;
+        text-align: right;
+    }
+
+    .buyAgainButton {
+        display: none;
+    }
+
+
 }
