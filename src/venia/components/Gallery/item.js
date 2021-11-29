@@ -11,9 +11,10 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import productLabelImage from '../../../assets/labelSprite.png';
+import RichText from '../RichText';
 import defaultClasses from './item.css';
 
-import { drop, includes, get } from 'lodash'
+import { get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 
@@ -86,16 +87,21 @@ const GalleryItem = props => {
     const { url: smallImageURL } = small_image;
 
     const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}${url_suffix || ""}`);
-    const productDimensions = get(item, "prod_dimensions", false)
-    const productNote = get(item, "prod_note", false)
-    const certifications = get(item, "certifications", false)
-    const capacity = get(item, "capacity", false)
 
     const processedProductLabels = useMemo(() => {
         let resultLabels = filter(productLabel.items, ["status", 1]);
         resultLabels = orderBy(resultLabels, ['priority'], ['asc']);
         return resultLabels
     }, [productLabel.items])
+
+    const productPrice = get(price, "regularPrice.amount.value")
+    const productCurrency = get(price, "regularPrice.amount.currency")
+
+    const moreInformation = get(
+        item,
+        'more_information.data',
+        []
+    );
 
     return (
         <div className={classes.root}>
@@ -130,11 +136,26 @@ const GalleryItem = props => {
                 <div className={classes.sku}>{get(item, "sku", "")}</div>
                 <div className={classes.price}>
                     <Price
-                        value={price.regularPrice.amount.value}
-                        currencyCode={price.regularPrice.amount.currency}
+                        value={productPrice}
+                        currencyCode={productCurrency}
                     />
                     <span className={classes.unit}>{get(item, "uom", "")}</span>
                 </div>
+                {/* Finance Offer */}
+                {productPrice > 500 && (
+                    <div className={classes.piSectionRow}>
+                        <div className={classes.finance}>
+                            <strong>
+                                {'Finance for as low as '}
+                                <Price
+                                    currencyCode={productCurrency}
+                                    value={productPrice / 39.5}
+                                />
+                                /month
+                            </strong>
+                        </div>
+                    </div>
+                )}
                 <div className={classes.productInner}>
                     <div className={classes.productActions}>
                         <div className={classes.viewMore}>
@@ -180,33 +201,23 @@ const GalleryItem = props => {
                         }
                     </div>
 
-                    <div className={classes.description}>
-                        {productDimensions && (
-                            <div className={classes.productOptions}>
-                                <strong>Dimensions:</strong>
-                                {productDimensions}
-                            </div>
-                        )}
-                        {productNote && (
-                            <div className={classes.productOptions}>
-                                <strong>Product Note:</strong>
-                                {productNote}
-                            </div>
-                        )}
-                        {certifications && (
-                            <div className={classes.productOptions}>
-                                <strong>Certifications:</strong>
-                                {certifications}
-                            </div>
-                        )}
-                        {capacity && (
-                            <div className={classes.productOptions}>
-                                <strong>Capacity:</strong>
-                                {capacity}
-                            </div>
-                        )}
-
+                    <div>
+                        {moreInformation.map(info => {
+                            return (
+                                <div>
+                                    <span scope="row" className={[classes.col, classes.label].join(" ")}>
+                                        {info.label}
+                                    </span>
+                                    <span data-th={info.label} className={[classes.col, classes.data].join(" ")}>
+                                        <RichText
+                                            content={info.value}
+                                        />
+                                    </span>
+                                </div>
+                            );
+                        })}
                     </div>
+
                     {!!productLabel.totalCount &&
                         <div className={classes.labelWrapper}>
                             {processedProductLabels.map((labelObj, i) => {
