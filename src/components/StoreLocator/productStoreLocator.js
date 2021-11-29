@@ -1,20 +1,20 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { get, groupBy, size, find } from 'lodash-es';
 
 import Image from '../../venia/components/Image';
 import Button from '../../venia/components/Button';
 
+import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
 import Mask from '@magento/venia-ui/lib/components/Mask';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import { getProductStoreLocatorData } from './productStoreLocator.gql';
-import mapImage from '../../assets/map.jpg';
 import { useStyle } from '../../venia/classify';
+import mapImage from '../../assets/map.jpg';
 import defaultClasses from './productStoreLocator.css';
-import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { get, groupBy, remove, size } from 'lodash-es';
-
 
 // Acemart.com store will be under this group
 // don't show it in group list
@@ -40,7 +40,10 @@ const ProductStoreLocator = props => {
         content = <div>An Error Occured while loading store data...</div>
     } else {
         content = (
-            <ProductStoreLocatorPopup availableStores={availableStoresData.availableStores} />
+            <ProductStoreLocatorPopup 
+                availableStores={availableStoresData.availableStores}
+                closeStoreLocatorPopup={closeStoreLocatorPopup}
+            />
         )
     }
 
@@ -79,8 +82,9 @@ const ProductStoreLocator = props => {
 }
 
 const ProductStoreLocatorPopup = props => {
-    const { availableStores } = props;
+    const { availableStores, closeStoreLocatorPopup } = props;
     const classes = useStyle(defaultClasses, props.classes);
+    const { handleSwitchStore } = useStoreSwitcher();
 
     // 1: select Area, 2: select Store, 3: details / stock
     const [popupState, setPopupState] = useState(1)
@@ -110,6 +114,15 @@ const ProductStoreLocatorPopup = props => {
         setselectedStore(store);
         setPopupState(3);
     }, [setselectedStore, setPopupState])
+
+    const handleSwitchStoreClick = useCallback(
+        // Change store view code and currency to be used in Apollo link request headers
+        storeCode => () => {
+            handleSwitchStore(storeCode)
+            closeStoreLocatorPopup();
+        },
+        [availableStores]
+    );
 
     const storeGroupData = groupBy(availableStores, 'store_group_name')
     const groupList = Object.keys(storeGroupData)
@@ -189,7 +202,6 @@ const ProductStoreLocatorPopup = props => {
 
                                 <div className={classes.storeListContainer}>
                                     {groupStoreList.map((store) => {
-                                        console.log("🚀 ~ file: productStoreLocator.js ~ line 180 ~ {groupStoreList.map ~ store", store)
                                         const {id ,store_name, store_locator_info} = store;
                                         const {street, city, state, zip, qty} = store_locator_info;
                                         return (
@@ -253,7 +265,7 @@ const ProductStoreLocatorPopup = props => {
                                 
                             </div>
                             <div className={classes.shopStore}>
-                                <a href="#"><span>Shop This Store</span></a>
+                                <span onClick={handleSwitchStoreClick(selectedStore.code)}>Shop This Store</span>
                             </div>
                             <div className={classes.storeNotes}>
                                 <p>*All products are sold on a first come, first served basis for in-store purchase and pickup only </p>
