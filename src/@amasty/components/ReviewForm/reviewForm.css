@@ -1,0 +1,46 @@
+.root {
+  max-width: 575px;
+  margin: 3rem auto;
+}
+
+.title {
+  composes: title from '../ProductReviews/productReviews.css';
+}
+
+.field {
+  margin-bottom: 0.5rem;
+}
+
+.fieldCheckbox {
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fieldCheckbox + .fieldCheckbox {
+  padding-top: 0;
+}
+
+.fieldCheckbox label {
+  margin: 0 0 0.5rem 0;
+}
+
+.signInMessage {
+  margin: 2rem 0;
+  background: #f7f1de;
+  padding: 0.5rem;
+  color: #6f5f2f;
+}
+
+.successMessage {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  background: rgba(var(--venia-global-color-teal-light));
+  padding: 0.5rem;
+  color: rgba(var(--venia-global-color-teal));
+}
+
+.successMessage svg {
+  stroke: rgba(var(--venia-global-color-teal));
+  margin-right: 0.5rem;
+}

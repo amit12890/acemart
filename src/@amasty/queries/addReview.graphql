@@ -1,0 +1,31 @@
+mutation addAdvReview(
+  $productId: Int!
+  $ratings: String!
+  $nickname: String!
+  $title: String!
+  $detail: String!
+  $guest_email: String
+  $like_about: String
+  $not_like_about: String
+  $is_recommended: Boolean
+  $gdpr: Boolean
+  $tmpImgPath: [String]
+) {
+  addAdvReview(
+    input: {
+      product_id: $productId
+      ratings: $ratings
+      nickname: $nickname
+      title: $title
+      detail: $detail
+      guest_email: $guest_email
+      like_about: $like_about
+      not_like_about: $not_like_about
+      is_recommended: $is_recommended
+      gdpr: $gdpr
+      tmp_images_path: $tmpImgPath
+    }
+  ) {
+    success
+  }
+}

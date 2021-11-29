@@ -1,0 +1,78 @@
+query getReviews(
+  $productId: Int!
+  $page: Int!
+  $amreviewDir: String
+  $amreviewSort: String
+  $stars: Int
+  $withImages: Boolean
+  $verifiedBuyer: Boolean
+  $isRecommended: Boolean
+) {
+  advreview(
+    productId: $productId
+    page: $page
+    amreviewDir: $amreviewDir
+    amreviewSort: $amreviewSort
+    stars: $stars
+    withImages: $withImages
+    verifiedBuyer: $verifiedBuyer
+    isRecommended: $isRecommended
+  ) {
+    totalRecords
+    ratingSummary
+    ratingSummaryValue
+    recomendedPercent
+    totalRecordsFiltered
+
+    detailedSummary {
+      one
+      two
+      three
+      four
+      five
+    }
+
+    items {
+      review_id
+      created_at
+      answer
+      verified_buyer
+      is_recommended
+      detail_id
+      title
+      detail
+      nickname
+      like_about
+      not_like_about
+      guest_email
+      plus_review
+      minus_review
+
+      rating_votes {
+        vote_id
+        option_id
+        rating_id
+        review_id
+        percent
+        value
+        rating_code
+      }
+
+      images {
+        full_path
+        resized_path
+      }
+
+      comments {
+        id
+        review_id
+        status
+        message
+        nickname
+        email
+        created_at
+        updated_at
+      }
+    }
+  }
+}

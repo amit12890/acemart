@@ -1,0 +1,45 @@
+query getReviewSetting {
+  amReviewSetting {
+    isGDPREnabled
+    getGDPRText
+    getReviewImageWidth
+    isAllowReminder
+    isCommentsEnabled
+    isGuestCanComment
+    isReminderEnabled
+
+    isRecommendFieldEnabled
+    isAllowGuest
+    isAllowAnswer
+    isAllowCoupons
+    isAllowHelpful
+    isAllowImages
+    isToolbarDisplayed
+    isSortingEnabled
+    isProsConsEnabled
+    isFilteringEnabled
+    perPage
+    isGuestEmailShow
+    isImagesRequired
+    slidesToShow
+
+    availableOrders {
+      label
+      code
+    }
+
+    availableFilters {
+      label
+      code
+    }
+
+    ratings {
+      rating_id
+      rating_code
+      rating_options {
+        option_id
+        value
+      }
+    }
+  }
+}

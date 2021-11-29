@@ -1,0 +1,260 @@
+.root {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-bottom: 1px solid rgba(var(--venia-global-color-gray));
+}
+
+@media (min-width: 768px) {
+  .root {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+.authorDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.authorIcon {
+  display: block;
+  margin-right: 0.5rem;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: -2px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNiAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMTcyNiAxOC40MzcxQzIxLjMxOTQgMTYuOTI2NiAyMiAxNS4wNDI4IDIyIDEzQzIyIDguMDI5NDQgMTcuOTcwNiA0IDEzIDRDOC4wMjk0NCA0IDQgOC4wMjk0NCA0IDEzQzQgMTUuMDQyOCA0LjY4MDU4IDE2LjkyNjYgNS44MjczNiAxOC40MzcxQzcuMDU3NDcgMTYuNTA3MyA5LjA0NTg3IDE1LjEwNjYgMTEuMzczNSAxNC42NTU1QzkuOTc0OTQgMTQuMDMyMiA5IDEyLjYzIDkgMTFDOSA4Ljc5MDg2IDEwLjc5MDkgNyAxMyA3QzE1LjIwOTEgNyAxNyA4Ljc5MDg2IDE3IDExQzE3IDEyLjYzIDE2LjAyNTEgMTQuMDMyMiAxNC42MjY1IDE0LjY1NTVDMTYuOTU0MSAxNS4xMDY2IDE4Ljk0MjUgMTYuNTA3MyAyMC4xNzI2IDE4LjQzNzFaTTE5LjQ4ODkgMTkuMjM2NUMxOC4xODk1IDE3LjAwMTIgMTUuNzY5NyAxNS41IDEzIDE1LjVDMTAuMjMwMyAxNS41IDcuODEwNTEgMTcuMDAxMiA2LjUxMTA5IDE5LjIzNjVDOC4xNDg2NSAyMC45Mzk5IDEwLjQ1MDUgMjIgMTMgMjJDMTUuNTQ5NSAyMiAxNy44NTE0IDIwLjkzOTkgMTkuNDg4OSAxOS4yMzY1Wk0xMyAyM0MxOC41MjI4IDIzIDIzIDE4LjUyMjggMjMgMTNDMjMgNy40NzcxNSAxOC41MjI4IDMgMTMgM0M3LjQ3NzE1IDMgMyA3LjQ3NzE1IDMgMTNDMyAxOC41MjI4IDcuNDc3MTUgMjMgMTMgMjNaTTEzIDE0QzE0LjY1NjkgMTQgMTYgMTIuNjU2OSAxNiAxMUMxNiA5LjM0MzE1IDE0LjY1NjkgOCAxMyA4QzExLjM0MzEgOCAxMCA5LjM0MzE1IDEwIDExQzEwIDEyLjY1NjkgMTEuMzQzMSAxNCAxMyAxNFoiIGZpbGw9IiMyMTIxMjEiLz4KPC9zdmc+Cg==);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.date {
+  display: block;
+  padding-left: 2.125rem;
+  font-size: 0.7rem;
+  line-height: 1.25rem;
+  color: rgb(var(--venia-global-color-text-alt));
+}
+
+.verifiedBuyer {
+  composes: date;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: rgb(var(--venia-global-color-teal));
+  order: 1;
+  width: 100%;
+}
+
+.verifiedBuyerIcon {
+  display: flex;
+  position: relative;
+  margin-left: 0.25rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  padding: 0;
+  border-radius: 1rem;
+  background: rgb(var(--venia-global-color-teal));
+}
+
+.verifiedBuyerIcon:after {
+  content: '';
+  display: block;
+  margin: auto;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  transform: rotate(-45deg);
+  width: 40%;
+  height: 20%;
+  position: relative;
+  top: -1px;
+}
+
+.recomended {
+  width: 100%;
+  order: 2;
+  margin: 0.5rem 0 0 0;
+  color: rgb(var(--venia-global-color-teal));
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+
+@media (min-width: 768px) {
+  .authorDetails {
+    display: block;
+    flex-basis: 300px;
+    padding-right: 1rem;
+  }
+
+  .recomended {
+    display: block;
+    max-width: 6rem;
+    margin: 1rem 0;
+    order: inherit;
+    padding-right: 0;
+    text-align: left;
+    padding-left: 0.5rem;
+    border-left: 2px solid rgb(var(--venia-global-color-teal));
+  }
+
+  .verifiedBuyer {
+    order: inherit;
+    width: 100%;
+    padding-left: 2.125rem;
+  }
+}
+
+.descriptionRoot {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .descriptionRoot {
+    width: calc(100% - 300px);
+  }
+}
+
+.descriptionHeader {
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .descriptionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 0.5rem 0;
+  }
+}
+
+.title {
+  display: block;
+  font-weight: 600;
+}
+
+.helpful {
+  composes: date;
+  padding: 0;
+}
+
+.rating {
+  margin-bottom: 0.5rem;
+}
+
+.ratingLabel {
+  composes: date;
+  padding: 0;
+}
+
+.ratingStars {
+  width: 107px;
+  height: 18px;
+}
+
+.detail {
+  padding: 0.5rem 0;
+}
+
+.answer {
+  margin-left: 1.25rem;
+  margin-bottom: 1rem;
+  padding: 0 0 0 1.25rem;
+  border-left: 1px solid rgb(var(--venia-global-color-border));
+}
+
+.answerTitle {
+  composes: title;
+}
+
+.answerText {
+  padding-top: 0.5rem;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .noComments {
+    justify-content: flex-end;
+  }
+}
+
+.toolbarItem:not(:last-child) {
+  margin-right: 2.75rem;
+}
+
+.toolbarBtn {
+  color: rgba(var(--venia-global-color-teal));
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+
+.toolbarBtn:hover {
+  text-decoration: underline;
+}
+
+.toolbarBtn:disabled {
+  pointer-events: none;
+}
+
+.plusMinusRoot:not(:empty) {
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .plusMinusRoot {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+.plusMinusRoot svg {
+  stroke: currentColor;
+}
+
+.plus {
+  display: flex;
+  align-items: flex-start;
+  color: #42b05b;
+  flex: 1;
+}
+
+.minus {
+  composes: plus;
+  margin-top: 1rem;
+  color: rgb(var(--venia-global-color-error));
+}
+
+@media (min-width: 768px) {
+  .minus {
+    margin-top: 0;
+  }
+
+  .plus + .minus {
+    margin-left: 3rem;
+  }
+}
+
+.plusMinusText {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-left: 0.5rem;
+}
+
+.commentsIcon {
+  composes: authorIcon;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNiAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjMgNVYxNUgyMVY4QzIxIDcuNDQ3NzIgMjAuNTUyMyA3IDIwIDdINlY1SDIzWk01IDdIM0MyLjQ0NzcyIDcgMiA3LjQ0NzcyIDIgOFYxOEMyIDE4LjU1MjMgMi40NDc3MiAxOSAzIDE5SDExTDE1LjQ0NTMgMjEuOTYzNUMxNi4xMDk5IDIyLjQwNjYgMTcgMjEuOTMwMiAxNyAyMS4xMzE1VjIwVjE5SDE4SDIwQzIwLjU1MjMgMTkgMjEgMTguNTUyMyAyMSAxOFYxNkgyM0MyMy41NTIzIDE2IDI0IDE1LjU1MjMgMjQgMTVWNUMyNCA0LjQ0NzcyIDIzLjU1MjMgNCAyMyA0SDZDNS40NDc3MiA0IDUgNC40NDc3MiA1IDVWN1pNMTEuNTU0NyAxOC4xNjc5TDExLjMwMjggMThIMTFIM1Y4SDIwVjE4SDE3SDE2VjE5VjIxLjEzMTVMMTEuNTU0NyAxOC4xNjc5WiIgZmlsbD0iIzIxMjEyMSIvPgo8L3N2Zz4K);
+}

@@ -84,7 +84,6 @@ const GalleryItem = props => {
         productLabel
     } = item;
     const { url: smallImageURL } = small_image;
-    console.log("🚀 ~ file: item.js ~ line 87 ~ smallImageURL", smallImageURL)
 
     const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}${url_suffix || ""}`);
     const productDimensions = get(item, "prod_dimensions", false)

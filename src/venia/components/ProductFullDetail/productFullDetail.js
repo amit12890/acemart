@@ -28,6 +28,7 @@ import LabelsPopup from '../../../components/LabelsPopup';
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
+import ProductReview from "../../../@amasty/amAdvancedReviews"
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -693,6 +694,7 @@ const ProductFullDetail = props => {
                             <span>
                                 Reviews
                             </span>
+                            <ProductReview product={product} />
                         </h2>
                     </div>
                     <div className={classes.sectionContent}>

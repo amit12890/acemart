@@ -82,7 +82,6 @@ const GalleryItem = props => {
         url_suffix, url_rewrites,
     } = item;
     const { url: smallImageURL } = small_image;
-    console.log("🚀 ~ file: item.js ~ line 85 ~ smallImageURL", smallImageURL)
     // const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}${url_suffix || ""}`);

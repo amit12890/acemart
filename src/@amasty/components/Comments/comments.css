@@ -1,0 +1,45 @@
+.comments {
+  margin-top: 1rem;
+  background-color: rgba(var(--venia-global-color-gray), 0.6);
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.comment {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.comment + .comment {
+  margin-top: 1.5rem;
+}
+
+.name {
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.date {
+  display: block;
+  composes: date from '../ProductReviews/review.css';
+  padding: 0;
+}
+
+.formRoot {
+  composes: comments;
+  margin: 0;
+}
+
+.field {
+  max-width: 575px;
+  composes: field from '../ReviewForm/reviewForm.css';
+}
+
+.successMessage {
+  composes: successMessage from '../ReviewForm/reviewForm.css';
+}
