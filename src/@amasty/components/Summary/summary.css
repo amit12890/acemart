@@ -11,7 +11,7 @@
   .root {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: stretch;
   }
 }
 
@@ -23,6 +23,7 @@
   font-size: 3.75rem;
   margin-right: 1rem;
   line-height: 1;
+  color: rgb(var(--color-black));
 }
 
 .count {
@@ -52,7 +53,9 @@
 
 @media (min-width: 768px) {
   .details {
-    margin: 0 auto 0 2rem;
+    margin: 0 0 0 2rem;
+    padding-right: 45px;
+    border-right: 1px solid #c4c4c4;
   }
 }
 
@@ -94,7 +97,32 @@
 }
 
 .goToReviews button {
+  --stroke: var(--theme-color-primary);
+  background-color: rgb(var(--stroke));
+  color: rgb(var(--color-white));
+  border-color: rgb(var(--stroke));
+  border-radius: 0;
+  border-style: solid;
+  border-width: 2px;
+  font-size: var(--fontSize-100);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25rem;
+  max-width: 100%;
+  min-width: 10rem;
+  min-height: 2.5rem;
+  outline: none;
+  padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+  text-transform: uppercase;
+  transition-duration: 256ms;
+  transition-property: background-color, border-color, color;
+  transition-timing-function: var(--venia-global-anim-standard);
   margin-right: 0.5rem;
+}
+
+.goToReviews button:hover {
+  background-color: rgb(var(--color-white)); 
+  color: rgb(var(--stroke));
+  border-color: rgb(var(--stroke)); 
 }
 
 .goToReviewsLabel {

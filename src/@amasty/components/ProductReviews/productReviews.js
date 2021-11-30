@@ -43,7 +43,7 @@ const ProductReviews = props => {
 
   return (
     <div ref={rootRef} className={classes.root}>
-      <h2 className={classes.title}>Customer Reviews</h2>
+      <div className={classes.title}>Customer Reviews</div>
 
       <Summary
         {...productReviews}
@@ -61,8 +61,10 @@ const ProductReviews = props => {
         handleStarFilter={handleStarFilter}
       />
 
-      <div ref={reviewFormRef} className={classes.reviewForm}>
-        <ReviewForm {...settings} productName={name} productId={id} />
+      <div ref={reviewFormRef} className={classes.reviewFormWrapper}>
+        <div className={classes.reviewFormContainer}>
+          <ReviewForm {...settings} productName={name} productId={id} />
+        </div>
       </div>
     </div>
   );

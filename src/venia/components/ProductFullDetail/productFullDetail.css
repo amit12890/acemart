@@ -38,6 +38,10 @@ flex-direction: column;
 .productAction {
     order: 3;
     width: 20%;
+
+}
+
+.productActionWrapper {
     background-color: #f6f6f6;
     padding: 10px;
     text-align: center;
@@ -67,6 +71,10 @@ flex-direction: column;
 }
 .apSectionRow:first-child {
     margin-top: 0;
+}
+
+.apSectionRow:last-child {
+    margin-bottom: 0;
 }
 .attributeWrapper {
     display: flex;

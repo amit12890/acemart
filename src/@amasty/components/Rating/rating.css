@@ -4,15 +4,17 @@
 }
 
 .root {
-  width: 160px;
-  height: 27px;
+  display: flex;
+  align-items: center;
+  font-size: var(--fontSize-70);
 }
 
 .stars {
-  width: 100%;
-  height: 100%;
+  width: 77px;
+  height: 13px;
   background: var(--am-star);
   background-size: contain;
+  margin-right: 10px;
 }
 
 .starsFilled {
@@ -20,4 +22,20 @@
   width: 0;
   background: var(--am-starFilled);
   background-size: contain;
+}
+
+.ratingValue {
+
+}
+
+.addReviewLink {
+  margin-left: 10px;
+  color: rgb(var(--theme-color-primary-alt));
+  text-decoration: underline;
+  text-transform: capitalize;
+
+}
+
+.addReviewLink:hover {
+  text-decoration: none;
 }

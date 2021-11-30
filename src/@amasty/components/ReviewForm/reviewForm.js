@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { bool, string } from 'prop-types';
 
 import { Form } from 'informed';
-import {snakeCase} from "lodash";
+import { snakeCase } from "lodash";
 
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import TextInput from '@magento/venia-ui/lib/components/TextInput';
@@ -78,14 +78,14 @@ const ReviewForm = props => {
   const ratingInputs =
     Array.isArray(ratings) && ratings.length
       ? ratings.map(r => (
-          <Field key={r.rating_id} label={r.rating_code} required={true}>
-            <RatingInput
-              options={r.rating_options}
-              validate={isRequired}
-              field={snakeCase(r.rating_code)}
-            />
-          </Field>
-        ))
+        <Field key={r.rating_id} label={r.rating_code} required={true}>
+          <RatingInput
+            options={r.rating_options}
+            validate={isRequired}
+            field={snakeCase(r.rating_code)}
+          />
+        </Field>
+      ))
       : null;
 
   return (
@@ -98,8 +98,9 @@ const ReviewForm = props => {
         getApi={setFormApi}
         onSubmitFailure={handleSubmitFailure}
       >
-        <div className={classes.title}>
-          {`You're reviewing: ${productName}`}
+        <div className={classes.legend}>
+          <div className={classes.legendLabel}>You're reviewing:</div>
+          <div className={classes.legendProductName}>{productName}</div>
         </div>
 
         {ratingInputs && <div className={classes.field}>{ratingInputs}</div>}
@@ -167,11 +168,10 @@ const ReviewForm = props => {
 
         {isAllowImages && (
           <div
-            className={`${classes.field} ${
-              isImagesRequired ? classes.required : ''
-            }`}
+            className={`${classes.field} ${isImagesRequired ? classes.required : ''
+              }`}
           >
-            <Field label="Add your photo" optional={!isImagesRequired}>
+            <Field label="Upload Product Images" optional={!isImagesRequired}>
               <UploadInput
                 multiple
                 field="review_images"
@@ -206,9 +206,13 @@ const ReviewForm = props => {
           </div>
         )}
 
-        <Button disabled={isDisabled || loading} type="submit" priority="high">
-          {'Submit review'}
-        </Button>
+        <div className={classes.actionToolbar}>
+          <Button disabled={isDisabled || loading} type="submit" priority="high">
+            {'Submit review'}
+          </Button>
+        </div>
+
+
       </Form>
 
       {isShowSuccessMessage && (

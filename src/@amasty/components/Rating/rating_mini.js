@@ -14,11 +14,11 @@ const RatingMini = props => {
                     style={{ width: `${percent}%` }}
                     className={classes.starsFilled}
                 />
-                <div style={{ color: 'red' }}>
-                    {value} {value > 1 ? 'review' : 'reviews'}
-                </div>
-                {!!(addReviewLink) && <div>{addReviewLink}</div>}
             </div>
+            <div className={classes.ratingValue}>
+                {value} {value > 1 ? 'review' : 'reviews'}
+            </div>
+            {!!(addReviewLink) && <div className={classes.addReviewLink}>{addReviewLink}</div>}
         </div>
     );
 };

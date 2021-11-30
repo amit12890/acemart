@@ -22,7 +22,7 @@ const List = props => {
 
   return (
     <div className={classes.reviewsRoot}>
-      <h2 className={classes.title}>
+      <div className={classes.title}>
         {`Top customer reviews ${stars ? `with ${stars} stars` : ''}`}
         {stars && (
           <button
@@ -32,7 +32,7 @@ const List = props => {
             {'Show All'}
           </button>
         )}
-      </h2>
+      </div>
       <Toolbar {...props} />
 
       <div className={`${classes.list}`}>

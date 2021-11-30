@@ -58,7 +58,6 @@ const Review = props => {
     <div className={classes.root}>
       <div className={classes.authorDetails}>
         <p className={classes.author}>
-          <span className={classes.authorIcon} />
           {nickname}
         </p>
         {!!verifiedBuyer && (
@@ -66,12 +65,12 @@ const Review = props => {
             {'Verified Buyer'} <span className={classes.verifiedBuyerIcon} />
           </span>
         )}
-        <time itemProp="datePublished" dateTime={date} className={classes.date}>
-          {date}
-        </time>
         {isRecommendFieldEnabled && isRecommended && (
           <div className={classes.recomended}>{'I recommend this product'}</div>
         )}
+        <time itemProp="datePublished" dateTime={date} className={classes.date}>
+          {date}
+        </time>
       </div>
 
       <div className={classes.descriptionRoot}>
@@ -110,9 +109,8 @@ const Review = props => {
         )}
 
         <div
-          className={`${classes.toolbar} ${
-            !isCommentsEnabled ? classes.noComments : ''
-          }`}
+          className={`${classes.toolbar} ${!isCommentsEnabled ? classes.noComments : ''
+            }`}
         >
           {isCommentsEnabled && (
             <Fragment>

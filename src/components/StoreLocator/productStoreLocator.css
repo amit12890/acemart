@@ -129,6 +129,7 @@ display: flex;
     border-color: #fff;
     border-width: 4px;
     left: -16px;
+    background-color: #f6f6f6;
 
 }
 
@@ -275,6 +276,8 @@ display: flex;
 }
 
 .storeListContainer {
+    max-height: 534px;
+    overflow: auto;
 }
 
 .listItem {

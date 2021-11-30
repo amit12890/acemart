@@ -9,7 +9,7 @@
 @media (min-width: 768px) {
   .root {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column; 
   }
 }
 
@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .authorIcon {
@@ -35,11 +36,14 @@
 .author {
   display: flex;
   align-items: center;
+  font-weight: bold;
+  color: rgb(var(--color-black));
+  font-size: var(--fontSize-100);
+  margin-bottom: 10px;
 }
 
 .date {
   display: block;
-  padding-left: 2.125rem;
   font-size: 0.7rem;
   line-height: 1.25rem;
   color: rgb(var(--venia-global-color-text-alt));
@@ -82,28 +86,25 @@
 .recomended {
   width: 100%;
   order: 2;
-  margin: 0.5rem 0 0 0;
-  color: rgb(var(--venia-global-color-teal));
-  font-size: 0.7rem;
+  color: #1ab900;
   line-height: 1rem;
+  padding: 5px;
+  font-size: var(--fontSize-100);
 }
 
 @media (min-width: 768px) {
   .authorDetails {
     display: block;
-    flex-basis: 300px;
     padding-right: 1rem;
   }
 
   .recomended {
     display: block;
-    max-width: 6rem;
-    margin: 1rem 0;
     order: inherit;
     padding-right: 0;
     text-align: left;
     padding-left: 0.5rem;
-    border-left: 2px solid rgb(var(--venia-global-color-teal));
+    border-left: 2px solid #1ab900;
   }
 
   .verifiedBuyer {
