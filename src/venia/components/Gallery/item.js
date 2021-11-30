@@ -160,14 +160,18 @@ const GalleryItem = props => {
                 {productPrice > 500 && (
                     <div className={classes.piSectionRow}>
                         <div className={classes.finance}>
-                            <strong>
-                                {'Finance for as low as '}
-                                <Price
-                                    currencyCode={productCurrency}
-                                    value={productPrice / 39.5}
-                                />
-                                /month
-                            </strong>
+                            <Link
+                                to="/financing"
+                            >
+                                <strong>
+                                    {'Finance for as low as '}
+                                    <Price
+                                        currencyCode={productCurrency}
+                                        value={productPrice / 39.5}
+                                    />
+                                    /month
+                                </strong>
+                            </Link>
                         </div>
                     </div>
                 )}
@@ -216,18 +220,19 @@ const GalleryItem = props => {
                         }
                     </div>
 
-                    <div>
+                    <div className={classes.productOptionsWrapper}>
                         {moreInformation.map(info => {
                             return (
-                                <div>
-                                    <span scope="row" className={[classes.col, classes.label].join(" ")}>
+                                <div className={classes.productOptions}>
+                                    <strong className={[classes.col, classes.label].join(" ")}>
                                         {info.label}
-                                    </span>
-                                    <span data-th={info.label} className={[classes.col, classes.data].join(" ")}>
+                                    </strong>
+                                    <div className={[classes.col, classes.data].join(" ")}>
                                         <RichText
+                                            className={classes.test}
                                             content={info.value}
                                         />
-                                    </span>
+                                    </div>
                                 </div>
                             );
                         })}

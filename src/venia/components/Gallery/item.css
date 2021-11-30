@@ -1,8 +1,15 @@
 .root {
     align-content: start;
     display: grid;
-    row-gap: 0.5rem;
+    row-gap: 0.875rem;
     grid-template-columns: repeat(1, 250px 1fr);
+    border-top: 1px solid rgb(var(--border-color-light));
+    padding-top: 15px;
+}
+
+.root:first-child {
+    padding-top: 0;
+    border-top: none;
 }
 
 .itemImageContainer {
@@ -85,6 +92,14 @@
     content: "/"
 }
 
+.finance {
+    font-size: var(--fontSize-100);
+    display: flex;
+    align-items: center;
+    color: rgb(var(--color-green10));  
+}
+
+
 .productActions {
     margin: 20px 0;
     display: flex;
@@ -106,11 +121,25 @@
 .viewMore:hover {
     border-color: rgb(var(--theme-color-primary-alt));
 }
-
-.productOptions {
-    margin-bottom: 10px;
+.productOptionsWrapper {
 
 }
+
+.productOptions {
+    font-size: var(--fontSize-100);
+    display: flex;
+    flex-wrap: wrap;
+    line-height: normal;
+    margin-bottom: 5px;
+}
+
+.col.label:after {
+    content: ":";
+     margin-right: 5px;
+
+}
+
+
 .actionsContainer {
 
 }
@@ -120,6 +149,8 @@
 
 .labelWrapper {
     display: flex;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .labelItem {
@@ -127,12 +158,12 @@
     background-repeat: no-repeat;
     width: 50px;
     height: 50px;
-    background-size: 210px;
+    background-size: 190px; 
     margin-left: 5px;;
 }
 
 .labelItem:first-child {
-   
+    margin-left: 0;
 }
 
 .labelItem  span {
@@ -141,36 +172,32 @@
 
 .onSale {
     background-position: -150px -80px;
+    
 }
 
 .freeShipping {
-    background-position: -150px ​-10px;
-   
+    background-position: -134px -6px;
 }
 
 .onlinePricing {
-    background-position: -80px -80px;
+    background-position: -70px -70px;
+   
 }
 
 .bulkSavings {
-    background-position: -10px -80px;
+    background-position: -6px -70px;
 }
 
-.newItem {
-    background-position: -80px ​-10px;
+.newItems {
+    
+    background-position: -70px -6px;
 }
-
-.disallowPickupatstore {
-    background-position: -10px -80px;
-}
-
 .storePickup {
-    background-position: -10px -10px;
+    background-position: -6px -6px;
 }
 
-.allowStorePickup {
-    background-position: -10px -10px;
-}
+
+
 
 .iconWrapper {
     composes: root_highPriority from '../../components/Button/button.css';

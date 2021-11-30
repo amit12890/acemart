@@ -59,6 +59,7 @@
 .sortText {
     line-height: 24px;
     font-size: var(--fontSize-100);
+    margin-right: 10px;
 }
 
 .desktopIconWrapper {
