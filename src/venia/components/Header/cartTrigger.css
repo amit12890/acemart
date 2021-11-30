@@ -47,6 +47,12 @@
     fill: currentColor;
 }
 
+.iconWrapper {
+    margin-right: 5px;
+}
+
+
+
 /*
  * Mobile-specific styles.
  */

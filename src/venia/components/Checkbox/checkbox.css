@@ -30,7 +30,7 @@
 }
 
 .icon svg {
-    stroke: rgb(var(--stroke));
+    stroke: rgb(var(--theme-color-primary));
     width: 1rem;
     height: 1rem;
 }
@@ -55,7 +55,7 @@
 }
 
 .input:checked:enabled + .icon {
-    --stroke: var(--venia-brand-color-1-700);
+    --stroke: var(--theme-color-primary);
 }
 
 .input:active:enabled,

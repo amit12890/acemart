@@ -34,11 +34,14 @@
 
 
 .home-section h3 {
-    font-size: 1.375rem;
+    font-size: var(--fontSize-600);
     font-weight: 400;
     margin: 0 0 35px 0;  
     text-transform: none;
     position: relative;
+    color: rgb(var(--color-black));
+    padding-bottom: 5px;  
+    letter-spacing: 2px;
 }
 .home-section h3:after {
     position: absolute;

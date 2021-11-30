@@ -13,6 +13,14 @@
     fill: currentColor;
 }
 
+.iconWrapper {
+    margin-right: 5px;
+}
+
+.svgIcon {
+    
+}
+
 .trigger {
     composes: root from '../clickable.css';
 
