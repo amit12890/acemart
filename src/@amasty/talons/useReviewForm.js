@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import ADD_REVIEW from '../queries/addReview.graphql';
+import { has } from 'lodash-es';
 
 const Y_OFFSET = 120;
 
@@ -71,8 +72,12 @@ export const useReviewForm = props => {
                 ...formValues,
                 ratings: JSON.stringify(ratings),
                 tmp_images_path: tmpImgPath,
+                gdpr: has(formValues, 'gdpr')
+                    ? formValues.gdpr
+                    : isSignedIn
+                    ? formValues.gdpr
+                    : false
             };
-
             try {
                 const { data } = await addReview({ variables });
                 const { addAdvReview } = data || {};
