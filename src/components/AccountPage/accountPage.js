@@ -24,6 +24,7 @@ import AccountInformation from './accountInformation';
 import WishlistPage from '../WishList';
 import OrderDetailsPage from './orderDetailsPage';
 import CompareListBlock from '../CompareListPage/compareListBlock';
+import WishlistBlock from '../WishList/wishlistBlock';
 
 
 const AccountPage = (props) => {
@@ -40,6 +41,7 @@ const AccountPage = (props) => {
             <div className={classes.sidebar_wrapper}>
                 <AccountSideBar activeUrl={path} />
                 <CompareListBlock />
+                <WishlistBlock />
             </div>
             <div className={classes.content_wrapper}>
                 <Switch>
