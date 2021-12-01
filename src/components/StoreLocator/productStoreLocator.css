@@ -29,7 +29,7 @@ display: flex;
     box-shadow: 0 1px 6px rgb(var(--color-gray40) / 0.2);
     display: grid;
     min-height: 10rem;
-    transform: translate3d(0, -8px, 0);
+    transform: translate3d(0, 0, 0);
     transition-duration: 192ms;
     transition-property: transform;
     transition-timing-function: var(--venia-global-anim-out);
@@ -39,7 +39,7 @@ display: flex;
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-    padding: 20px;
+    padding: 20px 30px;
 }
 
 .content {
@@ -51,8 +51,8 @@ display: flex;
     cursor: pointer;
     position: absolute;
     z-index: 5;
-    top: .875rem;
-    right: 1rem;
+    top: 5px;
+    right: 5px;
 }
 
 .modalClose button{
@@ -211,8 +211,9 @@ display: flex;
 
 .areas {
     margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .areaSwitcher {
@@ -236,7 +237,8 @@ display: flex;
     transition-property: background-color, border-color, color;
     transition-timing-function: var(--venia-global-anim-standard);
     text-align: center;
-    margin-left: 10px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .areaSwitcher:hover{
@@ -267,17 +269,38 @@ display: flex;
     display: flex;
 }
 
+.scrollable {
+    overflow: auto;
+    width: 100%;
+    min-height: 0;
+    flex-direction: column;
+    max-height: calc(100vh - 108px);
+}
+
 .mapContainer {
+    flex: 0 0 66.6666%;
+}
+.mapContent {
+
+    background-image: var(--mapImage);
+    background-repeat: no-repeat;
+    background-position: top;
+    flex: 0 0 66.6666%;
+    background-size: 100% auto;
+    position: sticky;
+    background-repeat: no-repeat;
+    padding-top: 100%;
     
 }
+
+
 
 .mapContainer img {
     position: static;
 }
 
 .storeListContainer {
-    max-height: 534px;
-    overflow: auto;
+
 }
 
 .listItem {
@@ -317,6 +340,10 @@ display: flex;
     font-weight: bold;
     font-size: var(--fontSize-200);
     margin: 0 0 10px 0;
+    cursor: pointer;
+}
+.storeName:hover {
+    color: rgb(var(--link-color-hover));
 }
 
 .storeAddress {
