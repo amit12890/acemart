@@ -6,7 +6,7 @@ import { snakeCase } from "lodash";
 
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import TextInput from '@magento/venia-ui/lib/components/TextInput';
-import Field from '@magento/venia-ui/lib/components/Field';
+import Field from '../../../venia/components/Field';
 import Button from '@magento/venia-ui/lib/components/Button';
 import TextArea from '@magento/venia-ui/lib/components/TextArea';
 import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
@@ -106,7 +106,7 @@ const ReviewForm = props => {
         {ratingInputs && <div className={classes.field}>{ratingInputs}</div>}
 
         <div className={classes.field}>
-          <Field label="Nickname">
+          <Field label="Nickname" classes={{root: classes.testRoot}}>
             <TextInput
               field="nickname"
               type="text"
