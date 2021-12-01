@@ -27,7 +27,7 @@ const CollapsedImageGallery = props => {
                         <Image
                             key={Object.keys(items)[index]}
                             alt={label}
-                            src={originalImageUrl}
+                            src={url}
                             width={48}
                         />
                     );

@@ -12,6 +12,14 @@ export const ProductDetailsFragment = gql`
         url_key
         specsheet
         ship_info
+        only_x_left_in_stock
+        rating_summary
+        review_count
+        pos_stock_manage {
+            hide_add_to_cart
+            locate_in_store
+            stock_label
+        }
         categories {
             id
             breadcrumbs {
@@ -36,6 +44,10 @@ export const ProductDetailsFragment = gql`
             disabled
             file
         }
+        media_gallery {
+            url
+            label
+        }
         small_image {
             url
         }
@@ -53,6 +65,15 @@ export const ProductDetailsFragment = gql`
             data {
                 code label value
             }
+        }
+        productLabel {
+            items {
+                labelname
+                status
+                priority
+                label_text
+            }
+            totalCount
         }
         ... on ConfigurableProduct {
             configurable_options {
@@ -98,36 +119,6 @@ export const ProductDetailsFragment = gql`
                             }
                         }
                     }
-                }
-            }
-        }
-    }
-`;
-
-export const ProductBasicDetailsFragment = gql`
-    fragment ProductBasicDetailsFragment on ProductInterface {
-        __typename
-        id
-        name
-        product_name
-        sku uom mpn
-        url_key
-        url_suffix
-        url_rewrites {
-            url
-            parameters {
-              name
-              value
-            }
-        }
-        small_image {
-            url
-        }
-        price {
-            regularPrice {
-                amount {
-                    currency
-                    value
                 }
             }
         }

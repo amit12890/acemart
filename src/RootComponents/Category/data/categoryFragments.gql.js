@@ -42,6 +42,8 @@ export const ProductsFragment = gql`
             prod_note
             output
             sku
+            rating_summary
+            review_count
             small_image {
                 url
             }
@@ -57,9 +59,19 @@ export const ProductsFragment = gql`
             on_sale
             prod_temp
             uom
-            product_label {
-                label
-                image
+            more_information {
+                data {
+                    code label value
+                }
+            }
+            productLabel {
+                items {
+                    labelname
+                    status
+                    priority
+                    label_text
+                }
+                totalCount
             }
         }
         page_info {

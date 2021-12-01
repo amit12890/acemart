@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 import Price from '@magento/venia-ui/lib/components/Price';
@@ -13,7 +13,7 @@ import productLabel from '../../../../../assets/labelSprite.png';
 import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-import { drop, includes, camelCase, size } from 'lodash'
+import { drop, includes, camelCase, size, filter, orderBy } from 'lodash'
 
 
 const style = {
@@ -48,15 +48,15 @@ const ItemPlaceholder = ({ classes }) => (
 );
 
 // TODO: remove temp image
-const getOriginalImage = (url) => {
-    if (includes(url, "/cache/")) {
-        const smallImageUrlArr = url.split("cache/")
-        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-        return smallImageUrlArr[0] + subUrl
-    } else {
-        return url
-    }
-}
+// const getOriginalImage = (url) => {
+//     if (includes(url, "/cache/")) {
+//         const smallImageUrlArr = url.split("cache/")
+//         const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+//         return smallImageUrlArr[0] + subUrl
+//     } else {
+//         return url
+//     }
+// }
 
 const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
@@ -68,10 +68,15 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { name, price, sku, product_label, small_image, url_key, url_suffix, uom } = item;
+    const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom } = item;
     const { url: smallImageURL } = small_image;
-    const originalUrl = getOriginalImage(smallImageURL)
     const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
+
+    const processedProductLabels = useMemo(() => {
+        let resultLabels = filter(productLabel.items, ["status", 1]);
+        resultLabels = orderBy(resultLabels, ['priority'], ['asc']);
+        return resultLabels
+    }, [productLabel.items])
 
     const wishlistButton = wishlistButtonProps ? (
         <WishlistGalleryButton {...wishlistButtonProps} />
@@ -92,8 +97,8 @@ const GalleryItem = props => {
                             root: classes.imageContainer
                         }}
                         height={IMAGE_HEIGHT}
-                        src={originalUrl}
-                        // src={smallImageURL}
+                        // src={originalUrl}
+                        src={smallImageURL}
                         widths={IMAGE_WIDTHS}
                     />
                 </Link>
@@ -117,14 +122,14 @@ const GalleryItem = props => {
                 <span className={classes.unit}>{uom}</span>
             </div>
 
-            {!!size(product_label) &&
+            {!!productLabel.totalCount &&
                 <div className={classes.labelWrapper}>
-                    {product_label.map((labelObj) => {
+                    {processedProductLabels.map((labelObj) => {
                         return (
                             <div
-                                className={[classes.labelItem, classes[camelCase(labelObj.label)]].join(" ")}
+                                className={[classes.labelItem, classes[camelCase(labelObj.labelname)]].join(" ")}
                                 style={style}>
-                                <span>{camelCase(labelObj.label)}</span>
+                                <span>{camelCase(labelObj.labelname)}</span>
                             </div>
                         )
                     })}

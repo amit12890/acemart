@@ -50,7 +50,7 @@ const OrderDetails = props => {
                         <div className={classes.contentWrapper}>
                             <div className={[classes.itemsContainer, classes.invoiceContainer].join(" ")}>
                                 <div className={classes.actionsToolbar}>
-                                    <Link className={classes.printLink}>
+                                    <Link onClick={() => window.print()} className={classes.printLink}>
                                         <span>Print All Invoices</span>
                                     </Link>
                                 </div>
@@ -68,7 +68,7 @@ const OrderDetails = props => {
                                         <Fragment key={invoice.id}>
                                             <div className={classes.orderTitle}>
                                                 <strong>Invoice #{invoice.number}</strong>
-                                                <Link className={classes.printLink}>
+                                                <Link onClick={() => window.print()} className={classes.printLink}>
                                                     <span>Print Invoices</span>
                                                 </Link>
                                             </div>
@@ -91,7 +91,7 @@ const OrderDetails = props => {
                         <div className={classes.contentWrapper}>
                             <div className={[classes.itemsContainer, classes.shipmentContainer].join(" ")}>
                                 <div className={classes.actionsToolbar}>
-                                    <Link className={classes.printLink}>
+                                    <Link onClick={() => window.print()} onClick={() => window.print()} className={classes.printLink}>
                                         <span>Print All Shipments</span>
                                     </Link>
                                 </div>
@@ -109,7 +109,7 @@ const OrderDetails = props => {
                                         <Fragment key={shipment.id}>
                                             <div className={classes.orderTitle}>
                                                 <strong>Shipment {shipment.number}</strong>
-                                                <Link className={classes.printLink}>
+                                                <Link onClick={() => window.print()} className={classes.printLink}>
                                                     <span>Print Shipments</span>
                                                 </Link>
                                                 <Link className={classes.printLink}>
@@ -134,7 +134,7 @@ const OrderDetails = props => {
                     <div className={classes.contentWrapper}>
                         <div className={classes.itemsContainer}>
                             <div className={classes.actionsToolbar}>
-                                <Link className={classes.printLink}>
+                                <Link onClick={() => window.print()} className={classes.printLink}>
                                     <span>Print Order</span>
                                 </Link>
                             </div>

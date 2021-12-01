@@ -278,9 +278,14 @@ export const GET_PRODUCTS_BY_SKU = gql`
                 uom
                 url_key
                 url_suffix
-                product_label {
-                    image
-                    label
+                productLabel {
+                    items {
+                        labelname
+                        status
+                        priority
+                        label_text
+                    }
+                    totalCount
                 }
                 price {
                     regularPrice {

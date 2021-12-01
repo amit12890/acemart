@@ -9,6 +9,7 @@ import Image from '../Image';
 import footerPayment from '../../../assets/footer-payment.png';
 import defaultClasses from './footer.css';
 import * as UrlFuncs from '../../../url.utils';
+import NewsletterSubscriptionInput from '../../../components/AccountPage/newsletterSubscriptionInput';
 
 
 const Footer = props => {
@@ -280,6 +281,9 @@ const Footer = props => {
                         <div className={classes.blockRight}>
                             <div className={classes.blockNewsletter}>
                                 <h3 className={classes.groupTitle}>Subscribe</h3>
+                            </div>
+                            <div>
+                                <NewsletterSubscriptionInput />
                             </div>
                             <div className={classes.blockPaymentAccepted}>
                                 <Image src={footerPayment} />

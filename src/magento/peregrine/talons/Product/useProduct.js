@@ -47,7 +47,7 @@ export const useProduct = props => {
     }, [storeConfigData]);
 
     const sku = pathname.split('/').pop();
-    const urlKey =  productUrlSuffix ? sku.replace(productUrlSuffix, '') : sku;
+    const urlKey = productUrlSuffix ? sku.replace(productUrlSuffix, '') : sku;
 
     const { error, loading, data } = useQuery(getProductDetailQuery, {
         fetchPolicy: 'cache-and-network',

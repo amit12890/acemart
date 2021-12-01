@@ -13,13 +13,13 @@ import { useStyle } from '../../venia/classify';
 
 const OrderDetailsPage = () => {
     const classes = useStyle(defaultClasses)
-    const {tab = "view", orderId} = useParams();
+    const { tab = "view", orderId } = useParams();
     const talonProps = useOrderHistoryPage();
     const {
         isLoadingWithoutData,
         orders,
     } = talonProps;
-    
+
     if (isLoadingWithoutData) {
         return fullPageLoadingIndicator;
     }

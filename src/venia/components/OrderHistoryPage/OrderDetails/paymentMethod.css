@@ -12,3 +12,10 @@
 .payment_type {
     grid-row: 2 / span 1;
 }
+
+@media print {  
+    .root {
+        font-size: 12px;
+    }
+
+}

@@ -103,10 +103,10 @@ const OrderRow = props => {
                         defaultMessage={'Order #'}
                     />
                 </span>
-                <Link to={myOrderDetailsPage("view", order.id)}>
+                <Link className={classes.orderAction} to={myOrderDetailsPage("view", order.id)}>
                     <span className={classes.orderNumber}>{orderNumber}</span>
                 </Link>
-                <div
+                <div className={classes.reorderAction}
                     style={{ cursor: "pointer" }}
                     onClick={handleReorder(orderNumber)}>
                     {reorderItemsLoading ? "Loading..." : "Reorder"}

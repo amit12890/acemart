@@ -95,3 +95,16 @@
         margin-top: 0;
     }
 }
+
+
+@media print {   
+    .previousButton,
+    .nextButton {
+        display: none;
+    }
+
+    .currentImage {
+        height: 300px;
+        width: auto;
+    }
+}

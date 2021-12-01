@@ -1,0 +1,9 @@
+mutation addAdvVote($type: String!, $reviewId: Int!) {
+  addAdvVote(input: { type: $type, review_id: $reviewId }) {
+    success
+    review {
+      plus_review
+      minus_review
+    }
+  }
+}

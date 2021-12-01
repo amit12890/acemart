@@ -6,13 +6,14 @@ import {
 } from 'react-feather';
 
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
-import { useProductImageCarousel } from '@magento/peregrine/lib/talons/ProductImageCarousel/useProductImageCarousel';
+import { useProductImageCarousel } from '../../../magento/peregrine/talons/ProductImageCarousel/useProductImageCarousel';
 
 import { useStyle } from '../../classify';
 import Icon from '../Icon';
 import Image from '../Image';
 import defaultClasses from './carousel.css';
 import Thumbnail from './thumbnail';
+import { get } from 'lodash-es';
 
 const IMAGE_WIDTH = 535;
 
@@ -30,10 +31,11 @@ const IMAGE_WIDTH = 535;
  * @returns {React.Element} React carousel component that displays a product image
  */
 const ProductImageCarousel = props => {
-    const { images } = props;
+    // we are useing media_gallary key
+    const { images, media_gallery } = props;
 
     const talonProps = useProductImageCarousel({
-        images,
+        images: media_gallery,
         imageWidth: IMAGE_WIDTH
     });
 
@@ -52,7 +54,7 @@ const ProductImageCarousel = props => {
         () =>
             sortedImages.map((item, index) => (
                 <Thumbnail
-                    key={`${item.file}--${item.label}`}
+                    key={`${item.url}--${item.label}`}
                     item={item}
                     itemIndex={index}
                     isActive={activeItemIndex === index}
@@ -65,7 +67,7 @@ const ProductImageCarousel = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     let image;
-    if (currentImage.file) {
+    if (currentImage.url) {
         image = (
             <Image
                 alt={altText}
@@ -73,7 +75,7 @@ const ProductImageCarousel = props => {
                     image: classes.currentImage,
                     root: classes.imageContainer
                 }}
-                resource={currentImage.file}
+                src={currentImage.url}
                 width={IMAGE_WIDTH}
             />
         );
@@ -97,8 +99,7 @@ const ProductImageCarousel = props => {
                 <button
                     className={classes.previousButton}
                     onClick={handlePrevious}
-                    type="button"
-                >
+                    type="button">
                     <Icon
                         classes={chevronClasses}
                         src={ChevronLeftIcon}
@@ -109,8 +110,7 @@ const ProductImageCarousel = props => {
                 <button
                     className={classes.nextButton}
                     onClick={handleNext}
-                    type="button"
-                >
+                    type="button">
                     <Icon
                         classes={chevronClasses}
                         src={ChevronRightIcon}
@@ -157,6 +157,12 @@ ProductImageCarousel.propTypes = {
             position: number,
             disabled: bool,
             file: string.isRequired
+        })
+    ).isRequired,
+    media_gallery: arrayOf(
+        shape({
+            label: string,
+            url: string
         })
     ).isRequired
 };

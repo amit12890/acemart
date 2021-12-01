@@ -1,1 +1,1 @@
-export { default } from './storeLocator'
+export { default } from './productStoreLocator'

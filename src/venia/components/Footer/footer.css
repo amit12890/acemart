@@ -306,23 +306,20 @@ h4:hover {
     font-size: var(--fontSize-100);
 }
 
-@media (max-width: 960px) {
-    .root {
+@media print { 
+    .sectionTop,
+    .sectionMiddle {
+        
+        display: none;
     }
-}
+    
 
+    
+    .sectionLower {
+        background-color: #383838;
+        color: rgb(var(--color-white));
+    }
 
-
-@media (max-width: 960px) {
-   
-}
-
-
-
-
-
-@media (max-width: 960px) {
-  
 }
 
 
@@ -330,18 +327,6 @@ h4:hover {
 
 
 
-@media (max-width: 960px) {
-   
-}
 
 
 
-@media (max-width: 960px) {
-   
-}
-
-
-
-@media (max-width: 960px) {
-  
-}

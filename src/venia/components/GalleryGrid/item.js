@@ -1,21 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
-import { size, camelCase } from "lodash";
 import { Link } from 'react-router-dom';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
-import Mask from '@magento/venia-ui/lib/components/Mask';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
 import productLabel from '../../../assets/labelSprite.png';
 import defaultClasses from './item.css';
 
-import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-// import WishlistGalleryButton from '../Wishlist/AddToListButton';
 import { drop, includes, get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
@@ -52,15 +48,15 @@ const ItemPlaceholder = ({ classes }) => (
 );
 
 // TODO: remove temp image
-const getOriginalImage = (url) => {
-    if (includes(url, "/cache/")) {
-        const smallImageUrlArr = url.split("cache/")
-        const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
-        return smallImageUrlArr[0] + subUrl
-    } else {
-        return url
-    }
-}
+// const getOriginalImage = (url) => {
+//     if (includes(url, "/cache/")) {
+//         const smallImageUrlArr = url.split("cache/")
+//         const subUrl = drop(smallImageUrlArr[1].split("/")).join("/")
+//         return smallImageUrlArr[0] + subUrl
+//     } else {
+//         return url
+//     }
+// }
 
 
 const GalleryItem = props => {
@@ -83,17 +79,12 @@ const GalleryItem = props => {
     }
 
     const { id: itemId, name, price, small_image,
-        url_key, url_suffix, canonical_url, url_rewrites,
-        product_label
+        url_suffix, url_rewrites,
     } = item;
     const { url: smallImageURL } = small_image;
-    const originalUrl = getOriginalImage(smallImageURL)
+    // const originalUrl = getOriginalImage(smallImageURL)
 
     const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}${url_suffix || ""}`);
-    const productDimensions = get(item, "prod_dimensions", false)
-    const productNote = get(item, "prod_note", false)
-    const certifications = get(item, "certifications", false)
-    const capacity = get(item, "capacity", false)
 
     return (
         <div className={classes.root}>
@@ -110,8 +101,7 @@ const GalleryItem = props => {
                                 image: classes.image,
                                 root: classes.imageContainer
                             }}
-                            src={originalUrl}
-                            // resource={smallImageURL}
+                            src={smallImageURL}
                             width={IMAGE_WIDTH}
                         />
                     </Link>

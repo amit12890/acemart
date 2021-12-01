@@ -38,6 +38,10 @@ flex-direction: column;
 .productAction {
     order: 3;
     width: 20%;
+
+}
+
+.productActionWrapper {
     background-color: #f6f6f6;
     padding: 10px;
     text-align: center;
@@ -67,6 +71,10 @@ flex-direction: column;
 }
 .apSectionRow:first-child {
     margin-top: 0;
+}
+
+.apSectionRow:last-child {
+    margin-bottom: 0;
 }
 .attributeWrapper {
     display: flex;
@@ -128,7 +136,7 @@ flex-direction: column;
     background-repeat: no-repeat;
     width: 50px;
     height: 50px;
-    background-size: 210px;
+    background-size: 190px;
     margin-left: 5px;;
 }
 
@@ -146,31 +154,35 @@ flex-direction: column;
 }
 
 .freeShipping {
-    background-position: -150px ​-10px;
-   
+    background-position: -134px -6px;
 }
-.onlinePrice {
-    background-position: -80px -80px;
+
+.onlinePricing {
+    background-position: -70px -70px;
    
 }
 
 .bulkSavings {
-    background-position: -10px -80px;
+    background-position: -6px -70px;
 }
 
-.newItem {
-    background-position: -80px ​-10px;
+.newItems {
+    
+    background-position: -70px -6px;
 }
-.disallowPickupatstore {
-    background-position: -10px -80px;
+.storePickup {
+    background-position: -6px -6px;
 }
 
-.allowStorePickup {
-    background-position: -10px -10px;
-}
+
 
 .labelHelper {
     margin-left: 10px; 
+    cursor: pointer;
+}
+
+.labelHelper:hover {
+    color: rgb(var(--link-color-hover));
 }
 
 .finance {
@@ -232,7 +244,11 @@ flex-direction: column;
 .storeLocator {
     color: rgb(var(--theme-color-primary-alt));
     display: flex;
+    cursor: pointer;
+}
 
+.storeLocator:hover {
+    color: rgb(var(--theme-color-primary));
 }
 
 .storeLocator .iconWrapper {
@@ -604,10 +620,6 @@ tbody tr:nth-child(odd) {
     composes: sectionTitle;
 }
 
-
-
-
-
 .quantityRoot {
     composes: root from '../CartPage/ProductListing/quantity.css';
     grid-template-columns: auto 4rem auto;
@@ -626,4 +638,48 @@ tbody tr:nth-child(odd) {
     justify-content: start;
     padding: 0.75rem;
     width: 100%;
+}
+
+
+
+
+@media print { 
+    .productViewSection {
+        flex-direction: column;
+    }
+
+    .productMedia,
+    .productInfo,
+    .productAction {
+        width: 100%;
+        padding: 10px;
+        justify-content: center;
+    
+    }
+
+    .productInfo {
+        order: 2;
+    }
+
+    .productMedia {
+        order: 1;
+    }
+
+
+    .sectionTitle {
+        text-align: left;
+        border-bottom: 3px solid #ddd;
+        padding-bottom: 5px
+        }
+        
+    .sectionTitle:before{
+        display: none;
+
+    }
+    .sectionTitle span {
+        padding: 0 ;
+    }
+    
+
+
 }

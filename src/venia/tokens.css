@@ -184,7 +184,7 @@
     --venia-brand-color-1-500: var(--venia-global-color-blue-500);
     --venia-brand-color-1-600: var(--venia-global-color-blue-600);
     --venia-brand-color-1-700: var(--color-red);
-    --venia-brand-color-1-800: var(--venia-global-color-blue-800); 
+    --venia-brand-color-1-800: var(--theme-color-primary); 
 
     /* typography */
     /* heading */

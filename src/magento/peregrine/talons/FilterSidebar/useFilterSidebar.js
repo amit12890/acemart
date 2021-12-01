@@ -48,10 +48,9 @@ export const useFilterSidebar = props => {
     const DISABLED_FILTERS = useMemo(() => {
         const disabled = new Set();
         // Disable category filtering when not on a search page.
-        if (pathname !== '/search.html') {
-            disabled.add('category_id');
-        }
-
+        // if (pathname !== '/search.html') {
+        //     disabled.add('category_id');
+        // }
         return disabled;
     }, [pathname]);
 
