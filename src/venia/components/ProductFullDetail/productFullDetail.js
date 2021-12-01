@@ -30,6 +30,7 @@ import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
 import ProductReview from "../../../@amasty/amAdvancedReviews"
 import RatingMini from "../../../@amasty/components/Rating/rating_mini"
+import RelatedPosts from './relatedPosts';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -700,9 +701,7 @@ const ProductFullDetail = props => {
                         </h2>
                         <ProductReview product={product} />
                     </div>
-                    <div className={classes.sectionContent}>
-                        <h2>Coming Soon...</h2>
-                    </div>
+                    <RelatedPosts productId={product.id}/>
                 </section>
 
                 {!!size(upsellProducts) && (
