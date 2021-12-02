@@ -6,24 +6,24 @@
 
 .itemInfoWrapper {
     position: relative;
+    display: grid;
+    gap: 1.2rem;
 }
 .itemImageContainer {
 
 }
 
 .images {
-    display: grid;
-    grid-template-areas: 'main';
+
 }
 
 .imageContainer {
-    grid-area: main;
-    padding: 10px;
+    
 }
 
 .image {
     display: block;
-    height: auto;
+   
     object-fit: contain;
     opacity: 1;
     transition-duration: 512ms;
@@ -34,12 +34,11 @@
     right: 0;
     max-width: 100%;
 
-
 }
 
 .imagePlaceholder {
     composes: image;
-    background-color: rgb(var(--venia-global-color-gray));
+    background-color: rgb(var(--venia-global-color-gray)); 
 }
 
 
@@ -151,6 +150,12 @@
 .iconWrapper:hover .svgIcon {
     fill: rgb(var(--theme-color-primary));
 }
+
+.iconWrapper:hover {
+    background-color: rgb(var(--color-white));
+}
+
+
 
 .svgIcon {
     fill: rgb(var(--color-white));

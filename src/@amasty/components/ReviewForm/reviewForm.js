@@ -9,7 +9,7 @@ import TextInput from '@magento/venia-ui/lib/components/TextInput';
 import Field from '../../../venia/components/Field';
 import Button from '@magento/venia-ui/lib/components/Button';
 import TextArea from '@magento/venia-ui/lib/components/TextArea';
-import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
+import Checkbox from '../../../venia/components/Checkbox';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 
 import RatingInput from '../RatingInput';
@@ -106,7 +106,7 @@ const ReviewForm = props => {
         {ratingInputs && <div className={classes.field}>{ratingInputs}</div>}
 
         <div className={classes.field}>
-          <Field label="Nickname" classes={{root: classes.testRoot}}>
+          <Field label="Nickname" classes={{ root: classes.reviewFormField }}>
             <TextInput
               field="nickname"
               type="text"
@@ -118,7 +118,7 @@ const ReviewForm = props => {
 
         {isGuestEmailShow && !isSignedIn && (
           <div className={classes.field}>
-            <Field label="Email Address" optional>
+            <Field label="Email Address" classes={{ root: classes.reviewFormField }} optional>
               <TextInput
                 field="guest_email"
                 type="email"
@@ -129,7 +129,7 @@ const ReviewForm = props => {
         )}
 
         <div className={classes.field}>
-          <Field label="Summary">
+          <Field label="Summary" classes={{ root: classes.reviewFormField }}>
             <TextInput
               field="title"
               type="text"
@@ -140,7 +140,7 @@ const ReviewForm = props => {
         </div>
 
         <div className={classes.field}>
-          <Field label="Review">
+          <Field label="Review" classes={{ root: classes.reviewFormField }}>
             <TextArea
               field="detail"
               validate={isRequired}
@@ -153,13 +153,13 @@ const ReviewForm = props => {
         {isProsConsEnabled && (
           <Fragment>
             <div className={classes.field}>
-              <Field label="Advantages" optional>
+              <Field label="Advantages" classes={{ root: classes.reviewFormField }} optional>
                 <TextArea field="like_about" rows={6} />
               </Field>
             </div>
 
             <div className={classes.field}>
-              <Field label="Disadvantages" optional>
+              <Field label="Disadvantages" classes={{ root: classes.reviewFormField }} optional>
                 <TextArea field="not_like_about" rows={6} />
               </Field>
             </div>
@@ -171,7 +171,7 @@ const ReviewForm = props => {
             className={`${classes.field} ${isImagesRequired ? classes.required : ''
               }`}
           >
-            <Field label="Upload Product Images" optional={!isImagesRequired}>
+            <Field label="Upload Product Images" classes={{ root: classes.reviewFormFileField }} optional={!isImagesRequired}>
               <UploadInput
                 multiple
                 field="review_images"
@@ -209,10 +209,9 @@ const ReviewForm = props => {
         <div className={classes.actionToolbar}>
           <Button disabled={isDisabled || loading} type="submit" priority="high">
             {'Submit review'}
+
           </Button>
         </div>
-
-
       </Form>
 
       {isShowSuccessMessage && (

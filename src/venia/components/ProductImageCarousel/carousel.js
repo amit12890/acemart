@@ -16,6 +16,8 @@ import Thumbnail from './thumbnail';
 import { get } from 'lodash-es';
 
 const IMAGE_WIDTH = 535;
+const IMAGE_HEIGHT = 535;
+
 
 /**
  * Carousel component for product images
@@ -77,6 +79,7 @@ const ProductImageCarousel = props => {
                 }}
                 src={currentImage.url}
                 width={IMAGE_WIDTH}
+                height={IMAGE_HEIGHT}
             />
         );
     } else {

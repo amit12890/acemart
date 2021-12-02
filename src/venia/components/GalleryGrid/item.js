@@ -23,7 +23,7 @@ const style = {
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
 const IMAGE_WIDTH = 225;
-const IMAGE_HEIGHT = 275;
+const IMAGE_HEIGHT = 225;
 
 // Gallery switches from two columns to three at 640px.
 const IMAGE_WIDTHS = new Map()
@@ -103,6 +103,7 @@ const GalleryItem = props => {
                             }}
                             src={smallImageURL}
                             width={IMAGE_WIDTH}
+                            height={IMAGE_HEIGHT}
                         />
                     </Link>
                 </div>

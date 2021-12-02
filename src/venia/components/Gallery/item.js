@@ -229,7 +229,6 @@ const GalleryItem = props => {
                                     </strong>
                                     <div className={[classes.col, classes.data].join(" ")}>
                                         <RichText
-                                            className={classes.test}
                                             content={info.value}
                                         />
                                     </div>
