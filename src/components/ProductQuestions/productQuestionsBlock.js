@@ -1,14 +1,32 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
 import { useQuery } from '@apollo/client';
-import Fuse from "fuse.js";
+import Fuse from 'fuse.js';
 import { get, size, range } from 'lodash';
 
 import Button from '../../venia/components/Button';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './productQuestions.css';
 import AddQuestion from './addQuestion';
-import AddAnswer from "./addAnswer";
-import { getProductQuestions } from './productQuestions.gql';
+import AddAnswer from './addAnswer';
+import PlusBlock from './plusBlock';
+import MinusBlock from './minusBlock';
+import ReportBlock from './reportBlock';
+
+import {
+    getProductQuestions,
+    questionRatingPlusMutation,
+    answerRatingPlusMutation,
+    questionRatingMinusMutation,
+    answerRatingMinusMutation,
+    reportQuestionMutation,
+    reportAnswerMutation
+} from './productQuestions.gql';
 
 const ProductQuestionsBlock = ({ productId }) => {
     const classes = useStyle(defaultClasses);
@@ -33,7 +51,9 @@ const ProductQuestionsBlock = ({ productId }) => {
     } else {
         const hasItems = get(questionsData, 'questions.items.length');
         if (hasItems) {
-            content = <QuestionBlock questions={questionsData.questions.items} />;
+            content = (
+                <QuestionBlock questions={questionsData.questions.items} />
+            );
         } else {
             content = <div>Be the first one to ask question.</div>;
         }
@@ -48,10 +68,9 @@ const ProductQuestionsBlock = ({ productId }) => {
 };
 
 const QuestionBlock = ({ questions }) => {
-console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ questions", questions)
     const classes = useStyle(defaultClasses);
-    const [expandedQuestions, setExpandedQuestions] = useState(new Set([]))
-    const [searchToken, setSearchToken] = useState("")
+    const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
+    const [searchToken, setSearchToken] = useState('');
     const fuseSearch = useRef();
 
     useEffect(() => {
@@ -65,44 +84,48 @@ console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ q
             distance: 32,
             maxPatternLength: 32,
             minMatchCharLength: 2,
-            keys: [
-                  "content",
-              ]
-          };
-          fuseSearch.current = new Fuse(questions, options);
-    }, [questions])
+            keys: ['content']
+        };
+        fuseSearch.current = new Fuse(questions, options);
+    }, [questions]);
 
-    const handleQueExpandToggle = useCallback((queIndex) => {
-        const newSet = new Set(expandedQuestions);
-        if (newSet.has(queIndex)) newSet.delete(queIndex);
-        else newSet.add(queIndex);
-        setExpandedQuestions(newSet)
-    }, [expandedQuestions, setExpandedQuestions])
+    const handleQueExpandToggle = useCallback(
+        queIndex => {
+            const newSet = new Set(expandedQuestions);
+            if (newSet.has(queIndex)) newSet.delete(queIndex);
+            else newSet.add(queIndex);
+            setExpandedQuestions(newSet);
+        },
+        [expandedQuestions, setExpandedQuestions]
+    );
 
     const toggleExpandAll = useCallback(() => {
-        setExpandedQuestions(expQue => expQue.size
-            ? new Set([]) : new Set(range(0, questions.length))
-        )
-    }, [questions, setExpandedQuestions])
+        setExpandedQuestions(expQue =>
+            expQue.size ? new Set([]) : new Set(range(0, questions.length))
+        );
+    }, [questions, setExpandedQuestions]);
 
     const handleResetSearch = useCallback(() => {
-        setSearchToken("");
-    }, [])
+        setSearchToken('');
+    }, []);
 
     const filteredQuestions = useMemo(() => {
         if (searchToken.length > 2) {
-          return fuseSearch.current.search(searchToken);
+            return fuseSearch.current.search(searchToken);
         } else {
-          return questions;
+            return questions;
         }
-      }, [searchToken, questions]);
+    }, [searchToken, questions]);
 
     return (
         <div>
             <div>
                 <label>Search Q/A</label>
-                <input placeholder="Search Phrase" value={searchToken}
-                    onChange={(e) => setSearchToken(e.target.value)} />
+                <input
+                    placeholder="Search Phrase"
+                    value={searchToken}
+                    onChange={e => setSearchToken(e.target.value)}
+                />
                 <Button onClick={handleResetSearch}>Reset</Button>
             </div>
             <div>
@@ -113,11 +136,15 @@ console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ q
             {filteredQuestions.map((item, index) => {
                 const ansCount = size(item.answer);
                 let queClass = expandedQuestions.has(index)
-                    ? `${classes.question} ${classes.question_open}` : classes.question
+                    ? `${classes.question} ${classes.question_open}`
+                    : classes.question;
 
                 return (
                     <div key={item.id}>
-                        <div className={queClass} onClick={() => handleQueExpandToggle(index)}>
+                        <div
+                            className={queClass}
+                            onClick={() => handleQueExpandToggle(index)}
+                        >
                             <div>{item.content}</div>
                             <div>
                                 {ansCount > 1
@@ -125,18 +152,72 @@ console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ q
                                     : `${ansCount} answer`}
                             </div>
                             <div>by {item.nickname}</div>
+                            <div>
+                                <PlusBlock
+                                    mutation={questionRatingPlusMutation}
+                                    variables={{
+                                        question_id: item.id
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <MinusBlock
+                                    mutation={questionRatingMinusMutation}
+                                    variables={{
+                                        question_id: item.id
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <ReportBlock
+                                    mutation={reportQuestionMutation}
+                                    variables={{
+                                        question_id: item.id
+                                    }}
+                                />
+                            </div>
                         </div>
                         <div className="answer">
                             <div>
                                 {!!ansCount
                                     ? item.answer.map((ans, ind) => {
-                                        return (
-                                            <div key={ind}>
-                                                <div>{ans.content}</div>
-                                                <div>by {ans.nickname}</div>
-                                            </div>
-                                        );
-                                    })
+                                          return (
+                                              <div key={ans.id}>
+                                                  <div>{ans.content}</div>
+                                                  <div>by {ans.nickname}</div>
+                                                  <div>
+                                                      <PlusBlock
+                                                          mutation={
+                                                              answerRatingPlusMutation
+                                                          }
+                                                          variables={{
+                                                              ans_id: ans.id
+                                                          }}
+                                                      />
+                                                  </div>
+                                                  <div>
+                                                      <MinusBlock
+                                                          mutation={
+                                                              answerRatingMinusMutation
+                                                          }
+                                                          variables={{
+                                                              ans_id: ans.id
+                                                          }}
+                                                      />
+                                                  </div>
+                                                  <div>
+                                                      <ReportBlock
+                                                          mutation={
+                                                              reportAnswerMutation
+                                                          }
+                                                          variables={{
+                                                              ans_id: ans.id
+                                                          }}
+                                                      />
+                                                  </div>
+                                              </div>
+                                          );
+                                      })
                                     : null}
                             </div>
                             <div>
@@ -144,8 +225,8 @@ console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ q
                             </div>
                         </div>
                     </div>
-                )})
-            }
+                );
+            })}
         </div>
     );
 };
