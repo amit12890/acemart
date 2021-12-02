@@ -79,8 +79,10 @@ console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ q
         setExpandedQuestions(newSet)
     }, [expandedQuestions, setExpandedQuestions])
 
-    const handleExpandAll = useCallback(() => {
-        setExpandedQuestions(new Set(range(0, questions.length)))
+    const toggleExpandAll = useCallback(() => {
+        setExpandedQuestions(expQue => expQue.size
+            ? new Set([]) : new Set(range(0, questions.length))
+        )
     }, [questions, setExpandedQuestions])
 
     const handleResetSearch = useCallback(() => {
@@ -105,7 +107,7 @@ console.log("🚀 ~ file: productQuestionsBlock.js ~ line 51 ~ QuestionBlock ~ q
             </div>
             <div>
                 <label>Sort By</label>
-                <Button onClick={handleExpandAll}>Expand All</Button>
+                <Button onClick={toggleExpandAll}>Expand All</Button>
             </div>
 
             {filteredQuestions.map((item, index) => {
