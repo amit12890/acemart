@@ -692,8 +692,10 @@ const ProductFullDetail = props => {
                         </h2>
                         <ProductReview product={product} />
                     </div>
-                    <RelatedPosts productId={product.id}/>
+
                 </section>
+
+                <RelatedPosts productId={product.id} />
 
                 {!!size(upsellProducts) && (
                     <section className={[classes.productViewSection, classes.upsellProducts].join(" ")}>

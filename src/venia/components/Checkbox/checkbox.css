@@ -55,10 +55,11 @@
 }
 
 .input:checked:enabled + .icon {
-    --stroke: var(--venia-brand-color-1-700);
+    --stroke: var(--theme-color-primary);
 }
 
 .input:active:enabled,
 .input:focus:enabled {
     outline: none;
+    box-shadow: none; 
 }

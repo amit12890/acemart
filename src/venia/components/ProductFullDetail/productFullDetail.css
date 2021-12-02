@@ -627,6 +627,11 @@ tbody tr:nth-child(odd) {
     margin-bottom: 10px;
 }
 
+.quantityRoot input {
+    padding: 10px;
+    font-weight: bold;
+}
+
 .unavailableContainer {
     align-items: center;
     background-color: rgb(var(--venia-global-color-gray));
@@ -682,4 +687,8 @@ tbody tr:nth-child(odd) {
     
 
 
+}
+
+.relatedPostSection {
+    
 }
