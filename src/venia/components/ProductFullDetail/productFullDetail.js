@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useState, useCallback, useMemo } from 'react';
+import React, { Fragment, Suspense, useState, useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -63,6 +63,8 @@ const ProductFullDetail = props => {
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
     const [showLabelsPopup, setLabelsPopup] = useState(false)
 
+    const reviewRef = useRef(null)
+
     const talonProps = useProductFullDetail({ product });
 
     // handlers for wishlist popup
@@ -98,6 +100,10 @@ const ProductFullDetail = props => {
     const closeLabelsPopup = useCallback(() => {
         setLabelsPopup(false);
     }, [setLabelsPopup]);
+
+    const handleFirstReviewClick = useCallback(() => {
+        reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    },[reviewRef])
 
     const {
         breadcrumbCategoryId,
@@ -348,11 +354,17 @@ const ProductFullDetail = props => {
                         )}
 
                         {/* Product Review   */}
-                        <div className={classes.piSectionRow}>
-                            <div className={classes.productReview}>
-                                <RatingMini percent={product.rating_summary} value={product.review_count} />
+                        {!!product.review_count ?
+                            <div className={classes.piSectionRow}>
+                                <div className={classes.productReview}>
+                                    <RatingMini percent={product.rating_summary} value={product.review_count} />
+                                </div>
                             </div>
-                        </div>
+                            :
+                            <div style={{ cursor: "pointer" }} onClick={handleFirstReviewClick}>
+                                Be the first to review this product
+                            </div>
+                        }
 
 
                         {/* Product  Short Additional Info  */}
@@ -683,7 +695,11 @@ const ProductFullDetail = props => {
                 </section>
 
 
-                <section className={[classes.productViewSection, classes.productReviewSection].join(" ")}>
+                <section ref={reviewRef}
+                    className={[
+                        classes.productViewSection,
+                        classes.productReviewSection
+                    ].join(" ")}>
                     <div className={classes.sectionTitleWrapper}>
                         <h2 className={classes.sectionTitle}>
                             <span>
