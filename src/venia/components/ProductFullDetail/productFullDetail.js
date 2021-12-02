@@ -31,6 +31,7 @@ import StoreLocator from '../../../components/StoreLocator';
 import ProductReview from "../../../@amasty/amAdvancedReviews"
 import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
+import ProductQuestions from '../../../components/ProductQuestions';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -687,7 +688,7 @@ const ProductFullDetail = props => {
                         </h2>
                     </div>
                     <div className={classes.sectionContent}>
-                        <h2>Coming Soon...</h2>
+                        <ProductQuestions productId={product.id} />
                     </div>
                 </section>
 
