@@ -240,7 +240,7 @@ const ProductFullDetail = props => {
                     <div className={classes.productInfo}>
                         {/* Product Name */}
                         <h1 className={classes.productName}>
-                            {product.product_name}
+                            <RichText content={product.product_name} />
                         </h1>
 
                         {/* Product SKU and Model Number */}
@@ -391,10 +391,12 @@ const ProductFullDetail = props => {
                             </div>
                         )}
                     </div>
+
+                    {/* Right side block */}
                     <div className={classes.productAction}>
                         <div className={classes.productActionWrapper}>
                             <Form onSubmit={handleAddToCart}>
-                                {/* form */}
+                                {/* Add to cart form */}
                                 <div className={classes.paContent}>
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.priceBox}>
@@ -493,18 +495,6 @@ const ProductFullDetail = props => {
                                     {/* Product Add To Links */}
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.addToLinks}>
-                                            {/* <div
-                                            className={[
-                                                classes.action,
-                                                classes.toWishList
-                                            ].join(' ')}
-                                        >
-                                            <Suspense fallback={null}>
-                                                <WishlistButton
-                                                    {...wishlistButtonProps}
-                                                />
-                                            </Suspense>
-                                        </div> */}
 
                                             <div
                                                 className={[
