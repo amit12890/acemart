@@ -211,6 +211,11 @@ const ReviewForm = props => {
             {'Submit review'}
 
           </Button>
+          <Button>
+            <span className={classes.loaderIcon}></span>
+            <span className={classes.loaderLabel}>Loading</span>
+          </Button>
+
         </div>
       </Form>
 
