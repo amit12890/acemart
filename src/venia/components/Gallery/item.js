@@ -132,7 +132,7 @@ const GalleryItem = props => {
                         to={productLink}
                         className={classes.name}
                     >
-                        <span>{get(item, "product_name", "")}</span>
+                        <RichText content={get(item, "product_name", "")} />
                     </Link>
                 </div>
                 <div className={classes.sku}>{get(item, "sku", "")}</div>

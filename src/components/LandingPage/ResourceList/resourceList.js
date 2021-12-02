@@ -25,7 +25,7 @@ function CustomArrows(props) {
  * parent
  *      LandingPage
  */
-export default ({ data, onItemClick }) => {
+export default ({ data, onItemClick, showTitle = true }) => {
     const classes = useStyle(defaultClasses);
 
     if (size(data) === 0) return null
@@ -33,7 +33,7 @@ export default ({ data, onItemClick }) => {
     return (
         <div className={classes.root} onClick={onItemClick}>
             <div className={classes.homeSection}>
-                <h3>Resources</h3>
+                {showTitle && <h3>Resources</h3>}
                 <div className={classes.resourcesWrapper}>
                     <CarouselProvider
                         className={classes.resourceCarouselProvider}

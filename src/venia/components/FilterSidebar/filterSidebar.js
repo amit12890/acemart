@@ -10,6 +10,9 @@ import CurrentFilters from '../FilterModal/CurrentFilters';
 import productLabel from '../../../assets/labelSprite.png';
 import FilterBlock from '../FilterModal/filterBlock';
 import defaultClasses from './filterSidebar.css';
+import CompareListBlock from '../../../components/CompareListPage/compareListBlock';
+import WishlistBlock from '../../../components/WishList/wishlistBlock';
+
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -191,6 +194,12 @@ const FilterSidebar = props => {
                     <div className={classes.labelWrapper}>
                         {toggleFiltersList}
                     </div>
+                </div>
+                <div className={classes.body}>
+                    <CompareListBlock />
+                </div>
+                <div className={classes.body}>
+                    <WishlistBlock />
                 </div>
             </aside>
         </Fragment>

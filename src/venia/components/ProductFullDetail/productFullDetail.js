@@ -30,6 +30,8 @@ import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
 import ProductReview from "../../../@amasty/amAdvancedReviews"
 import RatingMini from "../../../@amasty/components/Rating/rating_mini"
+import RelatedPosts from './relatedPosts';
+import ProductQuestions from '../../../components/ProductQuestions';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -238,7 +240,7 @@ const ProductFullDetail = props => {
                     <div className={classes.productInfo}>
                         {/* Product Name */}
                         <h1 className={classes.productName}>
-                            {product.product_name}
+                            <RichText content={product.product_name} />
                         </h1>
 
                         {/* Product SKU and Model Number */}
@@ -389,10 +391,12 @@ const ProductFullDetail = props => {
                             </div>
                         )}
                     </div>
+
+                    {/* Right side block */}
                     <div className={classes.productAction}>
                         <div className={classes.productActionWrapper}>
                             <Form onSubmit={handleAddToCart}>
-                                {/* form */}
+                                {/* Add to cart form */}
                                 <div className={classes.paContent}>
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.priceBox}>
@@ -491,18 +495,6 @@ const ProductFullDetail = props => {
                                     {/* Product Add To Links */}
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.addToLinks}>
-                                            {/* <div
-                                            className={[
-                                                classes.action,
-                                                classes.toWishList
-                                            ].join(' ')}
-                                        >
-                                            <Suspense fallback={null}>
-                                                <WishlistButton
-                                                    {...wishlistButtonProps}
-                                                />
-                                            </Suspense>
-                                        </div> */}
 
                                             <div
                                                 className={[
@@ -686,7 +678,7 @@ const ProductFullDetail = props => {
                         </h2>
                     </div>
                     <div className={classes.sectionContent}>
-                        <h2>Coming Soon...</h2>
+                        <ProductQuestions productId={product.id} />
                     </div>
                 </section>
 
@@ -700,9 +692,7 @@ const ProductFullDetail = props => {
                         </h2>
                         <ProductReview product={product} />
                     </div>
-                    <div className={classes.sectionContent}>
-                        <h2>Coming Soon...</h2>
-                    </div>
+                    <RelatedPosts productId={product.id}/>
                 </section>
 
                 {!!size(upsellProducts) && (
