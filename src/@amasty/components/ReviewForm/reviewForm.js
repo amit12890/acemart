@@ -18,6 +18,8 @@ import { useReviewForm } from '../../talons/useReviewForm';
 import { isRequired, isChecked } from '../../utils/validators';
 import { useUpload } from '../../talons/useUploadFile';
 import { CheckCircle as CheckIcon } from 'react-feather';
+import LoadingButton from '../../../components/LoadingButton';
+import LoadingButtonSmall from '../../../components/LoadingButtonSmall';
 
 import defaultClasses from './reviewForm.css';
 
@@ -211,10 +213,8 @@ const ReviewForm = props => {
             {'Submit review'}
 
           </Button>
-          <Button>
-            <span className={classes.loaderIcon}></span>
-            <span className={classes.loaderLabel}>Loading</span>
-          </Button>
+          <LoadingButton />
+          <LoadingButtonSmall />
 
         </div>
       </Form>

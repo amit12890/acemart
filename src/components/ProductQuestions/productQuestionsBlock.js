@@ -3,6 +3,8 @@ import { useQuery } from '@apollo/client';
 
 import { get, size } from 'lodash';
 
+// import { useStyle } from '../../classify';
+// import defaultClasses from './productFullDetail.css';
 import AddQuestion from './addQuestion';
 import AddAnswer from "./addAnswer";
 import { getProductQuestions } from './productQuestions.gql';
@@ -70,7 +72,7 @@ const QuestionBlock = ({ data }) => {
                             : null}
                     </div>
                     <div>
-                    <AddAnswer questionId={item.id} />
+                        <AddAnswer questionId={item.id} />
                     </div>
                 </div>
             </div>
