@@ -58,6 +58,7 @@
 }
 
 .actionToolbar button {
+  
   --stroke: var(--theme-color-primary);
   background-color: rgb(var(--stroke));
   color: rgb(var(--color-white));

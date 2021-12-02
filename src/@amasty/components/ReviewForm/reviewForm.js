@@ -7,10 +7,11 @@ import { snakeCase } from "lodash";
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import TextInput from '@magento/venia-ui/lib/components/TextInput';
 import Field from '../../../venia/components/Field';
-import Button from '@magento/venia-ui/lib/components/Button';
+import Button from '../../../venia/components/Button';
 import TextArea from '@magento/venia-ui/lib/components/TextArea';
 import Checkbox from '../../../venia/components/Checkbox';
 import Icon from '@magento/venia-ui/lib/components/Icon';
+
 
 import RatingInput from '../RatingInput';
 import UploadInput from '../UploadInput';
