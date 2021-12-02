@@ -32,6 +32,7 @@ import ProductReview from "../../../@amasty/amAdvancedReviews"
 import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
+import CaliforniaPopup from "./californiaPopup"
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -62,6 +63,7 @@ const ProductFullDetail = props => {
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
     const [showLabelsPopup, setLabelsPopup] = useState(false)
+    const [showCaliforniaPopup, setCaliforniaPopup] = useState(false)
 
     const reviewRef = useRef(null)
 
@@ -91,6 +93,15 @@ const ProductFullDetail = props => {
     const closeStoreLocatorPopup = useCallback(() => {
         setStoreLocatorPopup(false);
     }, [setStoreLocatorPopup]);
+
+    // handlers for storelocator popup
+    const openCaliforniaPopup = useCallback(() => {
+        setCaliforniaPopup(true);
+    }, [setCaliforniaPopup]);
+
+    const closeCaliforniaPopup = useCallback(() => {
+        setCaliforniaPopup(false);
+    }, [setCaliforniaPopup]);
 
     // handlers for Labels popup
     const openLabelsPopup = useCallback(() => {
@@ -636,6 +647,11 @@ const ProductFullDetail = props => {
                     <div className={classes.sectionContent}>
                         <RichText content={productDetails.description} />
                     </div>
+                    <br />
+                    <div onClick={openCaliforniaPopup} style={{ color: "blue" }}>
+                        California Residents:
+                        Proposition 65 Information
+                    </div>
 
                 </section>
 
@@ -775,6 +791,11 @@ const ProductFullDetail = props => {
                 <StoreLocator
                     isPopupVisible={showStoreLocatorPopup}
                     closeStoreLocatorPopup={closeStoreLocatorPopup} />
+            )}
+            {showCaliforniaPopup && (
+                <CaliforniaPopup
+                    isPopupVisible={showCaliforniaPopup}
+                    closeCaliforniaPopup={closeCaliforniaPopup} />
             )}
         </Fragment>
     );
