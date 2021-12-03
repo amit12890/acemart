@@ -1,3 +1,17 @@
+.root {
+    background: #ccc !important;
+    border-color: #ccc !important;
+    opacity: 0.5;
+    color: #999 !important;
+    cursor: none !important; 
+
+    max-width: 100% !important;
+    min-width: auto !important;
+    padding: calc(0.5rem + 1px) .875rem calc(0.5rem - 1px) !important;
+    display: inline-flex;
+
+}
+
 .loaderIcon {
     border: 2px solid #f3f3f3;
     border-radius: 50%;
@@ -6,7 +20,6 @@
     height: 15px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite; 
-    margin-right: 10px;
   }
 
   /* Safari */

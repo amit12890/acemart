@@ -8,7 +8,7 @@ const LoadingButton = () => {
     const classes = useStyle(defaultClasses);
 
     return (
-        <Button>
+        <Button className={classes.root}>
             <span className={classes.loaderIcon} />
             <span className={classes.loaderLabel}>Loading</span>
         </Button>
