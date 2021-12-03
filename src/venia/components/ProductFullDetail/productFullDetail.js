@@ -33,6 +33,7 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
+import LoadingButton from '../../../components/LoadingButton';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -114,7 +115,7 @@ const ProductFullDetail = props => {
 
     const handleFirstReviewClick = useCallback(() => {
         reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    },[reviewRef])
+    }, [reviewRef])
 
     const {
         breadcrumbCategoryId,
@@ -516,20 +517,20 @@ const ProductFullDetail = props => {
                                         {!!size(priceTiers) &&
                                             <div>
                                                 <div>BULK SAVINGS</div>
-                                                {priceTiers.map((tier, ind)=> {
+                                                {priceTiers.map((tier, ind) => {
                                                     return (
                                                         <div key={ind}>
                                                             <div>Buy at least {tier.quantity}</div>
                                                             <div>
-                                                            <Price
-                                                                currencyCode={
-                                                                    tier.final_price.currency
-                                                                }
-                                                                value={tier.final_price.value}
-                                                            />
-                                                            <span className={classes.unit}>
-                                                                / {product.uom}
-                                                            </span>
+                                                                <Price
+                                                                    currencyCode={
+                                                                        tier.final_price.currency
+                                                                    }
+                                                                    value={tier.final_price.value}
+                                                                />
+                                                                <span className={classes.unit}>
+                                                                    / {product.uom}
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     )
@@ -585,9 +586,7 @@ const ProductFullDetail = props => {
                                                             <span>Add to Compare</span>
                                                         </Button>
                                                     )}
-                                                    Loader={() => (
-                                                        <div>Loading....</div>
-                                                    )}
+                                                    Loader={() => <LoadingButton />}
                                                 />
                                             </div>
 
