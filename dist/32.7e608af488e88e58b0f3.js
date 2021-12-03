@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD:dist/24.0d926597f0af5931fe09.js
- * @version d99914e-dev
-=======
- * @version b0c9ffd-dev
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/32.7e608af488e88e58b0f3.js
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[32],{"+UaR":function(e,n,t){"use strict"

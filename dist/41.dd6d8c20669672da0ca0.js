@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/34.70c6b75b240fcaa42429.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[34],{"+sGa":function(n,t,e){(t=n.exports=e("JPst")(!1)).push([n.i,".myAccount-root-NhM {\n    display: grid;\n    grid-auto-flow: row;\n    row-gap: 1.5rem;\n}\n",""]),t.locals={root:"myAccount-root-NhM"}},"/K5Y":function(n,t,e){(t=n.exports=e("JPst")(!1)).i(e("Gs8Z"),""),t.push([n.i,".accountMenuItems-root-UhL {\n    display: grid;\n    grid-auto-flow: row;\n    justify-content: stretch;\n    row-gap: 1.5rem;\n    padding: 1.5rem;\n}\n\n.accountMenuItems-link-7WP {\n\n    color: rgb(var(--venia-global-color-gray-700));\n    justify-content: start;\n    text-decoration: none;\n}\n\n.accountMenuItems-link-7WP:hover {\n    color: rgb(var(--venia-global-color-gray-600));\n}\n\n.accountMenuItems-signOut-2E1 {\n\n    border-top: 2px solid rgb(var(--venia-global-color-gray));\n    padding-top: 1rem;\n}\n",""]),t.locals={root:"accountMenuItems-root-UhL",link:"accountMenuItems-link-7WP "+e("Gs8Z").locals.root,signOut:"accountMenuItems-signOut-2E1 accountMenuItems-link-7WP "+e("Gs8Z").locals.root}},"5g99":function(n,t,e){"use strict"
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[41],{"+sGa":function(n,t,e){(t=n.exports=e("JPst")(!1)).push([n.i,".myAccount-root-NhM {\n    display: grid;\n    grid-auto-flow: row;\n    row-gap: 1.5rem;\n}\n",""]),t.locals={root:"myAccount-root-NhM"}},"/K5Y":function(n,t,e){(t=n.exports=e("JPst")(!1)).i(e("Gs8Z"),""),t.push([n.i,".accountMenuItems-root-UhL {\n    display: grid;\n    grid-auto-flow: row;\n    justify-content: stretch;\n    row-gap: 1.5rem;\n    padding: 1.5rem;\n}\n\n.accountMenuItems-link-7WP {\n\n    color: rgb(var(--venia-global-color-gray-700));\n    justify-content: start;\n    text-decoration: none;\n}\n\n.accountMenuItems-link-7WP:hover {\n    color: rgb(var(--venia-global-color-gray-600));\n}\n\n.accountMenuItems-signOut-2E1 {\n\n    border-top: 2px solid rgb(var(--venia-global-color-gray));\n    padding-top: 1rem;\n}\n",""]),t.locals={root:"accountMenuItems-root-UhL",link:"accountMenuItems-link-7WP "+e("Gs8Z").locals.root,signOut:"accountMenuItems-signOut-2E1 accountMenuItems-link-7WP "+e("Gs8Z").locals.root}},"5g99":function(n,t,e){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/41.dd6d8c20669672da0ca0.js
 e.d(t,"a",function(){return g})
 var a,o,r=e("VkAN"),c=e.n(r),u=e("VX74"),s=Object(u.gql)(a||(a=c()(["\n    fragment GiftCardFragment on Cart {\n        __typename\n        id\n    }\n"]))),i=e("fgxC"),l=e("9etB"),m=e("Dmpr"),g=Object(u.gql)(o||(o=c()(["\n    fragment CartPageFragment on Cart {\n        id\n        total_quantity\n        ...AppliedCouponsFragment\n        ...GiftCardFragment\n        ...ProductListingFragment\n        ...PriceSummaryFragment\n    }\n    ","\n    ","\n    ","\n    ","\n"])),m.a,s,i.a,l.a)},"9etB":function(n,t,e){"use strict"
 e.d(t,"a",function(){return O})

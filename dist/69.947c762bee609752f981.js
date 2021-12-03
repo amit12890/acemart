@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/52.4c8fccab68ca97264aa7.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[52],{"506y":function(e,t,n){"use strict"
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[69],{"506y":function(e,t,n){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/69.947c762bee609752f981.js
 n.r(t)
 var a,o=n("MVZn"),s=n.n(o),d=n("q1tI"),r=n.n(d),c=n("dDsW"),u=n("kriW"),l=n("17x9"),i=n("J4zp"),m=n.n(i),y=n("VX74"),b=n("9872"),h=n("KFAD"),p=n("VkAN"),f=n.n(p),P={queries:{getSelectedPaymentMethodQuery:Object(y.gql)(a||(a=f()(["\n    query getSelectedPaymentMethod($cartId: String!) {\n        cart(cart_id: $cartId) {\n            id\n            selected_payment_method {\n                code\n            }\n        }\n    }\n"])))},mutations:{}},S=n("LboF"),C=n.n(S),O=n("QLDP"),g=n.n(O),k={injectType:"singletonStyleTag",insert:"head",singleton:!0},j=(C()(g.a,k),g.a.locals||{}),E=n("y1Xp"),M=n("GEef"),v=function EditCard(e){var t=Object(E.a)(j,e.classes),n=e.onPaymentReady,a=e.onPaymentSuccess,o=e.onPaymentError,s=e.resetShouldSubmit,d=e.shouldSubmit
 return r.a.createElement("div",{className:t.root},r.a.createElement(M.a,{onPaymentReady:n,onPaymentSuccess:a,onPaymentError:o,resetShouldSubmit:s,shouldSubmit:d}))}

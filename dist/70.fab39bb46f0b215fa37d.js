@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/53.e042e1c9d1de4f69046b.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[53],{KydY:function(e,t,a){"use strict"
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[70],{KydY:function(e,t,a){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/70.fab39bb46f0b215fa37d.js
 a.r(t)
 var n,o=a("MVZn"),r=a.n(o),s=a("q1tI"),d=a.n(s),l=a("17x9"),i=a("dDsW"),m=a("J4zp"),c=a.n(m),y=a("VX74"),u=a("8UhI"),p=a("9872"),h=a("y1Xp"),b=a("g/kr"),g=a("oL7x"),M=a("VkAN"),_=a.n(M),f={queries:{getPaymentMethodsQuery:Object(y.gql)(n||(n=_()(["\n    query getPaymentMethods($cartId: String!) {\n        cart(cart_id: $cartId) {\n            id\n            available_payment_methods {\n                code\n                title\n            }\n        }\n    }\n"])))},mutations:{}},P=a("LboF"),v=a.n(P),S=a("SbAB"),k=a.n(S),E={injectType:"singletonStyleTag",insert:"head",singleton:!0},O=(v()(k.a,E),k.a.locals||{}),j=a("MQRh"),w=function PaymentMethods(e){var t=e.classes,a=e.onPaymentError,n=e.onPaymentSuccess,o=e.resetShouldSubmit,s=e.shouldSubmit,l=Object(i.a)().formatMessage,m=Object(h.a)(O,t),M=function usePaymentMethods(e){var t=e.queries.getPaymentMethodsQuery,a=Object(p.b)(),n=c()(a,1)[0].cartId,o=Object(y.useQuery)(t,{skip:!n,variables:{cartId:n}}),r=o.data,s=o.loading,d=Object(u.m)("selectedPaymentMethod").value,l=r&&r.cart.available_payment_methods||[]
 return{availablePaymentMethods:l,currentSelectedPaymentMethod:d,initialSelectedMethod:l.length&&l[0].code||null,isLoading:s}}(r()({},f)),_=M.availablePaymentMethods,P=M.currentSelectedPaymentMethod,v=M.initialSelectedMethod

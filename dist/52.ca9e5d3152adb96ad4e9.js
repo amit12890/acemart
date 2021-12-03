@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/42.6d4921ab659ff09cbb0b.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{UNp6:function(n,t,e){"use strict"
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[52],{UNp6:function(n,t,e){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/52.ca9e5d3152adb96ad4e9.js
 e.r(t),e.d(t,"default",function(){return v})
 var o=e("RIqP"),r=e.n(o),i=e("q1tI"),a=e.n(i),s=e("17x9"),c=e("pwkN"),p=e.n(c),l=e("LboF"),g=e.n(l),u=e("rce9"),d=e.n(u),m={injectType:"singletonStyleTag",insert:"head",singleton:!0},b=(g()(d.a,m),d.a.locals||{}),f=e("UpPT"),h=e.n(f),y=e("y1Xp"),j=e("wiT2"),w=function getLocationFormattedAsHtml(n){var t=n.name?"<h3>".concat(h()(n.name),"</h3>"):"",e=n.comment?'<p class="map-comment">'.concat(h()(n.comment).replace(/(?:\r\n|\r|\n)/g,"<br>"),"</p>"):"",o=n.phone?"Phone: ".concat(h()(n.phone),"<br>"):"",r=n.address?"".concat(h()(n.address),"<br>"):"",i=n.city?h()(n.city):"",a=n.country?h()(n.country):"",s=n.state?h()(n.state)+" ":"",c=n.zipcode?h()(n.zipcode):"",p=i.length&&(s.length||c.length)?", ":"",l=i.length||c.length?"<br>":""
 return'\n    <div class="map-popup">\n        '.concat(t,"\n        ").concat(e,"\n        <p><span>").concat(o).concat(r).concat(i).concat(p).concat(s).concat(c).concat(l).concat(a,"</span></p>\n    </div>\n")},O=function GoogleMap(n){var t=Object(i.useRef)(null),e=Object(y.a)(b,n.classes),o=n.apiKey,s=n.locations,c=n.height,l=n.mapOptions,g=n.textAlign,u=n.border,d=n.borderColor,m=n.borderWidth,f=n.borderRadius,h=n.marginTop,O=n.marginRight,v=n.marginBottom,T=n.marginLeft,x=n.paddingTop,L=n.paddingRight,R=n.paddingBottom,M=n.paddingLeft,k=n.cssClasses,C=void 0===k?[]:k,S={height:c,textAlign:g,border:u,borderColor:d,borderWidth:m,borderRadius:f,marginTop:h,marginRight:O,marginBottom:v,marginLeft:T,paddingTop:x,paddingRight:L,paddingBottom:R,paddingLeft:M}

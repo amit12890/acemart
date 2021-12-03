@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD:dist/4.6db952a1f5b38a1ce36c.js
- * @version d99914e-dev
-=======
- * @version b0c9ffd-dev
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/8.f6164f995651edd28762.js
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[8],{"1b3y":function(t,e,r){(e=t.exports=r("JPst")(!1)).push([t.i,".productOptions-options-2ou {\n    font-size: 13px;\n    grid-area: options;\n    line-height: 1.5;\n    margin-top: 0.25rem;\n    max-height: 54px;\n    overflow-y: auto;\n}\n\n.productOptions-optionLabel-2TQ {\n    display: grid;\n    grid-auto-flow: column;\n    grid-auto-columns: max-content;\n}\n\n.productOptions-optionValue-26K {\n    margin-left: 0.25rem;\n}\n",""]),e.locals={options:"productOptions-options-2ou",optionLabel:"productOptions-optionLabel-2TQ",optionValue:"productOptions-optionValue-26K"}},"49sm":function(t,e){var r={}.toString

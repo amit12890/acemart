@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD:dist/vendors.9ee71f41ba51e42f58f0.js
- * @version d99914e-dev
-=======
- * @version b0c9ffd-dev
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/vendors.e7e41707c85ac79c2470.js
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[0],{"/Gi5":function(e,t,r){"use strict"

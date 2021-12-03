@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/58.da245670d31b8c7588c7.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[58],{XY2a:function(e,t){!function(i){if("object"==typeof t&&void 0!==e)e.exports=i()
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[78],{XY2a:function(e,t){!function(i){if("object"==typeof t&&void 0!==e)e.exports=i()
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/78.161642023f0bcbafb527.js
 else if("function"==typeof define&&define.amd)define([],i)
 else{var r;((r="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this).braintree||(r.braintree={})).dropin=i()}}(function(){return function(){return function r(e,t,i){function o(a,s){if(!t[a]){if(!e[a]){var l="function"==typeof require&&require
 if(!s&&l)return l(a,!0)

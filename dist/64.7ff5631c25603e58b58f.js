@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/48.a1aeb9126f1c571fc1a8.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[48],{APR0:function(r,i,t){"use strict"
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[64],{APR0:function(r,i,t){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/64.7ff5631c25603e58b58f.js
 t.r(i),t.d(i,"default",function(){return m})
 var n=t("q1tI"),o=t.n(n),e=t("LboF"),s=t.n(e),d=t("qZsg"),a=t.n(d),g={injectType:"singletonStyleTag",insert:"head",singleton:!0},p=(s()(a.a,g),a.a.locals||{}),c=t("y1Xp"),l=t("17x9"),h=function Divider(r){var i=Object(c.a)(p,r.classes),t=r.width,n=r.color,e=r.thickness,s=r.textAlign,d=r.border,a=r.borderColor,g=r.borderWidth,l=r.borderRadius,h=r.marginTop,m=r.marginRight,b=r.marginBottom,u=r.marginLeft,f=r.paddingTop,w=r.paddingRight,R=r.paddingBottom,x=r.paddingLeft,T=r.cssClasses,v=void 0===T?[]:T,y={textAlign:s,border:d,borderColor:a,borderWidth:g,borderRadius:l,marginTop:h,marginRight:m,marginBottom:b,marginLeft:u,paddingTop:f,paddingRight:w,paddingBottom:R,paddingLeft:x},B={width:t,borderColor:n,borderWidth:e}
 return o.a.createElement("div",{style:y,className:v.join(" ")},o.a.createElement("hr",{style:B,className:i.hr}))}

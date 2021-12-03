@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
- * @version d99914e-dev
-=======
- * @version b0c9ffd-dev
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[1],{"8//2":function(e,t,r){"use strict"
@@ -25,17 +21,10 @@ i=0===n?(0,o.default)({minWidth:0,maxWidth:r}):(0,o.default)({minWidth:t[n-1]+1,
 var r=(0,o.default)({minWidth:t.slice(-1)[0]});(0,a.canUseDOM)()&&this.media(r,function(){e.setState({breakpoint:null})})}}},{key:"componentWillUnmount",value:function componentWillUnmount(){this._responsiveMediaHandlers.forEach(function(e){l.unregister(e.query,e.handler)})}},{key:"render",value:function render(){var e,t,r=this;(e=this.state.breakpoint?"unslick"===(t=this.props.responsive.filter(function(e){return e.breakpoint===r.state.breakpoint}))[0].settings?"unslick":_objectSpread({},s.default,{},this.props,{},t[0].settings):_objectSpread({},s.default,{},this.props)).centerMode&&(e.slidesToScroll,e.slidesToScroll=1),e.fade&&(e.slidesToShow,e.slidesToScroll,e.slidesToShow=1,e.slidesToScroll=1)
 var o=n.default.Children.toArray(this.props.children)
 o=o.filter(function(e){return"string"==typeof e?!!e.trim():!!e}),e.variableWidth&&(e.rows>1||e.slidesPerRow>1)&&(e.variableWidth=!1)
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-for(var a=[],l=null,c=0;c<o.length;c+=e.rows*e.slidesPerRow){for(var d=[],u=c;u<c+e.rows*e.slidesPerRow;u+=e.slidesPerRow){for(var p=[],f=u;f<u+e.slidesPerRow&&(e.variableWidth&&o[f].props.style&&(l=o[f].props.style.width),!(f>=o.length));f+=1)p.push(r.default.cloneElement(o[f],{key:100*c+10*u+f,tabIndex:-1,style:{width:"".concat(100/e.slidesPerRow,"%"),display:"inline-block"}}))
-d.push(r.default.createElement("div",{key:10*c+u},p))}e.variableWidth?a.push(r.default.createElement("div",{key:c,style:{width:l}},d)):a.push(r.default.createElement("div",{key:c},d))}if("unslick"===e){var h="regular slider "+(this.props.className||"")
-return r.default.createElement("div",{className:h},a)}return a.length<=e.slidesToShow&&(e.unslick=!0),r.default.createElement(i.InnerSlider,_extends({style:this.props.style,ref:this.innerSliderRefHandler},e),a)}}]),Slider}()
-t.default=c},BBPU:function(e,t,n){"use strict"
-=======
 for(var a=[],l=null,c=0;c<o.length;c+=e.rows*e.slidesPerRow){for(var u=[],d=c;d<c+e.rows*e.slidesPerRow;d+=e.slidesPerRow){for(var p=[],f=d;f<d+e.slidesPerRow&&(e.variableWidth&&o[f].props.style&&(l=o[f].props.style.width),!(f>=o.length));f+=1)p.push(n.default.cloneElement(o[f],{key:100*c+10*d+f,tabIndex:-1,style:{width:"".concat(100/e.slidesPerRow,"%"),display:"inline-block"}}))
 u.push(n.default.createElement("div",{key:10*c+d},p))}e.variableWidth?a.push(n.default.createElement("div",{key:c,style:{width:l}},u)):a.push(n.default.createElement("div",{key:c},u))}if("unslick"===e){var h="regular slider "+(this.props.className||"")
 return n.default.createElement("div",{className:h},a)}return a.length<=e.slidesToShow&&(e.unslick=!0),n.default.createElement(i.InnerSlider,_extends({style:this.props.style,ref:this.innerSliderRefHandler},e),a)}}]),Slider}()
 t.default=c},BBPU:function(e,t,r){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0
 var n=function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}(r("q1tI"))
 var i={accessibility:!0,adaptiveHeight:!1,afterChange:null,appendDots:function appendDots(e){return n.default.createElement("ul",{style:{display:"block"}},e)},arrows:!0,autoplay:!1,autoplaySpeed:3e3,beforeChange:null,centerMode:!1,centerPadding:"50px",className:"",cssEase:"ease",customPaging:function customPaging(e){return n.default.createElement("button",null,e+1)},dots:!1,dotsClass:"slick-dots",draggable:!0,easing:"linear",edgeFriction:.35,fade:!1,focusOnSelect:!1,infinite:!0,initialSlide:0,lazyLoad:null,nextArrow:null,onEdge:null,onInit:null,onLazyLoadError:null,onReInit:null,pauseOnDotsHover:!1,pauseOnFocus:!1,pauseOnHover:!0,prevArrow:null,responsive:null,rows:1,rtl:!1,slide:"div",slidesPerRow:1,slidesToScroll:1,slidesToShow:1,speed:500,swipe:!0,swipeEvent:null,swipeToSlide:!1,touchMove:!0,touchThreshold:5,useCSS:!0,useTransform:!0,variableWidth:!1,vertical:!1,waitForAnimate:!0}
@@ -70,26 +59,6 @@ else if(Array.isArray(n)){if(n.length){var o=classNames.apply(null,n)
 o&&e.push(o)}}else if("object"===i)if(n.toString===Object.prototype.toString)for(var s in n)r.call(n,s)&&n[s]&&e.push(s)
 else e.push(n.toString())}}return e.join(" ")}e.exports?(classNames.default=classNames,e.exports=classNames):void 0===(n=function(){return classNames}.apply(t,[]))||(e.exports=n)}()},"UZv/":function(e,t,r){"use strict"
 Object.defineProperty(t,"__esModule",{value:!0}),t.Track=void 0
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-var r=_interopRequireDefault(n("q1tI")),i=_interopRequireDefault(n("TSYQ")),o=n("x9Za")
-function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function _typeof(e){return typeof e}:function _typeof(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _extends(){return(_extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
-for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function _defineProperties(e,t){for(var n=0;n<t.length;n++){var r=t[n]
-r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function _possibleConstructorReturn(e,t){return!t||"object"!==_typeof(t)&&"function"!=typeof t?function _assertThisInitialized(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
-return e}(e):t}function _getPrototypeOf(e){return(_getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function _setPrototypeOf(e,t){return(_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(e,t){return e.__proto__=t,e})(e,t)}function ownKeys(e,t){var n=Object.keys(e)
-if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),n.push.apply(n,r)}return n}function _objectSpread(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-t%2?ownKeys(n,!0).forEach(function(t){_defineProperty(e,t,n[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):ownKeys(n).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))})}return e}function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var s=function getSlideClasses(e){var t,n,r,i,o
-return r=(o=e.rtl?e.slideCount-1-e.index:e.index)<0||o>=e.slideCount,e.centerMode?(i=Math.floor(e.slidesToShow/2),n=(o-e.currentSlide)%e.slideCount==0,o>e.currentSlide-i-1&&o<=e.currentSlide+i&&(t=!0)):t=e.currentSlide<=o&&o<e.currentSlide+e.slidesToShow,{"slick-slide":!0,"slick-active":t,"slick-center":n,"slick-cloned":r,"slick-current":o===e.currentSlide}},a=function getKey(e,t){return e.key||t},l=function renderSlides(e){var t,n=[],l=[],c=[],d=r.default.Children.count(e.children),u=(0,o.lazyStartIndex)(e),p=(0,o.lazyEndIndex)(e)
-return r.default.Children.forEach(e.children,function(f,h){var y,v={message:"children",index:h,slidesToScroll:e.slidesToScroll,currentSlide:e.currentSlide}
-y=!e.lazyLoad||e.lazyLoad&&e.lazyLoadedList.indexOf(h)>=0?f:r.default.createElement("div",null)
-var b=function getSlideStyle(e){var t={}
-return void 0!==e.variableWidth&&!1!==e.variableWidth||(t.width=e.slideWidth),e.fade&&(t.position="relative",e.vertical?t.top=-e.index*parseInt(e.slideHeight):t.left=-e.index*parseInt(e.slideWidth),t.opacity=e.currentSlide===e.index?1:0,t.transition="opacity "+e.speed+"ms "+e.cssEase+", visibility "+e.speed+"ms "+e.cssEase,t.WebkitTransition="opacity "+e.speed+"ms "+e.cssEase+", visibility "+e.speed+"ms "+e.cssEase),t}(_objectSpread({},e,{index:h})),g=y.props.className||"",_=s(_objectSpread({},e,{index:h}))
-if(n.push(r.default.cloneElement(y,{key:"original"+a(y,h),"data-index":h,className:(0,i.default)(_,g),tabIndex:"-1","aria-hidden":!_["slick-active"],style:_objectSpread({outline:"none"},y.props.style||{},{},b),onClick:function onClick(t){y.props&&y.props.onClick&&y.props.onClick(t),e.focusOnSelect&&e.focusOnSelect(v)}})),e.infinite&&!1===e.fade){var S=d-h
-S<=(0,o.getPreClones)(e)&&d!==e.slidesToShow&&((t=-S)>=u&&(y=f),_=s(_objectSpread({},e,{index:t})),l.push(r.default.cloneElement(y,{key:"precloned"+a(y,t),"data-index":t,tabIndex:"-1",className:(0,i.default)(_,g),"aria-hidden":!_["slick-active"],style:_objectSpread({},y.props.style||{},{},b),onClick:function onClick(t){y.props&&y.props.onClick&&y.props.onClick(t),e.focusOnSelect&&e.focusOnSelect(v)}}))),d!==e.slidesToShow&&((t=d+h)<p&&(y=f),_=s(_objectSpread({},e,{index:t})),c.push(r.default.cloneElement(y,{key:"postcloned"+a(y,t),"data-index":t,tabIndex:"-1",className:(0,i.default)(_,g),"aria-hidden":!_["slick-active"],style:_objectSpread({},y.props.style||{},{},b),onClick:function onClick(t){y.props&&y.props.onClick&&y.props.onClick(t),e.focusOnSelect&&e.focusOnSelect(v)}})))}}),e.rtl?l.concat(n,c).reverse():l.concat(n,c)},c=function(e){function Track(){return function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,Track),_possibleConstructorReturn(this,_getPrototypeOf(Track).apply(this,arguments))}return function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
-e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&_setPrototypeOf(e,t)}(Track,r["default"].PureComponent),function _createClass(e,t,n){return t&&_defineProperties(e.prototype,t),n&&_defineProperties(e,n),e}(Track,[{key:"render",value:function render(){var e=l(this.props),t=this.props,n={onMouseEnter:t.onMouseEnter,onMouseOver:t.onMouseOver,onMouseLeave:t.onMouseLeave}
-return r.default.createElement("div",_extends({className:"slick-track",style:this.props.trackStyle},n),e)}}]),Track}()
-t.Track=c},aaW0:function(e,t,n){"use strict"
-=======
 var n=_interopRequireDefault(r("q1tI")),i=_interopRequireDefault(r("TSYQ")),o=r("x9Za")
 function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function _typeof(e){return typeof e}:function _typeof(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _extends(){return(_extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t]
 for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}function _defineProperties(e,t){for(var r=0;r<t.length;r++){var n=t[r]
@@ -108,7 +77,6 @@ S<=(0,o.getPreClones)(e)&&u!==e.slidesToShow&&((t=-S)>=d&&(y=f),_=s(_objectSprea
 e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&_setPrototypeOf(e,t)}(Track,n["default"].PureComponent),function _createClass(e,t,r){return t&&_defineProperties(e.prototype,t),r&&_defineProperties(e,r),e}(Track,[{key:"render",value:function render(){var e=l(this.props),t=this.props,r={onMouseEnter:t.onMouseEnter,onMouseOver:t.onMouseOver,onMouseLeave:t.onMouseLeave}
 return n.default.createElement("div",_extends({className:"slick-track",style:this.props.trackStyle},r),e)}}]),Track}()
 t.Track=c},aaW0:function(e,t,r){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 Object.defineProperty(t,"__esModule",{value:!0}),t.Dots=void 0
 var n=_interopRequireDefault(r("q1tI")),i=_interopRequireDefault(r("TSYQ"))
 function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function _typeof(e){return typeof e}:function _typeof(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function ownKeys(e,t){var r=Object.keys(e)
@@ -116,44 +84,6 @@ if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e)
 t&&(n=n.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),r.push.apply(r,n)}return r}function _defineProperty(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function _defineProperties(e,t){for(var r=0;r<t.length;r++){var n=t[r]
 n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function _possibleConstructorReturn(e,t){return!t||"object"!==_typeof(t)&&"function"!=typeof t?function _assertThisInitialized(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
 return e}(e):t}function _getPrototypeOf(e){return(_getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf:function _getPrototypeOf(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function _setPrototypeOf(e,t){return(_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(e,t){return e.__proto__=t,e})(e,t)}var o=function(e){function Dots(){return function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,Dots),_possibleConstructorReturn(this,_getPrototypeOf(Dots).apply(this,arguments))}return function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&_setPrototypeOf(e,t)}(Dots,r["default"].PureComponent),function _createClass(e,t,n){return t&&_defineProperties(e.prototype,t),n&&_defineProperties(e,n),e}(Dots,[{key:"clickHandler",value:function clickHandler(e,t){t.preventDefault(),this.props.clickHandler(e)}},{key:"render",value:function render(){var e=this,t=function getDotCount(e){return e.infinite?Math.ceil(e.slideCount/e.slidesToScroll):Math.ceil((e.slideCount-e.slidesToShow)/e.slidesToScroll)+1}({slideCount:this.props.slideCount,slidesToScroll:this.props.slidesToScroll,slidesToShow:this.props.slidesToShow,infinite:this.props.infinite}),n=this.props,o={onMouseEnter:n.onMouseEnter,onMouseOver:n.onMouseOver,onMouseLeave:n.onMouseLeave},s=Array.apply(null,Array(t+1).join("0").split("")).map(function(t,n){var o=n*e.props.slidesToScroll,s=n*e.props.slidesToScroll+(e.props.slidesToScroll-1),a=(0,i.default)({"slick-active":e.props.currentSlide>=o&&e.props.currentSlide<=s}),l={message:"dots",index:n,slidesToScroll:e.props.slidesToScroll,currentSlide:e.props.currentSlide},c=e.clickHandler.bind(e,l)
-return r.default.createElement("li",{key:n,className:a},r.default.cloneElement(e.props.customPaging(n),{onClick:c}))})
-return r.default.cloneElement(this.props.appendDots(s),function _objectSpread(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-t%2?ownKeys(n,!0).forEach(function(t){_defineProperty(e,t,n[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):ownKeys(n).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))})}return e}({className:this.props.dotsClass},o))}}]),Dots}()
-t.Dots=o},bdgK:function(e,t,n){"use strict"
-n.r(t),function(e){var n=function(){if("undefined"!=typeof Map)return Map
-function getIndex(e,t){var n=-1
-return e.some(function(e,r){return e[0]===t&&(n=r,!0)}),n}return function(){function class_1(){this.__entries__=[]}return Object.defineProperty(class_1.prototype,"size",{get:function(){return this.__entries__.length},enumerable:!0,configurable:!0}),class_1.prototype.get=function(e){var t=getIndex(this.__entries__,e),n=this.__entries__[t]
-return n&&n[1]},class_1.prototype.set=function(e,t){var n=getIndex(this.__entries__,e)
-~n?this.__entries__[n][1]=t:this.__entries__.push([e,t])},class_1.prototype.delete=function(e){var t=this.__entries__,n=getIndex(t,e)
-~n&&t.splice(n,1)},class_1.prototype.has=function(e){return!!~getIndex(this.__entries__,e)},class_1.prototype.clear=function(){this.__entries__.splice(0)},class_1.prototype.forEach=function(e,t){void 0===t&&(t=null)
-for(var n=0,r=this.__entries__;n<r.length;n++){var i=r[n]
-e.call(t,i[1],i[0])}},class_1}()}(),r="undefined"!=typeof window&&"undefined"!=typeof document&&window.document===document,i=void 0!==e&&e.Math===Math?e:"undefined"!=typeof self&&self.Math===Math?self:"undefined"!=typeof window&&window.Math===Math?window:Function("return this")(),o="function"==typeof requestAnimationFrame?requestAnimationFrame.bind(i):function(e){return setTimeout(function(){return e(Date.now())},1e3/60)},s=2
-var a=20,l=["top","right","bottom","left","width","height","size","weight"],c="undefined"!=typeof MutationObserver,d=function(){function ResizeObserverController(){this.connected_=!1,this.mutationEventsAdded_=!1,this.mutationsObserver_=null,this.observers_=[],this.onTransitionEnd_=this.onTransitionEnd_.bind(this),this.refresh=function throttle(e,t){var n=!1,r=!1,i=0
-function resolvePending(){n&&(n=!1,e()),r&&proxy()}function timeoutCallback(){o(resolvePending)}function proxy(){var e=Date.now()
-if(n){if(e-i<s)return
-r=!0}else n=!0,r=!1,setTimeout(timeoutCallback,t)
-i=e}return proxy}(this.refresh.bind(this),a)}return ResizeObserverController.prototype.addObserver=function(e){~this.observers_.indexOf(e)||this.observers_.push(e),this.connected_||this.connect_()},ResizeObserverController.prototype.removeObserver=function(e){var t=this.observers_,n=t.indexOf(e)
-~n&&t.splice(n,1),!t.length&&this.connected_&&this.disconnect_()},ResizeObserverController.prototype.refresh=function(){this.updateObservers_()&&this.refresh()},ResizeObserverController.prototype.updateObservers_=function(){var e=this.observers_.filter(function(e){return e.gatherActive(),e.hasActive()})
-return e.forEach(function(e){return e.broadcastActive()}),e.length>0},ResizeObserverController.prototype.connect_=function(){r&&!this.connected_&&(document.addEventListener("transitionend",this.onTransitionEnd_),window.addEventListener("resize",this.refresh),c?(this.mutationsObserver_=new MutationObserver(this.refresh),this.mutationsObserver_.observe(document,{attributes:!0,childList:!0,characterData:!0,subtree:!0})):(document.addEventListener("DOMSubtreeModified",this.refresh),this.mutationEventsAdded_=!0),this.connected_=!0)},ResizeObserverController.prototype.disconnect_=function(){r&&this.connected_&&(document.removeEventListener("transitionend",this.onTransitionEnd_),window.removeEventListener("resize",this.refresh),this.mutationsObserver_&&this.mutationsObserver_.disconnect(),this.mutationEventsAdded_&&document.removeEventListener("DOMSubtreeModified",this.refresh),this.mutationsObserver_=null,this.mutationEventsAdded_=!1,this.connected_=!1)},ResizeObserverController.prototype.onTransitionEnd_=function(e){var t=e.propertyName,n=void 0===t?"":t
-l.some(function(e){return!!~n.indexOf(e)})&&this.refresh()},ResizeObserverController.getInstance=function(){return this.instance_||(this.instance_=new ResizeObserverController),this.instance_},ResizeObserverController.instance_=null,ResizeObserverController}(),u=function(e,t){for(var n=0,r=Object.keys(t);n<r.length;n++){var i=r[n]
-Object.defineProperty(e,i,{value:t[i],enumerable:!1,writable:!1,configurable:!0})}return e},p=function(e){return e&&e.ownerDocument&&e.ownerDocument.defaultView||i},f=createRectInit(0,0,0,0)
-function toFloat(e){return parseFloat(e)||0}function getBordersSize(e){for(var t=[],n=1;n<arguments.length;n++)t[n-1]=arguments[n]
-return t.reduce(function(t,n){return t+toFloat(e["border-"+n+"-width"])},0)}function getHTMLElementContentRect(e){var t=e.clientWidth,n=e.clientHeight
-if(!t&&!n)return f
-var r=p(e).getComputedStyle(e),i=function getPaddings(e){for(var t={},n=0,r=["top","right","bottom","left"];n<r.length;n++){var i=r[n],o=e["padding-"+i]
-t[i]=toFloat(o)}return t}(r),o=i.left+i.right,s=i.top+i.bottom,a=toFloat(r.width),l=toFloat(r.height)
-if("border-box"===r.boxSizing&&(Math.round(a+o)!==t&&(a-=getBordersSize(r,"left","right")+o),Math.round(l+s)!==n&&(l-=getBordersSize(r,"top","bottom")+s)),!function isDocumentElement(e){return e===p(e).document.documentElement}(e)){var c=Math.round(a+o)-t,d=Math.round(l+s)-n
-1!==Math.abs(c)&&(a-=c),1!==Math.abs(d)&&(l-=d)}return createRectInit(i.left,i.top,a,l)}var h="undefined"!=typeof SVGGraphicsElement?function(e){return e instanceof p(e).SVGGraphicsElement}:function(e){return e instanceof p(e).SVGElement&&"function"==typeof e.getBBox}
-function getContentRect(e){return r?h(e)?function getSVGContentRect(e){var t=e.getBBox()
-return createRectInit(0,0,t.width,t.height)}(e):getHTMLElementContentRect(e):f}function createRectInit(e,t,n,r){return{x:e,y:t,width:n,height:r}}var y=function(){function ResizeObservation(e){this.broadcastWidth=0,this.broadcastHeight=0,this.contentRect_=createRectInit(0,0,0,0),this.target=e}return ResizeObservation.prototype.isActive=function(){var e=getContentRect(this.target)
-return this.contentRect_=e,e.width!==this.broadcastWidth||e.height!==this.broadcastHeight},ResizeObservation.prototype.broadcastRect=function(){var e=this.contentRect_
-return this.broadcastWidth=e.width,this.broadcastHeight=e.height,e},ResizeObservation}(),v=function(){return function ResizeObserverEntry(e,t){var n=function createReadOnlyRect(e){var t=e.x,n=e.y,r=e.width,i=e.height,o="undefined"!=typeof DOMRectReadOnly?DOMRectReadOnly:Object,s=Object.create(o.prototype)
-return u(s,{x:t,y:n,width:r,height:i,top:n,right:t+r,bottom:i+n,left:t}),s}(t)
-u(this,{target:e,contentRect:n})}}(),b=function(){function ResizeObserverSPI(e,t,r){if(this.activeObservations_=[],this.observations_=new n,"function"!=typeof e)throw new TypeError("The callback provided as parameter 1 is not a function.")
-this.callback_=e,this.controller_=t,this.callbackCtx_=r}return ResizeObserverSPI.prototype.observe=function(e){if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.")
-=======
 e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&_setPrototypeOf(e,t)}(Dots,n["default"].PureComponent),function _createClass(e,t,r){return t&&_defineProperties(e.prototype,t),r&&_defineProperties(e,r),e}(Dots,[{key:"clickHandler",value:function clickHandler(e,t){t.preventDefault(),this.props.clickHandler(e)}},{key:"render",value:function render(){var e=this,t=function getDotCount(e){return e.infinite?Math.ceil(e.slideCount/e.slidesToScroll):Math.ceil((e.slideCount-e.slidesToShow)/e.slidesToScroll)+1}({slideCount:this.props.slideCount,slidesToScroll:this.props.slidesToScroll,slidesToShow:this.props.slidesToShow,infinite:this.props.infinite}),r=this.props,o={onMouseEnter:r.onMouseEnter,onMouseOver:r.onMouseOver,onMouseLeave:r.onMouseLeave},s=Array.apply(null,Array(t+1).join("0").split("")).map(function(t,r){var o=r*e.props.slidesToScroll,s=r*e.props.slidesToScroll+(e.props.slidesToScroll-1),a=(0,i.default)({"slick-active":e.props.currentSlide>=o&&e.props.currentSlide<=s}),l={message:"dots",index:r,slidesToScroll:e.props.slidesToScroll,currentSlide:e.props.currentSlide},c=e.clickHandler.bind(e,l)
 return n.default.createElement("li",{key:r,className:a},n.default.cloneElement(e.props.customPaging(r),{onClick:c}))})
 return n.default.cloneElement(this.props.appendDots(s),function _objectSpread(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{}
@@ -190,7 +120,6 @@ return this.broadcastWidth=e.width,this.broadcastHeight=e.height,e},ResizeObserv
 return d(s,{x:t,y:r,width:n,height:i,top:r,right:t+n,bottom:i+r,left:t}),s}(t)
 d(this,{target:e,contentRect:r})}}(),b=function(){function ResizeObserverSPI(e,t,n){if(this.activeObservations_=[],this.observations_=new r,"function"!=typeof e)throw new TypeError("The callback provided as parameter 1 is not a function.")
 this.callback_=e,this.controller_=t,this.callbackCtx_=n}return ResizeObserverSPI.prototype.observe=function(e){if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.")
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 if("undefined"!=typeof Element&&Element instanceof Object){if(!(e instanceof p(e).Element))throw new TypeError('parameter 1 is not of type "Element".')
 var t=this.observations_
 t.has(e)||(t.set(e,new y(e)),this.controller_.addObserver(this),this.controller_.refresh())}},ResizeObserverSPI.prototype.unobserve=function(e){if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.")
@@ -200,13 +129,8 @@ t.has(e)&&(t.delete(e),t.size||this.controller_.removeObserver(this))}},ResizeOb
 this.clearActive(),this.observations_.forEach(function(t){t.isActive()&&e.activeObservations_.push(t)})},ResizeObserverSPI.prototype.broadcastActive=function(){if(this.hasActive()){var e=this.callbackCtx_,t=this.activeObservations_.map(function(e){return new v(e.target,e.broadcastRect())})
 this.callback_.call(e,t,e),this.clearActive()}},ResizeObserverSPI.prototype.clearActive=function(){this.activeObservations_.splice(0)},ResizeObserverSPI.prototype.hasActive=function(){return this.activeObservations_.length>0},ResizeObserverSPI}(),g="undefined"!=typeof WeakMap?new WeakMap:new r,_=function(){return function ResizeObserver(e){if(!(this instanceof ResizeObserver))throw new TypeError("Cannot call a class as a function.")
 if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.")
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-var t=d.getInstance(),n=new b(e,t,this)
-g.set(this,n)}}();["observe","unobserve","disconnect"].forEach(function(e){_.prototype[e]=function(){var t
-=======
 var t=u.getInstance(),r=new b(e,t,this)
 g.set(this,r)}}();["observe","unobserve","disconnect"].forEach(function(e){_.prototype[e]=function(){var t
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 return(t=g.get(this))[e].apply(t,arguments)}})
 var S=void 0!==i.ResizeObserver?i.ResizeObserver:_
 t.default=S}.call(this,r("yLpj"))},jpXb:function(e,t,r){var n=r("wZXL")
@@ -218,21 +142,12 @@ Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0
 var n={animating:!1,autoplaying:null,currentDirection:0,currentLeft:null,currentSlide:0,direction:1,dragging:!1,edgeDragged:!1,initialized:!1,lazyLoadedList:[],listHeight:null,listWidth:null,scrolling:!1,slideCount:null,slideHeight:null,slideWidth:null,swipeLeft:null,swiped:!1,swiping:!1,touchObject:{startX:0,startY:0,curX:0,curY:0},trackStyle:{},trackWidth:0}
 t.default=n},ueNE:function(e,t,r){"use strict"
 Object.defineProperty(t,"__esModule",{value:!0}),t.InnerSlider=void 0
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-var r=_interopRequireDefault(n("q1tI")),i=_interopRequireDefault(n("i8i4")),o=_interopRequireDefault(n("rxal")),s=_interopRequireDefault(n("9/5/")),a=_interopRequireDefault(n("TSYQ")),l=n("x9Za"),c=n("UZv/"),d=n("aaW0"),u=n("KOnL"),p=_interopRequireDefault(n("bdgK"))
-function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _extends(){return(_extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
-for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function _objectWithoutProperties(e,t){if(null==e)return{}
-var n,r,i=function _objectWithoutPropertiesLoose(e,t){if(null==e)return{}
-var n,r,i={},o=Object.keys(e)
-for(r=0;r<o.length;r++)n=o[r],t.indexOf(n)>=0||(i[n]=e[n])
-=======
 var n=_interopRequireDefault(r("q1tI")),i=_interopRequireDefault(r("i8i4")),o=_interopRequireDefault(r("rxal")),s=_interopRequireDefault(r("9/5/")),a=_interopRequireDefault(r("TSYQ")),l=r("x9Za"),c=r("UZv/"),u=r("aaW0"),d=r("KOnL"),p=_interopRequireDefault(r("bdgK"))
 function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _extends(){return(_extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t]
 for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}function _objectWithoutProperties(e,t){if(null==e)return{}
 var r,n,i=function _objectWithoutPropertiesLoose(e,t){if(null==e)return{}
 var r,n,i={},o=Object.keys(e)
 for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||(i[r]=e[r])
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 return i}(e,t)
 if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e)
 for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||Object.prototype.propertyIsEnumerable.call(e,r)&&(i[r]=e[r])}return i}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function _typeof(e){return typeof e}:function _typeof(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function ownKeys(e,t){var r=Object.keys(e)
@@ -255,34 +170,20 @@ var s=(0,l.getTrackCSS)(e);(r||n.default.Children.count(t.props.children)!==n.de
 t.props.children.forEach(function(t){i.push(t.props.style.width),e+=t.props.style.width})
 for(var a=0;a<o;a++)r+=i[i.length-1-a],e+=i[i.length-1-a]
 for(var c=0;c<s;c++)e+=i[c]
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-for(var d=0;d<t.state.currentSlide;d++)n+=i[d]
-var u={width:e+"px",left:-n+"px"}
-if(t.props.centerMode){var p="".concat(i[t.state.currentSlide],"px")
-u.left="calc(".concat(u.left," + (100% - ").concat(p,") / 2 ) ")}t.setState({trackStyle:u})}else{var f=r.default.Children.count(t.props.children),h=_objectSpread({},t.props,{},t.state,{slideCount:f}),y=(0,l.getPreClones)(h)+(0,l.getPostClones)(h)+f,v=100/t.props.slidesToShow*y,b=100/y,g=-b*((0,l.getPreClones)(h)+t.state.currentSlide)*v/100
-=======
 for(var u=0;u<t.state.currentSlide;u++)r+=i[u]
 var d={width:e+"px",left:-r+"px"}
 if(t.props.centerMode){var p="".concat(i[t.state.currentSlide],"px")
 d.left="calc(".concat(d.left," + (100% - ").concat(p,") / 2 ) ")}t.setState({trackStyle:d})}else{var f=n.default.Children.count(t.props.children),h=_objectSpread({},t.props,{},t.state,{slideCount:f}),y=(0,l.getPreClones)(h)+(0,l.getPostClones)(h)+f,v=100/t.props.slidesToShow*y,b=100/y,g=-b*((0,l.getPreClones)(h)+t.state.currentSlide)*v/100
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 t.props.centerMode&&(g+=(100-b*v/100)/2)
 var _={width:v+"%",left:g+"%"}
 t.setState({slideWidth:b+"%",trackStyle:_})}}),_defineProperty(_assertThisInitialized(t),"checkImagesLoad",function(){var e=document.querySelectorAll(".slick-slide img"),r=e.length,n=0
 Array.prototype.forEach.call(e,function(e){var i=function handler(){return++n&&n>=r&&t.onWindowResized()}
 if(e.onclick){var o=e.onclick
 e.onclick=function(){o(),e.parentNode.focus()}}else e.onclick=function(){return e.parentNode.focus()}
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-e.onload||(t.props.lazyLoad?e.onload=function(){t.adaptHeight(),t.callbackTimers.push(setTimeout(t.onWindowResized,t.props.speed))}:(e.onload=i,e.onerror=function(){i(),t.props.onLazyLoadError&&t.props.onLazyLoadError()}))})}),_defineProperty(_assertThisInitialized(t),"progressiveLazyLoad",function(){for(var e=[],n=_objectSpread({},t.props,{},t.state),r=t.state.currentSlide;r<t.state.slideCount+(0,l.getPostClones)(n);r++)if(t.state.lazyLoadedList.indexOf(r)<0){e.push(r)
-break}for(var i=t.state.currentSlide-1;i>=-(0,l.getPreClones)(n);i--)if(t.state.lazyLoadedList.indexOf(i)<0){e.push(i)
-break}e.length>0?(t.setState(function(t){return{lazyLoadedList:t.lazyLoadedList.concat(e)}}),t.props.onLazyLoad&&t.props.onLazyLoad(e)):t.lazyLoadTimer&&(clearInterval(t.lazyLoadTimer),delete t.lazyLoadTimer)}),_defineProperty(_assertThisInitialized(t),"slideHandler",function(e){var n=arguments.length>1&&void 0!==arguments[1]&&arguments[1],r=t.props,i=r.asNavFor,o=r.beforeChange,s=r.onLazyLoad,a=r.speed,c=r.afterChange,d=t.state.currentSlide,u=(0,l.slideHandler)(_objectSpread({index:e},t.props,{},t.state,{trackRef:t.track,useCSS:t.props.useCSS&&!n})),p=u.state,f=u.nextState
-if(p){o&&o(d,p.currentSlide)
-=======
 e.onload||(t.props.lazyLoad?e.onload=function(){t.adaptHeight(),t.callbackTimers.push(setTimeout(t.onWindowResized,t.props.speed))}:(e.onload=i,e.onerror=function(){i(),t.props.onLazyLoadError&&t.props.onLazyLoadError()}))})}),_defineProperty(_assertThisInitialized(t),"progressiveLazyLoad",function(){for(var e=[],r=_objectSpread({},t.props,{},t.state),n=t.state.currentSlide;n<t.state.slideCount+(0,l.getPostClones)(r);n++)if(t.state.lazyLoadedList.indexOf(n)<0){e.push(n)
 break}for(var i=t.state.currentSlide-1;i>=-(0,l.getPreClones)(r);i--)if(t.state.lazyLoadedList.indexOf(i)<0){e.push(i)
 break}e.length>0?(t.setState(function(t){return{lazyLoadedList:t.lazyLoadedList.concat(e)}}),t.props.onLazyLoad&&t.props.onLazyLoad(e)):t.lazyLoadTimer&&(clearInterval(t.lazyLoadTimer),delete t.lazyLoadTimer)}),_defineProperty(_assertThisInitialized(t),"slideHandler",function(e){var r=arguments.length>1&&void 0!==arguments[1]&&arguments[1],n=t.props,i=n.asNavFor,o=n.beforeChange,s=n.onLazyLoad,a=n.speed,c=n.afterChange,u=t.state.currentSlide,d=(0,l.slideHandler)(_objectSpread({index:e},t.props,{},t.state,{trackRef:t.track,useCSS:t.props.useCSS&&!r})),p=d.state,f=d.nextState
 if(p){o&&o(u,p.currentSlide)
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 var h=p.lazyLoadedList.filter(function(e){return t.state.lazyLoadedList.indexOf(e)<0})
 s&&h.length>0&&s(h),t.setState(p,function(){i&&i.innerSlider.slideHandler(e),f&&(t.animationEndCallback=setTimeout(function(){var e=f.animating,r=_objectWithoutProperties(f,["animating"])
 t.setState(r,function(){t.callbackTimers.push(setTimeout(function(){return t.setState({animating:e})},10)),c&&c(p.currentSlide),delete t.animationEndCallback})},a))})}}),_defineProperty(_assertThisInitialized(t),"changeSlide",function(e){var r=arguments.length>1&&void 0!==arguments[1]&&arguments[1],n=_objectSpread({},t.props,{},t.state),i=(0,l.changeSlide)(n,e);(0===i||i)&&(!0===r?t.slideHandler(i,r):t.slideHandler(i))}),_defineProperty(_assertThisInitialized(t),"clickHandler",function(e){!1===t.clickable&&(e.stopPropagation(),e.preventDefault()),t.clickable=!0}),_defineProperty(_assertThisInitialized(t),"keyHandler",function(e){var r=(0,l.keyHandler)(e,t.props.accessibility,t.props.rtl)
@@ -303,28 +204,16 @@ t.autoplayTimer=setInterval(t.play,t.props.autoplaySpeed+50),t.setState({autopla
 var r=t.state.autoplaying
 "paused"===e?t.setState({autoplaying:"paused"}):"focused"===e?"hovered"!==r&&"playing"!==r||t.setState({autoplaying:"focused"}):"playing"===r&&t.setState({autoplaying:"hovered"})}),_defineProperty(_assertThisInitialized(t),"onDotsOver",function(){return t.props.autoplay&&t.pause("hovered")}),_defineProperty(_assertThisInitialized(t),"onDotsLeave",function(){return t.props.autoplay&&"hovered"===t.state.autoplaying&&t.autoPlay("leave")}),_defineProperty(_assertThisInitialized(t),"onTrackOver",function(){return t.props.autoplay&&t.pause("hovered")}),_defineProperty(_assertThisInitialized(t),"onTrackLeave",function(){return t.props.autoplay&&"hovered"===t.state.autoplaying&&t.autoPlay("leave")}),_defineProperty(_assertThisInitialized(t),"onSlideFocus",function(){return t.props.autoplay&&t.pause("focused")}),_defineProperty(_assertThisInitialized(t),"onSlideBlur",function(){return t.props.autoplay&&"focused"===t.state.autoplaying&&t.autoPlay("blur")}),_defineProperty(_assertThisInitialized(t),"render",function(){var e,r,i,o=(0,a.default)("slick-slider",t.props.className,{"slick-vertical":t.props.vertical,"slick-initialized":!0}),s=_objectSpread({},t.props,{},t.state),p=(0,l.extractObject)(s,["fade","cssEase","speed","infinite","centerMode","focusOnSelect","currentSlide","lazyLoad","lazyLoadedList","rtl","slideWidth","slideHeight","listHeight","vertical","slidesToShow","slidesToScroll","slideCount","trackStyle","variableWidth","unslick","centerPadding"]),f=t.props.pauseOnHover
 if(p=_objectSpread({},p,{onMouseEnter:f?t.onTrackOver:null,onMouseLeave:f?t.onTrackLeave:null,onMouseOver:f?t.onTrackOver:null,focusOnSelect:t.props.focusOnSelect?t.selectHandler:null}),!0===t.props.dots&&t.state.slideCount>=t.props.slidesToShow){var h=(0,l.extractObject)(s,["dotsClass","slideCount","slidesToShow","currentSlide","slidesToScroll","clickHandler","children","customPaging","infinite","appendDots"]),y=t.props.pauseOnDotsHover
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-h=_objectSpread({},h,{clickHandler:t.changeSlide,onMouseEnter:y?t.onDotsLeave:null,onMouseOver:y?t.onDotsOver:null,onMouseLeave:y?t.onDotsLeave:null}),e=r.default.createElement(d.Dots,h)}var v=(0,l.extractObject)(s,["infinite","centerMode","currentSlide","slideCount","slidesToShow","prevArrow","nextArrow"])
-v.clickHandler=t.changeSlide,t.props.arrows&&(n=r.default.createElement(u.PrevArrow,v),i=r.default.createElement(u.NextArrow,v))
-=======
 h=_objectSpread({},h,{clickHandler:t.changeSlide,onMouseEnter:y?t.onDotsLeave:null,onMouseOver:y?t.onDotsOver:null,onMouseLeave:y?t.onDotsLeave:null}),e=n.default.createElement(u.Dots,h)}var v=(0,l.extractObject)(s,["infinite","centerMode","currentSlide","slideCount","slidesToShow","prevArrow","nextArrow"])
 v.clickHandler=t.changeSlide,t.props.arrows&&(r=n.default.createElement(d.PrevArrow,v),i=n.default.createElement(d.NextArrow,v))
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 var b=null
 t.props.vertical&&(b={height:t.state.listHeight})
 var g=null
 !1===t.props.vertical?!0===t.props.centerMode&&(g={padding:"0px "+t.props.centerPadding}):!0===t.props.centerMode&&(g={padding:t.props.centerPadding+" 0px"})
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-var _=_objectSpread({},b,{},g),S=t.props.touchMove,w={className:"slick-list",style:_,onClick:t.clickHandler,onMouseDown:S?t.swipeStart:null,onMouseMove:t.state.dragging&&S?t.swipeMove:null,onMouseUp:S?t.swipeEnd:null,onMouseLeave:t.state.dragging&&S?t.swipeEnd:null,onTouchStart:S?t.swipeStart:null,onTouchMove:t.state.dragging&&S?t.swipeMove:null,onTouchEnd:S?t.swipeEnd:null,onTouchCancel:t.state.dragging&&S?t.swipeEnd:null,onKeyDown:t.props.accessibility?t.keyHandler:null},m={className:o,dir:"ltr",style:t.props.style}
-return t.props.unslick&&(w={className:"slick-list"},m={className:o}),r.default.createElement("div",m,t.props.unslick?"":n,r.default.createElement("div",_extends({ref:t.listRefHandler},w),r.default.createElement(c.Track,_extends({ref:t.trackRefHandler},p),t.props.children)),t.props.unslick?"":i,t.props.unslick?"":e)}),t.list=null,t.track=null,t.state=_objectSpread({},o.default,{currentSlide:t.props.initialSlide,slideCount:r.default.Children.count(t.props.children)}),t.callbackTimers=[],t.clickable=!0,t.debouncedResize=null,t}return function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
-e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&_setPrototypeOf(e,t)}(InnerSlider,r["default"].Component),InnerSlider}()
-t.InnerSlider=f},"vPd/":function(e,t,n){var r=n("kCCV"),i=n("IX3V").each
-=======
 var _=_objectSpread({},b,{},g),S=t.props.touchMove,w={className:"slick-list",style:_,onClick:t.clickHandler,onMouseDown:S?t.swipeStart:null,onMouseMove:t.state.dragging&&S?t.swipeMove:null,onMouseUp:S?t.swipeEnd:null,onMouseLeave:t.state.dragging&&S?t.swipeEnd:null,onTouchStart:S?t.swipeStart:null,onTouchMove:t.state.dragging&&S?t.swipeMove:null,onTouchEnd:S?t.swipeEnd:null,onTouchCancel:t.state.dragging&&S?t.swipeEnd:null,onKeyDown:t.props.accessibility?t.keyHandler:null},O={className:o,dir:"ltr",style:t.props.style}
 return t.props.unslick&&(w={className:"slick-list"},O={className:o}),n.default.createElement("div",O,t.props.unslick?"":r,n.default.createElement("div",_extends({ref:t.listRefHandler},w),n.default.createElement(c.Track,_extends({ref:t.trackRefHandler},p),t.props.children)),t.props.unslick?"":i,t.props.unslick?"":e)}),t.list=null,t.track=null,t.state=_objectSpread({},o.default,{currentSlide:t.props.initialSlide,slideCount:n.default.Children.count(t.props.children)}),t.callbackTimers=[],t.clickable=!0,t.debouncedResize=null,t}return function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
 e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&_setPrototypeOf(e,t)}(InnerSlider,n["default"].Component),InnerSlider}()
 t.InnerSlider=f},"vPd/":function(e,t,r){var n=r("kCCV"),i=r("IX3V").each
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 function MediaQuery(e,t){this.query=e,this.isUnconditional=t,this.handlers=[],this.mql=window.matchMedia(e)
 var r=this
 this.listener=function(e){r.mql=e.currentTarget||e,r.assess()},this.mql.addListener(this.listener)}MediaQuery.prototype={constuctor:MediaQuery,addHandler:function(e){var t=new n(e)
@@ -353,34 +242,16 @@ var l=function lazySlidesOnLeft(e){return e.centerMode?Math.floor(e.slidesToShow
 t.lazySlidesOnLeft=l
 var c=function lazySlidesOnRight(e){return e.centerMode?Math.floor((e.slidesToShow-1)/2)+1+(parseInt(e.centerPadding)>0?1:0):e.slidesToShow}
 t.lazySlidesOnRight=c
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-var d=function getWidth(e){return e&&e.offsetWidth||0}
-t.getWidth=d
-var u=function getHeight(e){return e&&e.offsetHeight||0}
-t.getHeight=u
-var p=function getSwipeDirection(e){var t,n,r,i,o=arguments.length>1&&void 0!==arguments[1]&&arguments[1]
-return t=e.startX-e.curX,n=e.startY-e.curY,r=Math.atan2(n,t),(i=Math.round(180*r/Math.PI))<0&&(i=360-Math.abs(i)),i<=45&&i>=0||i<=360&&i>=315?"left":i>=135&&i<=225?"right":!0===o?i>=35&&i<=135?"up":"down":"vertical"}
-=======
 var u=function getWidth(e){return e&&e.offsetWidth||0}
 t.getWidth=u
 var d=function getHeight(e){return e&&e.offsetHeight||0}
 t.getHeight=d
 var p=function getSwipeDirection(e){var t,r,n,i,o=arguments.length>1&&void 0!==arguments[1]&&arguments[1]
 return t=e.startX-e.curX,r=e.startY-e.curY,n=Math.atan2(r,t),(i=Math.round(180*n/Math.PI))<0&&(i=360-Math.abs(i)),i<=45&&i>=0||i<=360&&i>=315?"left":i>=135&&i<=225?"right":!0===o?i>=35&&i<=135?"up":"down":"vertical"}
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 t.getSwipeDirection=p
 var f=function canGoNext(e){var t=!0
 return e.infinite||(e.centerMode&&e.currentSlide>=e.slideCount-1?t=!1:(e.slideCount<=e.slidesToShow||e.currentSlide>=e.slideCount-e.slidesToShow)&&(t=!1)),t}
 t.canGoNext=f
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-t.extractObject=function extractObject(e,t){var n={}
-return t.forEach(function(t){return n[t]=e[t]}),n}
-t.initializedState=function initializedState(e){var t,n=r.default.Children.count(e.children),s=Math.ceil(d(i.default.findDOMNode(e.listRef))),a=Math.ceil(d(i.default.findDOMNode(e.trackRef)))
-if(e.vertical)t=s
-else{var l=e.centerMode&&2*parseInt(e.centerPadding)
-"string"==typeof e.centerPadding&&"%"===e.centerPadding.slice(-1)&&(l*=s/100),t=Math.ceil((s-l)/e.slidesToShow)}var c=i.default.findDOMNode(e.listRef)&&u(i.default.findDOMNode(e.listRef).querySelector('[data-index="0"]')),p=c*e.slidesToShow,f=void 0===e.currentSlide?e.initialSlide:e.currentSlide
-e.rtl&&void 0===e.currentSlide&&(f=n-1-e.initialSlide)
-=======
 t.extractObject=function extractObject(e,t){var r={}
 return t.forEach(function(t){return r[t]=e[t]}),r}
 t.initializedState=function initializedState(e){var t,r=n.default.Children.count(e.children),s=Math.ceil(u(i.default.findDOMNode(e.listRef))),a=Math.ceil(u(i.default.findDOMNode(e.trackRef)))
@@ -388,42 +259,10 @@ if(e.vertical)t=s
 else{var l=e.centerMode&&2*parseInt(e.centerPadding)
 "string"==typeof e.centerPadding&&"%"===e.centerPadding.slice(-1)&&(l*=s/100),t=Math.ceil((s-l)/e.slidesToShow)}var c=i.default.findDOMNode(e.listRef)&&d(i.default.findDOMNode(e.listRef).querySelector('[data-index="0"]')),p=c*e.slidesToShow,f=void 0===e.currentSlide?e.initialSlide:e.currentSlide
 e.rtl&&void 0===e.currentSlide&&(f=r-1-e.initialSlide)
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 var h=e.lazyLoadedList||[],y=o({currentSlide:f,lazyLoadedList:h})
 h.concat(y)
 var v={slideCount:r,slideWidth:t,listWidth:s,trackWidth:a,currentSlide:f,slideHeight:c,listHeight:p,lazyLoadedList:h}
 return null===e.autoplaying&&e.autoplay&&(v.autoplaying="playing"),v}
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-t.slideHandler=function slideHandler(e){var t=e.waitForAnimate,n=e.animating,r=e.fade,i=e.infinite,s=e.index,a=e.slideCount,l=e.lazyLoadedList,c=e.lazyLoad,d=e.currentSlide,u=e.centerMode,p=e.slidesToScroll,h=e.slidesToShow,y=e.useCSS
-if(t&&n)return{}
-var v,b,w,m=s,O={},k={}
-if(r){if(!i&&(s<0||s>=a))return{}
-s<0?m=s+a:s>=a&&(m=s-a),c&&l.indexOf(m)<0&&l.push(m),O={animating:!0,currentSlide:m,lazyLoadedList:l},k={animating:!1}}else v=m,m<0?(v=m+a,i?a%p!=0&&(v=a-a%p):v=0):!f(e)&&m>d?m=v=d:u&&m>=a?(m=i?a:a-1,v=i?0:a-1):m>=a&&(v=m-a,i?a%p!=0&&(v=0):v=a-h),b=S(_objectSpread({},e,{slideIndex:m})),w=S(_objectSpread({},e,{slideIndex:v})),i||(b===w&&(m=v),b=w),c&&l.concat(o(_objectSpread({},e,{currentSlide:m}))),y?(O={animating:!0,currentSlide:v,trackStyle:_(_objectSpread({},e,{left:b})),lazyLoadedList:l},k={animating:!1,currentSlide:v,trackStyle:g(_objectSpread({},e,{left:w})),swipeLeft:null}):O={currentSlide:v,trackStyle:g(_objectSpread({},e,{left:w})),lazyLoadedList:l}
-return{state:O,nextState:k}}
-t.changeSlide=function changeSlide(e,t){var n,r,i,o,s=e.slidesToScroll,a=e.slidesToShow,l=e.slideCount,c=e.currentSlide,d=e.lazyLoad,u=e.infinite
-if(n=l%s!=0?0:(l-c)%s,"previous"===t.message)o=c-(i=0===n?s:a-n),d&&!u&&(o=-1==(r=c-i)?l-1:r)
-else if("next"===t.message)o=c+(i=0===n?s:n),d&&!u&&(o=(c+s)%l+n)
-else if("dots"===t.message){if((o=t.index*t.slidesToScroll)===t.currentSlide)return null}else if("children"===t.message){if((o=t.index)===t.currentSlide)return null
-if(u){var p=k(_objectSpread({},e,{targetSlide:o}))
-o>t.currentSlide&&"left"===p?o-=l:o<t.currentSlide&&"right"===p&&(o+=l)}}else if("index"===t.message&&(o=Number(t.index))===t.currentSlide)return null
-return o}
-t.keyHandler=function keyHandler(e,t,n){return e.target.tagName.match("TEXTAREA|INPUT|SELECT")||!t?"":37===e.keyCode?n?"next":"previous":39===e.keyCode?n?"previous":"next":""}
-t.swipeStart=function swipeStart(e,t,n){return"IMG"===e.target.tagName&&e.preventDefault(),!t||!n&&-1!==e.type.indexOf("mouse")?"":{dragging:!0,touchObject:{startX:e.touches?e.touches[0].pageX:e.clientX,startY:e.touches?e.touches[0].pageY:e.clientY,curX:e.touches?e.touches[0].pageX:e.clientX,curY:e.touches?e.touches[0].pageY:e.clientY}}}
-t.swipeMove=function swipeMove(e,t){var n=t.scrolling,r=t.animating,i=t.vertical,o=t.swipeToSlide,s=t.verticalSwiping,a=t.rtl,l=t.currentSlide,c=t.edgeFriction,d=t.edgeDragged,u=t.onEdge,h=t.swiped,y=t.swiping,v=t.slideCount,b=t.slidesToScroll,_=t.infinite,w=t.touchObject,m=t.swipeEvent,O=t.listHeight,k=t.listWidth
-if(!n){if(r)return e.preventDefault()
-i&&o&&s&&e.preventDefault()
-var P,x={},T=S(t)
-w.curX=e.touches?e.touches[0].pageX:e.clientX,w.curY=e.touches?e.touches[0].pageY:e.clientY,w.swipeLength=Math.round(Math.sqrt(Math.pow(w.curX-w.startX,2)))
-var j=Math.round(Math.sqrt(Math.pow(w.curY-w.startY,2)))
-if(!s&&!y&&j>10)return{scrolling:!0}
-s&&(w.swipeLength=j)
-var z=(a?-1:1)*(w.curX>w.startX?1:-1)
-s&&(z=w.curY>w.startY?1:-1)
-var C=Math.ceil(v/b),E=p(t.touchObject,s),L=w.swipeLength
-return _||(0===l&&"right"===E||l+1>=C&&"left"===E||!f(t)&&"left"===E)&&(L=w.swipeLength*c,!1===d&&u&&(u(E),x.edgeDragged=!0)),!h&&m&&(m(E),x.swiped=!0),P=i?T+L*(O/k)*z:a?T-L*z:T+L*z,s&&(P=T+L*z),x=_objectSpread({},x,{touchObject:w,swipeLeft:P,trackStyle:g(_objectSpread({},t,{left:P}))}),Math.abs(w.curX-w.startX)<.8*Math.abs(w.curY-w.startY)?x:(w.swipeLength>10&&(x.swiping=!0,e.preventDefault()),x)}}
-t.swipeEnd=function swipeEnd(e,t){var n=t.dragging,r=t.swipe,i=t.touchObject,o=t.listWidth,s=t.touchThreshold,a=t.verticalSwiping,l=t.listHeight,c=t.currentSlide,d=t.swipeToSlide,u=t.scrolling,f=t.onSwipe
-if(!n)return r&&e.preventDefault(),{}
-=======
 t.slideHandler=function slideHandler(e){var t=e.waitForAnimate,r=e.animating,n=e.fade,i=e.infinite,s=e.index,a=e.slideCount,l=e.lazyLoadedList,c=e.lazyLoad,u=e.currentSlide,d=e.centerMode,p=e.slidesToScroll,h=e.slidesToShow,y=e.useCSS
 if(t&&r)return{}
 var v,b,w,O=s,m={},P={}
@@ -453,20 +292,9 @@ var x=Math.ceil(v/b),E=p(t.touchObject,s),L=w.swipeLength
 return _||(0===l&&"right"===E||l+1>=x&&"left"===E||!f(t)&&"left"===E)&&(L=w.swipeLength*c,!1===u&&d&&(d(E),T.edgeDragged=!0)),!h&&O&&(O(E),T.swiped=!0),k=i?j+L*(m/P)*C:a?j-L*C:j+L*C,s&&(k=j+L*C),T=_objectSpread({},T,{touchObject:w,swipeLeft:k,trackStyle:g(_objectSpread({},t,{left:k}))}),Math.abs(w.curX-w.startX)<.8*Math.abs(w.curY-w.startY)?T:(w.swipeLength>10&&(T.swiping=!0,e.preventDefault()),T)}}
 t.swipeEnd=function swipeEnd(e,t){var r=t.dragging,n=t.swipe,i=t.touchObject,o=t.listWidth,s=t.touchThreshold,a=t.verticalSwiping,l=t.listHeight,c=t.currentSlide,u=t.swipeToSlide,d=t.scrolling,f=t.onSwipe
 if(!r)return n&&e.preventDefault(),{}
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 var h=a?l/s:o/s,b=p(i,a),g={dragging:!1,edgeDragged:!1,scrolling:!1,swiping:!1,swiped:!1,swipeLeft:null,touchObject:{}}
-if(u)return g
+if(d)return g
 if(!i.swipeLength)return g
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-if(i.swipeLength>h){var w,m
-switch(e.preventDefault(),f&&f(b),b){case"left":case"up":m=c+v(t),w=d?y(t,m):m,g.currentDirection=0
-break
-case"right":case"down":m=c-v(t),w=d?y(t,m):m,g.currentDirection=1
-break
-default:w=c}g.triggerSlideHandler=w}else{var O=S(t)
-g.trackStyle=_(_objectSpread({},t,{left:O}))}return g}
-var h=function getNavigableIndexes(e){for(var t=e.infinite?2*e.slideCount:e.slideCount,n=e.infinite?-1*e.slidesToShow:0,r=e.infinite?-1*e.slidesToShow:0,i=[];n<t;)i.push(n),n=r+e.slidesToScroll,r+=Math.min(e.slidesToScroll,e.slidesToShow)
-=======
 if(i.swipeLength>h){var w,O
 switch(e.preventDefault(),f&&f(b),b){case"left":case"up":O=c+v(t),w=u?y(t,O):O,g.currentDirection=0
 break
@@ -475,7 +303,6 @@ break
 default:w=c}g.triggerSlideHandler=w}else{var m=S(t)
 g.trackStyle=_(_objectSpread({},t,{left:m}))}return g}
 var h=function getNavigableIndexes(e){for(var t=e.infinite?2*e.slideCount:e.slideCount,r=e.infinite?-1*e.slidesToShow:0,n=e.infinite?-1*e.slidesToShow:0,i=[];r<t;)i.push(r),r=n+e.slidesToScroll,n+=Math.min(e.slidesToScroll,e.slidesToShow)
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 return i}
 t.getNavigableIndexes=h
 var y=function checkNavigable(e,t){var r=h(e),n=0
@@ -484,15 +311,9 @@ else for(var i in r){if(t<r[i]){t=n
 break}n=r[i]}return t}
 t.checkNavigable=y
 var v=function getSlideCount(e){var t=e.centerMode?e.slideWidth*Math.floor(e.slidesToShow/2):0
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-if(e.swipeToSlide){var n,r=i.default.findDOMNode(e.listRef).querySelectorAll(".slick-slide")
-if(Array.from(r).every(function(r){if(e.vertical){if(r.offsetTop+u(r)/2>-1*e.swipeLeft)return n=r,!1}else if(r.offsetLeft-t+d(r)/2>-1*e.swipeLeft)return n=r,!1
-return!0}),!n)return 0
-=======
 if(e.swipeToSlide){var r,n=i.default.findDOMNode(e.listRef).querySelectorAll(".slick-slide")
 if(Array.from(n).every(function(n){if(e.vertical){if(n.offsetTop+d(n)/2>-1*e.swipeLeft)return r=n,!1}else if(n.offsetLeft-t+u(n)/2>-1*e.swipeLeft)return r=n,!1
 return!0}),!r)return 0
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 var o=!0===e.rtl?e.slideCount-e.currentSlide:e.currentSlide
 return Math.abs(r.dataset.index-o)||1}return e.slidesToScroll}
 t.getSlideCount=v
@@ -512,32 +333,6 @@ return e.useTransform?(t.WebkitTransition="-webkit-transform "+e.speed+"ms "+e.c
 t.getTrackAnimateCSS=_
 var S=function getTrackLeft(e){if(e.unslick)return 0
 b(e,["slideIndex","trackRef","infinite","centerMode","slideCount","slidesToShow","slidesToScroll","slideWidth","listWidth","variableWidth","slideHeight"])
-<<<<<<< HEAD:dist/7.581d745161c26b4df720.js
-var t,n,r=e.slideIndex,o=e.trackRef,s=e.infinite,a=e.centerMode,l=e.slideCount,c=e.slidesToShow,d=e.slidesToScroll,u=e.slideWidth,p=e.listWidth,f=e.variableWidth,h=e.slideHeight,y=e.fade,v=e.vertical
-if(y||1===e.slideCount)return 0
-var g=0
-if(s?(g=-w(e),l%d!=0&&r+d>l&&(g=-(r>l?c-(r-l):l%d)),a&&(g+=parseInt(c/2))):(l%d!=0&&r+d>l&&(g=c-l%d),a&&(g=parseInt(c/2))),t=v?r*h*-1+g*h:r*u*-1+g*u,!0===f){var _,S=i.default.findDOMNode(o)
-if(_=r+w(e),t=(n=S&&S.childNodes[_])?-1*n.offsetLeft:0,!0===a){_=s?r+w(e):r,n=S&&S.children[_],t=0
-for(var m=0;m<_;m++)t-=S&&S.children[m]&&S.children[m].offsetWidth
-t-=parseInt(e.centerPadding),t+=n&&(p-n.offsetWidth)/2}}return t}
-t.getTrackLeft=S
-var w=function getPreClones(e){return e.unslick||!e.infinite?0:e.variableWidth?e.slideCount:e.slidesToShow+(e.centerMode?1:0)}
-t.getPreClones=w
-var m=function getPostClones(e){return e.unslick||!e.infinite?0:e.slideCount}
-t.getPostClones=m
-var O=function getTotalSlides(e){return 1===e.slideCount?1:w(e)+e.slideCount+m(e)}
-t.getTotalSlides=O
-var k=function siblingDirection(e){return e.targetSlide>e.currentSlide?e.targetSlide>e.currentSlide+P(e)?"left":"right":e.targetSlide<e.currentSlide-x(e)?"right":"left"}
-t.siblingDirection=k
-var P=function slidesOnRight(e){var t=e.slidesToShow,n=e.centerMode,r=e.rtl,i=e.centerPadding
-if(n){var o=(t-1)/2+1
-return parseInt(i)>0&&(o+=1),r&&t%2==0&&(o+=1),o}return r?0:t-1}
-t.slidesOnRight=P
-var x=function slidesOnLeft(e){var t=e.slidesToShow,n=e.centerMode,r=e.rtl,i=e.centerPadding
-if(n){var o=(t-1)/2+1
-return parseInt(i)>0&&(o+=1),r||t%2!=0||(o+=1),o}return r?t-1:0}
-t.slidesOnLeft=x
-=======
 var t,r,n=e.slideIndex,o=e.trackRef,s=e.infinite,a=e.centerMode,l=e.slideCount,c=e.slidesToShow,u=e.slidesToScroll,d=e.slideWidth,p=e.listWidth,f=e.variableWidth,h=e.slideHeight,y=e.fade,v=e.vertical
 if(y||1===e.slideCount)return 0
 var g=0
@@ -562,5 +357,4 @@ var T=function slidesOnLeft(e){var t=e.slidesToShow,r=e.centerMode,n=e.rtl,i=e.c
 if(r){var o=(t-1)/2+1
 return parseInt(i)>0&&(o+=1),n||t%2!=0||(o+=1),o}return n?t-1:0}
 t.slidesOnLeft=T
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/1.414d0085c626f435f5be.js
 t.canUseDOM=function canUseDOM(){return!("undefined"==typeof window||!window.document||!window.document.createElement)}}}])

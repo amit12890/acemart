@@ -1,15 +1,8 @@
 /*!
-<<<<<<< HEAD:dist/49.b0b87ef6bbb79f785cfb.js
- * @version d99914e-dev
- * 
- */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[49],{"1m22":function(t,r,n){"use strict"
-=======
- * @version b0c9ffd-dev
+ * @version f84a818-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[65],{"1m22":function(t,r,n){"use strict"
->>>>>>> 888654fb19486684afb0b7ccb1df0cdceac082da:dist/65.32f74b37baceaea23617.js
 n.r(r),n.d(r,"default",function(){return f})
 var i=n("RIqP"),o=n.n(i),a=n("q1tI"),e=n.n(a),g=n("LboF"),s=n.n(g),d=n("UgB0"),p=n.n(d),m={injectType:"singletonStyleTag",insert:"head",singleton:!0},l=(s()(p.a,m),p.a.locals||{}),b=n("y1Xp"),c=n("17x9"),h=function toHTML(t){return{__html:t}},u=function Html(t){var r=Object(b.a)(l,t.classes),n=t.html,i=t.textAlign,a=t.border,g=t.borderColor,s=t.borderWidth,d=t.borderRadius,p=t.marginTop,m=t.marginRight,c=t.marginBottom,u=t.marginLeft,f=t.paddingTop,T=t.paddingRight,w=t.paddingBottom,R=t.paddingLeft,B=t.cssClasses,L=void 0===B?[]:B,y={textAlign:i,border:a,borderColor:g,borderWidth:s,borderRadius:d,marginTop:p,marginRight:m,marginBottom:c,marginLeft:u,paddingTop:f,paddingRight:T,paddingBottom:w,paddingLeft:R}
 return e.a.createElement("div",{style:y,className:[r.root].concat(o()(L)).join(" "),dangerouslySetInnerHTML:h(n)})}
