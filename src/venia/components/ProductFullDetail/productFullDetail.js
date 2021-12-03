@@ -439,11 +439,13 @@ const ProductFullDetail = props => {
                                         <div>{pos_stock_manage.stock_label}</div>
                                     }
                                     {/* Product Stock Avialability */}
-                                    <div className={classes.apSectionRow}>
-                                        <div className={classes.stock}>
-                                            {product.only_x_left_in_stock} In Stock
+                                    {!!pos_stock_manage.stock_final_label &&
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.stock}>
+                                                {pos_stock_manage.stock_final_label}
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
 
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={classes.apSectionRow}>

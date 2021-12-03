@@ -19,6 +19,7 @@ export const ProductDetailsFragment = gql`
             hide_add_to_cart
             locate_in_store
             stock_label
+            stock_final_label
         }
         categories {
             id
