@@ -165,6 +165,12 @@ const ProductFullDetail = props => {
         []
     );
 
+    const priceTiers = get(
+        product,
+        'price_tiers',
+        []
+    );
+
     // Fill a map with field/section -> error.
     const errors = new Map();
     if (errorMessage) {
@@ -439,11 +445,13 @@ const ProductFullDetail = props => {
                                         <div>{pos_stock_manage.stock_label}</div>
                                     }
                                     {/* Product Stock Avialability */}
-                                    <div className={classes.apSectionRow}>
-                                        <div className={classes.stock}>
-                                            {product.only_x_left_in_stock} In Stock
+                                    {!!pos_stock_manage.stock_final_label &&
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.stock}>
+                                                {pos_stock_manage.stock_final_label}
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
 
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={classes.apSectionRow}>
@@ -501,11 +509,33 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
                                             <span>
-                                                Usually ships from our warehouse in
-                                                Schertz, TX within 1-2 business
-                                                days.
+                                                {product.ship_time}
                                             </span>
                                         </div>
+
+                                        {!!size(priceTiers) &&
+                                            <div>
+                                                <div>BULK SAVINGS</div>
+                                                {priceTiers.map((tier, ind)=> {
+                                                    return (
+                                                        <div key={ind}>
+                                                            <div>Buy at least {tier.quantity}</div>
+                                                            <div>
+                                                            <Price
+                                                                currencyCode={
+                                                                    tier.final_price.currency
+                                                                }
+                                                                value={tier.final_price.value}
+                                                            />
+                                                            <span className={classes.unit}>
+                                                                / {product.uom}
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        }
 
                                         <div className={classes.shippingNote}>
                                             <h3>Note</h3>
