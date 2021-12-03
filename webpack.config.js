@@ -1,5 +1,6 @@
 const { configureWebpack, graphQL } = require('@magento/pwa-buildpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 const moduleOverridePlugin = require('./moduleOverrideWebpackPlugin');
 const componentOverrideMapping = require('./componentOverrideMapping');
@@ -95,6 +96,9 @@ module.exports = async env => {
                 collapseWhitespace: true,
                 removeComments: true
             }
+        }),
+        new CopyPlugin({
+            patterns: [{ from: 'acemart-static', to: 'acemart-static' }]
         })
     ];
 
