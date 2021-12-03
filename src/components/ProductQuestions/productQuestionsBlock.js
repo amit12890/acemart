@@ -60,8 +60,8 @@ const ProductQuestionsBlock = ({ productId }) => {
     }
 
     return (
-        <div>
-            <div>{content}</div>
+        <div className={classes.qaWrapper}>
+            <div className={classes.qaContainer}>{content}</div>
             <AddQuestion productId={productId} />
         </div>
     );
@@ -118,116 +118,145 @@ const QuestionBlock = ({ questions }) => {
     }, [searchToken, questions]);
 
     return (
-        <div>
-            <div>
-                <label>Search Q/A</label>
-                <input
-                    placeholder="Search Phrase"
-                    value={searchToken}
-                    onChange={e => setSearchToken(e.target.value)}
-                />
-                <Button onClick={handleResetSearch}>Reset</Button>
-            </div>
-            <div>
-                <label>Sort By</label>
-                <Button onClick={toggleExpandAll}>Expand All</Button>
-            </div>
-
-            {filteredQuestions.map((item, index) => {
-                const ansCount = size(item.answer);
-                let queClass = expandedQuestions.has(index)
-                    ? `${classes.question} ${classes.question_open}`
-                    : classes.question;
-
-                return (
-                    <div key={item.id}>
-                        <div
-                            className={queClass}
-                            onClick={() => handleQueExpandToggle(index)}
-                        >
-                            <div>{item.content}</div>
-                            <div>
-                                {ansCount > 1
-                                    ? `${ansCount} answers`
-                                    : `${ansCount} answer`}
-                            </div>
-                            <div>by {item.nickname}</div>
-                            <div>
-                                <PlusBlock
-                                    mutation={questionRatingPlusMutation}
-                                    variables={{
-                                        question_id: item.id
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <MinusBlock
-                                    mutation={questionRatingMinusMutation}
-                                    variables={{
-                                        question_id: item.id
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <ReportBlock
-                                    mutation={reportQuestionMutation}
-                                    variables={{
-                                        question_id: item.id
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className="answer">
-                            <div>
-                                {!!ansCount
-                                    ? item.answer.map((ans, ind) => {
-                                          return (
-                                              <div key={ans.id}>
-                                                  <div>{ans.content}</div>
-                                                  <div>by {ans.nickname}</div>
-                                                  <div>
-                                                      <PlusBlock
-                                                          mutation={
-                                                              answerRatingPlusMutation
-                                                          }
-                                                          variables={{
-                                                              ans_id: ans.id
-                                                          }}
-                                                      />
-                                                  </div>
-                                                  <div>
-                                                      <MinusBlock
-                                                          mutation={
-                                                              answerRatingMinusMutation
-                                                          }
-                                                          variables={{
-                                                              ans_id: ans.id
-                                                          }}
-                                                      />
-                                                  </div>
-                                                  <div>
-                                                      <ReportBlock
-                                                          mutation={
-                                                              reportAnswerMutation
-                                                          }
-                                                          variables={{
-                                                              ans_id: ans.id
-                                                          }}
-                                                      />
-                                                  </div>
-                                              </div>
-                                          );
-                                      })
-                                    : null}
-                            </div>
-                            <div>
-                                <AddAnswer questionId={item.id} />
-                            </div>
+        <div className={classes.qaContent}>
+            <div className={classes.qaPanelBody}>
+                <div className={classes.panelHeader}>
+                    <div className={classes.qaSearchWrapper}>
+                        <label className={[classes.label, classes.searchLabel].join(" ")}>Search Q/A</label>
+                        <div className={classes.control}>
+                            <input
+                                type="text"
+                                placeholder="Search Phrase"
+                                value={searchToken}
+                                onChange={e => setSearchToken(e.target.value)}
+                            />
+                            <Button onClick={handleResetSearch}>Reset</Button>
                         </div>
                     </div>
-                );
-            })}
-        </div>
+                    <div className={classes.toolbarWrapper}>
+                        <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
+                        <Button onClick={toggleExpandAll}>
+                            <i className={classes.iconWrapper}>
+                                <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                    <title>store</title>
+                                    <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                            </i>
+                            <span>Expand All</span>
+                        </Button>
+                    </div>
+                </div>
+
+
+                {
+                    filteredQuestions.map((item, index) => {
+                        const ansCount = size(item.answer);
+                        let queClass = expandedQuestions.has(index)
+                            ? `${classes.question} ${classes.question_open}`
+                            : classes.question;
+
+                        return (
+                            <div key={item.id} className={classes.questionWrapper}>
+                                <div
+                                    className={queClass}
+                                    onClick={() => handleQueExpandToggle(index)}
+                                >
+                                    <div className={classes.listItemWrapper}>
+                                        <div className={classes.listItem}>
+                                            <div className={classes.leftBlock}>
+                                                <div className={classes.listContent}>{item.content}</div>
+                                                <div className={classes.count}>
+                                                    {ansCount > 1
+                                                        ? `${ansCount} answers`
+                                                        : `${ansCount} answer`}
+                                                </div>
+                                                <div className={classes.nickName}>by {item.nickname}</div>
+                                            </div>
+                                            <div className={classes.rightBlock}>
+                                                <div className={[classes.helper, classes.plus].join(" ")}>
+                                                    <PlusBlock
+                                                        mutation={questionRatingPlusMutation}
+                                                        variables={{
+                                                            question_id: item.id
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div className={[classes.helper, classes.minus].join(" ")}>
+                                                    <MinusBlock
+                                                        mutation={questionRatingMinusMutation}
+                                                        variables={{
+                                                            question_id: item.id
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div className={[classes.helper, classes.reportBlock].join(" ")} >
+                                                    <ReportBlock
+                                                        mutation={reportQuestionMutation}
+                                                        variables={{
+                                                            question_id: item.id
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={classes.answer}>
+
+                                            <div className={classes.actionToolbar}>
+                                                <AddAnswer questionId={item.id} />
+                                            </div>
+                                            {!!ansCount
+                                                ? item.answer.map((ans, ind) => {
+                                                    return (
+                                                        <div key={ans.id} className={classes.anslistItemWrapper}>
+                                                            <div className={classes.answerListItem}>
+                                                                <div className={classes.listContent}>{ans.content}</div>
+                                                            </div>
+                                                            <div className={classes.answerListHelper}>
+                                                                <div className={classes.nickName}>by {ans.nickname}</div>
+                                                                <div className={[classes.helper, classes.plus].join(" ")}>
+                                                                    <PlusBlock
+                                                                        mutation={
+                                                                            answerRatingPlusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id: ans.id
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className={[classes.helper, classes.minus].join(" ")}>
+                                                                    <MinusBlock
+                                                                        mutation={
+                                                                            answerRatingMinusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id: ans.id
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className={[classes.helper, classes.reportBlock].join(" ")} >
+                                                                    <ReportBlock
+                                                                        mutation={
+                                                                            reportAnswerMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id: ans.id
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })
+                                                : null}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        </div >
     );
 };
 

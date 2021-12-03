@@ -1,8 +1,196 @@
 .question {
-    font-weight: bold;
-    border: 1px solid silver;
+    
+    
+
+}
+
+.question .answer{
+    display: none;
 }
 
 .question_open {
-    color: red;
+    
+}
+
+.question_open .answer{
+    display: block;
+}
+
+.qaWrapper {
+
+}
+
+.qaContainer {
+
+}
+
+.qaPanelBody {
+
+}
+
+.panelHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.panelContent {
+
+}
+
+.qaContent { 
+
+}
+
+.qaSearchWrapper {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: bold;
+    font-size: var(--fontSize-100);
+    margin-bottom: 10px;
+}
+
+.control {
+    display: flex;
+}
+
+.control input {
+    background: rgb(--color-white);
+    border: 1px solid rgb(var(--border-color-base));
+    border-radius: 0;
+    color: rgb(var(--text-color));
+    display: inline-flex;
+    font-size: 1rem;
+    height: 40px;
+    margin: 0;
+    max-width: 250px;
+    padding: 10px 10px 10px 10px; 
+    width: 100%;
+    -webkit-appearance: none;
+}
+
+.control input:focus,
+.control input:focus-visible {
+    border-color: rgb(var(--theme-color-secondary));
+}
+
+.control button {
+    margin-left: 10px; 
+}
+
+.toolbarWrapper {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.questionWrapper {
+
+}
+
+.listItemWrapper {
+    margin-bottom: 20px;
+    font-size: var(--fontSize-100);
+}
+
+.listItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    
+}
+
+.question_open .listItem {
+    background-color: #f6f6f6;
+}
+
+.listItem:hover {
+    background-color: #f6f6f6;
+}
+
+.listContent {
+
+}
+
+.count {
+    margin-left: 2rem;
+}
+
+.nickName {
+    margin-left: 2rem;
+    color: rgb(var(--color-red10));
+}
+
+.helper {
+    margin-left: 10px;
+}
+
+.leftBlock {
+    flex-grow: 1;
+    display: flex;
+}
+
+.rightBlock {
+    display: flex;
+    margin-left: 2rem;
+}
+
+.helper.minus {
+
+}
+
+.helper.plus {
+
+}
+
+.listContent {
+
+
+}
+
+
+.plus {
+
+}
+
+.reportBlock {
+
+}
+.actionToolbar {
+    text-align: right;
+    margin: 1rem 0;
+} 
+.anslistItemWrapper {
+    margin-bottom: 1rem;
+    font-size: var(--fontSize-100);
+}
+
+.answerListItem {
+    display: flex;
+    font-size: var(--fontSize-100);
+}
+
+.answerListHelper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.answerListHelper .count {
+    margin-left: 2rem;
+}
+
+.answerListHelper .nickName {
+    margin-left: 2rem;
+    color: rgb(var(--theme-color-primary-alt));
+}
+
+.answerListHelper .helper {
+    margin-left: 10px;
 }
