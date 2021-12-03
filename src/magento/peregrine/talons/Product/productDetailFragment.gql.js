@@ -15,6 +15,14 @@ export const ProductDetailsFragment = gql`
         only_x_left_in_stock
         rating_summary
         review_count
+        ship_time
+        price_tiers {
+            quantity
+            final_price {
+                value
+                currency
+            }
+        }
         pos_stock_manage {
             hide_add_to_cart
             locate_in_store
