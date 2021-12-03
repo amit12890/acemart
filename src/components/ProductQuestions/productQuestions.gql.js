@@ -72,3 +72,51 @@ mutation addAnswer(
     }
 }
 `
+
+export const reportQuestionMutation = gql`
+mutation reportQuestion($question_id: Int!) {
+    reportQuestion( input: { id: $question_id } ) {
+        success
+    }
+}
+`
+
+export const reportAnswerMutation = gql`
+mutation reportAnswer($ans_id: Int!) {
+    reportAnswer( input: { id: $ans_id } ) {
+        success
+    }
+}
+`
+
+export const questionRatingPlusMutation = gql`
+mutation questionRatingPlus($question_id: Int!) {
+    questionRatingPlus( input: { id: $question_id } ) {
+        success count
+    }
+}
+`
+
+export const questionRatingMinusMutation = gql`
+mutation questionRatingMinus($question_id: Int!) {
+    questionRatingMinus( input: { id: $question_id } ) {
+        success count
+    }
+}
+`
+
+export const answerRatingPlusMutation = gql`
+mutation answerRatingPlus($ans_id: Int!) {
+    answerRatingPlus( input: { id: $ans_id } ) {
+        success count
+    }
+}
+`
+
+export const answerRatingMinusMutation = gql`
+mutation answerRatingMinus($ans_id: Int!) {
+    answerRatingMinus( input: { id: $ans_id } ) {
+        success count
+    }
+}
+`
