@@ -20,9 +20,11 @@ import defaultClasses from './productStoreLocator.css';
 // don't show it in group list
 const DEFAULT_STORE_GROUP_NAME = "Shopping"
 
-const style = {
-    '--mapImage': `url("${mapImage}")`
-};
+const getMapStype = (image) => {
+    return {
+        '--mapImage': `url("${image}")`
+    }
+}
 
 const ProductStoreLocator = props => {
     const { closeStoreLocatorPopup, productId, isPopupVisible } = props;
@@ -132,6 +134,7 @@ const ProductStoreLocatorPopup = props => {
     const storeGroupData = groupBy(availableStores, 'store_group_name')
     const groupList = difference(Object.keys(storeGroupData), [DEFAULT_STORE_GROUP_NAME])
     const groupStoreList = !!selectedGroup ? get(storeGroupData, selectedGroup, []) : [];
+    const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
 
     return (
         <div className={classes.content}>
@@ -202,7 +205,7 @@ const ProductStoreLocatorPopup = props => {
                             </div>
                             <div className={classes.selectStoreWrapper}>
                                 <div className={classes.mapContainer}>
-                                    <div className={classes.mapContent} style={style}></div>
+                                    <div className={classes.mapContent} style={getMapStype(selectedMapImage)}></div>
                                 </div>
 
                                 <div className={classes.storeListContainer}>
