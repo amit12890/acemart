@@ -27,8 +27,8 @@ function CustomArrows(props) {
  */
 export default ({ data, onItemClick, showTitle = true }) => {
     const classes = useStyle(defaultClasses);
-
-    if (size(data) === 0) return null
+    const dataSize = size(data);
+    if (dataSize === 0) return null
 
     return (
         <div className={classes.root} onClick={onItemClick}>
@@ -39,9 +39,9 @@ export default ({ data, onItemClick, showTitle = true }) => {
                         className={classes.resourceCarouselProvider}
                         naturalSlideWidth={200}
                         naturalSlideHeight={100}
-                        isPlaying={true}
+                        isPlaying={dataSize > 3}
                         visibleSlides={3}
-                        totalSlides={size(data)}
+                        totalSlides={dataSize}
                     >
 
                         <div className={classes.resourceSliderWrapper}>
