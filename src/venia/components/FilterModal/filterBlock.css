@@ -1,0 +1,46 @@
+.root {
+    border-color: rgb(var(--venia-global-color-border));
+    border-style: dashed;
+    border-width: 1px 0 0;
+    display: grid;
+}
+
+.header {
+    align-items: center;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr auto;
+    min-height: 3.125rem;
+}
+
+.header svg {
+    height: 20px;
+}
+
+.name {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: left;
+    font-size: var(--fontSize-100);
+    text-transform: uppercase;
+    color: rgb(var(--color-black));
+    font-weight: var(--font-weight-bold);
+}
+
+.list {
+}
+
+.list:empty {
+    display: none;
+}
+
+.list_expanded {
+    composes: list;
+}
+
+.list_collapsed {
+    composes: list;
+    display: none;
+}
+
+

@@ -1,0 +1,38 @@
+.subCategoryContainer{
+    
+}
+
+.subcatWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.subcatListItem {
+    display: flex;
+    justify-content: start;
+    width: calc(100%/7);
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+.catImageWrapper {
+    min-height: 130px;
+}
+.image {
+    height: auto;
+    object-fit: contain;
+}
+.subcatListItem:hover .name {
+    color: rgb(var(--link-color-hover));
+}
+.name {
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+}
+
+.subcatItemInfo {
+
+}

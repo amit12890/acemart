@@ -1,0 +1,103 @@
+.root {
+  composes: root from '../ProductReviews/productReviews.css';
+}
+
+.title {
+  composes: title from '../ProductReviews/productReviews.css';
+}
+
+.reviews {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -1rem;
+}
+
+.item {
+  padding: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.37rem;
+}
+
+@media (min-width: 768px) {
+  .item {
+    width: 50%;
+  }
+}
+
+.vertical .item {
+  width: 100%;
+}
+
+.productInfo {
+  flex: 0 0 8rem;
+}
+
+.images {
+  display: block;
+  text-align: center;
+  margin: 0.65rem 0;
+}
+
+.imageContainer {
+  display: block;
+  max-width: 100%;
+}
+
+.image {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  width: auto;
+  height: 10rem;
+}
+
+.reviewInfo {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+
+.more {
+  color: rgb(var(--venia-global-color-teal));
+}
+
+.more:hover {
+  text-decoration: underline;
+}
+
+.date {
+  composes: date from '../ProductReviews/review.css';
+}
+
+.rating {
+  composes: rating from '../ProductReviews/review.css';
+}
+
+.ratingStars {
+  composes: ratingStars from '../ProductReviews/review.css';
+}
+
+.ratingLabel {
+  composes: ratingLabel from '../ProductReviews/review.css';
+}
+
+.carousel {
+  composes: root from '~@magento/pagebuilder/lib/ContentTypes/Slider/slider.css';
+  padding: 1rem 0;
+}
+
+.carousel :global .slick-prev,
+.carousel :global .slick-next {
+  margin-top: -3.775rem;
+}
+
+.carousel .item {
+  width: auto;
+}

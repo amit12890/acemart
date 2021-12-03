@@ -1,0 +1,40 @@
+.root {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.inputRadio {
+  display: none;
+}
+
+.star:hover .icon,
+.star:hover ~ .star .icon,
+.inputRadio:checked ~ .star .icon {
+  background-image: var(--am-starFilled);
+}
+
+.star {
+  cursor: pointer;
+}
+
+.icon {
+  display: block;
+  width: 30px;
+  height: 25px;
+  background-image: var(--am-star);
+  background-size: contain;
+}
+
+.inputRadio:checked ~ .star .icon {
+  background-image: var(--am-starFilled);
+}

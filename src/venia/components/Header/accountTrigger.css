@@ -8,7 +8,9 @@
 .root_open {
     composes: root;
 
-    box-shadow: 0 4px rgb(var(--venia-brand-color-1-700));
+}
+.svgIcon {
+    fill: currentColor;
 }
 
 .trigger {
@@ -17,6 +19,7 @@
     height: 3rem;
     min-width: 6rem;
     z-index: 1;
+    color: rgb(var(--theme-color-primary));
 }
 
 @media (max-width: 640px) {

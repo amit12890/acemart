@@ -1,0 +1,116 @@
+.root {
+    --borderColor: var(--venia-global-color-border);
+    background-color: white;
+    bottom: 0;
+    display: none;
+    grid-template-rows: 1fr 7rem;
+    max-width: 360px;
+    width: 100%;
+    z-index: 3;
+}
+
+.body {
+    
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.headerTitle {
+    display: flex;
+    align-items: center;
+    font-size: var(--fontSize-200);;
+    line-height: 0.875rem;
+    text-transform: uppercase;
+}
+
+.action {
+    padding: 1rem 0;
+}
+
+.action button {
+
+}
+
+.blocks {
+    
+}
+
+.blocks > li:last-child {
+    
+}
+
+
+
+.labelWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.labelItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    min-height: 30px;
+    line-height: normal;
+    cursor: pointer;
+}
+.labelItem i{
+    background-image: var(--productLabel);
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    background-size: 90px;
+    margin-right: 10px;
+    
+}
+
+.filterLabel {
+ flex-grow: 1;
+ text-align: left;
+ font-size: var(--fontSize-100);
+ text-transform: uppercase;
+ color: rgb(var(--color-black));
+ font-weight: var(--font-weight-bold);
+}
+
+.onSale {
+    background-position: -62px -32px;
+    
+}
+
+.freeShipping {
+    background-position: -62px -2px;
+   
+}
+.onlinePrice {
+    background-position: -32px -32px;
+   
+}
+
+.bulkSavings {
+    background-position: -2px -32px;
+}
+
+.newItem {
+    background-position: -32px -2px;
+}
+.disallowPickupatstore {
+    background-position: -2px -2px;
+}
+
+.allowStorePickup {
+    background-position: -2px -2px; 
+}
+
+@media (min-width: 1024px) {
+    .root {
+        display: grid;
+    }
+    .blocks {
+       
+    }
+}

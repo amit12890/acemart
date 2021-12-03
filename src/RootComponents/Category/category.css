@@ -1,0 +1,132 @@
+:root {
+    --category-sidebar-width: 25%;
+}
+
+.root {
+    
+}
+
+.title {
+   
+
+    
+}
+
+.pagination {
+    position: relative;
+    bottom: 0;
+}
+
+.placeholder {
+    height: 100vh;
+}
+
+.categoryTitle {
+    font-size: var(--fontSize-600);
+    color: rgb(var(--theme-color-primary));
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 10px 0; 
+    padding: 0;
+}
+
+.categoryDescription {
+    font-size: var(--fontSize-100);
+    margin-bottom: 20px;
+}
+
+.heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.categoryInfo {
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    max-width: 75vw;
+}
+
+.headerButtons {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+}
+
+.subcategoryWrapper {
+    margin-bottom: 20px;
+
+}
+
+.contentWrapper {
+    width: 100%;
+}
+
+.sidebar {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .contentWrapper {
+        display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 20px 0;
+    }
+
+    .categoryHeader {
+        
+    }
+
+    .headerButtons {
+        justify-content: flex-end;
+    }
+
+    .heading {
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .headerButtons {
+        padding-bottom: 0;
+    }
+
+    .categoryInfo {
+        margin: 0;
+        flex-basis: 100%;
+        
+    }
+
+    .sidebar {
+        width: var(--category-sidebar-width);
+        display: flex;
+        align-self: flex-start;
+        -webkit-flex-grow: 1;
+        flex-grow: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+        padding-right: 20px;
+    }
+
+    .categoryContent {
+        flex-grow: 1;
+        padding-bottom: 40px;
+        -webkit-flex-basis: auto;
+        flex-basis: auto;
+        -webkit-flex-grow: 1;
+        flex-grow: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+        width: 75%;
+    }
+}

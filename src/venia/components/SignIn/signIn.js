@@ -10,7 +10,7 @@ import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator'
 import TextInput from '../TextInput';
 import Password from '../Password';
 import LinkButton from '../LinkButton';
-import FormError from '@magento/venia-ui/lib/components/FormError/formError';
+import FormError from '../FormError/formError';
 
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import { useStyle } from '../../classify';

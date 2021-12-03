@@ -5,7 +5,7 @@
     border-color: rgb(var(--stroke));
     border-radius: 0;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     color: rgb(var(--stroke));
     font-size: var(--fontSize-100);
     font-weight: var(--font-weight-bold);
@@ -45,7 +45,7 @@
 .root:disabled,
 .root:hover:disabled {
     pointer-events: none;
-    --stroke: var(--color-gray-darken1);
+    --stroke: var(--color-gray-darken10);
 }
 
 .content {
@@ -63,7 +63,7 @@
     background-color: var(--color-white);
 }
 .root_lowPriority:hover {
-    background-color: rgb(var(--color-red));
+    background-color: rgb(var(--stroke));
     color: rgb(var(--color-white));
 }
 .root_lowPriorityNegative {
@@ -76,11 +76,13 @@
 
 .root_normalPriority {
     composes: root;
-    background-color: rgba(255 255 255);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
 }
 .root_normalPriority:hover {
-    background-color: rgb(var(--color-red));
-    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-white));
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
 }
 .root_normalPriorityNegative {
     composes: root_normalPriority;
@@ -102,3 +104,24 @@
 .root_highPriorityNegative:hover {
     --stroke: var(--color-red1);
 }
+
+
+.button_asLink {
+    background-color: transparent;
+    border: none;
+    min-height: auto;
+    min-width: auto;
+    color: rgb(var(--stroke));
+    padding: 0;
+    line-height: normal;
+}
+
+.button_asLink:hover {
+    text-decoration: underline;
+    color: rgb(var(--stroke));
+}
+
+.cancelButton {
+    margin-right: 40px;
+}
+

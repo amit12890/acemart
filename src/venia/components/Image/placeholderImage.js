@@ -61,7 +61,7 @@ const PlaceholderImage = props => {
 };
 
 PlaceholderImage.propTypes = {
-    alt: string.isRequired,
+    alt: string,
     classes: shape({
         image: string,
         placeholder: string,

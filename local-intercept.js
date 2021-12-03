@@ -19,6 +19,11 @@
 
 function localIntercept(targets) {
     targets.of("@magento/venia-ui").routes.tap(routes => {
+        // routes.push({
+        //     name: "404 page",
+        //     pattern: "*",
+        //     path: require.resolve("./src/venia/components/ErrorView")
+        // });
         routes.push({
             name: "Landing Page",
             pattern: "/",
@@ -40,6 +45,24 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Address Book",
+            pattern: "/customer/address/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Address Book",
+            pattern: "/customer/address/new/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Address Book",
+            pattern: "/customer/address/edit",
+            exact: false,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "Account Info Form",
             pattern: "/customer/account/edit/",
             exact: true,
@@ -58,6 +81,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Orders Page",
+            pattern: "/sales/order/:tab/order_id/:orderId/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "My WishList Page",
             pattern: "/wishlist/",
             exact: true,
@@ -68,6 +97,12 @@ function localIntercept(targets) {
             pattern: "/newsletter/manage/",
             exact: true,
             path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
+            name: "Compare List",
+            pattern: "/catalog/product_compare/",
+            exact: true,
+            path: require.resolve("./src/components/CompareListPage")
         });
         return routes;
     });

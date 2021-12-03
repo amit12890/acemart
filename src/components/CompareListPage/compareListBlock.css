@@ -1,0 +1,61 @@
+.root {
+    margin: 20px 0;
+}
+
+.blockTitle {
+    font-size: var(--fontSize-300) ;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 10px;
+
+}
+
+.compareItem {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fontSize-100) ;
+    margin-bottom: 10px;
+}
+
+.removeButton {
+
+}
+
+.iconWrapper {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.iconWrapper:hover {
+    background-color: #f6f6f6;
+}
+
+.svgIcon {
+    width: 18px;    
+}
+.actionToolbar {
+    margin-top: 10px;
+}
+
+.action {
+    background-color: rgb(var(--theme-color-primary));
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    border: 1px solid rgb(var(--theme-color-primary));
+    line-height: 1.25rem;
+    padding: 5px;
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+
+}
+.action:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--theme-color-primary));
+    border-color: rgb(var(--theme-color-primary));
+}

@@ -1,0 +1,18 @@
+.root {
+    display: grid;
+    row-gap: 0.375rem;
+    font-size: 14px;
+}
+
+.heading {
+    padding-bottom: 0.375rem;
+    font-weight: var(--font-weight-bold);
+}
+
+@media print {  
+    .root {
+        font-size: 12px;
+    }
+
+}
+

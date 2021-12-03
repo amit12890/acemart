@@ -28,7 +28,7 @@
 :global(input),
 :global(select),
 :global(textarea) {
-    color: rgb(var(--text-color));
+    color: rgb(var(--text-color)); 
     font-family: var(--font-family-base);
 }
 
@@ -94,3 +94,18 @@
     cursor: default;
     touch-action: none;
 }
+
+:global(figure) {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+:global(a) {
+    cursor: pointer;
+}
+
+
+

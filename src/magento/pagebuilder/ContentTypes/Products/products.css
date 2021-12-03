@@ -1,0 +1,156 @@
+.root {
+}
+.root a {
+    text-decoration: none;
+}
+
+.error {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.centerMode {
+}
+
+.centerMode :global .slick-slide {
+    opacity: 0.5;
+    transition: 0.3s;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.centerMode :global .slick-slide:hover {
+    opacity: 1;
+}
+
+.centerMode :global .slick-slide.slick-current {
+    opacity: 1;
+}
+
+.products-home-slider .slick-slider .slick-prev,
+.products-home-slider .slick-slider .slickNext {
+    width: 32px;
+    height: 72px;
+}
+
+.products-home-slider {
+    
+}
+
+.galleryItems {
+    composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.css';
+    grid-template-columns: repeat(5, 1fr);
+}
+
+
+
+.root :global .slick-arrow.slick-hidden {
+    display: none;
+}
+
+.root :global .slick-arrow svg {
+    stroke: white;
+}
+
+.root :global .slick-prev,
+.root :global .slick-next {
+    opacity: 0;
+    transition: 0.3s;
+    
+}
+.root:hover :global .slick-prev,
+.root:hover :global .slick-next {
+    opacity: 1;
+}
+
+.root :global .slick-prev {
+    left: -32px;
+}
+
+.root :global .slick-prev svg {
+    transform: rotate(180deg);
+}
+.root :global .slick-prev:before {
+
+    
+}
+
+.root :global .slick-next {
+    right: -32px;
+}
+.root :global .slick-next:before {
+
+}
+
+.root :global .slick-prev,
+.root :global .slick-next {
+    background: rgba(0, 0, 102, 1);
+    border: none;
+    border-radius: 0; 
+    color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    height: 72px;
+    line-height: 0;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 32px;
+    z-index: 101;
+}
+
+@media (max-width: 640px) {
+    .galleryItems {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .centerModeSmall {
+    }
+
+    .centerModeSmall :global .slick-slide {
+        opacity: 0.5;
+        transition: 0.3s;
+    }
+
+    .centerModeSmall :global .slick-slide:hover {
+        opacity: 1;
+    }
+
+    .centerModeSmall :global .slick-slide.slick-current {
+        opacity: 1;
+    }
+}
+
+.carousel {
+    composes: root;
+    composes: root from '../Slider/slider.css';
+}
+    
+.home-slider {
+
+}
+.home-slider .slick-arrow,
+.home-slider .slick-arrow {
+    width: 32px;
+    height: 72px;
+}
+
+.home-slider .slick-prev {
+    left: -32px;
+}
+.home-slider .slick-next {
+    right: -32px;
+}
+
+
+.custombtn{
+    width: 32px;
+    height: 72px;
+    background-color: coral;
+}
+

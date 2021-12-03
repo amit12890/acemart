@@ -1,0 +1,7 @@
+{
+    "signup.formTitle": "Create New Customer Account",
+    "autocomplete.resultSummary": "{resultCount} items",
+    "sortItem.recommended": "Recommended",
+    "sortItem.price_asc": "Price Asc",
+    "sortItem.price_desc": "Price Desc"
+}

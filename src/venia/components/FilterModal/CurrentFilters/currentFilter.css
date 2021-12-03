@@ -1,0 +1,29 @@
+.root {
+    align-items: center;
+    display: inline-grid;
+    gap: 0.5rem;
+    grid-auto-flow: column;
+    justify-content: center;
+    padding: 5px;
+    white-space: nowrap;
+    font-size: var(--fontSize-100); 
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.root svg {
+    width: 14px;
+}
+.root button {
+    padding: 0 3px;
+}
+
+.root:hover button {
+   background-color: rgb(var(--color-gray30));
+}
+
+.root:hover svg {
+    stroke: white;
+}
+

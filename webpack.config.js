@@ -1,6 +1,8 @@
 const { configureWebpack, graphQL } = require('@magento/pwa-buildpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const moduleOverridePlugin = require('./moduleOverrideWebpackPlugin');
+const componentOverrideMapping = require('./componentOverrideMapping');
 
 const {
     getMediaURL,
@@ -147,6 +149,10 @@ module.exports = async env => {
         new LimitChunkCountPlugin({
             maxChunks: 1
         })
+    );
+
+    config.plugins.push(
+        new moduleOverridePlugin(componentOverrideMapping)
     );
 
     return [config, serverConfig];

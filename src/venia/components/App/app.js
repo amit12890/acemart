@@ -12,7 +12,7 @@ import Mask from '../Mask';
 import Navigation from '@magento/venia-ui/lib/components/Navigation';
 import Routes from '@magento/venia-ui/lib/components/Routes';
 import ToastContainer from '@magento/venia-ui/lib/components/ToastContainer';
-import Icon from '@magento/venia-ui/lib/components/Icon';
+import Icon from '../Icon';
 
 import {
     AlertCircle as AlertCircleIcon,

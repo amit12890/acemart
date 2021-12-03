@@ -1,0 +1,143 @@
+.root {
+    align-content: flex-start;
+    border-bottom: 1px solid rgb(var(--color-gray-light01));
+    display: grid;
+    position: relative;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    row-gap: 1rem;
+}
+.root:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.root:first-child {
+    padding-top: 0;
+}
+
+
+
+.root_updated {
+    composes: root;
+    animation: flash var(--venia-global-anim-bounce) 640ms 2;
+}
+
+.confirmDeleteContainer {
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    height: 100%;
+    justify-items: center;
+    left: 0;
+    padding: 1.25rem 2rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.confirmDeleteButton {
+    composes: root_normalPriorityNegative from '../Button/button.css';
+    background-color: white;
+    order: 1;
+    color: rgb(var(--color-red));
+}
+.cancelDeleteButton {
+    composes: root_lowPriority from '../Button/button.css';
+
+    background-color: white;
+}
+
+.contentContainer {
+    display: grid;
+    row-gap: 0.125rem;
+    font-size: 14px;
+}
+
+.actionContainer {
+display: flex;
+    justify-items: start;
+    
+}
+
+.defaultBadge {
+    width: max-content;
+    padding: 0.375rem 1.5rem;
+    margin-bottom: 0.25rem;
+    border: 1px solid rgb(var(--venia-global-color-gray-400));
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.name {
+    font-weight: var(--font-weight-bold);
+}
+
+.telephone {
+    margin-top: 0.5rem;
+}
+
+.linkButton {
+    composes: root from '../LinkButton/linkButton.css';
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: rgb(var(--theme-color-primary));
+    text-decoration: underline;
+    font-weight: var(--font-weight-bold);
+
+}
+
+.linkButton:hover {
+    text-decoration: none;
+}
+
+.editButton {
+    composes: linkButton;
+    margin-right: 25px;
+}
+
+.deleteButton {
+    composes: linkButton;
+
+}
+
+@media (max-width: 640px) {
+    .root {
+        padding: 1rem;
+    }
+
+    .confirmDeleteContainer {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+    }
+
+    .confirmDeleteButton {
+        order: 0;
+    }
+}
+
+@media (max-width: 384px) {
+    .actionLabel {
+        display: none;
+    }
+
+    .linkButton {
+        padding: 0 0.25rem 0.25rem;
+    }
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

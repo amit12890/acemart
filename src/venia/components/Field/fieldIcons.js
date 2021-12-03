@@ -11,7 +11,7 @@ const FieldIcons = props => {
 
     const style = {
         '--iconsBefore': before ? 1 : 0,
-        '--iconsAfter': after ? 1 : 0
+        '--iconsAfter': after ? 1 : 1
     };
 
     return (

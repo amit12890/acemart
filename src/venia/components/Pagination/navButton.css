@@ -1,0 +1,16 @@
+.root {
+    composes: root from './tile.css';
+}
+
+.icon {
+    composes: root from '../Icon/icon.css';
+}
+
+.root:hover svg {
+    stroke: white;
+}
+
+.icon_disabled {
+    composes: icon;
+    --stroke: rgb(var(--venia-global-color-text-hint));
+}

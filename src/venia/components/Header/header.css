@@ -8,7 +8,7 @@
 }
 
 .switchersContainer {
-    display: none;
+    
 }
 
 .open {
@@ -20,44 +20,25 @@
 }
 
 .toolbar {
-    z-index: 3;
     align-content: center;
     align-items: center;
-    display: grid;
-    grid-template-areas: 'primary title secondary';
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 3rem;
-    justify-items: center;
-    max-width: var(--venia-global-maxWidth);
-    min-height: var(--venia-global-header-minHeight);
-    padding: 0 0.5rem;
-    width: 100%;
+    display: flex;
 }
 
 @media (min-width: 641px) {
     .switchers {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: max-content;
-        justify-content: flex-end;
-        max-width: var(--venia-global-maxWidth);
-        width: 100%;
         position: relative;
         z-index: 11;
         margin: 0 auto;
     }
 
     .switchersContainer {
-        display: block;
         width: 100%;
-        background-color: rgb(var(--color-gray-light0));
     }
 
     .toolbar {
-        grid-template-areas: 'primary title secondary';
-        grid-template-columns: auto auto 1fr;
-        min-height: var(--venia-global-header-minHeight);
-        padding: 0 1rem;
+
+        
     }
 }
 
@@ -105,7 +86,9 @@
     composes: input from '../TextInput/textInput.css';
     max-width: 24rem;
 }
-
+.svgIcon {
+    fill: currentColor;
+}
 .loader,
 .loader:before,
 .loader:after {
@@ -146,6 +129,10 @@
     left: 3.5em;
 }
 
+.storeLocationWrapper {
+    
+}
+
 @media (min-width: 1024px) {
     .logoContainer {
         grid-column: 1 / 2;
@@ -159,6 +146,9 @@
 
     .toolbar {
         grid-template-columns: 0.5fr 0.5fr 3fr 1fr;
+    }
+    .storeLocationWrapper {
+        width: 250px;
     }
 }
 
@@ -180,7 +170,19 @@
     top: 0;
     width: 100%;
     z-index: 10;
+    display: flex;
+
+    
 }
+
+.navSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+
 
 .panelWrapper {
     display: flex;
@@ -191,15 +193,18 @@
 .headerNotice {
     padding: 6px;
     text-align: center;
-    background-color: rgb(var(--color-gray-light02));
+    background-color: rgb(var(--color-gray40));
     color: rgb(var(--color-gray20));
+}
+.baloonIcon {
+    margin-right: 10px;
 }
 
 .panelBody {
-    max-width: 1366px;
+    max-width: var(--venia-global-maxWidth);
     width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: var(--layout-indent-width);
+    padding-right: var(--layout-indent-width);
 }
 
 .pageTop {
@@ -208,8 +213,9 @@
     text-align: center;
 }
 
+
 .topMenuWrapper {
-    background-color: rgb(var(--color-gray-middle1));
+    background-color: rgb(var(--color-gray10));
     color: rgb(var(--color-white));
 }
 
@@ -227,22 +233,33 @@
 }
 .pageTop .action {
     padding: 0;
+    color: rgb(var(--text-color));
 }
 .pageTop .action:hover {
-    background-color: none;
+    
+    background-color: transparent;
 }
 .action {
+    color: rgb(var(--color-white)); 
     padding: 5px;
     display: inline-flex;
     align-items: center;
+    font-size: 15px;
 }
 .action:hover {
-    background-color: rgb(var(--color-gray-light03));
+    background-color: rgb(var(--color-gray30));
 }
 
 .leftMenu {
     flex-grow: 1; 
     margin-right: 20px;
+}
+
+.leftMenu .iconWrapper{
+    margin-right: 5px;
+}
+.leftMenu .iconWrapper div {
+    display: flex;
 }
 
 .rightMenu { 
@@ -255,10 +272,10 @@
 }
 
 .rightLinks li{
-    margin-left: 10px;
+    
 }
 .iconWrapper {
-    margin-left: 10px;
+    margin-left: 5px;
     margin-right: 5px;
     display: inline-flex;
 }
@@ -276,19 +293,30 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
+.logowrapper {
+    margin-right: 20px;
+}
 
 .csContainer {
     display: flex;
     align-items: center;
+    color: rgb(var(--theme-color-primary));
+
+}
+
+.csContainer .iconWrapper {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .csContent {
     display: flex;
     flex-direction: column;
-    color: rgb(var(--theme-color-primary));
+    
 }
 .csLabel {
     font-size: var(--fontSize-300);
@@ -298,3 +326,28 @@
     font-size: var(--fontSize-500);
     line-height: var(--fontSize-500);
 }
+.csAction:hover {
+    color: rgb(var(--text-color));
+}
+
+.searchBarWrapper {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+}
+
+
+@media print {
+    .headerNotice,
+    .topMenuWrapper,
+    .switchers,
+    .csContainer,
+    .searchBarWrapper,
+    .storeLocationWrapper,
+    .toolbar,
+    .navContainer {
+        display: none;
+    }
+}
+

@@ -62,7 +62,7 @@
 
 .title {
     text-align: center;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     color: rgb(var(--theme-color-primary));
     font-size: var(--fontSize-600);
@@ -103,7 +103,7 @@
 }
 
 .loginBlock .label {
-    justify-content: center;
+    
     
 }
 
@@ -144,7 +144,7 @@ h2 {
 
 h3 {
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: var(--font-weight-bold);;
     font-size: 18px;
     text-transform: uppercase;
 }
@@ -231,7 +231,5 @@ h3 {
 
 .password_label {
     composes: label from '../Field/field.css';
-    justify-content: center;
-    
-    
+   
 }

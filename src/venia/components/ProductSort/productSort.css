@@ -1,0 +1,84 @@
+.root {
+    position: relative;
+    margin-left: 0.5rem;
+}
+
+.menu {
+    position: absolute;
+    z-index: 2;
+    top: 110%;
+    right: 0;
+    min-width: 10rem;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: black;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgb(var(--venia-global-color-gray-dark));
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.menuItem {
+    border-bottom: 1px solid rgb(var(--venia-global-color-gray-dark));
+}
+
+.menuItem:last-child {
+    border-bottom: none;
+}
+
+.menuItem:hover {
+    background-color: rgb(var(--venia-global-color-gray));
+}
+
+.sortButton {
+    composes: root_lowPriority from '../../components/Button/button.css';
+    border-width: 1px;
+    border-color: rgb(var(--border-color-light));
+    border-radius: 0;
+    font-weight: var(--venia-global-fontWeight-normal);
+    color: rgb(var(--text-color));
+    text-transform: none;
+    padding: 5px 15px;
+}
+.sortButton:hover {
+    background-color: transparent;
+    color: rgb(var(--text-color));
+}
+
+.sortButton svg {
+    width: 15px;
+}
+
+.desktopText {
+    display: none;
+}
+
+.sortText {
+    line-height: 24px;
+    font-size: var(--fontSize-100);
+    margin-right: 10px;
+}
+
+.desktopIconWrapper {
+    composes: root from '../Icon/icon.css';
+    transform: translateX(10px);
+}
+
+.desktopIcon {
+    composes: icon from '../Icon/icon.css';
+    stroke: rgb(var(--venia-global-color-gray-500));
+}
+
+@media (min-width: 1024px) {
+
+    .mobileText {
+        display: none;
+    }
+
+    .desktopText {
+        display: inline-flex;
+    }
+}

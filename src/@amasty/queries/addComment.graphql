@@ -1,0 +1,29 @@
+mutation addAdvComment(
+  $reviewId: Int!
+  $nickname: String
+  $email: String
+  $message: String!
+) {
+  addAdvComment(
+    input: {
+      review_id: $reviewId
+      nickname: $nickname
+      email: $email
+      message: $message
+    }
+  ) {
+    success
+    review {
+      comments {
+        id
+        review_id
+        status
+        message
+        nickname
+        email
+        created_at
+        updated_at
+      }
+    }
+  }
+}

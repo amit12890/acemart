@@ -1,0 +1,32 @@
+.root {
+}
+
+.ads-banner-image {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ads-banner-image.first {
+    padding-left: 0;
+}
+.ads-banner-image.forth {
+    padding-right:0;
+}
+
+.resources-item {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.resources-item.first {
+    padding-left: 0;
+}
+.resources-item.last {
+    padding-right: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .root {
+        background-attachment: scroll !important;
+        flex-basis: 100%;
+    }
+}

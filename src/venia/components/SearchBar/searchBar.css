@@ -1,15 +1,15 @@
 .root {
     align-items: center;
-    display: none;
     justify-items: center;
     max-width: var(--venia-global-maxWidth);
-    padding: 0 1rem;
+    padding: 0 20px;
     width: 100%;
+    max-width: 475px;
 }
 
 .root_open {
     composes: root;
-    display: grid;
+    
 }
 
 .form {
@@ -23,10 +23,10 @@
     align-items: center;
     display: inline-flex;
     justify-content: center;
-    max-width: 24rem;
     padding-bottom: 1rem;
     position: relative;
     width: 100%;
+    z-index: 11;
 }
 
 .search {

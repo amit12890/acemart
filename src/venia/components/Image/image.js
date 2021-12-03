@@ -140,7 +140,7 @@ const conditionallyRequiredString = (props, propName, componentName) => {
 };
 
 Image.propTypes = {
-    alt: string.isRequired,
+    alt: string,
     classes: shape({
         container: string,
         loaded: string,

@@ -27,17 +27,12 @@ const AccountSideBar = props => {
         {
             name: 'Address Book',
             id: 3,
-            url: '/customer/address/new/'
+            url: '/customer/address/'
         },
         {
             name: 'Account Information',
             id: 4,
             url: '/customer/account/edit/'
-        },
-        {
-            name: 'Stored Payment Methods',
-            id: 5,
-            url: '/vault/cards/listaction/'
         },
         {
             name: 'My Product Reviews',
@@ -60,15 +55,19 @@ const AccountSideBar = props => {
 
     return (
         <div className={classes.root}>
-            {sidebarItems.map(item => {
-                const linkClass = item.url === props.activeUrl ?
-                    [classes.link, classes.link_active].join(" ") : classes.link
-                return (
-                    <Link className={linkClass} key={item.id} to={item.url}>
-                        {item.name}
-                    </Link>
-                );
-            })}
+            <ul>
+                {sidebarItems.map(item => {
+                    const linkClass = item.url === props.activeUrl ?
+                        [classes.link, classes.link_active].join(" ") : classes.link
+                    return (
+                        <li key={item.id} className={[classes.navItem, classes.item].join(" ")}>
+                            <Link className={linkClass} to={item.url}>
+                                <span>{item.name}</span>
+                            </Link>
+                        </li>
+                    );
+                })}
+            </ul>
         </div>
     );
 };

@@ -1,17 +1,46 @@
+.root {
+    background-color: #eee;
+}
 .wrapper {
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
+    
 }
+.navItem {
+    border-top: 1px solid #fff;
+}
+.navItem:first-child {
+    margin-top: 0;
+    border-top: none;
+}
+
+.item {
+    
+}
+
 
 .link {
     cursor: pointer;
-    display: flex;
-    padding: 15px;
-    flex: 1 1;
+    border-left: 5px solid transparent;
+    color: #575757;
+    display: block;
+    padding: 15px 20px;
+    font-size: var(--fontSize-200);
 }
 
-.link_active {
-    font-weight: bold;
+.link:hover {
+    background-color: #e8e8e8;
+    
 }
+
+.link_active {  
+    font-weight: var(--font-weight-bold);
+    border-left-color: rgb(var(--theme-color-primary));
+    color: rgb(var(--color-black));
+    
+    
+}
+
+
