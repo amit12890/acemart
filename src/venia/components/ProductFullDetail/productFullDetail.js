@@ -33,6 +33,7 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
+import ProductDetailsCarousel from '../ProductImageCarousel/productDetailsCarousel';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -256,9 +257,7 @@ const ProductFullDetail = props => {
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
                         {/* Carousel */}
-                        <Carousel
-                            images={mediaGalleryEntries}
-                            media_gallery={media_gallery} />
+                        <ProductDetailsCarousel media_gallery={media_gallery} />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}
@@ -509,7 +508,7 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
                                             <span>
-                                                {product.ship_time}
+                                                <RichText content={product.ship_time} />
                                             </span>
                                         </div>
 
@@ -536,13 +535,6 @@ const ProductFullDetail = props => {
                                                 })}
                                             </div>
                                         }
-
-                                        <div className={classes.shippingNote}>
-                                            <h3>Note</h3>
-                                            <span>
-                                                Supply chain issues are creating longer lead times than normal. Contact customer service for help on a time-specific order.
-                                            </span>
-                                        </div>
                                     </div>
 
                                     {/* Product Add To Links */}
