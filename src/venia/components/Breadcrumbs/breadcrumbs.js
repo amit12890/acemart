@@ -4,6 +4,7 @@ import { number, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'react-feather'
 
+import RichText from '../RichText';
 import { useBreadcrumbs } from '../../../magento/peregrine/talons/Breadcrumbs/useBreadcrumbs';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
@@ -62,7 +63,7 @@ const Breadcrumbs = props => {
     const currentProductNode = currentProduct ? (
         <Fragment>
             <span className={classes.divider}><ChevronRight /></span>
-            <span className={classes.currentState}>{currentProduct}</span>
+            <span className={classes.currentState}><RichText content={currentProduct} /></span>
         </Fragment>
     ) : null;
 

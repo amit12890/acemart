@@ -5,8 +5,9 @@ import { useProduct } from '../../magento/peregrine/talons/Product/useProduct';
 import ErrorView from '@magento/venia-ui/lib/components/ErrorView';
 import { StoreTitle, Meta } from '@magento/venia-ui/lib/components/Head';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import ProductFullDetail from "../../venia/components/ProductFullDetail"
+import ProductFullDetail from '../../venia/components/ProductFullDetail';
 import mapProduct from '@magento/venia-ui/lib/util/mapProduct';
+import { unescape } from 'lodash-es';
 
 /*
  * As of this writing, there is no single Product query type in the M2.3 schema.
@@ -40,7 +41,7 @@ const Product = () => {
 
     return (
         <Fragment>
-            <StoreTitle>{product.name}</StoreTitle>
+            <StoreTitle>{unescape(product.product_name)}</StoreTitle>
             <Meta name="description" content={product.meta_description} />
             <ProductFullDetail product={product} />
         </Fragment>
