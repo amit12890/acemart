@@ -41,7 +41,7 @@ const Product = () => {
 
     return (
         <Fragment>
-            <StoreTitle>{unescape(product.product_name)}</StoreTitle>
+            <StoreTitle>{unescape(product.name)}</StoreTitle>
             <Meta name="description" content={product.meta_description} />
             <ProductFullDetail product={product} />
         </Fragment>
