@@ -4,7 +4,8 @@
 
 }
 
-.input:focus {
+.input:focus,
+.input:focus-visible {
     border-color: rgb(var(--theme-color-secondary));
 }
 .input:disabled {

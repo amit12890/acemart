@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .authorIcon {
@@ -38,7 +38,7 @@
   align-items: center;
   font-weight: bold;
   color: rgb(var(--color-black));
-  font-size: var(--fontSize-100);
+  font-size: var(--fontSize-200);
   margin-bottom: 10px;
 }
 
@@ -95,7 +95,6 @@
 @media (min-width: 768px) {
   .authorDetails {
     display: block;
-    padding-right: 1rem;
   }
 
   .recomended {
@@ -120,7 +119,7 @@
 
 @media (min-width: 768px) {
   .descriptionRoot {
-    width: calc(100% - 300px);
+    
   }
 }
 

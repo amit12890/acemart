@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
  * @version 6f3669c-dev
+=======
+ * @version a75e51a-dev
+>>>>>>> origin/development
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[61],{BPA2:function(e,t,a){"use strict"

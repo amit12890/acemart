@@ -14,8 +14,8 @@
 }
 
 .legendLabel {
-text-transform: uppercase;
-font-size: 10px;
+  text-transform: uppercase;
+  font-size: 10px;
 }
 
 .legendProductName {
@@ -24,7 +24,7 @@ font-size: 10px;
 }
 
 .field {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   display: flex;
 }
 
@@ -41,6 +41,10 @@ font-size: 10px;
   margin-bottom: 0.5rem;
 }
 
+.fieldCheckbox checkbox {
+
+}
+
 .fieldCheckbox + .fieldCheckbox {
   padding-top: 0;
 }
@@ -49,7 +53,12 @@ font-size: 10px;
   margin: 0 0 0.5rem 0;
 }
 
+.actionToolbar {
+  display: flex;
+}
+
 .actionToolbar button {
+  
   --stroke: var(--theme-color-primary);
   background-color: rgb(var(--stroke));
   color: rgb(var(--color-white));
@@ -98,4 +107,42 @@ font-size: 10px;
 .successMessage svg {
   stroke: rgba(var(--venia-global-color-teal));
   margin-right: 0.5rem;
+}
+
+.reviewFormField {
+  
+}
+
+.reviewFormFileField input {
+  border-radius: 0;
+  border: none;  
+  padding: 0;
+  background-color: transparent;
+}
+
+.reviewFormFileField input:focus{
+  box-shadow: none;
+}
+
+.reviewFormFileField {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.reviewFormField input,
+.reviewFormField textarea {
+  border-radius: 0;
+  border: 1px solid rgb(var(--border-color-base));
+  
+}
+
+.reviewFormField input:focus,
+.reviewFormField textarea:focus {
+  box-shadow: none;
+}
+
+.fieldCheckbox {
+
 }

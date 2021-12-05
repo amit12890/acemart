@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
  * @version 6f3669c-dev
+=======
+ * @version a75e51a-dev
+>>>>>>> origin/development
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[12],{"0E3n":function(e,a,i){"use strict"

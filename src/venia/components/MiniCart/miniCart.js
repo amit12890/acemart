@@ -153,19 +153,19 @@ const MiniCart = React.forwardRef((props, ref) => {
                             id={'miniCart.checkout'}
                             defaultMessage={'CHECKOUT'}
                         />
-                </Button>
-                <Button
-                    onClick={handleEditCart}
-                    priority="high"
-                    className={classes.editCartButton}
-                    disabled={loading || isCartEmpty}
-                >
-                    <FormattedMessage
-                        id={'miniCart.editCartButton'}
-                        defaultMessage={'Edit Shopping Bag'}
-                    />
-                </Button>
-            </div>
+                    </Button>
+                    <Button
+                        onClick={handleEditCart}
+                        priority="high"
+                        className={classes.editCartButton}
+                        disabled={loading || isCartEmpty}
+                    >
+                        <FormattedMessage
+                            id={'miniCart.editCartButton'}
+                            defaultMessage={'Edit Shopping Bag'}
+                        />
+                    </Button>
+                </div>
             </div>
         </Fragment>
     );

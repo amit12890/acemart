@@ -81,16 +81,18 @@
 }
 
 .labelWrapper {
-    display: flex; 
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 }
 
-.labelItem {
+/* .labelItem {
     background-image: var(--productLabel);
     background-repeat: no-repeat;
     width: 45px;
     height: 45px;
-    background-size: 195px;
-    margin-left: 5px;;
+    background-size: 190px;
+    margin-left: 5px;
 }
 
 .labelItem:first-child {
@@ -101,8 +103,9 @@
     font-size: 0;
 }
 
+
 .storePickup {
-    background-position: -140px -75px;
+    background-position: -6px -6px;
 }
 
 .onSale {
@@ -126,6 +129,11 @@
 .newItem {
     background-position: -75px ​-10px;
 }
+.newItems {
+    background-position: -75px -10px;
+}
+
+
 .disallowPickupatstore {
     background-position: -10px -10px;
 }
@@ -136,6 +144,52 @@
 
 .blackFriday {
     background-position: -10px -10px;
+} */
+
+
+.labelItem {
+    background-image: var(--productLabel);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    background-size: 190px;
+    margin-left: 5px;
+}
+
+.labelItem:first-child {
+    margin-left: 0;
+}
+
+.labelItem  span {
+    font-size: 0;
+}
+
+.onSale {
+    background-position: -134px -70px;
+}
+
+.freeShipping {
+    background-position: -134px -6px;
+}
+
+.onlinePricing {
+    background-position: -70px -70px;
+   
+}
+
+.bulkSavings {
+    background-position: -6px -70px;
+}
+
+.newItems {
+    background-position: -70px -6px;
+}
+.storePickup {
+    background-position: -6px -6px;
+}
+
+.blackFriday {
+    background-position: -6px -6px;
 }
 
 
