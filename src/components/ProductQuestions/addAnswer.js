@@ -4,11 +4,11 @@ import { CheckCircle as CheckIcon } from 'react-feather';
 
 import { Form } from 'informed';
 
-import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
-import TextInput from '@magento/venia-ui/lib/components/TextInput';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
+import Checkbox from '../../venia/components/Checkbox';
+import TextInput from '../../venia/components/TextInput';
 import Button from '../../venia/components/Button';
 import Field from '../../venia/components/Field';
 
