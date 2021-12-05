@@ -76,13 +76,9 @@ const QuestionBlock = ({ questions }) => {
     useEffect(() => {
         // setup fuse search
         const options = {
-            shouldSort: true,
-            // tokenize: true,
             findAllMatches: true,
             threshold: 0.8,
-            location: 0,
             distance: 32,
-            maxPatternLength: 32,
             minMatchCharLength: 2,
             keys: ['content']
         };
@@ -111,7 +107,8 @@ const QuestionBlock = ({ questions }) => {
 
     const filteredQuestions = useMemo(() => {
         if (searchToken.length > 2) {
-            return fuseSearch.current.search(searchToken);
+            const result = fuseSearch.current.search(searchToken);
+            return result.map((d) => d.item)
         } else {
             return questions;
         }
