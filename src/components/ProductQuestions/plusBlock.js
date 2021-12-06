@@ -24,6 +24,7 @@ export default function PlusBlock(props) {
             }}
             onClick={handleClick}
         >
+
             {loading ? 'Loading' : 'Plus'}
         </div>
     );

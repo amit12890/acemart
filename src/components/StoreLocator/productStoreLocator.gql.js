@@ -29,6 +29,7 @@ query getAvailableProductStoresData($productId:Int){
                 sat
                 sun
             }
+            map
             temporary_closure
             fax
             driving_directions

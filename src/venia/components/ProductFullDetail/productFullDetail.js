@@ -25,6 +25,9 @@ import Carousel from '../ProductImageCarousel';
 import SharePopup from '../../../components/SharePopup';
 import LabelsPopup from '../../../components/LabelsPopup';
 
+import Image from '../Image';
+import smallWarning from '../../../assets/small_warning.png';
+
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
@@ -60,6 +63,7 @@ const ProductFullDetail = props => {
     const { pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
+    console.log(product)
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
@@ -443,13 +447,13 @@ const ProductFullDetail = props => {
                                     </div>
 
                                     {!!pos_stock_manage.stock_label &&
-                                        <div>{pos_stock_manage.stock_label}</div>
+                                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
                                     }
                                     {/* Product Stock Avialability */}
                                     {!!pos_stock_manage.stock_final_label &&
                                         <div className={classes.apSectionRow}>
                                             <div className={classes.stock}>
-                                                {pos_stock_manage.stock_final_label}
+                                                <span className={[classes.availability, classes.outofStock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
                                             </div>
                                         </div>
                                     }
@@ -510,7 +514,7 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
                                             <span>
-                                                {product.ship_time}
+                                                <RichText content={product.ship_time} />
                                             </span>
                                         </div>
 
@@ -537,13 +541,6 @@ const ProductFullDetail = props => {
                                                 })}
                                             </div>
                                         }
-
-                                        <div className={classes.shippingNote}>
-                                            <h3>Note</h3>
-                                            <span>
-                                                Supply chain issues are creating longer lead times than normal. Contact customer service for help on a time-specific order.
-                                            </span>
-                                        </div>
                                     </div>
 
                                     {/* Product Add To Links */}
@@ -677,9 +674,14 @@ const ProductFullDetail = props => {
                         <RichText content={productDetails.description} />
                     </div>
                     <br />
-                    <div onClick={openCaliforniaPopup} style={{ color: "blue" }}>
-                        California Residents:
-                        Proposition 65 Information
+                    <div className={classes.californiaResident} onClick={openCaliforniaPopup}>
+                        <div className={classes.iconWarning}>
+                            <Image src={smallWarning} />
+                        </div>
+                        <div className={classes.warningContent}>
+                            California Residents:<br />
+                            Proposition 65 Information
+                        </div>
                     </div>
 
                 </section>

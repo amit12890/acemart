@@ -153,19 +153,19 @@ const MiniCart = React.forwardRef((props, ref) => {
                             id={'miniCart.checkout'}
                             defaultMessage={'CHECKOUT'}
                         />
-                </Button>
-                <Button
-                    onClick={handleEditCart}
-                    priority="high"
-                    className={classes.editCartButton}
-                    disabled={loading || isCartEmpty}
-                >
-                    <FormattedMessage
-                        id={'miniCart.editCartButton'}
-                        defaultMessage={'Edit Shopping Bag'}
-                    />
-                </Button>
-            </div>
+                    </Button>
+                    <Button
+                        onClick={handleEditCart}
+                        priority="high"
+                        className={classes.editCartButton}
+                        disabled={loading || isCartEmpty}
+                    >
+                        <FormattedMessage
+                            id={'miniCart.editCartButton'}
+                            defaultMessage={'Edit Shopping Bag'}
+                        />
+                    </Button>
+                </div>
             </div>
         </Fragment>
     );
@@ -173,6 +173,7 @@ const MiniCart = React.forwardRef((props, ref) => {
     return (
         <aside className={rootClass}>
             <div ref={ref} className={contentsClass}>
+                <div onClick={() => setIsOpen(false)}>Close</div>
                 {contents}
             </div>
         </aside>

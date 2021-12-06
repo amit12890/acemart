@@ -9,8 +9,10 @@ import { useQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
 import { get, size, range } from 'lodash';
 
-import Button from '../../venia/components/Button';
 import { useStyle } from '@magento/venia-ui/lib/classify';
+import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
+
+import Button from '../../venia/components/Button';
 import defaultClasses from './productQuestions.css';
 import AddQuestion from './addQuestion';
 import AddAnswer from './addAnswer';
@@ -27,6 +29,15 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
+
+const options = [
+    { value: '7', label: 'Most Recent Questions' },
+    { value: '8', label: 'Oldest Questions' },
+    { value: '9', label: 'Questions With The Most Helpful Answers' },
+    { value: '10', label: 'Questions With Most Recent Answers' },
+    { value: '11', label: 'Questions With  Oldest Answers' },
+    { value: '12', label: 'Questions With Most Answers' },
+];
 
 const ProductQuestionsBlock = ({ productId }) => {
     const classes = useStyle(defaultClasses);
@@ -60,14 +71,16 @@ const ProductQuestionsBlock = ({ productId }) => {
     }
 
     return (
-        <div>
-            <div>{content}</div>
+        <div className={classes.qaWrapper}>
+            <div className={classes.qaContainer}>{content}</div>
             <AddQuestion productId={productId} />
         </div>
     );
 };
 
 const QuestionBlock = ({ questions }) => {
+    const { elementRef, expanded, setExpanded } = useDropdown();
+
     const classes = useStyle(defaultClasses);
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
@@ -76,15 +89,14 @@ const QuestionBlock = ({ questions }) => {
     useEffect(() => {
         // setup fuse search
         const options = {
-            shouldSort: true,
-            // tokenize: true,
             findAllMatches: true,
             threshold: 0.8,
-            location: 0,
             distance: 32,
-            maxPatternLength: 32,
             minMatchCharLength: 2,
-            keys: ['content']
+            keys: [
+                'content',
+                'answer.content',
+            ],
         };
         fuseSearch.current = new Fuse(questions, options);
     }, [questions]);
@@ -111,123 +123,205 @@ const QuestionBlock = ({ questions }) => {
 
     const filteredQuestions = useMemo(() => {
         if (searchToken.length > 2) {
-            return fuseSearch.current.search(searchToken);
+            const result = fuseSearch.current.search(searchToken);
+            return result.map((d) => d.item)
         } else {
             return questions;
         }
     }, [searchToken, questions]);
 
+    // expand or collapse on click
+    const handleSortClick = () => {
+        setExpanded(!expanded);
+    };
+
+    // click event for menu items
+    const handleItemClick = useCallback(
+        sortAttribute => {
+            console.log('sortAttribute', sortAttribute);
+            setExpanded(false);
+        },
+        [setExpanded]
+    );
+
+    const sortElements = useMemo(() => {
+        // should be not render item in collapsed mode.
+        if (!expanded) {
+            return null;
+        }
+
+        const itemElements = options.map((sortItem, ind) => {
+            return (
+                <li
+                    key={ind}
+                    className={classes.menuItem}
+                    onClick={() => handleItemClick(sortItem)}
+                >
+                    <div
+                        style={{
+                            color: 'blueviolet',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        {sortItem.label}
+                    </div>
+                </li>
+            );
+        });
+
+        return (
+            <div className={classes.menu}>
+                <ul>{itemElements}</ul>
+            </div>
+        );
+    }, [options, classes.menu, classes.menuItem, expanded, handleItemClick]);
+
     return (
-        <div>
-            <div>
-                <label>Search Q/A</label>
-                <input
-                    placeholder="Search Phrase"
-                    value={searchToken}
-                    onChange={e => setSearchToken(e.target.value)}
-                />
-                <Button onClick={handleResetSearch}>Reset</Button>
-            </div>
-            <div>
-                <label>Sort By</label>
-                <Button onClick={toggleExpandAll}>Expand All</Button>
-            </div>
-
-            {filteredQuestions.map((item, index) => {
-                const ansCount = size(item.answer);
-                let queClass = expandedQuestions.has(index)
-                    ? `${classes.question} ${classes.question_open}`
-                    : classes.question;
-
-                return (
-                    <div key={item.id}>
-                        <div
-                            className={queClass}
-                            onClick={() => handleQueExpandToggle(index)}
-                        >
-                            <div>{item.content}</div>
-                            <div>
-                                {ansCount > 1
-                                    ? `${ansCount} answers`
-                                    : `${ansCount} answer`}
-                            </div>
-                            <div>by {item.nickname}</div>
-                            <div>
-                                <PlusBlock
-                                    mutation={questionRatingPlusMutation}
-                                    variables={{
-                                        question_id: item.id
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <MinusBlock
-                                    mutation={questionRatingMinusMutation}
-                                    variables={{
-                                        question_id: item.id
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <ReportBlock
-                                    mutation={reportQuestionMutation}
-                                    variables={{
-                                        question_id: item.id
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className="answer">
-                            <div>
-                                {!!ansCount
-                                    ? item.answer.map((ans, ind) => {
-                                          return (
-                                              <div key={ans.id}>
-                                                  <div>{ans.content}</div>
-                                                  <div>by {ans.nickname}</div>
-                                                  <div>
-                                                      <PlusBlock
-                                                          mutation={
-                                                              answerRatingPlusMutation
-                                                          }
-                                                          variables={{
-                                                              ans_id: ans.id
-                                                          }}
-                                                      />
-                                                  </div>
-                                                  <div>
-                                                      <MinusBlock
-                                                          mutation={
-                                                              answerRatingMinusMutation
-                                                          }
-                                                          variables={{
-                                                              ans_id: ans.id
-                                                          }}
-                                                      />
-                                                  </div>
-                                                  <div>
-                                                      <ReportBlock
-                                                          mutation={
-                                                              reportAnswerMutation
-                                                          }
-                                                          variables={{
-                                                              ans_id: ans.id
-                                                          }}
-                                                      />
-                                                  </div>
-                                              </div>
-                                          );
-                                      })
-                                    : null}
-                            </div>
-                            <div>
-                                <AddAnswer questionId={item.id} />
-                            </div>
+        <div className={classes.qaContent}>
+            <div className={classes.qaPanelBody}>
+                <div className={classes.panelHeader}>
+                    <div className={classes.qaSearchWrapper}>
+                        <label className={[classes.label, classes.searchLabel].join(" ")}>Search Q/A</label>
+                        <div className={classes.control}>
+                            <input
+                                type="text"
+                                placeholder="Search Phrase"
+                                value={searchToken}
+                                onChange={e => setSearchToken(e.target.value)}
+                            />
+                            <Button onClick={handleResetSearch}>Reset</Button>
                         </div>
                     </div>
-                );
-            })}
-        </div>
+                    <div className={classes.toolbarWrapper}>
+                        <div ref={elementRef}>
+                            <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
+                            {/* default sorted option */}
+                            <Button onClick={handleSortClick}>{options[0].label}</Button>
+                            {sortElements}
+                        </div>
+
+                        <Button onClick={toggleExpandAll}>
+                            <i className={classes.iconWrapper}>
+                                <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                    <title>store</title>
+                                    <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                            </i>
+                            <span>Expand All</span>
+                        </Button>
+                    </div>
+                </div>
+
+
+                {
+                    filteredQuestions.map((item, index) => {
+                        const ansCount = size(item.answer);
+                        let queClass = expandedQuestions.has(index)
+                            ? `${classes.question} ${classes.question_open}`
+                            : classes.question;
+
+                        return (
+                            <div key={item.id} className={classes.questionWrapper}>
+                                <div
+                                    className={queClass}
+                                    onClick={() => handleQueExpandToggle(index)}
+                                >
+                                    <div className={classes.listItemWrapper}>
+                                        <div className={classes.listItem}>
+                                            <div className={classes.leftBlock}>
+                                                <div className={classes.listContent}>{item.content}</div>
+                                                <div className={classes.count}>
+                                                    {ansCount > 1
+                                                        ? `${ansCount} answers`
+                                                        : `${ansCount} answer`}
+                                                </div>
+                                                <div className={classes.nickName}>by {item.nickname}</div>
+                                            </div>
+                                            <div className={classes.rightBlock}>
+                                                <div className={[classes.helper, classes.plus].join(" ")}>
+                                                    <PlusBlock
+                                                        mutation={questionRatingPlusMutation}
+                                                        variables={{
+                                                            question_id: item.id
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div className={[classes.helper, classes.minus].join(" ")}>
+                                                    <MinusBlock
+                                                        mutation={questionRatingMinusMutation}
+                                                        variables={{
+                                                            question_id: item.id
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div className={[classes.helper, classes.reportBlock].join(" ")} >
+                                                    <ReportBlock
+                                                        mutation={reportQuestionMutation}
+                                                        variables={{
+                                                            question_id: item.id
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={classes.answer}>
+
+                                            <div className={classes.actionToolbar}>
+                                                <AddAnswer questionId={item.id} />
+                                            </div>
+                                            {!!ansCount
+                                                ? item.answer.map((ans, ind) => {
+                                                    return (
+                                                        <div key={ans.id} className={classes.anslistItemWrapper}>
+                                                            <div className={classes.answerListItem}>
+                                                                <div className={classes.listContent}>{ans.content}</div>
+                                                            </div>
+                                                            <div className={classes.answerListHelper}>
+                                                                <div className={classes.nickName}>by {ans.nickname}</div>
+                                                                <div className={[classes.helper, classes.plus].join(" ")}>
+                                                                    <PlusBlock
+                                                                        mutation={
+                                                                            answerRatingPlusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id: ans.id
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className={[classes.helper, classes.minus].join(" ")}>
+                                                                    <MinusBlock
+                                                                        mutation={
+                                                                            answerRatingMinusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id: ans.id
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className={[classes.helper, classes.reportBlock].join(" ")} >
+                                                                    <ReportBlock
+                                                                        mutation={
+                                                                            reportAnswerMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id: ans.id
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })
+                                                : null}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        </div >
     );
 };
 
