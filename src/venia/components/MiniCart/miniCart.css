@@ -67,7 +67,6 @@
     display: flex;
     justify-content: space-between;
     padding-top: 15px;
-    flex-direction: column;
 }
 
 .stockStatusMessageContainer {
@@ -88,12 +87,13 @@
 }
 
 .modalClose {
-    display: inline-flex;
+    display: none;
     cursor: pointer;
     position: absolute;
     z-index: 5;
     top: 5px;
     right: 5px;
+
 }
 
 
