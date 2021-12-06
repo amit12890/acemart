@@ -80,6 +80,18 @@ export const CREATE_COMPARE_LIST = gql`
     ${UserCompareListFragment}
 `;
 
+export const ADD_PRODUCTS_TO_COMPARE_LIST = gql`
+    mutation addProductsToCompareList(
+        $input: AddProductsToCompareListInput
+    ) {
+        addProductsToCompareList(input: $input) {
+            uid
+            ...UserCompareListFragment
+        }
+    }
+    ${UserCompareListFragment}
+`;
+
 export const REMOVE_ITEM_FROM_COMPARE_LIST = gql`
     mutation removeProductsFromCompareList(
         $input: RemoveProductsFromCompareListInput

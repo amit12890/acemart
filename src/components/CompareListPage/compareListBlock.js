@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { get } from 'lodash-es';
+import { get, size } from 'lodash-es';
 
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import Button from '../../venia/components/Button';
@@ -15,43 +15,40 @@ import {
 } from './compareListPage.gql';
 import { compareListPage } from '../../url.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useCompareList } from './useCompareList';
 
 
 const CompareListBlock = (props) => {
-    const { uid } = props
+    const { uid, item_count, items } = props
     const classes = useStyle(defaultClasses);
+    const { loadingCompareList, fetchCompareList } = useCompareList()
     const [{ isSignedIn }] = useUserContext();
     console.log("🚀 ~ file: compareListBlock.js ~ line 24 ~ CompareListBlock ~ uid", uid)
 
-    // get compare list
-    const [fetchCompareList, { loading: loadingCompareList, error, data: compareListData }] = useLazyQuery(
-        isSignedIn ? GET_CUSTOMER_COMPARE_LIST : GET_GUEST_COMPARE_LIST, { fetchPolicy: "network-only" }
-    );
-    console.log("🚀 ~ file: compareListBlock.js ~ line 23 ~ CompareListBlock ~ compareListData", compareListData)
 
     useEffect(() => {
         console.log("🚀 ~ file: compareListBlock.js ~ line 35 ~ useEffect ~ uid", uid)
         if (isSignedIn) {
-            fetchCompareList()
+            fetchCompareList({ variables: {} })
         } else {
             fetchCompareList({ variables: { uid } })
         }
     }, [uid, isSignedIn])
 
-    if (loadingCompareList) {
+    if (loadingCompareList && size(items) === 0) {
         return <LoadingIndicator />;
     }
     // data mapping for guest and logged user
-    let hasItems = 0, listId = 0, items = []
-    if (isSignedIn) {
-        hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
-        listId = get(compareListData, 'customer.compare_list.uid')
-        items = get(compareListData, 'customer.compare_list.items', [])
-    } else {
-        hasItems = !!get(compareListData, 'compareList.item_count', props.item_count)
-        listId = get(compareListData, 'compareList.uid', props.uid)
-        items = get(compareListData, 'compareList.items', props.items)
-    }
+    let hasItems = item_count, listId = uid
+    // if (isSignedIn) {
+    //     hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
+    //     listId = get(compareListData, 'customer.compare_list.uid')
+    //     items = get(compareListData, 'customer.compare_list.items', [])
+    // } else {
+    //     hasItems = !!get(compareListData, 'compareList.item_count', props.item_count)
+    //     listId = get(compareListData, 'compareList.uid', props.uid)
+    //     items = get(compareListData, 'compareList.items', props.items)
+    // }
 
     return (
         <div className={classes.root}>
