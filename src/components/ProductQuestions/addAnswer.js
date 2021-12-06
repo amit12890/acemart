@@ -6,6 +6,7 @@ import { Form } from 'informed';
 
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
+import defaultClasses from './productQuestions.css';
 
 import Checkbox from '../../venia/components/Checkbox';
 import TextInput from '../../venia/components/TextInput';

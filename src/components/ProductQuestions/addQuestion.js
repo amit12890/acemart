@@ -5,6 +5,7 @@ import { CheckCircle as CheckIcon } from 'react-feather';
 import { Form } from 'informed';
 
 import Icon from '@magento/venia-ui/lib/components/Icon';
+import defaultClasses from './productQuestions.css';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import Checkbox from '../../venia/components/Checkbox';
@@ -71,7 +72,7 @@ const AddQuestionBlock = ({ productId }) => {
 
     if (showForm) {
         return (
-            <div>
+            <div classes={classes.askQuestionWrapper}>
                 <h2>Ask a New Question</h2>
                 <Form
                     id="add-question-form"
