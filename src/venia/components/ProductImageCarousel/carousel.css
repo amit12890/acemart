@@ -107,3 +107,54 @@
         width: auto;
     }
 }
+
+.portalRoot {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.contentWrapper {
+    background-color: rgb(var(--page-background-color));
+    transform: translate3d(0, -8px, 0);
+    transition-duration: 192ms;
+    transition-property: transform;
+    transition-timing-function: var(--venia-global-anim-out);
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.modalClose {
+    display: inline-flex;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    top: .875rem;
+    right: 1rem;
+}
+
+.modalClose button{
+    width: 24px;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    height: 24px;
+    min-height: auto;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.modalClose .svgIcon {
+    width: 24px;
+    height: 24px;
+    fill: rgb(var(--color-gray-middle3));
+}

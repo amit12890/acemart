@@ -262,7 +262,9 @@ const ProductFullDetail = props => {
                         {/* Carousel */}
                         <Carousel
                             images={mediaGalleryEntries}
-                            media_gallery={media_gallery} />
+                            media_gallery={media_gallery}
+                            allowFullScreen
+                        />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}
