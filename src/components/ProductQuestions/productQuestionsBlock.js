@@ -9,8 +9,10 @@ import { useQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
 import { get, size, range } from 'lodash';
 
-import Button from '../../venia/components/Button';
 import { useStyle } from '@magento/venia-ui/lib/classify';
+import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
+
+import Button from '../../venia/components/Button';
 import defaultClasses from './productQuestions.css';
 import AddQuestion from './addQuestion';
 import AddAnswer from './addAnswer';
@@ -27,6 +29,15 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
+
+const options = [
+    { value: '7', label: 'Most Recent Questions' },
+    { value: '8', label: 'Oldest Questions' },
+    { value: '9', label: 'Questions With The Most Helpful Answers' },
+    { value: '10', label: 'Questions With Most Recent Answers' },
+    { value: '11', label: 'Questions With  Oldest Answers' },
+    { value: '12', label: 'Questions With Most Answers' },
+];
 
 const ProductQuestionsBlock = ({ productId }) => {
     const classes = useStyle(defaultClasses);
@@ -68,6 +79,8 @@ const ProductQuestionsBlock = ({ productId }) => {
 };
 
 const QuestionBlock = ({ questions }) => {
+    const { elementRef, expanded, setExpanded } = useDropdown();
+
     const classes = useStyle(defaultClasses);
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
@@ -114,6 +127,52 @@ const QuestionBlock = ({ questions }) => {
         }
     }, [searchToken, questions]);
 
+    // expand or collapse on click
+    const handleSortClick = () => {
+        setExpanded(!expanded);
+    };
+
+    // click event for menu items
+    const handleItemClick = useCallback(
+        sortAttribute => {
+            console.log('sortAttribute', sortAttribute);
+            setExpanded(false);
+        },
+        [setExpanded]
+    );
+
+    const sortElements = useMemo(() => {
+        // should be not render item in collapsed mode.
+        if (!expanded) {
+            return null;
+        }
+
+        const itemElements = options.map((sortItem, ind) => {
+            return (
+                <li
+                    key={ind}
+                    className={classes.menuItem}
+                    onClick={() => handleItemClick(sortItem)}
+                >
+                    <div
+                        style={{
+                            color: 'blueviolet',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        {sortItem.label}
+                    </div>
+                </li>
+            );
+        });
+
+        return (
+            <div className={classes.menu}>
+                <ul>{itemElements}</ul>
+            </div>
+        );
+    }, [options, classes.menu, classes.menuItem, expanded, handleItemClick]);
+
     return (
         <div className={classes.qaContent}>
             <div className={classes.qaPanelBody}>
@@ -131,7 +190,13 @@ const QuestionBlock = ({ questions }) => {
                         </div>
                     </div>
                     <div className={classes.toolbarWrapper}>
-                        <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
+                        <div ref={elementRef}>
+                            <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
+                            {/* default sorted option */}
+                            <Button onClick={handleSortClick}>{options[0].label}</Button>
+                            {sortElements}
+                        </div>
+
                         <Button onClick={toggleExpandAll}>
                             <i className={classes.iconWrapper}>
                                 <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
