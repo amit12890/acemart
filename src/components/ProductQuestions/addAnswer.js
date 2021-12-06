@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CheckCircle as CheckIcon } from 'react-feather';
 
-import { Form } from 'informed';
+import { Form, Relevant } from 'informed';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
@@ -34,10 +34,9 @@ const AddAnswerBlock = ({ questionId }) => {
                 nickname_answer: formValues.nickname_answer,
                 answer: formValues.answer,
                 newsletter: formValues.newsletter ? 1 : 0,
-                newsletter_email:
-                    formValues.newsletter && isSignedIn
-                        ? currentUser.email
-                        : '',
+                // required string
+                newsletter_email: (isSignedIn ? 
+                    currentUser.email : formValues.newsletter_email) || "",
                 // need purpose
                 status: 4
             };
@@ -100,6 +99,19 @@ const AddAnswerBlock = ({ questionId }) => {
                                 validateOnBlur
                             />
                         </div>
+                        <Relevant when={({ values }) => {
+                            return (values.newsletter && !isSignedIn)
+                        }}>
+                            <div className={classes.qaFieldWrapper}>
+                                <TextInput
+                                    field="newsletter_email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="Please, enter email"
+                                    validate={isRequired}
+                                />
+                            </div>
+                        </Relevant>
                         <div className={classes.actionToolbar}>
                             <Button
                                 disabled={loading}
