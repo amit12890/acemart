@@ -4,14 +4,14 @@
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
   "balloons.png": "/balloons-miQ.png",
   "bulk-savings.png": "/bulk-savings-mhz.png",
-  "client.js": "/client.99dbc989cda3b27decfe.js",
+  "client.js": "/client.ceba3a8af568c62e88db.js",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
     "client": {
       "js": [
         "/runtime.4cc28920fb5f1f643f8a.js",
         "/vendors.e7e41707c85ac79c2470.js",
-        "/client.99dbc989cda3b27decfe.js"
+        "/client.ceba3a8af568c62e88db.js"
       ]
     }
   },
@@ -41,7 +41,7 @@
     "load": [
       "/runtime.4cc28920fb5f1f643f8a.js",
       "/vendors.e7e41707c85ac79c2470.js",
-      "/client.99dbc989cda3b27decfe.js"
+      "/client.ceba3a8af568c62e88db.js"
     ],
     "prefetch": [
       "/RootCmp_CATEGORY__default.edf6b09ae77237766e8f.js",
@@ -51,7 +51,7 @@
   "js": {
     "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.edf6b09ae77237766e8f.js",
     "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.85c59602aa884a4e3297.js",
-    "client": "/client.99dbc989cda3b27decfe.js",
+    "client": "/client.ceba3a8af568c62e88db.js",
     "i18n-en_US": "/i18n-en_US.11a1768218246f931f59.js",
     "runtime": "/runtime.4cc28920fb5f1f643f8a.js",
     "vendors": "/vendors.e7e41707c85ac79c2470.js",

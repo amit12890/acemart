@@ -1,5 +1,5 @@
 /*!
- * @version 3471dc4-dev
+ * @version 564f25a-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[13],{LUbv:function(t,e,n){(e=t.exports=n("JPst")(!1)).push([t.i,"@media only screen and (max-width: 768px) {\n    .columnGroup-root-2Yu {\n        flex-wrap: wrap;\n    }\n}\n",""]),e.locals={root:"columnGroup-root-2Yu"}},LnOV:function(t,e,n){"use strict"
