@@ -1,5 +1,13 @@
 /*!
+<<<<<<< HEAD
  * @version 1c953b0-dev
+=======
+<<<<<<< HEAD
+ * @version 6f3669c-dev
+=======
+ * @version a75e51a-dev
+>>>>>>> origin/development
+>>>>>>> origin/master
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[67],{BkQx:function(n,t,e){"use strict"

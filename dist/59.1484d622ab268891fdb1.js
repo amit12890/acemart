@@ -1,5 +1,13 @@
 /*!
+<<<<<<< HEAD
  * @version 1c953b0-dev
+=======
+<<<<<<< HEAD:dist/58.f755cffecb007442b4a0.js
+ * @version 6f3669c-dev
+=======
+ * @version a75e51a-dev
+>>>>>>> origin/development:dist/59.1484d622ab268891fdb1.js
+>>>>>>> origin/master
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[59],{"3OBA":function(e,a,n){(a=e.exports=n("JPst")(!1)).push([e.i,".summary-root-2Ze {\n    display: grid;\n    gap: 1.125rem;\n    padding: 2rem;\n}\n\n.summary-heading_container-2F2 {\n    display: grid;\n    grid-auto-flow: column;\n    grid-template-columns: 1fr;\n}\n\n.summary-heading-29o {\n    font-weight: 600;\n}\n\n.summary-card_details_container-1pN {\n    display: grid;\n    gap: 0.5rem;\n}\n\n.summary-payment_details-3Ro {\n}\n",""]),a.locals={root:"summary-root-2Ze",heading_container:"summary-heading_container-2F2",heading:"summary-heading-29o",card_details_container:"summary-card_details_container-1pN",payment_details:"summary-payment_details-3Ro"}},KvUi:function(e,a,n){"use strict"
