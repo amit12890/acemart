@@ -31,7 +31,7 @@ import {
 } from './productQuestions.gql';
 import { getDateString } from './utils';
 
-const options = [
+const sortOptions = [
     { value: '7', label: 'Most Recent Questions' },
     { value: '8', label: 'Oldest Questions' },
     { value: '9', label: 'Questions With The Most Helpful Answers' },
@@ -87,14 +87,14 @@ const QuestionBlock = ({ questions }) => {
     const [expandBtnState, setExpandBtnState] = useState(false)
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
+    const [sortBy, setSortBy] = useState(sortOptions[0])
     const fuseSearch = useRef();
 
     useEffect(() => {
         // setup fuse search
         const options = {
             findAllMatches: true,
-            threshold: 0.8,
-            distance: 32,
+            ignoreLocation: true,
             minMatchCharLength: 2,
             keys: [
                 'content',
@@ -141,7 +141,7 @@ const QuestionBlock = ({ questions }) => {
     // click event for menu items
     const handleItemClick = useCallback(
         sortAttribute => {
-            console.log('sortAttribute', sortAttribute);
+            setSortBy(sortAttribute)
             setExpanded(false);
         },
         [setExpanded]
@@ -153,7 +153,7 @@ const QuestionBlock = ({ questions }) => {
             return null;
         }
 
-        const itemElements = options.map((sortItem, ind) => {
+        const itemElements = sortOptions.map((sortItem, ind) => {
             return (
                 <li
                     key={ind}
@@ -172,7 +172,7 @@ const QuestionBlock = ({ questions }) => {
                 <ul className={classes.sortingItems}>{itemElements}</ul>
             </div>
         );
-    }, [options, classes.menu, classes.menuItem, expanded, handleItemClick]);
+    }, [expanded, handleItemClick]);
 
     return (
         <div className={classes.qaContent}>
@@ -200,9 +200,22 @@ const QuestionBlock = ({ questions }) => {
                                 <div className={classes.sortingOptions}>
                                     <Button
                                         className={classes.sortingButton}
-                                        onClick={handleSortClick}>{options[0].label}</Button>
+                                        onClick={handleSortClick}>{sortBy.label}</Button>
                                     {sortElements}
                                 </div>
+                                {expandBtnState ?
+                                    <Button
+                                        onClick={toggleExpandAll}
+                                        className={classes.expandAll}
+                                    >
+                                        <span>Collapse All</span>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                                <title>store</title>
+                                                <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                        </i>
+                                    </Button>
+                                :
                                 <Button
                                     onClick={toggleExpandAll}
                                     className={classes.expandAll}
@@ -214,27 +227,9 @@ const QuestionBlock = ({ questions }) => {
                                             <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
                                     </i>
                                 </Button>
+                                }
                             </div>
                         </div>
-                        {expandBtnState ?
-                            <Button onClick={toggleExpandAll}>
-                                <i className={classes.iconWrapper}>
-                                    <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                        <title>store</title>
-                                        <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                                </i>
-                                <span>Collapse All</span>
-                            </Button>
-                        :
-                            <Button onClick={toggleExpandAll}>
-                                <i className={classes.iconWrapper}>
-                                    <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                        <title>store</title>
-                                        <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                                </i>
-                                <span>Expand All</span>
-                            </Button>
-                        }
                     </div>
                 </div>
 
