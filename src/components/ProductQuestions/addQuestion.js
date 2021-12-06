@@ -75,63 +75,66 @@ const AddQuestionBlock = ({ productId }) => {
     if (showForm) {
         return (
             <div classes={classes.askQuestionWrapper}>
-                <h2>Ask a New Question</h2>
-                <Form
-                    id="add-question-form"
-                    className="add-question-form"
-                    onSubmit={handleSubmit}
-                >
-                    <div>
-                        <Field label="Nickname">
-                            <TextInput
-                                field="nickname_question"
-                                type="text"
-                                validate={isRequired}
+                <div className={classes.subTitle}>Ask a New Question</div>
+
+                <div className={classes.formWrapper}>
+                    <Form
+                        id="add-question-form"
+                        className="add-question-form"
+                        onSubmit={handleSubmit}
+                    >
+                        <div className={classes.qaFieldWrapper}>
+                            <Field label="Nickname">
+                                <TextInput
+                                    field="nickname_question"
+                                    type="text"
+                                    validate={isRequired}
+                                    validateOnBlur
+                                />
+                            </Field>
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Field label="Your Question">
+                                <TextInput
+                                    field="question"
+                                    type="text"
+                                    validate={isRequired}
+                                    validateOnBlur
+                                />
+                            </Field>
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Checkbox
+                                field="notify"
+                                label="Notify me by email when answer received "
                                 validateOnBlur
                             />
-                        </Field>
-                    </div>
-                    <div>
-                        <Field label="Your Question">
-                            <TextInput
-                                field="question"
-                                type="text"
-                                validate={isRequired}
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Checkbox
+                                field="newsletter"
+                                label="Sign Up for Newsletter"
                                 validateOnBlur
                             />
-                        </Field>
-                    </div>
-                    <div>
-                        <Checkbox
-                            field="notify"
-                            label="Notify me by email when answer received "
-                            validateOnBlur
-                        />
-                    </div>
-                    <div>
-                        <Checkbox
-                            field="newsletter"
-                            label="Sign Up for Newsletter"
-                            validateOnBlur
-                        />
-                    </div>
-                    <div>
-                        <Button
-                            disabled={loading}
-                            type="submit"
-                            priority="high"
-                        >
-                            ADD QUESTION
-                        </Button>
-                        <Button
-                            disabled={false}
-                            priority="high"
-                            onClick={() => setShowForm(false)}
-                        >
-                            CANCEL
-                        </Button>
-                    </div>
-                </Form>
+                        </div>
+                        <div className={classes.actionToolbar}>
+                            <Button
+                                disabled={loading}
+                                type="submit"
+                                priority="high"
+                            >
+                                ADD QUESTION
+                            </Button>
+                            <Button
+                                disabled={false}
+                                priority="high"
+                                onClick={() => setShowForm(false)}
+                            >
+                                CANCEL
+                            </Button>
+                        </div>
+                    </Form>
+                </div>
                 {successMessage && (
                     <div>
                         <Icon src={CheckIcon} size={20} />

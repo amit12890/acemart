@@ -154,24 +154,19 @@ const QuestionBlock = ({ questions }) => {
             return (
                 <li
                     key={ind}
-                    className={classes.menuItem}
+                    className={classes.sortingItem}
                     onClick={() => handleItemClick(sortItem)}
                 >
-                    <div
-                        style={{
-                            color: 'blueviolet',
-                            cursor: 'pointer'
-                        }}
-                    >
+                    <span>
                         {sortItem.label}
-                    </div>
+                    </span>
                 </li>
             );
         });
 
         return (
-            <div className={classes.menu}>
-                <ul>{itemElements}</ul>
+            <div className={classes.sortingItemWrapper}>
+                <ul className={classes.sortingItems}>{itemElements}</ul>
             </div>
         );
     }, [options, classes.menu, classes.menuItem, expanded, handleItemClick]);
@@ -189,25 +184,36 @@ const QuestionBlock = ({ questions }) => {
                                 value={searchToken}
                                 onChange={e => setSearchToken(e.target.value)}
                             />
-                            <Button onClick={handleResetSearch}>Reset</Button>
+                            <Button
+                                className={classes.resetButton}
+                                onClick={handleResetSearch}>Reset</Button>
                         </div>
                     </div>
                     <div className={classes.toolbarWrapper}>
-                        <div ref={elementRef}>
+                        <div className={classes.sorting} ref={elementRef}>
                             <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
                             {/* default sorted option */}
-                            <Button onClick={handleSortClick}>{options[0].label}</Button>
-                            {sortElements}
+                            <div className={classes.sortingOptionsWrapper}>
+                                <div className={classes.sortingOptions}>
+                                    <Button
+                                        className={classes.sortingButton}
+                                        onClick={handleSortClick}>{options[0].label}</Button>
+                                    {sortElements}
+                                </div>
+                                <Button
+                                    onClick={toggleExpandAll}
+                                    className={classes.expandAll}
+                                >
+                                    <span>Expand All</span>
+                                    <i className={classes.iconWrapper}>
+                                        <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                            <title>store</title>
+                                            <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                    </i>
+                                </Button>
+                            </div>
                         </div>
 
-                        <Button onClick={toggleExpandAll}>
-                            <i className={classes.iconWrapper}>
-                                <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                    <title>store</title>
-                                    <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                            </i>
-                            <span>Expand All</span>
-                        </Button>
                     </div>
                 </div>
 
