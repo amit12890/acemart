@@ -1,13 +1,5 @@
 /*!
-<<<<<<< HEAD
- * @version 1c953b0-dev
-=======
-<<<<<<< HEAD
- * @version 6f3669c-dev
-=======
- * @version a75e51a-dev
->>>>>>> origin/development
->>>>>>> origin/master
+ * @version 29036d9-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[63],{"8Ab+":function(t,n,r){(n=t.exports=r("JPst")(!1)).push([t.i,".buttons-root-3lJ {\n    max-width: 100%;\n}\n.buttons-root-3lJ > div {\n    display: inline-block;\n    margin-bottom: 0.5rem;\n    max-width: 100%;\n}\n.buttons-root-3lJ button[class] {\n    max-width: 100%;\n    overflow: hidden;\n    min-width: var(--buttonMinWidth);\n}\n.buttons-stacked-1pN {\n    display: flex;\n    flex-wrap: wrap;\n    flex-direction: column;\n}\n.buttons-inline-3IH > div {\n    margin-inline-end: 0.5rem;\n}\n",""]),n.locals={root:"buttons-root-3lJ",stacked:"buttons-stacked-1pN",inline:"buttons-inline-3IH"}},fwGW:function(t,n,r){"use strict"

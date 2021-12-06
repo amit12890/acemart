@@ -1,13 +1,5 @@
 /*!
-<<<<<<< HEAD
- * @version 1c953b0-dev
-=======
-<<<<<<< HEAD:dist/39.f35411cf8bb6106c18ff.js
- * @version 6f3669c-dev
-=======
- * @version a75e51a-dev
->>>>>>> origin/development:dist/39.c540b83a918e786e08cd.js
->>>>>>> origin/master
+ * @version 29036d9-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[39],{"6QXU":function(e,t,n){"use strict"

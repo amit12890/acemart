@@ -1,13 +1,5 @@
 /*!
-<<<<<<< HEAD
- * @version 1c953b0-dev
-=======
-<<<<<<< HEAD
- * @version 6f3669c-dev
-=======
- * @version a75e51a-dev
->>>>>>> origin/development
->>>>>>> origin/master
+ * @version 29036d9-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[78],{XY2a:function(e,t){!function(i){if("object"==typeof t&&void 0!==e)e.exports=i()

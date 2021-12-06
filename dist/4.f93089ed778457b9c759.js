@@ -1,18 +1,10 @@
 /*!
-<<<<<<< HEAD
- * @version 1c953b0-dev
-=======
-<<<<<<< HEAD:dist/4.7ecd86d330072cc59afd.js
- * @version 6f3669c-dev
-=======
- * @version a75e51a-dev
->>>>>>> origin/development:dist/4.f93089ed778457b9c759.js
->>>>>>> origin/master
+ * @version 29036d9-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[4],{"206z":function(e,t,o){"use strict"
 t.a=function(e){var t={}
-try{var o=new URL("https://qa-acemart-backend.magedelight.magentoprojects.net/"),n=new URL(e)
+try{var o=new URL("https://dev-acemart.magedelight.magentoprojects.net"),n=new URL(e)
 o.host!==n.host?t.href=e:t.to=n.pathname}catch(o){t.href=e}return t}},"8hQ0":function(e,t,o){(t=e.exports=o("JPst")(!1)).push([e.i,".buttonItem-linkButton-2eC {\n    text-decoration: underline;\n}\n",""]),t.locals={linkButton:"buttonItem-linkButton-2eC"}},ACyH:function(e,t,o){"use strict"
 var n=o("pVnL"),i=o.n(n),a=o("QILm"),r=o.n(a),l=o("q1tI"),s=o.n(l),d=o("17x9"),c=o("y1Xp"),g=o("LboF"),p=o.n(g),u=o("ysJs"),m=o.n(u),y={injectType:"singletonStyleTag",insert:"head",singleton:!0},b=(p()(m.a,y),m.a.locals||{}),h=["children","classes","priority","type","negative","disabled","ariaLabel"],f=function Button(e){var t=e.children,o=e.classes,n=e.priority,a=e.type,l=e.negative,d=e.disabled,g=e.ariaLabel,p=r()(e,h),u=Object(c.a)(b,o),m=u[function getRootClassName(e,t){return"root_".concat(e,"Priority").concat(t?"Negative":"")}(n,l)]
 return s.a.createElement("button",i()({className:m,type:a,disabled:d,"aria-label":g},p),s.a.createElement("span",{className:u.content},t))}
