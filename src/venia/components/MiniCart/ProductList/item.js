@@ -10,6 +10,7 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
 import ProductOptions from '@magento/venia-ui/lib/components/LegacyMiniCart/productOptions';
 import Image from '../../Image';
+import RichText from '../../RichText';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import { useStyle } from '../../../classify';
 import configuredVariant from '@magento/peregrine/lib/util/configuredVariant';
@@ -80,7 +81,7 @@ const Item = props => {
                     to={itemLink}
                     onClick={closeMiniCart}
                 >
-                    {product.name}
+                    <RichText content={product.name} />
                 </Link>
                 <ProductOptions
                     options={configurable_options}
@@ -101,10 +102,7 @@ const Item = props => {
                             currencyCode={prices.price.currency}
                             value={prices.price.value}
                         />
-                        <FormattedMessage
-                            id={'productList.each'}
-                            defaultMessage={' ea.'}
-                        />
+                        / {product.uom}
                     </span>
                 </div>
                 <span className={classes.stockStatus}>{stockStatusText}</span>
