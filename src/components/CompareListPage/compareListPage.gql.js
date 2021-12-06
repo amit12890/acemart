@@ -61,6 +61,7 @@ export const GET_CUSTOMER_COMPARE_LIST = gql`
 export const GET_GUEST_COMPARE_LIST = gql`
     query compareList($uid:ID!){
         compareList(uid:$uid){
+            uid
             ...UserCompareListFragment
         }
     }

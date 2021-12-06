@@ -41,9 +41,17 @@ const CompareListBlock = (props) => {
     if (loadingCompareList) {
         return <LoadingIndicator />;
     }
-    const hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
-    const listId = get(compareListData, 'customer.compare_list.uid')
-    const items = get(compareListData, 'customer.compare_list.items', [])
+    // data mapping for guest and logged user
+    let hasItems = 0, listId = 0, items = []
+    if (isSignedIn) {
+        hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
+        listId = get(compareListData, 'customer.compare_list.uid')
+        items = get(compareListData, 'customer.compare_list.items', [])
+    } else {
+        hasItems = !!get(compareListData, 'compareList.item_count', props.item_count)
+        listId = get(compareListData, 'compareList.uid', props.uid)
+        items = get(compareListData, 'compareList.items', props.items)
+    }
 
     return (
         <div className={classes.root}>
@@ -82,6 +90,8 @@ const CompareListBlock = (props) => {
 
 export default connect(store => {
     return {
-        uid: store.compare.uid
+        uid: store.compare.uid,
+        items: store.compare.items,
+        item_count: store.compare.item_count
     }
 })(CompareListBlock)
