@@ -58,6 +58,15 @@ export const GET_CUSTOMER_COMPARE_LIST = gql`
     ${UserCompareListFragment}
 `;
 
+export const GET_GUEST_COMPARE_LIST = gql`
+    query compareList($uid:ID!){
+        compareList(uid:$uid){
+            ...UserCompareListFragment
+        }
+    }
+    ${UserCompareListFragment}
+`
+
 export const CREATE_COMPARE_LIST = gql`
     mutation createCompareList(
         $input: CreateCompareListInput
