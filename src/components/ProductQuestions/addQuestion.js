@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CheckCircle as CheckIcon } from 'react-feather';
 
-import { Form } from 'informed';
+import { Form, Relevant } from 'informed';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
@@ -37,13 +37,12 @@ const AddQuestionBlock = ({ productId }) => {
                 nickname_question: formValues.nickname_question,
                 question: formValues.question,
                 notify: formValues.notify ? 1 : 0,
-                notify_email:
-                    formValues.notify && isSignedIn ? currentUser.email : '',
+                // required string
+                notify_email: formValues.notify_email || "",
                 newsletter: formValues.newsletter ? 1 : 0,
-                newsletter_email:
-                    formValues.newsletter && isSignedIn
-                        ? currentUser.email
-                        : '',
+                // required string
+                newsletter_email: (isSignedIn ? 
+                    currentUser.email : formValues.newsletter_email) || "",
                 // need purpose
                 status: 4,
                 per_page: 10
@@ -73,6 +72,10 @@ const AddQuestionBlock = ({ productId }) => {
     );
 
     if (showForm) {
+        const email = isSignedIn
+            ? currentUser.email
+            : ''
+
         return (
             <div classes={classes.askQuestionWrapper}>
                 <div className={classes.subTitle}>Ask a New Question</div>
@@ -110,6 +113,20 @@ const AddQuestionBlock = ({ productId }) => {
                                 validateOnBlur
                             />
                         </div>
+                        <Relevant when={({ values }) => {
+                            return (values.notify)
+                        }}>
+                            <div className={classes.qaFieldWrapper}>
+                                <TextInput
+                                    field="notify_email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="Please, enter email"
+                                    validate={isRequired}
+                                    value={email}
+                                />
+                            </div>
+                        </Relevant>
                         <div className={classes.qaFieldWrapper}>
                             <Checkbox
                                 field="newsletter"
@@ -117,6 +134,20 @@ const AddQuestionBlock = ({ productId }) => {
                                 validateOnBlur
                             />
                         </div>
+                        <Relevant when={({ values }) => {
+                            return (values.newsletter && !isSignedIn)
+                        }}>
+                            <div className={classes.qaFieldWrapper}>
+                                <TextInput
+                                    field="newsletter_email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="Please, enter email"
+                                    validate={isRequired}
+                                    value={email}
+                                />
+                            </div>
+                        </Relevant>
                         <div className={classes.actionToolbar}>
                             <Button
                                 disabled={loading}
