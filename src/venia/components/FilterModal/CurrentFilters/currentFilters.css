@@ -1,6 +1,6 @@
 .root {
     overflow: auto;
-    padding: 0 10px;
+    padding: 10px;
     background-color: rgb(var(--color-gray-light02));
     
 }
@@ -11,4 +11,17 @@
 
 .root li {
     padding: 0 0 0;
+}
+
+.root li:first-child {
+    font-weight: bold;
+    color: rgb(var(--color-black));
+}
+
+.root ul {
+    margin-top: 10px;
+}
+
+.root ul:first-child {
+    margin-top: 0;
 }

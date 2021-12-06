@@ -66,56 +66,58 @@ const AddAnswerBlock = ({ questionId }) => {
     if (showForm) {
         return (
             <div className={classes.askQuestionWrapper}>
-                <h2>Ans this question</h2>
-                <Form
-                    id="add-question-form"
-                    className="add-question-form"
-                    onSubmit={handleSubmit}
-                >
-                    <div>
-                        <Field label="Nickname">
-                            <TextInput
-                                field="nickname_answer"
-                                type="text"
-                                validate={isRequired}
+                <div className={classes.subTitle}>Ans this question</div>
+                <div className={classes.formWrapper}>
+                    <Form
+                        id="add-question-form"
+                        className="add-question-form"
+                        onSubmit={handleSubmit}
+                    >
+                        <div className={classes.qaFieldWrapper}>
+                            <Field label="Nickname">
+                                <TextInput
+                                    field="nickname_answer"
+                                    type="text"
+                                    validate={isRequired}
+                                    validateOnBlur
+                                />
+                            </Field>
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Field label="Your Answer">
+                                <TextInput
+                                    field="answer"
+                                    type="text"
+                                    validate={isRequired}
+                                    validateOnBlur
+                                />
+                            </Field>
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Checkbox
+                                field="newsletter"
+                                label="Sign Up for Newsletter"
                                 validateOnBlur
                             />
-                        </Field>
-                    </div>
-                    <div>
-                        <Field label="Your Answer">
-                            <TextInput
-                                field="answer"
-                                type="text"
-                                validate={isRequired}
-                                validateOnBlur
-                            />
-                        </Field>
-                    </div>
-                    <div>
-                        <Checkbox
-                            field="newsletter"
-                            label="Sign Up for Newsletter"
-                            validateOnBlur
-                        />
-                    </div>
-                    <div>
-                        <Button
-                            disabled={loading}
-                            type="submit"
-                            priority="high"
-                        >
-                            ANSWER THIS QUESTION
-                        </Button>
-                        <Button
-                            disabled={false}
-                            priority="high"
-                            onClick={() => setShowForm(false)}
-                        >
-                            CANCEL
-                        </Button>
-                    </div>
-                </Form>
+                        </div>
+                        <div className={classes.actionToolbar}>
+                            <Button
+                                disabled={loading}
+                                type="submit"
+                                priority="high"
+                            >
+                                ANSWER THIS QUESTION
+                            </Button>
+                            <Button
+                                disabled={false}
+                                priority="high"
+                                onClick={() => setShowForm(false)}
+                            >
+                                CANCEL
+                            </Button>
+                        </div>
+                    </Form>
+                </div>
                 {successMessage && (
                     <div>
                         <Icon src={CheckIcon} size={20} />
