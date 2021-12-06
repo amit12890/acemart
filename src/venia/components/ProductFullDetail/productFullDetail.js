@@ -25,6 +25,9 @@ import Carousel from '../ProductImageCarousel';
 import SharePopup from '../../../components/SharePopup';
 import LabelsPopup from '../../../components/LabelsPopup';
 
+import Image from '../Image';
+import smallWarning from '../../../assets/small_warning.png';
+
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
@@ -671,9 +674,14 @@ const ProductFullDetail = props => {
                         <RichText content={productDetails.description} />
                     </div>
                     <br />
-                    <div onClick={openCaliforniaPopup} style={{ color: "blue" }}>
-                        California Residents:
-                        Proposition 65 Information
+                    <div className={classes.californiaResident} onClick={openCaliforniaPopup}>
+                        <div className={classes.iconWarning}>
+                            <Image src={smallWarning} />
+                        </div>
+                        <div className={classes.warningContent}>
+                            California Residents:<br />
+                            Proposition 65 Information
+                        </div>
                     </div>
 
                 </section>

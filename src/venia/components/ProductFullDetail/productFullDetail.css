@@ -96,9 +96,6 @@ flex-direction: column;
     color: rgb(var(--color-green10));
 }
 
-.outofStock {
-    color: rgb(var(--color-red10));
-}
 
 .outofStock {
     color: rgb(var(--color-red10));
@@ -461,6 +458,33 @@ flex-direction: column;
 .sectionContent {
 
 }
+
+.californiaResident {
+
+}
+
+.californiaResident {
+    display: flex;
+    align-items: center;
+}
+
+.californiaResident:hover {
+    color: rgb(var(--link-color-hover));
+}
+
+.iconWarning {
+    margin-right: 10px;
+}
+
+.iconWarning img {
+    position: static;
+}
+
+.warningContent {
+    font-size: var(--fontSize-100);
+    cursor: pointer;
+}
+
 
 /* Product Additional Section */
 
