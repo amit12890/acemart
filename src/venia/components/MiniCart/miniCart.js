@@ -173,6 +173,7 @@ const MiniCart = React.forwardRef((props, ref) => {
     return (
         <aside className={rootClass}>
             <div ref={ref} className={contentsClass}>
+                <div onClick={() => setIsOpen(false)}>Close</div>
                 {contents}
             </div>
         </aside>
