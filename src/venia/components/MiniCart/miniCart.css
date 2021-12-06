@@ -170,7 +170,17 @@
 
 .editCartButton {
     composes: root_normalPriority from '../Button/button.css';
+    background-color: rgb(var(--color-white));
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+    display: inline-flex;
+    align-self: self-start;
 
+}
+
+.editCartButton:hover {
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
 }
 
 .emptyCart {
