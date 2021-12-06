@@ -93,7 +93,10 @@ const QuestionBlock = ({ questions }) => {
             threshold: 0.8,
             distance: 32,
             minMatchCharLength: 2,
-            keys: ['content']
+            keys: [
+                'content',
+                'answer.content',
+            ],
         };
         fuseSearch.current = new Fuse(questions, options);
     }, [questions]);

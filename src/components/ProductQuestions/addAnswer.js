@@ -4,6 +4,7 @@ import { CheckCircle as CheckIcon } from 'react-feather';
 
 import { Form } from 'informed';
 
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import defaultClasses from './productQuestions.css';
@@ -21,6 +22,7 @@ const AddAnswerBlock = ({ questionId }) => {
     const [addAnswerHandler, { loading }] = useMutation(addAnswerMutation, {
         fetchPolicy: 'no-cache'
     });
+    const classes = useStyle(defaultClasses);
     const [showForm, setShowForm] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
@@ -63,7 +65,7 @@ const AddAnswerBlock = ({ questionId }) => {
 
     if (showForm) {
         return (
-            <div>
+            <div className={classes.askQuestionWrapper}>
                 <h2>Ans this question</h2>
                 <Form
                     id="add-question-form"
