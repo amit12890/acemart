@@ -29,6 +29,7 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
+import { getDateString } from './utils';
 
 const options = [
     { value: '7', label: 'Most Recent Questions' },
@@ -82,6 +83,8 @@ const QuestionBlock = ({ questions }) => {
     const { elementRef, expanded, setExpanded } = useDropdown();
 
     const classes = useStyle(defaultClasses);
+    // false : Next click will expand; in default state
+    const [expandBtnState, setExpandBtnState] = useState(false)
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
     const fuseSearch = useRef();
@@ -112,10 +115,10 @@ const QuestionBlock = ({ questions }) => {
     );
 
     const toggleExpandAll = useCallback(() => {
-        setExpandedQuestions(expQue =>
-            expQue.size ? new Set([]) : new Set(range(0, questions.length))
-        );
-    }, [questions, setExpandedQuestions]);
+        const nextState = expandBtnState ? new Set([]) : new Set(range(0, questions.length))
+        setExpandedQuestions(nextState);
+        setExpandBtnState(expBtnState => !expBtnState)
+    }, [questions, setExpandedQuestions, expandBtnState, setExpandBtnState]);
 
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
@@ -199,15 +202,25 @@ const QuestionBlock = ({ questions }) => {
                             <Button onClick={handleSortClick}>{options[0].label}</Button>
                             {sortElements}
                         </div>
-
-                        <Button onClick={toggleExpandAll}>
-                            <i className={classes.iconWrapper}>
-                                <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                    <title>store</title>
-                                    <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                            </i>
-                            <span>Expand All</span>
-                        </Button>
+                        {expandBtnState ?
+                            <Button onClick={toggleExpandAll}>
+                                <i className={classes.iconWrapper}>
+                                    <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                        <title>store</title>
+                                        <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                </i>
+                                <span>Collapse All</span>
+                            </Button>
+                        :
+                            <Button onClick={toggleExpandAll}>
+                                <i className={classes.iconWrapper}>
+                                    <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                        <title>store</title>
+                                        <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                </i>
+                                <span>Expand All</span>
+                            </Button>
+                        }
                     </div>
                 </div>
 
@@ -221,12 +234,11 @@ const QuestionBlock = ({ questions }) => {
 
                         return (
                             <div key={item.id} className={classes.questionWrapper}>
-                                <div
-                                    className={queClass}
-                                    onClick={() => handleQueExpandToggle(index)}
-                                >
+                                <div className={queClass}>
                                     <div className={classes.listItemWrapper}>
-                                        <div className={classes.listItem}>
+                                        <div className={classes.listItem}
+                                            onClick={() => handleQueExpandToggle(index)}
+                                        >
                                             <div className={classes.leftBlock}>
                                                 <div className={classes.listContent}>{item.content}</div>
                                                 <div className={classes.count}>
@@ -235,10 +247,11 @@ const QuestionBlock = ({ questions }) => {
                                                         : `${ansCount} answer`}
                                                 </div>
                                                 <div className={classes.nickName}>by {item.nickname}</div>
+                                                <div className={classes.count}>{getDateString("1050")}</div>
                                             </div>
                                             <div className={classes.rightBlock}>
                                                 <div className={[classes.helper, classes.plus].join(" ")}>
-                                                    <PlusBlock
+                                                    <PlusBlock count={item.good}
                                                         mutation={questionRatingPlusMutation}
                                                         variables={{
                                                             question_id: item.id
@@ -246,7 +259,7 @@ const QuestionBlock = ({ questions }) => {
                                                     />
                                                 </div>
                                                 <div className={[classes.helper, classes.minus].join(" ")}>
-                                                    <MinusBlock
+                                                    <MinusBlock count={item.bad}
                                                         mutation={questionRatingMinusMutation}
                                                         variables={{
                                                             question_id: item.id
@@ -269,7 +282,7 @@ const QuestionBlock = ({ questions }) => {
                                                 <AddAnswer questionId={item.id} />
                                             </div>
                                             {!!ansCount
-                                                ? item.answer.map((ans, ind) => {
+                                                ? item.answer.map((ans) => {
                                                     return (
                                                         <div key={ans.id} className={classes.anslistItemWrapper}>
                                                             <div className={classes.answerListItem}>
@@ -278,7 +291,7 @@ const QuestionBlock = ({ questions }) => {
                                                             <div className={classes.answerListHelper}>
                                                                 <div className={classes.nickName}>by {ans.nickname}</div>
                                                                 <div className={[classes.helper, classes.plus].join(" ")}>
-                                                                    <PlusBlock
+                                                                    <PlusBlock count={ans.good}
                                                                         mutation={
                                                                             answerRatingPlusMutation
                                                                         }
@@ -288,7 +301,7 @@ const QuestionBlock = ({ questions }) => {
                                                                     />
                                                                 </div>
                                                                 <div className={[classes.helper, classes.minus].join(" ")}>
-                                                                    <MinusBlock
+                                                                    <MinusBlock count={ans.bad}
                                                                         mutation={
                                                                             answerRatingMinusMutation
                                                                         }
