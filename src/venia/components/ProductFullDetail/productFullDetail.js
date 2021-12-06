@@ -33,7 +33,6 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
-import ProductDetailsCarousel from '../ProductImageCarousel/productDetailsCarousel';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -257,7 +256,9 @@ const ProductFullDetail = props => {
                 <section className={[classes.productViewSection, classes.productView].join(" ")}>
                     <div className={classes.productMedia}>
                         {/* Carousel */}
-                        <ProductDetailsCarousel media_gallery={media_gallery} />
+                        <Carousel
+                            images={mediaGalleryEntries}
+                            media_gallery={media_gallery} />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}

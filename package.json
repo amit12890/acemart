@@ -33,7 +33,6 @@
     "fuse.js": "^6.4.6",
     "pure-react-carousel": "^1.27.6",
     "react-feather": "^2.0.9",
-    "react-image-gallery": "^1.2.7",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
