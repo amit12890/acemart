@@ -62,7 +62,7 @@ const PriceAdjustments = props => {
                         <CouponCode setIsCartUpdating={setIsCartUpdating} />
                     </Suspense>
                 </Section>
-                <GiftCardSection setIsCartUpdating={setIsCartUpdating} />
+                {/* <GiftCardSection setIsCartUpdating={setIsCartUpdating} />
                 <Section
                     id={'gift_options'}
                     title={formatMessage({
@@ -73,7 +73,7 @@ const PriceAdjustments = props => {
                     <Suspense fallback={<LoadingIndicator />}>
                         <GiftOptions />
                     </Suspense>
-                </Section>
+                </Section> */}
             </Accordion>
         </div>
     );

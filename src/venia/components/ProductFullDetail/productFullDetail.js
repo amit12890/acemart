@@ -338,7 +338,7 @@ const ProductFullDetail = props => {
                                     )
                                 })}
                                 <div className={classes.labelHelper}>
-                                    <span onClick={openLabelsPopup}>What's this</span>
+                                    <span onClick={openLabelsPopup}>What's this?</span>
                                 </div>
                             </div>
                         </div>

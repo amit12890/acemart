@@ -20,11 +20,7 @@
     display: block;
     border: 1px solid rgb(var(--border-color-base));
     border-top: none;
-    padding: 0 10px;
-}
-
-.question_open .actionToolbar {
-    margin-top: 0;
+    padding: 10px;
 }
 
 .qaWrapper {
@@ -330,6 +326,7 @@
 
 .helperContainer {
     display: flex;
+    cursor: pointer;
 }
 
 .helperContainer img {

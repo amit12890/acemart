@@ -93,15 +93,15 @@ const CartPage = props => {
         <div className={classes.root}>
             <StoreTitle>
                 {formatMessage({
-                    id: 'cartPage.title',
-                    defaultMessage: 'Cart'
+                    id: 'am.cartPage.title',
+                    defaultMessage: 'Shopping Cart'
                 })}
             </StoreTitle>
-            <div className={classes.heading_container}>
-                <h1 className={classes.heading}>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
                     <FormattedMessage
-                        id={'cartPage.heading'}
-                        defaultMessage={'Cart'}
+                        id={'am.cartPage.heading'}
+                        defaultMessage={'Shopping Cart'}
                     />
                 </h1>
                 <div className={classes.stockStatusMessageContainer}>
@@ -109,16 +109,26 @@ const CartPage = props => {
                 </div>
             </div>
             <div className={classes.body}>
-                <div className={classes.items_container}>{productListing}</div>
-                <div className={classes.price_adjustments_container}>
-                    {priceAdjustments}
+                <div className={classes.items_container}>
+                    <div className={classes.productListingWrapper}>
+                        {productListing}
+                    </div>
+                    <div className={classes.cartActions}>
+
+                    </div>
+
                 </div>
                 <div className={classes.summary_container}>
                     <div className={classes.summary_contents}>
                         {priceSummary}
+                        <div className={classes.price_adjustments_container}>
+                            {priceAdjustments}
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div>People also bought:</div>
         </div>
     );
 };

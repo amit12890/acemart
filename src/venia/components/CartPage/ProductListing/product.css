@@ -1,6 +1,13 @@
 .root {
     display: grid;
     row-gap: 0.5rem;
+    border-top: 1px solid rgb(var(--border-color-light));
+    padding-top: 1.5rem;
+}
+
+.root:first-child {
+    border-top: none;
+    padding-top: 0;
 }
 
 .item {
@@ -56,13 +63,16 @@
 }
 
 .name {
-    grid-area: name;
-    font-weight: var(--venia-global-fontWeight-semibold);
+    /* grid-area: name; */
+    font-weight: var(--font-weight-bold);
+    font-size: var(--fontSize-200);
+
 }
 
 .price {
     grid-area: price;
     font-size: var(--venia-typography-body-S-fontSize);
+    color: rgb(var(--color-black));
 }
 
 .quantity {

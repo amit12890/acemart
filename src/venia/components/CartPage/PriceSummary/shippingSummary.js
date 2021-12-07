@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Price from '@magento/venia-ui/lib/components/Price';
 
 import { useStyle } from '../../../classify';
+import defaultClasses from './priceSummary.css';
 /**
  * A component that renders the shipping summary line item after address and
  * method are selected
@@ -11,7 +12,7 @@ import { useStyle } from '../../../classify';
  * @param {Object} props.data fragment response data
  */
 const ShippingSummary = props => {
-    const classes = useStyle({}, props.classes);
+    const classes = useStyle(defaultClasses, props.classes);
     const { data, isCheckout } = props;
     const { formatMessage } = useIntl();
 
@@ -25,28 +26,29 @@ const ShippingSummary = props => {
 
     const shippingLabel = isCheckout
         ? formatMessage({
-              id: 'shippingSummary.shipping',
-              defaultMessage: 'Shipping'
-          })
+            id: 'shippingSummary.shipping',
+            defaultMessage: 'Shipping'
+        })
         : formatMessage({
-              id: 'shippingSummary.estimatedShipping',
-              defaultMessage: 'Estimated Shipping'
-          });
+            id: 'shippingSummary.estimatedShipping',
+            defaultMessage: 'Estimated Shipping'
+        });
 
     // For a value of "0", display "FREE".
     const price = shipping.value ? (
         <Price value={shipping.value} currencyCode={shipping.currency} />
     ) : (
+
         <span>
             <FormattedMessage id={'global.free'} defaultMessage={'FREE'} />
         </span>
     );
 
     return (
-        <>
+        <div className={classes.summaryItem}>
             <span className={classes.lineItemLabel}>{shippingLabel}</span>
             <span className={classes.price}>{price}</span>
-        </>
+        </div>
     );
 };
 

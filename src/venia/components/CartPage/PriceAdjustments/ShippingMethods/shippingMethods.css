@@ -9,7 +9,7 @@
 }
 
 .prompt {
-    font-weight: var(--venia-global-fontWeight-semibold);
+    font-weight: var(--font-weight-bold);
 }
 
 .shipping_methods {
