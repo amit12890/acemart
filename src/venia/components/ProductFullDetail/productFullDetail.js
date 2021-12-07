@@ -59,10 +59,9 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const ProductFullDetail = props => {
     const { product } = props;
-    const { pos_stock_manage, only_x_left_in_stock,
+    const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
-    console.log(product)
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
@@ -822,7 +821,7 @@ const ProductFullDetail = props => {
                 />
             )}
             {showStoreLocatorPopup && (
-                <StoreLocator
+                <StoreLocator productId={id}
                     isPopupVisible={showStoreLocatorPopup}
                     closeStoreLocatorPopup={closeStoreLocatorPopup} />
             )}
