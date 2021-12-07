@@ -327,3 +327,15 @@
 .formWrapper .actionToolbar button:first-child {
     margin-left: 0;
 }
+
+.helperContainer {
+    display: flex;
+}
+
+.helperContainer img {
+    position: static;
+}
+
+.countWrapper {
+    margin-right: 5px;
+}

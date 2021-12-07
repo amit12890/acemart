@@ -66,6 +66,7 @@ const Item = props => {
                             root: classes.thumbnail
                         }}
                         width={75}
+                        height={75}
                         src={
                             configurableThumbnailSource === 'itself' &&
                                 configured_variant

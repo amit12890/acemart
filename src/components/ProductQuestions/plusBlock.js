@@ -1,10 +1,18 @@
 import React, { useCallback } from 'react';
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import Image from '../../venia/components/Image';
+import helperGood from '../../assets/good.png';
+import defaultClasses from './productQuestions.css';
+
+
 import { useMutation } from '@apollo/client';
 
 export default function PlusBlock(props) {
     const [updatePlus, { loading }] = useMutation(props.mutation, {
         fetchPolicy: 'no-cache'
     });
+
+    const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
         try {
@@ -17,15 +25,12 @@ export default function PlusBlock(props) {
     }, [updatePlus, props.variables]);
 
     return (
-        <div
-            style={{
-                color: 'blue',
-                cursor: 'pointer'
-            }}
-            onClick={handleClick}
-        >
-            {props.count || 0}
-            {loading ? ' Loading' : ' Plus'}
+        <div className={classes.helperContainer} onClick={handleClick}>
+            <div className={classes.countWrapper}>
+                {props.count || 0}
+                {loading ? ' Loading' : ' Plus'}
+            </div>
+            <Image src={helperGood} />
         </div>
     );
 }

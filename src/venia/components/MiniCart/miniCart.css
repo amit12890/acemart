@@ -133,7 +133,6 @@
 .footer {
     flex-shrink: 0;
     position: relative;
-
     align-items: center;
     border-top: 2px solid rgb(var(--venia-global-color-gray));
     padding-top: 10px;
@@ -150,7 +149,8 @@
 .footer .panelRow {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
 
 }
 
@@ -158,14 +158,15 @@
 .checkoutButton {
     composes: root_highPriority from '../Button/button.css';
     grid-column: 1 / span 1;
-    background-color: rgb(var(--venia-brand-color-1-700));
-    border: 2px solid rgb(var(--venia-brand-color-1-700));
+    background-color: rgb(var(--color-red10));
+    border: 2px solid rgb(var(--color-red10));
     font-weight:var(--font-weight-bold);
-    margin-bottom: 10px;
+    margin: 5px
+
 }
 .checkoutButton:hover {
-    color: rgb(var(--venia-brand-color-1-700)); 
-    border-color: rgb(var(--venia-brand-color-1-700));
+    color: rgb(var(--color-red10)); 
+    border-color: rgb(var(--color-red10));
 }
 
 .editCartButton {
@@ -175,6 +176,7 @@
     border-color: rgb(var(--stroke));
     display: inline-flex;
     align-self: self-start;
+    margin: 5px
 
 }
 

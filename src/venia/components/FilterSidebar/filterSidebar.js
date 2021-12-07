@@ -214,7 +214,7 @@ const FilterSidebar = props => {
                         <h2 className={classes.headerTitle}>
                             <FormattedMessage
                                 id={'filterModal.headerTitle'}
-                                defaultMessage={'Filters'}
+                                defaultMessage={'Shopping Options'}
                             />
                         </h2>
                     </div>

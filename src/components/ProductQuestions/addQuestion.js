@@ -41,7 +41,7 @@ const AddQuestionBlock = ({ productId }) => {
                 notify_email: formValues.notify_email || "",
                 newsletter: formValues.newsletter ? 1 : 0,
                 // required string
-                newsletter_email: (isSignedIn ? 
+                newsletter_email: (isSignedIn ?
                     currentUser.email : formValues.newsletter_email) || "",
                 // need purpose
                 status: 4,
