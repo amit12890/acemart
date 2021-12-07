@@ -90,19 +90,19 @@ const QuestionBlock = ({ questions }) => {
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
     const [sortBy, setSortBy] = useState(sortOptions[0])
-    const [queData, dispatch] = useReducer(questionReducer, {questions})
+    const [queData, dispatch] = useReducer(questionReducer, { questions: [] })
     const fuseSearch = useRef();
 
     useEffect(() => {
         // create new state for questions
         let pQueList = cloneDeep(questions)
-        for (let qInd = 0; qInd < pQueList.length; qInd++) {
+        for (let qInd = 0; qInd < size(pQueList); qInd++) {
             const currQue = pQueList[qInd];
             // add answer count for sorting
             currQue.ansCount = size(currQue.answer);
             // add answer total upvotes
             let ansUpvoteCount = 0;
-            for (let ansInd = 0; ansInd < currQue.answer.length; ansInd++) {
+            for (let ansInd = 0; ansInd < size(currQue.answer); ansInd++) {
                 const currAns = currQue.answer[ansInd];
                 ansUpvoteCount += currAns.good
             }
@@ -120,9 +120,10 @@ const QuestionBlock = ({ questions }) => {
             ],
         };
         fuseSearch.current = new Fuse(pQueList, options);
-        dispatch({type: "UPDATE_QUESTIONS", payload: pQueList});
+        console.log("🚀 ~ file: productQuestionsBlock.js ~ line 113 ~ useEffect ~ pQueList", pQueList)
+        dispatch({ type: "UPDATE_QUESTIONS", payload: pQueList });
     }, [questions, dispatch]);
-    
+
     useEffect(() => {
         let result;
         if (searchToken.length > 2) {
@@ -131,7 +132,7 @@ const QuestionBlock = ({ questions }) => {
         } else {
             result = cloneDeep(questions);
         }
-        dispatch({type: "UPDATE_QUESTIONS", payload: result});
+        dispatch({ type: "UPDATE_QUESTIONS", payload: result });
     }, [searchToken, questions]);
 
     const handleQueExpandToggle = useCallback(
@@ -149,7 +150,7 @@ const QuestionBlock = ({ questions }) => {
         setExpandedQuestions(nextState);
         setExpandBtnState(expBtnState => !expBtnState)
     }, [queData, setExpandedQuestions, expandBtnState, setExpandBtnState]);
-    console.log("🚀 ~ file: productQuestionsBlock.js ~ line 150 ~ QuestionBlock ~ queData", queData)
+    console.log("🚀 ~ file: productQuestionsBlock.js ~ line 150 ~ QuestionBlock ~ queData #########", queData)
 
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
@@ -187,7 +188,7 @@ const QuestionBlock = ({ questions }) => {
                     sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
                     break;
             }
-            dispatch({type: "UPDATE_QUESTIONS", payload: sortedQuestions});
+            dispatch({ type: "UPDATE_QUESTIONS", payload: sortedQuestions });
         },
         [setExpanded, setSortBy, dispatch, queData]
     );
@@ -260,18 +261,18 @@ const QuestionBlock = ({ questions }) => {
                                                 <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
                                         </i>
                                     </Button>
-                                :
-                                <Button
-                                    onClick={toggleExpandAll}
-                                    className={classes.expandAll}
-                                >
-                                    <span>Expand All</span>
-                                    <i className={classes.iconWrapper}>
-                                        <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                            <title>store</title>
-                                            <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                                    </i>
-                                </Button>
+                                    :
+                                    <Button
+                                        onClick={toggleExpandAll}
+                                        className={classes.expandAll}
+                                    >
+                                        <span>Expand All</span>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                                <title>store</title>
+                                                <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                        </i>
+                                    </Button>
                                 }
                             </div>
                         </div>
