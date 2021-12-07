@@ -2,9 +2,11 @@ import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CheckCircle as CheckIcon } from 'react-feather';
 
-import { Form } from 'informed';
+import { Form, Relevant } from 'informed';
 
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
+import defaultClasses from './productQuestions.css';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import Checkbox from '../../venia/components/Checkbox';
@@ -23,6 +25,7 @@ const AddQuestionBlock = ({ productId }) => {
             fetchPolicy: 'no-cache'
         }
     );
+    const classes = useStyle(defaultClasses);
     const [showForm, setShowForm] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
@@ -34,13 +37,12 @@ const AddQuestionBlock = ({ productId }) => {
                 nickname_question: formValues.nickname_question,
                 question: formValues.question,
                 notify: formValues.notify ? 1 : 0,
-                notify_email:
-                    formValues.notify && isSignedIn ? currentUser.email : '',
+                // required string
+                notify_email: formValues.notify_email || "",
                 newsletter: formValues.newsletter ? 1 : 0,
-                newsletter_email:
-                    formValues.newsletter && isSignedIn
-                        ? currentUser.email
-                        : '',
+                // required string
+                newsletter_email: (isSignedIn ? 
+                    currentUser.email : formValues.newsletter_email) || "",
                 // need purpose
                 status: 4,
                 per_page: 10
@@ -70,65 +72,100 @@ const AddQuestionBlock = ({ productId }) => {
     );
 
     if (showForm) {
+        const email = isSignedIn
+            ? currentUser.email
+            : ''
+
         return (
-            <div>
-                <h2>Ask a New Question</h2>
-                <Form
-                    id="add-question-form"
-                    className="add-question-form"
-                    onSubmit={handleSubmit}
-                >
-                    <div>
-                        <Field label="Nickname">
-                            <TextInput
-                                field="nickname_question"
-                                type="text"
-                                validate={isRequired}
+            <div classes={classes.askQuestionWrapper}>
+                <div className={classes.subTitle}>Ask a New Question</div>
+
+                <div className={classes.formWrapper}>
+                    <Form
+                        id="add-question-form"
+                        className="add-question-form"
+                        onSubmit={handleSubmit}
+                    >
+                        <div className={classes.qaFieldWrapper}>
+                            <Field label="Nickname">
+                                <TextInput
+                                    field="nickname_question"
+                                    type="text"
+                                    validate={isRequired}
+                                    validateOnBlur
+                                />
+                            </Field>
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Field label="Your Question">
+                                <TextInput
+                                    field="question"
+                                    type="text"
+                                    validate={isRequired}
+                                    validateOnBlur
+                                />
+                            </Field>
+                        </div>
+                        <div className={classes.qaFieldWrapper}>
+                            <Checkbox
+                                field="notify"
+                                label="Notify me by email when answer received "
                                 validateOnBlur
                             />
-                        </Field>
-                    </div>
-                    <div>
-                        <Field label="Your Question">
-                            <TextInput
-                                field="question"
-                                type="text"
-                                validate={isRequired}
+                        </div>
+                        <Relevant when={({ values }) => {
+                            return (values.notify)
+                        }}>
+                            <div className={classes.qaFieldWrapper}>
+                                <TextInput
+                                    field="notify_email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="Please, enter email"
+                                    validate={isRequired}
+                                    value={email}
+                                />
+                            </div>
+                        </Relevant>
+                        <div className={classes.qaFieldWrapper}>
+                            <Checkbox
+                                field="newsletter"
+                                label="Sign Up for Newsletter"
                                 validateOnBlur
                             />
-                        </Field>
-                    </div>
-                    <div>
-                        <Checkbox
-                            field="notify"
-                            label="Notify me by email when answer received "
-                            validateOnBlur
-                        />
-                    </div>
-                    <div>
-                        <Checkbox
-                            field="newsletter"
-                            label="Sign Up for Newsletter"
-                            validateOnBlur
-                        />
-                    </div>
-                    <div>
-                        <Button
-                            disabled={loading}
-                            type="submit"
-                            priority="high"
-                        >
-                            ADD QUESTION
-                        </Button>
-                        <Button
-                            disabled={false}
-                            priority="high"
-                            onClick={() => setShowForm(false)}
-                        >
-                            CANCEL
-                        </Button>
-                    </div>
-                </Form>
+                        </div>
+                        <Relevant when={({ values }) => {
+                            return (values.newsletter && !isSignedIn)
+                        }}>
+                            <div className={classes.qaFieldWrapper}>
+                                <TextInput
+                                    field="newsletter_email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="Please, enter email"
+                                    validate={isRequired}
+                                    value={email}
+                                />
+                            </div>
+                        </Relevant>
+                        <div className={classes.actionToolbar}>
+                            <Button
+                                disabled={loading}
+                                type="submit"
+                                priority="high"
+                            >
+                                ADD QUESTION
+                            </Button>
+                            <Button
+                                disabled={false}
+                                priority="high"
+                                onClick={() => setShowForm(false)}
+                            >
+                                CANCEL
+                            </Button>
+                        </div>
+                    </Form>
+                </div>
                 {successMessage && (
                     <div>
                         <Icon src={CheckIcon} size={20} />

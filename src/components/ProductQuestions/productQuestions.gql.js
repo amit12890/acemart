@@ -7,10 +7,16 @@ query getProductQuestions($productId: String) {
             id
             nickname
             content
+            date
+            good
+            bad
             answer {
                 id
                 nickname
                 content
+                date
+                good
+                bad
             }
         }
     }

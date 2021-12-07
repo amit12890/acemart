@@ -67,7 +67,7 @@ const CartTrigger = props => {
                     <span className={classes.cartLabel}>My Cart{maybeItemCounter}</span>
                 </button>
                 <Suspense fallback={null}>
-                    <Mask isActive={miniCartIsOpen} />
+                    {/* <Mask isActive={miniCartIsOpen} /> */}
                     <MiniCart
                         isOpen={miniCartIsOpen}
                         setIsOpen={setMiniCartIsOpen}

@@ -9,8 +9,10 @@ import { useQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
 import { get, size, range } from 'lodash';
 
-import Button from '../../venia/components/Button';
 import { useStyle } from '@magento/venia-ui/lib/classify';
+import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
+
+import Button from '../../venia/components/Button';
 import defaultClasses from './productQuestions.css';
 import AddQuestion from './addQuestion';
 import AddAnswer from './addAnswer';
@@ -27,6 +29,16 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
+import { getDateString } from './utils';
+
+const sortOptions = [
+    { value: '7', label: 'Most Recent Questions' },
+    { value: '8', label: 'Oldest Questions' },
+    { value: '9', label: 'Questions With The Most Helpful Answers' },
+    { value: '10', label: 'Questions With Most Recent Answers' },
+    { value: '11', label: 'Questions With  Oldest Answers' },
+    { value: '12', label: 'Questions With Most Answers' },
+];
 
 const ProductQuestionsBlock = ({ productId }) => {
     const classes = useStyle(defaultClasses);
@@ -68,19 +80,26 @@ const ProductQuestionsBlock = ({ productId }) => {
 };
 
 const QuestionBlock = ({ questions }) => {
+    const { elementRef, expanded, setExpanded } = useDropdown();
+
     const classes = useStyle(defaultClasses);
+    // false : Next click will expand; in default state
+    const [expandBtnState, setExpandBtnState] = useState(false)
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
+    const [sortBy, setSortBy] = useState(sortOptions[0])
     const fuseSearch = useRef();
 
     useEffect(() => {
         // setup fuse search
         const options = {
             findAllMatches: true,
-            threshold: 0.8,
-            distance: 32,
+            ignoreLocation: true,
             minMatchCharLength: 2,
-            keys: ['content']
+            keys: [
+                'content',
+                'answer.content',
+            ],
         };
         fuseSearch.current = new Fuse(questions, options);
     }, [questions]);
@@ -96,10 +115,10 @@ const QuestionBlock = ({ questions }) => {
     );
 
     const toggleExpandAll = useCallback(() => {
-        setExpandedQuestions(expQue =>
-            expQue.size ? new Set([]) : new Set(range(0, questions.length))
-        );
-    }, [questions, setExpandedQuestions]);
+        const nextState = expandBtnState ? new Set([]) : new Set(range(0, questions.length))
+        setExpandedQuestions(nextState);
+        setExpandBtnState(expBtnState => !expBtnState)
+    }, [questions, setExpandedQuestions, expandBtnState, setExpandBtnState]);
 
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
@@ -114,6 +133,47 @@ const QuestionBlock = ({ questions }) => {
         }
     }, [searchToken, questions]);
 
+    // expand or collapse on click
+    const handleSortClick = () => {
+        setExpanded(!expanded);
+    };
+
+    // click event for menu items
+    const handleItemClick = useCallback(
+        sortAttribute => {
+            setSortBy(sortAttribute)
+            setExpanded(false);
+        },
+        [setExpanded]
+    );
+
+    const sortElements = useMemo(() => {
+        // should be not render item in collapsed mode.
+        if (!expanded) {
+            return null;
+        }
+
+        const itemElements = sortOptions.map((sortItem, ind) => {
+            return (
+                <li
+                    key={ind}
+                    className={classes.sortingItem}
+                    onClick={() => handleItemClick(sortItem)}
+                >
+                    <span>
+                        {sortItem.label}
+                    </span>
+                </li>
+            );
+        });
+
+        return (
+            <div className={classes.sortingItemWrapper}>
+                <ul className={classes.sortingItems}>{itemElements}</ul>
+            </div>
+        );
+    }, [expanded, handleItemClick]);
+
     return (
         <div className={classes.qaContent}>
             <div className={classes.qaPanelBody}>
@@ -127,19 +187,49 @@ const QuestionBlock = ({ questions }) => {
                                 value={searchToken}
                                 onChange={e => setSearchToken(e.target.value)}
                             />
-                            <Button onClick={handleResetSearch}>Reset</Button>
+                            <Button
+                                className={classes.resetButton}
+                                onClick={handleResetSearch}>Reset</Button>
                         </div>
                     </div>
                     <div className={classes.toolbarWrapper}>
-                        <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
-                        <Button onClick={toggleExpandAll}>
-                            <i className={classes.iconWrapper}>
-                                <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                    <title>store</title>
-                                    <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                            </i>
-                            <span>Expand All</span>
-                        </Button>
+                        <div className={classes.sorting} ref={elementRef}>
+                            <label className={[classes.label, classes.sortLabel].join(" ")}>Sort By</label>
+                            {/* default sorted option */}
+                            <div className={classes.sortingOptionsWrapper}>
+                                <div className={classes.sortingOptions}>
+                                    <Button
+                                        className={classes.sortingButton}
+                                        onClick={handleSortClick}>{sortBy.label}</Button>
+                                    {sortElements}
+                                </div>
+                                {expandBtnState ?
+                                    <Button
+                                        onClick={toggleExpandAll}
+                                        className={classes.expandAll}
+                                    >
+                                        <span>Collapse All</span>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                                <title>store</title>
+                                                <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                        </i>
+                                    </Button>
+                                :
+                                <Button
+                                    onClick={toggleExpandAll}
+                                    className={classes.expandAll}
+                                >
+                                    <span>Expand All</span>
+                                    <i className={classes.iconWrapper}>
+                                        <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                            <title>store</title>
+                                            <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                    </i>
+                                </Button>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -153,12 +243,11 @@ const QuestionBlock = ({ questions }) => {
 
                         return (
                             <div key={item.id} className={classes.questionWrapper}>
-                                <div
-                                    className={queClass}
-                                    onClick={() => handleQueExpandToggle(index)}
-                                >
+                                <div className={queClass}>
                                     <div className={classes.listItemWrapper}>
-                                        <div className={classes.listItem}>
+                                        <div className={classes.listItem}
+                                            onClick={() => handleQueExpandToggle(index)}
+                                        >
                                             <div className={classes.leftBlock}>
                                                 <div className={classes.listContent}>{item.content}</div>
                                                 <div className={classes.count}>
@@ -167,10 +256,11 @@ const QuestionBlock = ({ questions }) => {
                                                         : `${ansCount} answer`}
                                                 </div>
                                                 <div className={classes.nickName}>by {item.nickname}</div>
+                                                <div className={classes.count}>{getDateString("1050")}</div>
                                             </div>
                                             <div className={classes.rightBlock}>
                                                 <div className={[classes.helper, classes.plus].join(" ")}>
-                                                    <PlusBlock
+                                                    <PlusBlock count={item.good}
                                                         mutation={questionRatingPlusMutation}
                                                         variables={{
                                                             question_id: item.id
@@ -178,7 +268,7 @@ const QuestionBlock = ({ questions }) => {
                                                     />
                                                 </div>
                                                 <div className={[classes.helper, classes.minus].join(" ")}>
-                                                    <MinusBlock
+                                                    <MinusBlock count={item.bad}
                                                         mutation={questionRatingMinusMutation}
                                                         variables={{
                                                             question_id: item.id
@@ -201,7 +291,7 @@ const QuestionBlock = ({ questions }) => {
                                                 <AddAnswer questionId={item.id} />
                                             </div>
                                             {!!ansCount
-                                                ? item.answer.map((ans, ind) => {
+                                                ? item.answer.map((ans) => {
                                                     return (
                                                         <div key={ans.id} className={classes.anslistItemWrapper}>
                                                             <div className={classes.answerListItem}>
@@ -210,7 +300,7 @@ const QuestionBlock = ({ questions }) => {
                                                             <div className={classes.answerListHelper}>
                                                                 <div className={classes.nickName}>by {ans.nickname}</div>
                                                                 <div className={[classes.helper, classes.plus].join(" ")}>
-                                                                    <PlusBlock
+                                                                    <PlusBlock count={ans.good}
                                                                         mutation={
                                                                             answerRatingPlusMutation
                                                                         }
@@ -220,7 +310,7 @@ const QuestionBlock = ({ questions }) => {
                                                                     />
                                                                 </div>
                                                                 <div className={[classes.helper, classes.minus].join(" ")}>
-                                                                    <MinusBlock
+                                                                    <MinusBlock count={ans.bad}
                                                                         mutation={
                                                                             answerRatingMinusMutation
                                                                         }

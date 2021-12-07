@@ -1,6 +1,68 @@
 import { gql } from '@apollo/client';
-import { MiniCartFragment } from '@magento/peregrine/lib/talons/MiniCart/miniCartFragments.gql';
 import { CartPageFragment } from '@magento/venia-ui/lib/components/CartPage/cartPageFragments.gql';
+
+const ProductListFragment = gql`
+    fragment ProductListFragment on Cart {
+        id
+        items {
+            id
+            product {
+                id
+                name
+                url_key
+                url_suffix
+                uom
+                thumbnail {
+                    url
+                }
+                stock_status
+                ... on ConfigurableProduct {
+                    variants {
+                        attributes {
+                            uid
+                        }
+                        product {
+                            id
+                            thumbnail {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+            prices {
+                price {
+                    currency
+                    value
+                }
+            }
+            quantity
+            ... on ConfigurableCartItem {
+                configurable_options {
+                    id
+                    option_label
+                    value_id
+                    value_label
+                }
+            }
+        }
+    }
+`;
+
+const MiniCartFragment = gql`
+    fragment MiniCartFragment on Cart {
+        id
+        total_quantity
+        prices {
+            subtotal_excluding_tax {
+                currency
+                value
+            }
+        }
+        ...ProductListFragment
+    }
+    ${ProductListFragment}
+`;
 
 /**
  * @deprecated - Moved to @magento/peregrine/lib/talons/MiniCart/miniCartFragments.gql

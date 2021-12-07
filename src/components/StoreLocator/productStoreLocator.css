@@ -383,8 +383,29 @@ display: flex;
 color: rgb(var(--color-red10));
 }
 
-.stocks {
+.callInfo a{
+    color: rgb(var(--color-black));
+}
 
+.callInfo a:hover{
+    color: rgb(var(--link-color-hover));
+}
+
+.stocks {
+    font-weight: var(--font-weight-bold);
+}
+
+.availability {
+    font-weight: var(--font-weight-bold);
+}
+
+.instock {
+    color: rgb(var(--color-green10));
+}
+
+
+.outofStock {
+    color: rgb(var(--color-red10));
 }
 
 .storeAddressHours {
@@ -406,11 +427,13 @@ color: rgb(var(--color-red10));
 
 .storeDirection {
     color: rgb(var(--theme-color-primary));
+
 }
 
 .storeDirection a {
     display: flex;
     align-items: center;
+    font-weight: var(--font-weight-regular);
 }
 
 .storeDirection .svgIcon{
@@ -433,7 +456,7 @@ color: rgb(var(--color-red10));
     display: flex;
 }
 
-.shopStore a{
+.shopStore span{
     --stroke: var(--theme-color-primary);
     background-color: rgb(var(--stroke));
     color: rgb(var(--color-white));
@@ -454,10 +477,11 @@ color: rgb(var(--color-red10));
     transition-property: background-color, border-color, color;
     transition-timing-function: var(--venia-global-anim-standard);
     text-align: center;
+    cursor: pointer;
     
 }
 
-.shopStore a:hover{
+.shopStore span:hover{ 
     background-color: rgb(var(--color-white));
     color: rgb(var(--stroke));
     border-color: rgb(var(--stroke));

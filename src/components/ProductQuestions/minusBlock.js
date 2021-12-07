@@ -25,7 +25,8 @@ export default function MinusBlock(props) {
             }}
             onClick={handleClick}
         >
-            {loading ? 'Loading' : 'Minus'}
+            {props.count || 0}
+            {loading ? ' Loading' : ' Minus'}
         </div>
     );
 }

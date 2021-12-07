@@ -25,6 +25,9 @@ import Carousel from '../ProductImageCarousel';
 import SharePopup from '../../../components/SharePopup';
 import LabelsPopup from '../../../components/LabelsPopup';
 
+import Image from '../Image';
+import smallWarning from '../../../assets/small_warning.png';
+
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
@@ -59,6 +62,7 @@ const ProductFullDetail = props => {
     const { pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
+    console.log(product)
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
@@ -114,7 +118,7 @@ const ProductFullDetail = props => {
 
     const handleFirstReviewClick = useCallback(() => {
         reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    },[reviewRef])
+    }, [reviewRef])
 
     const {
         breadcrumbCategoryId,
@@ -258,7 +262,9 @@ const ProductFullDetail = props => {
                         {/* Carousel */}
                         <Carousel
                             images={mediaGalleryEntries}
-                            media_gallery={media_gallery} />
+                            media_gallery={media_gallery}
+                            allowFullScreen
+                        />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}
@@ -442,13 +448,13 @@ const ProductFullDetail = props => {
                                     </div>
 
                                     {!!pos_stock_manage.stock_label &&
-                                        <div>{pos_stock_manage.stock_label}</div>
+                                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
                                     }
                                     {/* Product Stock Avialability */}
                                     {!!pos_stock_manage.stock_final_label &&
                                         <div className={classes.apSectionRow}>
                                             <div className={classes.stock}>
-                                                {pos_stock_manage.stock_final_label}
+                                                <span className={[classes.availability, classes.outofStock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
                                             </div>
                                         </div>
                                     }
@@ -516,20 +522,20 @@ const ProductFullDetail = props => {
                                         {!!size(priceTiers) &&
                                             <div>
                                                 <div>BULK SAVINGS</div>
-                                                {priceTiers.map((tier, ind)=> {
+                                                {priceTiers.map((tier, ind) => {
                                                     return (
                                                         <div key={ind}>
                                                             <div>Buy at least {tier.quantity}</div>
                                                             <div>
-                                                            <Price
-                                                                currencyCode={
-                                                                    tier.final_price.currency
-                                                                }
-                                                                value={tier.final_price.value}
-                                                            />
-                                                            <span className={classes.unit}>
-                                                                / {product.uom}
-                                                            </span>
+                                                                <Price
+                                                                    currencyCode={
+                                                                        tier.final_price.currency
+                                                                    }
+                                                                    value={tier.final_price.value}
+                                                                />
+                                                                <span className={classes.unit}>
+                                                                    / {product.uom}
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     )
@@ -671,9 +677,14 @@ const ProductFullDetail = props => {
                         <RichText content={productDetails.description} />
                     </div>
                     <br />
-                    <div onClick={openCaliforniaPopup} style={{ color: "blue" }}>
-                        California Residents:
-                        Proposition 65 Information
+                    <div className={classes.californiaResident} onClick={openCaliforniaPopup}>
+                        <div className={classes.iconWarning}>
+                            <Image src={smallWarning} />
+                        </div>
+                        <div className={classes.warningContent}>
+                            California Residents:<br />
+                            Proposition 65 Information
+                        </div>
                     </div>
 
                 </section>

@@ -137,6 +137,17 @@ const MiniCart = React.forwardRef((props, ref) => {
             <div className={classes.footer}>
                 <div className={classes.panelRow}>
                     <Button
+                        onClick={handleEditCart}
+                        priority="high"
+                        className={classes.editCartButton}
+                        disabled={loading || isCartEmpty}
+                    >
+                        <FormattedMessage
+                            id={'miniCart.editCart.Button'}
+                            defaultMessage={'View Cart'}
+                        />
+                    </Button>
+                    <Button
                         onClick={handleProceedToCheckout}
                         priority="high"
                         className={classes.checkoutButton}
@@ -154,17 +165,6 @@ const MiniCart = React.forwardRef((props, ref) => {
                             defaultMessage={'CHECKOUT'}
                         />
                     </Button>
-                    <Button
-                        onClick={handleEditCart}
-                        priority="high"
-                        className={classes.editCartButton}
-                        disabled={loading || isCartEmpty}
-                    >
-                        <FormattedMessage
-                            id={'miniCart.editCartButton'}
-                            defaultMessage={'Edit Shopping Bag'}
-                        />
-                    </Button>
                 </div>
             </div>
         </Fragment>
@@ -173,6 +173,23 @@ const MiniCart = React.forwardRef((props, ref) => {
     return (
         <aside className={rootClass}>
             <div ref={ref} className={contentsClass}>
+                <div onClick={() => setIsOpen(false)} className={classes.modalClose}>
+                    <i className={classes.iconWrapper}>
+                        <svg
+                            className={classes.svgIcon}
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                        >
+                            <title>remove</title>
+                            <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z" />
+                        </svg>
+                    </i>
+
+
+                </div>
                 {contents}
             </div>
         </aside>
