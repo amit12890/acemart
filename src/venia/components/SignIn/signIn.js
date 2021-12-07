@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
-import { useSignIn } from '@magento/peregrine/lib/talons/SignIn/useSignIn';
+import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
 
 import Button from '../Button';
 import Field from '../Field';
@@ -60,17 +60,18 @@ const SignIn = props => {
         classes.root_left_align : classes.root;
 
     const password_classes = props.isPopup ?
-    {
-        label: classes.label_left_align,
-        input: classes.input_borderPassword
-    }
-    :{ label: classes.password_label };
+        {
+            label: classes.label_left_align,
+            input: classes.input_borderPassword
+        }
+        : { label: classes.password_label };
 
-    const label_class = { label: props.isPopup
-        ? classes.label_left_align : classes.label
+    const label_class = {
+        label: props.isPopup
+            ? classes.label_left_align : classes.label
     }
     const input_class = props.isPopup ?
-        {input: classes.input_border} : {}
+        { input: classes.input_border } : {}
 
     return (
         <div className={root_class}>
@@ -84,93 +85,93 @@ const SignIn = props => {
                 <div className={classes.blockHeader}>
                     <div className={classes.blockHeaderContent}>
                         <h2>REGISTERED CUSTOMERS</h2>
-                        <p>If you have an account, sign in with your email address.</p> 
+                        <p>If you have an account, sign in with your email address.</p>
 
                     </div>
                 </div>
-            <FormError errors={Array.from(errors.values())} />
-            <Form
-                getApi={setFormApi}
-                className={classes.form}
-                onSubmit={handleSubmit}
-            >
-                <div className={classes.blockContentWrapper}>
-                <div className={classes.loginBlock}>
+                <FormError errors={Array.from(errors.values())} />
+                <Form
+                    getApi={setFormApi}
+                    className={classes.form}
+                    onSubmit={handleSubmit}
+                >
+                    <div className={classes.blockContentWrapper}>
+                        <div className={classes.loginBlock}>
 
-                    <Field
-                        label= {formatMessage({
-                            id: 'signIn.emailText',
-                            defaultMessage: 'Email'
-                        })}
-                        classes={label_class}
-                    >
-                        <TextInput
-                            autoComplete="email"
-                            field="email"
-                            validate={isRequired}
-                            classes={input_class}
-                        />
-                    </Field>
-                    <Password
-                        fieldName="password"
-                        label={formatMessage({
-                            id: 'signIn.passwordText',
-                            defaultMessage: 'Password'
-                        })}
-                        validate={isRequired}
-                        classes={password_classes}
-                        autoComplete="current-password"
-                        isToggleButtonHidden={false}
-                    />
-                    <div className={classes.actionToolbar}>
-                        <div className={classes.actionToolbarLogin}>
-                            <Button priority="high" type="submit">
-                                <FormattedMessage
-                                    id={'signIn.signInText'}
-                                    defaultMessage={'Sign In'}
+                            <Field
+                                label={formatMessage({
+                                    id: 'signIn.emailText',
+                                    defaultMessage: 'Email'
+                                })}
+                                classes={label_class}
+                            >
+                                <TextInput
+                                    autoComplete="email"
+                                    field="email"
+                                    validate={isRequired}
+                                    classes={input_class}
                                 />
-                            </Button>
+                            </Field>
+                            <Password
+                                fieldName="password"
+                                label={formatMessage({
+                                    id: 'signIn.passwordText',
+                                    defaultMessage: 'Password'
+                                })}
+                                validate={isRequired}
+                                classes={password_classes}
+                                autoComplete="current-password"
+                                isToggleButtonHidden={false}
+                            />
+                            <div className={classes.actionToolbar}>
+                                <div className={classes.actionToolbarLogin}>
+                                    <Button priority="high" type="submit">
+                                        <FormattedMessage
+                                            id={'signIn.signInText'}
+                                            defaultMessage={'Sign In'}
+                                        />
+                                    </Button>
+                                </div>
+                                <div className={classes.forgotPasswordButtonContainer}>
+                                    <LinkButton
+                                        classes={forgotPasswordClasses}
+                                        type="button"
+                                        onClick={handleForgotPassword}
+                                    >
+                                        <FormattedMessage
+                                            id={'signIn.forgotPasswordText'}
+                                            defaultMessage={'Forgot Password?'}
+                                        />
+                                    </LinkButton>
+                                </div>
+
+                            </div>
                         </div>
-                            <div className={classes.forgotPasswordButtonContainer}>
-                                <LinkButton
-                                    classes={forgotPasswordClasses}
+                    </div>
+
+                    <div className={classes.blockFooter}>
+                        <div className={classes.blockFooterContent}>
+
+                            <h3>New Customers</h3>
+                            <p>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
+                            <div className={classes.blockFooterAction}>
+                                <Button
+                                    priority="high"
                                     type="button"
-                                    onClick={handleForgotPassword}
+                                    onClick={handleCreateAccount}
                                 >
                                     <FormattedMessage
-                                        id={'signIn.forgotPasswordText'}
-                                        defaultMessage={'Forgot Password?'}
+                                        id={'signIn.createAccountText'}
+                                        defaultMessage={'Create an Account'}
                                     />
-                                </LinkButton>
+                                </Button>
                             </div>
-                       
+                        </div>
                     </div>
-                </div>
-                </div>
-         
-                <div className={classes.blockFooter}>
-                    <div className={classes.blockFooterContent}>
-            
-                    <h3>New Customers</h3>
-                    <p>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
-                    <div className={classes.blockFooterAction}>
-                        <Button
-                            priority="high"
-                            type="button"
-                            onClick={handleCreateAccount}
-                        >
-                            <FormattedMessage
-                                id={'signIn.createAccountText'}
-                                defaultMessage={'Create an Account'}
-                            />
-                        </Button>
-                    </div>
-                    </div>
-                </div>
-            </Form>
-           
+                </Form>
+
             </div>
-            
+
         </div>
     );
 };
@@ -190,7 +191,7 @@ SignIn.propTypes = {
     showForgotPassword: func
 };
 SignIn.defaultProps = {
-    setDefaultUsername: () => {},
-    showCreateAccount: () => {},
-    showForgotPassword: () => {}
+    setDefaultUsername: () => { },
+    showCreateAccount: () => { },
+    showForgotPassword: () => { }
 };

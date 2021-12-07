@@ -103,3 +103,15 @@ export const REMOVE_ITEM_FROM_COMPARE_LIST = gql`
     }
     ${UserCompareListFragment}
 `;
+
+export const ASSIGN_COMPARE_LIST_TO_CUSTOMER = gql`
+mutation assignCompareListToCustomer($uid: ID!) {
+    assignCompareListToCustomer(uid:$uid){
+        result
+        compare_list{
+            ...UserCompareListFragment
+        }
+    }
+}
+${UserCompareListFragment}
+`

@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useLazyQuery, useMutation } from '@apollo/client';
 import {
     ADD_PRODUCTS_TO_COMPARE_LIST,
+    ASSIGN_COMPARE_LIST_TO_CUSTOMER,
     CREATE_COMPARE_LIST,
     GET_CUSTOMER_COMPARE_LIST,
     GET_GUEST_COMPARE_LIST,
@@ -27,13 +28,11 @@ export const useCompareList = props => {
     if (!isSignedIn) {
         variables.uid = uid
     }
-    console.log("🚀 ~ file: compareListPage.js ~ line 29 ~ CompareListPage ~ variables", variables)
     // get compare list
     const [fetchCompareList, { loading: loadingCompareList, error }] = useLazyQuery(
         gqlQuery, {
         fetchPolicy: "network-only",
         onCompleted: (data) => {
-            console.log("🚀 ~ file: useCompareList.js ~ line 88 ~ data", data)
             const path = isSignedIn ? "customer.compare_list" : "compareList"
             dispatch(updateCompareFields(get(data, path, {})))
         }
@@ -94,11 +93,14 @@ export const useCompareList = props => {
     }, [removeItemsFromCompareList])
 
 
+    const [assignCompareList, { loading: assigningCompareList }] = useMutation(ASSIGN_COMPARE_LIST_TO_CUSTOMER)
+
 
     return {
         addProductToCompareList, addProductToCompareListError, addProductToCompareListLoading,
         removeProductFromCompareList, removeProductFromCompareListError, removeProductFromCompareListLoading,
         createCompareListLoading, createCompareListError,
-        fetchCompareList, loadingCompareList
+        fetchCompareList, loadingCompareList,
+        assignCompareList, assigningCompareList
     }
 }
