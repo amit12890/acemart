@@ -1804,10 +1804,10 @@ function broadcast(cache) {
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/cache/index.js (<- Module exports are unknown) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/core/ObservableQuery.js because of ./node_modules/@apollo/client/core/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/core/networkStatus.js because of ./node_modules/@apollo/client/core/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/errors/index.js because of ./node_modules/@apollo/client/react/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/errors/index.js because of ./node_modules/@apollo/client/core/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/link/core/index.js (<- Module exports are unknown) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/link/http/index.js because of ./node_modules/@apollo/client/core/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/node_modules/tslib/tslib.es6.js because of ./node_modules/@apollo/client/react/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/node_modules/tslib/tslib.es6.js because of ./node_modules/@apollo/client/core/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@apollo/client/utilities/index.js because of ./node_modules/@apollo/client/core/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@wry/equality/lib/equality.esm.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/graphql/language/visitor.mjs */

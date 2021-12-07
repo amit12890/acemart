@@ -2957,9 +2957,9 @@ const deleteInactiveCachesEntry = async (client, predicate) => {
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/catalog.js because of ./node_modules/@magento/peregrine/lib/talons/RootComponents/Category/useNoProductsFound.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/rootComponents.js because of ./src/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/unhandledErrors.js because of ./src/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/user.js because of ./node_modules/@magento/peregrine/lib/hooks/useCustomerWishlistSkus/useCustomerWishlistSkus.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/store/actions/checkout/actions.js because of ./node_modules/@magento/peregrine/lib/hooks/useCustomerWishlistSkus/useCustomerWishlistSkus.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/store/actions/checkout/asyncActions.js because of ./node_modules/@magento/peregrine/lib/hooks/useCustomerWishlistSkus/useCustomerWishlistSkus.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/user.js because of ./src/components/WishList/wishlistBlock.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/store/actions/checkout/actions.js because of ./src/components/WishList/wishlistBlock.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/store/actions/checkout/asyncActions.js because of ./src/components/WishList/wishlistBlock.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/bindActionCreators.js because of ./src/magento/peregrine/talons/Product/useProduct.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-redux/es/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react/index.js (<- Module is not an ECMAScript module) */
@@ -46374,11 +46374,11 @@ mutation updateCustomer($input: CustomerInput!){
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/catalog.js because of ./node_modules/@magento/peregrine/lib/talons/RootComponents/Category/useNoProductsFound.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/rootComponents.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/unhandledErrors.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/user.js because of ./node_modules/@magento/peregrine/lib/hooks/useCustomerWishlistSkus/useCustomerWishlistSkus.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useAwaitQuery.js because of ./node_modules/@magento/peregrine/lib/talons/SignIn/useSignIn.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useDropdown.js because of ./node_modules/@magento/venia-ui/lib/components/ProductSort/productSort.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/context/user.js because of ./src/components/WishList/wishlistBlock.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useAwaitQuery.js because of ./node_modules/@magento/peregrine/lib/talons/CreateAccount/useCreateAccount.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useDropdown.js because of ./src/venia/components/ProductSort/productSort.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useScrollLock.js because of ./src/venia/components/MiniCart/miniCart.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useScrollTopOnChange.js because of ./node_modules/@magento/peregrine/lib/talons/SearchPage/useSearchPage.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useScrollTopOnChange.js because of ./src/RootComponents/Category/data/useCategory.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useSearchParam.js because of ./node_modules/@magento/peregrine/lib/hooks/usePagination.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useTypePolicies.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/hooks/useWindowSize.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
@@ -46387,14 +46387,14 @@ mutation updateCustomer($input: CustomerInput!){
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/store/middleware/thunk.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/store/reducers/index.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/talons/AccountChip/useAccountChip.js because of ./src/venia/components/AccountMenu/accountMenuItems.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/talons/FilterModal/helpers.js because of ./node_modules/@magento/peregrine/lib/talons/FilterModal/useFilterModal.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/talons/Header/cartTriggerFragments.gql.js because of ./node_modules/@magento/peregrine/lib/talons/ProductFullDetail/productFullDetail.gql.ce.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/talons/FilterModal/helpers.js because of ./src/RootComponents/Category/data/useCategory.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/talons/Header/cartTriggerFragments.gql.js because of ./node_modules/@magento/peregrine/lib/talons/WishlistPage/wishlistItem.gql.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/talons/Header/useStoreSwitcher.js because of ./src/components/StoreLocator/productStoreLocator.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/createErrorRecord.js because of ./node_modules/@magento/venia-ui/lib/components/Wishlist/AddToListButton/useCommonToasts.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/intlPatches.js because of ./node_modules/@magento/peregrine/lib/Price/price.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/makeUrl.js because of ./node_modules/@magento/venia-ui/lib/components/Gallery/item.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/makeUrl.js because of ./src/RootComponents/Category/NoProductsFound/noProductsFound.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/shallowMerge.js because of ./src/magento/peregrine/talons/Product/useProduct.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/simplePersistence.js because of ./node_modules/@magento/peregrine/lib/hooks/useCustomerWishlistSkus/useCustomerWishlistSkus.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/simplePersistence.js because of ./src/components/WishList/wishlistBlock.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/swUtils.js because of ./src/magento/peregrine/talons/ProductImageCarousel/useProductImageCarousel.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/venia-ui/lib/components/AccountChip/accountChip.gql.js because of ./src/components/WishList/wishlistBlock.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/venia-ui/lib/components/Head/headProvider.js because of ./node_modules/@magento/venia-ui/lib/RootComponents/CMS/cms.js */
@@ -46419,12 +46419,12 @@ mutation updateCustomer($input: CustomerInput!){
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-feather/dist/icons/wifi.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-feather/dist/icons/x.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/components/AccountPage/newsletterSubscription.gql.js because of ./src/components/AccountPage/newsletterSubscription.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./src/url.utils.js because of ./src/venia/components/ProductFullDetail/productFullDetail.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./src/url.utils.js because of ./src/components/WishList/wishlistBlock.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Button/button.js because of ./src/RootComponents/Product/product.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/ErrorView/errorView.js because of ./src/RootComponents/Product/product.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Icon/icon.js because of ./src/venia/components/ProductSort/sortItem.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Image/image.js because of ./src/components/ProductCategory/productCategory.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/TextInput/textInput.js because of ./src/components/WishList/createWishlist.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/TextInput/textInput.js because of ./src/venia/components/ProductFullDetail/quantity.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/apollo-cache-persist/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-0-1!./node_modules/@magento/venia-ui/lib/components/AccountChip/accountChip.css (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-0-1!./node_modules/@magento/venia-ui/lib/components/AuthBar/authBar.css (<- Module is not an ECMAScript module) */
@@ -46468,7 +46468,7 @@ mutation updateCustomer($input: CustomerInput!){
 /*! ModuleConcatenation bailout: Cannot concat with ./src/assets/footer-payment.png (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/assets/truckicon.png (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Logo/logo.svg (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/graphql/jsutils/inspect.mjs because of ./node_modules/@apollo/client/core/LocalState.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/graphql/jsutils/inspect.mjs because of ./node_modules/@apollo/client/utilities/graphql/directives.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/graphql/language/blockString.mjs because of ./node_modules/@apollo/client/core/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/graphql/language/lexer.mjs because of ./node_modules/@apollo/client/core/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/graphql/language/source.mjs because of ./node_modules/@apollo/client/core/index.js */
@@ -54802,7 +54802,7 @@ $RefreshReg$(_c, "Button");
 /*! exports provided: default */
 /*! exports used: default */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/shallowMerge.js because of ./src/magento/peregrine/talons/Product/useProduct.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Button/button.js because of ./src/venia/components/FilterModalOpenButton/filterModalOpenButton.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Button/button.js because of ./src/venia/components/ProductSort/productSort.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-0-1!./src/venia/components/ErrorView/errorView.css (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/ErrorView/errorViewBackground-1400x600.png (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/ErrorView/errorViewBackground-380x600.png (<- Module is not an ECMAScript module) */
@@ -55849,7 +55849,7 @@ module.exports = __webpack_require__.p + "logo-qeq.svg";
 /*! exports used: default */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@magento/peregrine/lib/util/shallowMerge.js because of ./src/magento/peregrine/talons/Product/useProduct.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Field/fieldIcons.js because of ./src/venia/components/Select/select.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Field/message.js because of ./src/venia/components/ProductFullDetail/quantity.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./src/venia/components/Field/message.js because of ./src/venia/components/Checkbox/checkbox.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-0-1!./src/venia/components/TextInput/textInput.css (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/informed/dist/esm/index.js (<- Module uses injected variables (process)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/prop-types/index.js (<- Module is not an ECMAScript module) */

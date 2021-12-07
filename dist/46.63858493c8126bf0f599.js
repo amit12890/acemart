@@ -744,7 +744,7 @@ var find = _createFind(lodash_es_findIndex);
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/lodash-es/isArrayLike.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/lodash-es/isString.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/lodash-es/keys.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/lodash-es/toInteger.js because of ./src/components/AccountPage/orderDetailsPage.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/lodash-es/toInteger.js because of ./src/venia/components/AddressBookPage/addressBookPage.js */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
