@@ -104,6 +104,18 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/components/CompareListPage")
         });
+        routes.push({
+            name: "Cart Page",
+            pattern: "/cart/",
+            exact: true,
+            path: require.resolve("./src/venia/components/CartPage")
+        });
+        routes.push({
+            name: "Checkout Page",
+            pattern: "/checkout/",
+            exact: true,
+            path: require.resolve("./src/venia/components/CheckoutPage")
+        });
         return routes;
     });
 }
