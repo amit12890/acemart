@@ -37,7 +37,8 @@
     -webkit-appearance: none;
 }
 
-.input:focus {
+.input:focus,
+.input:focus-visible {
     box-shadow: none;
     outline: none;
 }

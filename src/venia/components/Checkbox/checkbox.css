@@ -61,4 +61,5 @@
 .input:active:enabled,
 .input:focus:enabled {
     outline: none;
+    box-shadow: none; 
 }

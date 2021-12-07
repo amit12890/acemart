@@ -282,7 +282,7 @@ const Footer = props => {
                             <div className={classes.blockNewsletter}>
                                 <h3 className={classes.groupTitle}>Subscribe</h3>
                             </div>
-                            <div>
+                            <div className={classes.newsletterContentWrapper}>
                                 <NewsletterSubscriptionInput />
                             </div>
                             <div className={classes.blockPaymentAccepted}>

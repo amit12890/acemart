@@ -29,8 +29,7 @@
 .button {
     align-items: center;
     background-color: rgb(var(--venia-global-color-gray-50));
-    border: 2px solid rgb(var(--border-color-base));
-    border-radius: 50%;
+    border: 1px solid rgb(var(--border-color-base));
     display: inline-flex;
     height: 2rem;
     justify-content: center;
@@ -51,6 +50,7 @@
 
 .button:disabled {
     cursor: not-allowed;
+    opacity: 0.3;
 }
 
 .button:focus {
@@ -75,4 +75,5 @@
 .input {
     composes: input from '../TextInput/textInput.css';
     text-align: center;
+
 }

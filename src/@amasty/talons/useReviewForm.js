@@ -72,11 +72,7 @@ export const useReviewForm = props => {
                 ...formValues,
                 ratings: JSON.stringify(ratings),
                 tmp_images_path: tmpImgPath,
-                gdpr: has(formValues, 'gdpr')
-                    ? formValues.gdpr
-                    : isSignedIn
-                    ? formValues.gdpr
-                    : false
+                gdpr: has(formValues, 'gdpr') ? formValues.gdpr : false
             };
             try {
                 const { data } = await addReview({ variables });

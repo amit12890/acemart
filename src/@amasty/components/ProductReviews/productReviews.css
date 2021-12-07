@@ -53,6 +53,26 @@
   padding: 15px;
 }
 
+.message {
+  margin: 0 0 20px;
+  padding: 10px 20px;
+  display: flex;
+  line-height: 1.2em;
+  font-size: var(--fontSize-90);
+  background: #fdf0d5;
+  color: #6f4400;
+  align-items: center;
+
+
+}
+
+.message .iconWrapper {
+  margin-right: 10px;
+}
+
+
+
+
 @media (min-width: 768px) {
   .reviewsRoot {
     padding-top: 4rem;
@@ -61,6 +81,17 @@
 
 .list {
   position: relative;
+  margin-bottom: 20px;
+}
+
+.iconWrapper {
+  
+}
+
+.svgIcon {
+    width: 18px;
+    height: auto;
+    fill: currentColor;
 }
 
 .loading {

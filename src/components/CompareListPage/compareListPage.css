@@ -14,7 +14,7 @@
     padding: 15px 30px;
     font-size: var(--fontSize-700);
     font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
+    text-transform: capitalize;
 } 
 
 .data,
@@ -127,7 +127,9 @@ tbody tr:nth-child(even) td:nth-child(even) {
 }
 
 .productInfo {
-
+    display: grid;
+    gap: 0.25rem;
+    font-size: var(--fontSize-100);
 }
 
 .itemThumbnail {
@@ -138,6 +140,8 @@ tbody tr:nth-child(even) td:nth-child(even) {
     font-size: var(--fontSize-100);
     font-weight: var(--font-weight-bold); 
     margin-bottom: 10px;
+    height: 35px;
+    overflow: hidden;
 }
 
 .price {

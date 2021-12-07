@@ -1,15 +1,12 @@
 import React, { Fragment, Suspense } from 'react';
 import { shape, string } from 'prop-types';
-import { ShoppingBag as ShoppingCartIcon } from 'react-feather';
 import { useIntl } from 'react-intl';
 
 import { useCartTrigger } from '@magento/peregrine/lib/talons/Header/useCartTrigger';
 
 import { useStyle } from '../../classify';
-import Icon from '@magento/venia-ui/lib/components/Icon';
 import defaultClasses from './cartTrigger.css';
 import { GET_ITEM_COUNT_QUERY } from './cartTrigger.gql';
-import { Portal } from '@magento/venia-ui/lib/components/Portal';
 import Mask from '@magento/venia-ui/lib/components/Mask';
 
 const MiniCart = React.lazy(() => import('../MiniCart'));
@@ -69,7 +66,14 @@ const CartTrigger = props => {
 
                     <span className={classes.cartLabel}>My Cart{maybeItemCounter}</span>
                 </button>
-
+                <Suspense fallback={null}>
+                    {/* <Mask isActive={miniCartIsOpen} /> */}
+                    <MiniCart
+                        isOpen={miniCartIsOpen}
+                        setIsOpen={setMiniCartIsOpen}
+                        ref={miniCartRef}
+                    />
+                </Suspense>
             </div>
             <button
                 aria-label={buttonAriaLabel}
@@ -84,16 +88,6 @@ const CartTrigger = props => {
                 </i>
                 {maybeItemCounter}
             </button>
-            <Suspense fallback={null}>
-                <Portal>
-                    <Mask isActive={miniCartIsOpen} />
-                    <MiniCart
-                        isOpen={miniCartIsOpen}
-                        setIsOpen={setMiniCartIsOpen}
-                        ref={miniCartRef}
-                    />
-                </Portal>
-            </Suspense>
         </Fragment>
     );
 

@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useState, useCallback, useMemo } from 'react';
+import React, { Fragment, Suspense, useState, useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -25,6 +25,9 @@ import Carousel from '../ProductImageCarousel';
 import SharePopup from '../../../components/SharePopup';
 import LabelsPopup from '../../../components/LabelsPopup';
 
+import Image from '../Image';
+import smallWarning from '../../../assets/small_warning.png';
+
 import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
@@ -32,6 +35,7 @@ import ProductReview from "../../../@amasty/amAdvancedReviews"
 import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
+import CaliforniaPopup from "./californiaPopup"
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -58,10 +62,14 @@ const ProductFullDetail = props => {
     const { pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
+    console.log(product)
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
     const [showLabelsPopup, setLabelsPopup] = useState(false)
+    const [showCaliforniaPopup, setCaliforniaPopup] = useState(false)
+
+    const reviewRef = useRef(null)
 
     const talonProps = useProductFullDetail({ product });
 
@@ -90,6 +98,15 @@ const ProductFullDetail = props => {
         setStoreLocatorPopup(false);
     }, [setStoreLocatorPopup]);
 
+    // handlers for storelocator popup
+    const openCaliforniaPopup = useCallback(() => {
+        setCaliforniaPopup(true);
+    }, [setCaliforniaPopup]);
+
+    const closeCaliforniaPopup = useCallback(() => {
+        setCaliforniaPopup(false);
+    }, [setCaliforniaPopup]);
+
     // handlers for Labels popup
     const openLabelsPopup = useCallback(() => {
         setLabelsPopup(true);
@@ -98,6 +115,10 @@ const ProductFullDetail = props => {
     const closeLabelsPopup = useCallback(() => {
         setLabelsPopup(false);
     }, [setLabelsPopup]);
+
+    const handleFirstReviewClick = useCallback(() => {
+        reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, [reviewRef])
 
     const {
         breadcrumbCategoryId,
@@ -145,6 +166,12 @@ const ProductFullDetail = props => {
     const moreInformation = get(
         product,
         'more_information.data',
+        []
+    );
+
+    const priceTiers = get(
+        product,
+        'price_tiers',
         []
     );
 
@@ -235,7 +262,9 @@ const ProductFullDetail = props => {
                         {/* Carousel */}
                         <Carousel
                             images={mediaGalleryEntries}
-                            media_gallery={media_gallery} />
+                            media_gallery={media_gallery}
+                            allowFullScreen
+                        />
                     </div>
                     <div className={classes.productInfo}>
                         {/* Product Name */}
@@ -348,11 +377,17 @@ const ProductFullDetail = props => {
                         )}
 
                         {/* Product Review   */}
-                        <div className={classes.piSectionRow}>
-                            <div className={classes.productReview}>
-                                <RatingMini percent={product.rating_summary} value={product.review_count} />
+                        {!!product.review_count ?
+                            <div className={classes.piSectionRow}>
+                                <div className={classes.productReview}>
+                                    <RatingMini percent={product.rating_summary} value={product.review_count} />
+                                </div>
                             </div>
-                        </div>
+                            :
+                            <div style={{ cursor: "pointer" }} onClick={handleFirstReviewClick}>
+                                Be the first to review this product
+                            </div>
+                        }
 
 
                         {/* Product  Short Additional Info  */}
@@ -413,14 +448,16 @@ const ProductFullDetail = props => {
                                     </div>
 
                                     {!!pos_stock_manage.stock_label &&
-                                        <div>{pos_stock_manage.stock_label}</div>
+                                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
                                     }
                                     {/* Product Stock Avialability */}
-                                    <div className={classes.apSectionRow}>
-                                        <div className={classes.stock}>
-                                            {product.only_x_left_in_stock} In Stock
+                                    {!!pos_stock_manage.stock_final_label &&
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.stock}>
+                                                <span className={[classes.availability, classes.outofStock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
 
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={classes.apSectionRow}>
@@ -478,18 +515,33 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
                                             <span>
-                                                Usually ships from our warehouse in
-                                                Schertz, TX within 1-2 business
-                                                days.
+                                                <RichText content={product.ship_time} />
                                             </span>
                                         </div>
 
-                                        <div className={classes.shippingNote}>
-                                            <h3>Note</h3>
-                                            <span>
-                                                Supply chain issues are creating longer lead times than normal. Contact customer service for help on a time-specific order.
-                                            </span>
-                                        </div>
+                                        {!!size(priceTiers) &&
+                                            <div>
+                                                <div>BULK SAVINGS</div>
+                                                {priceTiers.map((tier, ind) => {
+                                                    return (
+                                                        <div key={ind}>
+                                                            <div>Buy at least {tier.quantity}</div>
+                                                            <div>
+                                                                <Price
+                                                                    currencyCode={
+                                                                        tier.final_price.currency
+                                                                    }
+                                                                    value={tier.final_price.value}
+                                                                />
+                                                                <span className={classes.unit}>
+                                                                    / {product.uom}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        }
                                     </div>
 
                                     {/* Product Add To Links */}
@@ -624,6 +676,16 @@ const ProductFullDetail = props => {
                     <div className={classes.sectionContent}>
                         <RichText content={productDetails.description} />
                     </div>
+                    <br />
+                    <div className={classes.californiaResident} onClick={openCaliforniaPopup}>
+                        <div className={classes.iconWarning}>
+                            <Image src={smallWarning} />
+                        </div>
+                        <div className={classes.warningContent}>
+                            California Residents:<br />
+                            Proposition 65 Information
+                        </div>
+                    </div>
 
                 </section>
 
@@ -683,7 +745,11 @@ const ProductFullDetail = props => {
                 </section>
 
 
-                <section className={[classes.productViewSection, classes.productReviewSection].join(" ")}>
+                <section ref={reviewRef}
+                    className={[
+                        classes.productViewSection,
+                        classes.productReviewSection
+                    ].join(" ")}>
                     <div className={classes.sectionTitleWrapper}>
                         <h2 className={classes.sectionTitle}>
                             <span>
@@ -692,8 +758,10 @@ const ProductFullDetail = props => {
                         </h2>
                         <ProductReview product={product} />
                     </div>
-                    <RelatedPosts productId={product.id}/>
+
                 </section>
+
+                <RelatedPosts productId={product.id} />
 
                 {!!size(upsellProducts) && (
                     <section className={[classes.productViewSection, classes.upsellProducts].join(" ")}>
@@ -757,6 +825,11 @@ const ProductFullDetail = props => {
                 <StoreLocator
                     isPopupVisible={showStoreLocatorPopup}
                     closeStoreLocatorPopup={closeStoreLocatorPopup} />
+            )}
+            {showCaliforniaPopup && (
+                <CaliforniaPopup
+                    isPopupVisible={showCaliforniaPopup}
+                    closeCaliforniaPopup={closeCaliforniaPopup} />
             )}
         </Fragment>
     );
