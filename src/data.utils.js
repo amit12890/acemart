@@ -4,14 +4,14 @@ import Axios from 'axios';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 
-export const useApiData = ({url="", method="get", headers={}, data={}, isLazy=false, onSuccess=null}) => {
+export const useApiData = ({ url = "", method = "get", headers = {}, data = {}, isLazy = false, onSuccess = null }) => {
     const [{ token }, _] = useUserContext();
     const [loading, setLoading] = useState(!isLazy);
     const [response, setResponse] = useState({});
     const [error, setError] = useState(false);
 
     const callApi = useCallback(
-        async (cbUrl=null, data={}) => {
+        async (cbUrl = null, data = {}) => {
             setLoading(true);
             try {
                 const response = await Axios({
@@ -24,13 +24,13 @@ export const useApiData = ({url="", method="get", headers={}, data={}, isLazy=fa
                 });
                 setResponse(response.data);
                 setLoading(false);
-                if(!!onSuccess) onSuccess(response.data);
+                if (!!onSuccess) onSuccess(response.data);
             } catch (error) {
                 setError(true);
                 setLoading(false);
                 console.log("file: data.utils.js ~ line 27 ~ error", error)
             }
-        }, [url]
+        }, [url, onSuccess]
     )
 
     useEffect(() => {
@@ -40,5 +40,5 @@ export const useApiData = ({url="", method="get", headers={}, data={}, isLazy=fa
             callApi(data);
     }, [])
 
-    return {callApi, loading, response, error};
+    return { callApi, loading, response, error };
 }

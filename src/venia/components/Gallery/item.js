@@ -7,6 +7,7 @@ import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useI
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
+import { useHistory } from 'react-router-dom';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
@@ -19,6 +20,9 @@ import AddItemsToCompareList from '../../../components/CompareListPage/addItemsT
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import RatingMini from "../../../@amasty/components/Rating/rating_mini";
 import LoadingButtonSmall from '../../../components/LoadingButtonSmall'
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { loginPage } from '../../../url.utils';
+import { useWishlistSession } from '../../../data/appState/appState.hook'
 
 const style = {
     '--productLabel': `url("${productLabelImage}")`,
@@ -67,12 +71,20 @@ const GalleryItem = props => {
     const { handleLinkClick, item, wishlistButtonProps } = useGalleryItem(
         props
     );
-
+    const [{ isSignedIn }] = useUserContext();
+    const { addProductToWishlistSession } = useWishlistSession()
+    const history = useHistory()
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
 
     const openWishlistPopup = useCallback(() => {
-        setShowWishlistPopup(true)
-    }, [setShowWishlistPopup])
+        if (isSignedIn) {
+            setShowWishlistPopup(true)
+        } else {
+            history.push(loginPage())
+            addProductToWishlistSession(item)
+        }
+    }, [setShowWishlistPopup, isSignedIn, item, addProductToWishlistSession])
+
     const closeWishlistPopup = useCallback(() => {
         setShowWishlistPopup(false)
     }, [setShowWishlistPopup])

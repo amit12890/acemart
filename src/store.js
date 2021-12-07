@@ -2,6 +2,7 @@ import { combineReducers, createStore } from 'redux';
 import { enhancer, reducers } from '@magento/peregrine';
 // custom
 import { compareReducer } from './data/compare/compare.reducer';
+import { appStateReducer } from './data/appState/appState.reducer';
 
 
 // This is the connective layer between the Peregrine store and the
@@ -11,7 +12,8 @@ import { compareReducer } from './data/compare/compare.reducer';
 // example:
 const rootReducer = combineReducers({
     ...reducers,
-    compare: compareReducer
+    compare: compareReducer,
+    appState: appStateReducer
 });
 // const rootEnhancer = composeEnhancers(enhancer, myEnhancer);
 // export default createStore(rootReducer, rootEnhancer);
