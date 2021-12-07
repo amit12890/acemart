@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { string, shape, array } from 'prop-types';
 
 import { useStyle } from '../../classify';
@@ -14,6 +14,7 @@ import { useGallery } from '@magento/peregrine/lib/talons/Gallery/useGallery';
  */
 const Gallery = props => {
     const { items } = props;
+
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useGallery();
     const { storeConfig } = talonProps;

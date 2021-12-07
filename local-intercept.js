@@ -18,6 +18,11 @@
  */
 
 function localIntercept(targets) {
+    targets.of('@magento/pwa-buildpack').transformUpward.tap(def => {
+        def.staticFromRoot.inline.body.file.template.inline =
+            './acemart-static/{{ filename }}';
+    });
+
     targets.of("@magento/venia-ui").routes.tap(routes => {
         // routes.push({
         //     name: "404 page",

@@ -36,6 +36,7 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
+import LoadingButton from '../../../components/LoadingButton';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -583,9 +584,7 @@ const ProductFullDetail = props => {
                                                             <span>Add to Compare</span>
                                                         </Button>
                                                     )}
-                                                    Loader={() => (
-                                                        <div>Loading....</div>
-                                                    )}
+                                                    Loader={() => <LoadingButton />}
                                                 />
                                             </div>
 
