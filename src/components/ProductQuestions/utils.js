@@ -16,3 +16,15 @@ export const getDateString = (dateNumber) => {
         return `${Math.floor(dayCount / 365)} years ${months}`
     }
 }
+
+export function questionReducer(state, action) {
+    switch (action.type) {
+      case 'UPDATE_QUESTIONS':
+        return {questions: [...action.payload]};
+
+      case 'update-question-count':
+        return {count: state.count - 1};
+      default:
+        throw new Error();
+    }
+}

@@ -2,6 +2,7 @@ import React, {
     useCallback,
     useEffect,
     useMemo,
+    useReducer,
     useRef,
     useState
 } from 'react';
@@ -29,15 +30,16 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
-import { getDateString } from './utils';
+import { getDateString, questionReducer } from './utils';
+import { cloneDeep, orderBy } from 'lodash-es';
 
 const sortOptions = [
-    { value: '7', label: 'Most Recent Questions' },
-    { value: '8', label: 'Oldest Questions' },
-    { value: '9', label: 'Questions With The Most Helpful Answers' },
-    { value: '10', label: 'Questions With Most Recent Answers' },
-    { value: '11', label: 'Questions With  Oldest Answers' },
-    { value: '12', label: 'Questions With Most Answers' },
+    { value: '1', label: 'Most Recent Questions' },
+    { value: '2', label: 'Oldest Questions' },
+    { value: '3', label: 'Questions With The Most Helpful Answers' },
+    { value: '4', label: 'Questions With Most Recent Answers' },
+    { value: '5', label: 'Questions With  Oldest Answers' },
+    { value: '6', label: 'Questions With Most Answers' },
 ];
 
 const ProductQuestionsBlock = ({ productId }) => {
@@ -88,9 +90,25 @@ const QuestionBlock = ({ questions }) => {
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
     const [sortBy, setSortBy] = useState(sortOptions[0])
+    const [queData, dispatch] = useReducer(questionReducer, {questions})
     const fuseSearch = useRef();
 
     useEffect(() => {
+        // create new state for questions
+        let pQueList = cloneDeep(questions)
+        for (let qInd = 0; qInd < pQueList.length; qInd++) {
+            const currQue = pQueList[qInd];
+            // add answer count for sorting
+            currQue.ansCount = size(currQue.answer);
+            // add answer total upvotes
+            let ansUpvoteCount = 0;
+            for (let ansInd = 0; ansInd < currQue.answer.length; ansInd++) {
+                const currAns = currQue.answer[ansInd];
+                ansUpvoteCount += currAns.good
+            }
+            currQue.ansUpvoteCount = ansUpvoteCount;
+        }
+        pQueList = orderBy(pQueList, ['date'], ['asc']);
         // setup fuse search
         const options = {
             findAllMatches: true,
@@ -101,8 +119,20 @@ const QuestionBlock = ({ questions }) => {
                 'answer.content',
             ],
         };
-        fuseSearch.current = new Fuse(questions, options);
-    }, [questions]);
+        fuseSearch.current = new Fuse(pQueList, options);
+        dispatch({type: "UPDATE_QUESTIONS", payload: pQueList});
+    }, [questions, dispatch]);
+    
+    useEffect(() => {
+        let result;
+        if (searchToken.length > 2) {
+            result = fuseSearch.current.search(searchToken);
+            result = result.map((d) => d.item)
+        } else {
+            result = cloneDeep(questions);
+        }
+        dispatch({type: "UPDATE_QUESTIONS", payload: result});
+    }, [searchToken, questions]);
 
     const handleQueExpandToggle = useCallback(
         queIndex => {
@@ -115,23 +145,15 @@ const QuestionBlock = ({ questions }) => {
     );
 
     const toggleExpandAll = useCallback(() => {
-        const nextState = expandBtnState ? new Set([]) : new Set(range(0, questions.length))
+        const nextState = expandBtnState ? new Set([]) : new Set(range(0, queData.questions.length))
         setExpandedQuestions(nextState);
         setExpandBtnState(expBtnState => !expBtnState)
-    }, [questions, setExpandedQuestions, expandBtnState, setExpandBtnState]);
+    }, [queData, setExpandedQuestions, expandBtnState, setExpandBtnState]);
+    console.log("🚀 ~ file: productQuestionsBlock.js ~ line 150 ~ QuestionBlock ~ queData", queData)
 
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
     }, []);
-
-    const filteredQuestions = useMemo(() => {
-        if (searchToken.length > 2) {
-            const result = fuseSearch.current.search(searchToken);
-            return result.map((d) => d.item)
-        } else {
-            return questions;
-        }
-    }, [searchToken, questions]);
 
     // expand or collapse on click
     const handleSortClick = () => {
@@ -143,8 +165,31 @@ const QuestionBlock = ({ questions }) => {
         sortAttribute => {
             setSortBy(sortAttribute)
             setExpanded(false);
+            let sortedQuestions = [];
+            // sort questions by
+            switch (sortAttribute.value) {
+                case '1':
+                    sortedQuestions = orderBy(queData.questions, ['date'], ['asc']);
+                    break;
+                case '2':
+                    sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
+                    break;
+                case '3':
+                    sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
+                    break;
+                case '4':
+                    sortedQuestions = orderBy(queData.questions, ['answer.date'], ['asc']);
+                    break;
+                case '5':
+                    sortedQuestions = orderBy(queData.questions, ['answer.date'], ['desc']);
+                    break;
+                case '6':
+                    sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
+                    break;
+            }
+            dispatch({type: "UPDATE_QUESTIONS", payload: sortedQuestions});
         },
-        [setExpanded]
+        [setExpanded, setSortBy, dispatch, queData]
     );
 
     const sortElements = useMemo(() => {
@@ -235,7 +280,7 @@ const QuestionBlock = ({ questions }) => {
 
 
                 {
-                    filteredQuestions.map((item, index) => {
+                    queData.questions.map((item, index) => {
                         const ansCount = size(item.answer);
                         let queClass = expandedQuestions.has(index)
                             ? `${classes.question} ${classes.question_open}`
@@ -256,7 +301,7 @@ const QuestionBlock = ({ questions }) => {
                                                         : `${ansCount} answer`}
                                                 </div>
                                                 <div className={classes.nickName}>by {item.nickname}</div>
-                                                <div className={classes.count}>{getDateString("1050")}</div>
+                                                <div className={classes.count}>{getDateString(item.date)}</div>
                                             </div>
                                             <div className={classes.rightBlock}>
                                                 <div className={[classes.helper, classes.plus].join(" ")}>
