@@ -17,6 +17,21 @@ import { unescape } from 'lodash-es';
  * TODO: Replace with a single product query when possible.
  */
 
+// this functions are used to replace some special characters from html entity to symbol
+const keyMap = {
+    '&reg;': '®',
+    '&amp;': '&',
+    '&copy;': '©',
+    '&trade;': '™'
+};
+
+const replaceSpecialChars = name => {
+    const newStr = name.replace(/&reg;|&amp;|&copy;|&trade;/gi, (matched) => {
+        return keyMap[matched];
+    });
+    return newStr;
+};
+
 const Product = () => {
     const talonProps = useProduct({
         mapProduct
@@ -41,7 +56,7 @@ const Product = () => {
 
     return (
         <Fragment>
-            <StoreTitle>{unescape(product.name)}</StoreTitle>
+            <StoreTitle>{replaceSpecialChars(unescape(product.name))}</StoreTitle>
             <Meta name="description" content={product.meta_description} />
             <ProductFullDetail product={product} />
         </Fragment>
