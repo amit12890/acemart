@@ -11,8 +11,8 @@ const checkoutHeader = () => {
     const classes = useStyle(defaultClasses);
 
     return (
-        <div>
-            <div className={[classes.panelWrapper, classes.toolbarWrapper].join(" ")}>
+        <header className={checkoutHeader}>
+            <div className={classes.panelWrapper}>
                 <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>
 
                     <div className={classes.logowrapper}>
@@ -52,11 +52,9 @@ const checkoutHeader = () => {
                     </Link>
                 </div>
 
-                <div>
-                    <h2>Review and Payments</h2>
-                </div>
+
             </div>
-        </div>
+        </header>
     )
 }
 

@@ -60,24 +60,20 @@ const CompletedView = props => {
                             defaultMessage={'Shipping Method'}
                         />
                     </h5>
-                    <LinkButton
-                        className={classes.editButton}
-                        onClick={showUpdateMode}
-                    >
-                        <Icon
-                            size={16}
-                            src={EditIcon}
-                            classes={{ icon: classes.editIcon }}
-                        />
-                        <span className={classes.editButtonText}>
-                            <FormattedMessage
-                                id={'global.editButton'}
-                                defaultMessage={'Edit'}
-                            />
-                        </span>
-                    </LinkButton>
+
                 </span>
                 {contents}
+                <LinkButton
+                    className={classes.editButton}
+                    onClick={showUpdateMode}
+                >
+                    <span className={classes.editButtonText}>
+                        <FormattedMessage
+                            id={'global.editButton'}
+                            defaultMessage={'Edit'}
+                        />
+                    </span>
+                </LinkButton>
             </div>
         </div>
     );

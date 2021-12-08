@@ -13,6 +13,7 @@ import { useHeader } from '@magento/peregrine/lib/talons/Header/useHeader';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import Image from '../Image';
 import RichContent from '../RichContent';
+import CmsBlock from '@magento/venia-ui/lib/components/CmsBlock'
 
 
 import { TOP_HEADERS_GQL } from './header.gql';
@@ -48,15 +49,24 @@ const Header = props => {
         <PageLoadingIndicator />
     ) : null;
 
+
+    // mapping classes with js as pagebuilder not providing css style add
+    // const mapClasses = cssClasses.map((className) => {
+    //     return get(classes, className, className)
+    // })
     return (
         <Fragment>
             <header className={rootClass}>
-                {size(topHeader1Content) > 0 && (
-                    <RichContent html={topHeader1Content} />
+                {/* {size(topHeader1Content) > 0 && (
+                    <div className={classes.myFirtClass}>
+                        <RichContent
+                            classes={{ root: classes.test }}
+                            html={topHeader1Content} />
+                    </div>
                 )}
                 {size(topHeader2Content) > 0 && (
                     <RichContent html={topHeader2Content} />
-                )}
+                )} */}
                 {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>

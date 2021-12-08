@@ -67,10 +67,11 @@
     display: flex;
     justify-content: space-between;
     padding-top: 15px;
+    flex-wrap: wrap;
 }
 
 .stockStatusMessageContainer {
-    grid-column-end: span 2;
+    flex-basis: 100%;
 }
 
 .stockStatusMessageContainer:empty {

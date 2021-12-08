@@ -25,6 +25,13 @@
     display: flex;
 }
 
+.test {
+    width: 100%;
+
+}
+
+
+
 @media (min-width: 641px) {
     .switchers {
         position: relative;
@@ -351,3 +358,18 @@
     }
 }
 
+.test .pagebuilder-column {
+    flex-direction: row !important;
+}
+
+.myFirtClass {
+    margin: 0 auto;
+    background-color: red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.myFirtClass p {
+    margin: 0;
+}
