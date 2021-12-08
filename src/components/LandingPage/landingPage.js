@@ -16,6 +16,7 @@ import defaultClasses from './landingPage.css';
 const toHTML = str => ({ __html: str });
 
 const LandingPage = (props) => {
+
     const classes = useStyle(defaultClasses, props.classes);
     const { data: landingPageData, loading: dataLoading, error: loadDataError } = useQuery(
         GET_LANDING_PAGE,
