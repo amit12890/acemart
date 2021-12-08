@@ -4,6 +4,8 @@ import { Check } from 'react-feather';
 import { useCartPage } from '@magento/peregrine/lib/talons/CartPage/useCartPage';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { useToasts } from '@magento/peregrine';
+import { useQuery } from '@apollo/client';
+import { get } from "lodash";
 
 import Icon from '../Icon';
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
@@ -13,7 +15,7 @@ import PriceAdjustments from './PriceAdjustments';
 import ProductListing from './ProductListing';
 import PriceSummary from './PriceSummary';
 import defaultClasses from './cartPage.css';
-import { GET_CART_DETAILS } from './cartPage.gql';
+import { GET_CART_DETAILS, GET_STORE_CONFIG_DATA } from './cartPage.gql';
 
 const CheckIcon = <Icon size={20} src={Check} />;
 
@@ -40,6 +42,7 @@ const CartPage = props => {
             getCartDetails: GET_CART_DETAILS
         }
     });
+    const { loading, error, data } = useQuery(GET_STORE_CONFIG_DATA);
 
     const {
         cartItems,
@@ -62,7 +65,7 @@ const CartPage = props => {
         }
     }, [addToast, wishlistSuccessProps]);
 
-    if (shouldShowLoadingIndicator) {
+    if (shouldShowLoadingIndicator || loading) {
         return fullPageLoadingIndicator;
     }
 
@@ -84,6 +87,8 @@ const CartPage = props => {
     const priceAdjustments = hasItems ? (
         <PriceAdjustments setIsCartUpdating={setIsCartUpdating} />
     ) : null;
+
+    const isShoppingSite = get(data, "storeConfig.store_group_name") === "Shopping"
 
     const priceSummary = hasItems ? (
         <PriceSummary isUpdating={isCartUpdating} />
