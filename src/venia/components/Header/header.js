@@ -1,6 +1,8 @@
 import React, { Fragment, Suspense } from 'react';
 import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { get, size } from 'lodash-es';
 
 import Logo from '../Logo';
 import AccountTrigger from './accountTrigger';
@@ -10,8 +12,10 @@ import OnlineIndicator from './onlineIndicator';
 import { useHeader } from '@magento/peregrine/lib/talons/Header/useHeader';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import Image from '../Image';
+import RichContent from '../RichContent';
 
 
+import { TOP_HEADERS_GQL } from './header.gql';
 import { useStyle } from '../../classify';
 import defaultClasses from './header.css';
 import PageLoadingIndicator from '@magento/venia-ui/lib/components/PageLoadingIndicator';
@@ -33,6 +37,11 @@ const Header = props => {
         searchTriggerRef
     } = useHeader();
 
+    const { loading, data } = useQuery(TOP_HEADERS_GQL)
+    console.log("🚀 ~ file: header.js ~ line 39 ~ loading, data", loading, data)
+    const topHeader1Content = get(data, "topHeader1.items[0].content", "")
+    const topHeader2Content = get(data, "topHeader2.items[0].content", "")
+
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = isSearchOpen ? classes.open : classes.closed;
     const pageLoadingIndicator = isPageLoading ? (
@@ -42,6 +51,12 @@ const Header = props => {
     return (
         <Fragment>
             <header className={rootClass}>
+                {size(topHeader1Content) > 0 && (
+                    <RichContent html={topHeader1Content} />
+                )}
+                {size(topHeader2Content) > 0 && (
+                    <RichContent html={topHeader2Content} />
+                )}
                 {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>
