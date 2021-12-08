@@ -51,6 +51,7 @@ margin-bottom: 3rem;
 
 .price_adjustments_container {
     grid-area: adjustments;
+    margin-bottom: 25px;
 }
 
 .summary_container {
@@ -67,6 +68,36 @@ margin-bottom: 3rem;
      */
     top: 5.5rem;
 }
+
+.crossSellSection {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.sectionTitleWrapper {
+
+}
+
+
+.sectionSubTitle {
+    font-size: var(--fontSize-600);
+    font-weight: var(--font-weight-regular);
+    text-align: left;
+    margin-bottom: 20px;
+    text-transform: none;
+    
+    }
+
+.sectionContent {
+
+}
+
+.gallery {
+    
+}
+        
 
 /*
  * Mobile-specific styles.

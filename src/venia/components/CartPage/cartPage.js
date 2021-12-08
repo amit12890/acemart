@@ -120,15 +120,32 @@ const CartPage = props => {
                 </div>
                 <div className={classes.summary_container}>
                     <div className={classes.summary_contents}>
-                        {priceSummary}
                         <div className={classes.price_adjustments_container}>
                             {priceAdjustments}
                         </div>
+                        {priceSummary}
                     </div>
                 </div>
             </div>
 
-            <div>People also bought:</div>
+            <section className={classes.crossSellSection}>
+                <div className={classes.sectionTitleWrapper}>
+                    <h2 className={classes.sectionSubTitle}>
+                        <span>
+                            People also bought:
+                        </span>
+                    </h2>
+                </div>
+                <div className={classes.sectionContent}>
+                    <div className={classes.gallery}>
+                        Product Goes Here
+                    </div>
+                </div>
+            </section>
+
+
+
+
         </div>
     );
 };

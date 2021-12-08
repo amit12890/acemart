@@ -66,6 +66,10 @@
     /* grid-area: name; */
     font-weight: var(--font-weight-bold);
     font-size: var(--fontSize-200);
+    color: rgb(var(--product-name-color))
+}
+.name:hover {
+    color: rgb(var(--product-name-color-hover))
 
 }
 
@@ -80,6 +84,11 @@
     display: grid;
     grid-area: quantity;
     justify-items: center;
+}
+
+.quantity input {
+    padding: 10px;
+    font-weight: bold;
 }
 
 .kebab {

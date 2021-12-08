@@ -10,9 +10,9 @@ import Price from '@magento/venia-ui/lib/components/Price';
 import { useStyle } from '../../../classify';
 import Icon from '../../Icon';
 import Image from '../../Image';
-import Kebab from '@magento/venia-ui/lib/components/LegacyMiniCart/kebab';
-import ProductOptions from '@magento/venia-ui/lib/components/LegacyMiniCart/productOptions';
-import Section from '@magento/venia-ui/lib/components/LegacyMiniCart/section';
+import Kebab from '../../LegacyMiniCart/kebab';
+import ProductOptions from '../..//LegacyMiniCart/productOptions';
+import Section from '../../LegacyMiniCart/section';
 import AddToListButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 import Quantity from './quantity';
 
@@ -88,9 +88,9 @@ const Product = props => {
     const stockStatusMessage =
         stockStatus === 'OUT_OF_STOCK'
             ? formatMessage({
-                  id: 'product.outOfStock',
-                  defaultMessage: 'Out-of-stock'
-              })
+                id: 'product.outOfStock',
+                defaultMessage: 'Out-of-stock'
+            })
             : '';
 
     return (

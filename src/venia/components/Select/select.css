@@ -11,6 +11,13 @@
     composes: input from '../Field/field.css';
     grid-area: input-start / input-start / input-end / icon-end;
     padding-right: calc(2.25rem - 1px);
+    background-color: rgb(var(--color-white));
+    font-size: var(--fontSize-100);
+}
+
+.input:focus,
+.input:focus-visible {
+    border-color: rgb(var(--theme-color-secondary));
 }
 
 .input:disabled {

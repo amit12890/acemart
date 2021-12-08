@@ -6,8 +6,8 @@ import { func, shape, string } from 'prop-types';
 import { useShippingForm } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm';
 
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
-import Region from '@magento/venia-ui/lib/components/Region';
-import Postcode from '@magento/venia-ui/lib/components/Postcode';
+import Region from '../../../Region';
+import Postcode from '../../../Postcode';
 
 import { useStyle } from '../../../../classify';
 import Button from '../../../Button';
@@ -43,13 +43,13 @@ const ShippingForm = props => {
 
     const shippingStatusMessage = isSetShippingLoading
         ? formatMessage({
-              id: 'shippingForm.loading',
-              defaultMessage: 'Loading Methods...'
-          })
+            id: 'shippingForm.loading',
+            defaultMessage: 'Loading Methods...'
+        })
         : formatMessage({
-              id: 'shippingForm.getShippingOptions',
-              defaultMessage: 'Get Shipping Options'
-          });
+            id: 'shippingForm.getShippingOptions',
+            defaultMessage: 'Get Shipping Options'
+        });
 
     return (
         <Fragment>

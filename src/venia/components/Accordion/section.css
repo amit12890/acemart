@@ -1,5 +1,5 @@
 .root {
-    border-bottom: 2px solid rgb(var(--venia-global-color-gray-400));
+    border-bottom: 1px solid rgb(var(--border-color-base));
 }
 
 .root:last-of-type {
@@ -20,7 +20,7 @@
 }
 
 .title {
-    font-size: var(--venia-global-fontSize-300);
+    font-size: var(--venia-global-fontSize-200);
 }
 
 .title_container {
@@ -36,7 +36,7 @@
     gap: 1.5rem;
     grid-auto-flow: column;
     grid-template-columns: 1fr;
-    height: 4.5rem;
+    height: 3rem;
     justify-items: start;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
 }

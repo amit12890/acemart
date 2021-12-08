@@ -136,7 +136,7 @@ flex-direction: column;
     margin-left: 5px;
     font-weight: var(--font-weight-regular);
     color: rgb(var(--product-unit-color));
-    font-size: var(--fontSize-100);
+    font-size: var(--fontSize-200);
 }
 
 
@@ -144,6 +144,16 @@ flex-direction: column;
 
 }
 
+.reviewShort {
+    font-size: var(--fontSize-100); 
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.reviewShort:hover {
+    text-decoration: none;
+    color:rgb(var(--link-color-hover));
+}
 
 
 .labelWrapper {
