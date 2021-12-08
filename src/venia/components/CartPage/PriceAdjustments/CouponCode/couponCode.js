@@ -184,16 +184,16 @@ const CouponCode = props => {
                 <Field
                     id="couponCode"
                     label={formatMessage({
-                        id: 'cartPage.couponCode',
-                        defaultMessage: 'Coupon Code'
+                        id: 'am.cartPage.couponCode',
+                        defaultMessage: 'Enter discount code'
                     })}
                 >
                     <TextInput
                         field="couponCode"
                         id={'couponCode'}
                         placeholder={formatMessage({
-                            id: 'couponCode.enterCode',
-                            defaultMessage: 'Enter code'
+                            id: 'am.couponCode.enterCode',
+                            defaultMessage: 'Enter discount code'
                         })}
                         mask={value => value && value.trim()}
                         maskOnBlur={true}

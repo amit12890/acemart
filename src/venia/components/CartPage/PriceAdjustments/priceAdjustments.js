@@ -54,8 +54,8 @@ const PriceAdjustments = props => {
                 <Section
                     id={'coupon_code'}
                     title={formatMessage({
-                        id: 'priceAdjustments.couponCode',
-                        defaultMessage: 'Enter Coupon Code'
+                        id: 'am.priceAdjustments.couponCode',
+                        defaultMessage: 'Apply Discount Code'
                     })}
                 >
                     <Suspense fallback={<LoadingIndicator />}>
