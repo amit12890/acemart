@@ -396,9 +396,9 @@ const ProductFullDetail = props => {
                                 <div className={classes.tableWrapper}>
                                     <table className={[classes.data, classes.table, classes.shortAdditional].join(" ")}>
                                         <tbody>
-                                            {moreInformation.map(info => {
+                                            {moreInformation.map((info, mInd) => {
                                                 return (
-                                                    <tr>
+                                                    <tr key={mInd}>
                                                         <th scope="row" className={[classes.col, classes.label].join(" ")}>{info.label}</th>
                                                         <td data-th={info.label} className={[classes.col, classes.data].join(" ")}>
                                                             <RichText
