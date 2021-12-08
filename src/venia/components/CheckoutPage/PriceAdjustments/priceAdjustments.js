@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { func } from 'prop-types';
 
 import { useStyle } from '../../../classify';
-import { Accordion, Section } from '@magento/venia-ui/lib/components/Accordion';
+import { Accordion, Section } from '../../Accordion';
 import CouponCode from '../../CartPage/PriceAdjustments/CouponCode';
 import GiftCardSection from '../../CartPage/PriceAdjustments/giftCardSection';
 import GiftOptions from '../../CartPage/PriceAdjustments/GiftOptions';

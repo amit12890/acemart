@@ -36,6 +36,7 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
+import LoadingButton from '../../../components/LoadingButton';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -59,10 +60,9 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const ProductFullDetail = props => {
     const { product } = props;
-    const { pos_stock_manage, only_x_left_in_stock,
+    const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
-    console.log(product)
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
@@ -584,9 +584,7 @@ const ProductFullDetail = props => {
                                                             <span>Add to Compare</span>
                                                         </Button>
                                                     )}
-                                                    Loader={() => (
-                                                        <div>Loading....</div>
-                                                    )}
+                                                    Loader={() => <LoadingButton />}
                                                 />
                                             </div>
 
@@ -822,7 +820,7 @@ const ProductFullDetail = props => {
                 />
             )}
             {showStoreLocatorPopup && (
-                <StoreLocator
+                <StoreLocator productId={id}
                     isPopupVisible={showStoreLocatorPopup}
                     closeStoreLocatorPopup={closeStoreLocatorPopup} />
             )}

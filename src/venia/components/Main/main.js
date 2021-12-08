@@ -18,7 +18,7 @@ const Main = props => {
     const rootClass = isMasked ? classes.root_masked : classes.root;
     const pageClass = isMasked ? classes.page_masked : classes.page;
     // for checkout page show different header and no footer
-    const showCheckoutLayout = pathname.includes("checkout")
+    const showCheckoutLayout = pathname === "/checkout" || pathname === "/checkout/"
 
     useScrollLock(isMasked);
 
