@@ -31,7 +31,6 @@
     "@magento/pwa-buildpack": "~10.0.0",
     "axios": "^0.24.0",
     "fuse.js": "^6.4.6",
-    "moment": "^2.29.1",
     "pure-react-carousel": "^1.27.6",
     "react-feather": "^2.0.9",
     "zxcvbn": "^4.4.2"
