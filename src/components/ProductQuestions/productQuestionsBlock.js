@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { useQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
-import { get, size, range } from 'lodash';
+import { get, size, range, sortBy, cloneDeep } from 'lodash';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
@@ -21,6 +21,7 @@ import PlusBlock from './plusBlock';
 import MinusBlock from './minusBlock';
 import ReportBlock from './reportBlock';
 
+import { getDateString, questionReducer } from './utils';
 import {
     getProductQuestions,
     questionRatingPlusMutation,
@@ -30,8 +31,6 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
-import { getDateString, questionReducer } from './utils';
-import { cloneDeep, orderBy } from 'lodash-es';
 
 const sortOptions = [
     { value: '1', label: 'Most Recent Questions' },
@@ -89,7 +88,7 @@ const QuestionBlock = ({ questions }) => {
     const [expandBtnState, setExpandBtnState] = useState(false)
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
-    const [sortBy, setSortBy] = useState(sortOptions[0])
+    const [userSelectedSort, setSortBy] = useState(sortOptions[0])
     const [queData, dispatch] = useReducer(questionReducer, { questions: [] })
     const fuseSearch = useRef();
 
@@ -102,13 +101,20 @@ const QuestionBlock = ({ questions }) => {
             currQue.ansCount = size(currQue.answer);
             // add answer total upvotes
             let ansUpvoteCount = 0;
+            let ansMostRecentDate = Infinity;
+            let ansOldestDate = 0;
             for (let ansInd = 0; ansInd < size(currQue.answer); ansInd++) {
                 const currAns = currQue.answer[ansInd];
                 ansUpvoteCount += currAns.good
+                if (Number(currAns.date) < ansMostRecentDate) ansMostRecentDate = Number(currAns.date);
+                if (Number(currAns.date) > ansOldestDate) ansOldestDate = Number(currAns.date);
             }
             currQue.ansUpvoteCount = ansUpvoteCount;
+            currQue.ansMostRecentDate = ansMostRecentDate;
+            currQue.ansOldestDate = ansOldestDate;
         }
-        pQueList = orderBy(pQueList, ['date'], ['asc']);
+        // sort by Most Recent Questions
+        pQueList = sortBy(pQueList, [function(d) { return Number(d.date); }]);
         // setup fuse search
         const options = {
             findAllMatches: true,
@@ -120,20 +126,8 @@ const QuestionBlock = ({ questions }) => {
             ],
         };
         fuseSearch.current = new Fuse(pQueList, options);
-        console.log("🚀 ~ file: productQuestionsBlock.js ~ line 113 ~ useEffect ~ pQueList", pQueList)
         dispatch({ type: "UPDATE_QUESTIONS", payload: pQueList });
     }, [questions, dispatch]);
-
-    useEffect(() => {
-        let result;
-        if (searchToken.length > 2) {
-            result = fuseSearch.current.search(searchToken);
-            result = result.map((d) => d.item)
-        } else {
-            result = cloneDeep(questions);
-        }
-        dispatch({ type: "UPDATE_QUESTIONS", payload: result });
-    }, [searchToken, questions]);
 
     const handleQueExpandToggle = useCallback(
         queIndex => {
@@ -150,7 +144,6 @@ const QuestionBlock = ({ questions }) => {
         setExpandedQuestions(nextState);
         setExpandBtnState(expBtnState => !expBtnState)
     }, [queData, setExpandedQuestions, expandBtnState, setExpandBtnState]);
-    console.log("🚀 ~ file: productQuestionsBlock.js ~ line 150 ~ QuestionBlock ~ queData #########", queData)
 
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
@@ -169,29 +162,39 @@ const QuestionBlock = ({ questions }) => {
             let sortedQuestions = [];
             // sort questions by
             switch (sortAttribute.value) {
-                case '1':
-                    sortedQuestions = orderBy(queData.questions, ['date'], ['asc']);
+                case '1': // sort by Most Recent Questions
+                    sortedQuestions = sortBy(queData.questions, [function(d) { return Number(d.date); }]);
                     break;
-                case '2':
-                    sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
+                case '2': // Sort by Oldest questions
+                    sortedQuestions = sortBy(queData.questions, [function(d) { return Number(d.date) * -1; }]);
                     break;
-                case '3':
-                    sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
+                case '3': // Questions With The Most Helpful Answers
+                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansUpvoteCount * -1; }]);
                     break;
-                case '4':
-                    sortedQuestions = orderBy(queData.questions, ['answer.date'], ['asc']);
+                case '4': // Questions With Most Recent Answers
+                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansMostRecentDate; }]);
                     break;
-                case '5':
-                    sortedQuestions = orderBy(queData.questions, ['answer.date'], ['desc']);
+                case '5': // Questions With  Oldest Answers
+                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansOldestDate * -1; }]);
                     break;
-                case '6':
-                    sortedQuestions = orderBy(queData.questions, ['date'], ['desc']);
+                case '6': // Questions With Most Answers
+                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansCount * -1; }]);
                     break;
             }
             dispatch({ type: "UPDATE_QUESTIONS", payload: sortedQuestions });
         },
         [setExpanded, setSortBy, dispatch, queData]
     );
+
+    const searchedQuestions = useMemo(() => {
+        let result;
+        if (searchToken.length > 2) {
+            result = fuseSearch.current.search(searchToken);
+            return result.map((d) => d.item)
+        } else {
+            return queData.questions;
+        }
+    }, [searchToken, queData]);
 
     const sortElements = useMemo(() => {
         // should be not render item in collapsed mode.
@@ -246,7 +249,7 @@ const QuestionBlock = ({ questions }) => {
                                 <div className={classes.sortingOptions}>
                                     <Button
                                         className={classes.sortingButton}
-                                        onClick={handleSortClick}>{sortBy.label}</Button>
+                                        onClick={handleSortClick}>{userSelectedSort.label}</Button>
                                     {sortElements}
                                 </div>
                                 {expandBtnState ?
@@ -281,7 +284,7 @@ const QuestionBlock = ({ questions }) => {
 
 
                 {
-                    queData.questions.map((item, index) => {
+                    searchedQuestions.map((item, index) => {
                         const ansCount = size(item.answer);
                         let queClass = expandedQuestions.has(index)
                             ? `${classes.question} ${classes.question_open}`
@@ -345,6 +348,7 @@ const QuestionBlock = ({ questions }) => {
                                                             </div>
                                                             <div className={classes.answerListHelper}>
                                                                 <div className={classes.nickName}>by {ans.nickname}</div>
+                                                                <div className={classes.count}>{getDateString(ans.date)}</div>
                                                                 <div className={[classes.helper, classes.plus].join(" ")}>
                                                                     <PlusBlock count={ans.good}
                                                                         mutation={
