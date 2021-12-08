@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { shape, string } from 'prop-types';
-import { useAccountMenu } from '@magento/peregrine/lib/talons/Header/useAccountMenu';
+import { useAccountMenu } from "../../../magento/peregrine/talons/Header"
 
 import { X as XIcon } from 'react-feather';
 import Icon from '@magento/venia-ui/lib/components/Icon';
@@ -26,6 +26,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
     const {
         view,
         username,
+        signingOut,
         handleAccountCreation,
         handleSignOut,
         handleCancel,
@@ -48,7 +49,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
 
     switch (view) {
         case 'ACCOUNT': {
-            dropdownContents = <AccountMenuItems onSignOut={handleSignOut} />;
+            dropdownContents = <AccountMenuItems onSignOut={handleSignOut} signingOut={signingOut}/>;
 
             break;
         }
