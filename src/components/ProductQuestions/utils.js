@@ -18,6 +18,7 @@ export const getDateString = (dateNumber) => {
 }
 
 export function questionReducer(state, action) {
+    console.log("🚀 ~ file: utils.js ~ line 21 ~ questionReducer ~ action", action)
     switch (action.type) {
       case 'UPDATE_QUESTIONS':
         return {questions: [...action.payload]};
