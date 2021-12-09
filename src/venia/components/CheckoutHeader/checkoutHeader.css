@@ -5,6 +5,7 @@
     width: 100%;
     z-index: 10;
     --header-height: 5rem;
+    
 }
 
 .checkoutHeader {
@@ -15,12 +16,6 @@
 .logo {
     grid-area: title;
 }
-
-
-
-
-
-
 
 .svgIcon {
     fill: currentColor;
@@ -88,6 +83,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid rgb(var(--border-color-light));
 }
 .panelBody {
     max-width: var(--venia-global-maxWidth);
@@ -165,6 +161,20 @@
 }
 .csAction:hover {
     color: rgb(var(--text-color));
+}
+
+.backCartWrapper a {
+    display: flex;
+    align-items: center;
+    color: rgb(var(--theme-color-primary));
+}
+
+.backCartWrapper a:hover {
+    color: rgb(var(--link-color-hover));
+}
+
+.backCartWrapper .iconWrapper {
+    margin-right: 10px;
 }
 
 

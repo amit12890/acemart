@@ -41,15 +41,17 @@ const checkoutHeader = () => {
                             </Link>
                         </div>
                     </div>
-
-                    <Link className={classes.link} to={cartPage()}>
-                        <i className={classes.iconWrapper}>
-                            <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                <title>Back to Cart</title>
-                                <path d="M12 29q0 1.25-0.875 2.125t-2.125 0.875-2.125-0.875-0.875-2.125 0.875-2.125 2.125-0.875 2.125 0.875 0.875 2.125zM32 29q0 1.25-0.875 2.125t-2.125 0.875-2.125-0.875-0.875-2.125 0.875-2.125 2.125-0.875 2.125 0.875 0.875 2.125zM32 16v-12h-24q0-0.844-0.578-1.422t-1.422-0.578h-6v2h4l1.5 12.875q-0.688 0.563-1.094 1.375t-0.406 1.75q0 1.656 1.172 2.828t2.828 1.172h24v-2h-24q-0.844 0-1.422-0.578t-0.578-1.422v0-0.031z"></path>
-                            </svg>
-                        </i>
-                    </Link>
+                    <div className={classes.backCartWrapper}>
+                        <Link className={classes.link} to={cartPage()}>
+                            <i className={classes.iconWrapper}>
+                                <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                    <title>Back to Cart</title>
+                                    <path d="M12 29q0 1.25-0.875 2.125t-2.125 0.875-2.125-0.875-0.875-2.125 0.875-2.125 2.125-0.875 2.125 0.875 0.875 2.125zM32 29q0 1.25-0.875 2.125t-2.125 0.875-2.125-0.875-0.875-2.125 0.875-2.125 2.125-0.875 2.125 0.875 0.875 2.125zM32 16v-12h-24q0-0.844-0.578-1.422t-1.422-0.578h-6v2h4l1.5 12.875q-0.688 0.563-1.094 1.375t-0.406 1.75q0 1.656 1.172 2.828t2.828 1.172h24v-2h-24q-0.844 0-1.422-0.578t-0.578-1.422v0-0.031z"></path>
+                                </svg>
+                            </i>
+                            <span>Back to Cart</span>
+                        </Link>
+                    </div>
                 </div>
 
 

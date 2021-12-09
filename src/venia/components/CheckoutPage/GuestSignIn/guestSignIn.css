@@ -16,8 +16,7 @@
 }
 
 .contentContainer {
-    border: 1px solid rgb(var(--border-color-base));
-    padding-bottom: 2rem;
+    
 }
 
 .signInRoot {
