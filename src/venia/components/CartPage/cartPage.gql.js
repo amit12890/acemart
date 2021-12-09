@@ -10,3 +10,14 @@ export const GET_CART_DETAILS = gql`
     }
     ${CartPageFragment}
 `;
+
+
+export const GET_STORE_CONFIG_DATA = gql`
+    query getStoreConfigData {
+        storeConfig {
+            id
+            store_name
+            store_group_name        
+        }
+    }
+`;

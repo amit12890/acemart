@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heart } from 'react-feather';
 import { gql } from '@apollo/client';
@@ -21,6 +21,9 @@ import defaultClasses from './product.css';
 import { CartPageFragment } from '../cartPageFragments.gql';
 import { AvailableShippingMethodsCartFragment } from '../PriceAdjustments/ShippingMethods/shippingMethodsFragments.gql';
 
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import WishlistPopup from '../../../../components/WishList/wishlistPopup';
+
 const IMAGE_SIZE = 100;
 
 const HeartIcon = <Icon size={16} src={Heart} />;
@@ -28,7 +31,11 @@ const HeartIcon = <Icon size={16} src={Heart} />;
 const Product = props => {
     const { item } = props;
 
+    const [{ isSignedIn }] = useUserContext();
     const { formatMessage } = useIntl();
+
+    const [showWishlistPopup, setShowWishlistPopup] = useState(false);
+
     const talonProps = useProduct({
         operations: {
             removeItemMutation: REMOVE_ITEM_MUTATION,
@@ -62,6 +69,14 @@ const Product = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
 
+    const openWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(true);
+    }, [setShowWishlistPopup]);
+
+    const closeWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(false);
+    }, [setShowWishlistPopup]);
+
     const itemClassName = isProductUpdating
         ? classes.item_disabled
         : classes.item;
@@ -94,6 +109,7 @@ const Product = props => {
             : '';
 
     return (
+        <>
         <li className={classes.root}>
             <span className={classes.errorText}>{errorMessage}</span>
             <div className={itemClassName}>
@@ -135,6 +151,17 @@ const Product = props => {
                             initialValue={quantity}
                             onChange={handleUpdateItemQuantity}
                         />
+                        {isSignedIn &&
+                            <div
+                                style={{
+                                    cursor: 'pointer',
+                                    color: 'blue'
+                                }}
+                                onClick={openWishlistPopup}
+                            >
+                                Move to wishlist
+                            </div>
+                        }
                     </div>
                 </div>
                 <Kebab
@@ -168,6 +195,15 @@ const Product = props => {
                 </Kebab>
             </div>
         </li>
+        {showWishlistPopup && (
+            <WishlistPopup
+                isPopupVisible={showWishlistPopup}
+                productId={item.product.id}
+                productQty={quantity}
+                closeWishlistPopup={closeWishlistPopup}
+            />
+        )}
+        </>
     );
 };
 
