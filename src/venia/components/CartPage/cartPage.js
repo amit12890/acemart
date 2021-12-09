@@ -79,16 +79,18 @@ const CartPage = props => {
             fetchCartDetails={fetchCartDetails}
         />
     ) : (
-        <h3>
-            <FormattedMessage
-                id={'cartPage.emptyCart'}
-                defaultMessage={'There are no items in your cart.'}
-            />
-        </h3>
+        <div className={classes.emptyCart}>
+            <h3>
+                <FormattedMessage
+                    id={'cartPage.emptyCart'}
+                    defaultMessage={'There are no items in your cart.'}
+                />
+            </h3>
+        </div>
     );
 
     const priceAdjustments = hasItems ? (
-        <PriceAdjustments 
+        <PriceAdjustments
             isShoppingSite={isShoppingSite}
             setIsCartUpdating={setIsCartUpdating} />
     ) : null;

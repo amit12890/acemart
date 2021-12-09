@@ -115,6 +115,10 @@ margin: 5px;
 }
         
 
+.emptyCart h3 {
+    text-transform: none;
+}
+
 /*
  * Mobile-specific styles.
  */
