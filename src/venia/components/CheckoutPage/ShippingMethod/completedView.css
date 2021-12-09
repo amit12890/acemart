@@ -4,16 +4,26 @@
 
 .contents {
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr auto;
     margin-top: 1.125rem;
-    row-gap: 0.5rem;
+    row-gap: 1rem;
     text-align: left;
 }
 
 .editButton {
-    color: rgb(var(--venia-brand-color-1-700));
-    padding: 1rem;
-    margin: -1rem;
+    color: rgb(var(--color-gray-darken0));
+    text-transform: uppercase;
+    border: 1px solid rgb(var(--color-gray-darken0));;
+    min-height: auto;
+    padding: 10px 1.5rem;
+    font-size: var(--fontSize-100);
+    margin-top: 10px;
+    font-weight: var(--font-weight-bold);
+}
+
+.editButton:hover {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-gray-darken0));
 }
 
 .editIcon {
@@ -28,6 +38,7 @@
 
 .free {
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .heading {

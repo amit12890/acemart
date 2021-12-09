@@ -35,6 +35,7 @@
     padding: 10px 10px 10px 10px; 
     width: 100%;
     -webkit-appearance: none;
+    font-size: var(--fontSize-100);
 }
 
 .input:focus,

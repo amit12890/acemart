@@ -23,7 +23,7 @@
 }
 .itemThumbnailWrapper {
     margin-right: 15px;
-    width: 105px;
+    max-width: 85px;
 }
 .thumbnailContainer {
     grid-column: 1 / span 1;

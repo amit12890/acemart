@@ -84,10 +84,10 @@ const CheckoutPage = props => {
                 error && error.message
                     ? error.message
                     : formatMessage({
-                          id: 'checkoutPage.errorSubmit',
-                          defaultMessage:
-                              'Oops! An error occurred while submitting. Please try again.'
-                      });
+                        id: 'checkoutPage.errorSubmit',
+                        defaultMessage:
+                            'Oops! An error occurred while submitting. Please try again.'
+                    });
             addToast({
                 type: 'error',
                 icon: errorIcon,
@@ -111,13 +111,13 @@ const CheckoutPage = props => {
 
     const heading = isGuestCheckout
         ? formatMessage({
-              id: 'checkoutPage.guestCheckout',
-              defaultMessage: 'Guest Checkout'
-          })
+            id: 'checkoutPage.guestCheckout',
+            defaultMessage: 'Guest Checkout'
+        })
         : formatMessage({
-              id: 'checkoutPage.checkout',
-              defaultMessage: 'Checkout'
-          });
+            id: 'checkoutPage.checkout',
+            defaultMessage: 'Checkout'
+        });
 
     if (orderNumber && orderDetailsData) {
         return (
@@ -213,15 +213,15 @@ const CheckoutPage = props => {
             // )
             checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
                 <div>Replaced Payment Information block !!</div>
-            ) 
-            : (
-                <h3 className={classes.payment_information_heading}>
-                    <FormattedMessage
-                        id={'checkoutPage.paymentInformationStep'}
-                        defaultMessage={'3. Payment Information'}
-                    />
-                </h3>
-            );
+            )
+                : (
+                    <h3 className={classes.payment_information_heading}>
+                        <FormattedMessage
+                            id={'checkoutPage.paymentInformationStep'}
+                            defaultMessage={'3. Payment Information'}
+                        />
+                    </h3>
+                );
 
         const priceAdjustmentsSection =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (

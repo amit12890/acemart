@@ -1,10 +1,17 @@
 import React, { useCallback } from 'react';
+import { useStyle } from '@magento/venia-ui/lib/classify';
+
+import Image from '../../venia/components/Image';
+import helperReport from '../../assets/inappr.png';
+import defaultClasses from './productQuestions.css';
 import { useMutation } from '@apollo/client';
 
 export default function ReportBlock(props) {
     const [updateReport, { loading }] = useMutation(props.mutation, {
         fetchPolicy: 'no-cache'
     });
+
+    const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
         try {
@@ -18,14 +25,11 @@ export default function ReportBlock(props) {
     }, [updateReport, props.variables]);
 
     return (
-        <div
-            style={{
-                color: 'blue',
-                cursor: 'pointer'
-            }}
-            onClick={handleClick}
-        >
-            {loading ? 'Loading' : 'Report'}
+        <div className={classes.helperContainer} onClick={handleClick}>
+            <div className={classes.countWrapper}>
+                {loading ? 'Loading' : 'Report'}
+            </div>
+            <Image src={helperReport} />
         </div>
     );
 }

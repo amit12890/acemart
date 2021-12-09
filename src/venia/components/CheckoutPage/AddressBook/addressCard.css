@@ -1,7 +1,6 @@
 .root {
     align-content: flex-start;
-    border: 2px solid rgb(var(--venia-global-color-gray-400));
-    border-radius: 0.375rem;
+    border:  1px solid rgb(var(--border-color-base));
     box-shadow: none;
     cursor: pointer;
     display: grid;
@@ -31,7 +30,7 @@
 }
 
 .root:focus {
-    box-shadow: -6px 6px rgb(var(--venia-global-color-blue-700) / 0.3);
+    
 }
 
 .root:hover {
