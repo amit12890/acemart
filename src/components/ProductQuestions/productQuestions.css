@@ -210,6 +210,17 @@
 
 }
 
+.listContent .svgIcon {
+    width: 5px;
+    height: auto;
+
+}
+
+.listContent .iconWrapper {
+    display: inline-flex;
+    margin-right: 10px;
+}
+
 .count {
     margin-left: 2rem;
 }
@@ -287,11 +298,7 @@
 }
 
 .askQuestionWrapper {
-    padding-top: 20px;
-    border: 1px solid rgb(var(--border-color-base));
-    padding: 15px;
-    
-
+    padding: 0 15px ;
 }
 
 .subTitle {
