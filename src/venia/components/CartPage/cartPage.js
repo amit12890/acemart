@@ -119,7 +119,8 @@ const CartPage = props => {
                         {productListing}
                     </div>
                     <div className={classes.cartActions}>
-
+                        <div className={classes.buttonContinue}>Continue Shopping</div>
+                        <div className={classes.buttonClearCart}>Clear Shopping Cart</div>
                     </div>
 
                 </div>
@@ -133,7 +134,7 @@ const CartPage = props => {
                 </div>
             </div>
 
-            <section className={classes.crossSellSection}>
+            {/* <section className={classes.crossSellSection}>
                 <div className={classes.sectionTitleWrapper}>
                     <h2 className={classes.sectionSubTitle}>
                         <span>
@@ -146,7 +147,7 @@ const CartPage = props => {
                         Product Goes Here
                     </div>
                 </div>
-            </section>
+            </section> */}
 
 
 

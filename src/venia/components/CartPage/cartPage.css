@@ -97,6 +97,22 @@ margin-bottom: 3rem;
 .gallery {
     
 }
+
+.cartActions { 
+    display: flex;
+    justify-content: space-between;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+
+.buttonContinue {
+    margin: 5px;
+}
+
+.buttonClearCart {
+margin: 5px;
+}
         
 
 /*
