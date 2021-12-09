@@ -23,6 +23,7 @@ import { AvailableShippingMethodsCartFragment } from '../PriceAdjustments/Shippi
 
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import WishlistPopup from '../../../../components/WishList/wishlistPopup';
+import RichText from '../../RichText';
 
 const IMAGE_SIZE = 100;
 
@@ -30,6 +31,7 @@ const HeartIcon = <Icon size={16} src={Heart} />;
 
 const Product = props => {
     const { item } = props;
+    console.log("🚀 ~ file: product.js ~ line 34 ~ item", item)
 
     const [{ isSignedIn }] = useUserContext();
     const { formatMessage } = useIntl();
@@ -126,7 +128,7 @@ const Product = props => {
                     </Link>
                     <div className={classes.details}>
                         <div className={classes.name}>
-                            <Link to={itemLink}>{name}</Link>
+                            <Link to={itemLink}><RichText content={name} /></Link>
                         </div>
                         <ProductOptions
                             options={options}
@@ -136,11 +138,7 @@ const Product = props => {
                             }}
                         />
                         <span className={classes.price}>
-                            <Price currencyCode={currency} value={unitPrice} />
-                            <FormattedMessage
-                                id={'product.price'}
-                                defaultMessage={' ea.'}
-                            />
+                            <Price currencyCode={currency} value={unitPrice} /> / {item.product.uom}
                         </span>
                         <span className={classes.stockStatusMessage}>
                             {stockStatusMessage}

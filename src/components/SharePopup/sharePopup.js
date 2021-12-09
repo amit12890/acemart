@@ -1,22 +1,26 @@
 import React from 'react';
+import { useLocation } from 'react-router';
+
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
-import { Link } from 'react-router-dom';
+import Mask from '@magento/venia-ui/lib/components/Mask';
+import Button from '../../venia/components/Button';
 import Image from '../../venia/components/Image';
+
 import iconFacebook from '../../assets/facebook.svg';
 import iconTwitter from '../../assets/twitter.svg';
 import iconPinterest from '../../assets/pinterest.svg';
 import iconLinkedIn from '../../assets/linkedIn.svg';
 import iconEmail from '../../assets/email.svg';
 
-
-import Button from '../../venia/components/Button';
 import { useStyle } from '../../venia/classify';
-
 import defaultClasses from './sharePopup.css';
-import Mask from '@magento/venia-ui/lib/components/Mask';
+
+import { HOST_URL } from '../../url.utils';
+
 
 const SharePopup = props => {
     const { closeSharePopup, productId, isPopupVisible } = props;
+    let { productPath } = useLocation();
     const classes = useStyle(defaultClasses, props.classes);
 
     return (
@@ -51,7 +55,8 @@ const SharePopup = props => {
                             <div className={classes.shareButtons}>
                                 <div className={classes.shareItemWraper}>
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${HOST_URL}${productPath}&quote=Ace%20Mart%20Restauant%20Supply`}
+                                        className={classes.shareLink}>
                                             <Image
                                                 src={iconFacebook}
                                                 width="25"
