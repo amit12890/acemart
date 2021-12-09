@@ -6,9 +6,15 @@ import defaultClasses from './productQuestions.css';
 
 
 import { useMutation } from '@apollo/client';
+import { get } from 'lodash-es';
 
-export default function PlusBlock(props) {
-    const [updatePlus, { loading }] = useMutation(props.mutation, {
+/**
+ * 
+ * @props {String} queryType questionRatingPlus | answerRatingPlus
+ * @returns 
+ */
+export default function PlusBlock({queryType, mutation, variables, count, onSuccess}) {
+    const [updatePlus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
 
@@ -17,20 +23,24 @@ export default function PlusBlock(props) {
     const handleClick = useCallback(async () => {
         try {
             const { data } = await updatePlus({
-                variables: props.variables
+                variables: variables
             });
+            if (get(data ,`${queryType}.success`, false)) {
+                onSuccess(get(data ,`${queryType}.count`, 0))
+            }
         } catch (error) {
-            console.log('ggwp PlusBlock error', error);
+            console.log('Error during up vote', error);
         }
-    }, [updatePlus, props.variables]);
+    }, [updatePlus, variables]);
 
     return (
         <div className={classes.helperContainer} onClick={handleClick}>
             <div className={classes.countWrapper}>
-                {props.count || 0}
-                {loading ? ' Loading' : ' Plus'}
+                {count || 0}
             </div>
-            <Image src={helperGood} />
+            {loading ?
+                <Image src={helperGood} /> : <Image src={helperGood} />
+            }
         </div>
     );
 }

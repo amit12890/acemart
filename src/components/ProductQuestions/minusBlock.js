@@ -4,9 +4,11 @@ import Image from '../../venia/components/Image';
 import helperBad from '../../assets/bad.png';
 import defaultClasses from './productQuestions.css';
 import { useMutation } from '@apollo/client';
+import { get } from 'lodash-es';
 
-export default function MinusBlock(props) {
-    const [updateMinus, { loading }] = useMutation(props.mutation, {
+
+export default function MinusBlock({queryType, mutation, variables, count, onSuccess}) {
+    const [updateMinus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
 
@@ -15,21 +17,24 @@ export default function MinusBlock(props) {
     const handleClick = useCallback(async () => {
         try {
             const { data } = await updateMinus({
-                variables: props.variables
+                variables: variables
             });
-            console.log("ggwp data", data)
+            if (get(data ,`${queryType}.success`, false)) {
+                onSuccess(get(data ,`${queryType}.count`, 0))
+            }
         } catch (error) {
-            console.log('ggwp MinusBlock error', error);
+            console.log('Error during down vote', error);
         }
-    }, [updateMinus, props.variables]);
+    }, [updateMinus, variables]);
 
     return (
         <div className={classes.helperContainer} onClick={handleClick}>
             <div className={classes.countWrapper}>
-                {props.count || 0}
-                {loading ? ' Loading' : ' Minus'}
+                {count || 0}
             </div>
-            <Image src={helperBad} />
+            {loading ?
+                <Image src={helperBad} /> : <Image src={helperBad} />
+            }
         </div>
     );
 }
