@@ -30,7 +30,7 @@ export default function MinusBlock({queryType, mutation, variables, count, onSuc
     return (
         <div className={classes.helperContainer} onClick={handleClick}>
             <div className={classes.countWrapper}>
-                {props.count || 0}
+                {count || 0}
                 {loading ? ' Loading' : ' Minus'}
             </div>
             <Image src={helperBad} />

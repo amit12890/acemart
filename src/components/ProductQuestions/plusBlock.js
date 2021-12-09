@@ -36,7 +36,7 @@ export default function PlusBlock({queryType, mutation, variables, count, onSucc
     return (
         <div className={classes.helperContainer} onClick={handleClick}>
             <div className={classes.countWrapper}>
-                {props.count || 0}
+                {count || 0}
                 {loading ? ' Loading' : ' Plus'}
             </div>
             <Image src={helperGood} />
