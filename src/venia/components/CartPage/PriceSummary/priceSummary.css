@@ -9,6 +9,7 @@
 .lineItems {
     display: grid;
     grid-gap: 0.5rem; 
+    border: 1px solid rgb(var(--border-color-base));
     
 }
 
@@ -19,33 +20,35 @@
     align-items: center;
     padding: .5rem 1rem;
 }
-.summaryItem:nth-child(odd) {
+.summaryItem:last-child {
     background-color: rgb(var(--color-gray-light01));
 }
 
 .lineItemLabel {
     justify-self: start;
-    font-size: var(--fontSize-200);
-    font-weight: bold;
-    color: rgb(var(--color-black));
+    font-weight: var(--font-weight-bold);
+    
 }
 
 .price {
     justify-self: end;
-    font-size: var(--fontSize-400);
-    color: rgb(var(--theme-color-primary-alt));
     font-weight: var(--font-weight-bold);
 }
 
 
 .totalLabel {
     composes: lineItemLabel;
-    font-weight: var(--venia-global-fontWeight-semibold);
+    font-size: var(--fontSize-600);
+    font-weight: bold;
+    color: rgb(var(--color-black));
 }
 
 .totalPrice {
     composes: price;
     font-weight: var(--venia-global-fontWeight-semibold);
+    font-size: var(--fontSize-600);
+    color: rgb(var(--theme-color-primary-alt));
+    font-weight: var(--font-weight-bold);
 }
 
 .priceUpdating {
