@@ -115,7 +115,7 @@ const QuestionBlock = ({ questions }) => {
             currQue.ansOldestDate = ansOldestDate;
         }
         // sort by Most Recent Questions
-        pQueList = sortBy(pQueList, [function(d) { return Number(d.date); }]);
+        pQueList = sortBy(pQueList, [function (d) { return Number(d.date); }]);
         // setup fuse search
         const options = {
             findAllMatches: true,
@@ -172,22 +172,22 @@ const QuestionBlock = ({ questions }) => {
             // sort questions by
             switch (sortAttribute.value) {
                 case '1': // sort by Most Recent Questions
-                    sortedQuestions = sortBy(queData.questions, [function(d) { return Number(d.date); }]);
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return Number(d.date); }]);
                     break;
                 case '2': // Sort by Oldest questions
-                    sortedQuestions = sortBy(queData.questions, [function(d) { return Number(d.date) * -1; }]);
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return Number(d.date) * -1; }]);
                     break;
                 case '3': // Questions With The Most Helpful Answers
-                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansUpvoteCount * -1; }]);
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansUpvoteCount * -1; }]);
                     break;
                 case '4': // Questions With Most Recent Answers
-                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansMostRecentDate; }]);
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansMostRecentDate; }]);
                     break;
                 case '5': // Questions With  Oldest Answers
-                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansOldestDate * -1; }]);
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansOldestDate * -1; }]);
                     break;
                 case '6': // Questions With Most Answers
-                    sortedQuestions = sortBy(queData.questions, [function(d) { return d.ansCount * -1; }]);
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansCount * -1; }]);
                     break;
             }
             dispatch({ type: "UPDATE_QUESTIONS", payload: sortedQuestions });
@@ -305,11 +305,19 @@ const QuestionBlock = ({ questions }) => {
                             <div key={item.id} className={classes.questionWrapper}>
                                 <div className={queClass}>
                                     <div className={classes.listItemWrapper}>
-                                        <div className={classes.listItem}
-                                            onClick={() => handleQueExpandToggle(index)}
-                                        >
+                                        <div className={classes.listItem}>
                                             <div className={classes.leftBlock}>
-                                                <div className={classes.listContent}>{item.content}</div>
+                                                <div className={classes.listContent}
+                                                    onClick={() => handleQueExpandToggle(index)}
+                                                >
+                                                    <i className={classes.iconWrapper}>
+                                                        <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="11" height="32" viewBox="0 0 11 32">
+                                                            <title>next</title>
+                                                            <path d="M10.625 17.438q0 0.094-0.047 0.203t-0.141 0.203l-8.313 8.313q-0.094 0.094-0.203 0.141t-0.203 0.047q-0.125 0-0.234-0.047t-0.172-0.141l-0.906-0.875q-0.063-0.094-0.125-0.203t-0.063-0.234q0-0.094 0.063-0.203t0.125-0.203l7.031-7-7.031-7.031q-0.063-0.063-0.125-0.188t-0.063-0.219 0.063-0.219 0.125-0.188l0.906-0.906q0.063-0.063 0.172-0.109t0.234-0.047q0.094 0 0.203 0.047t0.203 0.109l8.313 8.344q0.094 0.063 0.141 0.172t0.047 0.234v0z"></path>
+                                                        </svg>
+                                                    </i>
+                                                    {item.content}
+                                                </div>
                                                 <div className={classes.count}>
                                                     {ansCount > 1
                                                         ? `${ansCount} answers`

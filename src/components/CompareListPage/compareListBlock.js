@@ -70,7 +70,7 @@ const CompareListBlock = (props) => {
                                     }
                                     Loader={() => <div>Loading...</div>}
                                 />
-                                <span>{product.name}</span>
+                                <span className={classes.productName}>{product.name}</span>
                             </div>
                         )
                     })}

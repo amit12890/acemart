@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 import { arrayOf, string, shape, number } from 'prop-types';
 import { useShippingRadios } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingRadios';
 
-import RadioGroup from '@magento/venia-ui/lib/components/RadioGroup';
+import RadioGroup from '../../../RadioGroup';
 
 import { useStyle } from '../../../../classify';
 import { CartPageFragment } from '../../cartPageFragments.gql';

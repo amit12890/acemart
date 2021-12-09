@@ -3,6 +3,8 @@ import { useIntl } from 'react-intl';
 import Price from '@magento/venia-ui/lib/components/Price';
 
 import { useStyle } from '../../../classify';
+import defaultClasses from './priceSummary.css';
+
 /**
  * Reduces applied tax amounts into a single amount.
  *
@@ -22,7 +24,7 @@ const getEstimatedTax = (applied_taxes = []) => {
  * @param {Object} props.data query response data
  */
 const TaxSummary = props => {
-    const classes = useStyle({}, props.classes);
+    const classes = useStyle(defaultClasses, props.classes);
     const { data, isCheckout } = props;
     const { formatMessage } = useIntl();
 
@@ -34,23 +36,23 @@ const TaxSummary = props => {
 
     const taxLabel = isCheckout
         ? formatMessage({
-              id: 'taxSummary.tax',
-              defaultMessage: 'Tax'
-          })
+            id: 'taxSummary.tax',
+            defaultMessage: 'Tax'
+        })
         : formatMessage({
-              id: 'taxSummary.estimatedTax',
-              defaultMessage: 'Estimated Tax'
-          });
+            id: 'am.taxSummary.estimatedTax',
+            defaultMessage: 'Tax'
+        });
 
     const tax = getEstimatedTax(props.data);
 
     return (
-        <>
+        <div className={classes.summaryItem}>
             <span className={classes.lineItemLabel}>{taxLabel}</span>
             <span className={classes.price}>
                 <Price value={tax.value} currencyCode={tax.currency} />
             </span>
-        </>
+        </div>
     );
 };
 

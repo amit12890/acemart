@@ -29,9 +29,9 @@ const Card = props => {
 
     return (
         <div className={classes.root}>
-            <span>{email}</span>
-            <span>{nameString}</span>
-            <span>{telephone}</span>
+            <span className={classes.email}>{email}</span>
+            <span className={classes.name}>{nameString}</span>
+            <span className={classes.telephone}>{telephone}</span>
             <div className={classes.address}>
                 {streetRows}
                 <span>{additionalAddressString}</span>

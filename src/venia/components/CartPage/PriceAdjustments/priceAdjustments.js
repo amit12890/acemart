@@ -54,15 +54,15 @@ const PriceAdjustments = props => {
                 <Section
                     id={'coupon_code'}
                     title={formatMessage({
-                        id: 'priceAdjustments.couponCode',
-                        defaultMessage: 'Enter Coupon Code'
+                        id: 'am.priceAdjustments.couponCode',
+                        defaultMessage: 'Apply Discount Code'
                     })}
                 >
                     <Suspense fallback={<LoadingIndicator />}>
                         <CouponCode setIsCartUpdating={setIsCartUpdating} />
                     </Suspense>
                 </Section>
-                <GiftCardSection setIsCartUpdating={setIsCartUpdating} />
+                {/* <GiftCardSection setIsCartUpdating={setIsCartUpdating} />
                 <Section
                     id={'gift_options'}
                     title={formatMessage({
@@ -73,7 +73,7 @@ const PriceAdjustments = props => {
                     <Suspense fallback={<LoadingIndicator />}>
                         <GiftOptions />
                     </Suspense>
-                </Section>
+                </Section> */}
             </Accordion>
         </div>
     );

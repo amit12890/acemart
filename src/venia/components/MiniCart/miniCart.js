@@ -12,7 +12,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 
 import Button from '../Button';
 import Icon from '@magento/venia-ui/lib/components/Icon';
-import StockStatusMessage from '@magento/venia-ui/lib/components/StockStatusMessage';
+import StockStatusMessage from '../../../venia/components/StockStatusMessage';
 import ProductList from './ProductList';
 import defaultClasses from './miniCart.css';
 import operations from './miniCart.gql';

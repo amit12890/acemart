@@ -82,13 +82,13 @@ const PriceSummary = props => {
 
     const totalPriceLabel = isCheckout
         ? formatMessage({
-              id: 'priceSummary.total',
-              defaultMessage: 'Total'
-          })
+            id: 'am.priceSummary.total',
+            defaultMessage: 'Total'
+        })
         : formatMessage({
-              id: 'priceSummary.estimatedTotal',
-              defaultMessage: 'Estimated Total'
-          });
+            id: 'am.priceSummary.estimatedTotal',
+            defaultMessage: 'Total'
+        });
 
     const proceedToCheckoutButton = !isCheckout ? (
         <div className={classes.checkoutButton_container}>
@@ -108,18 +108,20 @@ const PriceSummary = props => {
     return (
         <div className={classes.root}>
             <div className={classes.lineItems}>
-                <span className={classes.lineItemLabel}>
-                    <FormattedMessage
-                        id={'priceSummary.lineItemLabel'}
-                        defaultMessage={'Subtotal'}
-                    />
-                </span>
-                <span className={priceClass}>
-                    <Price
-                        value={subtotal.value}
-                        currencyCode={subtotal.currency}
-                    />
-                </span>
+                <div className={classes.summaryItem}>
+                    <span className={classes.lineItemLabel}>
+                        <FormattedMessage
+                            id={'priceSummary.lineItemLabel'}
+                            defaultMessage={'Subtotal'}
+                        />
+                    </span>
+                    <span className={priceClass}>
+                        <Price
+                            value={subtotal.value}
+                            currencyCode={subtotal.currency}
+                        />
+                    </span>
+                </div>
                 <DiscountSummary
                     classes={{
                         lineItemLabel: classes.lineItemLabel,
@@ -150,10 +152,12 @@ const PriceSummary = props => {
                     data={shipping}
                     isCheckout={isCheckout}
                 />
-                <span className={classes.totalLabel}>{totalPriceLabel}</span>
-                <span className={totalPriceClass}>
-                    <Price value={total.value} currencyCode={total.currency} />
-                </span>
+                <div className={classes.summaryItem}>
+                    <span className={classes.totalLabel}>{totalPriceLabel}</span>
+                    <span className={totalPriceClass}>
+                        <Price value={total.value} currencyCode={total.currency} />
+                    </span>
+                </div>
             </div>
             {proceedToCheckoutButton}
         </div>

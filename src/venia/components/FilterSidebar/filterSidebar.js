@@ -199,7 +199,7 @@ const FilterSidebar = props => {
         <div className={classes.action}>
             <LinkButton type="button" onClick={handleReset}>
                 <FormattedMessage
-                    id={'filterModal.action'}
+                    id={'am.filterModal.action'}
                     defaultMessage={'Clear all'}
                 />
             </LinkButton>
@@ -213,8 +213,8 @@ const FilterSidebar = props => {
                     <div className={classes.header}>
                         <h2 className={classes.headerTitle}>
                             <FormattedMessage
-                                id={'filterModal.headerTitle'}
-                                defaultMessage={'Filters'}
+                                id={'am.filterModal.headerTitle'}
+                                defaultMessage={'Shopping Options'}
                             />
                         </h2>
                     </div>

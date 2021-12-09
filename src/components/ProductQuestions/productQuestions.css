@@ -20,11 +20,7 @@
     display: block;
     border: 1px solid rgb(var(--border-color-base));
     border-top: none;
-    padding: 0 10px;
-}
-
-.question_open .actionToolbar {
-    margin-top: 0;
+    padding: 10px;
 }
 
 .qaWrapper {
@@ -214,6 +210,17 @@
 
 }
 
+.listContent .svgIcon {
+    width: 5px;
+    height: auto;
+
+}
+
+.listContent .iconWrapper {
+    display: inline-flex;
+    margin-right: 10px;
+}
+
 .count {
     margin-left: 2rem;
 }
@@ -291,11 +298,7 @@
 }
 
 .askQuestionWrapper {
-    padding-top: 20px;
-    border: 1px solid rgb(var(--border-color-base));
-    padding: 15px;
-    
-
+    padding: 0 15px ;
 }
 
 .subTitle {
@@ -326,4 +329,17 @@
 
 .formWrapper .actionToolbar button:first-child {
     margin-left: 0;
+}
+
+.helperContainer {
+    display: flex;
+    cursor: pointer;
+}
+
+.helperContainer img {
+    position: static;
+}
+
+.countWrapper {
+    margin-right: 5px;
 }

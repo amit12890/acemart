@@ -41,8 +41,8 @@ const ShippingInformation = props => {
     const rootClassName = !doneEditing
         ? classes.root_editMode
         : hasUpdate
-        ? classes.root_updated
-        : classes.root;
+            ? classes.root_updated
+            : classes.root;
 
     if (isLoading) {
         return (
@@ -70,24 +70,19 @@ const ShippingInformation = props => {
                         defaultMessage={'Shipping Information'}
                     />
                 </h5>
-                <LinkButton
-                    onClick={handleEditShipping}
-                    className={classes.editButton}
-                >
-                    <Icon
-                        size={16}
-                        src={EditIcon}
-                        classes={{ icon: classes.editIcon }}
-                    />
-                    <span className={classes.editText}>
-                        <FormattedMessage
-                            id={'global.editButton'}
-                            defaultMessage={'Edit'}
-                        />
-                    </span>
-                </LinkButton>
             </div>
             <Card shippingData={shippingData} />
+            <LinkButton
+                onClick={handleEditShipping}
+                className={classes.editButton}
+            >
+                <span className={classes.editText}>
+                    <FormattedMessage
+                        id={'global.editButton'}
+                        defaultMessage={'Edit'}
+                    />
+                </span>
+            </LinkButton>
             {editModal}
         </Fragment>
     ) : (
