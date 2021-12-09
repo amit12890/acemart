@@ -39,11 +39,10 @@ const Header = props => {
     } = useHeader();
 
     const { loading, data } = useQuery(TOP_HEADERS_GQL)
-    console.log("🚀 ~ file: header.js ~ line 39 ~ loading, data", loading, data)
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
     const topHeader2Content = get(data, "topHeader2.items[0].content", "")
 
-    const classes = useStyle(defaultClasses, props.classes);
+    const classes = useStyle(defaultClasses, props.classes)
     const rootClass = isSearchOpen ? classes.open : classes.closed;
     const pageLoadingIndicator = isPageLoading ? (
         <PageLoadingIndicator />

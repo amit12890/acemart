@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useQuery } from '@apollo/client';
 import { get } from 'lodash';
 
@@ -16,7 +17,7 @@ import defaultClasses from './landingPage.css';
 const toHTML = str => ({ __html: str });
 
 const LandingPage = (props) => {
-
+    const history = useHistory()
     const classes = useStyle(defaultClasses, props.classes);
     const { data: landingPageData, loading: dataLoading, error: loadDataError } = useQuery(
         GET_LANDING_PAGE,
@@ -38,7 +39,10 @@ const LandingPage = (props) => {
                 <RichContent html={html} />
                 <ResourceList
                     data={get(landingPageData, "blogPosts.items", [])}
-                    onItemClick={() => { }} />
+                    onItemClick={(item) => {
+                        // hard replacing url as its blog and may have external website link
+                        window.location.href = get(item, "canonical_url", "")
+                    }} />
                 <BrandList
                     data={get(landingPageData, "brand.items", [])}
                     onItemClick={() => { }} />
