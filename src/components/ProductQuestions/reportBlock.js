@@ -26,10 +26,9 @@ export default function ReportBlock(props) {
 
     return (
         <div className={classes.helperContainer} onClick={handleClick}>
-            <div className={classes.countWrapper}>
-                {loading ? 'Loading' : 'Report'}
-            </div>
-            <Image src={helperReport} />
+            {loading ?
+                <Image src={helperReport} /> : <Image src={helperReport} />
+            }
         </div>
     );
 }

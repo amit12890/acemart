@@ -305,11 +305,13 @@ const QuestionBlock = ({ questions }) => {
                             <div key={item.id} className={classes.questionWrapper}>
                                 <div className={queClass}>
                                     <div className={classes.listItemWrapper}>
-                                        <div className={classes.listItem}
-                                            onClick={() => handleQueExpandToggle(index)}
-                                        >
+                                        <div className={classes.listItem}>
                                             <div className={classes.leftBlock}>
-                                                <div className={classes.listContent}>{item.content}</div>
+                                                <div className={classes.listContent} 
+                                                    onClick={() => handleQueExpandToggle(index)}
+                                                >
+                                                    {item.content}
+                                                </div>
                                                 <div className={classes.count}>
                                                     {ansCount > 1
                                                         ? `${ansCount} answers`
