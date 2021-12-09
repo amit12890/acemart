@@ -71,6 +71,14 @@ width: 130px;
     display: block;
 }
 
+.my-class{
+    border:10px solid black;
+}
+
+.another-my-class{
+    border:10px solid green;
+}
+
 @media only screen and (max-width: 768px) {
     .root {
         background-attachment: scroll !important;

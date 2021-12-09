@@ -42,7 +42,7 @@ const Header = props => {
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
     const topHeader2Content = get(data, "topHeader2.items[0].content", "")
 
-    const classes = useStyle(defaultClasses, props.classes);
+    const classes = useStyle(defaultClasses, props.classes)
     const rootClass = isSearchOpen ? classes.open : classes.closed;
     const pageLoadingIndicator = isPageLoading ? (
         <PageLoadingIndicator />
