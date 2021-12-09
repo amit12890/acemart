@@ -1,20 +1,29 @@
 import React, { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
+import { get } from 'lodash-es';
 
-export default function PlusBlock(props) {
-    const [updatePlus, { loading }] = useMutation(props.mutation, {
+/**
+ * 
+ * @props {String} queryType questionRatingPlus | answerRatingPlus
+ * @returns 
+ */
+export default function PlusBlock({queryType, mutation, variables, count, onSuccess}) {
+    const [updatePlus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
 
     const handleClick = useCallback(async () => {
         try {
             const { data } = await updatePlus({
-                variables: props.variables
+                variables: variables
             });
+            if (get(data ,`${queryType}.success`, false)) {
+                onSuccess(get(data ,`${queryType}.count`, 0))
+            }
         } catch (error) {
-            console.log('ggwp PlusBlock error', error);
+            console.log('Error during up vote', error);
         }
-    }, [updatePlus, props.variables]);
+    }, [updatePlus, variables]);
 
     return (
         <div
@@ -24,7 +33,7 @@ export default function PlusBlock(props) {
             }}
             onClick={handleClick}
         >
-            {props.count || 0}
+            {count || 0}
             {loading ? ' Loading' : ' Plus'}
         </div>
     );

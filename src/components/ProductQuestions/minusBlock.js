@@ -1,21 +1,25 @@
 import React, { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
+import { get } from 'lodash-es';
 
-export default function MinusBlock(props) {
-    const [updateMinus, { loading }] = useMutation(props.mutation, {
+
+export default function MinusBlock({queryType, mutation, variables, count, onSuccess}) {
+    const [updateMinus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
 
     const handleClick = useCallback(async () => {
         try {
             const { data } = await updateMinus({
-                variables: props.variables
+                variables: variables
             });
-            console.log("ggwp data", data)
+            if (get(data ,`${queryType}.success`, false)) {
+                onSuccess(get(data ,`${queryType}.count`, 0))
+            }
         } catch (error) {
-            console.log('ggwp MinusBlock error', error);
+            console.log('Error during down vote', error);
         }
-    }, [updateMinus, props.variables]);
+    }, [updateMinus, variables]);
 
     return (
         <div
@@ -25,7 +29,7 @@ export default function MinusBlock(props) {
             }}
             onClick={handleClick}
         >
-            {props.count || 0}
+            {count || 0}
             {loading ? ' Loading' : ' Minus'}
         </div>
     );

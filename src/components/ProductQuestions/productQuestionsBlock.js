@@ -21,7 +21,7 @@ import PlusBlock from './plusBlock';
 import MinusBlock from './minusBlock';
 import ReportBlock from './reportBlock';
 
-import { getDateString, questionReducer } from './utils';
+import { getDateString, questionReducer, updateAnswerCountAction, updateQuestionCountAction } from './utils';
 import {
     getProductQuestions,
     questionRatingPlusMutation,
@@ -31,6 +31,7 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
+import { partial } from 'lodash-es';
 
 const sortOptions = [
     { value: '1', label: 'Most Recent Questions' },
@@ -153,6 +154,14 @@ const QuestionBlock = ({ questions }) => {
     const handleSortClick = () => {
         setExpanded(!expanded);
     };
+
+    const onQuestionVoteSuccess = useCallback((questionId, countType, count) => {
+        dispatch(updateQuestionCountAction(questionId, countType, count))
+    }, [])
+
+    const onAnswerVoteSuccess = useCallback((questionId, answerId, countType, count) => {
+        dispatch(updateAnswerCountAction(questionId, answerId, countType, count))
+    }, [])
 
     // click event for menu items
     const handleItemClick = useCallback(
@@ -289,6 +298,8 @@ const QuestionBlock = ({ questions }) => {
                         let queClass = expandedQuestions.has(index)
                             ? `${classes.question} ${classes.question_open}`
                             : classes.question;
+                        const onUpvoteSuccess = partial(onQuestionVoteSuccess, item.id, "good")
+                        const onDownvoteSuccess = partial(onQuestionVoteSuccess, item.id, "bad")
 
                         return (
                             <div key={item.id} className={classes.questionWrapper}>
@@ -311,6 +322,8 @@ const QuestionBlock = ({ questions }) => {
                                                 <div className={[classes.helper, classes.plus].join(" ")}>
                                                     <PlusBlock count={item.good}
                                                         mutation={questionRatingPlusMutation}
+                                                        queryType="questionRatingPlus"
+                                                        onSuccess={onUpvoteSuccess}
                                                         variables={{
                                                             question_id: item.id
                                                         }}
@@ -319,6 +332,8 @@ const QuestionBlock = ({ questions }) => {
                                                 <div className={[classes.helper, classes.minus].join(" ")}>
                                                     <MinusBlock count={item.bad}
                                                         mutation={questionRatingMinusMutation}
+                                                        queryType="questionRatingMinus"
+                                                        onSuccess={onDownvoteSuccess}
                                                         variables={{
                                                             question_id: item.id
                                                         }}
@@ -341,6 +356,10 @@ const QuestionBlock = ({ questions }) => {
                                             </div>
                                             {!!ansCount
                                                 ? item.answer.map((ans) => {
+                                                    const onAnsUpvoteSuccess = partial(
+                                                        onAnswerVoteSuccess, item.id, ans.id, "good")
+                                                    const onAnsDownvoteSuccess = partial(
+                                                        onAnswerVoteSuccess, item.id, ans.id, "bad")
                                                     return (
                                                         <div key={ans.id} className={classes.anslistItemWrapper}>
                                                             <div className={classes.answerListItem}>
@@ -351,6 +370,8 @@ const QuestionBlock = ({ questions }) => {
                                                                 <div className={classes.count}>{getDateString(ans.date)}</div>
                                                                 <div className={[classes.helper, classes.plus].join(" ")}>
                                                                     <PlusBlock count={ans.good}
+                                                                        queryType="answerRatingPlus"
+                                                                        onSuccess={onAnsUpvoteSuccess}
                                                                         mutation={
                                                                             answerRatingPlusMutation
                                                                         }
@@ -361,6 +382,8 @@ const QuestionBlock = ({ questions }) => {
                                                                 </div>
                                                                 <div className={[classes.helper, classes.minus].join(" ")}>
                                                                     <MinusBlock count={ans.bad}
+                                                                        queryType="answerRatingMinus"
+                                                                        onSuccess={onAnsDownvoteSuccess}
                                                                         mutation={
                                                                             answerRatingMinusMutation
                                                                         }
