@@ -21,7 +21,6 @@ const Footer = props => {
     const talonProps = useFooter();
 
     const { data, loading } = useQuery(GET_FOOTER_GQL)
-    console.log("🚀 ~ file: footer.js ~ line 22 ~ footer data", data)
     const footerCol1 = get(data, "footerColumn1.items[0].content", "")
     const footerCol2 = get(data, "footerColumn2.items[0].content", "")
     const footerCol3 = get(data, "footerColumn3.items[0].content", "")
