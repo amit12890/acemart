@@ -10,8 +10,8 @@ import Button from '../../../Button';
 import Country from '../../../Country';
 import Field, { Message } from '../../../Field';
 import FormError from '../../../FormError';
-import Region from '@magento/venia-ui/lib/components/Region';
-import Postcode from '@magento/venia-ui/lib/components/Postcode';
+import Region from '../../../Region';
+import Postcode from '../../../Postcode';
 import TextInput from '../../../TextInput';
 import defaultClasses from './guestForm.css';
 import GuestFormOperations from './guestForm.gql';
@@ -66,13 +66,13 @@ const GuestForm = props => {
 
     const submitButtonText = isUpdate
         ? formatMessage({
-              id: 'global.updateButton',
-              defaultMessage: 'Update'
-          })
+            id: 'global.updateButton',
+            defaultMessage: 'Update'
+        })
         : formatMessage({
-              id: 'guestForm.continueToNextStep',
-              defaultMessage: 'Continue to Shipping Method'
-          });
+            id: 'guestForm.continueToNextStep',
+            defaultMessage: 'Continue to Shipping Method'
+        });
     const submitButtonProps = {
         disabled: isSaving,
         priority: isUpdate ? 'high' : 'normal',
@@ -87,7 +87,7 @@ const GuestForm = props => {
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
-                <div className={classes.email}>
+                <div className={[classes.formField, classes.email].join(" ")}>
                     <Field
                         id="email"
                         label={formatMessage({
@@ -103,7 +103,7 @@ const GuestForm = props => {
                         {guestEmailMessage}
                     </Field>
                 </div>
-                <div className={classes.firstname}>
+                <div className={[classes.formField, classes.firstname].join(" ")}>
                     <Field
                         id="firstname"
                         label={formatMessage({
@@ -118,7 +118,7 @@ const GuestForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.lastname}>
+                <div className={[classes.formField, classes.lastname].join(" ")}>
                     <Field
                         id="lastname"
                         label={formatMessage({
@@ -133,10 +133,10 @@ const GuestForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.country}>
+                <div className={[classes.formField, classes.country].join(" ")}>
                     <Country validate={isRequired} />
                 </div>
-                <div className={classes.street0}>
+                <div className={[classes.formField, classes.street0].join(" ")}>
                     <Field
                         id="street0"
                         label={formatMessage({
@@ -151,7 +151,7 @@ const GuestForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.street1}>
+                <div className={[classes.formField, classes.street1].join(" ")}>
                     <Field
                         id="street1"
                         label={formatMessage({
@@ -163,7 +163,7 @@ const GuestForm = props => {
                         <TextInput field="street[1]" id="street1" />
                     </Field>
                 </div>
-                <div className={classes.city}>
+                <div className={[classes.formField, classes.city].join(" ")}>
                     <Field
                         id="city"
                         label={formatMessage({
@@ -178,7 +178,7 @@ const GuestForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.region}>
+                <div className={[classes.formField, classes.region].join(" ")}>
                     <Region
                         validate={isRequired}
                         fieldInput={'region[region]'}
@@ -186,10 +186,10 @@ const GuestForm = props => {
                         optionValueKey={'id'}
                     />
                 </div>
-                <div className={classes.postcode}>
+                <div className={[classes.formField, classes.postcode].join(" ")}>
                     <Postcode validate={isRequired} />
                 </div>
-                <div className={classes.telephone}>
+                <div className={[classes.formField, classes.telephone].join(" ")}>
                     <Field
                         id="telephone"
                         label={formatMessage({

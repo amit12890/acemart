@@ -9,6 +9,12 @@
     grid-column-end: span 2;
 }
 
+.formField {
+    margin-bottom: 1rem;
+}
+
+
+
 .email,
 .country,
 .street0,

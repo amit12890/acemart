@@ -16,8 +16,7 @@
 }
 
 .contentContainer {
-    border: 2px solid rgb(var(--venia-global-color-border));
-    border-radius: 0.375rem;
+    border: 1px solid rgb(var(--border-color-base));
     padding-bottom: 2rem;
 }
 
