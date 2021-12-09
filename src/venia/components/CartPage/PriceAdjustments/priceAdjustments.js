@@ -32,25 +32,27 @@ const ShippingMethods = React.lazy(() => import('./ShippingMethods'));
 const PriceAdjustments = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
-    const { setIsCartUpdating } = props;
+    const { isShoppingSite, setIsCartUpdating } = props;
     const { formatMessage } = useIntl();
 
     return (
         <div className={classes.root}>
             <Accordion canOpenMultiple={true}>
-                <Section
-                    id={'shipping_method'}
-                    title={formatMessage({
-                        id: 'priceAdjustments.shippingMethod',
-                        defaultMessage: 'Estimate your Shipping'
-                    })}
-                >
-                    <Suspense fallback={<LoadingIndicator />}>
-                        <ShippingMethods
-                            setIsCartUpdating={setIsCartUpdating}
-                        />
-                    </Suspense>
-                </Section>
+                {isShoppingSite &&
+                    <Section
+                        id={'shipping_method'}
+                        title={formatMessage({
+                            id: 'priceAdjustments.shippingMethod',
+                            defaultMessage: 'Estimate your Shipping'
+                        })}
+                    >
+                        <Suspense fallback={<LoadingIndicator />}>
+                            <ShippingMethods
+                                setIsCartUpdating={setIsCartUpdating}
+                            />
+                        </Suspense>
+                    </Section>
+                }
                 <Section
                     id={'coupon_code'}
                     title={formatMessage({

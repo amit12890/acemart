@@ -69,6 +69,9 @@ const CartPage = props => {
         return fullPageLoadingIndicator;
     }
 
+    // use is shopping on acemart
+    const isShoppingSite = get(data, "storeConfig.store_group_name") === "Shopping"
+
     const productListing = hasItems ? (
         <ProductListing
             onAddToWishlistSuccess={onAddToWishlistSuccess}
@@ -85,10 +88,10 @@ const CartPage = props => {
     );
 
     const priceAdjustments = hasItems ? (
-        <PriceAdjustments setIsCartUpdating={setIsCartUpdating} />
+        <PriceAdjustments 
+            isShoppingSite={isShoppingSite}
+            setIsCartUpdating={setIsCartUpdating} />
     ) : null;
-
-    const isShoppingSite = get(data, "storeConfig.store_group_name") === "Shopping"
 
     const priceSummary = hasItems ? (
         <PriceSummary isUpdating={isCartUpdating} />
