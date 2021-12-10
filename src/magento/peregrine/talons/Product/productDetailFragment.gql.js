@@ -6,6 +6,8 @@ export const ProductDetailsFragment = gql`
         id
         meta_description
         name
+        brand
+        brand_name
         product_name
         sku uom mpn
         youtube_filename
