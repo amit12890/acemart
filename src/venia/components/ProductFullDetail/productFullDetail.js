@@ -60,6 +60,7 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const ProductFullDetail = props => {
     const { product } = props;
+    console.log("🚀 ~ file: productFullDetail.js ~ line 63 ~ product", product)
     const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;

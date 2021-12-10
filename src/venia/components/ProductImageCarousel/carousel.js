@@ -16,6 +16,7 @@ import Image from '../Image';
 import defaultClasses from './carousel.css';
 import Thumbnail from './thumbnail';
 import Button from '../Button';
+import { size } from 'lodash-es';
 
 const IMAGE_WIDTH = 535;
 const IMAGE_HEIGHT = 535;
@@ -43,7 +44,7 @@ const ProductImageCarousel = props => {
 
     const closeFullScreen = useCallback(() => {
         setShowFullScreen(false)
-    },[])
+    }, [])
 
     const windowSize = useWindowSize();
     const talonProps = useProductImageCarousel({
@@ -112,29 +113,35 @@ const ProductImageCarousel = props => {
         <>
             <div className={classes.root}>
                 <div className={classes.carouselContainer}>
-                    <button
-                        className={classes.previousButton}
-                        onClick={handlePrevious}
-                        type="button">
-                        <Icon
-                            classes={chevronClasses}
-                            src={ChevronLeftIcon}
-                            size={80}
-                        />
-                    </button>
+                    {size(sortedImages) > 1 && (
+                        <button
+                            className={classes.previousButton}
+                            onClick={handlePrevious}
+                            type="button">
+                            <Icon
+                                classes={chevronClasses}
+                                src={ChevronLeftIcon}
+                                size={80}
+                            />
+                        </button>
+                    )}
                     {image}
-                    <button
-                        className={classes.nextButton}
-                        onClick={handleNext}
-                        type="button">
-                        <Icon
-                            classes={chevronClasses}
-                            src={ChevronRightIcon}
-                            size={80}
-                        />
-                    </button>
+                    {size(sortedImages) > 1 && (
+                        <button
+                            className={classes.nextButton}
+                            onClick={handleNext}
+                            type="button">
+                            <Icon
+                                classes={chevronClasses}
+                                src={ChevronRightIcon}
+                                size={80}
+                            />
+                        </button>
+                    )}
                 </div>
-                <div className={classes.thumbnailList}>{thumbnails}</div>
+                {size(sortedImages) > 1 && (
+                    <div className={classes.thumbnailList}>{thumbnails}</div>
+                )}
             </div>
             {(allowFullScreen && showFullScreen) &&
                 <Portal>
@@ -154,14 +161,14 @@ const ProductImageCarousel = props => {
                                         </svg>
                                     </i>
                                 </Button>
-                                <div onClick={()=> {
-                                    if(zoom <= 1.5) {
-                                        setZoom(zoom+0.25)
+                                <div onClick={() => {
+                                    if (zoom <= 1.5) {
+                                        setZoom(zoom + 0.25)
                                     }
                                 }}>Zoom In</div>
                                 <div onClick={() => {
-                                    if(zoom >= 0.5) {
-                                        setZoom(zoom-0.25)
+                                    if (zoom >= 0.5) {
+                                        setZoom(zoom - 0.25)
                                     }
                                 }}>Zoom Out</div>
                             </div>
