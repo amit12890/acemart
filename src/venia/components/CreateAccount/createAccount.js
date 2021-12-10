@@ -15,7 +15,7 @@ import {
     isEqualToField,
 } from '@magento/venia-ui/lib/util/formValidators';
 import Button from '../Button';
-import Checkbox from '@magento/venia-ui/lib/components/Checkbox';
+import Checkbox from '../Checkbox';
 import Field from '../Field';
 import TextInput from '../TextInput';
 import Password from '../Password';

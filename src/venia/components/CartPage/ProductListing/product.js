@@ -150,14 +150,10 @@ const Product = props => {
                                 onChange={handleUpdateItemQuantity}
                             />
                             {isSignedIn &&
-                                <div
-                                    style={{
-                                        cursor: 'pointer',
-                                        color: 'blue'
-                                    }}
-                                    onClick={openWishlistPopup}
-                                >
-                                    Move to wishlist
+                                <div className={classes.addToList}>
+                                    <div className={classes.toWishlist} onClick={openWishlistPopup}>
+                                        Move to wishlist
+                                    </div>
                                 </div>
                             }
                         </div>
