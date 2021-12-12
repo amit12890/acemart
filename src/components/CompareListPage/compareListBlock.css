@@ -4,8 +4,23 @@
 
 .blockTitle {
     font-size: var(--fontSize-300) ;
-    font-weight: var(--font-weight-bold);
     margin-bottom: 10px;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    position: relative;
+    font-size: var(--fontSize-100); 
+}
+.blockTitle strong {
+    border-bottom: 3px solid #333;
+    display: inline-flex;
+    padding-bottom: 10px;
+    font-size: var(--fontSize-300); 
+}
+
+.blockContent {
+
+}
+
+.actionDelete {
 
 }
 
@@ -13,11 +28,16 @@
     display: flex;
     align-items: flex-start;
     font-size: var(--fontSize-100) ;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed rgb(var(--border-color-light));
+    padding-bottom: 5px; 
 }
 
 .productName {
     flex-grow: 1;
+    font-size: var(--fontSize-90);
+    color: rgb(var(--product-name-color));
+    font-weight: bold;
 }
 
 .removeButton {
@@ -29,7 +49,6 @@
     height: 30px;
     display: flex;
     justify-content: center;
-    margin-right: 10px;
     cursor: pointer;
 }
 
@@ -41,7 +60,12 @@
     width: 18px;    
     height: auto;
 }
-.actionToolbar {
+
+
+.actionToolbar { 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: 10px;
 }
 

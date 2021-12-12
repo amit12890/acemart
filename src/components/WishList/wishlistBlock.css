@@ -1,0 +1,21 @@
+.root {
+    
+}
+
+.wishListBlock {
+    margin: 20px 0;
+}
+
+.blockTitle {
+    font-size: var(--fontSize-300) ;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 10px;
+}
+
+.blockContent {
+
+}
+
+.blockAction { 
+
+}

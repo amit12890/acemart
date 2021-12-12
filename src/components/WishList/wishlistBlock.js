@@ -45,7 +45,7 @@ const WishlistPage = props => {
 
     const finalWishlist = useMemo(() => {
         const itemList = []
-        if(wishlists && Array.isArray(wishlists)) {
+        if (wishlists && Array.isArray(wishlists)) {
             for (let index = 0; index < wishlists.length; index++) {
                 itemList.push(...wishlists[index].product)
             }
@@ -63,21 +63,31 @@ const WishlistPage = props => {
         content = <div className={classes.errorContainer}>{errorElement}</div>;
     } else {
         content = (
-            <ProductListing 
+            <ProductListing
                 wishlists={finalWishlist}
-                refreshWishlist={refreshWishlist} 
+                refreshWishlist={refreshWishlist}
             />
         )
     }
 
     return (
-        <div>
-            <div>My Wish List {finalWishlist.length ? `( ${finalWishlist.length} items)` : ""}</div>
-            <div>
+        <div className={classes.wishListBlock}>
+            <div className={classes.blockTitle}>
+                <strong>My Wish List</strong> {finalWishlist.length ? `( ${finalWishlist.length} items)` : ""}
+            </div>
+            <div className={classes.blockContent}>
                 {content}
             </div>
-            <div>
-                <Link to={myWishlistPage()}>Go to Wish List</Link>
+            <div className={classes.blockAction}>
+                <Link to={myWishlistPage()}>
+                    <i className={classes.iconWrapper}>
+                        <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <title>arrow-right-thin</title>
+                            <path d="M25.875 14l-9.719-9.719 2.281-2.25 13.563 13.563-13.563 13.594-2.281-2.281 9.719-9.719h-25.875v-3.188h25.875z"></path>
+                        </svg>
+                    </i>
+                    <span>Go to Wish List</span>
+                </Link>
             </div>
         </div>
     );
@@ -119,26 +129,26 @@ const ProductListing = props => {
     }
 
     return (
-        <div className={classes.galleryItemsWrapper}>
-            <div className={classes.galleryItemsGrid}>
+        <div className={classes.blockItemsWrapper}>
+            <div className={classes.blocktemsList}>
                 {itemList.map((item) => {
                     const { product, wishlist_item_id, wishlist_id } = item
                     const { name, price, small_image } = product
                     return (
-                        <div key={wishlist_item_id} className={classes.galleryItem}>
-                            <div className={classes.galleryItemInfo}>
-                                <div className={classes.galleryItemImageContainer}>
-                                    <div className={classes.galleryItemImage}>
+                        <div key={wishlist_item_id} className={classes.listItem}>
+                            <div className={classes.listItemInfo}>
+                                <div className={classes.listItemImageContainer}>
+                                    <div className={classes.listItemImage}>
                                         <img src={small_image} />
                                     </div>
 
                                 </div>
 
-                                <div className={classes.galleryItemDetails}>
-                                    <div className={classes.itemName}>{name}</div>
-                                    <div className={classes.itemPrice}>{price}</div>
+                                <div className={classes.listItemDetails}>
+                                    <div className={classes.listItemName}>{name}</div>
+                                    <div className={classes.listItemPrice}>{price}</div>
 
-                                    <div className={classes.productItemQuickActions}>
+                                    <div className={classes.ItemQuickActions}>
                                         <div className={[classes.action, classes.edit].join(" ")} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
                                             {removeProductLoading ? <span>Loading...</span> :
                                                 <span>

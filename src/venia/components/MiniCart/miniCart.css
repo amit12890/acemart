@@ -1,5 +1,4 @@
 .root {
-    
     overflow: visible;
     opacity: 0;
     position: absolute;
@@ -79,12 +78,10 @@
 }
 
 .body {
-    min-height: 10rem;
     overflow-y: auto;
     height: 100%;
     padding-top: 15px;
     padding-bottom: 15px;
-    
 }
 
 .modalClose {

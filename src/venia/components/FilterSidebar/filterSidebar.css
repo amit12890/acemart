@@ -3,7 +3,7 @@
     background-color: white;
     bottom: 0;
     display: none;
-    grid-template-rows: 1fr 7rem;
+    grid-template-rows: auto auto auto;
     max-width: 360px;
     width: 100%;
     z-index: 3;

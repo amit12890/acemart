@@ -52,13 +52,15 @@ const CompareListBlock = (props) => {
 
     return (
         <div className={classes.root}>
-            <div className={classes.blockTitle}>Compare Products</div>
+            <div className={classes.blockTitle}><strong>Compare Products</strong></div>
             {hasItems ?
-                <div>
+                <div className={classes.blockContent}>
                     {items.map((item) => {
                         const product = item.product;
                         return (
                             <div key={item.uid} className={classes.compareItem}>
+                                <span className={classes.productName}>{product.name}</span>
+
                                 <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
                                     Child={() =>
                                         <i className={classes.iconWrapper}>
@@ -70,7 +72,7 @@ const CompareListBlock = (props) => {
                                     }
                                     Loader={() => <div>Loading...</div>}
                                 />
-                                <span className={classes.productName}>{product.name}</span>
+
                             </div>
                         )
                     })}
