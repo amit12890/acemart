@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/client';
 import { get } from "lodash";
 
 import Icon from '../Icon';
-import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import StockStatusMessage from '@magento/venia-ui/lib/components/StockStatusMessage';
 import Button from '../Button';
@@ -104,12 +104,12 @@ const CartPage = props => {
 
     return (
         <div className={classes.root}>
-            <StoreTitle>
+            <Title>
                 {formatMessage({
                     id: 'am.cartPage.title',
                     defaultMessage: 'Shopping Cart'
                 })}
-            </StoreTitle>
+            </Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>
                     <FormattedMessage
