@@ -20,7 +20,7 @@ import { HOST_URL } from '../../url.utils';
 
 const SharePopup = props => {
     const { closeSharePopup, productId, isPopupVisible } = props;
-    let { productPath } = useLocation();
+    const { pathname } = useLocation();
     const classes = useStyle(defaultClasses, props.classes);
 
     return (
@@ -55,7 +55,9 @@ const SharePopup = props => {
                             <div className={classes.shareButtons}>
                                 <div className={classes.shareItemWraper}>
                                     <div className={classes.shareItem}>
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${HOST_URL}${productPath}&quote=Ace%20Mart%20Restauant%20Supply`}
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${HOST_URL}${pathname}&quote=Ace%20Mart%20Restauant%20Supply`}
+                                        target="_blank"
+                                        title="Share on Facebook"
                                         className={classes.shareLink}>
                                             <Image
                                                 src={iconFacebook}
@@ -66,7 +68,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a 
+                                            href={`https://twitter.com/intent/tweet?source=${HOST_URL}${pathname}&text=Ace%20Mart%20Restauant%20Supply:%20http%3A%2F%2Fwww.acemart.com`}
+                                            target="_blank" 
+                                            title="Tweet"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconTwitter}
                                                 width="25"
@@ -76,7 +83,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a 
+                                            href={`http://pinterest.com/pin/create/button/?url=${HOST_URL}${pathname}&description=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply`}
+                                            target="_blank"
+                                            title="Pin it"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconPinterest}
                                                 width="25"
@@ -86,7 +98,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a 
+                                            href={`http://www.linkedin.com/shareArticle?mini=true&url=${HOST_URL}${pathname}&title=Ace%20Mart%20Restauant%20Supply&summary=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply&source=http%3A%2F%2Fwww.acemart.com`}
+                                            target="_blank"
+                                            title="Share on LinkedIn"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconLinkedIn}
                                                 width="25"
@@ -96,7 +113,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a
+                                            href={`mailto:?subject=Ace%20Mart%20Restauant%20Supply&body=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply:${HOST_URL}${pathname}`}
+                                            target="_blank"
+                                            title="Send email"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconEmail}
                                                 width="25"
