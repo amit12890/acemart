@@ -5,7 +5,12 @@ import { get, size, isNil } from 'lodash';
 import { useStyle } from '../../venia/classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
+import Icon from '@magento/venia-ui/lib/components/Icon';
 import defaultClasses from './wishlistPopup.css';
+import { useToasts } from '@magento/peregrine/lib/Toasts'
+import {
+    CheckCircle as CheckCircleIcon,
+} from 'react-feather';
 
 import CreateWishlist from './createWishlist';
 import { useApiData } from '../../data.utils';
@@ -15,11 +20,21 @@ import Button from '../../venia/components/Button';
 import { apiAddToWishlist, apiGetWishlistData } from '../../url.utils';
 import Mask from '@magento/venia-ui/lib/components/Mask';
 
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
+const successMessage = "has been added to wish list"
 
 const WishlistPopup = props => {
-    const { closeWishlistPopup, productId, productQty = 1, isPopupVisible } = props;
+    const { closeWishlistPopup, productId, productQty = 1, isPopupVisible, productName } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+    const [_, { addToast }] = useToasts()
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
@@ -36,7 +51,16 @@ const WishlistPopup = props => {
     }, [getWishlist, customerData])
 
     const { callApi: addToWishlist, response: addResponse, loading: addToWishlistLoading, error: addToWishlistError } = useApiData({
-        method: "post", isLazy: true,
+        method: "post", isLazy: true, onSuccess: () => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: `${productName} ${successMessage}`,
+                dismissable: true,
+                timeout: 3000
+            })
+            closeWishlistPopup()
+        }
     })
 
     const handleSubmit = useCallback(async () => {
