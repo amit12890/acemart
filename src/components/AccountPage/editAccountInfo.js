@@ -16,6 +16,7 @@ import {
     isEqualToField
 } from '@magento/venia-ui/lib/util/formValidators';
 import combine from '@magento/venia-ui/lib/util/combineValidators';
+import { useIntl } from 'react-intl';
 
 import Field from '../../venia/components/Field';
 import Button from '../../venia/components/Button';
@@ -25,9 +26,11 @@ import Password from '../../venia/components/Password';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
 import { accountPageUrl } from '../../url.utils.js';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 
 const EditAccountInfo = ({path}) => {
+    const { formatMessage } = useIntl();
     const history = useHistory();
     const [showEmail, setShowEmail] = useState(false)
     const [showPassword, setShowPassword] = useState(path.includes("changepass"))
@@ -111,6 +114,7 @@ const EditAccountInfo = ({path}) => {
 
     return (
         <div className={classes.root}>
+            <Title>{formatMessage({ id: "editAccountInfo.title" })}</Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>Edit Account Information</h1>
             </div>

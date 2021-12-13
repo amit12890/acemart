@@ -20,6 +20,7 @@ export const GET_LANDING_PAGE = gql`
         post_url
         featured_image
         short_filtered_content
+        canonical_url
       }
     }
     brand(currentPage:1,pageSize:10,sort:"ASC",featuredBrands:true){

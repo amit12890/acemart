@@ -23,6 +23,7 @@ import { AvailableShippingMethodsCartFragment } from '../PriceAdjustments/Shippi
 
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import WishlistPopup from '../../../../components/WishList/wishlistPopup';
+import RichText from '../../RichText';
 
 const IMAGE_SIZE = 100;
 
@@ -30,6 +31,7 @@ const HeartIcon = <Icon size={16} src={Heart} />;
 
 const Product = props => {
     const { item } = props;
+    console.log("🚀 ~ file: product.js ~ line 34 ~ item", item)
 
     const [{ isSignedIn }] = useUserContext();
     const { formatMessage } = useIntl();
@@ -110,99 +112,91 @@ const Product = props => {
 
     return (
         <>
-        <li className={classes.root}>
-            <span className={classes.errorText}>{errorMessage}</span>
-            <div className={itemClassName}>
-                <Link to={itemLink} className={classes.imageContainer}>
-                    <Image
-                        alt={name}
-                        classes={{
-                            root: classes.imageRoot,
-                            image: classes.image
-                        }}
-                        width={IMAGE_SIZE}
-                        resource={image}
-                    />
-                </Link>
-                <div className={classes.details}>
-                    <div className={classes.name}>
-                        <Link to={itemLink}>{name}</Link>
-                    </div>
-                    <ProductOptions
-                        options={options}
-                        classes={{
-                            options: classes.options,
-                            optionLabel: classes.optionLabel
-                        }}
-                    />
-                    <span className={classes.price}>
-                        <Price currencyCode={currency} value={unitPrice} />
-                        <FormattedMessage
-                            id={'product.price'}
-                            defaultMessage={' ea.'}
-                        />
-                    </span>
-                    <span className={classes.stockStatusMessage}>
-                        {stockStatusMessage}
-                    </span>
-                    <div className={classes.quantity}>
-                        <Quantity
-                            itemId={item.id}
-                            initialValue={quantity}
-                            onChange={handleUpdateItemQuantity}
-                        />
-                        {isSignedIn &&
-                            <div
-                                style={{
-                                    cursor: 'pointer',
-                                    color: 'blue'
-                                }}
-                                onClick={openWishlistPopup}
-                            >
-                                Move to wishlist
-                            </div>
-                        }
-                    </div>
-                </div>
-                <Kebab
-                    classes={{
-                        root: classes.kebab
-                    }}
-                    disabled={true}
-                >
-                    {editItemSection}
-                    <Section
-                        text={formatMessage({
-                            id: 'product.removeFromCart',
-                            defaultMessage: 'Remove from cart'
-                        })}
-                        onClick={handleRemoveFromCart}
-                        icon="Trash"
-                        classes={{
-                            text: classes.sectionText
-                        }}
-                    />
-                    <li>
-                        <AddToListButton
-                            {...addToWishlistProps}
+            <li className={classes.root}>
+                <span className={classes.errorText}>{errorMessage}</span>
+                <div className={itemClassName}>
+                    <Link to={itemLink} className={classes.imageContainer}>
+                        <Image
+                            alt={name}
                             classes={{
-                                root: classes.addToListButton,
-                                root_selected: classes.addToListButton_selected
+                                root: classes.imageRoot,
+                                image: classes.image
                             }}
-                            icon={HeartIcon}
+                            width={IMAGE_SIZE}
+                            resource={image}
                         />
-                    </li>
-                </Kebab>
-            </div>
-        </li>
-        {showWishlistPopup && (
-            <WishlistPopup
-                isPopupVisible={showWishlistPopup}
-                productId={item.product.id}
-                productQty={quantity}
-                closeWishlistPopup={closeWishlistPopup}
-            />
-        )}
+                    </Link>
+                    <div className={classes.details}>
+                        <div className={classes.name}>
+                            <Link to={itemLink}><RichText content={name} /></Link>
+                        </div>
+                        <ProductOptions
+                            options={options}
+                            classes={{
+                                options: classes.options,
+                                optionLabel: classes.optionLabel
+                            }}
+                        />
+                        <span className={classes.price}>
+                            <Price currencyCode={currency} value={unitPrice} /> / {item.product.uom}
+                        </span>
+                        <span className={classes.stockStatusMessage}>
+                            {stockStatusMessage}
+                        </span>
+                        <div className={classes.quantity}>
+                            <Quantity
+                                itemId={item.id}
+                                initialValue={quantity}
+                                onChange={handleUpdateItemQuantity}
+                            />
+                            {isSignedIn &&
+                                <div className={classes.addToList}>
+                                    <div className={classes.toWishlist} onClick={openWishlistPopup}>
+                                        Move to wishlist
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <Kebab
+                        classes={{
+                            root: classes.kebab
+                        }}
+                        disabled={true}
+                    >
+                        {editItemSection}
+                        <Section
+                            text={formatMessage({
+                                id: 'product.removeFromCart',
+                                defaultMessage: 'Remove from cart'
+                            })}
+                            onClick={handleRemoveFromCart}
+                            icon="Trash"
+                            classes={{
+                                text: classes.sectionText
+                            }}
+                        />
+                        <li>
+                            <AddToListButton
+                                {...addToWishlistProps}
+                                classes={{
+                                    root: classes.addToListButton,
+                                    root_selected: classes.addToListButton_selected
+                                }}
+                                icon={HeartIcon}
+                            />
+                        </li>
+                    </Kebab>
+                </div>
+            </li>
+            {showWishlistPopup && (
+                <WishlistPopup
+                    isPopupVisible={showWishlistPopup}
+                    productId={item.product.id}
+                    productQty={quantity}
+                    closeWishlistPopup={closeWishlistPopup}
+                />
+            )}
         </>
     );
 };

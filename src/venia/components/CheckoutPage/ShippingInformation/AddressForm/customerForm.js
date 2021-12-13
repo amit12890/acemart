@@ -59,7 +59,7 @@ const CustomerForm = props => {
     }
 
     const emailRow = !hasDefaultShipping ? (
-        <div className={classes.email}>
+        <div className={[classes.formField, classes.email].join(" ")}>
             <Field
                 id="email"
                 label={formatMessage({
@@ -101,18 +101,18 @@ const CustomerForm = props => {
 
     const submitButtonText = !hasDefaultShipping
         ? formatMessage({
-              id: 'global.saveAndContinueButton',
-              defaultMessage: 'Save and Continue'
-          })
+            id: 'global.saveAndContinueButton',
+            defaultMessage: 'Save and Continue'
+        })
         : isUpdate
-        ? formatMessage({
-              id: 'global.updateButton',
-              defaultMessage: 'Update'
-          })
-        : formatMessage({
-              id: 'global.addButton',
-              defaultMessage: 'Add'
-          });
+            ? formatMessage({
+                id: 'global.updateButton',
+                defaultMessage: 'Update'
+            })
+            : formatMessage({
+                id: 'global.addButton',
+                defaultMessage: 'Add'
+            });
     const submitButtonProps = {
         disabled: isSaving,
         priority: !hasDefaultShipping ? 'normal' : 'high',
@@ -145,7 +145,7 @@ const CustomerForm = props => {
             >
                 {formMessageRow}
                 {emailRow}
-                <div className={classes.firstname}>
+                <div className={[classes.formField, classes.firstname].join(" ")}>
                     <Field
                         id="customer_firstname"
                         label={formatMessage({
@@ -161,7 +161,7 @@ const CustomerForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.lastname}>
+                <div className={[classes.formField, classes.lastname].join(" ")}>
                     <Field
                         id="customer_lastname"
                         label={formatMessage({
@@ -177,10 +177,10 @@ const CustomerForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.country}>
+                <div className={[classes.formField, classes.country].join(" ")}>
                     <Country validate={isRequired} />
                 </div>
-                <div className={classes.street0}>
+                <div className={[classes.formField, classes.street0].join(" ")}>
                     <Field
                         id="customer_street0"
                         label={formatMessage({
@@ -195,7 +195,7 @@ const CustomerForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.street1}>
+                <div className={[classes.formField, classes.street1].join(" ")}>
                     <Field
                         id="customer_street1"
                         label={formatMessage({
@@ -207,7 +207,7 @@ const CustomerForm = props => {
                         <TextInput field="street[1]" id="customer_street1" />
                     </Field>
                 </div>
-                <div className={classes.city}>
+                <div className={[classes.formField, classes.city].join(" ")}>
                     <Field
                         id="customer_city"
                         label={formatMessage({
@@ -222,7 +222,7 @@ const CustomerForm = props => {
                         />
                     </Field>
                 </div>
-                <div className={classes.region}>
+                <div className={[classes.formField, classes.region].join(" ")}>
                     <Region
                         validate={isRequired}
                         fieldInput={'region[region]'}
@@ -230,10 +230,10 @@ const CustomerForm = props => {
                         optionValueKey={'id'}
                     />
                 </div>
-                <div className={classes.postcode}>
+                <div className={[classes.formField, classes.postcode].join(" ")}>
                     <Postcode validate={isRequired} />
                 </div>
-                <div className={classes.telephone}>
+                <div className={[classes.formField, classes.telephone].join(" ")}>
                     <Field
                         id="customer_telephone"
                         label={formatMessage({

@@ -1,9 +1,9 @@
 import React from 'react';
 import { gql } from '@apollo/client';
 import { bool, func, shape, string } from 'prop-types';
-import { useAutocomplete } from '@magento/peregrine/lib/talons/SearchBar';
 import { useIntl } from 'react-intl';
 
+import { useAutocomplete } from '../../../magento/peregrine/talons/SearchBar';
 import defaultClasses from './autocomplete.css';
 import { useStyle } from '../../classify';
 import Suggestions from './suggestions';

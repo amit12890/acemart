@@ -3,14 +3,17 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Check } from 'react-feather';
 import { useCartPage } from '@magento/peregrine/lib/talons/CartPage/useCartPage';
 import { useStyle } from '@magento/venia-ui/lib/classify';
+import { Link } from 'react-router-dom';
 import { useToasts } from '@magento/peregrine';
+import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useQuery } from '@apollo/client';
 import { get } from "lodash";
 
 import Icon from '../Icon';
-import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import StockStatusMessage from '@magento/venia-ui/lib/components/StockStatusMessage';
+import Button from '../Button';
 import PriceAdjustments from './PriceAdjustments';
 import ProductListing from './ProductListing';
 import PriceSummary from './PriceSummary';
@@ -69,6 +72,9 @@ const CartPage = props => {
         return fullPageLoadingIndicator;
     }
 
+    // use is shopping on acemart
+    const isShoppingSite = get(data, "storeConfig.store_group_name") === "Shopping"
+
     const productListing = hasItems ? (
         <ProductListing
             onAddToWishlistSuccess={onAddToWishlistSuccess}
@@ -76,19 +82,21 @@ const CartPage = props => {
             fetchCartDetails={fetchCartDetails}
         />
     ) : (
-        <h3>
-            <FormattedMessage
-                id={'cartPage.emptyCart'}
-                defaultMessage={'There are no items in your cart.'}
-            />
-        </h3>
+        <div className={classes.emptyCart}>
+            <h3>
+                <FormattedMessage
+                    id={'cartPage.emptyCart'}
+                    defaultMessage={'There are no items in your cart.'}
+                />
+            </h3>
+        </div>
     );
 
     const priceAdjustments = hasItems ? (
-        <PriceAdjustments setIsCartUpdating={setIsCartUpdating} />
+        <PriceAdjustments
+            isShoppingSite={isShoppingSite}
+            setIsCartUpdating={setIsCartUpdating} />
     ) : null;
-
-    const isShoppingSite = get(data, "storeConfig.store_group_name") === "Shopping"
 
     const priceSummary = hasItems ? (
         <PriceSummary isUpdating={isCartUpdating} />
@@ -96,12 +104,12 @@ const CartPage = props => {
 
     return (
         <div className={classes.root}>
-            <StoreTitle>
+            <Title>
                 {formatMessage({
                     id: 'am.cartPage.title',
                     defaultMessage: 'Shopping Cart'
                 })}
-            </StoreTitle>
+            </Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>
                     <FormattedMessage
@@ -119,7 +127,25 @@ const CartPage = props => {
                         {productListing}
                     </div>
                     <div className={classes.cartActions}>
-
+                        <div className={classes.buttonContinue}>
+                            <Link
+                                to={resourceUrl('/')}
+                                className={classes.action}
+                            >
+                                <i className={classes.iconWrapper}>
+                                    <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="12" height="32" viewBox="0 0 12 32">
+                                        <title>previous</title>
+                                        <path d="M11.188 10q0 0.094-0.047 0.219t-0.109 0.188l-7.031 7.031 7.031 7q0.063 0.094 0.109 0.203t0.047 0.203q0 0.125-0.047 0.234t-0.109 0.203l-0.906 0.875q-0.094 0.094-0.203 0.141t-0.203 0.047q-0.125 0-0.234-0.047t-0.172-0.141l-8.344-8.313q-0.063-0.094-0.109-0.203t-0.047-0.203q0-0.125 0.047-0.234t0.109-0.172l8.344-8.344q0.063-0.063 0.172-0.109t0.234-0.047q0.094 0 0.203 0.047t0.203 0.109l0.906 0.906q0.063 0.063 0.109 0.172t0.047 0.234v0z"></path>
+                                    </svg>
+                                </i>
+                                <span>Continue Shopping</span>
+                            </Link>
+                        </div>
+                        <div className={classes.buttonClearCart}>
+                            <Button>
+                                <span>Clear Shopping Cart</span>
+                            </Button>
+                        </div>
                     </div>
 
                 </div>
@@ -133,7 +159,7 @@ const CartPage = props => {
                 </div>
             </div>
 
-            <section className={classes.crossSellSection}>
+            {/* <section className={classes.crossSellSection}>
                 <div className={classes.sectionTitleWrapper}>
                     <h2 className={classes.sectionSubTitle}>
                         <span>
@@ -146,7 +172,7 @@ const CartPage = props => {
                         Product Goes Here
                     </div>
                 </div>
-            </section>
+            </section> */}
 
 
 

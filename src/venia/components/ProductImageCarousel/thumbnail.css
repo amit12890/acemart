@@ -34,7 +34,11 @@
     }
 
     .image {
-        background-color: rgb(var(--venia-global-color-gray));
+        /* 
+            color will be white
+            background-color: rgb(var(--venia-global-color-gray)); 
+        */
+        background-color: white;
         display: block;
         height: 100%;
         object-fit: contain;

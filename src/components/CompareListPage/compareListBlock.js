@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { get, size } from 'lodash-es';
+import { get, map, size } from 'lodash-es';
 
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import Button from '../../venia/components/Button';
@@ -23,11 +23,9 @@ const CompareListBlock = (props) => {
     const classes = useStyle(defaultClasses);
     const { loadingCompareList, fetchCompareList } = useCompareList()
     const [{ isSignedIn }] = useUserContext();
-    console.log("🚀 ~ file: compareListBlock.js ~ line 24 ~ CompareListBlock ~ uid", uid)
 
 
     useEffect(() => {
-        console.log("🚀 ~ file: compareListBlock.js ~ line 35 ~ useEffect ~ uid", uid)
         if (isSignedIn) {
             fetchCompareList({ variables: {} })
         } else {
@@ -40,6 +38,7 @@ const CompareListBlock = (props) => {
     }
     // data mapping for guest and logged user
     let hasItems = item_count, listId = uid
+    const itemIds = hasItems ? map(items, "product.id") : []
     // if (isSignedIn) {
     //     hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
     //     listId = get(compareListData, 'customer.compare_list.uid')
@@ -52,13 +51,15 @@ const CompareListBlock = (props) => {
 
     return (
         <div className={classes.root}>
-            <div className={classes.blockTitle}>Compare Products</div>
+            <div className={classes.blockTitle}><strong>Compare Products</strong></div>
             {hasItems ?
-                <div>
+                <div className={classes.blockContent}>
                     {items.map((item) => {
                         const product = item.product;
                         return (
                             <div key={item.uid} className={classes.compareItem}>
+                                <span className={classes.productName}>{product.name}</span>
+
                                 <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
                                     Child={() =>
                                         <i className={classes.iconWrapper}>
@@ -70,12 +71,19 @@ const CompareListBlock = (props) => {
                                     }
                                     Loader={() => <div>Loading...</div>}
                                 />
-                                <span className={classes.productName}>{product.name}</span>
+
                             </div>
                         )
                     })}
                     <div className={classes.actionToolbar}>
                         <Link className={classes.action} to={compareListPage()}>Compare</Link>
+                        <RemoveItemFromCompareList
+                            listId={listId} 
+                            itemIds={itemIds}
+                            clearAll
+                            Child={() => <div className={classes.clear}>CLEAR ALL</div>}
+                            Loader={() => <div className={classes.clear}>LOADING...</div>}
+                        />
                     </div>
                 </div>
                 :

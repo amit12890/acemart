@@ -1,13 +1,14 @@
 .root {
     display: grid;
     row-gap: 0.5rem;
-    border-top: 1px solid rgb(var(--border-color-light));
-    padding-top: 1.5rem;
+    /* border-top: 1px solid rgb(var(--border-color-light)); */
+    background-color: rgb(var(--color-gray-light0));
+    padding: 0.875rem;
+    margin-bottom: 1.5rem;
 }
 
 .root:first-child {
-    border-top: none;
-    padding-top: 0;
+    
 }
 
 .item {
@@ -41,12 +42,16 @@
 }
 
 .image {
-    background-color: rgb(var(--venia-global-color-gray));
+    background-color: rgb(var(--color-white));
     border: solid 1px rgb(var(--venia-global-color-border));
     border-radius: 2px;
     height: 100%;
     object-fit: contain;
     object-position: center;
+}
+
+.imageContainer img {
+    display: block;
 }
 
 .details {
@@ -138,6 +143,37 @@
 
 .addToListButton_selected {
     display: none;
+}
+
+.addToList {
+margin-top: 5px;
+}
+
+.toWishlist {
+    --stroke: var(--theme-color-primary-alt);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-90);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    outline: none;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    cursor: pointer;
+
+}
+
+.toWishlist:hover {
+    background-color: rgb(var(--color-white));
+    color:  rgb(var(--stroke));
 }
 
 @media (max-width: 640px) {

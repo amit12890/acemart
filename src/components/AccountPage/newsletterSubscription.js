@@ -2,15 +2,18 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useMutation, useQuery } from '@apollo/client';
 import { get } from 'lodash';
+import { useIntl } from 'react-intl';
 
 import { useStyle } from '../../venia/classify';
 import Button from '../../venia/components/Button';
 import { GET_CUSTOMER_SUBSCRIPTION, UPDATE_CUSTOMER } from './newsletterSubscription.gql';
 import { accountPageUrl } from '../../url.utils';
 import defaultClasses from './newsletterSubscription.css';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 
 const NewsletterSubscription = () => {
+    const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses);
     const history = useHistory();
     const [subscription, setSubscription] = useState(false);
@@ -33,6 +36,7 @@ const NewsletterSubscription = () => {
 
     return(
         <div className={classes.root}>
+            <Title>{formatMessage({ id: "newsletterSubscription.title" })}</Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>Newsletter Subscription</h1>
             </div>

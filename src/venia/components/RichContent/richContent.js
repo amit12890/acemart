@@ -22,7 +22,6 @@ import PBcanRender from '../../../magento/pagebuilder/detectPageBuilder';
  */
 const RichContent = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    console.log(props)
     const rendererProps = {
         ...props,
         classes

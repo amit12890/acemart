@@ -111,7 +111,7 @@ function localIntercept(targets) {
         });
         routes.push({
             name: "Cart Page",
-            pattern: "/cart/",
+            pattern: "/checkout/cart/",
             exact: true,
             path: require.resolve("./src/venia/components/CartPage")
         });

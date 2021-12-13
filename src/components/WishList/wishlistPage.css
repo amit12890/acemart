@@ -288,6 +288,144 @@
     padding: 10px;
 }
 
+
+
+.wishListBlock {
+    margin: 20px 0;
+}
+
+.blockTitle {
+    font-size: var(--fontSize-300) ;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    position: relative;
+    font-size: var(--fontSize-100); 
+}
+.blockTitle strong {
+    border-bottom: 3px solid #333;
+    display: inline-flex;
+    padding-bottom: 10px;
+    font-size: var(--fontSize-300);
+}
+
+.blockContent { 
+
+}
+
+.blockItemsWrapper {
+
+}
+
+.blocktemsList {
+    display: flex;
+    flex-direction: column;
+
+} 
+
+.listItem {
+    margin-bottom: 5px;
+    border-bottom: 1px dashed rgb(var(--border-color-light));
+    padding-bottom: 5px;
+}
+
+.listItemInfo {
+    display: flex;
+}
+
+.listItemImageContainer {
+    width: 75px;
+    flex-basis: 75px;
+}
+
+.listItemImage {
+    
+}
+
+.listItemImage img {
+    max-width: 100%;
+}
+
+.listItemDetails {
+    margin-left: 10px;
+    position: relative;
+    padding-right: 20px;
+    flex-grow: 1;
+}
+
+.listItemName {
+    font-size: var(--fontSize-90);
+    color: rgb(var(--product-name-color));
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+
+}
+
+.listItemPrice {
+    font-size: var(--fontSize-90);
+    color: rgb(var(--product-price-color));
+    font-weight: bold;
+}
+
+.ItemQuickActions {
+
+}
+
+.edit {
+    position: absolute;
+    right: 0;
+    top: 0;
+} 
+
+.edit .iconWrapper {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.edit .iconWrapper:hover {
+    background-color: #f6f6f6;
+}
+
+.edit .svgIcon {
+    width: 18px;
+    height: auto;
+    cursor: pointer;
+}
+
+.blockAction { 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.blockAction .iconWrapper {
+    margin-right: 10px;
+}
+
+.blockAction a {
+    font-size: var(--fontSize-100);
+    font-style: italic;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    color: rgb(var(--color-gray-darken10));
+}
+
+.blockAction a:hover {
+    color: rgb(var(--link-color-hover)); 
+}
+
+
+
+.blockAction .svgIcon {
+    width: 12px;
+    height: auto;
+    cursor: pointer;
+}
+
 @media (max-width: 960px) {
     .root {
         padding-left: 1.5rem;

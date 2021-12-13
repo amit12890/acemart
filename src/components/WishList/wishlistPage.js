@@ -1,6 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { get, size } from 'lodash';
+import { useIntl } from 'react-intl';
 
 import { useStyle } from '../../venia/classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
@@ -17,9 +18,11 @@ import { apiGetWishlistData } from '../../url.utils';
 import WishlistCopyProductPopup from './WishlistCopyProductPopup';
 import { REMOVE_PRODUCTS_FROM_WISHLIST } from '@magento/peregrine/lib/talons/WishlistPage/wishlistItem.gql';
 import WishlistMoveProductPopup from './WishlistMoveProductPopup';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 
 const WishlistPage = props => {
+    const { formatMessage } = useIntl();
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
 
@@ -113,6 +116,7 @@ const WishlistPage = props => {
 
     return (
         <div className={classes.root}>
+            <Title>{formatMessage({ id: "wishlistPage.title" })}</Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>
                     Wishlist
