@@ -20,7 +20,6 @@ const successIcon = (
         }}
     />
 );
-const successMessage = 'Address Updated successfully.';
 
 /**
  *  A talon to support the functionality of the Address Book page.

@@ -27,7 +27,18 @@ import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
 import { accountPageUrl } from '../../url.utils.js';
 import { Title } from '@magento/venia-ui/lib/components/Head';
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import Icon from '../../venia/components/Icon/icon.js';
+import { useToasts } from '@magento/peregrine';
 
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const EditAccountInfo = ({path}) => {
     const { formatMessage } = useIntl();
@@ -36,6 +47,7 @@ const EditAccountInfo = ({path}) => {
     const [showPassword, setShowPassword] = useState(path.includes("changepass"))
     const [showError, setError] = useState(null)
     const classes = useStyle(defaultClasses);
+    const [_, { addToast }] = useToasts();
 
     const { data: accountInformationData, error: loadDataError } = useQuery(
         GET_CUSTOMER_INFORMATION,
@@ -56,7 +68,17 @@ const EditAccountInfo = ({path}) => {
             error: customerInformationUpdateError,
             loading: isUpdatingCustomerInformation
         }
-    ] = useMutation(SET_CUSTOMER_INFORMATION);
+    ] = useMutation(SET_CUSTOMER_INFORMATION, {
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Account information updated successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    });
     const [
         changeCustomerPassword,
         {
