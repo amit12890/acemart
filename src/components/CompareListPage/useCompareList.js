@@ -8,7 +8,7 @@ import {
     GET_GUEST_COMPARE_LIST,
     REMOVE_ITEM_FROM_COMPARE_LIST,
 } from './compareListPage.gql';
-import { find, get, size, takeRight } from "lodash-es";
+import { find, get, size, last } from "lodash-es";
 import {
     CheckCircle as CheckCircleIcon,
 } from 'react-feather';
@@ -65,7 +65,7 @@ export const useCompareList = props => {
     ] = useMutation(CREATE_COMPARE_LIST, {
         onCompleted: (data) => {
             const items = get(data, "createCompareList.items", [])
-            const lastAddedItem = (takeRight(items, 1))[0]
+            const lastAddedItem = last(items)
             addToast({
                 type: 'success',
                 icon: successIcon,
@@ -83,7 +83,7 @@ export const useCompareList = props => {
         }] = useMutation(ADD_PRODUCTS_TO_COMPARE_LIST, {
             onCompleted: (data) => {
                 const items = get(data, "addProductsToCompareList.items", [])
-                const lastAddedItem = (takeRight(items, 1))[0]
+                const lastAddedItem = last(items)
                 addToast({
                     type: 'success',
                     icon: successIcon,
