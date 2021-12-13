@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { get, size } from 'lodash-es';
+import { get, map, size } from 'lodash-es';
 
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import Button from '../../venia/components/Button';
@@ -23,11 +23,9 @@ const CompareListBlock = (props) => {
     const classes = useStyle(defaultClasses);
     const { loadingCompareList, fetchCompareList } = useCompareList()
     const [{ isSignedIn }] = useUserContext();
-    console.log("🚀 ~ file: compareListBlock.js ~ line 24 ~ CompareListBlock ~ uid", uid)
 
 
     useEffect(() => {
-        console.log("🚀 ~ file: compareListBlock.js ~ line 35 ~ useEffect ~ uid", uid)
         if (isSignedIn) {
             fetchCompareList({ variables: {} })
         } else {
@@ -40,6 +38,7 @@ const CompareListBlock = (props) => {
     }
     // data mapping for guest and logged user
     let hasItems = item_count, listId = uid
+    const itemIds = hasItems ? map(items, "product.id") : []
     // if (isSignedIn) {
     //     hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
     //     listId = get(compareListData, 'customer.compare_list.uid')
@@ -78,6 +77,13 @@ const CompareListBlock = (props) => {
                     })}
                     <div className={classes.actionToolbar}>
                         <Link className={classes.action} to={compareListPage()}>Compare</Link>
+                        <RemoveItemFromCompareList
+                            listId={listId} 
+                            itemIds={itemIds}
+                            clearAll
+                            Child={() => <div className={classes.clear}>CLEAR ALL</div>}
+                            Loader={() => <div className={classes.clear}>LOADING...</div>}
+                        />
                     </div>
                 </div>
                 :

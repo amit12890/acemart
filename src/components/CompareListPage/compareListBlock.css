@@ -64,7 +64,7 @@
 
 .actionToolbar { 
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 }
@@ -87,4 +87,17 @@
     background-color: var(--color-white);
     color: rgb(var(--theme-color-primary));
     border-color: rgb(var(--theme-color-primary));
+}
+
+.clear {
+    font-size: var(--fontSize-100);
+    font-style: italic;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    color: rgb(var(--color-gray-darken10));
+    cursor: pointer;
+}
+
+.clear:hover {
+    color: rgb(var(--link-color-hover)); 
 }

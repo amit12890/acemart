@@ -6,7 +6,10 @@ import defaultClasses from './compareListBlock.css';
 const RemoveItemFromCompareList = (props) => {
     const classes = useStyle(defaultClasses);
 
-    const { itemId, listId, Child, Loader, disabled = false } = props
+    const { 
+        itemId, itemIds, listId, Child, Loader, 
+        disabled = false, clearAll = false
+    } = props
     const {
         removeProductFromCompareList,
         removeProductFromCompareListLoading,
@@ -15,10 +18,11 @@ const RemoveItemFromCompareList = (props) => {
     const handleRemoveItem = useCallback(async () => {
         if (removeProductFromCompareListLoading || disabled) return;
 
-        await removeProductFromCompareList([itemId], listId);
+        const input = clearAll ? itemIds : [itemId]
+        await removeProductFromCompareList(input, listId);
     }, [
         removeProductFromCompareList, removeProductFromCompareListLoading,
-        itemId, listId
+        itemId, listId, itemIds
     ])
 
     return (
