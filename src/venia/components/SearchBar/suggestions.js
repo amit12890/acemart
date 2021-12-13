@@ -8,6 +8,9 @@ import SuggestedCategories from './suggestedCategories';
 import SuggestedProducts from './suggestedProducts';
 import defaultClasses from './suggestions.css';
 
+import DATA from "./suggest.json"
+import SuggestedProductNames from "./suggestedProductNames"
+
 const Suggestions = props => {
     const {
         displayResult,
@@ -19,38 +22,22 @@ const Suggestions = props => {
     } = props;
     const { items } = products;
 
-    const talonProps = useSuggestions({
-        displayResult,
-        filters,
-        items,
-        setVisible,
-        visible
-    });
-    const { categories, onNavigate, shouldRender } = talonProps;
     const classes = useStyle(defaultClasses, props.classes);
 
     // render null without data
-    if (!shouldRender) {
-        return null;
-    }
+    // check here data have length
+    // if (!shouldRender) {
+    //     return null;
+    // }
 
     return (
-        <Fragment>
-            <SuggestedCategories
-                categories={categories}
-                onNavigate={onNavigate}
-                value={searchValue}
+        <div>
+            <SuggestedProductNames
+                suggestions={DATA}
+                setVisible={setVisible}
             />
-            <h2 className={classes.heading}>
-                <span>
-                    <FormattedMessage
-                        id={'searchBar.heading'}
-                        defaultMessage={'Product Suggestions'}
-                    />
-                </span>
-            </h2>
-            <SuggestedProducts onNavigate={onNavigate} products={items} />
-        </Fragment>
+            {/* <SuggestedProducts onNavigate={onNavigate} products={items} /> */}
+        </div>
     );
 };
 

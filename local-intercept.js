@@ -121,6 +121,12 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/venia/components/CheckoutPage")
         });
+        routes.push({
+            name: "Search",
+            pattern: "/catalogsearch/result/",
+            exact: true,
+            path: require.resolve("./src/venia/components/SearchPage")
+        });
         return routes;
     });
 }

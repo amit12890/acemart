@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
+import { SEARCH_PAGE_PATH } from '../../../../url.utils';
 
 const initialValues = { search_query: '' };
 
@@ -36,7 +37,7 @@ export const useSearchBar = () => {
     const handleSubmit = useCallback(
         ({ search_query }) => {
             if (search_query != null && search_query.trim().length > 0) {
-                push(`/search.html?query=${search_query}`);
+                push(`${SEARCH_PAGE_PATH}?query=${search_query}`);
                 setIsAutoCompleteOpen(false);
             }
         },
