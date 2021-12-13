@@ -58,8 +58,6 @@ export const useAutocomplete = props => {
     }, [debouncedRunQuery, valid, value, visible]);
 
     const { response, data, error, loading } = suggestionResult;
-    console.log("useAutocomplete suggestionResult", suggestionResult)
-    console.log("useAutocomplete productResult", productResult)
 
     // Handle results.
     const products = data && data.products;
