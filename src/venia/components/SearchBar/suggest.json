@@ -1,0 +1,45 @@
+{
+    "query": "lib",
+    "suggested": {
+        "text": "libbey",
+        "type": "completed",
+        "completed": [
+            {
+                "token": "libbey",
+                "query": "lib",
+                "type": "prefix"
+            }
+        ],
+        "source": "popular-query"
+    },
+    "alternatives": [
+        {
+            "text": "lib9520004",
+            "type": "completed",
+            "completed": [
+                {
+                    "token": "lib9520004",
+                    "query": "lib",
+                    "type": "prefix"
+                }
+            ],
+            "source": "popular-query"
+        },
+        {
+            "text": "lib9520003",
+            "type": "completed",
+            "completed": [
+                {
+                    "token": "lib9520003",
+                    "query": "lib",
+                    "type": "prefix"
+                }
+            ],
+            "source": "popular-query"
+        },
+        {
+            "popularity": 8,
+            "text": "libbey glass barrels"
+        }
+    ]
+}
