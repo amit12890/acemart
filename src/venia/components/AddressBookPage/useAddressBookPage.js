@@ -1,13 +1,26 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
+import { useToasts } from '@magento/peregrine';
 
 import defaultOperations from './addressBookPage.gql';
 import { addressBookPage, addAddress, editAddress } from '../../../url.utils';
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import Icon from '../Icon';
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
+const successMessage = 'Address Updated successfully.';
 
 /**
  *  A talon to support the functionality of the Address Book page.
@@ -40,6 +53,7 @@ export const useAddressBookPage = (props = {}) => {
     const [{ isSignedIn }] = useUserContext();
 
     const history = useHistory();
+    const [_, { addToast }] = useToasts();
 
     const { data: customerAddressesData, loading } = useQuery(
         getCustomerAddressesQuery,
@@ -51,7 +65,17 @@ export const useAddressBookPage = (props = {}) => {
     const [
         deleteCustomerAddress,
         { loading: isDeletingCustomerAddress }
-    ] = useMutation(deleteCustomerAddressMutation);
+    ] = useMutation(deleteCustomerAddressMutation, {
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Address deleted successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    });
 
     const [confirmDeleteAddressId, setConfirmDeleteAddressId] = useState();
 
@@ -68,14 +92,34 @@ export const useAddressBookPage = (props = {}) => {
             error: createCustomerAddressError,
             loading: isCreatingCustomerAddress
         }
-    ] = useMutation(createCustomerAddressMutation);
+    ] = useMutation(createCustomerAddressMutation, {
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'New address added successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    });
     const [
         updateCustomerAddress,
         {
             error: updateCustomerAddressError,
             loading: isUpdatingCustomerAddress
         }
-    ] = useMutation(updateCustomerAddressMutation);
+    ] = useMutation(updateCustomerAddressMutation, {
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Address updated successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    });
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isDialogEditMode, setIsDialogEditMode] = useState(false);
@@ -204,7 +248,7 @@ export const useAddressBookPage = (props = {}) => {
                     return;
                 }
             }
-            history.push(addressBookPage())
+            history.push(addressBookPage());
         },
         [
             createCustomerAddress,
