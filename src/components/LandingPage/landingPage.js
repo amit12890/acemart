@@ -40,7 +40,8 @@ const LandingPage = (props) => {
         return (
             <div className={classes.homePageWrapper}>
                 <Title>{formatMessage({ id: "landingPage.title" })}</Title>
-                <Meta name="description"
+                <Meta
+                    name="description"
                     content={formatMessage({ id: "landingPage.description" })}
                 />
                 <RichContent html={html} />
@@ -52,7 +53,8 @@ const LandingPage = (props) => {
                     }} />
                 <BrandList
                     data={get(landingPageData, "brand.items", [])}
-                    onItemClick={() => { }} />
+                    onItemClick={() => {
+                    }} />
             </div>
         )
     }
