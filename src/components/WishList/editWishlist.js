@@ -11,21 +11,53 @@ import { useApiData } from '../../data.utils';
 import defaultClasses from './wishlistPage.css';
 import { HOST_URL } from '../../url.utils';
 
+import { useToasts } from '@magento/peregrine';
+
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import Icon from '../../venia/components/Icon';
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const EditWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    
+    const [_, { addToast }] = useToasts();
+
     const { callApi: editWishlist, response, loading, error } = useApiData({
         url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
-        onSuccess: () => props.refreshWishlist()
+        onSuccess: () => {
+            props.refreshWishlist()
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Wishlist name updated successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
     })
     const { callApi: deleteWishlist, loading: loadingDelete } = useApiData({
         url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/delete/${props.multi_wishlist_id}`,
         method: "delete",
         isLazy: true,
-        onSuccess: () => props.refreshWishlist()
+        onSuccess: () => {
+            props.refreshWishlist()
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Wishlist deleted successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
     })
 
     const handleEditWishlist = useCallback((data) => {
