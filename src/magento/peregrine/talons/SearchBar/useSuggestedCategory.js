@@ -28,7 +28,7 @@ export const useSuggestedCategory = props => {
     const { search } = useLocation();
     const nextSearchParams = setSearchParams(search, restProps);
     const destination = createHref({
-        pathname: '/search.html',
+        pathname: '/catalogsearch/result/',
         search: nextSearchParams
     });
 

@@ -1,10 +1,11 @@
 import React, { Fragment, Suspense, useState, useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
 import { Info } from 'react-feather';
 import { get, size, filter, orderBy, camelCase } from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Price from '@magento/venia-ui/lib/components/Price';
 import FormError from '@magento/venia-ui/lib/components/FormError';
@@ -28,7 +29,7 @@ import LabelsPopup from '../../../components/LabelsPopup';
 import Image from '../Image';
 import smallWarning from '../../../assets/small_warning.png';
 
-import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
+import { productSpecsheetUrl, productSpecsheetLogoUrl, loginPage } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
 import ProductReview from "../../../@amasty/amAdvancedReviews"
@@ -37,6 +38,9 @@ import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
 import LoadingButton from '../../../components/LoadingButton';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useWishlistSession } from '../../../data/appState/appState.hook';
+import { toLower } from 'lodash-es';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -63,6 +67,10 @@ const ProductFullDetail = props => {
     const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
+    console.log("🚀 ~ file: productFullDetail.js ~ line 69 ~ product ===>", product)
+    const history = useHistory()
+    const [{ isSignedIn }] = useUserContext()
+    const { addProductToWishlistSession } = useWishlistSession()
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
@@ -75,8 +83,13 @@ const ProductFullDetail = props => {
 
     // handlers for wishlist popup
     const openWishlistPopup = useCallback(() => {
-        setShowWishlistPopup(true);
-    }, [setShowWishlistPopup]);
+        if (isSignedIn) {
+            setShowWishlistPopup(true)
+        } else {
+            history.push(loginPage())
+            addProductToWishlistSession(product)
+        }
+    }, [setShowWishlistPopup, isSignedIn, product, addProductToWishlistSession]);
     const closeWishlistPopup = useCallback(() => {
         setShowWishlistPopup(false);
     }, [setShowWishlistPopup]);
@@ -253,6 +266,43 @@ const ProductFullDetail = props => {
     const upsellProducts = get(product, 'upsell_products', []);
     const relatedProducts = get(product, 'related_products', []);
 
+    const renderSideAvailability = useCallback(() => {
+        if (toLower(pos_stock_manage.stock_label) === "unavailable") {
+            return (
+                <>
+                    <div className={classes.stockAvailability}>
+                        This item is unavailable for store pickup.
+                        <span style={{ color: 'blue' }} onClick={(e) => {
+                            e.preventDefault()
+                        }}>Click here</span>
+                        to ship direct.
+                    </div>
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                        </div>
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    {!!pos_stock_manage.stock_label &&
+                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
+                    }
+                    {/* Product Stock Avialability */}
+                    {!!pos_stock_manage.stock_final_label &&
+                        <div className={classes.apSectionRow}>
+                            <div className={classes.stock}>
+                                <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                            </div>
+                        </div>
+                    }
+                </>
+            )
+        }
+    }, [pos_stock_manage])
+
     return (
         <Fragment>
             {breadcrumbs}
@@ -319,8 +369,8 @@ const ProductFullDetail = props => {
 
                         {/* Product Stock Avialability */}
                         <div className={classes.piSectionRow}>
-                            <div className={classes.stock}>
-                                {only_x_left_in_stock} In Stock
+                            <div className={classes.instock}>
+                                {get(pos_stock_manage, "stock_final_label", "")}
                             </div>
                         </div>
 
@@ -447,17 +497,7 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
-                                    {!!pos_stock_manage.stock_label &&
-                                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
-                                    }
-                                    {/* Product Stock Avialability */}
-                                    {!!pos_stock_manage.stock_final_label &&
-                                        <div className={classes.apSectionRow}>
-                                            <div className={classes.stock}>
-                                                <span className={[classes.availability, classes.outofStock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
-                                            </div>
-                                        </div>
-                                    }
+                                    {renderSideAvailability()}
 
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={classes.apSectionRow}>
@@ -802,6 +842,7 @@ const ProductFullDetail = props => {
                     isPopupVisible={showWishlistPopup}
                     productId={product.id}
                     productQty={wishlistButtonProps.item.quantity}
+                    productName={product.product_name || ''}
                     closeWishlistPopup={closeWishlistPopup}
                 />
             )}
