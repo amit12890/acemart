@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from '@apollo/client';
 import {
     ADD_PRODUCTS_TO_COMPARE_LIST,
@@ -8,15 +8,32 @@ import {
     GET_GUEST_COMPARE_LIST,
     REMOVE_ITEM_FROM_COMPARE_LIST,
 } from './compareListPage.gql';
-import { get, size } from "lodash-es";
+import { find, get, size, takeRight } from "lodash-es";
+import {
+    CheckCircle as CheckCircleIcon,
+} from 'react-feather';
 import { updateCompareFields } from "../../data/compare/compare.action";
+import { useToasts } from '@magento/peregrine/lib/Toasts'
+import Icon from '../../venia/components/Icon';
 
 import { useUserContext } from "@magento/peregrine/lib/context/user";
 import { useDispatch, useSelector } from "react-redux";
 
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
+const successMessage = "added to compare list"
+
 export const useCompareList = props => {
     const [{ isSignedIn }] = useUserContext();
     const dispatch = useDispatch()
+    const [_, { addToast }] = useToasts()
     const uid = useSelector(store => store.compare.uid)
 
     // Get customer and guest compare list
@@ -45,10 +62,37 @@ export const useCompareList = props => {
             error: createCompareListError,
             loading: createCompareListLoading
         }
-    ] = useMutation(CREATE_COMPARE_LIST)
+    ] = useMutation(CREATE_COMPARE_LIST, {
+        onCompleted: (data) => {
+            const items = get(data, "createCompareList.items", [])
+            const lastAddedItem = (takeRight(items, 1))[0]
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`,
+                dismissable: true,
+                timeout: 3000
+            })
+        }
+    })
 
     // add products to comparelist mutation
-    const [addProductsToCompareListMutation, { loading: addProductToCompareListLoading, error: addProductToCompareListError }] = useMutation(ADD_PRODUCTS_TO_COMPARE_LIST)
+    const [addProductsToCompareListMutation,
+        { loading: addProductToCompareListLoading,
+            error: addProductToCompareListError
+        }] = useMutation(ADD_PRODUCTS_TO_COMPARE_LIST, {
+            onCompleted: (data) => {
+                const items = get(data, "addProductsToCompareList.items", [])
+                const lastAddedItem = (takeRight(items, 1))[0]
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message: `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`,
+                    dismissable: true,
+                    timeout: 3000
+                })
+            }
+        })
 
     /**
      * if user is not logged in then create compare list gql will be called
@@ -61,7 +105,6 @@ export const useCompareList = props => {
                     input: { products }
                 }
             });
-            console.log("🚀 ~ file: useCompareList.js ~ line 26 ~ addProductsToCompareList ~ res", res)
             dispatch(updateCompareFields(get(res.data, "createCompareList", {})))
         } else {
             const addRes = await addProductsToCompareListMutation({
