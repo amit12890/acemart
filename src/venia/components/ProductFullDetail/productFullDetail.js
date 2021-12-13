@@ -40,6 +40,7 @@ import CaliforniaPopup from "./californiaPopup"
 import LoadingButton from '../../../components/LoadingButton';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useWishlistSession } from '../../../data/appState/appState.hook';
+import { toLower } from 'lodash-es';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -265,6 +266,43 @@ const ProductFullDetail = props => {
     const upsellProducts = get(product, 'upsell_products', []);
     const relatedProducts = get(product, 'related_products', []);
 
+    const renderSideAvailability = useCallback(() => {
+        if (toLower(pos_stock_manage.stock_label) === "unavailable") {
+            return (
+                <>
+                    <div className={classes.stockAvailability}>
+                        This item is unavailable for store pickup.
+                        <span style={{ color: 'blue' }} onClick={(e) => {
+                            e.preventDefault()
+                        }}>Click here</span>
+                        to ship direct.
+                    </div>
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                        </div>
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    {!!pos_stock_manage.stock_label &&
+                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
+                    }
+                    {/* Product Stock Avialability */}
+                    {!!pos_stock_manage.stock_final_label &&
+                        <div className={classes.apSectionRow}>
+                            <div className={classes.stock}>
+                                <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                            </div>
+                        </div>
+                    }
+                </>
+            )
+        }
+    }, [pos_stock_manage])
+
     return (
         <Fragment>
             {breadcrumbs}
@@ -331,8 +369,8 @@ const ProductFullDetail = props => {
 
                         {/* Product Stock Avialability */}
                         <div className={classes.piSectionRow}>
-                            <div className={classes.stock}>
-                                {only_x_left_in_stock} In Stock
+                            <div className={classes.instock}>
+                                {get(pos_stock_manage, "stock_final_label", "")}
                             </div>
                         </div>
 
@@ -459,17 +497,7 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
-                                    {!!pos_stock_manage.stock_label &&
-                                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
-                                    }
-                                    {/* Product Stock Avialability */}
-                                    {!!pos_stock_manage.stock_final_label &&
-                                        <div className={classes.apSectionRow}>
-                                            <div className={classes.stock}>
-                                                <span className={[classes.availability, classes.outofStock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
-                                            </div>
-                                        </div>
-                                    }
+                                    {renderSideAvailability()}
 
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={classes.apSectionRow}>

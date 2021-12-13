@@ -23,6 +23,7 @@ import LoadingButton from '../../../components/LoadingButton';
 import LoadingButtonSmall from '../../../components/LoadingButtonSmall';
 
 import defaultClasses from './reviewForm.css';
+import RichText from '../../../venia/components/RichText';
 
 const toHTML = str => ({ __html: str });
 
@@ -102,8 +103,8 @@ const ReviewForm = props => {
                 onSubmitFailure={handleSubmitFailure}
             >
                 <div className={classes.legend}>
-                    <div className={classes.legendLabel}>You're reviewing:</div>
-                    <div className={classes.legendProductName}>{productName}</div>
+                    <div className={classes.legendLabel}>You're reviewing</div>
+                    <RichText content={productName} classes={{ root: classes.legendProductName }} />
                 </div>
 
                 {ratingInputs && <div className={classes.field}>{ratingInputs}</div>}

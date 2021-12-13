@@ -1,5 +1,5 @@
 /*!
- * @version 0493d01-dev
+ * @version d8fdc2c-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[9],{"9MIK":function(e,t,n){(t=e.exports=n("JPst")(!1)).push([e.i,".pagination-root-oRm {\n    background-color: white;\n    border-top: 1px solid rgb(var(--venia-global-color-border));\n    display: grid;\n    gap: 0.25rem;\n    grid-auto-columns: minmax(2rem, auto);\n    grid-auto-flow: column;\n    justify-content: center;\n    padding: 1rem 0;\n    text-align: center;\n}\n",""]),t.locals={root:"pagination-root-oRm"}},C0us:function(e,t,n){"use strict"
