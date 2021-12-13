@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 
 import { useAutocomplete } from '../../../magento/peregrine/talons/SearchBar';
 import defaultClasses from './autocomplete.css';
-import { useStyle } from '../../classify';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import Suggestions from './suggestions';
 
 const GET_AUTOCOMPLETE_RESULTS = gql`
@@ -125,10 +125,8 @@ const Autocomplete = props => {
             <div className={classes.message}>{message}</div>
             <div className={classes.suggestions}>
                 <Suggestions
-                    displayResult={displayResult}
+                    suggestions={[]}
                     products={products || {}}
-                    filters={filters}
-                    searchValue={value}
                     setVisible={setVisible}
                     visible={visible}
                 />
