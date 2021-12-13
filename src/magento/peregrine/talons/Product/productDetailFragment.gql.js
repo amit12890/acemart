@@ -26,6 +26,9 @@ export const ProductDetailsFragment = gql`
             }
         }
         pos_stock_manage {
+            availability
+            warehouse_qty
+            store_qty
             hide_add_to_cart
             locate_in_store
             stock_label
