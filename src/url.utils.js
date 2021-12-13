@@ -1,7 +1,7 @@
-export const HOST_URL = 'https://dev-acemart.magedelight.magentoprojects.net';
+// export const HOST_URL = 'https://dev-acemart.magedelight.magentoprojects.net';
 export const SITE_ID = 'qficp5';
 
-// export const HOST_URL = "https://qa-acemart-backend.magedelight.magentoprojects.net";
+export const HOST_URL = "https://qa-acemart-backend.magedelight.magentoprojects.net";
 
 /** Handle all url routes */
 
@@ -39,10 +39,10 @@ export const apiUpdateProductWishlist = () =>
     `${HOST_URL}/rest/V2/wishlist/update`;
 
 /** Search Apis */
-export const apiGetSearchSuggestions = (query, suggestionCount = "8") => 
+export const apiGetSearchSuggestions = (query, suggestionCount = "8") =>
     `https://${SITE_ID}.a.searchspring.io/api/suggest/query?siteId=${SITE_ID}&query=${query}&suggestionCount=${suggestionCount}`;
 
-export const apiGetSearchResult = (query, resultsPerPage = "12") => 
+export const apiGetSearchResult = (query, resultsPerPage = "12") =>
     `https://${SITE_ID}.a.searchspring.io/api/search/search.json?resultsFormat=native&siteId=${SITE_ID}&resultsPerPage=${resultsPerPage}&q=${query}`
 
 /** Footer Other Urls */
