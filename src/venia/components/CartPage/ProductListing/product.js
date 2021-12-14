@@ -63,6 +63,8 @@ const Product = props => {
         urlSuffix
     } = product;
 
+    const { uom, ship_info } = item.product
+
     const classes = useStyle(defaultClasses, props.classes);
 
     const openWishlistPopup = useCallback(() => {
@@ -132,11 +134,16 @@ const Product = props => {
                             }}
                         />
                         <span className={classes.price}>
-                            <Price currencyCode={currency} value={unitPrice} /> / {item.product.uom}
+                            <Price currencyCode={currency} value={unitPrice} /> / {uom}
                         </span>
                         <span className={classes.stockStatusMessage}>
                             {stockStatusMessage}
                         </span>
+                        {ship_info &&  // extra note about shipping delays
+                            <div>
+                                {ship_info}
+                            </div>
+                        }
                         <div>
                             <h3>Subtotal</h3>
                             <span className={classes.price}>
