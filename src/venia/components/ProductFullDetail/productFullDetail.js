@@ -41,6 +41,7 @@ import LoadingButton from '../../../components/LoadingButton';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useWishlistSession } from '../../../data/appState/appState.hook';
 import { toLower } from 'lodash-es';
+import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -79,6 +80,8 @@ const ProductFullDetail = props => {
 
     const reviewRef = useRef(null)
 
+    const { availableStores, handleSwitchStore } = useStoreSwitcher()
+    console.log("🚀 ~ file: productFullDetail.js ~ line 84 ~ availableStores", availableStores)
     const talonProps = useProductFullDetail({ product });
 
     // handlers for wishlist popup
@@ -266,16 +269,69 @@ const ProductFullDetail = props => {
     const upsellProducts = get(product, 'upsell_products', []);
     const relatedProducts = get(product, 'related_products', []);
 
+    /**
+    * render availablity of in grey porttion
+    */
+    const renderAvailability = useCallback(() => {
+        const storeFinalLabel = get(pos_stock_manage, "stock_final_label", "")
+        if (toLower(pos_stock_manage.stock_label) === "unavailable") {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div
+                        className={classes.stockAvailability}
+                        style={{ borderBottomWidth: 0 }}>
+                        This item is unavailable for store pickup.&nbsp;
+                        <span
+                            className={classes.clickHere}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleSwitchStore("default")
+                            }}>
+                            Click here
+                        </span>
+                        &nbsp;to ship direct.
+                    </div>
+                </div>
+            )
+        } else if (size(storeFinalLabel) > 0) {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div className={classes.instock}>
+                        {get(pos_stock_manage, "stock_final_label", "")}
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div
+                        className={classes.stockAvailability}
+                        style={{ borderBottomWidth: 0 }}>
+                        {get(pos_stock_manage, "stock_label", "")}
+                    </div>
+                </div>
+            )
+        }
+    }, [pos_stock_manage])
+
+    /**
+     * render availablity of store pickup in side gray portion
+     */
     const renderSideAvailability = useCallback(() => {
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
                 <>
                     <div className={classes.stockAvailability}>
-                        This item is unavailable for store pickup.
-                        <span style={{ color: 'blue' }} onClick={(e) => {
-                            e.preventDefault()
-                        }}>Click here</span>
-                        to ship direct.
+                        This item is unavailable for store pickup.&nbsp;
+                        <span
+                            className={classes.clickHere}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleSwitchStore("default")
+                            }}>
+                            Click here
+                        </span>
+                        &nbsp;to ship direct.
                     </div>
                     <div className={classes.apSectionRow}>
                         <div className={classes.stock}>
@@ -368,11 +424,12 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Product Stock Avialability */}
-                        <div className={classes.piSectionRow}>
+                        {/* <div className={classes.piSectionRow}>
                             <div className={classes.instock}>
                                 {get(pos_stock_manage, "stock_final_label", "")}
                             </div>
-                        </div>
+                        </div> */}
+                        {renderAvailability()}
 
                         {/* Product Label */}
                         <div className={classes.piSectionRow}>

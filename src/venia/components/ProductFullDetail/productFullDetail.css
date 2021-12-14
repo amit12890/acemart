@@ -86,6 +86,11 @@ flex-direction: column;
     margin-bottom: 10px;
 }
 
+.clickHere {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
 
 
 .availability {
