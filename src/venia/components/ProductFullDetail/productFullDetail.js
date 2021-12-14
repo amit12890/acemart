@@ -438,9 +438,11 @@ const ProductFullDetail = props => {
                                         </div>
                                     )
                                 })}
-                                <div className={classes.labelHelper}>
-                                    <span onClick={openLabelsPopup}>What's this?</span>
-                                </div>
+                                {!!size(processedProductLabels) &&
+                                    <div className={classes.labelHelper}>
+                                        <span onClick={openLabelsPopup}>What's this?</span>
+                                    </div>
+                                }
                             </div>
                         </div>
 
