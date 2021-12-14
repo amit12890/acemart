@@ -1,8 +1,8 @@
 /* Styles for "add" view. */
 .entryForm,
 .entryFormError {
-    display: grid;
-    /* grid-template-columns: 1fr auto; */
+    display: flex;
+    grid-template-columns: 1fr auto;
     grid-column-gap: 1.5rem;
 }
 

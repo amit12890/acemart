@@ -15,7 +15,7 @@
     transition-property: opacity, transform, visibility;
     visibility: hidden;
     width: 100%;
-    z-index: 3;
+    z-index: 101;
 }
 
 .root_open {
@@ -43,7 +43,8 @@
 
 .headerText {
     align-self: center;
-    color: rgb(var(--venia-global-color-text-alt));
+    font-weight: bold;
+    font-size: var(--fontSize-400);
 }
 
 @media (max-width: 960px) {

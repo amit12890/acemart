@@ -12,9 +12,9 @@
 }
 
 .title {
-    font-size: var(--fontSize-200);
+    font-size: var(--fontSize-400);
     text-transform: uppercase;
     margin-bottom: .875rem;
     font-weight: bold;
-    color: rgb(var(--color-gray20));
+    color: rgb(var(--color-black));
 }
