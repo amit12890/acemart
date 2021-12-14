@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { arrayOf, bool, func, number, object, shape, string } from 'prop-types';
 
 import { useStyle } from '../../../classify';
-import Dialog from '@magento/venia-ui/lib/components/Dialog';
+import Dialog from '../../Dialog';
 import FormError from '../../FormError';
 import ShippingRadios from './shippingRadios';
 import defaultClasses from './updateModal.css';
