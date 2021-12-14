@@ -16,7 +16,22 @@ import {
 import { compareListPage } from '../../url.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useCompareList } from './useCompareList';
+import { unescape } from 'lodash-es';
 
+
+const keyMap = {
+    '&reg;': '®',
+    '&amp;': '&',
+    '&copy;': '©',
+    '&trade;': '™'
+};
+
+const replaceSpecialChars = name => {
+    const newStr = name.replace(/&reg;|&amp;|&copy;|&trade;/gi, (matched) => {
+        return keyMap[matched];
+    });
+    return newStr;
+};
 
 const CompareListBlock = (props) => {
     const { uid, item_count, items } = props
@@ -58,7 +73,7 @@ const CompareListBlock = (props) => {
                         const product = item.product;
                         return (
                             <div key={item.uid} className={classes.compareItem}>
-                                <span className={classes.productName}>{product.name}</span>
+                                <span className={classes.productName}>{replaceSpecialChars(unescape(product.name))}</span>
 
                                 <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
                                     Child={() =>
@@ -78,7 +93,7 @@ const CompareListBlock = (props) => {
                     <div className={classes.actionToolbar}>
                         <Link className={classes.action} to={compareListPage()}>Compare</Link>
                         <RemoveItemFromCompareList
-                            listId={listId} 
+                            listId={listId}
                             itemIds={itemIds}
                             clearAll
                             Child={() => <div className={classes.clear}>CLEAR ALL</div>}
