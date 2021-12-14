@@ -124,6 +124,13 @@
     composes: root_highPriority from '../Button/button.css';
     grid-column: 1 / span 1;
     margin: auto;
+    background-color: rgb(var(--theme-color-primary-alt));
+    border: 2px solid rgb(var(--theme-color-primary-alt));
+}
+.place_order_button:hover {
+    color: rgb(var(--theme-color-primary-alt)); 
+    border-color: rgb(var(--theme-color-primary-alt)); 
+
 }
 
 /*

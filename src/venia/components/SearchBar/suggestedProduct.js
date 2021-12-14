@@ -1,7 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
-import { func, number, shape, string } from 'prop-types';
-import { Link } from 'react-router-dom';
-import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
+import React, { useCallback } from 'react';
+import { func, shape, string } from 'prop-types';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { useStyle } from '../../classify';
 
@@ -12,7 +10,15 @@ const IMAGE_WIDTH = 60;
 
 const SuggestedProduct = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    const { url_key, small_image, name, onNavigate, price, url_suffix } = props;
+    const {
+        sku,
+        name,
+        uom,
+        onNavigate,
+        price,
+        thumbnailImageUrl,
+        baseless_url
+    } = props;
 
     const handleClick = useCallback(() => {
         if (typeof onNavigate === 'function') {
@@ -20,43 +26,36 @@ const SuggestedProduct = props => {
         }
     }, [onNavigate]);
 
-    const uri = useMemo(() => resourceUrl(`/${url_key}${url_suffix || ''}`), [
-        url_key,
-        url_suffix
-    ]);
-
     return (
-        <Link className={classes.root} to={uri} onClick={handleClick}>
+        <a
+            className={classes.root}
+            href={"/" + baseless_url}
+            onClick={handleClick}
+        >
             <Image
                 alt={name}
                 classes={{ image: classes.thumbnail, root: classes.image }}
-                resource={small_image}
+                resource={thumbnailImageUrl}
                 width={IMAGE_WIDTH}
             />
-            <span className={classes.name}>{name}</span>
-            <span className={classes.price}>
-                <Price
-                    currencyCode={price.regularPrice.amount.currency}
-                    value={price.regularPrice.amount.value}
-                />
-            </span>
-        </Link>
+            <div className={classes.name}>{name}</div>
+            <div className={classes.name}>{sku}</div>
+            <div className={classes.price}>
+                <Price currencyCode={'USD'} value={price} />
+                <span className={classes.unit}>/ {uom}</span>
+            </div>
+        </a>
     );
 };
 
 SuggestedProduct.propTypes = {
-    url_key: string.isRequired,
-    small_image: string.isRequired,
     name: string.isRequired,
+    sku: string.isRequired,
+    uom: string.isRequired,
+    price: string.isRequired,
+    thumbnailImageUrl: string.isRequired,
+    baseless_url: string.isRequired,
     onNavigate: func,
-    price: shape({
-        regularPrice: shape({
-            amount: shape({
-                currency: string,
-                value: number
-            })
-        })
-    }).isRequired,
     classes: shape({
         root: string,
         image: string,

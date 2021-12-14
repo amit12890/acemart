@@ -1,42 +1,40 @@
-import React, { Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from 'react';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
-import { useSuggestions } from '@magento/peregrine/lib/talons/SearchBar';
 
-import { useStyle } from '../../classify';
-import SuggestedCategories from './suggestedCategories';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import SuggestedProducts from './suggestedProducts';
 import defaultClasses from './suggestions.css';
 
-import DATA from "./suggest.json"
 import SuggestedProductNames from "./suggestedProductNames"
+import { size } from 'lodash-es';
+
+import S_DATA from "./suggest.json"
+import SP_DATA from "./suggestProduct.json"
 
 const Suggestions = props => {
     const {
-        displayResult,
-        filters,
         products,
-        searchValue,
+        suggestions,
         setVisible,
         visible
     } = props;
-    const { items } = products;
+    const { results } = SP_DATA;
 
     const classes = useStyle(defaultClasses, props.classes);
 
+    const shouldRender = visible && size(S_DATA)
     // render null without data
-    // check here data have length
-    // if (!shouldRender) {
-    //     return null;
-    // }
+    if (!shouldRender) {
+        return null;
+    }
 
     return (
-        <div>
+        <div style={{display: "flex"}}>
             <SuggestedProductNames
-                suggestions={DATA}
+                suggestions={S_DATA}
                 setVisible={setVisible}
             />
-            {/* <SuggestedProducts onNavigate={onNavigate} products={items} /> */}
+            <SuggestedProducts products={results} />
         </div>
     );
 };

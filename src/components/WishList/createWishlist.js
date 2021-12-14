@@ -11,15 +11,38 @@ import { useApiData } from '../../data.utils';
 import defaultClasses from './createWishlist.css';
 import { HOST_URL } from '../../url.utils';
 
+import { useToasts } from '@magento/peregrine';
+
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import Icon from '../../venia/components/Icon';
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const CreateWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
+    const [_, { addToast }] = useToasts();
 
     const { callApi, response, loading, error } = useApiData({
         url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
-        onSuccess: () => props.refreshWishlist()
+        onSuccess: () => {
+            props.refreshWishlist();
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'New wishlist added successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
     })
     const handleCreateList = useCallback((data) => {
         if (loading) return;
