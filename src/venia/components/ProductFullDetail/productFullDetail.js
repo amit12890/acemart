@@ -80,7 +80,6 @@ const ProductFullDetail = props => {
     const reviewRef = useRef(null)
 
     const { availableStores, handleSwitchStore } = useStoreSwitcher()
-    console.log("🚀 ~ file: productFullDetail.js ~ line 84 ~ availableStores", availableStores)
     const talonProps = useProductFullDetail({ product });
 
     // handlers for wishlist popup
@@ -423,11 +422,6 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Product Stock Avialability */}
-                        {/* <div className={classes.piSectionRow}>
-                            <div className={classes.instock}>
-                                {get(pos_stock_manage, "stock_final_label", "")}
-                            </div>
-                        </div> */}
                         {renderAvailability()}
 
                         {/* Product Label */}

@@ -56,6 +56,7 @@ const Product = () => {
 
     return (
         <Fragment>
+            {/* <StoreTitle>{replaceSpecialChars(unescape(product.product_name))}</StoreTitle> */}
             <StoreTitle>{replaceSpecialChars(unescape(product.name))}</StoreTitle>
             <Meta name="description" content={product.meta_description} />
             <ProductFullDetail product={product} />
