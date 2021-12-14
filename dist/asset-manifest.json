@@ -5,14 +5,14 @@
   "bad.png": "/bad-r1m.png",
   "balloons.png": "/balloons-miQ.png",
   "bulk-savings.png": "/bulk-savings-mhz.png",
-  "client.js": "/client.f801a9fca5550099d654.js",
+  "client.js": "/client.517b3376df1a6222c450.js",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
     "client": {
       "js": [
         "/runtime.7e74a11f8f828fd38b92.js",
         "/vendors.e90019c5b1825f8d2318.js",
-        "/client.f801a9fca5550099d654.js"
+        "/client.517b3376df1a6222c450.js"
       ]
     }
   },
@@ -46,7 +46,7 @@
     "load": [
       "/runtime.7e74a11f8f828fd38b92.js",
       "/vendors.e90019c5b1825f8d2318.js",
-      "/client.f801a9fca5550099d654.js"
+      "/client.517b3376df1a6222c450.js"
     ],
     "prefetch": [
       "/RootCmp_CATEGORY__default.a5aa7f56a615d6656311.js",
@@ -56,7 +56,7 @@
   "js": {
     "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.a5aa7f56a615d6656311.js",
     "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.458739cee92138e444ad.js",
-    "client": "/client.f801a9fca5550099d654.js",
+    "client": "/client.517b3376df1a6222c450.js",
     "i18n-en_US": "/i18n-en_US.2d969e70e3af520c5881.js",
     "runtime": "/runtime.7e74a11f8f828fd38b92.js",
     "vendors": "/vendors.e90019c5b1825f8d2318.js",
