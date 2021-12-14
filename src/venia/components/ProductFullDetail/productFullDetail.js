@@ -521,7 +521,11 @@ const ProductFullDetail = props => {
                                     <iframe
                                         src={`https://www.youtube.com/embed/${product.youtube_filename
                                             }`}
-                                    />
+                                        allowfullscreen="allowfullscreen"
+                                        mozallowfullscreen="mozallowfullscreen"
+                                        msallowfullscreen="msallowfullscreen"
+                                        oallowfullscreen="oallowfullscreen"
+                                        webkitallowfullscreen="webkitallowfullscreen" />
                                 </div>
                             </div>
                         )}
