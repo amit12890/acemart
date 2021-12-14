@@ -8,6 +8,7 @@ import CreateAccount from '../../../../venia/components/CreateAccount';
 import ForgotPassword from '../../../../venia/components/ForgotPassword';
 import LinkButton from '@magento/venia-ui/lib/components/LinkButton';
 import SignIn from '../../../../venia/components/SignIn';
+import Button from '../../Button/button.css';
 import defaultClasses from './guestSignIn.css';
 
 const GuestSignIn = props => {
@@ -62,7 +63,13 @@ const GuestSignIn = props => {
             <div className={classes.contentContainer}>
                 {content}
             </div>
-            <LinkButton onClick={handleBackToCheckout}>
+            <LinkButton className={classes.backToCheckout} onClick={handleBackToCheckout}>
+                <i className={classes.iconWrapper}>
+                    <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <title>arrow-right-thin</title>
+                        <path d="M25.875 14l-9.719-9.719 2.281-2.25 13.563 13.563-13.563 13.594-2.281-2.281 9.719-9.719h-25.875v-3.188h25.875z"></path>
+                    </svg>
+                </i>
                 <FormattedMessage
                     id="checkoutPage.guestSignIn.backToCheckout"
                     defaultMessage="Back to Checkout"

@@ -19,6 +19,38 @@
     
 }
 
+.contentContainer .iconWrapper {
+    display: inline-flex;
+    margin-right: 10px;
+
+}
+
+.iconWrapper .svgIcon {
+    width: 13px;
+    height: auto;
+    transform: rotate(180deg); 
+    fill: currentColor;
+}
+
+.backToCheckout {
+    composes: root_highPriority from '../../Button/button.css';
+    grid-column: 1 / span 1;
+    background-color: rgb(var(--theme-color-primary-alt));
+    border: 2px solid rgb(var(--theme-color-primary-alt));
+    font-weight:var(--font-weight-bold);
+    margin: 0 auto;
+    min-width: auto;
+    max-width: none;
+}
+
+.backToCheckout:hover {
+    color: rgb(var(--theme-color-primary-alt)); 
+    border-color: rgb(var(--theme-color-primary-alt));
+}
+
+
+
+
 .signInRoot {
     composes: root from '../../SignIn/signIn.css';
 }
