@@ -11,6 +11,17 @@ export const GET_CART_DETAILS = gql`
     ${CartPageFragment}
 `;
 
+export const REMOVE_ALL_ITEM_CART = gql`
+    mutation removeAllItemFromCart($cartId: String!) {
+        removeAllItemFromCart(input: { cart_id: $cartId }) {
+            cart {
+                id
+                ...CartPageFragment
+            }
+        }
+    }
+    ${CartPageFragment}
+`
 
 export const GET_STORE_CONFIG_DATA = gql`
     query getStoreConfigData {

@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Check } from 'react-feather';
+import { Check, AlertCircle as AlertCircleIcon } from 'react-feather';
 import { useCartPage } from '@magento/peregrine/lib/talons/CartPage/useCartPage';
+import { useCartContext } from '@magento/peregrine/lib/context/cart';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { Link } from 'react-router-dom';
 import { useToasts } from '@magento/peregrine';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
-import { useQuery } from '@apollo/client';
-import { get } from "lodash";
+import { useQuery, useMutation } from '@apollo/client';
+import { get } from 'lodash';
 
 import Icon from '../Icon';
 import { Title } from '@magento/venia-ui/lib/components/Head';
@@ -18,9 +19,22 @@ import PriceAdjustments from './PriceAdjustments';
 import ProductListing from './ProductListing';
 import PriceSummary from './PriceSummary';
 import defaultClasses from './cartPage.css';
-import { GET_CART_DETAILS, GET_STORE_CONFIG_DATA } from './cartPage.gql';
+import {
+    GET_CART_DETAILS,
+    GET_STORE_CONFIG_DATA,
+    REMOVE_ALL_ITEM_CART
+} from './cartPage.gql';
 
 const CheckIcon = <Icon size={20} src={Check} />;
+
+const errorIcon = (
+    <Icon
+        src={AlertCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 /**
  * Structural page component for the shopping cart.
@@ -40,6 +54,8 @@ const CheckIcon = <Icon size={20} src={Check} />;
  * import CartPage from "@magento/venia-ui/lib/components/CartPage";
  */
 const CartPage = props => {
+    const [{ cartId }] = useCartContext();
+
     const talonProps = useCartPage({
         queries: {
             getCartDetails: GET_CART_DETAILS
@@ -57,6 +73,23 @@ const CartPage = props => {
     } = talonProps;
 
     const { loading, error, data } = useQuery(GET_STORE_CONFIG_DATA);
+    const [
+        removeAllItemFromCart,
+        {
+            error: removeAllItemFromCartError,
+            loading: removeAllItemFromCartLoading
+        }
+    ] = useMutation(REMOVE_ALL_ITEM_CART, {
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: CheckIcon,
+                message: 'Cart cleared successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    });
 
     const classes = useStyle(defaultClasses, props.classes);
     const { formatMessage } = useIntl();
@@ -68,12 +101,29 @@ const CartPage = props => {
         }
     }, [addToast, wishlistSuccessProps]);
 
+    const handleRemoveCart = useCallback(async () => {
+        try {
+            const { data } = await removeAllItemFromCart({
+                variables: { cartId }
+            });
+        } catch (error) {
+            addToast({
+                type: 'error',
+                icon: errorIcon,
+                message: 'Failed to clear cart.',
+                dismissable: true,
+                timeout: 10000
+            });
+        }
+    }, [cartId]);
+
     if (shouldShowLoadingIndicator || loading) {
         return fullPageLoadingIndicator;
     }
 
     // use is shopping on acemart
-    const isShoppingSite = get(data, "storeConfig.store_group_name") === "Shopping"
+    const isShoppingSite =
+        get(data, 'storeConfig.store_group_name') === 'Shopping';
 
     const productListing = hasItems ? (
         <ProductListing
@@ -95,7 +145,8 @@ const CartPage = props => {
     const priceAdjustments = hasItems ? (
         <PriceAdjustments
             isShoppingSite={isShoppingSite}
-            setIsCartUpdating={setIsCartUpdating} />
+            setIsCartUpdating={setIsCartUpdating}
+        />
     ) : null;
 
     const priceSummary = hasItems ? (
@@ -133,23 +184,32 @@ const CartPage = props => {
                                 className={classes.action}
                             >
                                 <i className={classes.iconWrapper}>
-                                    <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="12" height="32" viewBox="0 0 12 32">
+                                    <svg
+                                        className={classes.svgIcon}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="32"
+                                        viewBox="0 0 12 32"
+                                    >
                                         <title>previous</title>
-                                        <path d="M11.188 10q0 0.094-0.047 0.219t-0.109 0.188l-7.031 7.031 7.031 7q0.063 0.094 0.109 0.203t0.047 0.203q0 0.125-0.047 0.234t-0.109 0.203l-0.906 0.875q-0.094 0.094-0.203 0.141t-0.203 0.047q-0.125 0-0.234-0.047t-0.172-0.141l-8.344-8.313q-0.063-0.094-0.109-0.203t-0.047-0.203q0-0.125 0.047-0.234t0.109-0.172l8.344-8.344q0.063-0.063 0.172-0.109t0.234-0.047q0.094 0 0.203 0.047t0.203 0.109l0.906 0.906q0.063 0.063 0.109 0.172t0.047 0.234v0z"></path>
+                                        <path d="M11.188 10q0 0.094-0.047 0.219t-0.109 0.188l-7.031 7.031 7.031 7q0.063 0.094 0.109 0.203t0.047 0.203q0 0.125-0.047 0.234t-0.109 0.203l-0.906 0.875q-0.094 0.094-0.203 0.141t-0.203 0.047q-0.125 0-0.234-0.047t-0.172-0.141l-8.344-8.313q-0.063-0.094-0.109-0.203t-0.047-0.203q0-0.125 0.047-0.234t0.109-0.172l8.344-8.344q0.063-0.063 0.172-0.109t0.234-0.047q0.094 0 0.203 0.047t0.203 0.109l0.906 0.906q0.063 0.063 0.109 0.172t0.047 0.234v0z" />
                                     </svg>
                                 </i>
                                 <span>Continue Shopping</span>
                             </Link>
                         </div>
-                        {hasItems &&
+                        {hasItems && (
                             <div className={classes.buttonClearCart}>
-                                <Button>
-                                    <span>Clear Shopping Cart</span>
+                                <Button onClick={handleRemoveCart}>
+                                    <span>
+                                        {removeAllItemFromCartLoading
+                                            ? 'Loading...'
+                                            : 'Clear Shopping Cart'}
+                                    </span>
                                 </Button>
                             </div>
-                        }
+                        )}
                     </div>
-
                 </div>
                 <div className={classes.summary_container}>
                     <div className={classes.summary_contents}>
@@ -175,10 +235,6 @@ const CartPage = props => {
                     </div>
                 </div>
             </section> */}
-
-
-
-
         </div>
     );
 };
