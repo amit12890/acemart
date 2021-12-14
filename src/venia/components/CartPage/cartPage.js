@@ -45,8 +45,6 @@ const CartPage = props => {
             getCartDetails: GET_CART_DETAILS
         }
     });
-    const { loading, error, data } = useQuery(GET_STORE_CONFIG_DATA);
-
     const {
         cartItems,
         hasItems,
@@ -57,6 +55,8 @@ const CartPage = props => {
         shouldShowLoadingIndicator,
         wishlistSuccessProps
     } = talonProps;
+
+    const { loading, error, data } = useQuery(GET_STORE_CONFIG_DATA);
 
     const classes = useStyle(defaultClasses, props.classes);
     const { formatMessage } = useIntl();
@@ -141,11 +141,13 @@ const CartPage = props => {
                                 <span>Continue Shopping</span>
                             </Link>
                         </div>
-                        <div className={classes.buttonClearCart}>
-                            <Button>
-                                <span>Clear Shopping Cart</span>
-                            </Button>
-                        </div>
+                        {hasItems &&
+                            <div className={classes.buttonClearCart}>
+                                <Button>
+                                    <span>Clear Shopping Cart</span>
+                                </Button>
+                            </div>
+                        }
                     </div>
 
                 </div>
