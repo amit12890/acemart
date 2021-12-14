@@ -17,6 +17,8 @@ import defaultClasses from './carousel.css';
 import Thumbnail from './thumbnail';
 import Button from '../Button';
 import { size } from 'lodash-es';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const IMAGE_WIDTH = 535;
 const IMAGE_HEIGHT = 535;
@@ -67,13 +69,15 @@ const ProductImageCarousel = props => {
     const thumbnails = useMemo(
         () =>
             sortedImages.map((item, index) => (
-                <Thumbnail
-                    key={`${item.url}--${item.label}`}
-                    item={item}
-                    itemIndex={index}
-                    isActive={activeItemIndex === index}
-                    onClickHandler={handleThumbnailClick}
-                />
+                <Slide>
+                    <Thumbnail
+                        key={`${item.url}--${item.label}`}
+                        item={item}
+                        itemIndex={index}
+                        isActive={activeItemIndex === index}
+                        onClickHandler={handleThumbnailClick}
+                    />
+                </Slide>
             )),
         [activeItemIndex, handleThumbnailClick, sortedImages]
     );
@@ -140,7 +144,19 @@ const ProductImageCarousel = props => {
                     )}
                 </div>
                 {size(sortedImages) > 1 && (
-                    <div className={classes.thumbnailList}>{thumbnails}</div>
+                    <CarouselProvider
+                        naturalSlideWidth={200}
+                        naturalSlideHeight={100}
+                        isPlaying={false}
+                        visibleSlides={3}
+                        totalSlides={size(sortedImages)}
+                    >
+                        <div className={classes.thumbnailList}>
+                            <Slider>
+                                {thumbnails}
+                            </Slider>
+                        </div>
+                    </CarouselProvider>
                 )}
             </div>
             {(allowFullScreen && showFullScreen) &&

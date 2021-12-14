@@ -65,9 +65,11 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const ProductFullDetail = props => {
     const { product } = props;
+
     const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
+
     const history = useHistory()
     const [{ isSignedIn }] = useUserContext()
     const { addProductToWishlistSession } = useWishlistSession()
@@ -79,7 +81,7 @@ const ProductFullDetail = props => {
 
     const reviewRef = useRef(null)
 
-    const { availableStores, handleSwitchStore } = useStoreSwitcher()
+    const { handleSwitchStore } = useStoreSwitcher()
     const talonProps = useProductFullDetail({ product });
 
     // handlers for wishlist popup
@@ -266,7 +268,6 @@ const ProductFullDetail = props => {
 
     const upsellProducts = get(product, 'upsell_products', []);
     const relatedProducts = get(product, 'related_products', []);
-
     /**
     * render availablity of in grey porttion
     */
