@@ -32,3 +32,46 @@ export const GET_STORE_CONFIG_DATA = gql`
         }
     }
 `;
+
+export const GET_CART_RELATED_PRODUCTS = gql`
+    query GetCartDetails($skus: [String]) {
+        products(
+            currentPage: 1
+            pageSize: 5
+            sort: { position: ASC }
+            filter: {
+                sku: {
+                    in: $skus
+                }
+                category_id: { eq: "2" }
+            }
+        ) {
+            items {
+                id
+                name
+                product_name
+                sku
+                uom
+                mpn
+                url_key
+                url_suffix
+                url_rewrites {
+                    url
+                    parameters {
+                        name
+                        value
+                    }
+                }
+                small_image { url }
+                price {
+                    regularPrice {
+                        amount {
+                            currency
+                            value
+                        }
+                    }
+                }
+            }
+        }
+    }
+`

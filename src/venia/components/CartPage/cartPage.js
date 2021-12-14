@@ -18,6 +18,7 @@ import Button from '../Button';
 import PriceAdjustments from './PriceAdjustments';
 import ProductListing from './ProductListing';
 import PriceSummary from './PriceSummary';
+import CrossSellProducts from './crossSellProducts';
 import defaultClasses from './cartPage.css';
 import {
     GET_CART_DETAILS,
@@ -221,20 +222,20 @@ const CartPage = props => {
                 </div>
             </div>
 
-            {/* <section className={classes.crossSellSection}>
+            <section className={classes.crossSellSection}>
                 <div className={classes.sectionTitleWrapper}>
                     <h2 className={classes.sectionSubTitle}>
-                        <span>
-                            People also bought:
-                        </span>
+                        <span>People also bought:</span>
                     </h2>
                 </div>
                 <div className={classes.sectionContent}>
                     <div className={classes.gallery}>
-                        Product Goes Here
+                        <CrossSellProducts
+                            skuList={[]}
+                        />
                     </div>
                 </div>
-            </section> */}
+            </section>
         </div>
     );
 };
