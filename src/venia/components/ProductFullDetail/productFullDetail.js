@@ -68,7 +68,6 @@ const ProductFullDetail = props => {
     const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
-    console.log("🚀 ~ file: productFullDetail.js ~ line 69 ~ product ===>", product)
     const history = useHistory()
     const [{ isSignedIn }] = useUserContext()
     const { addProductToWishlistSession } = useWishlistSession()

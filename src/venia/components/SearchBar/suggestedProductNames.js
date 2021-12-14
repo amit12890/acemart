@@ -1,3 +1,4 @@
+import { debounce } from 'lodash-es';
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { SEARCH_PAGE_PATH } from '../../../url.utils';
@@ -13,10 +14,18 @@ const suggestedProductNames = props => {
     const handleClick = useCallback(
         text => () => {
             history.push(`${SEARCH_PAGE_PATH}?query=${text}`);
-            setVisible(false)
+            setVisible(false);
         },
         [history, setVisible]
     );
+
+    const handleMouseEnter = useCallback(text => () => {
+        console.log("search Hover enter ~ text", text);
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        console.log("search Hover leave~ text");
+    }, []);
 
     return (
         <ul className={classes.root}>
@@ -25,6 +34,8 @@ const suggestedProductNames = props => {
                     <li
                         key={index}
                         onClick={handleClick(item.text)}
+                        onMouseEnter={debounce(handleMouseEnter(item.text), 500)}
+                        onMouseLeave={debounce(handleMouseLeave, 500)}
                         style={{
                             cursor: 'pointer'
                         }}
