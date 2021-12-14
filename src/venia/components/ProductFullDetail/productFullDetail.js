@@ -485,7 +485,7 @@ const ProductFullDetail = props => {
                         {/* Product Review   */}
                         {!!product.review_count ?
                             <div className={classes.piSectionRow}>
-                                <div className={classes.productReview}>
+                                <div className={classes.productReview} onClick={handleFirstReviewClick}>
                                     <RatingMini percent={product.rating_summary} value={product.review_count} />
                                 </div>
                             </div>

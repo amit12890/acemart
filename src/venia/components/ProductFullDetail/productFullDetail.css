@@ -241,6 +241,8 @@ flex-direction: column;
 
 .productReview {
     font-size: var(--fontSize-75);
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .shortAdditionalInfo {
