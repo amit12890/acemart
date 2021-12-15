@@ -47,6 +47,7 @@
     position: absolute;
     right: 0;
     top: 0;
+    color: rgb(var(--theme-color-primary));
 }
 
 @media (min-width: 961px) {
@@ -57,13 +58,13 @@
 }
 
 .editButton:hover {
-    --fill: rgb(var(--venia-brand-color-1-700));
+    --fill: rgb(var(--theme-color-primary));
 }
 
 .editIcon {
-    stroke: rgb(var(--venia-brand-color-1-700));
+    stroke: rgb(var(--theme-color-primary));
     fill: var(--fill, white);
-    transition: fill 384ms var(--venia-global-anim-standard);
+    transition: fill 384ms var(--theme-color-primary);
 }
 
 .defaultBadge {
