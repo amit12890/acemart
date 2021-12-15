@@ -612,7 +612,7 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
                                             <span>
-                                                <RichText content={product.ship_time} />
+                                                <RichText content={get(product, "pos_stock_manage.ship_time_label", "")} />
                                             </span>
                                         </div>
 
