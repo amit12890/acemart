@@ -1,10 +1,13 @@
 import { useEffect, useMemo } from 'react';
 import { useFieldState } from 'informed';
-import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
 
-import { useApiData } from "../../../../data.utils"
-import { apiGetSearchResult, apiGetSearchSuggestions } from '../../../../url.utils';
+import { useApiData } from '../../../../data.utils';
+import {
+    apiGetAutocompleteSearchResult,
+    apiGetSearchSuggestions
+} from '../../../../url.utils';
+import { size } from 'lodash';
 
 /**
  * @typedef { import("graphql").DocumentNode } DocumentNode
@@ -13,39 +16,28 @@ import { apiGetSearchResult, apiGetSearchSuggestions } from '../../../../url.uti
 /**
  * Returns props necessary to render an Autocomplete component.
  * @param {Object} props
- * @param {DocumentNode} props.query - GraphQL query
  * @param {Boolean} props.valid - whether to run the query
  * @param {Boolean} props.visible - whether to show the element
  */
 export const useAutocomplete = props => {
-    const {
-        queries: { getAutocompleteResults },
-        valid,
-        visible
-    } = props;
-
-    // Prepare to run the queries.
-    // const [runSearch, productResult] = useLazyQuery(getAutocompleteResults, {
-    //     fetchPolicy: 'cache-and-network',
-    //     nextFetchPolicy: 'cache-first'
-    // });
+    const { valid, visible } = props;
 
     // Get the search term from the field.
     const { value } = useFieldState('search_query');
 
     const { callApi: callSuggestionApi, ...suggestionResult } = useApiData({
-        isLazy: true,
-    })
+        isLazy: true
+    });
     const { callApi: callproductSearchApi, ...productResult } = useApiData({
-        isLazy: true,
-    })
+        isLazy: true
+    });
     // Create a debounced function so we only search some delay after the last
     // keypress.
     const debouncedRunQuery = useMemo(
         () =>
             debounce(inputText => {
                 callSuggestionApi(apiGetSearchSuggestions(inputText));
-                callproductSearchApi(apiGetSearchResult(inputText))
+                callproductSearchApi(apiGetAutocompleteSearchResult(inputText));
             }, 500),
         []
     );
@@ -57,37 +49,42 @@ export const useAutocomplete = props => {
         }
     }, [debouncedRunQuery, valid, value, visible]);
 
-    const { response, data, error, loading } = suggestionResult;
-
-    // Handle results.
-    const products = data && data.products;
-    const filters = data && data.products.aggregations;
-    const hasResult = products && products.items;
-    const resultCount = products && products.total_count;
-    const displayResult = valid && hasResult;
     const invalidCharacterLength = !valid && value ? true : false;
     let messageType = '';
 
+    const suggestionError = suggestionResult.error;
+    const productError = productResult.error;
+
+    const suggestionLoading = suggestionResult.loading;
+    const productLoading = productResult.loading;
+
+    const suggestions = suggestionResult.response;
+    const products = productResult.response;
+
+    const hasResult = size(suggestions) || size(products);
+    const displayResult = valid && hasResult;
+
     if (invalidCharacterLength) {
         messageType = 'INVALID_CHARACTER_LENGTH';
-    } else if (error) {
-        messageType = 'ERROR';
-    } else if (loading) {
+    } else if (suggestionError) {
+        messageType = 'SUGGESTION_ERROR';
+    } else if (productError) {
+        messageType = 'PRODUCT_ERROR';
+    } else if (suggestionLoading || productLoading) {
         messageType = 'LOADING';
     } else if (!displayResult) {
         messageType = 'PROMPT';
-    } else if (!resultCount) {
-        messageType = 'EMPTY_RESULT';
     } else {
         messageType = 'RESULT_SUMMARY';
     }
 
     return {
-        displayResult,
-        filters,
-        messageType,
+        suggestionLoading,
+        productLoading,
+        suggestions,
         products,
-        resultCount,
-        value
+        messageType,
+        value,
+        displayResult
     };
 };
