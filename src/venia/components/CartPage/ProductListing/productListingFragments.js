@@ -12,6 +12,7 @@ export const ProductListingFragment = gql`
                 url_key
                 url_suffix
                 uom
+                ship_info
                 thumbnail {
                     url
                 }

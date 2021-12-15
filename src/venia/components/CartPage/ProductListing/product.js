@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Heart } from 'react-feather';
+import { useIntl } from 'react-intl';
 import { gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { useProduct } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProduct';
@@ -8,12 +7,9 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import Price from '@magento/venia-ui/lib/components/Price';
 
 import { useStyle } from '../../../classify';
-import Icon from '../../Icon';
 import Image from '../../Image';
-import Kebab from '../../LegacyMiniCart/kebab';
 import ProductOptions from '../..//LegacyMiniCart/productOptions';
 import Section from '../../LegacyMiniCart/section';
-import AddToListButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 import Quantity from './quantity';
 
 import defaultClasses from './product.css';
@@ -24,14 +20,12 @@ import { AvailableShippingMethodsCartFragment } from '../PriceAdjustments/Shippi
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import WishlistPopup from '../../../../components/WishList/wishlistPopup';
 import RichText from '../../RichText';
+import Button from '../../Button';
 
 const IMAGE_SIZE = 100;
 
-const HeartIcon = <Icon size={16} src={Heart} />;
-
 const Product = props => {
     const { item } = props;
-    console.log("🚀 ~ file: product.js ~ line 34 ~ item", item)
 
     const [{ isSignedIn }] = useUserContext();
     const { formatMessage } = useIntl();
@@ -68,6 +62,8 @@ const Product = props => {
         urlKey,
         urlSuffix
     } = product;
+
+    const { uom, ship_info } = item.product
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -138,11 +134,22 @@ const Product = props => {
                             }}
                         />
                         <span className={classes.price}>
-                            <Price currencyCode={currency} value={unitPrice} /> / {item.product.uom}
+                            <Price currencyCode={currency} value={unitPrice} /> / {uom}
                         </span>
                         <span className={classes.stockStatusMessage}>
                             {stockStatusMessage}
                         </span>
+                        {ship_info &&  // extra note about shipping delays
+                            <div>
+                                {ship_info}
+                            </div>
+                        }
+                        <div>
+                            <h3>Subtotal</h3>
+                            <span className={classes.price}>
+                                <Price currencyCode={currency} value={unitPrice * quantity} /> / {item.product.uom}
+                            </span>
+                        </div>
                         <div className={classes.quantity}>
                             <Quantity
                                 itemId={item.id}
@@ -156,37 +163,14 @@ const Product = props => {
                                     </div>
                                 </div>
                             }
+                            <Button onClick={handleRemoveFromCart}>
+                                {formatMessage({
+                                    id: 'product.removeFromCart',
+                                    defaultMessage: 'Remove from cart'
+                                })}
+                            </Button>
                         </div>
                     </div>
-                    <Kebab
-                        classes={{
-                            root: classes.kebab
-                        }}
-                        disabled={true}
-                    >
-                        {editItemSection}
-                        <Section
-                            text={formatMessage({
-                                id: 'product.removeFromCart',
-                                defaultMessage: 'Remove from cart'
-                            })}
-                            onClick={handleRemoveFromCart}
-                            icon="Trash"
-                            classes={{
-                                text: classes.sectionText
-                            }}
-                        />
-                        <li>
-                            <AddToListButton
-                                {...addToWishlistProps}
-                                classes={{
-                                    root: classes.addToListButton,
-                                    root_selected: classes.addToListButton_selected
-                                }}
-                                icon={HeartIcon}
-                            />
-                        </li>
-                    </Kebab>
                 </div>
             </li>
             {showWishlistPopup && (
