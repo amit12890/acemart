@@ -7,7 +7,7 @@ import { Info } from 'react-feather';
 import { get, size, filter, orderBy, camelCase } from 'lodash';
 import { Link, useHistory } from 'react-router-dom';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import FormError from '@magento/venia-ui/lib/components/FormError';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
@@ -246,7 +246,10 @@ const ProductFullDetail = props => {
     }
 
     const cartActionContent = isSupportedProductType ? (
-        <Button disabled={isAddToCartDisabled} priority="high" type="submit">
+        <Button
+            disabled={isAddToCartDisabled}
+            priority="high"
+            type="submit">
             <FormattedMessage
                 id={'productFullDetail.cartAction'}
                 defaultMessage={'Add to Cart'}
@@ -415,6 +418,11 @@ const ProductFullDetail = props => {
                                 <Price
                                     currencyCode={productDetails.price.currency}
                                     value={productDetails.price.value}
+                                    classes={{
+                                        currency: classes.currency,
+                                        decimal: classes.decimal,
+                                        fraction: classes.fraction
+                                    }}
                                 />
                                 <span className={classes.unit}>
                                     / {uom}

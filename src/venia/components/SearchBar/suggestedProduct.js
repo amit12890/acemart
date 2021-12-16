@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { func, shape, string } from 'prop-types';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import { useStyle } from '../../classify';
 
 import Image from '../Image';
