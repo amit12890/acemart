@@ -20,13 +20,30 @@ const FilterSidebar = React.lazy(() => import('../FilterSidebar'));
 import SearchProducts from './searchProducts';
 
 import SP_DATA from './searchPageData.json';
+import { size } from 'lodash-es';
+import SearchSort from './searchSort';
+import SearchPerPage from './searchPerPage';
 
 const SearchPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useSearchPage(SP_DATA);
-    const { products } = talonProps;
+    const {
+        products,
+        searchTerm,
+        pagination,
+        sortProps,
+        filters,
+        breadcrumbs,
+        filterSummary,
+        setSort,
+        setPerPage,
+        setPage,
+    } = talonProps;
+    console.log('test : talonProps', talonProps);
     const { loading, error } = props;
     const { formatMessage } = useIntl();
+
+    const isProducts = size(products);
 
     const content = useMemo(() => {
         if (!products && loading) return fullPageLoadingIndicator;
@@ -64,7 +81,11 @@ const SearchPage = props => {
                         <SearchProducts products={products} />
                     </section>
                     <section className={classes.pagination}>
-                        {/* <Pagination pageControl={pageControl} /> */}
+                        <Pagination pageControl={{
+                            currentPage: pagination.currentPage,
+                            setPage: setPage,
+                            totalPages: pagination.totalPages,
+                        }} />
                     </section>
                 </Fragment>
             );
@@ -75,8 +96,42 @@ const SearchPage = props => {
         classes.pagination,
         error,
         loading,
-        products,
+        products
     ]);
+
+    const searchResultsHeading = !isProducts ? null : searchTerm ? (
+        <FormattedMessage
+            id={'searchPage.searchTermText'}
+            values={{
+                highlight: chunks => (
+                    <span className={classes.headingHighlight}>{chunks}</span>
+                ),
+                term: searchTerm
+            }}
+            defaultMessage={'Showing results:'}
+        />
+    ) : (
+        <FormattedMessage
+            id={'searchPage.searchTermEmpty'}
+            defaultMessage={'Showing all results:'}
+        />
+    );
+
+    const itemCountHeading =
+        isProducts > 0 ? (
+            <div>
+                Items {pagination.begin}-{pagination.end} of{' '}
+                {pagination.totalResults}
+            </div>
+        ) : null;
+
+    const maybeSortButton = size(sortProps) ? (
+        <SearchSort sortProps={sortProps} setSort={setSort} />
+    ) : null;
+
+    const maybePageSize = (
+        <SearchPerPage pagination={pagination} setPerPage={setPerPage} />
+    );
 
     return (
         <article className={classes.root}>
@@ -86,21 +141,19 @@ const SearchPage = props => {
             <div className={classes.searchContent}>
                 <div className={classes.heading}>
                     <div className={classes.searchInfo}>
-                        {/* {searchResultsHeading}
-                        {itemCountHeading} */}
+                        {searchResultsHeading}
+                        {itemCountHeading}
                     </div>
                     <div className={classes.headerButtons}>
-                        {/* {maybeFilterButtons}
-                        {maybeSortButton} */}
+                        {maybePageSize}
+                        {maybeSortButton}
                     </div>
-                    {/* {maybeSortContainer} */}
                 </div>
                 {content}
                 {/* <Suspense fallback={null}>{maybeFilterModal}</Suspense> */}
             </div>
         </article>
     );
-
 };
 
 export default SearchPage;
