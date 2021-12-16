@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { gql } from '@apollo/client';
 import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing';
 
+import { concat, filter, get, map } from 'lodash-es';
+
 import { useStyle } from '../../../classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import defaultClasses from './productListing.css';
@@ -58,6 +60,14 @@ const ProductListing = props => {
     }
 
     if (items.length) {
+        let upsellProducts = [];
+        for (let itemInd = 0; itemInd < items.length; itemInd++) {
+            const currItem = items[itemInd];
+            const skuList = filter(get(currItem , "product.product_links", []), ['link_type', "crosssell"])
+            upsellProducts = concat(upsellProducts, map(skuList, 'linked_product_sku'))
+        }
+        console.log("🚀 ~ file: productListing.js ~ line 67 ~ upsellProducts", upsellProducts)
+
         const productComponents = items.map(product => (
             <Product
                 item={product}
