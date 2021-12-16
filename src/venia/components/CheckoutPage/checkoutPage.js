@@ -12,7 +12,7 @@ import { useWindowSize, useToasts } from '@magento/peregrine';
 import {
     CHECKOUT_STEP,
     useCheckoutPage
-} from '@magento/peregrine/lib/talons/CheckoutPage/useCheckoutPage';
+} from '../../../magento/peregrine/talons/CheckoutPage/useCheckoutPage';
 
 import { useStyle } from '../../classify';
 import Button from '../Button';
