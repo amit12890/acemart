@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import Price from '@magento/venia-ui/lib/components/Price';
 import FormError from '@magento/venia-ui/lib/components/FormError';
-import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
+import { useProductFullDetail } from "../../../magento/peregrine/talons/ProductFullDetail/useProductFullDetail";
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { QuantityFields } from './quantity';

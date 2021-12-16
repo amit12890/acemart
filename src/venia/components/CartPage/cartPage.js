@@ -72,6 +72,7 @@ const CartPage = props => {
         shouldShowLoadingIndicator,
         wishlistSuccessProps
     } = talonProps;
+    const [, { addToast }] = useToasts();
 
     const { loading, error, data } = useQuery(GET_STORE_CONFIG_DATA);
     const [
@@ -94,7 +95,6 @@ const CartPage = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
     const { formatMessage } = useIntl();
-    const [, { addToast }] = useToasts();
 
     useEffect(() => {
         if (wishlistSuccessProps) {
