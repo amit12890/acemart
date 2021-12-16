@@ -116,6 +116,11 @@
     line-height: normal;
 }
 
+.buttonSmall {
+    composes: root;
+    padding: 0;
+}
+
 .button_asLink:hover {
     text-decoration: underline;
     color: rgb(var(--stroke));

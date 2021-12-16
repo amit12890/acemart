@@ -615,15 +615,20 @@ const ProductFullDetail = props => {
                                                 <RichText content={get(product, "pos_stock_manage.ship_time_label", "")} />
                                             </span>
                                         </div>
+                                    </div>
 
-                                        {!!size(priceTiers) &&
-                                            <div>
-                                                <div>BULK SAVINGS</div>
+                                    {/* Bulk Saving Info */}
+                                    {!!size(priceTiers) &&
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.bulkSavingInfo}>
+                                                <div className={classes.bulkSavingtitle}>BULK SAVINGS</div>
                                                 {priceTiers.map((tier, ind) => {
                                                     return (
-                                                        <div key={ind}>
-                                                            <div>Buy at least {tier.quantity}</div>
-                                                            <div>
+                                                        <div className={classes.bulkOfferWrapper} key={ind}>
+                                                            <div className={classes.tierQuantity}>
+                                                                <span>Buy at least</span> <strong>{tier.quantity}</strong>
+                                                            </div>
+                                                            <div className={classes.tierPice}>
                                                                 <Price
                                                                     currencyCode={
                                                                         tier.final_price.currency
@@ -638,8 +643,9 @@ const ProductFullDetail = props => {
                                                     )
                                                 })}
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
+
 
                                     {/* Product Add To Links */}
                                     <div className={classes.apSectionRow}>
