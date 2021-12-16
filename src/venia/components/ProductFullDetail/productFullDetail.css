@@ -384,7 +384,7 @@ flex-direction: column;
 
 .tierPice .unit {
     font-size: var(--fontSize-90);
-    margin: 0 5px
+    margin: 0 5px;
     font-weight: normal;
 }
 
