@@ -1,6 +1,8 @@
 import { debounce } from 'lodash-es';
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { size } from "lodash"
+
 import { SEARCH_PAGE_PATH } from '../../../url.utils';
 
 import { useStyle } from '../../classify';
@@ -19,31 +21,39 @@ const suggestedProductNames = props => {
         [history, setVisible]
     );
 
-    const handleMouseEnter = useCallback(text => () => {
-        console.log("search Hover enter ~ text", text);
-    }, []);
+    const handleMouseEnter = useCallback(
+        text => () => {
+            console.log('search Hover enter ~ text', text);
+        },
+        []
+    );
 
     const handleMouseLeave = useCallback(() => {
-        console.log("search Hover leave~ text");
+        console.log('search Hover leave~ text');
     }, []);
 
     return (
         <ul className={classes.root}>
-            {suggestions.alternatives.map((item, index) => {
-                return (
-                    <li
-                        key={index}
-                        onClick={handleClick(item.text)}
-                        onMouseEnter={debounce(handleMouseEnter(item.text), 500)}
-                        onMouseLeave={debounce(handleMouseLeave, 500)}
-                        style={{
-                            cursor: 'pointer'
-                        }}
-                    >
-                        {item.text}
-                    </li>
-                );
-            })}
+            {size(suggestions.alternatives)
+                ? suggestions.alternatives.map((item, index) => {
+                      return (
+                          <li
+                              key={index}
+                              onClick={handleClick(item.text)}
+                              onMouseEnter={debounce(
+                                  handleMouseEnter(item.text),
+                                  500
+                              )}
+                              onMouseLeave={debounce(handleMouseLeave, 500)}
+                              style={{
+                                  cursor: 'pointer'
+                              }}
+                          >
+                              {item.text}
+                          </li>
+                      );
+                  })
+                : null}
         </ul>
     );
 };
