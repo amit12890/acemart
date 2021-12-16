@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { ChevronDown, ChevronUp } from 'react-feather';
 import { FormattedMessage, useIntl } from 'react-intl';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import { useOrderRow } from '@magento/peregrine/lib/talons/OrderHistoryPage/useOrderRow';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 

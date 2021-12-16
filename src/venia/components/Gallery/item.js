@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { string, number, shape } from 'prop-types';
 import { camelCase, filter, orderBy } from "lodash";
 import { Link } from 'react-router-dom';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';

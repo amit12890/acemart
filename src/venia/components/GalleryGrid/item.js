@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
@@ -128,9 +128,9 @@ const GalleryItem = props => {
                     </div>
                     <div className={classes.productInner}>
                         <div className={classes.productActions}>
-                            <AddToCart 
+                            <AddToCart
                                 sku={item.sku}
-                                Child={() => 
+                                Child={() =>
                                     <div className={classes.actionsContainer}>
                                         <i className={classes.iconWrapper}>
                                             <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -142,7 +142,7 @@ const GalleryItem = props => {
                                 }
                                 Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
                             />
-                            
+
                             <div className={classes.actionsContainer} onClick={openWishlistPopup}>
                                 <i className={classes.iconWrapper}>
                                     <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">

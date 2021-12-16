@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { size, split, camelCase, unescape } from 'lodash-es';
 
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 

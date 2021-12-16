@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../Price';
 
 import { useStyle } from '../../../classify';
 import defaultClasses from './priceSummary.css';
@@ -49,7 +49,7 @@ const TaxSummary = props => {
         tax = getEstimatedTax(props.data);
     } else {
         // show default tax if tax array is empty
-        tax = {value: 0, currency: "USD"};
+        tax = { value: 0, currency: "USD" };
     }
 
     return (

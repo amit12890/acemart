@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { get, size } from 'lodash-es';
 import { FormattedMessage } from 'react-intl';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../venia/components/Price';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
