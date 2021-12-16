@@ -1,10 +1,9 @@
 .root {
     align-content: start;
-    display: grid;
-    row-gap: 0.875rem;
-    grid-template-columns: repeat(1, 250px 1fr);
+    display: flex;
+    gap: 3rem;
     border-top: 1px solid rgb(var(--border-color-light));
-    padding-top: 15px;
+    padding:30px 0;
 }
 
 .root:first-child {
@@ -13,7 +12,9 @@
 }
 
 .itemImageContainer {
-
+    order: 1;
+    flex: 0 1 250px;
+    display: flex;
 }
 
 .images {
@@ -43,12 +44,25 @@
 }
 
 .itemDetails {
-    padding-left: 20px;
+    flex: 1;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.itemActions { 
+    order: 3;
+    flex: 0 1 250px;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 1.2rem;
 
 }
 
 .actionsContainer {
-    column-gap: 0.5rem;
+    gap: 1rem;
     display: flex;
     justify-content: space-between;
 }
@@ -57,36 +71,38 @@
     display: none;
 }
 .nameContainer {
-    margin-bottom: 5px;
+    
 }
 
 .name {
-    font-size: var(--fontSize-200);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--fontSize-400);
     color: var(--product-name-color);
-    
     line-height: normal;
 }
 
 .sku {
     font-size: var(--fontSize-100);
     color: rgb(var(--color-gray-middle3));
-    margin-bottom: 10px;
-    
 }
 
 .price {
     font-weight: var(--font-weight-bold);
-    font-size: var(--fontSize-500);
+    font-size: var(--fontSize-800);
     color: rgb(var(--product-price-color)); 
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.currency {
+    font-size: 1rem;
 }
 
 .unit {
-    margin-left: 5px;
+    margin:0 0 5px 5px;
     font-weight: var(--font-weight-regular);
     color: rgb(var(--product-unit-color));
     font-size: var(--fontSize-100);
+    align-self: flex-end;
 }
 .unit:before {
     content: "/"
@@ -101,9 +117,9 @@
 
 
 .productActions {
-    margin: 20px 0;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
     
 }
 
@@ -111,15 +127,11 @@
     composes: root_highPriority from '../../components/Button/button.css';
     background-color: rgb(var(--theme-color-primary-alt));
     border-color: rgb(var(--theme-color-primary-alt));
-    margin-right: 10px;
-    padding: 3px 15px;
-    min-width: auto;
-    min-height: auto;
-    line-height: auto;
 }
 
 .viewMore:hover {
     border-color: rgb(var(--theme-color-primary-alt));
+    color: rgb(var(--theme-color-primary-alt));
 }
 .productOptionsWrapper {
 
@@ -128,9 +140,23 @@
 .productOptions {
     font-size: var(--fontSize-100);
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     line-height: normal;
-    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.productOptions:first-child {
+    margin-top: 0;
+}
+
+.col {
+    flex-grow: 1;
+}
+
+.col.label {
+    flex-basis: 170px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .col.label:after {
@@ -150,7 +176,7 @@
 .labelWrapper {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    justify-content: flex-end;
 }
 
 .labelItem {
@@ -194,27 +220,60 @@
     background-position: -6px -6px;
 }
 
+.addTo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgb(var(--border-color-base));
+    flex-grow: 1;
+    padding: 9px 6px;
+    cursor: pointer;
+}
 
 
+.addToWarapper {
+    font-size: var(--fontSize-90);
+    display: flex;
+    flex-direction: column;
+}
+.toWishlist {
+
+}
+
+.toCompare {
+
+}
 
 .iconWrapper {
-    composes: root_highPriority from '../../components/Button/button.css';
-    border-width: 1px;
-    margin: 0 5px;
-    padding: 7px;
+    margin: 5px;
+    padding: 0;
     min-width: auto;
     min-height: auto;
     line-height: normal;
-    
 }
-.iconWrapper:hover .svgIcon {
+
+.addTo:hover {
+    border-color: rgb(var(--theme-color-primary));
+}
+
+.addTo:hover .svgIcon {
     fill: rgb(var(--theme-color-primary));
+}
+.addToLabel {
+    color: rgb(var(--text-color)); 
+}
+.addTo:hover .addToLabel {
+    color: rgb(var(--theme-color-primary));
 }
 
 .svgIcon {
-    fill: rgb(var(--color-white));
     width: auto;
     height: 14px;
+    fill: rgb(var(--theme-color-primary));
+}
+.iconWrapper .iconWishlist {
+    fill: rgb(230 0 0);
 }
 
 /* state: pending */
@@ -242,3 +301,5 @@
     background-color: rgb(var(--venia-global-color-gray));
     width: 3rem;
 }
+
+

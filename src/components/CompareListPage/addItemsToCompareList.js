@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 import { useCompareList } from './useCompareList';
+import defaultClasses from './addItemsToCompareList.css'
+import { useStyle } from '@magento/venia-ui/lib/classify'
 
 /**
  * Parent
@@ -7,6 +9,7 @@ import { useCompareList } from './useCompareList';
  */
 const AddItemsToCompareList = (props) => {
     const { itemId, Child, Loader, disabled = false } = props
+    const classes = useStyle(defaultClasses)
     const {
         addProductToCompareList,
         addProductToCompareListLoading,
@@ -22,7 +25,7 @@ const AddItemsToCompareList = (props) => {
     ])
 
     return (
-        <div onClick={handleAddItem}>
+        <div className={classes.root} onClick={handleAddItem}>
             {addProductToCompareListLoading
                 ? <Loader /> : <Child />
             }
