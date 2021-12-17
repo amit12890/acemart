@@ -1,13 +1,11 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
-import { get } from 'lodash-es';
+import { get, pull } from 'lodash-es';
 
 import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
 import { useApiData } from '../../../../data.utils';
-import {
-    apiGetSearchResult,
-} from '../../../../url.utils';
+import { SITE_ID, apiGetSearchResult } from '../../../../url.utils';
 // shape : { direction, field, label }
 export const getSearchSortField = sort =>
     `sort.${sort.field}=${sort.direction}`;
@@ -25,6 +23,7 @@ const getQueryFromState = (search, fieldName, value) => {
     nextParams.append(fieldName, value);
     return nextParams.toString();
 };
+
 export const useSearchPage = (props = {}) => {
     const history = useHistory();
     // get the URL query parameters.
@@ -36,16 +35,33 @@ export const useSearchPage = (props = {}) => {
         isLazy: true
     });
 
-    const products = get(props, 'results', []);
-    const pagination = get(props, 'pagination', {});
-    const filters = get(props, 'facets', []);
-    const sortProps = get(props, 'sorting.options', []);
-    const breadcrumbs = get(props, 'breadcrumbs', []);
-    const filterSummary = get(props, 'filterSummary', []);
+    const searchError = searchResult.error;
+    const searchLoading = searchResult.loading;
+
+    const products = get(searchResult.response, 'results', []);
+    const pagination = get(searchResult.response, 'pagination', {});
+    const filters = get(searchResult.response, 'facets', []);
+    const sortProps = get(searchResult.response, 'sorting.options', []);
+    const breadcrumbs = get(searchResult.response, 'breadcrumbs', []);
+    const filterSummary = get(searchResult.response, 'filterSummary', []);
 
     useEffect(() => {
-        // console.log('test : search', search, pathname, inputText);
-    }, [search, pathname, inputText]);
+        const params = new URLSearchParams(search);
+        // update query to q
+        if (params.has('query')) {
+            const value = params.get('query');
+            params.delete('query');
+            params.append('q', value);
+        }
+        if (!params.has('resultsPerPage')) {
+            params.append('resultsPerPage', 12); // default
+        }
+        params.append('siteId', SITE_ID); // default
+        params.append('resultsFormat', 'native'); // default
+
+        const url = apiGetSearchResult(params.toString());
+        callSearchApi(url);
+    }, [search, pathname]);
 
     const setSort = useCallback(
         sort => {
@@ -85,21 +101,32 @@ export const useSearchPage = (props = {}) => {
     );
 
     const setFilter = useCallback(
-        (field, selectedFilter) => () => {
+        (field, selectedFilter, isFieldActive) => () => {
             const nextParams = new URLSearchParams(search);
             const keyName = `filter.${field}`;
             const newValue = selectedFilter.value;
+
             if (field === 'stickers' || field === 'ss_hierarchy') {
-                if (nextParams.get(keyName) !== newValue) {
+                // single filter can active
+                if (selectedFilter.active) {
                     nextParams.delete(keyName);
-                    nextParams.append(keyName, newValue);
                 } else {
-                    nextParams.delete(keyName);
+                    nextParams.set(keyName, newValue);
                 }
             } else {
-                if (nextParams.has(keyName)) {
-                    if (nextParams.get(keyName) === newValue) {
+                // multiple filter can active
+                if (isFieldActive) {
+                    if (selectedFilter.active) {
+                        let values = [];
+                        for (const [key, value] of nextParams.entries()) {
+                            if (key === keyName) values.push(value);
+                        }
+                        values = pull(values, newValue);
+                        // before add, delete all same filters
                         nextParams.delete(keyName);
+                        values.forEach(val => {
+                            nextParams.append(keyName, val);
+                        });
                     } else {
                         nextParams.append(keyName, newValue);
                     }
@@ -123,6 +150,8 @@ export const useSearchPage = (props = {}) => {
         setSort,
         setPerPage,
         setPage,
-        setFilter
+        setFilter,
+        searchError,
+        searchLoading
     };
 };
