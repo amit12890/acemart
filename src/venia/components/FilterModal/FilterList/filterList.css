@@ -17,11 +17,16 @@
 }
 
 .item strong{
-    border: 1px solid rgb(var(--border-color-base));
-    padding: 0 3px;
-    border-radius: 2px;
-    
-    
+    border-radius: 50%;
+    background-color: rgb(var(--color-gray-light10));
+    font-size: 11px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
 }
 .itemClass {
     padding: 0 0 0 0.375rem;

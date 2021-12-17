@@ -1,21 +1,16 @@
 import React, { Fragment, Suspense, useMemo } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { shape, string } from 'prop-types';
 
 import { useSearchPage } from '../../../magento/peregrine/talons/SearchPage/useSearchPage';
 
 import Pagination from '../../components/Pagination';
-import Gallery from '../Gallery';
-import ProductSort from '../ProductSort';
 import defaultClasses from './searchPage.css';
-import SortedByContainer from '../SortedByContainer';
-import FilterModalOpenButton from '../FilterModalOpenButton';
+import Image from '../Image';
+import searchBanner from '../../../assets/searchBanner.jpg';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-
-const FilterModal = React.lazy(() => import('../FilterModal'));
-const FilterSidebar = React.lazy(() => import('../FilterSidebar'));
 
 import SearchProducts from './searchProducts';
 
@@ -23,6 +18,7 @@ import SP_DATA from './searchPageData.json';
 import { size } from 'lodash-es';
 import SearchSort from './searchSort';
 import SearchPerPage from './searchPerPage';
+import FilterSidebar from './filterSidebar';
 
 const SearchPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -33,15 +29,12 @@ const SearchPage = props => {
         pagination,
         sortProps,
         filters,
-        breadcrumbs,
-        filterSummary,
         setSort,
         setPerPage,
         setPage,
+        setFilter
     } = talonProps;
-    console.log('test : talonProps', talonProps);
     const { loading, error } = props;
-    const { formatMessage } = useIntl();
 
     const isProducts = size(products);
 
@@ -77,15 +70,17 @@ const SearchPage = props => {
         } else {
             return (
                 <Fragment>
-                    <section className={classes.gallery}>
+                    <div className={classes.gallery}>
                         <SearchProducts products={products} />
-                    </section>
+                    </div>
                     <section className={classes.pagination}>
-                        <Pagination pageControl={{
-                            currentPage: pagination.currentPage,
-                            setPage: setPage,
-                            totalPages: pagination.totalPages,
-                        }} />
+                        <Pagination
+                            pageControl={{
+                                currentPage: pagination.currentPage,
+                                setPage: setPage,
+                                totalPages: pagination.totalPages
+                            }}
+                        />
                     </section>
                 </Fragment>
             );
@@ -104,7 +99,7 @@ const SearchPage = props => {
             id={'searchPage.searchTermText'}
             values={{
                 highlight: chunks => (
-                    <span className={classes.headingHighlight}>{chunks}</span>
+                    <span className={classes.headingHighlight}>"{chunks}"</span>
                 ),
                 term: searchTerm
             }}
@@ -133,26 +128,46 @@ const SearchPage = props => {
         <SearchPerPage pagination={pagination} setPerPage={setPerPage} />
     );
 
+    const maybeSidebar = size(filters) ? (
+        <FilterSidebar filters={filters} setFilter={setFilter} />
+    ) : null;
+
     return (
-        <article className={classes.root}>
-            <div className={classes.sidebar}>
-                {/* <Suspense fallback={null}>{maybeSidebar}</Suspense> */}
-            </div>
-            <div className={classes.searchContent}>
-                <div className={classes.heading}>
-                    <div className={classes.searchInfo}>
-                        {searchResultsHeading}
-                        {itemCountHeading}
-                    </div>
-                    <div className={classes.headerButtons}>
-                        {maybePageSize}
-                        {maybeSortButton}
-                    </div>
+        <div className={classes.root}>
+            <div className={classes.searchHeaderWrapper}>
+                <div className={classes.searchHeader}>
+                    <h1 className={classes.title}>
+                        <div className={classes.searchTitle}>
+                            {searchResultsHeading}
+                        </div>
+                    </h1>
                 </div>
-                {content}
-                {/* <Suspense fallback={null}>{maybeFilterModal}</Suspense> */}
             </div>
-        </article>
+            <div className={classes.contentWrapper}>
+                <div className={classes.sidebar}>
+                    <Suspense fallback={null}>{maybeSidebar}</Suspense>
+                </div>
+
+                <div className={classes.searchContent}>
+
+                    <div className={classes.searchBannerWrapper}>
+                        <Image src={searchBanner} />
+                    </div>
+                    <div className={classes.heading}>
+                        <div className={classes.searchInfo}>
+                            {itemCountHeading}
+                        </div>
+                        <div className={classes.headerButtons}>
+                            {maybePageSize}
+                            {maybeSortButton}
+                        </div>
+                    </div>
+                    {content}
+                    {/* <Suspense fallback={null}>{maybeFilterModal}</Suspense> */}
+                </div>
+            </div>
+
+        </div>
     );
 };
 

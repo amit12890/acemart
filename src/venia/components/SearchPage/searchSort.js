@@ -26,9 +26,9 @@ const SearchSort = props => {
     // click event for menu items
     const handleItemClick = useCallback(
         (sort, index) => () => {
-            setSort(sort)
+            setSort(sort);
             setExpanded(false);
-            setSortIndex(index)
+            setSortIndex(index);
         },
         [setExpanded, setSortIndex, setSort]
     );
@@ -57,8 +57,12 @@ const SearchSort = props => {
                         className={classes.root}
                         onClick={handleItemClick(sort, index)}
                     >
-                        {sort.label}
-                        {activeIcon}
+                        <span className={classes.content}>
+                            <span className={classes.text}>
+                                {sort.label}
+                            </span>
+                            {activeIcon}
+                        </span>
                     </button>
                 </li>
             );
@@ -73,6 +77,12 @@ const SearchSort = props => {
 
     return (
         <div ref={elementRef} className={classes.root}>
+            <span className={classes.label}>
+                <FormattedMessage
+                    id={'productSort.sortButton'}
+                    defaultMessage={'Sort'}
+                />
+            </span>
             <Button
                 priority={'low'}
                 classes={{
@@ -80,12 +90,6 @@ const SearchSort = props => {
                 }}
                 onClick={handleSortClick}
             >
-                <span className={classes.mobileText}>
-                    <FormattedMessage
-                        id={'productSort.sortButton'}
-                        defaultMessage={'Sort'}
-                    />
-                </span>
                 <span className={classes.desktopText}>
                     <span className={classes.sortText}>
                         {get(sortProps, `${currentSortIndex}.label`, '')}

@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import Price from '../Price';
 import FormError from '@magento/venia-ui/lib/components/FormError';
-import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
+import { useProductFullDetail } from "../../../magento/peregrine/talons/ProductFullDetail/useProductFullDetail";
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { QuantityFields } from './quantity';
@@ -623,15 +623,20 @@ const ProductFullDetail = props => {
                                                 <RichText content={get(product, "pos_stock_manage.ship_time_label", "")} />
                                             </span>
                                         </div>
+                                    </div>
 
-                                        {!!size(priceTiers) &&
-                                            <div>
-                                                <div>BULK SAVINGS</div>
+                                    {/* Bulk Saving Info */}
+                                    {!!size(priceTiers) &&
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.bulkSavingInfo}>
+                                                <div className={classes.bulkSavingtitle}>BULK SAVINGS</div>
                                                 {priceTiers.map((tier, ind) => {
                                                     return (
-                                                        <div key={ind}>
-                                                            <div>Buy at least {tier.quantity}</div>
-                                                            <div>
+                                                        <div className={classes.bulkOfferWrapper} key={ind}>
+                                                            <div className={classes.tierQuantity}>
+                                                                <span>Buy at least</span> <strong>{tier.quantity}</strong>
+                                                            </div>
+                                                            <div className={classes.tierPice}>
                                                                 <Price
                                                                     currencyCode={
                                                                         tier.final_price.currency
@@ -646,8 +651,9 @@ const ProductFullDetail = props => {
                                                     )
                                                 })}
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
+
 
                                     {/* Product Add To Links */}
                                     <div className={classes.apSectionRow}>

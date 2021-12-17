@@ -123,54 +123,74 @@ const Product = props => {
                         />
                     </Link>
                     <div className={classes.details}>
-                        <div className={classes.name}>
-                            <Link to={itemLink}><RichText content={name} /></Link>
-                        </div>
-                        <ProductOptions
-                            options={options}
-                            classes={{
-                                options: classes.options,
-                                optionLabel: classes.optionLabel
-                            }}
-                        />
-                        <span className={classes.price}>
-                            <Price currencyCode={currency} value={unitPrice} /> / {uom}
-                        </span>
-                        <span className={classes.stockStatusMessage}>
-                            {stockStatusMessage}
-                        </span>
-                        {ship_info &&  // extra note about shipping delays
-                            <div>
-                                {ship_info}
+                        <div className={classes.leftBlock}>
+                            <div className={classes.name}>
+                                <Link to={itemLink}><RichText content={name} /></Link>
                             </div>
-                        }
-                        <div>
-                            <h3>Subtotal</h3>
-                            <span className={classes.price}>
-                                <Price currencyCode={currency} value={unitPrice * quantity} /> / {item.product.uom}
-                            </span>
-                        </div>
-                        <div className={classes.quantity}>
-                            <Quantity
-                                itemId={item.id}
-                                initialValue={quantity}
-                                onChange={handleUpdateItemQuantity}
+                            <div className={classes.sku}>
+                                SKU goes here
+                            </div>
+
+                            <ProductOptions
+                                options={options}
+                                classes={{
+                                    options: classes.options,
+                                    optionLabel: classes.optionLabel
+                                }}
                             />
-                            {isSignedIn &&
-                                <div className={classes.addToList}>
-                                    <div className={classes.toWishlist} onClick={openWishlistPopup}>
-                                        Move to wishlist
-                                    </div>
+                            <span className={classes.stockStatusMessage}>
+                                {stockStatusMessage}
+                            </span>
+                            {ship_info &&  // extra note about shipping delays
+                                <div>
+                                    {ship_info}
                                 </div>
                             }
-                            <Button onClick={handleRemoveFromCart}>
-                                {formatMessage({
-                                    id: 'product.removeFromCart',
-                                    defaultMessage: 'Remove from cart'
-                                })}
-                            </Button>
+                            <div className={classes.quantity}>
+                                <Quantity
+                                    itemId={item.id}
+                                    initialValue={quantity}
+                                    onChange={handleUpdateItemQuantity}
+                                />
+
+                            </div>
+                        </div>
+                        <div className={classes.rightBlock}>
+                            <div className={classes.price}>
+                                <div className={classes.colHead}>Price</div>
+                                <div className={classes.priceWrapper}>
+                                    <Price currencyCode={currency} value={unitPrice} /> / {uom}
+                                </div>
+                            </div>
+                            <div className={classes.subTotal}>
+                                <div className={classes.colHead}>Subtotal</div>
+                                <div className={classes.priceWrapper}>
+                                    <Price currencyCode={currency} value={unitPrice * quantity} /> / {item.product.uom}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div className={classes.cartItemActions}>
+                    {isSignedIn &&
+                        <div className={classes.addToList}>
+                            <div className={classes.toWishlist} onClick={openWishlistPopup}>
+                                Move to wishlist
+                            </div>
+                        </div>
+                    }
+                    <Button
+                        onClick={handleRemoveFromCart}
+                        priority="high"
+                        classes={{
+                            root: classes.root
+                        }}
+                    >
+                        {formatMessage({
+                            id: 'am.product.removeFromCart',
+                            defaultMessage: 'Remove Item'
+                        })}
+                    </Button>
                 </div>
             </li>
             {showWishlistPopup && (
