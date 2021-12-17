@@ -35,16 +35,20 @@
 
 .sortButton {
     composes: root_lowPriority from '../../components/Button/button.css';
+    background-color: rgb(var(--color-white));
     border-width: 1px;
     border-color: rgb(var(--border-color-light));
     border-radius: 0;
     font-weight: var(--venia-global-fontWeight-normal);
     color: rgb(var(--text-color));
     text-transform: none;
-    padding: 5px 15px;
+    padding: 3px 10px;
+    min-height: auto;
+    min-width: auto;
+    line-height: normal;
 }
 .sortButton:hover {
-    background-color: transparent;
+    background-color: rgb(var(--color-white));;
     color: rgb(var(--text-color));
 }
 
@@ -58,13 +62,12 @@
 
 .sortText {
     line-height: 24px;
-    font-size: var(--fontSize-100);
+    font-size: var(--fontSize-90);
     margin-right: 10px;
 }
 
 .desktopIconWrapper {
     composes: root from '../Icon/icon.css';
-    transform: translateX(10px);
 }
 
 .desktopIcon {
