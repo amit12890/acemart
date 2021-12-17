@@ -99,6 +99,7 @@ const GalleryItem = props => {
         url_suffix, url_rewrites,
         productLabel
     } = item;
+    console.log("🚀 ~ file: item.js ~ line 102 ~ item", item)
     const { url: smallImageURL } = small_image;
 
     const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}${url_suffix || ""}`);
@@ -114,10 +115,9 @@ const GalleryItem = props => {
 
     const moreInformation = get(
         item,
-        'more_information.data',
+        'prod_list_attribute.data',
         []
     );
-
     return (
         <div className={classes.root}>
             <div className={classes.itemImageContainer}>
