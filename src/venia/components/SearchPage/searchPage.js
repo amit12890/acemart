@@ -11,6 +11,7 @@ import searchBanner from '../../../assets/searchBanner.jpg';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 import SearchProducts from './searchProducts';
 
@@ -163,6 +164,7 @@ const SearchPage = props => {
 
     return (
         <div className={classes.root}>
+            <Title>Search : {searchTerm}</Title>
             <div className={classes.searchHeaderWrapper}>
                 <div className={classes.searchHeader}>
                     <h1 className={classes.title}>
