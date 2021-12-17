@@ -9,7 +9,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Button from '../../Button';
 import ProductOptions from '@magento/venia-ui/lib/components/LegacyMiniCart/productOptions';
 import Image from '../../Image';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../Price';
 import defaultClasses from './item.css';
 import PlaceholderImage from '../../Image/placeholderImage';
 

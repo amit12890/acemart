@@ -7,7 +7,7 @@ import { useWishlistItem } from '@magento/peregrine/lib/talons/WishlistPage/useW
 import { useStyle } from '../../venia/classify';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import Image from '@magento/venia-ui/lib/components/Image';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../venia/components/Price';
 
 import defaultClasses from './wishlistItem.css';
 
