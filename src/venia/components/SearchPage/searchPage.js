@@ -79,9 +79,9 @@ const SearchPage = props => {
         } else {
             return (
                 <Fragment>
-                    <section className={classes.gallery}>
+                    <div className={classes.gallery}>
                         <SearchProducts products={products} />
-                    </section>
+                    </div>
                     <section className={classes.pagination}>
                         <Pagination pageControl={{
                             currentPage: pagination.currentPage,
