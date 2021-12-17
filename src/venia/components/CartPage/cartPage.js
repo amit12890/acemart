@@ -9,6 +9,7 @@ import { useToasts } from '@magento/peregrine';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useQuery, useMutation } from '@apollo/client';
 import { get } from 'lodash';
+import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing';
 
 import Icon from '../Icon';
 import { Title } from '@magento/venia-ui/lib/components/Head';
@@ -25,6 +26,8 @@ import {
     GET_STORE_CONFIG_DATA,
     REMOVE_ALL_ITEM_CART
 } from './cartPage.gql';
+import { ProductListingFragment } from './ProductListing/productListingFragments';
+import { gql } from '@apollo/client';
 
 const CheckIcon = <Icon size={20} src={Check} />;
 
@@ -36,6 +39,16 @@ const errorIcon = (
         }}
     />
 );
+
+export const GET_PRODUCT_LISTING = gql`
+    query getProductListing($cartId: String!) {
+        cart(cart_id: $cartId) {
+            id
+            ...ProductListingFragment
+        }
+    }
+    ${ProductListingFragment}
+`;
 
 /**
  * Structural page component for the shopping cart.
@@ -72,6 +85,17 @@ const CartPage = props => {
         shouldShowLoadingIndicator,
         wishlistSuccessProps
     } = talonProps;
+
+    const productTalonProps = useProductListing({
+        queries: {
+            getProductListing: GET_PRODUCT_LISTING
+        }
+    });
+    const {
+        isLoading,
+        items,
+    } = productTalonProps;
+
     const [, { addToast }] = useToasts();
 
     const { loading, error, data } = useQuery(GET_STORE_CONFIG_DATA);
@@ -131,6 +155,7 @@ const CartPage = props => {
             onAddToWishlistSuccess={onAddToWishlistSuccess}
             setIsCartUpdating={setIsCartUpdating}
             fetchCartDetails={fetchCartDetails}
+            {...productTalonProps}
         />
     ) : (
         <div className={classes.emptyCart}>
@@ -231,7 +256,8 @@ const CartPage = props => {
                 <div className={classes.sectionContent}>
                     <div className={classes.gallery}>
                         <CrossSellProducts
-                            skuList={[]}
+                            isLoading={isLoading}
+                            items={items}
                         />
                     </div>
                 </div>

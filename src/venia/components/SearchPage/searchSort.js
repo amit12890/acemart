@@ -26,9 +26,9 @@ const SearchSort = props => {
     // click event for menu items
     const handleItemClick = useCallback(
         (sort, index) => () => {
-            setSort(sort)
+            setSort(sort);
             setExpanded(false);
-            setSortIndex(index)
+            setSortIndex(index);
         },
         [setExpanded, setSortIndex, setSort]
     );
