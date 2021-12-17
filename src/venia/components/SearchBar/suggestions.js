@@ -27,7 +27,7 @@ const Suggestions = props => {
     }
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div className={classes.root}>
             <SuggestedProductNames
                 suggestions={suggestions}
                 setVisible={setVisible}

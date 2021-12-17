@@ -33,28 +33,31 @@ const suggestedProductNames = props => {
     }, []);
 
     return (
-        <ul className={classes.root}>
-            {size(suggestions.alternatives)
-                ? suggestions.alternatives.map((item, index) => {
-                      return (
-                          <li
-                              key={index}
-                              onClick={handleClick(item.text)}
-                              onMouseEnter={debounce(
-                                  handleMouseEnter(item.text),
-                                  500
-                              )}
-                              onMouseLeave={debounce(handleMouseLeave, 500)}
-                              style={{
-                                  cursor: 'pointer'
-                              }}
-                          >
-                              {item.text}
-                          </li>
-                      );
-                  })
-                : null}
-        </ul>
+        <div className={classes.suggestProductsWrapper}>
+            <ul className={classes.listItems}>
+                <li className={classes.listItem}>Product Name Goes Here</li>
+                {size(suggestions.alternatives)
+                    ? suggestions.alternatives.map((item, index) => {
+                        return (
+                            <li
+                                key={index}
+                                onClick={handleClick(item.text)}
+                                onMouseEnter={debounce(
+                                    handleMouseEnter(item.text),
+                                    500
+                                )}
+                                onMouseLeave={debounce(handleMouseLeave, 500)}
+                                style={{
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                {item.text}
+                            </li>
+                        );
+                    })
+                    : null}
+            </ul>
+        </div>
     );
 };
 

@@ -1,2 +1,20 @@
 .root {
+    
+}
+
+.suggestProductsWrapper {
+    flex: 1;
+}
+
+.listItems {
+    margin-right: 6px;
+}
+
+.listItem {
+    cursor: pointer;
+    padding: 12px;
+}
+
+.listItem:hover {
+    background-color: rgb(var(--color-gray-light10));
 }
