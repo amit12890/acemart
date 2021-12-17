@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { CheckoutPageFragment } from './checkoutPageFragments.gql';
+import { AppliedCouponsFragment, AvailablePaymentMethodsFragment, BillingAddressFragment, EmailFragment, GiftMessageFragment, ItemPricesFragment, ItemsFragment, MultiShippingFragment, PriceSummaryFragment, ProductListingFragment, SelectedPaymentMethodFragment, ShippingAddressesFragment } from './checkoutPageFragments.gql';
 import { OrderConfirmationPageFragment } from './OrderConfirmationPage/orderConfirmationPageFragments.gql';
 
 export const CREATE_CART = gql`
@@ -36,10 +36,32 @@ export const GET_CHECKOUT_DETAILS = gql`
     query getCheckoutDetails($cartId: String!) {
         cart(cart_id: $cartId) {
             id
-            ...CheckoutPageFragment
+            is_virtual
+            total_quantity  
+            ...multiShippingFragment  
+            ...appliedCouponsFragment    
+            ...availablePaymentMethodsFragment
+            ...billingAddressFragment
+            ...emailFragment
+            ...giftMessageFragment    
+            ...itemsFragment
+            ...priceSummaryFragment
+            ...selectedPaymentMethodFragment
+            ...shippingAddressesFragment 
         }
     }
-    ${CheckoutPageFragment}
+    ${AppliedCouponsFragment}
+    ${AvailablePaymentMethodsFragment}
+    ${BillingAddressFragment}
+    ${EmailFragment}
+    ${GiftMessageFragment}
+    ${ItemsFragment}
+    ${PriceSummaryFragment}
+    ${SelectedPaymentMethodFragment}
+    ${ShippingAddressesFragment}
+    ${ItemPricesFragment}
+    ${ProductListingFragment}
+    ${MultiShippingFragment}
 `;
 
 export const GET_CUSTOMER = gql`

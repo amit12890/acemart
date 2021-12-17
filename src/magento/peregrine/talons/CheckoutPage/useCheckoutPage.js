@@ -15,6 +15,7 @@ import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
 import DEFAULT_OPERATIONS from './checkoutPage.gql.js';
 
 import CheckoutError from './CheckoutError';
+import { get, size } from 'lodash';
 
 export const CHECKOUT_STEP = {
     SHIPPING_ADDRESS: 1,
@@ -123,9 +124,11 @@ export const useCheckoutPage = (props = {}) => {
         /**
          * Skip fetching checkout details if the `cartId`
          * is a falsy value.
+         * 
+         * set notify network fetch to false to prevent refetching of the query
          */
         skip: !cartId,
-        notifyOnNetworkStatusChange: true,
+        notifyOnNetworkStatusChange: false,
         variables: {
             cartId
         }
@@ -290,6 +293,8 @@ export const useCheckoutPage = (props = {}) => {
         isCartEmpty: !(checkoutData && checkoutData.cart.total_quantity),
         isGuestCheckout: !isSignedIn,
         isLoading,
+        checkoutData,
+        hasCheckoutData: size(checkoutData) > 0,
         isUpdating,
         orderDetailsData,
         orderDetailsLoading,
@@ -297,6 +302,8 @@ export const useCheckoutPage = (props = {}) => {
             (placeOrderData && placeOrderData.placeOrder.order.order_number) ||
             null,
         placeOrderLoading,
+        isMultiShipping: size(checkoutData.cart.multi_shipping) > 0,
+        multiShipping: get(checkoutData, "cart.multi_shipping", {}),
         setCheckoutStep,
         setIsUpdating,
         setShippingInformationDone,
