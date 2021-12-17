@@ -5,7 +5,6 @@ import { CheckCircle as CheckIcon } from 'react-feather';
 import { Form, Relevant } from 'informed';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
-import Icon from '@magento/venia-ui/lib/components/Icon';
 import defaultClasses from './productQuestions.css';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 
@@ -13,18 +12,38 @@ import Checkbox from '../../venia/components/Checkbox';
 import TextInput from '../../venia/components/TextInput';
 import Button from '../../venia/components/Button';
 import Field from '../../venia/components/Field';
+import Icon from '../../venia/components/Icon';
 
 import { isRequired } from '../../@amasty/utils/validators';
 import { addQuestionMutation } from './productQuestions.gql';
+import { useToasts } from '@magento/peregrine';
+
+const successIcon = (
+    <Icon
+        src={CheckIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const AddQuestionBlock = ({ productId }) => {
     const [{ currentUser, isSignedIn }] = useUserContext();
-    const [addQuestionHandler, { loading }] = useMutation(
-        addQuestionMutation,
-        {
-            fetchPolicy: 'no-cache'
+    const [_, { addToast }] = useToasts();
+
+    const [addQuestionHandler, { loading }] = useMutation(addQuestionMutation, {
+        fetchPolicy: 'no-cache',
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: data.addQuestion.success,
+                dismissable: true,
+                timeout: 3000
+            });
         }
-    );
+    });
+
     const classes = useStyle(defaultClasses);
     const [showForm, setShowForm] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
@@ -38,11 +57,13 @@ const AddQuestionBlock = ({ productId }) => {
                 question: formValues.question,
                 notify: formValues.notify ? 1 : 0,
                 // required string
-                notify_email: formValues.notify_email || "",
+                notify_email: formValues.notify_email || '',
                 newsletter: formValues.newsletter ? 1 : 0,
                 // required string
-                newsletter_email: (isSignedIn ?
-                    currentUser.email : formValues.newsletter_email) || "",
+                newsletter_email:
+                    (isSignedIn
+                        ? currentUser.email
+                        : formValues.newsletter_email) || '',
                 // need purpose
                 status: 4,
                 per_page: 10
@@ -72,9 +93,7 @@ const AddQuestionBlock = ({ productId }) => {
     );
 
     if (showForm) {
-        const email = isSignedIn
-            ? currentUser.email
-            : ''
+        const email = isSignedIn ? currentUser.email : '';
 
         return (
             <div classes={classes.askQuestionWrapper}>
@@ -113,9 +132,11 @@ const AddQuestionBlock = ({ productId }) => {
                                 validateOnBlur
                             />
                         </div>
-                        <Relevant when={({ values }) => {
-                            return (values.notify)
-                        }}>
+                        <Relevant
+                            when={({ values }) => {
+                                return values.notify;
+                            }}
+                        >
                             <div className={classes.qaFieldWrapper}>
                                 <TextInput
                                     field="notify_email"
@@ -134,9 +155,11 @@ const AddQuestionBlock = ({ productId }) => {
                                 validateOnBlur
                             />
                         </div>
-                        <Relevant when={({ values }) => {
-                            return (values.newsletter && !isSignedIn)
-                        }}>
+                        <Relevant
+                            when={({ values }) => {
+                                return values.newsletter && !isSignedIn;
+                            }}
+                        >
                             <div className={classes.qaFieldWrapper}>
                                 <TextInput
                                     field="newsletter_email"
