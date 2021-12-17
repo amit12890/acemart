@@ -43,7 +43,12 @@ const SearchPerPage = props => {
                         className={classes.root}
                         onClick={handleItemClick(page)}
                     >
-                        {page}
+                        <span className={classes.content}>
+                            <span className={classes.text}>
+                                {page}
+                            </span>
+                        </span>
+
                     </button>
                 </li>
             );
@@ -58,6 +63,7 @@ const SearchPerPage = props => {
 
     return (
         <div ref={elementRef} className={classes.root}>
+            <span className={classes.label}>Show</span>
             <Button
                 priority={'low'}
                 classes={{
@@ -65,7 +71,6 @@ const SearchPerPage = props => {
                 }}
                 onClick={handleClick}
             >
-                <span className={classes.mobileText}>Show</span>
                 <span className={classes.desktopText}>
                     <span className={classes.pageText}>
                         {get(pagination, `perPage`, '')}

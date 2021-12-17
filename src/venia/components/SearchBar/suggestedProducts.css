@@ -3,7 +3,7 @@
 }
 
 .products {
-    border-top: 1px solid rgb(var(--venia-global-color-border));
+    border-top: 1px solid rgb(var(--border-color-base));
     display: grid;
     gap: 0.75rem;
     padding-top: 0.75rem;

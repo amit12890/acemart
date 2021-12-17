@@ -1,9 +1,9 @@
 :root {
-    --search-sidebar-width: 325px;
+    --search-sidebar-width: 25%;
 }
 
 .root {
-    padding: 1rem;
+    padding: 1rem; 
 }
 
 .noResult {
@@ -14,19 +14,43 @@
     display: flex;
     flex-basis: 100%;
     justify-content: center;
-    margin: 1rem 0;
+    padding-bottom: 1.5rem;
 }
 
 .heading {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: rgb(var(--color-gray-light10));
+    padding: 5px 10px;
+    margin-bottom: 20px;
 }
 
+.searchHeaderWrapper {
+    
+}
+
+.searchHeader {
+    
+}
+
+.title {
+    
+}
+
+.searchTitle {
+    font-size: var(--fontSize-600);
+    color: rgb(var(--theme-color-primary));
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 10px 0; 
+    padding: 0;
+}
+
+
 .searchInfo {
-    line-height: var(--venia-global-typography-heading-lineHeight);
-    margin: 2.5rem 0 1rem;
-    max-width: 75vw;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    max-width: 75vw;  
 }
 
 .totalPages {
@@ -34,17 +58,41 @@
 }
 
 .headingHighlight {
-    font-weight: var(--venia-global-fontWeight-bold);
+    
+}
+
+.contentWrapper {
+    width: 100%;
 }
 
 .sidebar {
     display: none;
 }
 
+
+.searchBannerWrapper img{
+    max-width: 100%;
+    margin-bottom: 20px;
+    position: static;
+}
+
+
 @media (min-width: 1024px) {
-    .root {
+
+    .contentWrapper {
         display: flex;
-        flex-wrap: nowrap;
+        gap: 4rem;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 20px 0;
+    }
+
+
+
+    .headerButtons {
+        justify-content: flex-end;
+        padding-bottom: 0;
     }
 
     .heading {
@@ -52,6 +100,8 @@
         flex-wrap: nowrap;
         align-items: center;
     }
+
+
 
     .searchInfo {
         margin: 0;
@@ -63,13 +113,25 @@
     }
 
     .sidebar {
+        flex: 0 0 250px;
+        width: var(--search-sidebar-width);
         display: flex;
         align-self: flex-start;
-        width: var(--search-sidebar-width);
-        padding-top: 4rem;
+        order: 1;
     }
 
     .searchContent {
         flex-grow: 1;
+        padding-bottom: 40px;
+        -webkit-flex-basis: auto;
+        flex-basis: auto;
+        -webkit-flex-grow: 1;
+        flex-grow: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+        width: 75%;
     }
+
+
 }

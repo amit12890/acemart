@@ -8,6 +8,8 @@ import Pagination from '../../components/Pagination';
 import Gallery from '../Gallery';
 import ProductSort from '../ProductSort';
 import defaultClasses from './searchPage.css';
+import Image from '../Image';
+import searchBanner from '../../../assets/searchBanner.jpg';
 import SortedByContainer from '../SortedByContainer';
 import FilterModalOpenButton from '../FilterModalOpenButton';
 
@@ -134,25 +136,42 @@ const SearchPage = props => {
     );
 
     return (
-        <article className={classes.root}>
-            <div className={classes.sidebar}>
-                {/* <Suspense fallback={null}>{maybeSidebar}</Suspense> */}
-            </div>
-            <div className={classes.searchContent}>
-                <div className={classes.heading}>
-                    <div className={classes.searchInfo}>
-                        {searchResultsHeading}
-                        {itemCountHeading}
-                    </div>
-                    <div className={classes.headerButtons}>
-                        {maybePageSize}
-                        {maybeSortButton}
-                    </div>
+        <div className={classes.root}>
+            <div className={classes.searchHeaderWrapper}>
+                <div className={classes.searchHeader}>
+                    <h1 className={classes.title}>
+                        <div className={classes.searchTitle}>
+                            {searchResultsHeading}
+                        </div>
+                    </h1>
                 </div>
-                {content}
-                {/* <Suspense fallback={null}>{maybeFilterModal}</Suspense> */}
             </div>
-        </article>
+            <div className={classes.contentWrapper}>
+                <div className={classes.sidebar}>
+                    sidebar Goes Here
+                    {/* <Suspense fallback={null}>{maybeSidebar}</Suspense> */}
+                </div>
+
+                <div className={classes.searchContent}>
+
+                    <div className={classes.searchBannerWrapper}>
+                        <Image src={searchBanner} />
+                    </div>
+                    <div className={classes.heading}>
+                        <div className={classes.searchInfo}>
+                            {itemCountHeading}
+                        </div>
+                        <div className={classes.headerButtons}>
+                            {maybePageSize}
+                            {maybeSortButton}
+                        </div>
+                    </div>
+                    {content}
+                    {/* <Suspense fallback={null}>{maybeFilterModal}</Suspense> */}
+                </div>
+            </div>
+
+        </div>
     );
 };
 
