@@ -22,6 +22,7 @@ import SearchPerPage from './searchPerPage';
 import FilterSidebar from './filterSidebar';
 import { Link } from 'react-router-dom';
 import { SEARCH_PAGE_PATH } from '../../../url.utils';
+import CompareListBlock from '../../../components/CompareListPage/compareListBlock';
 
 const POPULAR_SEARCH = [
     'sale',
@@ -177,7 +178,8 @@ const SearchPage = props => {
             </div>
             <div className={classes.contentWrapper}>
                 <div className={classes.sidebar}>
-                    <Suspense fallback={null}>{maybeSidebar}</Suspense>
+                    {maybeSidebar}
+                    <CompareListBlock />
                 </div>
 
                 <div className={classes.searchContent}>
