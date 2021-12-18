@@ -1,37 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { useLazyQuery, useQuery } from '@apollo/client';
 import { get, map, size } from 'lodash-es';
 
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
-import Button from '../../venia/components/Button';
 import RemoveItemFromCompareList from './removeItemFromCompareList';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './compareListBlock.css';
-import {
-    GET_CUSTOMER_COMPARE_LIST, GET_GUEST_COMPARE_LIST,
-} from './compareListPage.gql';
+
 import { compareListPage } from '../../url.utils';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useCompareList } from './useCompareList';
-import { unescape } from 'lodash-es';
+import { replaceSpecialChars } from '../../app.utils';
 
-
-const keyMap = {
-    '&reg;': '®',
-    '&amp;': '&',
-    '&copy;': '©',
-    '&trade;': '™'
-};
-
-const replaceSpecialChars = name => {
-    const newStr = name.replace(/&reg;|&amp;|&copy;|&trade;/gi, (matched) => {
-        return keyMap[matched];
-    });
-    return newStr;
-};
 
 const CompareListBlock = (props) => {
     const { uid, item_count, items } = props
@@ -73,7 +55,7 @@ const CompareListBlock = (props) => {
                         const product = item.product;
                         return (
                             <div key={item.uid} className={classes.compareItem}>
-                                <span className={classes.productName}>{replaceSpecialChars(unescape(product.name))}</span>
+                                <span className={classes.productName}>{replaceSpecialChars(product.name)}</span>
 
                                 <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
                                     Child={() =>

@@ -7,7 +7,7 @@ import { StoreTitle, Meta } from '@magento/venia-ui/lib/components/Head';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import ProductFullDetail from '../../venia/components/ProductFullDetail';
 import mapProduct from '@magento/venia-ui/lib/util/mapProduct';
-import { unescape } from 'lodash-es';
+import { replaceSpecialChars } from '../../app.utils';
 
 /*
  * As of this writing, there is no single Product query type in the M2.3 schema.
@@ -17,20 +17,6 @@ import { unescape } from 'lodash-es';
  * TODO: Replace with a single product query when possible.
  */
 
-// this functions are used to replace some special characters from html entity to symbol
-const keyMap = {
-    '&reg;': '®',
-    '&amp;': '&',
-    '&copy;': '©',
-    '&trade;': '™'
-};
-
-const replaceSpecialChars = name => {
-    const newStr = name.replace(/&reg;|&amp;|&copy;|&trade;/gi, (matched) => {
-        return keyMap[matched];
-    });
-    return newStr;
-};
 
 const Product = () => {
     const talonProps = useProduct({
@@ -56,8 +42,7 @@ const Product = () => {
 
     return (
         <Fragment>
-            {/* <StoreTitle>{replaceSpecialChars(unescape(product.product_name))}</StoreTitle> */}
-            <StoreTitle>{replaceSpecialChars(unescape(product.name))}</StoreTitle>
+            <StoreTitle>{replaceSpecialChars(product.name)}</StoreTitle>
             <Meta name="description" content={product.meta_description} />
             <ProductFullDetail product={product} />
         </Fragment>
