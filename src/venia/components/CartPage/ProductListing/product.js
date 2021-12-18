@@ -60,10 +60,10 @@ const Product = props => {
         stockStatus,
         unitPrice,
         urlKey,
-        urlSuffix
+        urlSuffix,
     } = product;
 
-    const { uom, ship_info } = item.product
+    const { uom, ship_info, sku } = item.product
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -127,9 +127,7 @@ const Product = props => {
                             <div className={classes.name}>
                                 <Link to={itemLink}><RichText content={name} /></Link>
                             </div>
-                            <div className={classes.sku}>
-                                SKU goes here
-                            </div>
+                            <div className={classes.sku}>{sku}</div>
 
                             <ProductOptions
                                 options={options}
