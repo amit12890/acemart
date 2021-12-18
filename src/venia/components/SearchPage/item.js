@@ -75,13 +75,13 @@ export default function Item(props) {
 
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
 
-    const openWishlistPopup = useCallback(() => {
+    const openWishlistPopup = useCallback((e) => {
         setShowWishlistPopup(true);
-    }, [setShowWishlistPopup]);
+    }, []);
 
-    const closeWishlistPopup = useCallback(() => {
+    const closeWishlistPopup = useCallback((e) => {
         setShowWishlistPopup(false);
-    }, [setShowWishlistPopup]);
+    }, []);
 
     return (
         <div className={classes.root}>
@@ -180,8 +180,8 @@ export default function Item(props) {
                         </div>
                     )}
 
-                    <div className={classes.actionsContainer} onClick={openWishlistPopup}>
-                        <div className={classes.addTo}>
+                    <div className={classes.actionsContainer}>
+                        <div className={classes.addTo} onClick={openWishlistPopup}>
                             <div className={classes.addToWarapper}>
                                 <i className={classes.iconWrapper}>
                                     <svg
@@ -225,15 +225,13 @@ export default function Item(props) {
                             />
                         </div>
                         {showWishlistPopup && (
-                            <>
-                                <WishlistPopup
-                                    isPopupVisible={showWishlistPopup}
-                                    productId={mage2_id}
-                                    productQty={1}
-                                    productName={name}
-                                    closeWishlistPopup={closeWishlistPopup}
-                                />
-                            </>
+                            <WishlistPopup
+                                isPopupVisible={showWishlistPopup}
+                                productId={mage2_id}
+                                productQty={1}
+                                productName={name}
+                                closeWishlistPopup={closeWishlistPopup}
+                            />
                         )}
                     </div>
 
