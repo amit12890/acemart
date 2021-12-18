@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
-import { get, pull } from 'lodash-es';
+import { get, pull, find, split, join } from 'lodash-es';
 
 import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
 import { useApiData } from '../../../../data.utils';
@@ -62,6 +62,32 @@ export const useSearchPage = (props = {}) => {
         const url = apiGetSearchResult(params.toString());
         callSearchApi(url);
     }, [search, pathname]);
+
+    const categoryFiltered = useMemo(() => {
+        const hierarchyDelimiter = '>';
+        const hierarchy = find(breadcrumbs, ['field', 'ss_hierarchy']);
+        const filterList =
+            hierarchy && hierarchy.filterValue
+                ? split(hierarchy.filterValue, hierarchyDelimiter)
+                : [];
+        const transformedList = [];
+        for (let index = 0; index < filterList.length; index++) {
+            const filter = filterList[index];
+            if (index === 0) {
+                transformedList.push(filter);
+            } else {
+                transformedList.push(
+                    `${
+                        transformedList[index - 1]
+                    }${hierarchyDelimiter}${filter}`
+                );
+            }
+        }
+        return {
+            labels: filterList,
+            values: transformedList
+        }
+    }, [breadcrumbs]);
 
     const setSort = useCallback(
         sort => {
@@ -152,6 +178,7 @@ export const useSearchPage = (props = {}) => {
         setPage,
         setFilter,
         searchError,
-        searchLoading
+        searchLoading,
+        categoryFiltered
     };
 };

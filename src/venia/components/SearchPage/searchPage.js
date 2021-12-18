@@ -46,7 +46,8 @@ const SearchPage = props => {
         setPage,
         setFilter,
         searchError,
-        searchLoading
+        searchLoading,
+        categoryFiltered
     } = talonProps;
 
     const isProducts = size(products);
@@ -159,7 +160,7 @@ const SearchPage = props => {
 
     const maybeSidebar =
         !searchLoading && size(filters) ? (
-            <FilterSidebar filters={filters} setFilter={setFilter} />
+            <FilterSidebar filters={filters} setFilter={setFilter} categoryFiltered={categoryFiltered} />
         ) : null;
 
     return (
