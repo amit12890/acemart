@@ -105,7 +105,8 @@
     align-self: flex-end;
 }
 .unit:before {
-    content: "/"
+    content: "/";
+    margin-right: 5px;
 }
 
 .finance {
