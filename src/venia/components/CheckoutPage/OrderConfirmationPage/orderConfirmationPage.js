@@ -11,7 +11,13 @@ import defaultClasses from './orderConfirmationPage.css';
 
 const OrderConfirmationPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    const { data, orderNumber } = props;
+    const { data = {}, orderNumber = 123 } = props;
+
+    return (
+        <div>
+            test
+        </div>
+    )
     const { formatMessage } = useIntl();
 
     const talonProps = useOrderConfirmationPage({
