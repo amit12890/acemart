@@ -114,10 +114,9 @@ const GalleryItem = props => {
 
     const moreInformation = get(
         item,
-        'more_information.data',
+        'prod_list_attribute.data',
         []
     );
-
     return (
         <div className={classes.root}>
             <div className={classes.itemImageContainer}>
