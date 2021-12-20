@@ -104,6 +104,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "My Product Reviews",
+            pattern: "/review/customer/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "Compare List",
             pattern: "/catalog/product_compare/",
             exact: true,
