@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useMemo } from 'react';
+import React, { Fragment, Suspense, useMemo, useCallback } from 'react';
 import { array, number, shape, string } from 'prop-types';
 import { useCategoryContent } from './data';
 
@@ -17,6 +17,7 @@ import FilterModalOpenButton from '../../venia/components/FilterModalOpenButton'
 import ProductCategory from '../../components/ProductCategory/productCategory';
 import { get } from 'lodash-es';
 import ProductPerPage from './productPerPage';
+import { useLocation, useHistory } from 'react-router-dom';
 
 const FilterModal = React.lazy(() =>
     import('../../venia/components/FilterModal')
@@ -54,6 +55,17 @@ const CategoryContent = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     const shouldShowFilterButtons = filters && filters.length;
+
+    const history = useHistory();
+    const { search, pathname } = useLocation();
+    const pageSizeSelect = useCallback(
+        pageNumber => {
+            const params = new URLSearchParams(search);
+            params.set('product_list_limit', pageNumber);
+            history.push({ pathname, search: params.toString() });
+        },
+        [search, pathname, history]
+    );
 
     // If there are no products we can hide the sort button.
     const shouldShowSortButtons = totalPagesFromData;
@@ -102,7 +114,10 @@ const CategoryContent = props => {
                             <Pagination pageControl={pageControl} />
                         </div>
                         <div className={classes.parPageItem}>
-                            <ProductPerPage pageSize={pageSize} />
+                            <ProductPerPage
+                                pageSize={pageSize}
+                                pageSizeSelect={pageSizeSelect}
+                            />
                         </div>
                     </div>
                 </Fragment>

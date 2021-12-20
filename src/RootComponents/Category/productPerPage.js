@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
 import { ChevronDown as ArrowDown } from 'react-feather';
-import { useLocation, useHistory } from 'react-router-dom';
 
 import { useStyle } from '../../venia/classify';
 import Button from '../../venia/components/Button';
@@ -13,20 +12,15 @@ const PAGE_ITEMS = [12, 24, 36, 48];
 
 const productPerPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    const { pageSize } = props;
+    const { pageSize, pageSizeSelect } = props;
     const { elementRef, expanded, setExpanded } = useDropdown();
-
-    const { search, pathname } = useLocation();
-    const history = useHistory();
 
     // click event for menu items
     const handleItemClick = useCallback(
-        page => () => {
-            const params = new URLSearchParams(search);
-            params.set("product_list_limit", page)
-            history.push({ pathname, search: params.toString() });
+        pageNumber => () => {
+            pageSizeSelect(pageNumber)
         },
-        [setExpanded, search, pathname, history]
+        [setExpanded]
     );
 
     // expand or collapse on click
