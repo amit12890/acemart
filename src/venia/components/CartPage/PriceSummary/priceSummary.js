@@ -11,6 +11,9 @@ import GiftCardSummary from './giftCardSummary';
 import ShippingSummary from './shippingSummary';
 import TaxSummary from './taxSummary';
 import { PriceSummaryFragment } from '@magento/peregrine/lib/talons/CartPage/PriceSummary/priceSummaryFragments.gql';
+import { useRouteMatch } from 'react-router-dom';
+
+
 const GET_PRICE_SUMMARY = gql`
     query getPriceSummary($cartId: String!) {
         cart(cart_id: $cartId) {
@@ -49,10 +52,12 @@ const PriceSummary = props => {
         handleProceedToCheckout,
         hasError,
         hasItems,
-        isCheckout,
         isLoading,
         flatData
     } = talonProps;
+    // created own isCheckout as in magento as route our cart page also has checkout keyword
+    const isCart = useRouteMatch('/checkout/cart')
+    console.log("🚀 ~ file: priceSummary.js ~ line 59 ~ isCart", isCart)
     const { formatMessage } = useIntl();
 
     if (hasError) {
@@ -80,7 +85,7 @@ const PriceSummary = props => {
         ? classes.priceUpdating
         : classes.totalPrice;
 
-    const totalPriceLabel = isCheckout
+    const totalPriceLabel = !isCart
         ? formatMessage({
             id: 'am.priceSummary.total',
             defaultMessage: 'Total'
@@ -90,7 +95,7 @@ const PriceSummary = props => {
             defaultMessage: 'Total'
         });
 
-    const proceedToCheckoutButton = !isCheckout ? (
+    const proceedToCheckoutButton = isCart ? (
         <div className={classes.checkoutButton_container}>
             <Button
                 disabled={isPriceUpdating}
@@ -142,7 +147,7 @@ const PriceSummary = props => {
                         price: priceClass
                     }}
                     data={taxes}
-                    isCheckout={isCheckout}
+                    isCheckout={!isCart}
                 />
                 <ShippingSummary
                     classes={{
@@ -150,7 +155,7 @@ const PriceSummary = props => {
                         price: priceClass
                     }}
                     data={shipping}
-                    isCheckout={isCheckout}
+                    isCheckout={!isCart}
                 />
                 <div className={classes.summaryItem}>
                     <span className={classes.totalLabel}>{totalPriceLabel}</span>
