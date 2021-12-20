@@ -11,6 +11,7 @@ import searchBanner from '../../../assets/searchBanner.jpg';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 import SearchProducts from './searchProducts';
 
@@ -19,6 +20,18 @@ import { size } from 'lodash-es';
 import SearchSort from './searchSort';
 import SearchPerPage from './searchPerPage';
 import FilterSidebar from './filterSidebar';
+import { Link } from 'react-router-dom';
+import { SEARCH_PAGE_PATH } from '../../../url.utils';
+import CompareListBlock from '../../../components/CompareListPage/compareListBlock';
+
+const POPULAR_SEARCH = [
+    'sale',
+    'specials',
+    'store pickup',
+    'popcorn',
+    'online price',
+    'apron'
+];
 
 const SearchPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -32,16 +45,18 @@ const SearchPage = props => {
         setSort,
         setPerPage,
         setPage,
-        setFilter
+        setFilter,
+        searchError,
+        searchLoading,
+        categoryFiltered
     } = talonProps;
-    const { loading, error } = props;
 
     const isProducts = size(products);
 
     const content = useMemo(() => {
-        if (!products && loading) return fullPageLoadingIndicator;
+        if (searchLoading) return fullPageLoadingIndicator;
 
-        if (!products && error) {
+        if (searchError) {
             return (
                 <div className={classes.noResult}>
                     <FormattedMessage
@@ -60,11 +75,27 @@ const SearchPage = props => {
 
         if (products.length === 0) {
             return (
-                <div className={classes.noResult}>
-                    <FormattedMessage
-                        id={'searchPage.noResultImportant'}
-                        defaultMessage={'No results found!'}
-                    />
+                <div>
+                    <div className={classes.noResult}>
+                        <FormattedMessage
+                            id={'searchPage.noResultImportant'}
+                            defaultMessage={'No results found!'}
+                        />
+                    </div>
+                    <div>
+                        <div>Below are some of our popular searches:</div>
+                        <div>
+                            {POPULAR_SEARCH.map(keyword => (
+                                <div>
+                                    <Link
+                                        to={`${SEARCH_PAGE_PATH}?query=${keyword}`}
+                                    >
+                                        {keyword}
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             );
         } else {
@@ -89,9 +120,9 @@ const SearchPage = props => {
         classes.gallery,
         classes.noResult,
         classes.pagination,
-        error,
-        loading,
-        products
+        products,
+        searchError,
+        searchLoading
     ]);
 
     const searchResultsHeading = !isProducts ? null : searchTerm ? (
@@ -124,16 +155,18 @@ const SearchPage = props => {
         <SearchSort sortProps={sortProps} setSort={setSort} />
     ) : null;
 
-    const maybePageSize = (
+    const maybePageSize = size(pagination) ? (
         <SearchPerPage pagination={pagination} setPerPage={setPerPage} />
-    );
-
-    const maybeSidebar = size(filters) ? (
-        <FilterSidebar filters={filters} setFilter={setFilter} />
     ) : null;
+
+    const maybeSidebar =
+        !searchLoading && size(filters) ? (
+            <FilterSidebar filters={filters} setFilter={setFilter} categoryFiltered={categoryFiltered} />
+        ) : null;
 
     return (
         <div className={classes.root}>
+            <Title>Search : {searchTerm}</Title>
             <div className={classes.searchHeaderWrapper}>
                 <div className={classes.searchHeader}>
                     <h1 className={classes.title}>
@@ -145,11 +178,11 @@ const SearchPage = props => {
             </div>
             <div className={classes.contentWrapper}>
                 <div className={classes.sidebar}>
-                    <Suspense fallback={null}>{maybeSidebar}</Suspense>
+                    {maybeSidebar}
+                    <CompareListBlock />
                 </div>
 
                 <div className={classes.searchContent}>
-
                     <div className={classes.searchBannerWrapper}>
                         <Image src={searchBanner} />
                     </div>
@@ -163,10 +196,8 @@ const SearchPage = props => {
                         </div>
                     </div>
                     {content}
-                    {/* <Suspense fallback={null}>{maybeFilterModal}</Suspense> */}
                 </div>
             </div>
-
         </div>
     );
 };

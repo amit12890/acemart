@@ -45,8 +45,8 @@ export const apiGetSearchSuggestions = (query, suggestionCount = "8") =>
 export const apiGetAutocompleteSearchResult = (query, resultsPerPage = "4") =>
     `https://${SITE_ID}.a.searchspring.io/api/search/autocomplete.json?siteId=${SITE_ID}&q=${query}&resultsFormat=native&resultsPerPage=${resultsPerPage}`
 
-export const apiGetSearchResult = (query, resultsPerPage = "12") =>
-    `https://${SITE_ID}.a.searchspring.io/api/search/search.json?resultsFormat=native&siteId=${SITE_ID}&resultsPerPage=${resultsPerPage}&q=${query}`
+export const apiGetSearchResult = (queryString) =>
+    `https://${SITE_ID}.a.searchspring.io/api/search/search.json?${queryString}`
 
 export const SEARCH_PAGE_PATH = "/catalogsearch/result/";
 

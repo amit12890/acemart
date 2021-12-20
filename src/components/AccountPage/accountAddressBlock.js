@@ -4,7 +4,7 @@ import { find } from 'lodash-es';
 
 import { useAddressBookPage } from '../../venia/components/AddressBookPage/useAddressBookPage';
 import { useStyle } from '@magento/venia-ui/lib/classify';
-import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import AddressCard from '../../venia/components/AddressBookPage/addressCard';
 import defaultClasses from '../../venia/components/AddressBookPage/addressBookPage.css';
@@ -41,7 +41,7 @@ const AccountAddressBlock = props => {
     }, [customerAddresses]);
 
     if (isLoading) {
-        return fullPageLoadingIndicator;
+        return <LoadingIndicator />;
     }
 
     return (

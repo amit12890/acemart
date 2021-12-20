@@ -27,7 +27,6 @@ const CompareListPage = (props) => {
     const [{ isSignedIn }] = useUserContext();
 
     useEffect(() => {
-        console.log("🚀 ~ file: compareListBlock.js ~ line 35 ~ useEffect ~ uid", uid)
         if (isSignedIn) {
             fetchCompareList({ variables: {} })
         } else {
@@ -41,7 +40,6 @@ const CompareListPage = (props) => {
 
     // data mapping for guest and logged user
     let hasItems = item_count, listId = uid
-    console.log("🚀 ~ file: compareListPage.js ~ line 51 ~ CompareListPage ~ items", items)
 
     const productCompareFields = [
         { hideName: true, name: 'Header Block', renderer: itemHeaderBlock, },

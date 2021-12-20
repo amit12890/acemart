@@ -245,8 +245,8 @@ const GalleryItem = props => {
 
 
 
-                    <div className={classes.actionsContainer} onClick={openWishlistPopup}>
-                        <div className={classes.addTo}>
+                    <div className={classes.actionsContainer}>
+                        <div className={classes.addTo} onClick={openWishlistPopup}>
                             <div className={classes.addToWarapper}>
                                 <i className={classes.iconWrapper}>
                                     <svg className={[classes.svgIcon, classes.iconWishlist].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">

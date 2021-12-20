@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useStyle } from '../../classify';
-import { camelCase, startCase } from 'lodash';
+import { camelCase, startCase, get } from 'lodash';
 
 import productLabel from '../../../assets/labelSprite.png';
 import Checkbox from '../Checkbox';
@@ -16,7 +16,7 @@ const style = {
 };
 
 const FilterSidebar = props => {
-    const { filters, setFilter } = props;
+    const { filters, setFilter, categoryFiltered } = props;
     const classes = useStyle(
         defaultClasses, filterBlockClasses, filterListClasses, 
         filterDefaultClasses, props.classes
@@ -41,7 +41,7 @@ const FilterSidebar = props => {
                                                   <div
                                                       key={item.value}
                                                       className={classes.labelItem}
-                                                      onClick={setFilter(field, item)}
+                                                      onClick={setFilter(field, item, facet_active)}
                                                   >
                                                       <i className={classes[camelCase(value)]}
                                                           style={style}
@@ -65,6 +65,31 @@ const FilterSidebar = props => {
                                 <span className={classes.header}>
                                     <span className={classes.name}>{label}</span>
                                 </span>
+                                {field === "ss_hierarchy" &&
+                                    <Form className={classes.list_expanded}>
+                                        <ul className={classes.items}>
+                                            {categoryFiltered.labels.map((label, ind) => {
+                                                const checkField = categoryFiltered.values[ind]
+                                                const value = categoryFiltered.values[ind-1]
+                                                return (
+                                                    <li key={label}
+                                                        className={classes.item}
+                                                    >
+                                                        <Checkbox
+                                                            classes={classes}
+                                                            field={checkField}
+                                                            fieldValue={true}
+                                                            label={label}
+                                                            onClick={
+                                                                setFilter(field, { value, active: ind === 0 }, true)
+                                                            }
+                                                        />
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </Form>
+                                }
                                 <Form className={classes.list_expanded}>
                                     <ul className={classes.items}>
                                     {values && values.length
@@ -79,7 +104,7 @@ const FilterSidebar = props => {
                                                         field={value}
                                                         fieldValue={!!active}
                                                         label={label}
-                                                        onClick={setFilter(field, item)}
+                                                        onClick={setFilter(field, item, facet_active)}
                                                     />
                                                     <strong>{count}</strong>
                                                 </li>

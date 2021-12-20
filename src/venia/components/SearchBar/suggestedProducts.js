@@ -10,20 +10,19 @@ const SuggestedProducts = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     return (
-        <ul className={classes.root}>
-            {products.map(product => {
-                return (
-                    <li key={product.id} className={classes.item}>
-                        <SuggestedProduct
-                            {...product}
-                            onNavigate={d => {
-                                console.log('ggwp onNavigate', d);
-                            }}
-                        />
-                    </li>
-                );
-            })}
-        </ul>
+        <div className={classes.listWrapper}>
+            <ul className={classes.listItems}>
+                {products.map(product => {
+                    return (
+                        <li key={product.id} className={classes.listItem}>
+                            <SuggestedProduct
+                                {...product}
+                            />
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
     );
 };
 

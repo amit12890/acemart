@@ -116,6 +116,7 @@
         width: var(--search-sidebar-width);
         display: flex;
         align-self: flex-start;
+        flex-direction: column;
         order: 1;
     }
 

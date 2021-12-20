@@ -83,11 +83,15 @@
 }
 
 .price {
-text-align: right;
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .subTotal {
-text-align: right;
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .priceWrapper {
@@ -135,16 +139,33 @@ text-align: right;
 }
 .cartItemActions button {
     margin: 0 5px;
-    padding: 0 10px;
+    padding: 3px;
     min-width: auto;
     font-size: 12px;
     text-transform: none;
-    height: auto;
+    height: 36px;
+    width: 36px;
     min-height: auto;
     border-width: 1px;
     background-color: rgb(var(--theme-color-primary-alt));
     border-color: rgb(var(--theme-color-primary-alt));
 }
+
+.cartItemActions button:hover {
+    border-color: rgb(var(--theme-color-primary-alt));
+    color: rgb(var(--theme-color-primary-alt));
+}
+
+.cartItemActions .iconWrapper {
+    display: inline-flex;
+}
+.cartItemActions .svgIcon {
+    fill: currentColor;
+    height: auto;
+    width: 18px; 
+}
+
+
 
 .kebab {
     grid-area: kebab;
