@@ -17,9 +17,6 @@ const SuggestedProducts = props => {
                         <li key={product.id} className={classes.listItem}>
                             <SuggestedProduct
                                 {...product}
-                                onNavigate={d => {
-                                    console.log('ggwp onNavigate', d);
-                                }}
                             />
                         </li>
                     );
