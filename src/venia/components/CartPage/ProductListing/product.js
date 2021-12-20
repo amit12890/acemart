@@ -26,7 +26,6 @@ const IMAGE_SIZE = 100;
 
 const Product = props => {
     const { item } = props;
-    console.log("🚀 ~ file: product.js ~ line 29 ~ item", item)
 
     const [{ isSignedIn }] = useUserContext();
     const { formatMessage } = useIntl();

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { shape, string } from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AlertCircle as AlertCircleIcon } from 'react-feather';
@@ -46,6 +46,7 @@ const CheckoutPage = props => {
          * Enum, one of:
          * SHIPPING_ADDRESS, SHIPPING_METHOD, PAYMENT, REVIEW
          */
+        isDefaultStore,
         activeContent,
         availablePaymentMethods,
         cartItems,
@@ -84,7 +85,6 @@ const CheckoutPage = props => {
     console.log("🚀 ~ file: checkoutPage.js ~ line 81 ~ checkoutData", checkoutData)
 
     const [, { addToast }] = useToasts();
-
 
     useEffect(() => {
         if (hasError) {
@@ -180,6 +180,7 @@ const CheckoutPage = props => {
                     onSave={setShippingMethodDone}
                     onSuccess={scrollShippingMethodIntoView}
                     setPageIsUpdating={setIsUpdating}
+                    isDefaultStore={isDefaultStore}
                 />
             ) : (
                 <h3 className={classes.shipping_method_heading}>
@@ -361,6 +362,7 @@ const CheckoutPage = props => {
                             onSave={setShippingInformationDone}
                             onSuccess={scrollShippingInformationIntoView}
                             toggleActiveContent={toggleAddressBookContent}
+                            isDefaultStore={isDefaultStore}
                         />
                     </ScrollAnchor>
                 </div>

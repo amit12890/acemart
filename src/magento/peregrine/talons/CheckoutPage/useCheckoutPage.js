@@ -16,6 +16,7 @@ import DEFAULT_OPERATIONS from './checkoutPage.gql.js';
 
 import CheckoutError from './CheckoutError';
 import { get, size } from 'lodash';
+import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 
 export const CHECKOUT_STEP = {
     SHIPPING_ADDRESS: 1,
@@ -68,12 +69,19 @@ export const CHECKOUT_STEP = {
 export const useCheckoutPage = (props = {}) => {
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
 
+    const [checkoutData, setCheckoutData] = useState(false)
+    // as based on this checkout graphql will be called
+    const { currentStoreName, availableStores } = useStoreSwitcher()
+    const defaultStoreName = get(availableStores.get('default'), "storeName", "")
+    const isDefaultStore = defaultStoreName === currentStoreName
+
     const {
         createCartMutation,
         getCheckoutDetailsQuery,
         getCustomerQuery,
         getOrderDetailsQuery,
-        placeOrderMutation
+        placeOrderMutation,
+        setStorePickupShippingAdressMutation
     } = operations;
 
     const [reviewOrderButtonClicked, setReviewOrderButtonClicked] = useState(
@@ -117,10 +125,9 @@ export const useCheckoutPage = (props = {}) => {
         { skip: !isSignedIn }
     );
 
-    const {
-        data: checkoutData,
+    const [fetchCheckoutDetails, {
         networkStatus: checkoutQueryNetworkStatus
-    } = useQuery(getCheckoutDetailsQuery, {
+    }] = useLazyQuery(getCheckoutDetailsQuery, {
         /**
          * Skip fetching checkout details if the `cartId`
          * is a falsy value.
@@ -128,17 +135,46 @@ export const useCheckoutPage = (props = {}) => {
          * set notify network fetch to false to prevent refetching of the query
          */
         skip: !cartId,
-        notifyOnNetworkStatusChange: false,
+        notifyOnNetworkStatusChange: true,
         variables: {
             cartId
+        },
+        onCompleted: (data) => {
+            setCheckoutData(data)
         }
-    });
+    })
+
+    const [setStorePickupAndFetchDetails, _] = useMutation(setStorePickupShippingAdressMutation, {
+        variables: {
+            cartId
+        },
+        onCompleted: (data) => {
+            setCheckoutData(get(data, "setStorePickupShippingAddressesOnCart", {}))
+        }
+    })
+
+    /**
+     * based on isDefaultStore flag 
+     * checkout data fetch gql call will be updated
+     * 
+     * if user has selected default store code then it will call simple checkout method 
+     * else it will call call custom gql
+     */
+    useEffect(() => {
+        if (isDefaultStore) {
+            console.log("fetching checkout deatils.....")
+            fetchCheckoutDetails()
+        } else {
+            console.log("seting store pickup.....")
+            setStorePickupAndFetchDetails()
+        }
+    }, [isDefaultStore])
 
     const cartItems = useMemo(() => {
         return (checkoutData && checkoutData.cart.items) || [];
     }, [checkoutData]);
 
-    /**
+    /**,fetchCheckoutDetails
      * For more info about network statues check this out
      *
      * https://www.apollographql.com/docs/react/data/queries/#inspecting-loading-states
@@ -158,6 +194,7 @@ export const useCheckoutPage = (props = {}) => {
             currentlyActive === 'checkout' ? 'addressBook' : 'checkout'
         );
     }, []);
+
     const toggleSignInContent = useCallback(() => {
         setActiveContent(currentlyActive =>
             currentlyActive === 'checkout' ? 'signIn' : 'checkout'
@@ -280,6 +317,7 @@ export const useCheckoutPage = (props = {}) => {
     ]);
 
     return {
+        isDefaultStore,
         activeContent,
         availablePaymentMethods: checkoutData
             ? checkoutData.cart.available_payment_methods
@@ -302,7 +340,7 @@ export const useCheckoutPage = (props = {}) => {
             (placeOrderData && placeOrderData.placeOrder.order.order_number) ||
             null,
         placeOrderLoading,
-        isMultiShipping: size(checkoutData.cart.multi_shipping) > 0,
+        isMultiShipping: checkoutData && size(checkoutData.cart.multi_shipping) > 0,
         multiShipping: get(checkoutData, "cart.multi_shipping", {}),
         setCheckoutStep,
         setIsUpdating,

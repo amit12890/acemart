@@ -11,7 +11,8 @@ import defaultClasses from './completedView.css';
 import LinkButton from '../../LinkButton';
 
 const CompletedView = props => {
-    const { selectedShippingMethod, showUpdateMode } = props;
+    // if default store then it should display edit button
+    const { selectedShippingMethod, showUpdateMode, isDefaultStore } = props;
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -63,17 +64,19 @@ const CompletedView = props => {
 
                 </span>
                 {contents}
-                <LinkButton
-                    className={classes.editButton}
-                    onClick={showUpdateMode}
-                >
-                    <span className={classes.editButtonText}>
-                        <FormattedMessage
-                            id={'global.editButton'}
-                            defaultMessage={'Edit'}
-                        />
-                    </span>
-                </LinkButton>
+                {isDefaultStore && (
+                    <LinkButton
+                        className={classes.editButton}
+                        onClick={showUpdateMode}
+                    >
+                        <span className={classes.editButtonText}>
+                            <FormattedMessage
+                                id={'global.editButton'}
+                                defaultMessage={'Edit'}
+                            />
+                        </span>
+                    </LinkButton>
+                )}
             </div>
         </div>
     );

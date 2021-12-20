@@ -1,6 +1,6 @@
 import React, { Fragment, Suspense } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { func, string, shape } from 'prop-types';
+import { func, string, shape, bool } from 'prop-types';
 import { Edit2 as EditIcon } from 'react-feather';
 import { useShippingInformation } from '@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/useShippingInformation';
 
@@ -20,7 +20,8 @@ const ShippingInformation = props => {
         classes: propClasses,
         onSave,
         onSuccess,
-        toggleActiveContent
+        toggleActiveContent,
+        isDefaultStore
     } = props;
     const talonProps = useShippingInformation({
         onSave,
@@ -72,18 +73,21 @@ const ShippingInformation = props => {
                 </h5>
             </div>
             <Card shippingData={shippingData} />
-            <LinkButton
-                onClick={handleEditShipping}
-                className={classes.editButton}
-            >
-                <span className={classes.editText}>
-                    <FormattedMessage
-                        id={'global.editButton'}
-                        defaultMessage={'Edit'}
-                    />
-                </span>
-            </LinkButton>
-            {editModal}
+            {isDefaultStore && (
+                <>
+                    <LinkButton
+                        onClick={handleEditShipping}
+                        className={classes.editButton}>
+                        <span className={classes.editText}>
+                            <FormattedMessage
+                                id={'global.editButton'}
+                                defaultMessage={'Edit'}
+                            />
+                        </span>
+                    </LinkButton>
+                    {editModal}
+                </>
+            )}
         </Fragment>
     ) : (
         <Fragment>
@@ -121,5 +125,6 @@ ShippingInformation.propTypes = {
     }),
     onSave: func.isRequired,
     onSuccess: func.isRequired,
-    toggleActiveContent: func.isRequired
+    toggleActiveContent: func.isRequired,
+    isDefaultStore: bool
 };

@@ -57,7 +57,6 @@ const PriceSummary = props => {
     } = talonProps;
     // created own isCheckout as in magento as route our cart page also has checkout keyword
     const isCart = useRouteMatch('/checkout/cart')
-    console.log("🚀 ~ file: priceSummary.js ~ line 59 ~ isCart", isCart)
     const { formatMessage } = useIntl();
 
     if (hasError) {
