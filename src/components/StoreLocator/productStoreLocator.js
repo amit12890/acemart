@@ -265,6 +265,7 @@ const ProductStoreLocatorPopup = props => {
                                 <div className={classes.storeAddressHours}>
                                     <div className={classes.storeAddressWrapper}>
                                         <div className={classes.storeAddress}>
+                                            <p>Ace Mart Restaurant Supply</p>
                                             <p>{selectedStore.store_locator_info.street}</p>
                                             <p>{selectedStore.store_locator_info.city}, {selectedStore.store_locator_info.state} {selectedStore.store_locator_info.zip}</p>
                                         </div>
