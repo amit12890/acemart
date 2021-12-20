@@ -122,6 +122,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/venia/components/CheckoutPage")
         });
         routes.push({
+            name: "Checkout success Page",
+            pattern: "/checkout/success",
+            exact: true,
+            path: require.resolve("./src/venia/components/CheckoutPage/OrderConfirmationPage")
+        });
+        routes.push({
             name: "Search",
             pattern: "/catalogsearch/result/",
             exact: true,

@@ -12,7 +12,7 @@ import { useWindowSize, useToasts } from '@magento/peregrine';
 import {
     CHECKOUT_STEP,
     useCheckoutPage
-} from '@magento/peregrine/lib/talons/CheckoutPage/useCheckoutPage';
+} from '../../../magento/peregrine/talons/CheckoutPage/useCheckoutPage';
 
 import { useStyle } from '../../classify';
 import Button from '../Button';
@@ -31,6 +31,8 @@ import OrderConfirmationPage from './OrderConfirmationPage';
 import ItemsReview from './ItemsReview';
 
 import defaultClasses from './checkoutPage.css';
+import { size } from 'lodash';
+import SplitOrder from '../../../components/SplitOrder';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
@@ -55,6 +57,8 @@ const CheckoutPage = props => {
         isCartEmpty,
         isGuestCheckout,
         isLoading,
+        checkoutData,
+        hasCheckoutData,
         isUpdating,
         orderDetailsData,
         orderDetailsLoading,
@@ -73,10 +77,14 @@ const CheckoutPage = props => {
         handleReviewOrder,
         reviewOrderButtonClicked,
         toggleAddressBookContent,
-        toggleSignInContent
+        toggleSignInContent,
+        multiShipping,
+        isMultiShipping
     } = talonProps;
+    console.log("🚀 ~ file: checkoutPage.js ~ line 81 ~ checkoutData", checkoutData)
 
     const [, { addToast }] = useToasts();
+
 
     useEffect(() => {
         if (hasError) {
@@ -126,7 +134,8 @@ const CheckoutPage = props => {
                 orderNumber={orderNumber}
             />
         );
-    } else if (isLoading) {
+    } else if (isLoading && !hasCheckoutData) {
+        // if checkout data is empty and data loading then show full screen loader
         return fullPageLoadingIndicator;
     } else if (isCartEmpty) {
         checkoutContent = (
@@ -327,6 +336,9 @@ const CheckoutPage = props => {
         );
         checkoutContent = (
             <div className={checkoutContentClass}>
+                {isMultiShipping && (
+                    <SplitOrder data={multiShipping} />
+                )}
                 <div className={classes.heading_container}>
                     <FormError
                         classes={{
