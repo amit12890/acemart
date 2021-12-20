@@ -4,7 +4,7 @@ import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './rating.css';
 
 const RatingMini = props => {
-    const { percent, value, addReviewLink } = props;
+    const { percent, value, addReviewLink, showValue = true } = props;
     const classes = mergeClasses(defaultClasses, props.classes);
 
     return (
@@ -16,9 +16,11 @@ const RatingMini = props => {
                 />
             </div>
             <div className={classes.ratingValue}>
-                {value} {value > 1 ? 'review' : 'reviews'}
+                {showValue && `${value} ${value > 1 ? 'review' : 'reviews'}`}
             </div>
-            {!!(addReviewLink) && <div className={classes.addReviewLink}>{addReviewLink}</div>}
+            {!!addReviewLink && (
+                <div className={classes.addReviewLink}>{addReviewLink}</div>
+            )}
         </div>
     );
 };
