@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
-import { useSignIn } from '@magento/peregrine/lib/talons/SignIn/useSignIn';
+import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
 
 import Button from '../Button';
 import Field from '../Field';

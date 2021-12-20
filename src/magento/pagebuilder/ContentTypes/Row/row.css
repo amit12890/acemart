@@ -67,11 +67,27 @@ width: 130px;
 }
 
 .banner-ads {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.banner-ads > div {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
 
 }
+
 .banner-ads img,
 .banner-callout img {
     display: block;
+}
+
+.my-class{
+    border:10px solid black;
+}
+
+.another-my-class{
+    border:10px solid green;
 }
 
 @media only screen and (max-width: 768px) {

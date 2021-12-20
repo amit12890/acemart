@@ -55,9 +55,21 @@ h2 {
     color: rgb(var(--theme-color-primary));
     text-decoration: underline;
     font-weight: bold;
+    display: inline-flex;
 }
 .actionToolbar a:hover {
     text-decoration: none;
+}
+
+.actionToolbar .iconWrapper {
+display: inline-flex;
+}
+
+.actionToolbar .svgIcon{
+    width: 14px;
+    height: auto;
+    fill: currentColor;
+    margin-left: 5px;
 }
 
 .action {

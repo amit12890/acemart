@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { filter, find, size } from 'lodash-es';
 import { PlusSquare } from 'react-feather';
+import { useIntl } from 'react-intl';
 
 import { useAddressBookPage } from './useAddressBookPage';
 import { useStyle } from '@magento/venia-ui/lib/classify';
-import Icon from '@magento/venia-ui/lib/components/Icon';
 import LinkButton from '../LinkButton';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
@@ -12,6 +12,7 @@ import AddressCard from './addressCard';
 import defaultClasses from './addressBookPage.css';
 import AddressForm from './addressForm';
 import { addAddress } from '../../../url.utils';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 
 /**
@@ -22,6 +23,7 @@ import { addAddress } from '../../../url.utils';
  * "/edit/{id}" - show editAddress form; 404 if address with id not found
  */
 const AddressBookPage = props => {
+    const { formatMessage } = useIntl();
     const talonProps = useAddressBookPage();
     const {
         confirmDeleteAddressId,
@@ -102,6 +104,7 @@ const AddressBookPage = props => {
 
     return (
         <div className={classes.root}>
+            <Title>{formatMessage({ id: "addressBookPage.title" })}</Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>
                     Address Book

@@ -2,35 +2,41 @@ import { useCallback, useEffect, useState } from 'react';
 import Axios from 'axios';
 
 import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { size } from 'lodash-es';
 
 
-export const useApiData = ({url="", method="get", headers={}, data={}, isLazy=false, onSuccess=null}) => {
+export const useApiData = ({ url = "", method = "get", headers = {}, data = {}, isLazy = false, onSuccess = null }) => {
     const [{ token }, _] = useUserContext();
     const [loading, setLoading] = useState(!isLazy);
     const [response, setResponse] = useState({});
     const [error, setError] = useState(false);
 
     const callApi = useCallback(
-        async (cbUrl=null, data={}) => {
+        async (cbUrl = null, data = {}) => {
             setLoading(true);
             try {
+                let requestHeaders = { ...headers }
+                // auth header will be only passed if token has values
+                if (size(token) > 0) {
+                    requestHeaders = {
+                        ...requestHeaders,
+                        authorization: token ? `Bearer ${token}` : ''
+                    }
+                }
                 const response = await Axios({
                     method, url: cbUrl ? cbUrl : url,
-                    headers: {
-                        authorization: token ? `Bearer ${token}` : '',
-                        ...headers,
-                    },
+                    headers: requestHeaders,
                     data,
                 });
                 setResponse(response.data);
                 setLoading(false);
-                if(!!onSuccess) onSuccess(response.data);
+                if (!!onSuccess) onSuccess(response.data);
             } catch (error) {
                 setError(true);
                 setLoading(false);
                 console.log("file: data.utils.js ~ line 27 ~ error", error)
             }
-        }, [url]
+        }, [url, onSuccess]
     )
 
     useEffect(() => {
@@ -40,5 +46,5 @@ export const useApiData = ({url="", method="get", headers={}, data={}, isLazy=fa
             callApi(data);
     }, [])
 
-    return {callApi, loading, response, error};
+    return { callApi, loading, response, error };
 }

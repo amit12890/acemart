@@ -7,7 +7,7 @@ import { StoreTitle, Meta } from '@magento/venia-ui/lib/components/Head';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import ProductFullDetail from '../../venia/components/ProductFullDetail';
 import mapProduct from '@magento/venia-ui/lib/util/mapProduct';
-import { unescape } from 'lodash-es';
+import { replaceSpecialChars } from '../../app.utils';
 
 /*
  * As of this writing, there is no single Product query type in the M2.3 schema.
@@ -16,6 +16,7 @@ import { unescape } from 'lodash-es';
  * https://github.com/magento/graphql-ce/issues/86
  * TODO: Replace with a single product query when possible.
  */
+
 
 const Product = () => {
     const talonProps = useProduct({
@@ -41,7 +42,7 @@ const Product = () => {
 
     return (
         <Fragment>
-            <StoreTitle>{unescape(product.name)}</StoreTitle>
+            <StoreTitle>{replaceSpecialChars(product.name)}</StoreTitle>
             <Meta name="description" content={product.meta_description} />
             <ProductFullDetail product={product} />
         </Fragment>

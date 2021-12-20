@@ -59,7 +59,7 @@ export const ProductsFragment = gql`
             on_sale
             prod_temp
             uom
-            more_information {
+            prod_list_attribute {
                 data {
                     code label value
                 }

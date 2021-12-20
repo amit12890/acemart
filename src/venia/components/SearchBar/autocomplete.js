@@ -1,67 +1,27 @@
 import React from 'react';
 import { gql } from '@apollo/client';
 import { bool, func, shape, string } from 'prop-types';
-import { useAutocomplete } from '@magento/peregrine/lib/talons/SearchBar';
 import { useIntl } from 'react-intl';
 
+import { useAutocomplete } from '../../../magento/peregrine/talons/SearchBar';
 import defaultClasses from './autocomplete.css';
-import { useStyle } from '../../classify';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import Suggestions from './suggestions';
-
-const GET_AUTOCOMPLETE_RESULTS = gql`
-    query getAutocompleteResults($inputText: String!) {
-        # Limit results to first three.
-        products(search: $inputText, currentPage: 1, pageSize: 3) {
-            aggregations {
-                label
-                count
-                attribute_code
-                options {
-                    label
-                    value
-                }
-            }
-            items {
-                id
-                name
-                small_image {
-                    url
-                }
-                url_key
-                url_suffix
-                price {
-                    regularPrice {
-                        amount {
-                            value
-                            currency
-                        }
-                    }
-                }
-            }
-            page_info {
-                total_pages
-            }
-            total_count
-        }
-    }
-`;
 
 const Autocomplete = props => {
     const { setVisible, valid, visible } = props;
     const talonProps = useAutocomplete({
-        queries: {
-            getAutocompleteResults: GET_AUTOCOMPLETE_RESULTS
-        },
         valid,
         visible
     });
     const {
-        displayResult,
-        filters,
-        messageType,
+        suggestionLoading,
+        productLoading,
+        suggestions,
         products,
-        resultCount,
-        value
+        messageType,
+        value,
+        displayResult
     } = talonProps;
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -70,10 +30,24 @@ const Autocomplete = props => {
     const { formatMessage } = useIntl();
     const MESSAGES = new Map()
         .set(
-            'ERROR',
+            'PROMPT',
             formatMessage({
-                id: 'autocomplete.error',
-                defaultMessage: 'An error occurred while fetching results.'
+                id: 'autocomplete.prompt',
+                defaultMessage: 'Search for a product'
+            })
+        )
+        .set(
+            'SUGGESTION_ERROR',
+            formatMessage({
+                id: 'autocomplete.suggestion_error',
+                defaultMessage: 'An error occurred while fetching suggestions.'
+            })
+        )
+        .set(
+            'PRODUCT_ERROR',
+            formatMessage({
+                id: 'autocomplete.product_error',
+                defaultMessage: 'An error occurred while fetching products.'
             })
         )
         .set(
@@ -84,29 +58,6 @@ const Autocomplete = props => {
             })
         )
         .set(
-            'PROMPT',
-            formatMessage({
-                id: 'autocomplete.prompt',
-                defaultMessage: 'Search for a product'
-            })
-        )
-        .set(
-            'EMPTY_RESULT',
-            formatMessage({
-                id: 'autocomplete.emptyResult',
-                defaultMessage: 'No results were found.'
-            })
-        )
-        .set('RESULT_SUMMARY', (_, resultCount) =>
-            formatMessage(
-                {
-                    id: 'autocomplete.resultSummary',
-                    defaultMessage: '{resultCount} items'
-                },
-                { resultCount: resultCount }
-            )
-        )
-        .set(
             'INVALID_CHARACTER_LENGTH',
             formatMessage({
                 id: 'autocomplete.invalidCharacterLength',
@@ -114,23 +65,20 @@ const Autocomplete = props => {
             })
         );
 
-    const messageTpl = MESSAGES.get(messageType);
-    const message =
-        typeof messageTpl === 'function'
-            ? messageTpl`${resultCount}`
-            : messageTpl;
+    const message = MESSAGES.get(messageType);
 
     return (
         <div className={rootClassName}>
             <div className={classes.message}>{message}</div>
             <div className={classes.suggestions}>
                 <Suggestions
-                    displayResult={displayResult}
-                    products={products || {}}
-                    filters={filters}
-                    searchValue={value}
+                    suggestionLoading={suggestionLoading}
+                    productLoading={productLoading}
+                    suggestions={suggestions}
+                    products={products}
                     setVisible={setVisible}
                     visible={visible}
+                    displayResult={displayResult}
                 />
             </div>
         </div>

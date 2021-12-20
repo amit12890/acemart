@@ -58,11 +58,33 @@ export const GET_CUSTOMER_COMPARE_LIST = gql`
     ${UserCompareListFragment}
 `;
 
+export const GET_GUEST_COMPARE_LIST = gql`
+    query compareList($uid:ID!){
+        compareList(uid:$uid){
+            uid
+            ...UserCompareListFragment
+        }
+    }
+    ${UserCompareListFragment}
+`
+
 export const CREATE_COMPARE_LIST = gql`
     mutation createCompareList(
         $input: CreateCompareListInput
     ) {
         createCompareList(input: $input) {
+            uid
+            ...UserCompareListFragment
+        }
+    }
+    ${UserCompareListFragment}
+`;
+
+export const ADD_PRODUCTS_TO_COMPARE_LIST = gql`
+    mutation addProductsToCompareList(
+        $input: AddProductsToCompareListInput
+    ) {
+        addProductsToCompareList(input: $input) {
             uid
             ...UserCompareListFragment
         }
@@ -81,3 +103,15 @@ export const REMOVE_ITEM_FROM_COMPARE_LIST = gql`
     }
     ${UserCompareListFragment}
 `;
+
+export const ASSIGN_COMPARE_LIST_TO_CUSTOMER = gql`
+mutation assignCompareListToCustomer($uid: ID!) {
+    assignCompareListToCustomer(uid:$uid){
+        result
+        compare_list{
+            ...UserCompareListFragment
+        }
+    }
+}
+${UserCompareListFragment}
+`

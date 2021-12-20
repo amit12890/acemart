@@ -13,7 +13,6 @@ import defaultClasses from './filterSidebar.css';
 import CompareListBlock from '../../../components/CompareListPage/compareListBlock';
 import WishlistBlock from '../../../components/WishList/wishlistBlock';
 
-
 const style = {
     '--productLabel': `url("${productLabel}")`
 };
@@ -36,8 +35,11 @@ const staticLabelGroups = new Set([
     'online_price',
     'bulk_savings',
     'new_item',
-    'disallow_pickupatstore'
+    'disallow_pickupatstore',
+    'featured_item' // added here to show proper name in CurrentFilters
 ]);
+
+const featuredItemKey = 'featured_item';
 
 /**
  * A view that displays applicable and applied filters.
@@ -160,11 +162,44 @@ const FilterSidebar = props => {
         ]
     );
 
+    const toggleFeatureFilterBlock = useMemo(() => {
+        if (filterItems.has(featuredItemKey)) {
+            const groupName = filterNames.get(featuredItemKey);
+            // get filter items from set
+            const items = filterItems.get(featuredItemKey);
+            // get positive item
+            const item = find(items, ['title', '1']);
+
+            if (item) {
+                const blockState = filterState.get(featuredItemKey);
+                // to show selected filter
+                const isSelected = blockState && blockState.has(item);
+                return (
+                    <div
+                        className={classes.labelItem}
+                        onClick={handleStaticApplyFilter(featuredItemKey, item)}
+                    >
+                        <span className={classes.filterLabel}>{groupName}</span>
+                    </div>
+                );
+            }
+
+        }
+        return null;
+    }, [
+        filterApi,
+        filterItems,
+        filterNames,
+        filterState,
+        filterCountToOpen,
+        handleApplyFilter
+    ]);
+
     const clearAll = filterState.size ? (
         <div className={classes.action}>
             <LinkButton type="button" onClick={handleReset}>
                 <FormattedMessage
-                    id={'filterModal.action'}
+                    id={'am.filterModal.action'}
                     defaultMessage={'Clear all'}
                 />
             </LinkButton>
@@ -178,8 +213,8 @@ const FilterSidebar = props => {
                     <div className={classes.header}>
                         <h2 className={classes.headerTitle}>
                             <FormattedMessage
-                                id={'filterModal.headerTitle'}
-                                defaultMessage={'Filters'}
+                                id={'am.filterModal.headerTitle'}
+                                defaultMessage={'Shopping Options'}
                             />
                         </h2>
                     </div>
@@ -193,6 +228,9 @@ const FilterSidebar = props => {
                     <ul className={classes.blocks}>{filtersList}</ul>
                     <div className={classes.labelWrapper}>
                         {toggleFiltersList}
+                    </div>
+                    <div className={classes.labelWrapper}>
+                        {toggleFeatureFilterBlock}
                     </div>
                 </div>
                 <div className={classes.body}>

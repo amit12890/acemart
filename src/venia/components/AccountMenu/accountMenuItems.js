@@ -3,6 +3,8 @@ import { func, shape, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
+import { get } from "lodash";
+
 import { useAccountChip } from '@magento/peregrine/lib/talons/AccountChip/useAccountChip';
 import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
 
@@ -16,9 +18,8 @@ import {
 } from '../../../url.utils';
 import defaultClasses from './accountMenuItems.css';
 
-
 const AccountMenuItems = props => {
-    const { onSignOut: handleSignOut } = props;
+    const { onSignOut: handleSignOut, signingOut } = props;
     const talonProps = useAccountChip({
         queries: {
             getCustomerDetailsQuery: GET_CUSTOMER_DETAILS
@@ -26,9 +27,9 @@ const AccountMenuItems = props => {
     });
     const { currentUser, isLoadingUserName, isUserSignedIn } = talonProps;
 
-    let headerText = "Welcome back";
+    let headerText = 'Welcome back';
     if (!isLoadingUserName) {
-        headerText = `Welcome back, ${currentUser.firstname}`
+        headerText = `Welcome back, ${get(currentUser, "firstname", "")}`;
     }
 
     const menuItems = [
@@ -66,20 +67,24 @@ const AccountMenuItems = props => {
 
     return (
         <div className={classes.root}>
-            <div>{headerText}</div>
+            <div className={classes.welcomeMessage}>{headerText}</div>
             {menu}
-            {!!handleSignOut &&
+            {!!handleSignOut && (
                 <button
                     className={classes.signOut}
                     onClick={handleSignOut}
                     type="button"
                 >
-                    <FormattedMessage
-                        id={'accountMenu.LogoutButtonText'}
-                        defaultMessage={'Logout'}
-                    />
+                    {signingOut ? (
+                        'Loading...'
+                    ) : (
+                        <FormattedMessage
+                            id={'accountMenu.LogoutButtonText'}
+                            defaultMessage={'Logout'}
+                        />
+                    )}
                 </button>
-            }
+            )}
         </div>
     );
 };

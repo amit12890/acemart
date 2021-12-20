@@ -1,0 +1,29 @@
+.root {
+    border: none;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    padding: 1.5rem 0rem;
+    display: grid;
+    row-gap: 1rem;
+    
+}
+
+.done {
+    composes: root;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 1.5rem;
+}
+
+.editingHeading {
+    text-transform: uppercase;
+}
+
+.form {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    row-gap: 1.5rem;
+}
+
+.formButtons {
+    display: flex;
+    justify-content: center;
+}

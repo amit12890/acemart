@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Redirect, useHistory } from 'react-router-dom';
 import { useAccountInformationPage } from '@magento/peregrine/lib/talons/AccountInformationPage/useAccountInformationPage';
 
@@ -13,11 +13,13 @@ import AccountNewsletterBlock from './accountNewsletterBlock';
 import defaultClasses from './accountInformation.css';
 import AccountInformationPageOperations from './accountInformation.gql.js';
 import { editAccountInfo, editAccountPassword } from '../../url.utils';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 
 const AccountInformation = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const history = useHistory()
+    const { formatMessage } = useIntl();
 
     const talonProps = useAccountInformationPage({
         ...AccountInformationPageOperations
@@ -121,6 +123,7 @@ const AccountInformation = props => {
 
     return (
         <div className={classes.root}>
+            <Title>{formatMessage({ id: "accountInformation.title" })}</Title>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>
                     <FormattedMessage

@@ -1,34 +1,46 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { get } from 'lodash-es';
+import { get, size } from 'lodash-es';
 import { FormattedMessage } from 'react-intl';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../venia/components/Price';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import RichContent from '../../venia/components/RichContent';
 import defaultClasses from './compareListPage.css';
 import {
-    GET_CUSTOMER_COMPARE_LIST,
+    GET_CUSTOMER_COMPARE_LIST, GET_GUEST_COMPARE_LIST,
 } from './compareListPage.gql';
 import Button from '../../venia/components/Button';
 import RemoveItemFromCompareList from './removeItemFromCompareList';
 
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useCompareList } from './useCompareList';
 
-const CompareListPage = () => {
+
+const CompareListPage = (props) => {
+    const { uid, items, item_count } = props
     const classes = useStyle(defaultClasses);
-    // get compare list
-    const { loading: loadingCompareList, error, data: compareListData } = useQuery(
-        GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
-    );
+    const { loadingCompareList, fetchCompareList } = useCompareList()
+    const [{ isSignedIn }] = useUserContext();
 
-    if (loadingCompareList) {
+    useEffect(() => {
+        if (isSignedIn) {
+            fetchCompareList({ variables: {} })
+        } else {
+            fetchCompareList({ variables: { uid } })
+        }
+    }, [isSignedIn, uid])
+
+    if (loadingCompareList && size(items) === 0) {
         return fullPageLoadingIndicator;
     }
-    const hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
-    const listId = get(compareListData, 'customer.compare_list.uid')
-    const items = get(compareListData, 'customer.compare_list.items', [])
+
+    // data mapping for guest and logged user
+    let hasItems = item_count, listId = uid
+
     const productCompareFields = [
         { hideName: true, name: 'Header Block', renderer: itemHeaderBlock, },
         { name: 'SKU', path: "sku" },
@@ -132,7 +144,13 @@ const CompareListPage = () => {
     )
 }
 
-export default CompareListPage
+export default connect(store => {
+    return {
+        uid: store.compare.uid,
+        items: store.compare.items,
+        item_count: store.compare.item_count
+    }
+})(CompareListPage)
 
 
 const itemHeaderBlock = (classes, item) => {

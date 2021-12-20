@@ -6,6 +6,8 @@ export const ProductDetailsFragment = gql`
         id
         meta_description
         name
+        brand
+        brand_name
         product_name
         sku uom mpn
         youtube_filename
@@ -24,6 +26,9 @@ export const ProductDetailsFragment = gql`
             }
         }
         pos_stock_manage {
+            availability
+            warehouse_qty
+            store_qty
             hide_add_to_cart
             locate_in_store
             stock_label

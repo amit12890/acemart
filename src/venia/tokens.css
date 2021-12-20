@@ -81,6 +81,7 @@
        --color-gray-light10:  var(--color-gray40);       
 
        --product-name-color:  var(--color-gray10);
+       --product-name-color-hover:  var(--link-color-hover);
        --product-price-color: var(--color-blue20);
        --product-special-price-color: var(--color-red10);
        
@@ -151,7 +152,7 @@
 
     --border-color-base: var(--color-gray-middle2);
     --border-color-light: var(--color-gray-light01);
-    --border-color-dark: var(--color-gray-middle2);
+    --border-color-dark: var(--color-gray-middle3);
     --border-width-base: 1px;
 
     

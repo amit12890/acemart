@@ -36,13 +36,11 @@
 .previousButton {
     justify-content: flex-start;
     grid-area: 1 / 1 / 2 / 2;
-    
 }
 
 .nextButton {
     justify-content: flex-end;
     grid-area: 1 / 3 / 2 / 4;
-    
 }
 
 .chevron {
@@ -54,7 +52,8 @@
 
 .chevron svg {
     stroke-width: 1px;
-    stroke: rgb(var(--color-gray-light03));
+    /* stroke: rgb(var(--color-gray-light03)); */
+    stroke: #cacaca;
 }
 
 .nextButton:focus > .chevron,
@@ -64,14 +63,14 @@
 }
 
 .thumbnailList {
-    align-content: stretch;
+    /* align-content: stretch;
     display: grid;
     grid-auto-flow: column;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, 1rem);
     justify-content: center;
     margin-top: 1rem;
-    z-index: 1;
+    z-index: 1; */
 }
 
 @media (min-width: 1024px) {
@@ -87,11 +86,11 @@
     }
 
     .thumbnailList {
-        align-content: start;
+        /* align-content: start;
         grid-auto-flow: row;
         grid-gap: 0.5rem;
         grid-template-columns: repeat(4, 1fr);
-        margin-top: 0;
+        margin-top: 0; */
     }
 }
 

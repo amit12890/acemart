@@ -18,6 +18,11 @@
  */
 
 function localIntercept(targets) {
+    targets.of('@magento/pwa-buildpack').transformUpward.tap(def => {
+        def.staticFromRoot.inline.body.file.template.inline =
+            './acemart-static/{{ filename }}';
+    });
+
     targets.of("@magento/venia-ui").routes.tap(routes => {
         // routes.push({
         //     name: "404 page",
@@ -103,6 +108,30 @@ function localIntercept(targets) {
             pattern: "/catalog/product_compare/",
             exact: true,
             path: require.resolve("./src/components/CompareListPage")
+        });
+        routes.push({
+            name: "Cart Page",
+            pattern: "/checkout/cart/",
+            exact: true,
+            path: require.resolve("./src/venia/components/CartPage")
+        });
+        routes.push({
+            name: "Checkout Page",
+            pattern: "/checkout/",
+            exact: true,
+            path: require.resolve("./src/venia/components/CheckoutPage")
+        });
+        routes.push({
+            name: "Checkout success Page",
+            pattern: "/checkout/success",
+            exact: true,
+            path: require.resolve("./src/venia/components/CheckoutPage/OrderConfirmationPage")
+        });
+        routes.push({
+            name: "Search",
+            pattern: "/catalogsearch/result/",
+            exact: true,
+            path: require.resolve("./src/venia/components/SearchPage")
         });
         return routes;
     });

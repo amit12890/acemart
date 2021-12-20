@@ -4,7 +4,7 @@ import { string, number, shape, func, arrayOf, oneOf } from 'prop-types';
 import { Trash2 as DeleteIcon } from 'react-feather';
 import { Link } from 'react-router-dom';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../Price';
 import { useItem } from '@magento/peregrine/lib/talons/MiniCart/useItem';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
@@ -66,6 +66,7 @@ const Item = props => {
                             root: classes.thumbnail
                         }}
                         width={75}
+                        height={75}
                         src={
                             configurableThumbnailSource === 'itself' &&
                                 configured_variant

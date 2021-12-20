@@ -1,0 +1,183 @@
+.root {
+    padding: 2.5rem 0;
+    max-width: var(--venia-global-maxWidth);
+    margin: 0 auto;
+}
+
+.checkoutContent {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 2fr 1fr;
+}
+
+.checkoutContent_hidden {
+    composes: checkoutContent;
+    display: none;
+}
+
+.heading_container {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.pageTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    padding-bottom: 1rem;
+}
+
+.heading {
+    line-height: 1.25em;
+    font-size: var(--fontSize-500);
+    font-weight: bold;
+    margin: 0 10px 0 0;
+    
+}
+
+.cartLink {
+    composes: root from '../LinkButton/linkButton.css';
+    font-size: inherit;
+}
+
+.stepper_heading {
+    border-bottom: 1px solid rgb(var(--venia-global-color-border));
+    font-size: 1rem;
+    font-weight: 600;
+    padding-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.shipping_method_heading {
+    composes: stepper_heading;
+}
+
+.payment_information_heading {
+    composes: stepper_heading;
+}
+
+.signInContainer {
+    /* align-items: center;
+    border: 1px solid rgb(var(--border-color-base));
+    display: grid;
+    grid-auto-flow: row;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center; */
+}
+
+.signInLabel {
+    font-weight: var(--venia-global-fontWeight-semibold);
+}
+
+.signInButton {
+    composes: root_normalPriority from '../Button/button.css';
+    min-height: auto;
+    min-width: auto;
+    padding: 0.25rem 2rem;
+    max-width: 300px;
+}
+
+.empty_cart_container {
+    margin-bottom: 1.5rem;
+}
+
+.shipping_information_container {
+    grid-column: 1 / span 1;
+    position: relative;
+}
+
+.shipping_method_container {
+    grid-column: 1 / span 1;
+    position: relative;
+}
+
+.payment_information_container {
+    grid-column: 1 / span 1;
+}
+
+.price_adjustments_container {
+    grid-column: 1 / span 1;
+    margin-bottom: 2rem;
+}
+
+.items_review_container {
+    grid-column: 1 / span 1;
+}
+
+.summaryContainer {
+    grid-column: 1 / span 1;
+}
+
+.formErrors {
+    border-color: rgb(var(--venia-global-color-error));
+    border-style: solid;
+    border-width: 0 0 0 5px;
+    padding: 1rem 0 1rem 1rem;
+    display: grid;
+    grid-column: 1 / span 1;
+}
+
+@media (min-width: 961px) {
+    .summaryContainer {
+        grid-column: 2 / span 1;
+        grid-row: 2 / span 3;
+        position: sticky;
+        top: 1rem;
+        height: min-content;
+    }
+}
+
+.review_order_button {
+    composes: root_highPriority from '../Button/button.css';
+    grid-column: 1 / span 1;
+    margin: auto;
+}
+
+.place_order_button {
+    composes: root_highPriority from '../Button/button.css';
+    grid-column: 1 / span 1;
+    margin: auto;
+    background-color: rgb(var(--theme-color-primary-alt));
+    border: 2px solid rgb(var(--theme-color-primary-alt));
+}
+.place_order_button:hover {
+    color: rgb(var(--theme-color-primary-alt)); 
+    border-color: rgb(var(--theme-color-primary-alt)); 
+
+}
+
+/*
+ * Mobile-specific styles.
+ */
+
+@media (max-width: 960px) {
+    .root {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .checkoutContent {
+        /* Only one column in mobile view. */
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .signInContainer {
+        grid-row-start: 1;
+        grid-auto-flow: row;
+        justify-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .stepper_heading {
+        padding-bottom: 1rem;
+    }
+
+    .payment_information_heading {
+        composes: stepper_heading;
+        /* On mobile, order summary has a top border, so avoid doubling up. */
+        border-bottom-width: 0;
+    }
+}

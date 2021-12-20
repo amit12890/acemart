@@ -17,7 +17,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import TextInput from '../TextInput';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
 import defaultClasses from './orderHistoryPage.css';
 import OrderRow from './orderRow';
@@ -152,7 +152,7 @@ const OrderHistoryPage = props => {
     return (
         <OrderHistoryContextProvider>
             <div className={classes.root}>
-                <StoreTitle>{PAGE_TITLE}</StoreTitle>
+                <Title>{formatMessage({ id: "orderHistoryPage.title" })}</Title>
                 <div className={classes.pageTitleWrapper}>
                     <h1 className={classes.title}>
                         {PAGE_TITLE}

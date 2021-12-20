@@ -1,0 +1,6 @@
+.price {
+    font-weight: 600;
+    text-align: right;
+    color: rgb(var(--theme-color-primary-alt));
+}
+

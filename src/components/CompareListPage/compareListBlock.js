@@ -1,44 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { get } from 'lodash-es';
+import { get, map, size } from 'lodash-es';
 
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
-import Button from '../../venia/components/Button';
 import RemoveItemFromCompareList from './removeItemFromCompareList';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './compareListBlock.css';
-import {
-    GET_CUSTOMER_COMPARE_LIST,
-} from './compareListPage.gql';
+
 import { compareListPage } from '../../url.utils';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useCompareList } from './useCompareList';
+import { replaceSpecialChars } from '../../app.utils';
 
 
-const CompareListBlock = () => {
+const CompareListBlock = (props) => {
+    const { uid, item_count, items } = props
     const classes = useStyle(defaultClasses);
+    const { loadingCompareList, fetchCompareList } = useCompareList()
+    const [{ isSignedIn }] = useUserContext();
 
-    // get compare list
-    const { loading: loadingCompareList, error, data: compareListData } = useQuery(
-        GET_CUSTOMER_COMPARE_LIST, { fetchPolicy: "network-only" }
-    );
 
-    if (loadingCompareList) {
+    useEffect(() => {
+        if (isSignedIn) {
+            fetchCompareList({ variables: {} })
+        } else {
+            fetchCompareList({ variables: { uid } })
+        }
+    }, [uid, isSignedIn])
+
+    if (loadingCompareList && size(items) === 0) {
         return <LoadingIndicator />;
     }
-    const hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
-    const listId = get(compareListData, 'customer.compare_list.uid')
-    const items = get(compareListData, 'customer.compare_list.items', [])
+    // data mapping for guest and logged user
+    let hasItems = item_count, listId = uid
+    const itemIds = hasItems ? map(items, "product.id") : []
+    // if (isSignedIn) {
+    //     hasItems = !!get(compareListData, 'customer.compare_list.item_count', 0)
+    //     listId = get(compareListData, 'customer.compare_list.uid')
+    //     items = get(compareListData, 'customer.compare_list.items', [])
+    // } else {
+    //     hasItems = !!get(compareListData, 'compareList.item_count', props.item_count)
+    //     listId = get(compareListData, 'compareList.uid', props.uid)
+    //     items = get(compareListData, 'compareList.items', props.items)
+    // }
 
     return (
         <div className={classes.root}>
-            <div className={classes.blockTitle}>Compare Products</div>
+            <div className={classes.blockTitle}><strong>Compare Products</strong></div>
             {hasItems ?
-                <div>
+                <div className={classes.blockContent}>
                     {items.map((item) => {
                         const product = item.product;
                         return (
                             <div key={item.uid} className={classes.compareItem}>
+                                <span className={classes.productName}>{replaceSpecialChars(product.name)}</span>
+
                                 <RemoveItemFromCompareList listId={listId} itemId={item.product.id}
                                     Child={() =>
                                         <i className={classes.iconWrapper}>
@@ -50,12 +68,19 @@ const CompareListBlock = () => {
                                     }
                                     Loader={() => <div>Loading...</div>}
                                 />
-                                <span>{product.name}</span>
+
                             </div>
                         )
                     })}
                     <div className={classes.actionToolbar}>
                         <Link className={classes.action} to={compareListPage()}>Compare</Link>
+                        <RemoveItemFromCompareList
+                            listId={listId}
+                            itemIds={itemIds}
+                            clearAll
+                            Child={() => <div className={classes.clear}>CLEAR ALL</div>}
+                            Loader={() => <div className={classes.clear}>LOADING...</div>}
+                        />
                     </div>
                 </div>
                 :
@@ -65,4 +90,10 @@ const CompareListBlock = () => {
     )
 }
 
-export default CompareListBlock
+export default connect(store => {
+    return {
+        uid: store.compare.uid,
+        items: store.compare.items,
+        item_count: store.compare.item_count
+    }
+})(CompareListBlock)

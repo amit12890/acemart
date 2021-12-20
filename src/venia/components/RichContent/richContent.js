@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyle } from '../../classify';
 import defaultClasses from './richContent.css';
-import { shape, string } from 'prop-types';
+import { array, shape, string } from 'prop-types';
 import richContentRenderers from '@magento/venia-ui/lib/components/RichContent/richContentRenderers';
 
 import PBComponent from '../../../magento/pagebuilder/pagebuilder';
@@ -57,7 +57,8 @@ const RichContent = props => {
  */
 RichContent.propTypes = {
     classes: shape({
-        root: string
+        root: string,
+        cssClasses: array
     }),
     html: string
 };

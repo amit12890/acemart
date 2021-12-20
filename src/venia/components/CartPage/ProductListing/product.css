@@ -1,0 +1,266 @@
+.root {
+    display: grid;
+    row-gap: 0.5rem;
+    /* border-top: 1px solid rgb(var(--border-color-light)); */
+    background-color: rgb(var(--color-gray-light0));
+    padding: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.root:first-child {
+    
+}
+
+.item {
+    align-items: start;
+    display: grid;
+    grid-gap: 0.5rem 1rem;
+    grid-template-areas: 'image details';
+    grid-template-columns: 100px 1fr;
+}
+
+.item_disabled {
+    composes: item;
+    opacity: 0.5;
+}
+
+.errorText {
+    color: rgb(var(--venia-global-color-error));
+    line-height: var(--venia-global-lineHeight-300);
+}
+
+.errorText:empty {
+    display: none;
+}
+
+.imageContainer {
+    grid-area: image;
+}
+
+.imageRoot {
+    height: 100%;
+}
+
+.image {
+    background-color: rgb(var(--color-white));
+    border: solid 1px rgb(var(--venia-global-color-border));
+    border-radius: 2px;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.imageContainer img {
+    display: block;
+}
+
+.details {
+    display: grid;
+    gap: 0.5rem;
+    grid-area: details;
+    grid-template-columns: 2fr 250px;
+    line-height: 1.5;
+}
+
+.leftBlock {
+
+}
+
+.rightBlock {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(var(--color-black));
+    font-size: var(--fontSize-100);
+}
+
+.colHead {
+    font-size: var(--fontSize-100);
+    font-weight: bold;
+    color: rgb(var(--color-black));
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.price {
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.subTotal {
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.priceWrapper {
+
+}
+
+.name {
+    /* grid-area: name; */
+    font-weight: var(--font-weight-bold);
+    font-size: var(--fontSize-200);
+    color: rgb(var(--product-name-color));
+    margin-bottom: .5rem
+
+}
+.name:hover {
+    color: rgb(var(--product-name-color-hover))
+
+}
+
+.sku {
+    color: rgb(var( --text-color-alt));
+    font-size: var(--fontSize-90);
+    margin-bottom: .5rem
+}
+
+
+
+.quantity {
+    align-items: start;
+    display: grid;
+    grid-area: quantity;
+    justify-items: flex-start;
+    margin-bottom: .875rem
+}
+
+.quantity input {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.cartItemActions {
+    display: flex;
+    justify-content: flex-end;
+
+}
+.cartItemActions button {
+    margin: 0 5px;
+    padding: 3px;
+    min-width: auto;
+    font-size: 12px;
+    text-transform: none;
+    height: 36px;
+    width: 36px;
+    min-height: auto;
+    border-width: 1px;
+    background-color: rgb(var(--theme-color-primary-alt));
+    border-color: rgb(var(--theme-color-primary-alt));
+}
+
+.cartItemActions button:hover {
+    border-color: rgb(var(--theme-color-primary-alt));
+    color: rgb(var(--theme-color-primary-alt));
+}
+
+.cartItemActions .iconWrapper {
+    display: inline-flex;
+}
+.cartItemActions .svgIcon {
+    fill: currentColor;
+    height: auto;
+    width: 18px; 
+}
+
+
+
+.kebab {
+    grid-area: kebab;
+    position: relative;
+}
+
+.sectionText {
+    padding: 0.25rem 0.5rem;
+    font-size: var(--venia-typography-body-S-fontSize);
+    pointer-events: none;
+}
+
+.options {
+    grid-area: options;
+    font-size: var(--venia-typography-body-S-fontSize);
+    display: grid;
+    grid-gap: 0.125rem;
+}
+
+.optionLabel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+}
+
+.stockStatusMessage {
+    color: rgb(var(--venia-global-color-error));
+    font-size: var(--venia-global-fontSize-100);
+    font-weight: var(--venia-global-fontWeight-semibold);
+    grid-area: stock;
+}
+
+.stockStatusMessage:empty {
+    display: none;
+}
+
+.addToListButton {
+    --stroke: rgb(var(--venia-global-color-teal));
+    align-content: center;
+    column-gap: 1.125rem;
+    display: inline-flex;
+    font-size: var(--venia-typography-body-S-fontSize);
+    padding: 0.875rem 0.625rem;
+    width: 100%;
+}
+
+.addToListButton_selected {
+    display: none;
+}
+
+.addToList {
+margin-top: 5px;
+}
+
+.toWishlist {
+    --stroke: var(--theme-color-primary-alt);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-90);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    outline: none;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    cursor: pointer;
+
+}
+
+.toWishlist:hover {
+    background-color: rgb(var(--color-white));
+    color:  rgb(var(--stroke));
+}
+
+@media (max-width: 640px) {
+    .details {
+        grid-template: none;
+    }
+
+    /* .name,
+    .options,
+    .price,
+    .stockStatusMessage,
+    .quantity {
+        grid-area: auto;
+    } */
+
+    .quantity {
+        justify-items: start;
+    }
+}

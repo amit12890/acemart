@@ -1,9 +1,9 @@
 import React from 'react';
 import { bool, shape, string } from 'prop-types';
 import { Form } from 'informed';
-import { useSearchBar } from '@magento/peregrine/lib/talons/SearchBar';
+import { useSearchBar } from '../../../magento/peregrine/talons/SearchBar';
 
-import { useStyle } from '../../classify';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import Autocomplete from './autocomplete';
 import SearchField from './searchField';
 import defaultClasses from './searchBar.css';

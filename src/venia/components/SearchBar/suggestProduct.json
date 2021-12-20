@@ -1,0 +1,371 @@
+{
+    "pagination": {
+        "totalResults": 172,
+        "begin": 1,
+        "end": 4,
+        "currentPage": 1,
+        "totalPages": 43,
+        "previousPage": 0,
+        "nextPage": 2,
+        "perPage": 4,
+        "defaultPerPage": 30
+    },
+    "sorting": {
+        "options": [
+            {
+                "field": "relevance",
+                "direction": "desc",
+                "label": "Best Match"
+            },
+            {
+                "field": "price",
+                "direction": "asc",
+                "label": "Price (Low to High)"
+            },
+            {
+                "field": "price",
+                "direction": "desc",
+                "label": "Price (High to Low)"
+            },
+            {
+                "field": "rating",
+                "direction": "desc",
+                "label": "Customer Rating"
+            },
+            {
+                "field": "brand",
+                "direction": "desc",
+                "label": "test"
+            }
+        ]
+    },
+    "resultLayout": "grid",
+    "results": [
+        {
+            "availability": "Sold Online &amp; In Stores",
+            "baseless_url": "beverage/glassware-and-drinkware/shot-glasses/libbey-5122-1-oz-whiskey-shot-glass/LIB5122",
+            "brand": "Libbey",
+            "bulk_savings": "bulk_savings",
+            "bulletpoints": [
+                "Product Dimensions:  1.38&quot; bot dia. x 2&quot; top dia. x 2.38&quot; h.",
+                "Capacity:  1 oz.",
+                "Manufacturer:  Libbey Glass",
+                "Color:  Clear"
+            ],
+            "color": [
+                "Clear"
+            ],
+            "description": "Serve potent shots and strong shooters with this 1-ounce whiskey/shot glass from Libbey. Featuring an elegant design, this glass is ideal for creative shooters and shots for your guests to sample. Whether it's an Irish frog, fireball, kamikaze, or a straight pour of your customer's preferred brand of whiskey, this glass will boost your presentation value to help you stand out from your competition. Its 1-ounce capacity also makes it a useful tool of the bartending trade for measuring shots in drink recipes.",
+            "id": "e64d7cba00ebd00952bab9911d516f42",
+            "imageUrl": "https://www.acemart.com/pub/media/thirdparty/600X600/0/-/0-lib5122.jpg",
+            "intellisuggestData": "eJwqTMtMLjBlYMjJTEpKrVRIz0ksLk4tZvDxdDI1NDJiMGQwZDBgMDQ3YkgvykwBBAAA__84ngxF",
+            "intellisuggestSignature": "328249d282d42e455d2aa8cdc8db1bf96e5ab3a2465799faea50fe0ce3aaa7bf",
+            "inventory": "1593.0000",
+            "mage2_id": "9021",
+            "material": [
+                "Glass"
+            ],
+            "mpn": "5122",
+            "name": "1 oz. Whiskey/Shot Glass",
+            "price": "2.19",
+            "product_type_unigram": "glass",
+            "sku": "LIB5122",
+            "stickers": [
+                "bulk_savings",
+                "store_pickup"
+            ],
+            "store_pickup": "store_pickup",
+            "thumbnailImageUrl": "https://www.acemart.com/pub/media/thirdparty/100X100/0/-/0-lib5122.jpg",
+            "uid": "15424",
+            "uom": "Each",
+            "url": "https://www.acemart.com/beverage/glassware-and-drinkware/shot-glasses/libbey-5122-1-oz-whiskey-shot-glass/LIB5122"
+        },
+        {
+            "availability": "Sold Online &amp; In Stores",
+            "baseless_url": "beverage/glassware-and-drinkware/shot-glasses/libbey-5134-1124n-4-oz-measuring-glass/LIB5134-1124N",
+            "brand": "Libbey",
+            "bulk_savings": "bulk_savings",
+            "bulletpoints": [
+                "Capacity:  4 ounces",
+                "Manufacturer:  Libbey Glass",
+                "Color:  Clear"
+            ],
+            "color": [
+                "Clear"
+            ],
+            "description": "Celebrate life's everyday celebrations with exquisite tableware and glassware from Libbey. With a rich history in glassware dating back to 1818, Libbey maintains standards for quality, durability, and aesthetic appeal designed specifically for the foodservice operator. Trust Libbey to help you bring your tabletop visions to life.This 4 ounce mixing glass from Libbey has graduations for precise measurement and portion control. The measurements are printed on both sides of this mixing glass for speed and convenience. It's a must-have in bar operations since it provides accuracy in creating a variety of mixed drinks. This bar measuring glass will add pizzazz to any bar glassware collection, and is great for preparing drinks. It conveniently fits standard metal shakers and strainers. Constructed of Duratuff&amp;reg;, this measuring glass is designed for longer service life.",
+            "id": "7b202645442b09b369553d9e54284ada",
+            "imageUrl": "https://www.acemart.com/pub/media/thirdparty/600X600/0/-/0-lib5134_1124n.jpg",
+            "intellisuggestData": "eJwqTMtMLjBlYMjJTEpKrVRIz0ksLk4tZvDxdDI1NDbRNzQ0MvFjMGQwYjBgMDQ3YkgvykwBBAAA__-IyQ2O",
+            "intellisuggestSignature": "b4a3a3d07afc863a4b0f02c51453aaaeab2dd6e8ed2df70d7c04cb7e19ce26c1",
+            "inventory": "359.0000",
+            "mage2_id": "9028",
+            "material": [
+                "Glass"
+            ],
+            "mpn": "5134/1124N",
+            "name": "4 oz. Measuring Glass",
+            "num_reviews": "3",
+            "price": "3.29",
+            "product_type_unigram": "glass",
+            "rating": "100",
+            "sku": "LIB5134/1124N",
+            "stickers": [
+                "bulk_savings",
+                "store_pickup"
+            ],
+            "store_pickup": "store_pickup",
+            "thumbnailImageUrl": "https://www.acemart.com/pub/media/thirdparty/100X100/0/-/0-lib5134_1124n.jpg",
+            "uid": "6126",
+            "uom": "Each",
+            "url": "https://www.acemart.com/beverage/glassware-and-drinkware/shot-glasses/libbey-5134-1124n-4-oz-measuring-glass/LIB5134-1124N"
+        },
+        {
+            "availability": "Sold Online &amp; In Stores",
+            "baseless_url": "beverage/bar-supplies/bar-shakers/libbey-1639-1918m-16-oz-mixing-beverage-glass-with-measurements/LIB1639-1918M",
+            "brand": "Libbey",
+            "bulk_savings": "bulk_savings",
+            "bulletpoints": [
+                "Capacity:  16 ounces",
+                "Manufacturer:  Libbey Glass",
+                "Color:  Clear"
+            ],
+            "color": [
+                "Clear"
+            ],
+            "description": "Celebrate life's everyday celebrations with exquisite tableware and glassware from Libbey. With a rich history in glassware dating back to 1818, Libbey maintains standards for quality, durability, and aesthetic appeal designed specifically for the foodservice operator. Trust Libbey to help you bring your tabletop visions to life.This 16 ounce pint mixing glass from Libbey has graduations for precise measurement and portion control up to 12 ounces. The measurements are printed on both sides of this mixing glass for speed and convenience. It's a must-have in bar operations since it provides accuracy in creating a variety of mixed drinks. This bar measuring glass will add pizzazz to any bar glassware collection, and is great for preparing drinks as well as serving guests. This versatile glass can be used to serve alcoholic drinks, tea, soda, water, and more!",
+            "id": "faa1ea5edb59df049c71ef3b2952d801",
+            "imageUrl": "https://www.acemart.com/pub/media/thirdparty/600X600/0/-/0-lib1639_1918m.jpg",
+            "intellisuggestData": "eJwqTMtMLjBlYMjJTEpKrVRIz0ksLk4tZvDxdDI0M7bUN7Q0tPBlMGQwZjBgMDQ3YkgvykwBBAAA__-KEQ2f",
+            "intellisuggestSignature": "54ad2dc4c782f4f9222bd96798f823b78ffe2c3403c58f30187d2c7fa6e0e671",
+            "inventory": "271.0000",
+            "mage2_id": "8909",
+            "material": [
+                "Glass"
+            ],
+            "mpn": "1639/1918M",
+            "name": "16 oz. Mixing Beverage Glass w/ Measurements",
+            "num_reviews": "1",
+            "price": "4.99",
+            "product_type_unigram": "glass",
+            "rating": "100",
+            "sku": "LIB1639/1918M",
+            "stickers": [
+                "bulk_savings",
+                "store_pickup"
+            ],
+            "store_pickup": "store_pickup",
+            "thumbnailImageUrl": "https://www.acemart.com/pub/media/thirdparty/100X100/0/-/0-lib1639_1918m.jpg",
+            "uid": "6018",
+            "uom": "Each",
+            "url": "https://www.acemart.com/beverage/bar-supplies/bar-shakers/libbey-1639-1918m-16-oz-mixing-beverage-glass-with-measurements/LIB1639-1918M"
+        },
+        {
+            "availability": "Sold Online &amp; In Stores",
+            "baseless_url": "beverage/glassware-and-drinkware/pint-glasses/libbey-1639ht-restaurant-basics-16-oz-mixing-glass/LIB1639HT-AM",
+            "brand": "Libbey",
+            "bulletpoints": [
+                "Product Dimensions:  3-1/2&quot; max. dia. x 2-3/8&quot; bot. dia x 5-7/8&quot; h.",
+                "Capacity:  16 ounces",
+                "Manufacturer:  Libbey Glass",
+                "Color:  Clear"
+            ],
+            "color": [
+                "Clear"
+            ],
+            "description": "Part of Libbey's Restaurant Basics&amp;reg; line, this versatile 16 oz. Mixing Glass can be used for anything from water to a Long Island Iced Tea. This 16 oz. cocktail mixing glass creates a combination of elegance and affordability for operators looking to upgrade their beverage service, while still maintaining their longer service life.Toughening processes increase both the mechanical strength and thermal shock resistance - the two biggest factors that affect glassware performance in a foodservice operation. Mechanical strength is the ability to withstand impact and resist scratches, tiny abrasions, and flaws that weaken the glass. Even small nicks and scratches that you can't see can affect breakage. Thermal shock resistance is the ability to withstand sudden shifts in temperature. Glass is a poor conductor of heat. Every 1&amp;deg; change in temperature adds 25 lbs. per square inch of stress to a glass.So what's the difference between DurTuffing and tempering? Libbey's exclusive processes were developed not only to reduce breakage and chipping, but to also change how a glass breaks - an important safety consideration in foodservice operations. Fully tempered glass is unstable, and can shatter in an explosive manner. It breaks into smaller jagged pieces that can travel long distances, potentially contaminating ice bins or salad bars, shutting down production for a period of time. The need for product replacement due to breakage and chipping affects your bottom line. Libbey's toughening processes produce glassware that stands up to more servings which means more profits for you.Libbey's DuraTuff&amp;reg; treatment is a super strengthening thermal alterprocess for &quot;pressed&quot; tumblers and stemware. The process is performed only on the upper portion of the glass, increasing its resistance to thermal and mechanical shock. Treating just the upper third of the glass at a lower temperature than tempering puts less stress on the glass and positively affects how the glass breaks as well as improving the overall durability. This process produces some of the most durable glassware in the industry.",
+            "id": "346506594cf24c814e3f163bde32e82d",
+            "imageUrl": "https://www.acemart.com/pub/media/thirdparty/600X600/0/-/0-lib1639ht-am.jpg",
+            "intellisuggestData": "eJwqTMtMLjBlYMjJTEpKrVRIz0ksLk4tZvDxdDI0M7b0CNF19GUwZDBhMGAwNDdiSC_KTAEEAAD__4DkDag",
+            "intellisuggestSignature": "1312a09f6290bf217e6c8b715076649d9b810637a392999204485cd875f632b5",
+            "inventory": "3733.0000",
+            "mage2_id": "8910",
+            "material": [
+                "Glass"
+            ],
+            "mpn": "1639HT",
+            "name": "Restaurant Basics 16 oz. Mixing Glass",
+            "num_reviews": "9",
+            "price": "13.99",
+            "product_type_unigram": "glass",
+            "rating": "89",
+            "sku": "LIB1639HT-AM",
+            "stickers": [
+                "store_pickup"
+            ],
+            "store_pickup": "store_pickup",
+            "thumbnailImageUrl": "https://www.acemart.com/pub/media/thirdparty/100X100/0/-/0-lib1639ht-am.jpg",
+            "uid": "13105",
+            "uom": "Dozen",
+            "url": "https://www.acemart.com/beverage/glassware-and-drinkware/pint-glasses/libbey-1639ht-restaurant-basics-16-oz-mixing-glass/LIB1639HT-AM"
+        }
+    ],
+    "facets": [
+        {
+            "field": "stickers",
+            "label": "stickers",
+            "type": null,
+            "collapse": 0,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "store_pickup",
+                    "label": "store_pickup",
+                    "count": 172
+                },
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "bulk_savings",
+                    "label": "bulk_savings",
+                    "count": 12
+                },
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "online_price",
+                    "label": "online_price",
+                    "count": 5
+                },
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "on_sale",
+                    "label": "on_sale",
+                    "count": 3
+                }
+            ]
+        },
+        {
+            "field": "availability",
+            "label": "Availability",
+            "type": null,
+            "collapse": 0,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Sold Online & In Stores",
+                    "label": "Sold Online & In Stores",
+                    "count": 172
+                }
+            ]
+        },
+        {
+            "field": "ss_hierarchy",
+            "label": "Category",
+            "type": "hierarchy",
+            "multiple": "single",
+            "collapse": 0,
+            "facet_active": 0,
+            "hierarchyDelimiter": ">",
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Beverage",
+                    "label": "Beverage",
+                    "count": 158
+                },
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Dining",
+                    "label": "Dining",
+                    "count": 13
+                },
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Furnishings",
+                    "label": "Furnishings",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "field": "brand",
+            "label": "Brand",
+            "type": null,
+            "multiple": "multiple-union",
+            "collapse": 0,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Libbey",
+                    "label": "Libbey",
+                    "count": 172
+                }
+            ]
+        },
+        {
+            "field": "color",
+            "label": "Color",
+            "type": null,
+            "multiple": "single",
+            "collapse": 0,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Clear",
+                    "label": "Clear",
+                    "count": 169
+                },
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Blue",
+                    "label": "Blue",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "field": "material",
+            "label": "Material",
+            "type": null,
+            "multiple": "multiple-union",
+            "collapse": 0,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Glass",
+                    "label": "Glass",
+                    "count": 169
+                }
+            ]
+        }
+    ],
+    "breadcrumbs": [
+        {
+            "field": "",
+            "label": "Search: \"libbey glasses\"",
+            "filterLabel": "Search",
+            "filterValue": "libbey glasses",
+            "removeFilters": [],
+            "removeRefineQuery": []
+        }
+    ],
+    "filterSummary": [],
+    "merchandising": {
+        "redirect": "",
+        "is_elevated": [],
+        "elevated": [],
+        "removed": [],
+        "content": {},
+        "facets": [],
+        "facetsHide": [],
+        "experiments": [],
+        "variants": [],
+        "personalized": false
+    }
+}

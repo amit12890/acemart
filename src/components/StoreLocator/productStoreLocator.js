@@ -1,9 +1,7 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { get, groupBy, size, difference } from 'lodash-es';
+import { get, groupBy, size, difference, orderBy, sortBy } from 'lodash-es';
 
-import Image from '../../venia/components/Image';
 import Button from '../../venia/components/Button';
 
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
@@ -27,7 +25,7 @@ const getMapStype = (image) => {
 }
 
 const ProductStoreLocator = props => {
-    const { closeStoreLocatorPopup, productId, isPopupVisible } = props;
+    const { closeStoreLocatorPopup, productId } = props;
     const classes = useStyle(defaultClasses, props.classes);
 
     const { data: availableStoresData, loading: storeDataLoading, error: storeDataError } = useQuery(
@@ -132,8 +130,17 @@ const ProductStoreLocatorPopup = props => {
     );
 
     const storeGroupData = groupBy(availableStores, 'store_group_name')
-    const groupList = difference(Object.keys(storeGroupData), [DEFAULT_STORE_GROUP_NAME])
-    const groupStoreList = !!selectedGroup ? get(storeGroupData, selectedGroup, []) : [];
+    const groupList = sortBy(
+        difference(Object.keys(storeGroupData), [DEFAULT_STORE_GROUP_NAME]),
+        [function(o) { return o; }]
+    )
+    let groupStoreList = [];
+    if (!!selectedGroup) {
+        groupStoreList = orderBy(
+            get(storeGroupData, selectedGroup, []),
+            ['store_group_name', 'store_sort_order'], ['desc', 'asc']
+        )
+    }
     const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
 
     return (
@@ -209,13 +216,16 @@ const ProductStoreLocatorPopup = props => {
                                 </div>
 
                                 <div className={classes.storeListContainer}>
-                                    {groupStoreList.map((store) => {
+                                    {groupStoreList.map((store, sInd) => {
                                         const { id, store_name, store_locator_info } = store;
                                         const { street, city, state, zip, qty } = store_locator_info;
                                         return (
                                             <div key={id} className={classes.listItem}
                                                 onClick={() => handleStoreSelect(store)}>
-                                                <div className={classes.listLabel}><span>A</span></div>
+                                                <div className={classes.listLabel}>
+                                                    <span>
+                                                        {String.fromCharCode(65 + sInd)}
+                                                    </span></div>
                                                 <div className={classes.storeAddressWrapper}>
                                                     <h4 className={classes.storeName}>{store_name}</h4>
                                                     <div className={classes.storeAddress}>
@@ -244,7 +254,7 @@ const ProductStoreLocatorPopup = props => {
                                     <p className={classes.qtyInfo}><strong>
                                         <span>{selectedStore.store_locator_info.qty}</span> in stock at this Location</strong></p>
                                     :
-                                    <p className={classes.qtyInfo}><strong>
+                                    <p className={[classes.qtyInfo, classes.outOfStock].join(' ')}><strong>
                                         <span>Out of Stock</span></strong></p>
                                 }
                                 <p className={classes.callInfo}>Call <a href={`tel:${selectedStore.store_locator_info.phone}`}>{selectedStore.store_locator_info.phone}</a> to verify stock</p>

@@ -1,22 +1,26 @@
 import React from 'react';
+import { useLocation } from 'react-router';
+
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
-import { Link } from 'react-router-dom';
+import Mask from '@magento/venia-ui/lib/components/Mask';
+import Button from '../../venia/components/Button';
 import Image from '../../venia/components/Image';
+
 import iconFacebook from '../../assets/facebook.svg';
 import iconTwitter from '../../assets/twitter.svg';
 import iconPinterest from '../../assets/pinterest.svg';
 import iconLinkedIn from '../../assets/linkedIn.svg';
 import iconEmail from '../../assets/email.svg';
 
-
-import Button from '../../venia/components/Button';
 import { useStyle } from '../../venia/classify';
-
 import defaultClasses from './sharePopup.css';
-import Mask from '@magento/venia-ui/lib/components/Mask';
+
+import { HOST_URL } from '../../url.utils';
+
 
 const SharePopup = props => {
     const { closeSharePopup, productId, isPopupVisible } = props;
+    const { pathname } = useLocation();
     const classes = useStyle(defaultClasses, props.classes);
 
     return (
@@ -51,7 +55,10 @@ const SharePopup = props => {
                             <div className={classes.shareButtons}>
                                 <div className={classes.shareItemWraper}>
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${HOST_URL}${pathname}&quote=Ace%20Mart%20Restauant%20Supply`}
+                                        target="_blank"
+                                        title="Share on Facebook"
+                                        className={classes.shareLink}>
                                             <Image
                                                 src={iconFacebook}
                                                 width="25"
@@ -61,7 +68,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a 
+                                            href={`https://twitter.com/intent/tweet?source=${HOST_URL}${pathname}&text=Ace%20Mart%20Restauant%20Supply:%20http%3A%2F%2Fwww.acemart.com`}
+                                            target="_blank" 
+                                            title="Tweet"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconTwitter}
                                                 width="25"
@@ -71,7 +83,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a 
+                                            href={`http://pinterest.com/pin/create/button/?url=${HOST_URL}${pathname}&description=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply`}
+                                            target="_blank"
+                                            title="Pin it"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconPinterest}
                                                 width="25"
@@ -81,7 +98,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a 
+                                            href={`http://www.linkedin.com/shareArticle?mini=true&url=${HOST_URL}${pathname}&title=Ace%20Mart%20Restauant%20Supply&summary=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply&source=http%3A%2F%2Fwww.acemart.com`}
+                                            target="_blank"
+                                            title="Share on LinkedIn"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconLinkedIn}
                                                 width="25"
@@ -91,7 +113,12 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a href="#" className={classes.shareLink}>
+                                        <a
+                                            href={`mailto:?subject=Ace%20Mart%20Restauant%20Supply&body=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply:${HOST_URL}${pathname}`}
+                                            target="_blank"
+                                            title="Send email"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconEmail}
                                                 width="25"

@@ -1,5 +1,9 @@
+.root {
+    
+}
+
 .products {
-    border-top: 1px solid rgb(var(--venia-global-color-border));
+    border-top: 1px solid rgb(var(--border-color-base));
     display: grid;
     gap: 0.75rem;
     padding-top: 0.75rem;
@@ -7,4 +11,76 @@
 
 .products:empty {
     display: none;
+}
+
+.listItems {
+    margin-left: 6px;
+}
+
+.listItem {
+    cursor: pointer;
+    padding: 12px;
+   border-top: 1px solid rgb(var(--border-color-base));
+}
+
+.listItem:first-child {
+    border-top: none;
+}
+
+.listItem:hover {
+    
+}
+
+.listWrapper {
+    flex: 2;
+    border-left: 1px solid #ddd;
+}
+
+.itemInfo {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--fontSize-100);
+}
+
+.imageWrapper {
+    margin-right: 15px;
+    flex: 1;
+    float: left;
+}
+.thumbnail {
+
+}
+
+.image {
+
+}
+
+.name {
+    font-size: var(--fontSize-200);
+    color: var(--product-name-color);
+    line-height: normal; 
+    flex: 1;
+    margin-bottom: 8px;
+}
+
+.sku {
+    font-size: var(--fontSize-90);
+    color: rgb(var(--color-gray-middle3));
+    flex: 1;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-weight: var(--font-weight-bold);
+    color: rgb(var(--product-price-color)); 
+    flex: 1;
+}
+
+.unit {
+    font-weight: var(--font-weight-regular);
+    color: rgb(var(--product-unit-color));
+}
+.unit:before {
+    content: "/";
+    margin-right: 5px;
 }

@@ -1,56 +1,39 @@
-import React, { Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from 'react';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
-import { useSuggestions } from '@magento/peregrine/lib/talons/SearchBar';
 
-import { useStyle } from '../../classify';
-import SuggestedCategories from './suggestedCategories';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import SuggestedProducts from './suggestedProducts';
 import defaultClasses from './suggestions.css';
 
+import SuggestedProductNames from './suggestedProductNames';
+
 const Suggestions = props => {
     const {
-        displayResult,
-        filters,
+        suggestionLoading,
+        productLoading,
+        suggestions,
         products,
-        searchValue,
         setVisible,
-        visible
+        visible,
+        displayResult
     } = props;
-    const { items } = products;
 
-    const talonProps = useSuggestions({
-        displayResult,
-        filters,
-        items,
-        setVisible,
-        visible
-    });
-    const { categories, onNavigate, shouldRender } = talonProps;
     const classes = useStyle(defaultClasses, props.classes);
 
+    const shouldRender = visible && displayResult;
     // render null without data
     if (!shouldRender) {
         return null;
     }
 
     return (
-        <Fragment>
-            <SuggestedCategories
-                categories={categories}
-                onNavigate={onNavigate}
-                value={searchValue}
+        <div className={classes.root}>
+            <SuggestedProductNames
+                suggestions={suggestions}
+                setVisible={setVisible}
             />
-            <h2 className={classes.heading}>
-                <span>
-                    <FormattedMessage
-                        id={'searchBar.heading'}
-                        defaultMessage={'Product Suggestions'}
-                    />
-                </span>
-            </h2>
-            <SuggestedProducts onNavigate={onNavigate} products={items} />
-        </Fragment>
+            <SuggestedProducts products={products.results || []} />
+        </div>
     );
 };
 

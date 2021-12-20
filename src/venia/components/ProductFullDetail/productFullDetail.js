@@ -1,14 +1,15 @@
 import React, { Fragment, Suspense, useState, useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
 import { Info } from 'react-feather';
 import { get, size, filter, orderBy, camelCase } from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import FormError from '@magento/venia-ui/lib/components/FormError';
-import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
+import { useProductFullDetail } from "../../../magento/peregrine/talons/ProductFullDetail/useProductFullDetail";
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { QuantityFields } from './quantity';
@@ -28,7 +29,7 @@ import LabelsPopup from '../../../components/LabelsPopup';
 import Image from '../Image';
 import smallWarning from '../../../assets/small_warning.png';
 
-import { productSpecsheetUrl, productSpecsheetLogoUrl } from '../../../url.utils';
+import { productSpecsheetUrl, productSpecsheetLogoUrl, loginPage } from '../../../url.utils';
 import defaultClasses from './productFullDetail.css';
 import StoreLocator from '../../../components/StoreLocator';
 import ProductReview from "../../../@amasty/amAdvancedReviews"
@@ -36,6 +37,11 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
+import LoadingButton from '../../../components/LoadingButton';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useWishlistSession } from '../../../data/appState/appState.hook';
+import { toLower } from 'lodash-es';
+import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -59,10 +65,14 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const ProductFullDetail = props => {
     const { product } = props;
-    const { pos_stock_manage, only_x_left_in_stock,
+
+    const { id, pos_stock_manage, only_x_left_in_stock,
         mpn, uom, productLabel, media_gallery
     } = product;
-    console.log(product)
+
+    const history = useHistory()
+    const [{ isSignedIn }] = useUserContext()
+    const { addProductToWishlistSession } = useWishlistSession()
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
@@ -71,12 +81,18 @@ const ProductFullDetail = props => {
 
     const reviewRef = useRef(null)
 
+    const { handleSwitchStore } = useStoreSwitcher()
     const talonProps = useProductFullDetail({ product });
 
     // handlers for wishlist popup
     const openWishlistPopup = useCallback(() => {
-        setShowWishlistPopup(true);
-    }, [setShowWishlistPopup]);
+        if (isSignedIn) {
+            setShowWishlistPopup(true)
+        } else {
+            history.push(loginPage())
+            addProductToWishlistSession(product)
+        }
+    }, [setShowWishlistPopup, isSignedIn, product, addProductToWishlistSession]);
     const closeWishlistPopup = useCallback(() => {
         setShowWishlistPopup(false);
     }, [setShowWishlistPopup]);
@@ -230,7 +246,10 @@ const ProductFullDetail = props => {
     }
 
     const cartActionContent = isSupportedProductType ? (
-        <Button disabled={isAddToCartDisabled} priority="high" type="submit">
+        <Button
+            disabled={isAddToCartDisabled}
+            priority="high"
+            type="submit">
             <FormattedMessage
                 id={'productFullDetail.cartAction'}
                 defaultMessage={'Add to Cart'}
@@ -252,6 +271,95 @@ const ProductFullDetail = props => {
 
     const upsellProducts = get(product, 'upsell_products', []);
     const relatedProducts = get(product, 'related_products', []);
+    /**
+    * render availablity of in grey porttion
+    */
+    const renderAvailability = useCallback(() => {
+        const storeFinalLabel = get(pos_stock_manage, "stock_final_label", "")
+        if (toLower(pos_stock_manage.stock_label) === "unavailable") {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div
+                        className={classes.stockAvailability}
+                        style={{ borderBottomWidth: 0 }}>
+                        This item is unavailable for store pickup.&nbsp;
+                        <span
+                            className={classes.clickHere}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleSwitchStore("default")
+                            }}>
+                            Click here
+                        </span>
+                        &nbsp;to ship direct.
+                    </div>
+                </div>
+            )
+        } else if (size(storeFinalLabel) > 0) {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div className={classes.instock}>
+                        {get(pos_stock_manage, "stock_final_label", "")}
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div
+                        className={classes.stockAvailability}
+                        style={{ borderBottomWidth: 0 }}>
+                        {get(pos_stock_manage, "stock_label", "")}
+                    </div>
+                </div>
+            )
+        }
+    }, [pos_stock_manage])
+
+    /**
+     * render availablity of store pickup in side gray portion
+     */
+    const renderSideAvailability = useCallback(() => {
+        if (toLower(pos_stock_manage.stock_label) === "unavailable") {
+            return (
+                <>
+                    <div className={classes.stockAvailability}>
+                        This item is unavailable for store pickup.&nbsp;
+                        <span
+                            className={classes.clickHere}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                handleSwitchStore("default")
+                            }}>
+                            Click here
+                        </span>
+                        &nbsp;to ship direct.
+                    </div>
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                        </div>
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    {!!pos_stock_manage.stock_label &&
+                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
+                    }
+                    {/* Product Stock Avialability */}
+                    {!!pos_stock_manage.stock_final_label &&
+                        <div className={classes.apSectionRow}>
+                            <div className={classes.stock}>
+                                <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                            </div>
+                        </div>
+                    }
+                </>
+            )
+        }
+    }, [pos_stock_manage])
 
     return (
         <Fragment>
@@ -310,6 +418,11 @@ const ProductFullDetail = props => {
                                 <Price
                                     currencyCode={productDetails.price.currency}
                                     value={productDetails.price.value}
+                                    classes={{
+                                        currency: classes.currency,
+                                        decimal: classes.decimal,
+                                        fraction: classes.fraction
+                                    }}
                                 />
                                 <span className={classes.unit}>
                                     / {uom}
@@ -318,11 +431,7 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Product Stock Avialability */}
-                        <div className={classes.piSectionRow}>
-                            <div className={classes.stock}>
-                                {only_x_left_in_stock} In Stock
-                            </div>
-                        </div>
+                        {renderAvailability()}
 
                         {/* Product Label */}
                         <div className={classes.piSectionRow}>
@@ -337,9 +446,11 @@ const ProductFullDetail = props => {
                                         </div>
                                     )
                                 })}
-                                <div className={classes.labelHelper}>
-                                    <span onClick={openLabelsPopup}>What's this</span>
-                                </div>
+                                {!!size(processedProductLabels) &&
+                                    <div className={classes.labelHelper}>
+                                        <span onClick={openLabelsPopup}>What's this?</span>
+                                    </div>
+                                }
                             </div>
                         </div>
 
@@ -379,12 +490,12 @@ const ProductFullDetail = props => {
                         {/* Product Review   */}
                         {!!product.review_count ?
                             <div className={classes.piSectionRow}>
-                                <div className={classes.productReview}>
+                                <div className={classes.productReview} onClick={handleFirstReviewClick}>
                                     <RatingMini percent={product.rating_summary} value={product.review_count} />
                                 </div>
                             </div>
                             :
-                            <div style={{ cursor: "pointer" }} onClick={handleFirstReviewClick}>
+                            <div className={classes.reviewShort} onClick={handleFirstReviewClick}>
                                 Be the first to review this product
                             </div>
                         }
@@ -396,9 +507,9 @@ const ProductFullDetail = props => {
                                 <div className={classes.tableWrapper}>
                                     <table className={[classes.data, classes.table, classes.shortAdditional].join(" ")}>
                                         <tbody>
-                                            {moreInformation.map(info => {
+                                            {moreInformation.map((info, mInd) => {
                                                 return (
-                                                    <tr>
+                                                    <tr key={mInd}>
                                                         <th scope="row" className={[classes.col, classes.label].join(" ")}>{info.label}</th>
                                                         <td data-th={info.label} className={[classes.col, classes.data].join(" ")}>
                                                             <RichText
@@ -421,7 +532,11 @@ const ProductFullDetail = props => {
                                     <iframe
                                         src={`https://www.youtube.com/embed/${product.youtube_filename
                                             }`}
-                                    />
+                                        allowfullscreen="allowfullscreen"
+                                        mozallowfullscreen="mozallowfullscreen"
+                                        msallowfullscreen="msallowfullscreen"
+                                        oallowfullscreen="oallowfullscreen"
+                                        webkitallowfullscreen="webkitallowfullscreen" />
                                 </div>
                             </div>
                         )}
@@ -447,17 +562,7 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
-                                    {!!pos_stock_manage.stock_label &&
-                                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
-                                    }
-                                    {/* Product Stock Avialability */}
-                                    {!!pos_stock_manage.stock_final_label &&
-                                        <div className={classes.apSectionRow}>
-                                            <div className={classes.stock}>
-                                                <span className={[classes.availability, classes.outofStock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
-                                            </div>
-                                        </div>
-                                    }
+                                    {renderSideAvailability()}
 
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={classes.apSectionRow}>
@@ -515,18 +620,23 @@ const ProductFullDetail = props => {
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
                                             <span>
-                                                <RichText content={product.ship_time} />
+                                                <RichText content={get(product, "pos_stock_manage.ship_time_label", "")} />
                                             </span>
                                         </div>
+                                    </div>
 
-                                        {!!size(priceTiers) &&
-                                            <div>
-                                                <div>BULK SAVINGS</div>
+                                    {/* Bulk Saving Info */}
+                                    {!!size(priceTiers) &&
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.bulkSavingInfo}>
+                                                <div className={classes.bulkSavingtitle}>BULK SAVINGS</div>
                                                 {priceTiers.map((tier, ind) => {
                                                     return (
-                                                        <div key={ind}>
-                                                            <div>Buy at least {tier.quantity}</div>
-                                                            <div>
+                                                        <div className={classes.bulkOfferWrapper} key={ind}>
+                                                            <div className={classes.tierQuantity}>
+                                                                <span>Buy at least</span> <strong>{tier.quantity}</strong>
+                                                            </div>
+                                                            <div className={classes.tierPice}>
                                                                 <Price
                                                                     currencyCode={
                                                                         tier.final_price.currency
@@ -541,8 +651,9 @@ const ProductFullDetail = props => {
                                                     )
                                                 })}
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
+
 
                                     {/* Product Add To Links */}
                                     <div className={classes.apSectionRow}>
@@ -584,9 +695,7 @@ const ProductFullDetail = props => {
                                                             <span>Add to Compare</span>
                                                         </Button>
                                                     )}
-                                                    Loader={() => (
-                                                        <div>Loading....</div>
-                                                    )}
+                                                    Loader={() => <LoadingButton />}
                                                 />
                                             </div>
 
@@ -804,6 +913,7 @@ const ProductFullDetail = props => {
                     isPopupVisible={showWishlistPopup}
                     productId={product.id}
                     productQty={wishlistButtonProps.item.quantity}
+                    productName={product.product_name || ''}
                     closeWishlistPopup={closeWishlistPopup}
                 />
             )}
@@ -822,7 +932,7 @@ const ProductFullDetail = props => {
                 />
             )}
             {showStoreLocatorPopup && (
-                <StoreLocator
+                <StoreLocator productId={id}
                     isPopupVisible={showStoreLocatorPopup}
                     closeStoreLocatorPopup={closeStoreLocatorPopup} />
             )}

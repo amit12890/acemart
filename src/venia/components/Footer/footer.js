@@ -10,11 +10,21 @@ import footerPayment from '../../../assets/footer-payment.png';
 import defaultClasses from './footer.css';
 import * as UrlFuncs from '../../../url.utils';
 import NewsletterSubscriptionInput from '../../../components/AccountPage/newsletterSubscriptionInput';
+import { useQuery } from '@apollo/client';
+import { GET_FOOTER_GQL } from './footer.gql';
+import RichContent from '../RichContent';
+import { get, size } from 'lodash-es';
 
 
 const Footer = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useFooter();
+
+    const { data, loading } = useQuery(GET_FOOTER_GQL)
+    const footerCol1 = get(data, "footerColumn1.items[0].content", "")
+    const footerCol2 = get(data, "footerColumn2.items[0].content", "")
+    const footerCol3 = get(data, "footerColumn3.items[0].content", "")
+    const footerCol4 = get(data, "footerColumn4.items[0].content", "")
 
     const { copyrightText } = talonProps;
 
@@ -112,7 +122,10 @@ const Footer = props => {
                     <div className={[classes.contentBlock, classes.blockMiddle].join(" ")}>
                         <div className={classes.blockLeft}>
                             <div className={classes.footerBox}>
-                                <h3 className={classes.groupTitle}>Customer Center</h3>
+                                {size(footerCol1) > 0 && (
+                                    <RichContent html={footerCol1} />
+                                )}
+                                {/* <h3 className={classes.groupTitle}>Customer Center</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -147,11 +160,15 @@ const Footer = props => {
                                             Shipping Policies
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div className={classes.footerBox}>
-                                <h3 className={classes.groupTitle}>Company Info</h3>
+                                {size(footerCol2) > 0 && (
+                                    <RichContent html={footerCol2} />
+                                )}
+
+                                {/* <h3 className={classes.groupTitle}>Company Info</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -181,11 +198,14 @@ const Footer = props => {
                                             FAQs
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div className={classes.footerBox}>
-                                <h3 className={classes.groupTitle}>Tools & Services</h3>
+                                {size(footerCol3) > 0 && (
+                                    <RichContent html={footerCol3} />
+                                )}
+                                {/* <h3 className={classes.groupTitle}>Tools & Services</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -215,16 +235,19 @@ const Footer = props => {
                                             Commercial Kitchen Design
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div className={classes.footerBox}>
-                                <h3 className={classes.groupTitle}>Contact Us</h3>
+                                {size(footerCol4) > 0 && (
+                                    <RichContent html={footerCol4} />
+                                )}
+                                {/* <h3 className={classes.groupTitle}>Contact Us</h3>
                                 <div className={classes.storeAddress}>
                                     <p>2653 Austin Hwy</p>
                                     <p>San Antonio, TX 78218</p>
                                     <p>888-898-8079</p>
-                                </div>
+                                </div> */}
                                 <ul className={[classes.groupLinks, classes.groupSocial].join(" ")}>
                                     <li className={classes.socialLinks}>
                                         <a target="_blank" href="https://www.facebook.com/acemart/">
@@ -304,7 +327,7 @@ const Footer = props => {
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer >
     );
 };
 

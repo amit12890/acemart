@@ -1,0 +1,81 @@
+.root {
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 1.5rem;
+}
+
+.root_editMode {
+    composes: root;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    padding: 0;
+}
+
+.root_updated {
+    composes: root;
+    animation: flash var(--venia-global-anim-bounce) 640ms 2;
+}
+
+.cardHeader {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr;
+}
+
+.cardTitle {
+    font-weight: 600;
+}
+
+.editButton {
+    color: rgb(var(--color-gray-darken0));
+    text-transform: uppercase;
+    border: 1px solid rgb(var(--color-gray-darken0));;
+    min-height: auto;
+    padding: 10px 1.5rem;
+    font-size: var(--fontSize-100);
+    margin-top: 10px;
+    font-weight: var(--font-weight-bold);
+}
+
+.editButton:hover {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-gray-darken0));
+}
+
+.editWrapper {
+    display: grid;
+    padding: 1rem 0 1.5rem;
+    row-gap: 0.5rem;
+}
+
+.editTitle {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.editIcon {
+    stroke: rgb(var(--venia-brand-color-1-700));
+}
+
+.loading {
+    composes: root from '../../CartPage/indicator.css';
+    text-align: center;
+}
+
+@media (max-width: 960px) {
+    .editText {
+        display: none;
+    }
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

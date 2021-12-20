@@ -3,5 +3,16 @@
     "autocomplete.resultSummary": "{resultCount} items",
     "sortItem.recommended": "Recommended",
     "sortItem.price_asc": "Price Asc",
-    "sortItem.price_desc": "Price Desc"
+    "sortItem.price_desc": "Price Desc",
+    "accountInformation.title": "My Dashboard",
+    "orderHistoryPage.title": "My Orders",
+    "wishlistPage.title": "My Wish List",
+    "addressBookPage.title": "Address Book",
+    "editAccountInfo.title": "Edit Account Information",
+    "newsletterSubscription.title": "Newsletter Subscription",
+    "landingPage.title": "Ace Mart Restaurant Supply",
+    "autocomplete.suggestion_error": "An error occurred while fetching suggestions.",
+    "autocomplete.product_error": "An error occurred while fetching products.",
+    "landingPage.description": "Ace Mart Restaurant Supply has a large inventory of in-stock restaurant equipment and supplies available at wholesale prices. Shop online or in-store today.",
+    "searchPage.searchTermText": "Showing results for <highlight>{term}</highlight>"
 }

@@ -2,12 +2,13 @@ import React, {
     useCallback,
     useEffect,
     useMemo,
+    useReducer,
     useRef,
     useState
 } from 'react';
 import { useQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
-import { get, size, range } from 'lodash';
+import { get, size, range, sortBy, cloneDeep } from 'lodash';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
@@ -20,6 +21,7 @@ import PlusBlock from './plusBlock';
 import MinusBlock from './minusBlock';
 import ReportBlock from './reportBlock';
 
+import { getDateString, questionReducer, updateAnswerCountAction, updateQuestionCountAction } from './utils';
 import {
     getProductQuestions,
     questionRatingPlusMutation,
@@ -29,15 +31,15 @@ import {
     reportQuestionMutation,
     reportAnswerMutation
 } from './productQuestions.gql';
-import { getDateString } from './utils';
+import { partial } from 'lodash-es';
 
 const sortOptions = [
-    { value: '7', label: 'Most Recent Questions' },
-    { value: '8', label: 'Oldest Questions' },
-    { value: '9', label: 'Questions With The Most Helpful Answers' },
-    { value: '10', label: 'Questions With Most Recent Answers' },
-    { value: '11', label: 'Questions With  Oldest Answers' },
-    { value: '12', label: 'Questions With Most Answers' },
+    { value: '1', label: 'Most Recent Questions' },
+    { value: '2', label: 'Oldest Questions' },
+    { value: '3', label: 'Questions With The Most Helpful Answers' },
+    { value: '4', label: 'Questions With Most Recent Answers' },
+    { value: '5', label: 'Questions With  Oldest Answers' },
+    { value: '6', label: 'Questions With Most Answers' },
 ];
 
 const ProductQuestionsBlock = ({ productId }) => {
@@ -87,10 +89,33 @@ const QuestionBlock = ({ questions }) => {
     const [expandBtnState, setExpandBtnState] = useState(false)
     const [expandedQuestions, setExpandedQuestions] = useState(new Set([]));
     const [searchToken, setSearchToken] = useState('');
-    const [sortBy, setSortBy] = useState(sortOptions[0])
+    const [userSelectedSort, setSortBy] = useState(sortOptions[0])
+    const [queData, dispatch] = useReducer(questionReducer, { questions: [] })
     const fuseSearch = useRef();
 
     useEffect(() => {
+        // create new state for questions
+        let pQueList = cloneDeep(questions)
+        for (let qInd = 0; qInd < size(pQueList); qInd++) {
+            const currQue = pQueList[qInd];
+            // add answer count for sorting
+            currQue.ansCount = size(currQue.answer);
+            // add answer total upvotes
+            let ansUpvoteCount = 0;
+            let ansMostRecentDate = Infinity;
+            let ansOldestDate = 0;
+            for (let ansInd = 0; ansInd < size(currQue.answer); ansInd++) {
+                const currAns = currQue.answer[ansInd];
+                ansUpvoteCount += currAns.good
+                if (Number(currAns.date) < ansMostRecentDate) ansMostRecentDate = Number(currAns.date);
+                if (Number(currAns.date) > ansOldestDate) ansOldestDate = Number(currAns.date);
+            }
+            currQue.ansUpvoteCount = ansUpvoteCount;
+            currQue.ansMostRecentDate = ansMostRecentDate;
+            currQue.ansOldestDate = ansOldestDate;
+        }
+        // sort by Most Recent Questions
+        pQueList = sortBy(pQueList, [function (d) { return Number(d.date); }]);
         // setup fuse search
         const options = {
             findAllMatches: true,
@@ -101,8 +126,9 @@ const QuestionBlock = ({ questions }) => {
                 'answer.content',
             ],
         };
-        fuseSearch.current = new Fuse(questions, options);
-    }, [questions]);
+        fuseSearch.current = new Fuse(pQueList, options);
+        dispatch({ type: "UPDATE_QUESTIONS", payload: pQueList });
+    }, [questions, dispatch]);
 
     const handleQueExpandToggle = useCallback(
         queIndex => {
@@ -115,37 +141,69 @@ const QuestionBlock = ({ questions }) => {
     );
 
     const toggleExpandAll = useCallback(() => {
-        const nextState = expandBtnState ? new Set([]) : new Set(range(0, questions.length))
+        const nextState = expandBtnState ? new Set([]) : new Set(range(0, queData.questions.length))
         setExpandedQuestions(nextState);
         setExpandBtnState(expBtnState => !expBtnState)
-    }, [questions, setExpandedQuestions, expandBtnState, setExpandBtnState]);
+    }, [queData, setExpandedQuestions, expandBtnState, setExpandBtnState]);
 
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
     }, []);
-
-    const filteredQuestions = useMemo(() => {
-        if (searchToken.length > 2) {
-            const result = fuseSearch.current.search(searchToken);
-            return result.map((d) => d.item)
-        } else {
-            return questions;
-        }
-    }, [searchToken, questions]);
 
     // expand or collapse on click
     const handleSortClick = () => {
         setExpanded(!expanded);
     };
 
+    const onQuestionVoteSuccess = useCallback((questionId, countType, count) => {
+        dispatch(updateQuestionCountAction(questionId, countType, count))
+    }, [])
+
+    const onAnswerVoteSuccess = useCallback((questionId, answerId, countType, count) => {
+        dispatch(updateAnswerCountAction(questionId, answerId, countType, count))
+    }, [])
+
     // click event for menu items
     const handleItemClick = useCallback(
         sortAttribute => {
             setSortBy(sortAttribute)
             setExpanded(false);
+            let sortedQuestions = [];
+            // sort questions by
+            switch (sortAttribute.value) {
+                case '1': // sort by Most Recent Questions
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return Number(d.date); }]);
+                    break;
+                case '2': // Sort by Oldest questions
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return Number(d.date) * -1; }]);
+                    break;
+                case '3': // Questions With The Most Helpful Answers
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansUpvoteCount * -1; }]);
+                    break;
+                case '4': // Questions With Most Recent Answers
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansMostRecentDate; }]);
+                    break;
+                case '5': // Questions With  Oldest Answers
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansOldestDate * -1; }]);
+                    break;
+                case '6': // Questions With Most Answers
+                    sortedQuestions = sortBy(queData.questions, [function (d) { return d.ansCount * -1; }]);
+                    break;
+            }
+            dispatch({ type: "UPDATE_QUESTIONS", payload: sortedQuestions });
         },
-        [setExpanded]
+        [setExpanded, setSortBy, dispatch, queData]
     );
+
+    const searchedQuestions = useMemo(() => {
+        let result;
+        if (searchToken.length > 2) {
+            result = fuseSearch.current.search(searchToken);
+            return result.map((d) => d.item)
+        } else {
+            return queData.questions;
+        }
+    }, [searchToken, queData]);
 
     const sortElements = useMemo(() => {
         // should be not render item in collapsed mode.
@@ -200,7 +258,7 @@ const QuestionBlock = ({ questions }) => {
                                 <div className={classes.sortingOptions}>
                                     <Button
                                         className={classes.sortingButton}
-                                        onClick={handleSortClick}>{sortBy.label}</Button>
+                                        onClick={handleSortClick}>{userSelectedSort.label}</Button>
                                     {sortElements}
                                 </div>
                                 {expandBtnState ?
@@ -215,18 +273,18 @@ const QuestionBlock = ({ questions }) => {
                                                 <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
                                         </i>
                                     </Button>
-                                :
-                                <Button
-                                    onClick={toggleExpandAll}
-                                    className={classes.expandAll}
-                                >
-                                    <span>Expand All</span>
-                                    <i className={classes.iconWrapper}>
-                                        <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                            <title>store</title>
-                                            <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
-                                    </i>
-                                </Button>
+                                    :
+                                    <Button
+                                        onClick={toggleExpandAll}
+                                        className={classes.expandAll}
+                                    >
+                                        <span>Expand All</span>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                                                <title>store</title>
+                                                <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                        </i>
+                                    </Button>
                                 }
                             </div>
                         </div>
@@ -235,33 +293,45 @@ const QuestionBlock = ({ questions }) => {
 
 
                 {
-                    filteredQuestions.map((item, index) => {
+                    searchedQuestions.map((item, index) => {
                         const ansCount = size(item.answer);
                         let queClass = expandedQuestions.has(index)
                             ? `${classes.question} ${classes.question_open}`
                             : classes.question;
+                        const onUpvoteSuccess = partial(onQuestionVoteSuccess, item.id, "good")
+                        const onDownvoteSuccess = partial(onQuestionVoteSuccess, item.id, "bad")
 
                         return (
                             <div key={item.id} className={classes.questionWrapper}>
                                 <div className={queClass}>
                                     <div className={classes.listItemWrapper}>
-                                        <div className={classes.listItem}
-                                            onClick={() => handleQueExpandToggle(index)}
-                                        >
+                                        <div className={classes.listItem}>
                                             <div className={classes.leftBlock}>
-                                                <div className={classes.listContent}>{item.content}</div>
+                                                <div className={classes.listContent}
+                                                    onClick={() => handleQueExpandToggle(index)}
+                                                >
+                                                    <i className={classes.iconWrapper}>
+                                                        <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="11" height="32" viewBox="0 0 11 32">
+                                                            <title>next</title>
+                                                            <path d="M10.625 17.438q0 0.094-0.047 0.203t-0.141 0.203l-8.313 8.313q-0.094 0.094-0.203 0.141t-0.203 0.047q-0.125 0-0.234-0.047t-0.172-0.141l-0.906-0.875q-0.063-0.094-0.125-0.203t-0.063-0.234q0-0.094 0.063-0.203t0.125-0.203l7.031-7-7.031-7.031q-0.063-0.063-0.125-0.188t-0.063-0.219 0.063-0.219 0.125-0.188l0.906-0.906q0.063-0.063 0.172-0.109t0.234-0.047q0.094 0 0.203 0.047t0.203 0.109l8.313 8.344q0.094 0.063 0.141 0.172t0.047 0.234v0z"></path>
+                                                        </svg>
+                                                    </i>
+                                                    {item.content}
+                                                </div>
                                                 <div className={classes.count}>
                                                     {ansCount > 1
                                                         ? `${ansCount} answers`
                                                         : `${ansCount} answer`}
                                                 </div>
                                                 <div className={classes.nickName}>by {item.nickname}</div>
-                                                <div className={classes.count}>{getDateString("1050")}</div>
+                                                <div className={classes.count}>{getDateString(item.date)}</div>
                                             </div>
                                             <div className={classes.rightBlock}>
                                                 <div className={[classes.helper, classes.plus].join(" ")}>
                                                     <PlusBlock count={item.good}
                                                         mutation={questionRatingPlusMutation}
+                                                        queryType="questionRatingPlus"
+                                                        onSuccess={onUpvoteSuccess}
                                                         variables={{
                                                             question_id: item.id
                                                         }}
@@ -270,6 +340,8 @@ const QuestionBlock = ({ questions }) => {
                                                 <div className={[classes.helper, classes.minus].join(" ")}>
                                                     <MinusBlock count={item.bad}
                                                         mutation={questionRatingMinusMutation}
+                                                        queryType="questionRatingMinus"
+                                                        onSuccess={onDownvoteSuccess}
                                                         variables={{
                                                             question_id: item.id
                                                         }}
@@ -292,6 +364,10 @@ const QuestionBlock = ({ questions }) => {
                                             </div>
                                             {!!ansCount
                                                 ? item.answer.map((ans) => {
+                                                    const onAnsUpvoteSuccess = partial(
+                                                        onAnswerVoteSuccess, item.id, ans.id, "good")
+                                                    const onAnsDownvoteSuccess = partial(
+                                                        onAnswerVoteSuccess, item.id, ans.id, "bad")
                                                     return (
                                                         <div key={ans.id} className={classes.anslistItemWrapper}>
                                                             <div className={classes.answerListItem}>
@@ -299,8 +375,11 @@ const QuestionBlock = ({ questions }) => {
                                                             </div>
                                                             <div className={classes.answerListHelper}>
                                                                 <div className={classes.nickName}>by {ans.nickname}</div>
+                                                                <div className={classes.count}>{getDateString(ans.date)}</div>
                                                                 <div className={[classes.helper, classes.plus].join(" ")}>
                                                                     <PlusBlock count={ans.good}
+                                                                        queryType="answerRatingPlus"
+                                                                        onSuccess={onAnsUpvoteSuccess}
                                                                         mutation={
                                                                             answerRatingPlusMutation
                                                                         }
@@ -311,6 +390,8 @@ const QuestionBlock = ({ questions }) => {
                                                                 </div>
                                                                 <div className={[classes.helper, classes.minus].join(" ")}>
                                                                     <MinusBlock count={ans.bad}
+                                                                        queryType="answerRatingMinus"
+                                                                        onSuccess={onAnsDownvoteSuccess}
                                                                         mutation={
                                                                             answerRatingMinusMutation
                                                                         }

@@ -1,25 +1,29 @@
 import React from 'react';
 import { arrayOf, func, number, oneOfType, shape, string } from 'prop-types';
 
-import { useStyle } from '../../classify';
-import mapProduct from '@magento/venia-ui/lib/util/mapProduct';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import SuggestedProduct from './suggestedProduct';
 import defaultClasses from './suggestedProducts.css';
 
 const SuggestedProducts = props => {
-    const { limit, onNavigate, products } = props;
+    const { products } = props;
     const classes = useStyle(defaultClasses, props.classes);
 
-    const items = products.slice(0, limit).map(product => (
-        <li key={product.id} className={classes.item}>
-            <SuggestedProduct
-                {...mapProduct(product)}
-                onNavigate={onNavigate}
-            />
-        </li>
-    ));
-
-    return <ul className={classes.root}>{items}</ul>;
+    return (
+        <div className={classes.listWrapper}>
+            <ul className={classes.listItems}>
+                {products.map(product => {
+                    return (
+                        <li key={product.id} className={classes.listItem}>
+                            <SuggestedProduct
+                                {...product}
+                            />
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+    );
 };
 
 export default SuggestedProducts;

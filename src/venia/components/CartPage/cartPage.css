@@ -1,0 +1,183 @@
+.root {
+    padding: 2.5rem 0;
+    max-width: var(--venia-global-maxWidth);
+    margin: 0 auto;
+}
+
+.body {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 23rem;
+    /* The summary grid item spans the entire right column. */
+    grid-template-areas:
+        'items summary'
+        'adjustments summary';
+}
+
+.pageTitleWrapper {
+margin-bottom: 3rem;
+}
+
+.title {
+    justify-self: center;
+    background-color: #f5f5f5;
+    padding: 15px 30px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.heading_container {
+    display: grid;
+    margin-bottom: 1rem;
+    row-gap: 1rem;
+}
+
+.heading {
+    line-height: 1.25em;
+}
+
+.stockStatusMessageContainer:empty {
+    display: none;
+}
+
+.items_container {
+    grid-area: items;
+}
+
+.productListingWrapper {
+    
+}
+
+.price_adjustments_container {
+    grid-area: adjustments;
+    margin-bottom: 25px;
+}
+
+.summary_container {
+    grid-area: summary;
+    height: 100%;
+}
+
+.summary_contents {
+    position: sticky;
+    /*
+     * TODO: Use CSS Properties (variables) or something instead of hardcoding this.
+     *  - 3.5rem = min-height of nav header. See the "toolbar" class in header.css.
+     *  - 2rem = padding-top of the cart page.
+     */
+    top: 5.5rem;
+}
+
+.crossSellSection {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.sectionTitleWrapper {
+
+}
+
+
+.sectionSubTitle {
+    font-size: var(--fontSize-600);
+    font-weight: var(--font-weight-regular);
+    text-align: left;
+    margin-bottom: 20px;
+    text-transform: none;
+    
+    }
+
+.sectionContent {
+
+}
+
+.gallery {
+    
+}
+
+.cartActions { 
+    display: flex;
+    justify-content: space-between;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+
+.buttonContinue {
+    margin: 5px;
+}
+
+.buttonClearCart {
+margin: 5px;
+}
+        
+
+.emptyCart h3 {
+    text-transform: none;
+}
+
+.buttonContinue .action,
+.buttonClearCart button {
+    --stroke: var(--theme-color-primary-alt);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    display: flex;
+}
+
+.buttonContinue .action:hover {
+    background-color: rgb(var(--color-white));
+    color:  rgb(var(--stroke));
+}
+
+.buttonContinue .iconWrapper,
+.buttonClearCart .iconWrapper{
+    display: inline-flex;
+    margin-right: 10px;
+
+}
+
+.buttonContinue .svgIcon,
+.buttonClearCart .svgIcon {
+    width: 6px;
+    height: auto;
+    fill: currentColor;
+}
+
+/*
+ * Mobile-specific styles.
+ */
+
+@media (max-width: 960px) {
+    .root {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .body {
+        /* Only one column in mobile view. */
+        grid-template-columns: 100%;
+        grid-template-areas:
+            'items'
+            'adjustments'
+            'summary';
+    }
+}

@@ -1,5 +1,4 @@
 .root {
-    
     overflow: visible;
     opacity: 0;
     position: absolute;
@@ -67,10 +66,11 @@
     display: flex;
     justify-content: space-between;
     padding-top: 15px;
+    flex-wrap: wrap;
 }
 
 .stockStatusMessageContainer {
-    grid-column-end: span 2;
+    flex-basis: 100%;
 }
 
 .stockStatusMessageContainer:empty {
@@ -78,12 +78,10 @@
 }
 
 .body {
-    min-height: 10rem;
     overflow-y: auto;
     height: 100%;
     padding-top: 15px;
     padding-bottom: 15px;
-    
 }
 
 .modalClose {
@@ -133,7 +131,6 @@
 .footer {
     flex-shrink: 0;
     position: relative;
-
     align-items: center;
     border-top: 2px solid rgb(var(--venia-global-color-gray));
     padding-top: 10px;
@@ -150,7 +147,8 @@
 .footer .panelRow {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
 
 }
 
@@ -158,14 +156,15 @@
 .checkoutButton {
     composes: root_highPriority from '../Button/button.css';
     grid-column: 1 / span 1;
-    background-color: rgb(var(--venia-brand-color-1-700));
-    border: 2px solid rgb(var(--venia-brand-color-1-700));
+    background-color: rgb(var(--theme-color-primary-alt));
+    border: 2px solid rgb(var(--theme-color-primary-alt));
     font-weight:var(--font-weight-bold);
-    margin-bottom: 10px;
+    margin: 5px
+
 }
 .checkoutButton:hover {
-    color: rgb(var(--venia-brand-color-1-700)); 
-    border-color: rgb(var(--venia-brand-color-1-700));
+    color: rgb(var(--theme-color-primary-alt)); 
+    border-color: rgb(var(--theme-color-primary-alt)); 
 }
 
 .editCartButton {
@@ -175,6 +174,7 @@
     border-color: rgb(var(--stroke));
     display: inline-flex;
     align-self: self-start;
+    margin: 5px
 
 }
 
@@ -198,6 +198,6 @@
 @media (min-width: 1024px) {
     
     .root {
-        width: 20vw;
+        width: 25vw;
     }
 }

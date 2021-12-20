@@ -131,8 +131,8 @@ const AddressCard = props => {
                     </i>
                     <span className={classes.actionLabel}>
                         <FormattedMessage
-                            id="addressBookPage.editAddress"
-                            defaultMessage="Edit"
+                            id="am.addressBookPage.editAddress"
+                            defaultMessage="Edit Address"
                         />
                     </span>
                 </LinkButton>
