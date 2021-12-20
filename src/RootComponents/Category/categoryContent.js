@@ -16,6 +16,7 @@ import SortedByContainer from '@magento/venia-ui/lib/components/SortedByContaine
 import FilterModalOpenButton from '../../venia/components/FilterModalOpenButton';
 import ProductCategory from '../../components/ProductCategory/productCategory';
 import { get } from 'lodash-es';
+import ProductPerPage from './productPerPage';
 
 const FilterModal = React.lazy(() =>
     import('../../venia/components/FilterModal')
@@ -97,7 +98,12 @@ const CategoryContent = props => {
                         <Gallery items={items} />
                     </section>
                     <div className={classes.pagination}>
-                        <Pagination pageControl={pageControl} />
+                        <div className={classes.paginationItem}>
+                            <Pagination pageControl={pageControl} />
+                        </div>
+                        <div className={classes.parPageItem}>
+                            <ProductPerPage pageSize={pageSize} />
+                        </div>
                     </div>
                 </Fragment>
             );
@@ -118,7 +124,7 @@ const CategoryContent = props => {
         totalPagesFromData
     ]);
 
-    const categoryMetaTitle = get(props, "data.category.meta_title", "")
+    const categoryMetaTitle = get(props, 'data.category.meta_title', '');
 
     return (
         <Fragment>

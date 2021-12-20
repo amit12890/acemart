@@ -15,6 +15,18 @@
 .pagination {
     position: relative;
     bottom: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginationItem {
+    flex: 1;
+}
+
+.parPageItem {
+    border-top: 1px solid rgb(var(--venia-global-color-border));
+    display: flex;
+    align-items: center;
 }
 
 .placeholder {
