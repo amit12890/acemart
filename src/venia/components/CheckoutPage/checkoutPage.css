@@ -20,8 +20,20 @@
     row-gap: 1rem;
 }
 
+.pageTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(var(--border-color-base));
+    padding-bottom: 1rem;
+}
+
 .heading {
     line-height: 1.25em;
+    font-size: var(--fontSize-500);
+    font-weight: bold;
+    margin: 0 10px 0 0;
+    
 }
 
 .cartLink {
@@ -46,12 +58,13 @@
 }
 
 .signInContainer {
-    align-items: center;
+    /* align-items: center;
     border: 1px solid rgb(var(--border-color-base));
     display: grid;
-    gap: 1rem;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     padding: 1rem;
+    align-items: center;
+    justify-content: center; */
 }
 
 .signInLabel {
@@ -63,6 +76,7 @@
     min-height: auto;
     min-width: auto;
     padding: 0.25rem 2rem;
+    max-width: 300px;
 }
 
 .empty_cart_container {
@@ -85,6 +99,7 @@
 
 .price_adjustments_container {
     grid-column: 1 / span 1;
+    margin-bottom: 2rem;
 }
 
 .items_review_container {

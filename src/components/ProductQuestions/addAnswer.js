@@ -5,7 +5,6 @@ import { CheckCircle as CheckIcon } from 'react-feather';
 import { Form, Relevant } from 'informed';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
-import Icon from '@magento/venia-ui/lib/components/Icon';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import defaultClasses from './productQuestions.css';
 
@@ -13,14 +12,36 @@ import Checkbox from '../../venia/components/Checkbox';
 import TextInput from '../../venia/components/TextInput';
 import Button from '../../venia/components/Button';
 import Field from '../../venia/components/Field';
+import Icon from '../../venia/components/Icon';
 
 import { isRequired } from '../../@amasty/utils/validators';
 import { addAnswerMutation } from './productQuestions.gql';
+import { useToasts } from '@magento/peregrine';
+
+const successIcon = (
+    <Icon
+        src={CheckIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const AddAnswerBlock = ({ questionId }) => {
     const [{ currentUser, isSignedIn }] = useUserContext();
+    const [_, { addToast }] = useToasts();
+
     const [addAnswerHandler, { loading }] = useMutation(addAnswerMutation, {
-        fetchPolicy: 'no-cache'
+        fetchPolicy: 'no-cache',
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Your answer submitted successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
     });
     const classes = useStyle(defaultClasses);
     const [showForm, setShowForm] = useState(false);

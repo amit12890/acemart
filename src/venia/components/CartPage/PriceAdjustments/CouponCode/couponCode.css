@@ -1,9 +1,9 @@
 /* Styles for "add" view. */
 .entryForm,
 .entryFormError {
-    display: grid;
-    /* grid-template-columns: 1fr auto; */
-    grid-column-gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .entryFormError input {

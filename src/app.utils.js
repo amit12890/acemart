@@ -1,4 +1,4 @@
-import { drop, includes } from "lodash-es"
+import { drop, includes, unescape } from "lodash-es"
 
 // TODO: remove temp image fix
 export const getOriginalImage = (url) => {
@@ -10,3 +10,19 @@ export const getOriginalImage = (url) => {
         return url
     }
 }
+
+// this functions are used to replace some special characters from html entity to symbol
+const keyMap = {
+    '&reg;': '®',
+    '&amp;': '&',
+    '&copy;': '©',
+    '&trade;': '™'
+};
+
+export const replaceSpecialChars = name => {
+    let newStr = unescape(name)
+    newStr = newStr.replace(/&reg;|&amp;|&copy;|&trade;/gi, (matched) => {
+        return keyMap[matched];
+    });
+    return newStr;
+};

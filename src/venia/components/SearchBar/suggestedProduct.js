@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import { func, shape, string } from 'prop-types';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../Price';
 import { useStyle } from '../../classify';
 
 import Image from '../Image';
-import defaultClasses from './suggestedProduct.css';
+import defaultClasses from './suggestedProducts.css';
 
-const IMAGE_WIDTH = 60;
+const IMAGE_WIDTH = 100;
 
 const SuggestedProduct = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -27,24 +27,28 @@ const SuggestedProduct = props => {
     }, [onNavigate]);
 
     return (
-        <a
-            className={classes.root}
-            href={"/" + baseless_url}
-            onClick={handleClick}
-        >
-            <Image
-                alt={name}
-                classes={{ image: classes.thumbnail, root: classes.image }}
-                resource={thumbnailImageUrl}
-                width={IMAGE_WIDTH}
-            />
-            <div className={classes.name}>{name}</div>
-            <div className={classes.name}>{sku}</div>
-            <div className={classes.price}>
-                <Price currencyCode={'USD'} value={price} />
-                <span className={classes.unit}>/ {uom}</span>
-            </div>
-        </a>
+        <div className={classes.itemInfo}>
+            <a
+                className={classes.root}
+                href={"/" + baseless_url}
+                onClick={handleClick}
+            >
+                <div className={classes.imageWrapper}>
+                    <Image
+                        alt={name}
+                        classes={{ image: classes.thumbnail, root: classes.image }}
+                        resource={thumbnailImageUrl}
+                        width={IMAGE_WIDTH}
+                    />
+                </div>
+                <div className={classes.name}>{name}</div>
+                <div className={classes.sku}>{sku}</div>
+                <div className={classes.price}>
+                    <Price currencyCode={'USD'} value={price} />
+                    <span className={classes.unit}>{uom}</span>
+                </div>
+            </a>
+        </div>
     );
 };
 

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
@@ -16,12 +16,18 @@ export const useSearchBar = () => {
     const history = useHistory();
     const { push } = history;
 
+    useEffect(() => {
+        // do not open on load
+        if(history.location.pathname === SEARCH_PAGE_PATH) {
+            setIsAutoCompleteOpen(false);
+        }
+    }, [history])
+
     // expand or collapse on input change
     const handleChange = useCallback(
         value => {
             const hasValue = !!value;
             const isValid = hasValue && value.length > 2;
-
             setValid(isValid);
             setIsAutoCompleteOpen(hasValue);
         },

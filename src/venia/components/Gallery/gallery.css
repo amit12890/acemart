@@ -10,7 +10,6 @@
 .items {
     display: grid;
     grid-area: items;
-    grid-gap: 1rem;
     grid-template-columns: repeat(1, 1fr);
     margin-bottom: 20px;
 }

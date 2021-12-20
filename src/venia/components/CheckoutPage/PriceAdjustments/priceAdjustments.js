@@ -33,8 +33,8 @@ const PriceAdjustments = props => {
                 >
                     <CouponCode setIsCartUpdating={setPageIsUpdating} />
                 </Section>
-                <GiftCardSection setIsCartUpdating={setPageIsUpdating} />
-                <Section
+                {/* <GiftCardSection setIsCartUpdating={setPageIsUpdating} /> */}
+                {/* <Section
                     id={'gift_options'}
                     title={formatMessage({
                         id: 'checkoutPage.giftOptions',
@@ -42,7 +42,7 @@ const PriceAdjustments = props => {
                     })}
                 >
                     <GiftOptions />
-                </Section>
+                </Section> */}
             </Accordion>
         </div>
     );

@@ -11,5 +11,8 @@
     "editAccountInfo.title": "Edit Account Information",
     "newsletterSubscription.title": "Newsletter Subscription",
     "landingPage.title": "Ace Mart Restaurant Supply",
-    "landingPage.description": "Ace Mart Restaurant Supply has a large inventory of in-stock restaurant equipment and supplies available at wholesale prices. Shop online or in-store today."
+    "autocomplete.suggestion_error": "An error occurred while fetching suggestions.",
+    "autocomplete.product_error": "An error occurred while fetching products.",
+    "landingPage.description": "Ace Mart Restaurant Supply has a large inventory of in-stock restaurant equipment and supplies available at wholesale prices. Shop online or in-store today.",
+    "searchPage.searchTermText": "Showing results for <highlight>{term}</highlight>"
 }

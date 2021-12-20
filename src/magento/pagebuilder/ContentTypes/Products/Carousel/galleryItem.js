@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../../../../venia/components/Price';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 import { useGalleryItem } from '@magento/peregrine/lib/talons/Gallery/useGalleryItem';
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';

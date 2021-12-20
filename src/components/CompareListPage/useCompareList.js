@@ -18,6 +18,8 @@ import Icon from '../../venia/components/Icon';
 
 import { useUserContext } from "@magento/peregrine/lib/context/user";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import { compareListPage } from "../../url.utils";
 
 
 const successIcon = (
@@ -35,6 +37,7 @@ export const useCompareList = props => {
     const dispatch = useDispatch()
     const [_, { addToast }] = useToasts()
     const uid = useSelector(store => store.compare.uid)
+    const history = useHistory();
 
     // Get customer and guest compare list
 
@@ -70,8 +73,10 @@ export const useCompareList = props => {
                 type: 'success',
                 icon: successIcon,
                 message: `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`,
-                dismissable: true,
-                timeout: 3000
+                dismissable: false,
+                timeout: 10000,
+                actionText: "Compare",
+                onAction: () => history.push(compareListPage())
             })
         }
     })
@@ -88,8 +93,10 @@ export const useCompareList = props => {
                     type: 'success',
                     icon: successIcon,
                     message: `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`,
-                    dismissable: true,
-                    timeout: 3000
+                    dismissable: false,
+                    timeout: 10000,
+                    actionText: "Compare",
+                    onAction: () => history.push(compareListPage())
                 })
             }
         })
@@ -112,7 +119,6 @@ export const useCompareList = props => {
                     input: { products, uid }
                 }
             })
-            console.log("🚀 ~ file: useCompareList.js ~ line 26 ~ addProductsToCompareList ~ addRes", addRes)
             dispatch(updateCompareFields(get(addRes.data, "addProductsToCompareList", {})))
         }
     }, [createCompareList, updateCompareFields, uid, addProductsToCompareListMutation])

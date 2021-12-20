@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 
 import { useStyle } from '../../../classify';
-import RadioGroup from '@magento/venia-ui/lib/components/RadioGroup';
+import RadioGroup from '../../RadioGroup';
 import ShippingRadio from '../../CartPage/PriceAdjustments/ShippingMethods/shippingRadio';
 import defaultClasses from './shippingRadios.css';
 

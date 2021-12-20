@@ -59,6 +59,9 @@ const Button = props => {
  * low priority.
  * @property {string} classes.root_normalPriority classes for Button if
  * normal priority.
+ * @property {string} classes.button_small classes for Button if
+ * normal priority.
+ * 
  * @property {string} priority the priority/importance of the Button
  * @property {string} type the type of the Button
  * @property {bool} negative whether the button should be displayed in red for a negative action
@@ -70,7 +73,9 @@ Button.propTypes = {
         root: string,
         root_highPriority: string,
         root_lowPriority: string,
-        root_normalPriority: string
+        root_normalPriority: string,
+        button_small: string
+
     }),
     priority: oneOf(['high', 'low', 'normal']).isRequired,
     type: oneOf(['button', 'reset', 'submit']).isRequired,

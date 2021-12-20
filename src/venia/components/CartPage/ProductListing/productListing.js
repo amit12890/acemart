@@ -1,7 +1,6 @@
 import React, { Fragment, Suspense } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { gql } from '@apollo/client';
-import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing';
 
 import { useStyle } from '../../../classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
@@ -29,20 +28,13 @@ const ProductListing = props => {
     const {
         onAddToWishlistSuccess,
         setIsCartUpdating,
-        fetchCartDetails
-    } = props;
-    const talonProps = useProductListing({
-        queries: {
-            getProductListing: GET_PRODUCT_LISTING
-        }
-    });
-    const {
+        fetchCartDetails,
         activeEditItem,
         isLoading,
         items,
         setActiveEditItem,
         wishlistConfig
-    } = talonProps;
+    } = props;
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -87,14 +79,5 @@ const ProductListing = props => {
     return null;
 };
 
-export const GET_PRODUCT_LISTING = gql`
-    query getProductListing($cartId: String!) {
-        cart(cart_id: $cartId) {
-            id
-            ...ProductListingFragment
-        }
-    }
-    ${ProductListingFragment}
-`;
 
 export default ProductListing;

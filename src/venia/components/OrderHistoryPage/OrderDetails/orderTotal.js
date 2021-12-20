@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { arrayOf, string, shape, number } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../Price';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 
 import defaultClasses from './orderTotal.css';

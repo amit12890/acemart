@@ -5,36 +5,34 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import SuggestedProducts from './suggestedProducts';
 import defaultClasses from './suggestions.css';
 
-import SuggestedProductNames from "./suggestedProductNames"
-import { size } from 'lodash-es';
-
-import S_DATA from "./suggest.json"
-import SP_DATA from "./suggestProduct.json"
+import SuggestedProductNames from './suggestedProductNames';
 
 const Suggestions = props => {
     const {
-        products,
+        suggestionLoading,
+        productLoading,
         suggestions,
+        products,
         setVisible,
-        visible
+        visible,
+        displayResult
     } = props;
-    const { results } = SP_DATA;
 
     const classes = useStyle(defaultClasses, props.classes);
 
-    const shouldRender = visible && size(S_DATA)
+    const shouldRender = visible && displayResult;
     // render null without data
     if (!shouldRender) {
         return null;
     }
 
     return (
-        <div style={{display: "flex"}}>
+        <div className={classes.root}>
             <SuggestedProductNames
-                suggestions={S_DATA}
+                suggestions={suggestions}
                 setVisible={setVisible}
             />
-            <SuggestedProducts products={results} />
+            <SuggestedProducts products={products.results || []} />
         </div>
     );
 };

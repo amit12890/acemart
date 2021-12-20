@@ -145,12 +145,12 @@ const CheckoutPage = props => {
     } else {
         const signInContainerElement = isGuestCheckout ? (
             <div className={classes.signInContainer}>
-                <span className={classes.signInLabel}>
+                {/* <span className={classes.signInLabel}>
                     <FormattedMessage
                         id={'checkoutPage.signInLabel'}
                         defaultMessage={'Sign in for Express Checkout'}
                     />
-                </span>
+                </span> */}
                 <Button
                     className={classes.signInButton}
                     onClick={toggleSignInContent}
@@ -280,6 +280,7 @@ const CheckoutPage = props => {
 
         const orderSummary = shouldRenderPriceSummary ? (
             <div className={classes.summaryContainer}>
+                {priceAdjustmentsSection}
                 <OrderSummary isUpdating={isUpdating} />
             </div>
         ) : null;
@@ -337,9 +338,11 @@ const CheckoutPage = props => {
                         cartItems={cartItems}
                         message={stockStatusMessageElement}
                     />
-                    <h1 className={classes.heading}>{headerText}</h1>
+                    <div className={classes.pageTitleWrapper}>
+                        <h1 className={classes.heading}>{headerText}</h1>
+                        {signInContainerElement}
+                    </div>
                 </div>
-                {signInContainerElement}
                 <div className={classes.shipping_information_container}>
                     <ScrollAnchor ref={shippingInformationRef}>
                         <ShippingInformation
@@ -357,7 +360,6 @@ const CheckoutPage = props => {
                 <div className={classes.payment_information_container}>
                     {paymentInformationSection}
                 </div>
-                {priceAdjustmentsSection}
                 {reviewOrderButton}
                 {itemsReview}
                 {orderSummary}

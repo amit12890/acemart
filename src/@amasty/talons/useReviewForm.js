@@ -1,9 +1,12 @@
-import { useCallback, useState, useMemo, useEffect } from 'react';
+import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 import ADD_REVIEW from '../queries/addReview.graphql';
 import { has } from 'lodash-es';
+import { useToasts } from '@magento/peregrine';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { CheckCircle as CheckIcon } from 'react-feather';
 
 const Y_OFFSET = 120;
 
@@ -18,6 +21,15 @@ const getRatings = values =>
         return rat;
     }, {});
 
+const successIcon = (
+    <Icon
+        src={CheckIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
+
 export const useReviewForm = props => {
     const { productId } = props;
     const [formApi, setFormApi] = useState(null);
@@ -27,9 +39,19 @@ export const useReviewForm = props => {
     const [tmpImgPath, setTmpImgPath] = useState([]);
     const [isShowSuccessMessage, setIsShowSuccessMessage] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
+    const [_, { addToast }] = useToasts();
 
     const [addReview] = useMutation(ADD_REVIEW, {
-        fetchPolicy: 'no-cache'
+        fetchPolicy: 'no-cache',
+        onCompleted: data => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'You submitted your review for moderation.',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
     });
 
     const initialValues = useMemo(() => {

@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { get, size } from 'lodash-es';
 import { FormattedMessage } from 'react-intl';
 
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../venia/components/Price';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
@@ -27,7 +27,6 @@ const CompareListPage = (props) => {
     const [{ isSignedIn }] = useUserContext();
 
     useEffect(() => {
-        console.log("🚀 ~ file: compareListBlock.js ~ line 35 ~ useEffect ~ uid", uid)
         if (isSignedIn) {
             fetchCompareList({ variables: {} })
         } else {
@@ -41,7 +40,6 @@ const CompareListPage = (props) => {
 
     // data mapping for guest and logged user
     let hasItems = item_count, listId = uid
-    console.log("🚀 ~ file: compareListPage.js ~ line 51 ~ CompareListPage ~ items", items)
 
     const productCompareFields = [
         { hideName: true, name: 'Header Block', renderer: itemHeaderBlock, },

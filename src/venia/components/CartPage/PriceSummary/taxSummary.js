@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import Price from '@magento/venia-ui/lib/components/Price';
+import Price from '../../Price';
 
 import { useStyle } from '../../../classify';
 import defaultClasses from './priceSummary.css';
@@ -30,9 +30,9 @@ const TaxSummary = props => {
 
     // Don't render estimated taxes until an address has been provided which
     // causes the server to apply a tax value to the cart.
-    if (!data.length) {
-        return null;
-    }
+    // if (!data.length) {
+    //     return null;
+    // }
 
     const taxLabel = isCheckout
         ? formatMessage({
@@ -44,7 +44,13 @@ const TaxSummary = props => {
             defaultMessage: 'Tax'
         });
 
-    const tax = getEstimatedTax(props.data);
+    let tax;
+    if (data.length) {
+        tax = getEstimatedTax(props.data);
+    } else {
+        // show default tax if tax array is empty
+        tax = { value: 0, currency: "USD" };
+    }
 
     return (
         <div className={classes.summaryItem}>
