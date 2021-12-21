@@ -2,24 +2,28 @@ import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'reac
 import { useQuery, useMutation } from '@apollo/client';
 import { get, size } from 'lodash';
 import { useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 
-import { useStyle } from '../../venia/classify';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
-import Wishlist from './wishlist';
 import Mask from '@magento/venia-ui/lib/components/Mask';
-import defaultClasses from './wishlistPage.css';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
+import { REMOVE_PRODUCTS_FROM_WISHLIST } from '@magento/peregrine/lib/talons/WishlistPage/wishlistItem.gql';
+import { Title } from '@magento/venia-ui/lib/components/Head';
 
+import Wishlist from './wishlist';
+import defaultClasses from './wishlistPage.css';
 import EditWishlist from './editWishlist';
 import CreateWishlist from './createWishlist';
 import { useApiData } from '../../data.utils';
-import { useUserContext } from '@magento/peregrine/lib/context/user';
-import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountChip/accountChip.gql';
-import { apiGetWishlistData } from '../../url.utils';
+import { accountPageUrl, apiGetWishlistData, myWishlistSharePage } from '../../url.utils';
 import WishlistCopyProductPopup from './WishlistCopyProductPopup';
-import { REMOVE_PRODUCTS_FROM_WISHLIST } from '@magento/peregrine/lib/talons/WishlistPage/wishlistItem.gql';
 import WishlistMoveProductPopup from './WishlistMoveProductPopup';
-import { Title } from '@magento/venia-ui/lib/components/Head';
-
+import { replaceSpecialChars } from "../../app.utils"
+import { useStyle } from '../../venia/classify';
+import Price from '../../venia/components/Price';
+import Button from '../../venia/components/Button';
+import AddToCart from '../../venia/components/CartPage/addToCart';
 
 const WishlistPage = props => {
     const { formatMessage } = useIntl();
@@ -35,7 +39,7 @@ const WishlistPage = props => {
     const { callApi: getWishlist, response: wishlists, loading, error } = useApiData({
         isLazy: true,
         onSuccess: (data) => {
-            if (!selectedWishlist && !!size(data)) {
+            if (size(data)) {
                 setSelectedWishlist(data[0])
             }
         }
@@ -108,6 +112,13 @@ const WishlistPage = props => {
 
                         <ProductListing selectedWishlist={selectedWishlist} wishlists={wishlists}
                             refreshWishlist={refreshWishlist} />
+                        <div>
+                            <Button priority="low">UPDATE WISH LIST</Button>
+                            <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
+                                <Button priority="low">SHARE WISH LIST</Button>
+                            </Link>
+                            <Button priority="low">ADD ALL TO CART</Button>
+                        </div>
                     </div>
                 }
             </Fragment>
@@ -123,6 +134,11 @@ const WishlistPage = props => {
                 </h1>
             </div>
             {content}
+            <div>
+                <Link to={accountPageUrl()}>
+                    <Button>BACK</Button>
+                </Link>
+            </div>
         </div>
     );
 };
@@ -134,6 +150,7 @@ const ProductListing = props => {
     const { selectedWishlist, wishlists, refreshWishlist } = props;
     // { productId, productQty }
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [removingItemId, setRemovingItemId] = useState(null);
     // null | copy | move
     const [actionType, setActionType] = useState(null);
     const classes = useStyle(defaultClasses, props.classes);
@@ -149,16 +166,20 @@ const ProductListing = props => {
         setSelectedProduct(null);
         setActionType(null);
     }, [setSelectedProduct, setActionType]);
+
     const handleRemoveProduct = useCallback(async (wishlistId, itemId) => {
         if (removeProductLoading) return;
+        setRemovingItemId(itemId)
         await removeProductFromWishlist({
             variables: {
                 wishlistId: wishlistId,
                 wishlistItemsId: [itemId]
             }
         });
+        setRemovingItemId(null)
         await refreshWishlist();
     }, [removeProductLoading, removeProductFromWishlist])
+
     const itemList = get(selectedWishlist, 'product', [])
 
     if (!size(itemList)) {
@@ -173,55 +194,56 @@ const ProductListing = props => {
             <div className={classes.galleryItemsGrid}>
                 {itemList.map((item) => {
                     const { product, qty, wishlist_item_id, wishlist_id, product_id } = item
-                    const { name, price, small_image, short_description } = product
+                    const { name, price, small_image, request_path, sku } = product
                     return (
                         <div key={wishlist_item_id} className={classes.galleryItem}>
                             <div className={classes.galleryItemInfo}>
-                                <div className={classes.galleryItemImageContainer}>
-                                    <div className={classes.galleryItemImage}>
-                                        <img src={small_image} />
+                                <Link to={`/${request_path}`}>
+                                    <div className={classes.galleryItemImageContainer}>
+                                        <div className={classes.galleryItemImage}>
+                                            <img src={small_image} />
+                                        </div>
                                     </div>
-
-                                </div>
+                                </Link>
 
                                 <div className={classes.galleryItemDetails}>
-                                    <div className={classes.itemName}>{name}</div>
-                                    <div className={classes.itemPrice}>{price}</div>
+                                    <Link to={`/${request_path}`}>
+                                        <div className={classes.itemName}>
+                                            {replaceSpecialChars(name)}
+                                        </div>
+                                    </Link>
+                                    <Price
+                                        currencyCode={"USD"}
+                                        value={price}
+                                        classes={{
+                                            currency: classes.currency,
+                                            decimal: classes.decimal,
+                                            fraction: classes.fraction
+                                        }}
+                                    />
                                     <div className={classes.itemComment}>
-                                        <textarea className={classes.textarea}>
-                                        </textarea>
+                                        <textarea className={classes.textarea}
+                                            placeholder='Comment' />
                                     </div>
-                                    <div className={classes.itemQty}>
-                                        <span className={classes.qtyLabel}>Qty</span>
-                                        <span className={classes.qtyValue}>{qty}</span></div>
-                                    <div className={classes.boxCart}>
 
-                                        Add to cart
-                                    </div>
+                                    <AddToCartBlock classes={classes} sku={sku} qty={qty} />
 
                                     <div className={classes.productItemQuickActions}>
-                                        <div className={[classes.action, classes.delete].join(" ")}>
+                                        <div className={[classes.action, classes.delete].join(" ")}
+                                            onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
                                             <span>
-                                                <i className={classes.iconWrapper}>
-                                                    <svg className={[classes.svgIcon, classes.deleteIcon].join(" ")} width="32" height="32" viewBox="0 0 32 32">
-                                                        <title>remove</title>
-                                                        <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
-                                                    </svg>
-                                                </i>
+                                                {removingItemId === wishlist_item_id 
+                                                    ? <div>Loading...</div>
+                                                    : (
+                                                        <i className={classes.iconWrapper}>
+                                                            <svg className={[classes.svgIcon, classes.deleteIcon].join(" ")} width="32" height="32" viewBox="0 0 32 32">
+                                                                <title>remove</title>
+                                                                <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
+                                                            </svg>
+                                                        </i>
+                                                    )
+                                                }
                                             </span>
-                                        </div>
-
-                                        <div className={[classes.action, classes.edit].join(" ")} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
-                                            {removeProductLoading ? <span>Loading...</span> :
-                                                <span>
-                                                    <i className={classes.iconWrapper}>
-                                                        <svg className={[classes.svgIcon, classes.editIcon].join(" ")} width="27" height="32" viewBox="0 0 27 32">
-                                                            <title>edit</title>
-                                                            <path d="M6.469 27.719l1.625-1.625-4.188-4.188-1.625 1.625v1.906h2.281v2.281h1.906zM15.813 11.156q0-0.188-0.109-0.297t-0.266-0.109q-0.094 0-0.172 0.031t-0.141 0.094l-9.688 9.688q-0.063 0.063-0.094 0.141t-0.031 0.141q0 0.188 0.109 0.297t0.297 0.109q0.063 0 0.141-0.031t0.172-0.094l9.656-9.688q0.063-0.063 0.094-0.141t0.031-0.141v0zM14.844 7.719l7.438 7.438-14.844 14.844h-7.438v-7.438zM27.063 9.438q0 0.438-0.188 0.859t-0.469 0.734l-2.969 2.969-7.438-7.438 2.969-2.938q0.313-0.313 0.734-0.5t0.859-0.188q0.469 0 0.891 0.188t0.734 0.5l4.219 4.188q0.281 0.313 0.469 0.734t0.188 0.891v0z"></path>
-                                                        </svg>
-                                                    </i>
-                                                </span>
-                                            }
                                         </div>
                                     </div>
                                     <div className={classes.productItemActions}>
@@ -252,6 +274,38 @@ const ProductListing = props => {
                 <WishlistMoveProductPopup closeWishlistPopup={handlePopupClose}
                     wishlists={wishlists} refreshWishlist={refreshWishlist} {...selectedProduct} />
             }
+        </div>
+    )
+}
+
+const AddToCartBlock = ({ classes, qty, sku }) => {
+    const [value, setValue] = useState(qty)
+
+    return (
+        <div>
+            <div className={classes.itemQty}>
+                <span className={classes.qtyLabel}>Qty</span>
+                <input
+                    className={classes.qtyValue}
+                    type="number"
+                    placeholder="Enter quantity"
+                    value={value}
+                    onChange={e => setValue(e.target.value)}
+                />
+            </div>
+            <AddToCart
+                sku={sku}
+                quantity={Number(value)}
+                Child={()=>
+                    <Button
+                        priority="high"
+                        type="submit"
+                    >
+                        Add to Cart
+                    </Button>
+                }
+                Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
+            />
         </div>
     )
 }
