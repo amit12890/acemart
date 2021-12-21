@@ -77,7 +77,7 @@ const SignIn = props => {
         <div className={root_class}>
             <h1 className={classes.title}>
                 <FormattedMessage
-                    id={'signIn.titleText'}
+                    id={'am.signIn.titleText'}
                     defaultMessage={'Sign-in to Your Account'}
                 />
             </h1>
@@ -139,8 +139,8 @@ const SignIn = props => {
                                         onClick={handleForgotPassword}
                                     >
                                         <FormattedMessage
-                                            id={'signIn.forgotPasswordText'}
-                                            defaultMessage={'Forgot Password?'}
+                                            id={'am.signIn.forgotPasswordText'}
+                                            defaultMessage={'Forgot Your Password?'}
                                         />
                                     </LinkButton>
                                 </div>

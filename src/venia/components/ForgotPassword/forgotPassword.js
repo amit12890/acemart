@@ -33,7 +33,7 @@ const ForgotPassword = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
     const INSTRUCTIONS = formatMessage({
-        id: 'forgotPassword.instructions',
+        id: 'am.forgotPassword.instructions',
         defaultMessage:
             'Please enter your email address below to receive a password reset link.'
     });
@@ -43,21 +43,21 @@ const ForgotPassword = props => {
         <Fragment>
             <h1 className={classes.title}>
                 <FormattedMessage
-                    id={'forgotPassword.recoverPasswordText'}
-                    defaultMessage={'Recover Password'}
+                    id={'am.forgotPassword.recoverPasswordText'}
+                    defaultMessage={'Forgot Your Password'}
                 />
             </h1>
             <div className={classes.loginContainer}>
-            <div className={classes.forgotPasswordBlock}>
-                <p className={classes.instructions}>{INSTRUCTIONS}</p>
-                <ForgotPasswordForm
-                    initialValues={initialValues}
-                    isResettingPassword={isResettingPassword}
-                    onSubmit={handleFormSubmit}
-                    onCancel={handleCancel}
-                />
-                <FormErrors errors={formErrors} />
-            </div>
+                <div className={classes.forgotPasswordBlock}>
+                    <p className={classes.instructions}>{INSTRUCTIONS}</p>
+                    <ForgotPasswordForm
+                        initialValues={initialValues}
+                        isResettingPassword={isResettingPassword}
+                        onSubmit={handleFormSubmit}
+                        onCancel={handleCancel}
+                    />
+                    <FormErrors errors={formErrors} />
+                </div>
             </div>
         </Fragment>
     );
@@ -79,5 +79,5 @@ ForgotPassword.propTypes = {
 };
 
 ForgotPassword.defaultProps = {
-    onCancel: () => {}
+    onCancel: () => { }
 };

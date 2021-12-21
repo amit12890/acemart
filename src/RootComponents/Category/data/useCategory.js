@@ -13,6 +13,7 @@ import {
 } from '@magento/peregrine/lib/talons/FilterModal/helpers';
 
 import DEFAULT_OPERATIONS from './category.gql';
+import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
 
 /**
  * A [React Hook]{@link https://reactjs.org/docs/hooks-intro.html} that
@@ -48,7 +49,7 @@ export const useCategory = props => {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first'
     });
-    const pageSize = pageSizeData && pageSizeData.storeConfig.grid_per_page;
+    let pageSize = pageSizeData && pageSizeData.storeConfig.grid_per_page;
 
     const [paginationValues, paginationApi] = usePagination();
     const { currentPage, totalPages } = paginationValues;
@@ -88,7 +89,13 @@ export const useCategory = props => {
         error,
         data
     } = queryResponse;
-    const { search } = useLocation();
+    const location = useLocation();
+    const { search } = location;
+
+    const product_list_limit = getSearchParam('product_list_limit', location);
+    pageSize = !!product_list_limit
+        ? Number(product_list_limit)
+        : Number(pageSize);
 
     const isBackgroundLoading = !!data && categoryLoading;
 
@@ -147,7 +154,7 @@ export const useCategory = props => {
                 currentPage: Number(currentPage),
                 id: Number(id),
                 filters: newFilters,
-                pageSize: Number(pageSize),
+                pageSize,
                 sort: { [currentSort.sortAttribute]: currentSort.sortDirection }
             }
         });
@@ -158,7 +165,8 @@ export const useCategory = props => {
         id,
         pageSize,
         runQuery,
-        search
+        search,
+        product_list_limit
     ]);
 
     const totalPagesFromData = data

@@ -16,12 +16,13 @@ const keyMap = {
     '&reg;': '®',
     '&amp;': '&',
     '&copy;': '©',
-    '&trade;': '™'
+    '&trade;': '™',
+    "&quot;": `"`,
 };
 
 export const replaceSpecialChars = name => {
     let newStr = unescape(name)
-    newStr = newStr.replace(/&reg;|&amp;|&copy;|&trade;/gi, (matched) => {
+    newStr = newStr.replace(/&reg;|&amp;|&copy;|&trade;|&quot;/gi, (matched) => {
         return keyMap[matched];
     });
     return newStr;

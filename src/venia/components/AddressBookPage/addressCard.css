@@ -98,12 +98,26 @@ display: flex;
 .editButton {
     composes: linkButton;
     margin-right: 25px;
+    display: flex;
+    align-items: center;
 }
 
 .deleteButton {
     composes: linkButton;
 
 }
+
+.iconWrapper {
+    display: inline-flex;
+
+}
+
+.svgIcon {
+    width: 14px;
+    height: auto;
+    fill: currentColor;
+}
+
 
 @media (max-width: 640px) {
     .root {

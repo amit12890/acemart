@@ -51,6 +51,57 @@
 
 .actionToolbar {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.primaryAction {
+    margin: 8px 8px 8px 0;
+
+}
+
+.secondaryAction {
+    margin: 8px 0 8px 8px;
+}
+
+.action {
+    --stroke: var(--theme-color-primary);
+    background: rgb(var(--stroke));;
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    display: inline-flex;
+}
+
+.action:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.iconWrapper {
+    display: inline-flex;
+}
+
+.svgIcon {
+    fill: currentColor;
+    width: 13px;
+    height: auto;
+    margin-right: 10px;
 }
 
 .email,

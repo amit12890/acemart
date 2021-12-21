@@ -82,7 +82,7 @@
 }
 
 h4:hover {
-    color: rgb(92 106 195);
+    color: rgb(var(--link-color-hover));
 }
 
 .itemContent {
@@ -156,6 +156,7 @@ h4:hover {
 .groupTitle {
     font-size: 18px;
     text-transform: uppercase;
+    font-weight: var(--font-weight-regular);
 }
 .link {
     letter-spacing: .05em;
@@ -177,7 +178,7 @@ h4:hover {
     align-items: center;
 }
 .socialLinks {
-
+    margin-left: -5px;
 }
 .socialLinks a {
     display: inline-flex;

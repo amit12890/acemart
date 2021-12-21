@@ -139,7 +139,7 @@ const OrderRow = props => {
                 <span className={classes.orderStatusBadge}>
                     {derivedStatus}
                 </span>
-                <OrderProgressBar status={derivedStatus} />
+                {/* <OrderProgressBar status={derivedStatus} /> */}
             </div>
             {!showDetails &&  // for showDetails true; collapssible btn is not needed
                 <button

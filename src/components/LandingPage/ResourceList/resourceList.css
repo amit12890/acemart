@@ -61,6 +61,7 @@
     right: 0;
     color: #fff;
     background: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 100%);
+    font-size: var(--fontSize-90);
 }
 
 .resouresDetails h4 {
@@ -76,6 +77,11 @@
     margin-bottom: 0;
     font-size: var(--fontSize-75);
 
+}
+
+.shortDescription {
+    height: 35px;
+    overflow: hidden;
 }
 
 .resourceSliderList {

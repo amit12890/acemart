@@ -24,8 +24,8 @@ const ForgotPasswordForm = props => {
         >
             <Field
                 label={formatMessage({
-                    id: 'forgotPasswordForm.emailAddressText',
-                    defaultMessage: 'Email address'
+                    id: 'am.forgotPasswordForm.emailAddressText',
+                    defaultMessage: 'Email'
                 })}
             >
                 <TextInput
