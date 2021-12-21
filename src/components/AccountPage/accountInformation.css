@@ -64,6 +64,7 @@
 }
 
 .editButtonContainer {
+    display: flex;
     
 }
 
@@ -71,7 +72,7 @@
     composes: root_normalPriority from '../../venia/components/Button/button.css';
     composes: button_asLink from '../../venia/components/Button/button.css';
     font-weight: normal;
-    margin-right: 10px;
+    margin-right: 20px;
     color: rgb(var(--theme-color-primary));
     text-decoration: underline;
     font-weight: var(--font-weight-bold);
@@ -79,6 +80,18 @@
 .editInformationButton:hover {
     text-decoration: none;
     color: rgb(var(--theme-color-primary));
+}
+
+
+.iconWrapper {
+    display: inline-flex;
+
+}
+
+.svgIcon {
+    width: 14px;
+    height: auto;
+    fill: currentColor;
 }
 
 @media (min-width: 961px) {
