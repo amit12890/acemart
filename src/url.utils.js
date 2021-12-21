@@ -28,6 +28,7 @@ export const editAddress = (id = null) => {
 
 export const compareListPage = () => '/catalog/product_compare/';
 export const cartPage = () => '/checkout/cart/';
+export const reviewPage = () => '/review/customer/';
 
 /** API urls */
 
