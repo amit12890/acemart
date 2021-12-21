@@ -13,7 +13,6 @@ import SplitOrderItem from './SplitOrderItem'
  */
 export default ({ data }) => {
     const classes = useStyle(defaultClasses)
-    console.log("🚀 ~ file: splitOrder.js ~ line 10 ~ data", data)
     const bops = get(data, "bops", {})
     const boss = get(data, "boss", {})
     const bopsItems = get(bops, "items", [])

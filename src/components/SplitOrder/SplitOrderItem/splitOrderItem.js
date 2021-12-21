@@ -14,7 +14,6 @@ import Price from '../../../venia/components/Price'
  */
 export default ({ item }) => {
     const classes = useStyle(defaultClasses)
-    console.log("🚀 ~ file: splitOrder.js ~ line 10 ~ data", item)
     const productName = get(item, "product.product_name", "")
     const productImage = get(item, "product.small_image.url", "")
     const sku = get(item, "product.sku", "")
