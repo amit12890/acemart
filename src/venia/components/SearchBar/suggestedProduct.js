@@ -3,6 +3,8 @@ import { func, shape, string } from 'prop-types';
 import Price from '../Price';
 import { useStyle } from '../../classify';
 
+import { replaceSpecialChars } from '../../../app.utils';
+
 import Image from '../Image';
 import defaultClasses from './suggestedProducts.css';
 
@@ -30,18 +32,21 @@ const SuggestedProduct = props => {
         <div className={classes.itemInfo}>
             <a
                 className={classes.root}
-                href={"/" + baseless_url}
+                href={'/' + baseless_url}
                 onClick={handleClick}
             >
                 <div className={classes.imageWrapper}>
                     <Image
                         alt={name}
-                        classes={{ image: classes.thumbnail, root: classes.image }}
+                        classes={{
+                            image: classes.thumbnail,
+                            root: classes.image
+                        }}
                         resource={thumbnailImageUrl}
                         width={IMAGE_WIDTH}
                     />
                 </div>
-                <div className={classes.name}>{name}</div>
+                <div className={classes.name}>{replaceSpecialChars(name)}</div>
                 <div className={classes.sku}>{sku}</div>
                 <div className={classes.price}>
                     <Price currencyCode={'USD'} value={price} />

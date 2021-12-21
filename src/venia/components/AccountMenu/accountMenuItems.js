@@ -67,7 +67,7 @@ const AccountMenuItems = props => {
 
     return (
         <div className={classes.root}>
-            <div>{headerText}</div>
+            <div className={classes.welcomeMessage}>{headerText}</div>
             {menu}
             {!!handleSignOut && (
                 <button

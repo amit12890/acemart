@@ -14,8 +14,22 @@
     color: rgb(var(--theme-color-primary));
     text-decoration: underline;
     font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
 }
 
 .action:hover {
     text-decoration: none;
+}
+
+.iconWrapper {
+    display: inline-flex;
+    margin-right: 5px;
+
+}
+
+.svgIcon {
+    width: 14px;
+    height: auto;
+    fill: currentColor;
 }

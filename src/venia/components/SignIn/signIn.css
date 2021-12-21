@@ -51,13 +51,17 @@
 }
 
 .forgotPasswordButton {
-    composes: root from '../LinkButton/linkButton.css';
+    composes: root from '../LinkButton/linkButton.css'; 
     padding: 0 0 5px 0 ;
     text-decoration: none;
     text-transform: uppercase;
     border-bottom: 1px solid;
     font-size: 14px;
 
+}
+
+.forgotPasswordButton:hover {
+    color: var(--link-color-hover);
 }
 
 .title {

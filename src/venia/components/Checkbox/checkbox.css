@@ -30,7 +30,7 @@
 }
 
 .icon svg {
-    stroke: rgb(var(--stroke));
+    stroke: rgb(var(--theme-color-primary));
     width: 1rem;
     height: 1rem;
 }

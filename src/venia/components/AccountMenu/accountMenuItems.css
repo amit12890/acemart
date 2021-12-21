@@ -2,25 +2,31 @@
     display: grid;
     grid-auto-flow: row;
     justify-content: stretch;
-    row-gap: 1.5rem;
+    row-gap: .875rem;
     padding: 1.5rem;
 }
 
 .link {
     composes: root from '../LinkButton/linkButton.css';
-
-    color: rgb(var(--link-color));
+    color: rgb(var(--text-color));
     justify-content: start;
     text-decoration: none;
+    font-size: var(--fontSize-100);
+    font-weight: normal;
 }
 
 .link:hover {
-    color: rgb(var(--link-color-hover));
+    color: rgb(var(--link-color));
 }
 
 .signOut {
     composes: link;
-
     border-top: 2px solid rgb(var(--border-color-base));
     padding-top: 1rem;
+}
+
+.welcomeMessage {
+    font-size: var(--fontSize-400);
+    margin-bottom: 18px;
+    font-weight: bold;
 }

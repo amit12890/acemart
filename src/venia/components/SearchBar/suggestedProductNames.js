@@ -1,7 +1,6 @@
-import { debounce } from 'lodash-es';
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { size } from "lodash"
+import { size } from 'lodash';
 
 import { SEARCH_PAGE_PATH } from '../../../url.utils';
 
@@ -21,40 +20,21 @@ const suggestedProductNames = props => {
         [history, setVisible]
     );
 
-    const handleMouseEnter = useCallback(
-        text => () => {
-            console.log('search Hover enter ~ text', text);
-        },
-        []
-    );
-
-    const handleMouseLeave = useCallback(() => {
-        console.log('search Hover leave~ text');
-    }, []);
-
     return (
         <div className={classes.suggestProductsWrapper}>
             <ul className={classes.listItems}>
-                <li className={classes.listItem}>Product Name Goes Here</li>
                 {size(suggestions.alternatives)
                     ? suggestions.alternatives.map((item, index) => {
-                        return (
-                            <li
-                                key={index}
-                                onClick={handleClick(item.text)}
-                                onMouseEnter={debounce(
-                                    handleMouseEnter(item.text),
-                                    500
-                                )}
-                                onMouseLeave={debounce(handleMouseLeave, 500)}
-                                style={{
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                {item.text}
-                            </li>
-                        );
-                    })
+                          return (
+                              <li
+                                  key={index}
+                                  className={classes.listItem}
+                                  onClick={handleClick(item.text)}
+                              >
+                                  {item.text}
+                              </li>
+                          );
+                      })
                     : null}
             </ul>
         </div>

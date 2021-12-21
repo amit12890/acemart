@@ -49,7 +49,7 @@
 
 .search {
     display: grid;
-    gap: 1rem;
+    gap: 0;
     grid-auto-flow: column;
     width: 22rem;
 }
