@@ -122,10 +122,10 @@ const Footer = props => {
                     <div className={[classes.contentBlock, classes.blockMiddle].join(" ")}>
                         <div className={classes.blockLeft}>
                             <div className={classes.footerBox}>
-                                {size(footerCol1) > 0 && (
+                                {/* {size(footerCol1) > 0 && (
                                     <RichContent html={footerCol1} />
-                                )}
-                                {/* <h3 className={classes.groupTitle}>Customer Center</h3>
+                                )} */}
+                                <h3 className={classes.groupTitle}>Customer Center</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -160,15 +160,15 @@ const Footer = props => {
                                             Shipping Policies
                                         </Link>
                                     </li>
-                                </ul> */}
+                                </ul>
                             </div>
 
                             <div className={classes.footerBox}>
-                                {size(footerCol2) > 0 && (
+                                {/* {size(footerCol2) > 0 && (
                                     <RichContent html={footerCol2} />
-                                )}
+                                )} */}
 
-                                {/* <h3 className={classes.groupTitle}>Company Info</h3>
+                                <h3 className={classes.groupTitle}>Company Info</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -198,14 +198,14 @@ const Footer = props => {
                                             FAQs
                                         </Link>
                                     </li>
-                                </ul> */}
+                                </ul>
                             </div>
 
                             <div className={classes.footerBox}>
-                                {size(footerCol3) > 0 && (
+                                {/* {size(footerCol3) > 0 && (
                                     <RichContent html={footerCol3} />
-                                )}
-                                {/* <h3 className={classes.groupTitle}>Tools & Services</h3>
+                                )} */}
+                                <h3 className={classes.groupTitle}>Tools & Services</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -235,19 +235,19 @@ const Footer = props => {
                                             Commercial Kitchen Design
                                         </Link>
                                     </li>
-                                </ul> */}
+                                </ul>
                             </div>
 
                             <div className={classes.footerBox}>
-                                {size(footerCol4) > 0 && (
+                                {/* {size(footerCol4) > 0 && (
                                     <RichContent html={footerCol4} />
-                                )}
-                                {/* <h3 className={classes.groupTitle}>Contact Us</h3>
+                                )} */}
+                                <h3 className={classes.groupTitle}>Contact Us</h3>
                                 <div className={classes.storeAddress}>
                                     <p>2653 Austin Hwy</p>
                                     <p>San Antonio, TX 78218</p>
                                     <p>888-898-8079</p>
-                                </div> */}
+                                </div>
                                 <ul className={[classes.groupLinks, classes.groupSocial].join(" ")}>
                                     <li className={classes.socialLinks}>
                                         <a target="_blank" href="https://www.facebook.com/acemart/">

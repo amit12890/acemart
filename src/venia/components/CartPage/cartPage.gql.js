@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 import { CartPageFragment } from './cartPageFragments.gql';
+import { CartTriggerFragment } from '@magento/peregrine/lib/talons/Header/cartTriggerFragments.gql';
+import { MiniCartFragment } from '@magento/peregrine/lib/talons/MiniCart/miniCartFragments.gql';
 
 export const GET_CART_DETAILS = gql`
     query GetCartDetails($cartId: String!) {
@@ -75,3 +77,21 @@ export const GET_CART_RELATED_PRODUCTS = gql`
         }
     }
 `
+
+export const ADD_PRODUCT_TO_CART = gql`
+    mutation AddProductToCart($cartId: String!, $product: CartItemInput!) {
+        addProductsToCart(cartId: $cartId, cartItems: [$product]) {
+            cart {
+                id
+                ...CartTriggerFragment
+                ...MiniCartFragment
+            }
+            user_errors {
+                code
+                message
+            }
+        }
+    }
+    ${CartTriggerFragment}
+    ${MiniCartFragment}
+`;

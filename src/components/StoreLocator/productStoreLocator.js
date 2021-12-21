@@ -132,7 +132,7 @@ const ProductStoreLocatorPopup = props => {
     const storeGroupData = groupBy(availableStores, 'store_group_name')
     const groupList = sortBy(
         difference(Object.keys(storeGroupData), [DEFAULT_STORE_GROUP_NAME]),
-        [function(o) { return o; }]
+        [function (o) { return o; }]
     )
     let groupStoreList = [];
     if (!!selectedGroup) {
@@ -174,11 +174,11 @@ const ProductStoreLocatorPopup = props => {
                             <div className={classes.switchContent}>
                                 {!!selectedStore ?
                                     <>
-                                        <span className={classes.tabLabel}>in Stock:</span>
+                                        <span className={classes.tabLabel}>In Stock</span>
                                         <span className={classes.tabValue}>{selectedStore.store_locator_info.qty}</span>
                                     </>
                                     :
-                                    <span className={classes.tabLabel}>in Stock:</span>
+                                    <span className={classes.tabLabel}>In Stock</span>
                                 }
                             </div>
                         </a>
@@ -216,31 +216,33 @@ const ProductStoreLocatorPopup = props => {
                                 </div>
 
                                 <div className={classes.storeListContainer}>
-                                    {groupStoreList.map((store, sInd) => {
-                                        const { id, store_name, store_locator_info } = store;
-                                        const { street, city, state, zip, qty } = store_locator_info;
-                                        return (
-                                            <div key={id} className={classes.listItem}
-                                                onClick={() => handleStoreSelect(store)}>
-                                                <div className={classes.listLabel}>
-                                                    <span>
-                                                        {String.fromCharCode(65 + sInd)}
-                                                    </span></div>
-                                                <div className={classes.storeAddressWrapper}>
-                                                    <h4 className={classes.storeName}>{store_name}</h4>
-                                                    <div className={classes.storeAddress}>
-                                                        <p>{street}</p>
-                                                        <p>{city}, {state} {zip}</p>
-                                                    </div>
-                                                    <div className={classes.stockInfo}>
-                                                        <span className={classes.stockLabel}>Qty.</span>
-                                                        <strong className={classes.stockvalue}>{qty || "Out of Stock"}</strong>
-                                                    </div>
+                                    <div className={classes.storeListItemWrapper}>
+                                        {groupStoreList.map((store, sInd) => {
+                                            const { id, store_name, store_locator_info } = store;
+                                            const { street, city, state, zip, qty } = store_locator_info;
+                                            return (
+                                                <div key={id} className={classes.listItem}
+                                                    onClick={() => handleStoreSelect(store)}>
+                                                    <div className={classes.listLabel}>
+                                                        <span>
+                                                            {String.fromCharCode(65 + sInd)}
+                                                        </span></div>
+                                                    <div className={classes.storeAddressWrapper}>
+                                                        <h4 className={classes.storeName}>{store_name}</h4>
+                                                        <div className={classes.storeAddress}>
+                                                            <p>{street}</p>
+                                                            <p>{city}, {state} {zip}</p>
+                                                        </div>
+                                                        <div className={classes.stockInfo}>
+                                                            <span className={classes.stockLabel}>Qty.</span>
+                                                            <strong className={classes.stockvalue}>{qty || "Out of Stock"}</strong>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })}
+                                            )
+                                        })}
+                                    </div>
                                 </div>
 
                             </div>
@@ -263,6 +265,7 @@ const ProductStoreLocatorPopup = props => {
                                 <div className={classes.storeAddressHours}>
                                     <div className={classes.storeAddressWrapper}>
                                         <div className={classes.storeAddress}>
+                                            <p>Ace Mart Restaurant Supply</p>
                                             <p>{selectedStore.store_locator_info.street}</p>
                                             <p>{selectedStore.store_locator_info.city}, {selectedStore.store_locator_info.state} {selectedStore.store_locator_info.zip}</p>
                                         </div>

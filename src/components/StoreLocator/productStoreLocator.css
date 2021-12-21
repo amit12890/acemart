@@ -39,11 +39,11 @@ display: flex;
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-    padding: 20px 30px;
+    padding: 20px 20px;
 }
 
 .content {
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .modalClose {
@@ -182,7 +182,7 @@ display: flex;
 }
 
 .tabLabel {
-    font-weight: bold;
+    
 }
 
 .tabLabel:after {
@@ -191,6 +191,7 @@ display: flex;
 
 .tabValue {
     margin-left: 5px;
+    font-weight: bold;
 }
 
 .tabsContent {
@@ -267,6 +268,10 @@ display: flex;
 
 .selectStoreWrapper {
     display: flex;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 6px;
+    max-height: 490px;
+
 }
 
 .scrollable {
@@ -278,18 +283,25 @@ display: flex;
 }
 
 .mapContainer {
-    flex: 0 0 66.6666%;
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 .mapContent {
 
     background-image: var(--mapImage);
     background-repeat: no-repeat;
     background-position: top;
-    flex: 0 0 66.6666%;
+    flex: 0 0 60%;
     background-size: 100% auto;
-    position: sticky;
+    position: absolute;
     background-repeat: no-repeat;
-    padding-top: 100%;
+    flex-direction: column;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     
 }
 
@@ -300,12 +312,20 @@ display: flex;
 }
 
 .storeListContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 30%;
 
+}
+
+.storeListItemWrapper {
+    overflow-y: auto;
 }
 
 .listItem {
     display: flex;
     border-top: 2px solid rgb(var(--border-color-base));
+    cursor: pointer;
 }
 .listItem:first-child {
     border-top: none;
@@ -372,6 +392,8 @@ display: flex;
 }
 
 .qtyInfo {
+    font-size: var(--fontSize-300);
+    margin-bottom: 10px;
 
 }
 
@@ -392,7 +414,7 @@ color: rgb(var(--color-red10));
 }
 
 .stocks {
-    font-weight: var(--font-weight-bold);
+    
 }
 
 .availability {
@@ -415,14 +437,15 @@ color: rgb(var(--color-red10));
 }
 
 .stocks .storeAddressWrapper {
-    flex-grow: 1;
     margin: 0 0 20px;
+    flex: 1 1;
 
 }
 
 .stocks .storeAddress {
     font-weight: bold;
     font-size: var(--fontSize-200);
+    
 }
 
 .storeDirection {
@@ -449,6 +472,7 @@ color: rgb(var(--color-red10));
 
 .storeHours {
     font-size: var(--fontSize-100); 
+    flex: 1 1;
 }
 
 .shopStore {
