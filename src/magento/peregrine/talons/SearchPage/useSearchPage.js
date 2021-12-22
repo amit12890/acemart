@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useFieldApi } from 'informed';
 
-import { get, pull, find, split, join } from 'lodash-es';
+import { get, pull, find, split } from 'lodash-es';
 
 import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
 import { useApiData } from '../../../../data.utils';
@@ -44,8 +45,16 @@ export const useSearchPage = (props = {}) => {
     const sortProps = get(searchResult.response, 'sorting.options', []);
     const breadcrumbs = get(searchResult.response, 'breadcrumbs', []);
     const filterSummary = get(searchResult.response, 'filterSummary', []);
-    const header = get(searchResult.response, 'merchandising.content.header', []);
-    const footer = get(searchResult.response, 'merchandising.content.footer', []);
+    const header = get(
+        searchResult.response,
+        'merchandising.content.header',
+        []
+    );
+    const footer = get(
+        searchResult.response,
+        'merchandising.content.footer',
+        []
+    );
 
     useEffect(() => {
         const params = new URLSearchParams(search);
@@ -83,7 +92,7 @@ export const useSearchPage = (props = {}) => {
         return {
             labels: filterList,
             values: transformedList
-        }
+        };
     }, [breadcrumbs]);
 
     const setSort = useCallback(

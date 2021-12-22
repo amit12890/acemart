@@ -1,21 +1,17 @@
 import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { useUserContext } from '@magento/peregrine/lib/context/user';
-import { useAppContext } from '@magento/peregrine/lib/context/app';
-import ADD_REVIEW from '../queries/addReview.graphql';
-import { has } from 'lodash-es';
-import { useToasts } from '@magento/peregrine';
-import Icon from '@magento/venia-ui/lib/components/Icon';
+
+import { has, snakeCase } from 'lodash-es';
 import { CheckCircle as CheckIcon } from 'react-feather';
 
-const Y_OFFSET = 120;
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useAppContext } from '@magento/peregrine/lib/context/app';
 
-const getRatings = values => {
-    const ratingMapper = {
-        "2" : "value"
-    }
-    return JSON.stringify({"2": values[ratingMapper["2"]]})
-}
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { useToasts } from '@magento/peregrine';
+import ADD_REVIEW from '../queries/addReview.graphql';
+
+const Y_OFFSET = 120;
 
 const successIcon = (
     <Icon
@@ -27,7 +23,7 @@ const successIcon = (
 );
 
 export const useReviewForm = props => {
-    const { productId } = props;
+    const { productId, ratings } = props;
     const [formApi, setFormApi] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [{ currentUser, isSignedIn, isGettingDetails }] = useUserContext();
@@ -83,10 +79,19 @@ export const useReviewForm = props => {
 
             delete formValues.review_images;
 
+            const ratingsObj = {}
+            for (let ratInd = 0; ratInd < ratings.length; ratInd++) {
+                const currRating = ratings[ratInd];
+                const ratingKey = snakeCase(currRating.rating_code);
+                if (has(formValues, ratingKey)) {
+                    ratingsObj[currRating.rating_id] = formValues[ratingKey]
+                }
+            }
+
             const variables = {
                 productId,
                 ...formValues,
-                ratings: getRatings(formValues),
+                ratings: JSON.stringify(ratingsObj),
                 tmp_images_path: tmpImgPath,
                 gdpr: has(formValues, 'gdpr') ? formValues.gdpr : false
             };
@@ -111,6 +116,7 @@ export const useReviewForm = props => {
         },
         [
             productId,
+            ratings,
             addReview,
             formApi,
             tmpImgPath,

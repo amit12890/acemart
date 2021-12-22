@@ -1,5 +1,6 @@
 export const SET_WISHLIST_SESSION = 'SET_WISHLIST_SESSION'
 export const RESET_WISHLIST_SESSION = 'RESET_WISHLIST_SESSION'
+export const UDPATE_APP_STATE = 'UDPATE_APP_STATE'
 
 /**
  * add product object to session 
@@ -13,4 +14,9 @@ export const addToWishlistSession = (payload) => ({
 
 export const resetWishlistSession = () => ({
     type: RESET_WISHLIST_SESSION
+})
+
+export const updateAppState = (payload) => ({
+    type: UDPATE_APP_STATE,
+    payload
 })
