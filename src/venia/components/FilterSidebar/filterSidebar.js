@@ -145,7 +145,7 @@ const FilterSidebar = props => {
                                     style={style}
                                 />
                                 <span className={classes.filterLabel}>
-                                    {groupName}sdfasfd
+                                    {groupName}
                                 </span>
                             </div>
                         );
