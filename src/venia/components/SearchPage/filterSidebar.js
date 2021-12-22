@@ -51,7 +51,7 @@ const FilterSidebar = props => {
             return (
                 <>
                     <span className={classes.header}>
-                        <span className={classes.name}>{label}</span>
+                        <span className={classes.name}>Features</span>
                     </span>
                     <div className={classes.labelWrapper}>
                         {values && values.length

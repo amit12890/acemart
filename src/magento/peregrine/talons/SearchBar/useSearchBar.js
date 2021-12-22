@@ -43,7 +43,7 @@ export const useSearchBar = () => {
     const handleSubmit = useCallback(
         ({ search_query }) => {
             if (search_query != null && search_query.trim().length > 0) {
-                push(`${SEARCH_PAGE_PATH}?query=${search_query}`);
+                push(`${SEARCH_PAGE_PATH}?q=${search_query}`);
                 setIsAutoCompleteOpen(false);
             }
         },
