@@ -9,7 +9,7 @@ import { useToasts } from '@magento/peregrine';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useQuery, useMutation } from '@apollo/client';
 import { get } from 'lodash';
-import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing';
+import { useProductListing } from '../../../magento/peregrine/talons/CartPage/useProductListing';
 
 import Icon from '../Icon';
 import { Title } from '@magento/venia-ui/lib/components/Head';
@@ -91,10 +91,7 @@ const CartPage = props => {
             getProductListing: GET_PRODUCT_LISTING
         }
     });
-    const {
-        isLoading,
-        items,
-    } = productTalonProps;
+    const { isLoading, items, error: productFetchError } = productTalonProps;
 
     const [, { addToast }] = useToasts();
 
@@ -157,6 +154,10 @@ const CartPage = props => {
             fetchCartDetails={fetchCartDetails}
             {...productTalonProps}
         />
+    ) : productFetchError ? (
+        <div className={classes.emptyCart}>
+            <h3>Failed to fetch product list</h3>
+        </div>
     ) : (
         <div className={classes.emptyCart}>
             <h3>
