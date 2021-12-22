@@ -89,11 +89,13 @@ const CategoryContent = props => {
     const maybeSortContainer = shouldShowSortButtons ? (
         <SortedByContainer currentSort={currentSort} />
     ) : null;
-
+    
+    const startPageNumber = (pageSize * (pageControl.currentPage - 1)) + 1;
+    const endPageNumber = (startPageNumber + pageSize) - 1;
     const categoryResultsHeading =
         totalCount > 0 ? (
             <div>
-                Items 1-{Math.floor(totalCount / totalPagesFromData)} of{' '}
+                Items {startPageNumber} - {endPageNumber} of{' '}
                 {totalCount}
             </div>
         ) : null;

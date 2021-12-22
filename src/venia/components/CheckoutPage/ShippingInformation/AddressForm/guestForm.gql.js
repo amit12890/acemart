@@ -3,7 +3,7 @@ import { PriceSummaryFragment } from '@magento/peregrine/lib/talons/CartPage/Pri
 
 import { ShippingInformationFragment } from '../shippingInformationFragments.gql';
 import { ShippingMethodsCheckoutFragment } from '../../ShippingMethod/shippingMethodFragments.gql';
-import { AvailablePaymentMethodsFragment } from '../../PaymentInformation/paymentInformation.gql';
+import { AvailablePaymentMethodsFragment } from '../../PaymentInformationVenia/paymentInformation.gql';
 
 export const SET_GUEST_SHIPPING_MUTATION = gql`
     mutation SetGuestShipping(
