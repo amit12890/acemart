@@ -14,7 +14,7 @@ const suggestedProductNames = props => {
 
     const handleClick = useCallback(
         text => () => {
-            history.push(`${SEARCH_PAGE_PATH}?query=${text}`);
+            history.push(`${SEARCH_PAGE_PATH}?q=${text}`);
             setVisible(false);
         },
         [history, setVisible]
