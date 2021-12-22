@@ -103,25 +103,27 @@ const WishlistPage = props => {
                 {wishlistTabs}
 
                 {!!selectedWishlist &&
-                    <div>
+                    <div className={classes.wishlistPageWrapper}>
                         <EditWishlist key={`${selectedWishlist.multi_wishlist_id}-${selectedWishlist.wishlist_name}`}
                             refreshWishlist={refreshWishlist}
                             customerId={get(customerData, 'customer.id', null)}
                             multi_wishlist_id={selectedWishlist.multi_wishlist_id}
                             name={selectedWishlist.wishlist_name} />
-
-                        <ProductListing selectedWishlist={selectedWishlist} wishlists={wishlists}
-                            refreshWishlist={refreshWishlist} />
-                        <div>
+                        <div className={classes.wishlistGridWrapper}>
+                            <ProductListing selectedWishlist={selectedWishlist} wishlists={wishlists}
+                                refreshWishlist={refreshWishlist} />
+                        </div>
+                        <div className={classes.actionsToolbarWrapper}>
                             <Button priority="low">UPDATE WISH LIST</Button>
                             <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
                                 <Button priority="low">SHARE WISH LIST</Button>
                             </Link>
                             <Button priority="low">ADD ALL TO CART</Button>
                         </div>
+
                     </div>
                 }
-            </Fragment>
+            </Fragment >
         );
     }
 
@@ -212,15 +214,17 @@ const ProductListing = props => {
                                             {replaceSpecialChars(name)}
                                         </div>
                                     </Link>
-                                    <Price
-                                        currencyCode={"USD"}
-                                        value={price}
-                                        classes={{
-                                            currency: classes.currency,
-                                            decimal: classes.decimal,
-                                            fraction: classes.fraction
-                                        }}
-                                    />
+                                    <div className={classes.itemPrice}>
+                                        <Price
+                                            currencyCode={"USD"}
+                                            value={price}
+                                            classes={{
+                                                currency: classes.currency,
+                                                decimal: classes.decimal,
+                                                fraction: classes.fraction
+                                            }}
+                                        />
+                                    </div>
                                     <div className={classes.itemComment}>
                                         <textarea className={classes.textarea}
                                             placeholder='Comment' />
@@ -232,7 +236,7 @@ const ProductListing = props => {
                                         <div className={[classes.action, classes.delete].join(" ")}
                                             onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
                                             <span>
-                                                {removingItemId === wishlist_item_id 
+                                                {removingItemId === wishlist_item_id
                                                     ? <div>Loading...</div>
                                                     : (
                                                         <i className={classes.iconWrapper}>
@@ -296,7 +300,7 @@ const AddToCartBlock = ({ classes, qty, sku }) => {
             <AddToCart
                 sku={sku}
                 quantity={Number(value)}
-                Child={()=>
+                Child={() =>
                     <Button
                         priority="high"
                         type="submit"

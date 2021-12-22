@@ -68,6 +68,17 @@
     
 }
 
+.labelItem strong {
+    border-radius: 2px;
+    background-color: rgb(var(--color-gray-light10));
+    font-size: 11px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 5px;
+}
+
 .filterLabel {
  flex-grow: 1;
  text-align: left;

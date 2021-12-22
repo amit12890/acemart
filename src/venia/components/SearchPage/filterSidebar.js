@@ -56,30 +56,30 @@ const FilterSidebar = props => {
                     <div className={classes.labelWrapper}>
                         {values && values.length
                             ? values.map(item => {
-                                  const { active, value, label, count } = item;
-                                  return (
-                                      <div
-                                          key={item.value}
-                                          className={classes.labelItem}
-                                          onClick={setFilter(
-                                              field,
-                                              item,
-                                              facet_active
-                                          )}
-                                      >
-                                          <i
-                                              className={
-                                                  classes[camelCase(value)]
-                                              }
-                                              style={style}
-                                          />
-                                          <span className={classes.filterLabel}>
-                                              {startCase(label)}
-                                          </span>
-                                          <span>{count}</span>
-                                      </div>
-                                  );
-                              })
+                                const { active, value, label, count } = item;
+                                return (
+                                    <div
+                                        key={item.value}
+                                        className={classes.labelItem}
+                                        onClick={setFilter(
+                                            field,
+                                            item,
+                                            facet_active
+                                        )}
+                                    >
+                                        <i
+                                            className={
+                                                classes[camelCase(value)]
+                                            }
+                                            style={style}
+                                        />
+                                        <span className={classes.filterLabel}>
+                                            {startCase(label)}
+                                        </span>
+                                        <span>{count}</span>
+                                    </div>
+                                );
+                            })
                             : null}
                     </div>
                 </>
