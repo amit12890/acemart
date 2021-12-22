@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { size } from 'lodash';
+import { useFieldApi } from 'informed';
 
 import { SEARCH_PAGE_PATH } from '../../../url.utils';
 
@@ -11,13 +12,15 @@ const suggestedProductNames = props => {
     const { suggestions, setVisible } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const history = useHistory();
+    const fieldApi = useFieldApi('search_query');
 
     const handleClick = useCallback(
         text => () => {
             history.push(`${SEARCH_PAGE_PATH}?q=${text}`);
             setVisible(false);
+            fieldApi.setValue(text);
         },
-        [history, setVisible]
+        [history, setVisible, fieldApi]
     );
 
     return (

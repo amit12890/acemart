@@ -20,16 +20,22 @@ import { size } from 'lodash';
  * @param {Boolean} props.visible - whether to show the element
  */
 export const useAutocomplete = props => {
-    const { valid, visible } = props;
+    const { valid, visible, setVisible } = props;
 
     // Get the search term from the field.
     const { value } = useFieldState('search_query');
 
     const { callApi: callSuggestionApi, ...suggestionResult } = useApiData({
-        isLazy: true
+        isLazy: true,
+        onSuccess: () => {
+            setVisible(true)
+        }
     });
     const { callApi: callproductSearchApi, ...productResult } = useApiData({
-        isLazy: true
+        isLazy: true,
+        onSuccess: () => {
+            setVisible(true)
+        }
     });
     // Create a debounced function so we only search some delay after the last
     // keypress.
@@ -44,16 +50,10 @@ export const useAutocomplete = props => {
 
     // run the query once on mount, and again whenever state changes
     useEffect(() => {
-        if (valid && visible) {
+        if (valid) {
             debouncedRunQuery(value);
         }
     }, [debouncedRunQuery, valid, value, visible]);
-
-    const invalidCharacterLength = !valid && value ? true : false;
-    let messageType = '';
-
-    const suggestionError = suggestionResult.error;
-    const productError = productResult.error;
 
     const suggestionLoading = suggestionResult.loading;
     const productLoading = productResult.loading;
@@ -64,27 +64,11 @@ export const useAutocomplete = props => {
     const hasResult = size(suggestions) || size(products);
     const displayResult = valid && hasResult;
 
-    if (invalidCharacterLength) {
-        messageType = 'INVALID_CHARACTER_LENGTH';
-    } else if (suggestionError) {
-        messageType = 'SUGGESTION_ERROR';
-    } else if (productError) {
-        messageType = 'PRODUCT_ERROR';
-    } else if (suggestionLoading || productLoading) {
-        messageType = 'LOADING';
-    } else if (!displayResult) {
-        messageType = 'PROMPT';
-    } else {
-        messageType = 'RESULT_SUMMARY';
-    }
-
     return {
         suggestionLoading,
         productLoading,
         suggestions,
         products,
-        messageType,
-        value,
         displayResult
     };
 };
