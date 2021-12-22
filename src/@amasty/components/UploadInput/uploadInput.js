@@ -57,7 +57,7 @@ const UploadInput = props => {
           }}
         />
       </FieldIcons>
-      <Message fieldState={fieldState}>{message}</Message>
+      {/* <Message fieldState={fieldState}>{message}</Message> */}
     </Fragment>
   );
 };
