@@ -2,8 +2,11 @@ import { useState, useCallback } from 'react';
 import { RestApi } from '@magento/peregrine';
 const { request } = RestApi.Magento2;
 
-const UPLOAD_API = 'rest/all/V1/amasty_advanced_review/uploadImage';
+import { HOST_URL } from "../../url.utils"
+
+const UPLOAD_API = `${HOST_URL}/rest/all/V1/amasty_advanced_review/uploadImage`;
 const MAX_SIZE = 7340032; // ~7mb
+
 
 const getBase64 = file => {
   const reader = new FileReader();
@@ -40,7 +43,7 @@ export const useUpload = props => {
         for (let i = 0; i < files.length; i++) {
           if (files[i].size < MAX_SIZE) {
             promises.push(
-              getBase64(files[i]).then(fileContent =>
+              getBase64(files[i]).then(({fileContent}) =>
                 request(UPLOAD_API, {
                   method: 'POST',
                   body: JSON.stringify(fileContent)

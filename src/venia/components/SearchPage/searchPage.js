@@ -179,7 +179,6 @@ const SearchPage = props => {
             <div className={classes.contentWrapper}>
                 <div className={classes.sidebar}>
                     {maybeSidebar}
-                    <CompareListBlock />
                 </div>
 
                 <div className={classes.searchContent}>
