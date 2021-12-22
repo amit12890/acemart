@@ -26,18 +26,14 @@ export const useSearchBar = () => {
     // expand or collapse on input change
     const handleChange = useCallback(
         value => {
-            const hasValue = !!value;
-            const isValid = hasValue && value.length > 2;
+            const isValid = !!value && value.length > 1;
             setValid(isValid);
-            setIsAutoCompleteOpen(hasValue);
+            if (!isValid) {
+                setIsAutoCompleteOpen(false);
+            }
         },
         [setIsAutoCompleteOpen, setValid]
     );
-
-    // expand on focus
-    const handleFocus = useCallback(() => {
-        setIsAutoCompleteOpen(true);
-    }, [setIsAutoCompleteOpen]);
 
     // navigate on submit
     const handleSubmit = useCallback(
@@ -53,7 +49,6 @@ export const useSearchBar = () => {
     return {
         containerRef: elementRef,
         handleChange,
-        handleFocus,
         handleSubmit,
         initialValues,
         isAutoCompleteOpen,

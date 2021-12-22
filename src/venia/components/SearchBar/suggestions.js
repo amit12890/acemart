@@ -9,8 +9,6 @@ import SuggestedProductNames from './suggestedProductNames';
 
 const Suggestions = props => {
     const {
-        suggestionLoading,
-        productLoading,
         suggestions,
         products,
         setVisible,

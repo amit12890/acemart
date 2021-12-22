@@ -56,7 +56,7 @@ const ReviewForm = props => {
         isShowSuccessMessage,
         handleSubmitFailure,
         formApi
-    } = useReviewForm({ productId });
+    } = useReviewForm({ productId, ratings });
 
     const { handleUpload, loading } = useUpload({ setTmpImgPath, formApi });
 
