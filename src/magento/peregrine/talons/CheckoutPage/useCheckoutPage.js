@@ -144,7 +144,9 @@ export const useCheckoutPage = (props = {}) => {
         }
     })
 
-    const [setStorePickupAndFetchDetails, _] = useMutation(setStorePickupShippingAdressMutation, {
+    const [setStorePickupAndFetchDetails, {
+        loading: storePickupNetworkStatus
+    }] = useMutation(setStorePickupShippingAdressMutation, {
         variables: {
             cartId
         },
@@ -180,12 +182,14 @@ export const useCheckoutPage = (props = {}) => {
      * https://www.apollographql.com/docs/react/data/queries/#inspecting-loading-states
      */
     const isLoading = useMemo(() => {
-        const checkoutQueryInFlight = checkoutQueryNetworkStatus
-            ? checkoutQueryNetworkStatus < 7
-            : true;
-
+        let checkoutQueryInFlight = true
+        if (isDefaultStore) {
+            checkoutQueryInFlight = checkoutQueryNetworkStatus < 7
+        } else {
+            checkoutQueryInFlight = storePickupNetworkStatus < 7
+        }
         return checkoutQueryInFlight || customerLoading;
-    }, [checkoutQueryNetworkStatus, customerLoading]);
+    }, [checkoutQueryNetworkStatus, customerLoading, storePickupNetworkStatus, isDefaultStore]);
 
     const customer = customerData && customerData.customer;
 

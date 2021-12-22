@@ -137,7 +137,7 @@ const CheckoutPage = props => {
                 orderNumber={orderNumber}
             />
         );
-    } else if (isLoading) {
+    } else if (isLoading && !hasCheckoutData) {
         // if checkout data is empty and data loading then show full screen loader
         return fullPageLoadingIndicator;
     } else if (isCartEmpty) {
