@@ -119,7 +119,7 @@ const Product = props => {
                                 image: classes.image
                             }}
                             width={IMAGE_SIZE}
-                            resource={image}
+                            src={image}
                         />
                     </Link>
                     <div className={classes.details}>

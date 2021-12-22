@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { shape, string } from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AlertCircle as AlertCircleIcon } from 'react-feather';
@@ -22,22 +22,24 @@ import FormError from '../FormError';
 import AddressBook from './AddressBook';
 import GuestSignIn from './GuestSignIn';
 import OrderSummary from './OrderSummary';
-// import PaymentInformation from './PaymentInformation';
-import payments from './PaymentInformation/paymentMethodCollection';
+import PaymentInformation from './PaymentInformation';
+import payments from './PaymentInformationVenia/paymentMethodCollection';
 import PriceAdjustments from './PriceAdjustments';
 import ShippingMethod from './ShippingMethod';
 import ShippingInformation from './ShippingInformation';
 import OrderConfirmationPage from './OrderConfirmationPage';
 import ItemsReview from './ItemsReview';
+import SplitOrder from '../../../components/SplitOrder';
 
 import defaultClasses from './checkoutPage.css';
 import { size } from 'lodash';
-import SplitOrder from '../../../components/SplitOrder';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
 const CheckoutPage = props => {
     const { classes: propClasses } = props;
+
+    const [selectedPayment, setSelectedPayment] = useState(false)
     const { formatMessage } = useIntl();
     const talonProps = useCheckoutPage();
 
@@ -46,6 +48,7 @@ const CheckoutPage = props => {
          * Enum, one of:
          * SHIPPING_ADDRESS, SHIPPING_METHOD, PAYMENT, REVIEW
          */
+        isDefaultStore,
         activeContent,
         availablePaymentMethods,
         cartItems,
@@ -81,10 +84,10 @@ const CheckoutPage = props => {
         multiShipping,
         isMultiShipping
     } = talonProps;
+    console.log("🚀 ~ file: checkoutPage.js ~ line 85 ~ availablePaymentMethods", availablePaymentMethods)
     console.log("🚀 ~ file: checkoutPage.js ~ line 81 ~ checkoutData", checkoutData)
 
     const [, { addToast }] = useToasts();
-
 
     useEffect(() => {
         if (hasError) {
@@ -134,7 +137,7 @@ const CheckoutPage = props => {
                 orderNumber={orderNumber}
             />
         );
-    } else if (isLoading && !hasCheckoutData) {
+    } else if (isLoading) {
         // if checkout data is empty and data loading then show full screen loader
         return fullPageLoadingIndicator;
     } else if (isCartEmpty) {
@@ -180,6 +183,7 @@ const CheckoutPage = props => {
                     onSave={setShippingMethodDone}
                     onSuccess={scrollShippingMethodIntoView}
                     setPageIsUpdating={setIsUpdating}
+                    isDefaultStore={isDefaultStore}
                 />
             ) : (
                 <h3 className={classes.shipping_method_heading}>
@@ -195,9 +199,7 @@ const CheckoutPage = props => {
 
         // If we have an implementation, or if this is a "zero" checkout,
         // we can allow checkout to proceed.
-        const isPaymentAvailable = !!availablePaymentMethods.find(
-            ({ code }) => code === 'free' || paymentMethods.includes(code)
-        );
+        const isPaymentAvailable = size(availablePaymentMethods) > 0
 
         if (!isPaymentAvailable) {
             formErrors.push(
@@ -211,17 +213,8 @@ const CheckoutPage = props => {
         }
 
         const paymentInformationSection =
-            // checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
-            //     <PaymentInformation
-            //         onSave={setPaymentInformationDone}
-            //         checkoutError={error}
-            //         resetShouldSubmit={resetReviewOrderButtonClicked}
-            //         setCheckoutStep={setCheckoutStep}
-            //         shouldSubmit={reviewOrderButtonClicked}
-            //     />
-            // )
             checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
-                <div>Replaced Payment Information block !!</div>
+                <PaymentInformation data={availablePaymentMethods} />
             )
                 : (
                     <h3 className={classes.payment_information_heading}>
@@ -361,6 +354,7 @@ const CheckoutPage = props => {
                             onSave={setShippingInformationDone}
                             onSuccess={scrollShippingInformationIntoView}
                             toggleActiveContent={toggleAddressBookContent}
+                            isDefaultStore={isDefaultStore}
                         />
                     </ScrollAnchor>
                 </div>

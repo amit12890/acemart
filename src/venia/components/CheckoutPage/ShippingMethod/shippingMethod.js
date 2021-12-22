@@ -29,7 +29,7 @@ const initializingContents = (
 );
 
 const ShippingMethod = props => {
-    const { onSave, onSuccess, pageIsUpdating, setPageIsUpdating } = props;
+    const { onSave, onSuccess, pageIsUpdating, setPageIsUpdating, isDefaultStore } = props;
 
     const talonProps = useShippingMethod({
         onSave,
@@ -58,14 +58,13 @@ const ShippingMethod = props => {
         const updateFormInitialValues = {
             shipping_method: selectedShippingMethod.serializedValue
         };
-
         contents = (
             <Fragment>
                 <div className={classes.done}>
                     <CompletedView
                         selectedShippingMethod={selectedShippingMethod}
                         showUpdateMode={showUpdateMode}
-                    />
+                        isDefaultStore={isDefaultStore} />
                 </div>
                 <UpdateModal
                     formErrors={Array.from(errors.values())}
