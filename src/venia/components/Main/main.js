@@ -31,7 +31,6 @@ const Main = props => {
     if (isCMS) {
         pageClass = [...pageClass, classes.cms_page]
     }
-    console.log("🚀 ~ file: main.js ~ line 31 ~ pageClass", pageClass)
     // for checkout page show different header and no footer
     const showCheckoutLayout = pathname === "/checkout" || pathname === "/checkout/"
 
