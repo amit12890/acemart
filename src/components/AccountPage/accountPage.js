@@ -13,7 +13,8 @@ import {
     myOrderListPage,
     myWishlistPage,
     newsletterPage,
-    reviewPage
+    reviewPage,
+    myWishlistSharePage
 } from '../../url.utils';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';

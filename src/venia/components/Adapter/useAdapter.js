@@ -49,6 +49,7 @@ export const useAdapter = props => {
                 const { graphQLErrors, networkError, response } = handler;
 
                 if (graphQLErrors) {
+                    console.log("🚀 ~ file: useAdapter.js ~ line 52 ~ graphQLErrors", graphQLErrors)
                     graphQLErrors.forEach(({ message, locations, path }) =>
                         console.log(
                             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`

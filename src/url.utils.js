@@ -13,6 +13,8 @@ export const accountPageUrl = () => '/customer/account/';
 export const editAccountInfo = () => '/customer/account/edit/';
 export const editAccountPassword = () => '/customer/account/edit/changepass/1/';
 export const myWishlistPage = () => '/wishlist/';
+export const myWishlistSharePage = (wishlist_id = ':wishlist_id') =>
+    `/wishlist/index/share/mwishlist_id/${wishlist_id}/`;
 export const myOrderListPage = () => '/sales/order/history/';
 export const myOrderDetailsPage = (tab = ':tab', orderId = ':orderId') =>
     `/sales/order/${tab}/order_id/${orderId}/`;

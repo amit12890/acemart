@@ -165,9 +165,7 @@
     font-size: var(--fontSize-100);
     text-align: left;
     color: rgb(var(--product-name-color));
-    
-
-
+    text-transform: uppercase;
 }
 .itemPrice {
     font-weight: var(--font-weight-bold);

@@ -11,7 +11,8 @@ import { GET_CUSTOMER_DETAILS } from '@magento/venia-ui/lib/components/AccountCh
 import { apiGetWishlistData, myWishlistPage } from '../../url.utils';
 import { REMOVE_PRODUCTS_FROM_WISHLIST } from '@magento/peregrine/lib/talons/WishlistPage/wishlistItem.gql';
 import { Link } from 'react-router-dom';
-
+import { replaceSpecialChars } from "../../app.utils"
+import Price from '../../venia/components/Price';
 
 const WishlistPage = props => {
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
@@ -26,7 +27,7 @@ const WishlistPage = props => {
     const { callApi: getWishlist, response: wishlists, loading, error } = useApiData({
         isLazy: true,
         onSuccess: (data) => {
-            if (!selectedWishlist && !!size(data)) {
+            if (size(data)) {
                 setSelectedWishlist(data[0])
             }
         }
@@ -100,6 +101,7 @@ const ProductListing = props => {
     const { wishlists, refreshWishlist } = props;
 
     const classes = useStyle(defaultClasses, props.classes);
+    const [removingItemId, setRemovingItemId] = useState(null);
 
     const [
         removeProductFromWishlist,
@@ -111,12 +113,14 @@ const ProductListing = props => {
 
     const handleRemoveProduct = useCallback(async (wishlistId, itemId) => {
         if (removeProductLoading) return;
+        setRemovingItemId(itemId)
         await removeProductFromWishlist({
             variables: {
                 wishlistId: wishlistId,
                 wishlistItemsId: [itemId]
             }
         });
+        setRemovingItemId(null)
         await refreshWishlist();
     }, [removeProductLoading, removeProductFromWishlist])
 
@@ -133,32 +137,48 @@ const ProductListing = props => {
             <div className={classes.blocktemsList}>
                 {itemList.map((item) => {
                     const { product, wishlist_item_id, wishlist_id } = item
-                    const { name, price, small_image } = product
+                    const { name, price, small_image, request_path } = product
                     return (
                         <div key={wishlist_item_id} className={classes.listItem}>
                             <div className={classes.listItemInfo}>
-                                <div className={classes.listItemImageContainer}>
-                                    <div className={classes.listItemImage}>
-                                        <img src={small_image} />
+                                <Link to={`/${request_path}`}>
+                                    <div className={classes.listItemImageContainer}>
+                                        <div className={classes.listItemImage}>
+                                            <img src={small_image} />
+                                        </div>
                                     </div>
-
-                                </div>
-
+                                </Link>
                                 <div className={classes.listItemDetails}>
-                                    <div className={classes.listItemName}>{name}</div>
-                                    <div className={classes.listItemPrice}>{price}</div>
+                                    <Link to={`/${request_path}`}>
+                                        <div className={classes.listItemName}>
+                                            {replaceSpecialChars(name)}
+                                        </div>
+                                    </Link>
+                                    <Price
+                                        currencyCode={"USD"}
+                                        value={price}
+                                        classes={{
+                                            currency: classes.currency,
+                                            decimal: classes.decimal,
+                                            fraction: classes.fraction
+                                        }}
+                                    />
 
                                     <div className={classes.ItemQuickActions}>
-                                        <div className={[classes.action, classes.edit].join(" ")} onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
-                                            {removeProductLoading ? <span>Loading...</span> :
-                                                <span>
-                                                    <i className={classes.iconWrapper}>
-                                                        <svg className={[classes.svgIcon, classes.deleteIcon].join(" ")} width="32" height="32" viewBox="0 0 32 32">
-                                                            <title>remove</title>
-                                                            <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
-                                                        </svg>
-                                                    </i>
-                                                </span>
+                                        <div className={[classes.action, classes.edit].join(" ")}
+                                            onClick={() => handleRemoveProduct(wishlist_id, wishlist_item_id)}>
+                                            {removingItemId === wishlist_item_id
+                                                ? <span>Loading...</span>
+                                                : (
+                                                    <span>
+                                                        <i className={classes.iconWrapper}>
+                                                            <svg className={[classes.svgIcon, classes.deleteIcon].join(" ")} width="32" height="32" viewBox="0 0 32 32">
+                                                                <title>remove</title>
+                                                                <path d="M25.313 9.219l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
+                                                            </svg>
+                                                        </i>
+                                                    </span>
+                                                )
                                             }
                                         </div>
                                     </div>

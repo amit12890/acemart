@@ -24,7 +24,7 @@ const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
 
 const successMessage = 'is added into cart';
 
-const AddToCart = ({ sku, Child, Loader }) => {
+const AddToCart = ({ sku, Child, Loader, quantity = 1 }) => {
     const [{ cartId }] = useCartContext();
     const [_, { addToast }] = useToasts();
 
@@ -73,16 +73,15 @@ const AddToCart = ({ sku, Child, Loader }) => {
             cartId,
             product: {
                 sku,
-                quantity: 1
+                quantity
             }
         };
-
         try {
             await addProductToCart({ variables });
         } catch {
             return;
         }
-    }, [addProductToCart, cartId, sku]);
+    }, [addProductToCart, cartId, sku, quantity]);
 
     return (
         <div onClick={handleAddToCart}>{loading ? <Loader /> : <Child />}</div>

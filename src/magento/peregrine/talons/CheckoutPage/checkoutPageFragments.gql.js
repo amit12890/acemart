@@ -36,7 +36,10 @@ export const MultiShippingFragment = gql`
                 sku
                 url_key
                 url_suffix
-                uom      
+                uom
+                brand
+                brand_name
+                product_name
                 thumbnail {
                     url        
                 }
@@ -63,7 +66,10 @@ export const MultiShippingFragment = gql`
                 sku
                 url_key
                 url_suffix
-                uom      
+                uom
+                brand
+                brand_name
+                product_name
                 thumbnail {
                     url        
                 }
