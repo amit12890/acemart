@@ -22,7 +22,7 @@ import FormError from '../FormError';
 import AddressBook from './AddressBook';
 import GuestSignIn from './GuestSignIn';
 import OrderSummary from './OrderSummary';
-import PaymentInformation from './PaymentInformation';
+import PaymentInformation from './PaymentInformationVenia';
 import payments from './PaymentInformationVenia/paymentMethodCollection';
 import PriceAdjustments from './PriceAdjustments';
 import ShippingMethod from './ShippingMethod';
@@ -39,7 +39,7 @@ const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 const CheckoutPage = props => {
     const { classes: propClasses } = props;
 
-    const [selectedPayment, setSelectedPayment] = useState(false)
+    const [selectedPaymentMethod, setSelectedPayment] = useState(false)
     const { formatMessage } = useIntl();
     const talonProps = useCheckoutPage();
 
@@ -84,8 +84,6 @@ const CheckoutPage = props => {
         multiShipping,
         isMultiShipping
     } = talonProps;
-    console.log("🚀 ~ file: checkoutPage.js ~ line 85 ~ availablePaymentMethods", availablePaymentMethods)
-    console.log("🚀 ~ file: checkoutPage.js ~ line 81 ~ checkoutData", checkoutData)
 
     const [, { addToast }] = useToasts();
 
@@ -214,16 +212,21 @@ const CheckoutPage = props => {
 
         const paymentInformationSection =
             checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
-                <PaymentInformation data={availablePaymentMethods} />
-            )
-                : (
-                    <h3 className={classes.payment_information_heading}>
-                        <FormattedMessage
-                            id={'checkoutPage.paymentInformationStep'}
-                            defaultMessage={'3. Payment Information'}
-                        />
-                    </h3>
-                );
+                <PaymentInformation
+                    onSave={setPaymentInformationDone}
+                    checkoutError={error}
+                    resetShouldSubmit={resetReviewOrderButtonClicked}
+                    setCheckoutStep={setCheckoutStep}
+                    shouldSubmit={reviewOrderButtonClicked}
+                />
+            ) : (
+                <h3 className={classes.payment_information_heading}>
+                    <FormattedMessage
+                        id={'checkoutPage.paymentInformationStep'}
+                        defaultMessage={'3. Payment Information'}
+                    />
+                </h3>
+            );
 
         const priceAdjustmentsSection =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
@@ -242,8 +245,7 @@ const CheckoutPage = props => {
                         reviewOrderButtonClicked ||
                         isUpdating ||
                         !isPaymentAvailable
-                    }
-                >
+                    }>
                     <FormattedMessage
                         id={'checkoutPage.reviewOrder'}
                         defaultMessage={'Review Order'}

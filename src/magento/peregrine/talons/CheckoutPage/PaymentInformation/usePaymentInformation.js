@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
-import { useQuery, useApolloClient, useMutation } from '@apollo/client';
+import { useQuery, useApolloClient, useMutation, useLazyQuery } from '@apollo/client';
 
-import { useCartContext } from '../../../context/cart';
+import { useCartContext } from '@magento/peregrine/lib/context/cart';
 import CheckoutError from '../CheckoutError';
 import { CHECKOUT_STEP } from '../useCheckoutPage';
 
@@ -79,6 +79,7 @@ export const usePaymentInformation = props => {
         skip: !cartId,
         variables: { cartId }
     });
+    console.log("🚀 ~ file: usePaymentInformation.js ~ line 82 ~ paymentInformationData", paymentInformationData)
 
     const [
         setFreePaymentMethod,
@@ -108,7 +109,6 @@ export const usePaymentInformation = props => {
     /**
      * Effects
      */
-
     const availablePaymentMethods = paymentInformationData
         ? paymentInformationData.cart.available_payment_methods
         : [];
@@ -147,7 +147,8 @@ export const usePaymentInformation = props => {
                 if (selectedPaymentMethod !== 'free') {
                     await setFreePaymentMethod({
                         variables: {
-                            cartId
+                            cartId,
+                            code: selectedPaymentMethod.code
                         }
                     });
                     setDoneEditing(true);
@@ -222,6 +223,15 @@ export const usePaymentInformation = props => {
         }
     });
 
+    const updatePaymentSelection = useCallback((selectedPaymentItem) => {
+        setFreePaymentMethod({
+            variables: {
+                cartId,
+                code: selectedPaymentItem.code
+            }
+        });
+    }, [cartId])
+
     const handleExpiredPaymentError = useCallback(() => {
         setDoneEditing(false);
         clearPaymentDetails({ variables: { cartId } });
@@ -245,7 +255,8 @@ export const usePaymentInformation = props => {
         hideEditModal,
         isEditModalActive,
         isLoading,
-        showEditModal
+        showEditModal,
+        updatePaymentSelection
     };
 };
 

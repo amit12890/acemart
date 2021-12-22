@@ -1,15 +1,6 @@
 import { gql } from '@apollo/client';
 import { PriceSummaryFragment } from '../../CartPage/PriceSummary/priceSummaryFragments.gql';
-
-export const AvailablePaymentMethodsFragment = gql`
-    fragment AvailablePaymentMethodsFragment on Cart {
-        id
-        available_payment_methods {
-            code
-            title
-        }
-    }
-`;
+import { AvailablePaymentMethodsFragment } from '../checkoutPageFragments.gql'
 
 export const GET_PAYMENT_INFORMATION = gql`
     query getPaymentInformation($cartId: String!) {
@@ -32,7 +23,7 @@ export const GET_PAYMENT_INFORMATION = gql`
                 }
                 telephone
             }
-            ...AvailablePaymentMethodsFragment
+            ...availablePaymentMethodsFragment
         }
     }
     ${AvailablePaymentMethodsFragment}

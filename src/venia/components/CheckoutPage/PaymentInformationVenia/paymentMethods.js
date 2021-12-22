@@ -3,6 +3,7 @@ import { shape, string, bool, func } from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { usePaymentMethods } from '@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/usePaymentMethods';
+import { Circle, CheckCircle } from 'react-feather'
 
 import { useStyle } from '../../../classify';
 import RadioGroup from '@magento/venia-ui/lib/components/RadioGroup';
@@ -17,7 +18,8 @@ const PaymentMethods = props => {
         onPaymentError,
         onPaymentSuccess,
         resetShouldSubmit,
-        shouldSubmit
+        shouldSubmit,
+        updatePaymentSelection
     } = props;
 
     const { formatMessage } = useIntl();
@@ -32,8 +34,9 @@ const PaymentMethods = props => {
         availablePaymentMethods,
         currentSelectedPaymentMethod,
         initialSelectedMethod,
-        isLoading
+        isLoading,
     } = talonProps;
+    console.log("🚀 ~ file: paymentMethods.js ~ line 37 ~ availablePaymentMethods", currentSelectedPaymentMethod)
 
     if (isLoading) {
         return null;
@@ -41,6 +44,33 @@ const PaymentMethods = props => {
 
     const radios = availablePaymentMethods
         .map(({ code, title }) => {
+            const isActive = currentSelectedPaymentMethod === code
+            return (
+                <div
+                    style={{
+                        padding: 16,
+                        display: 'flex'
+                    }}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        updatePaymentSelection({ code, title })
+                    }}>
+                    {isActive ? (
+                        <div >
+                            <CheckCircle color='#009988' />
+                        </div>
+                    ) : (
+                        <div>
+                            <Circle />
+                        </div>
+                    )}
+                    <div style={{
+                        marginLeft: 16
+                    }}>
+                        {title}
+                    </div>
+                </div>
+            )
             // If we don't have an implementation for a method type, ignore it.
             if (!Object.keys(payments).includes(code)) {
                 return;
