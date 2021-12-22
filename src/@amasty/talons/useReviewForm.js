@@ -10,16 +10,12 @@ import { CheckCircle as CheckIcon } from 'react-feather';
 
 const Y_OFFSET = 120;
 
-const getRatings = values =>
-    Object.keys(values).reduce((rat, key) => {
-        const ratingId = new RegExp(/^rating_([\d+])/g).exec(key);
-
-        if (ratingId && ratingId[1]) {
-            rat[ratingId[1]] = values[key];
-        }
-
-        return rat;
-    }, {});
+const getRatings = values => {
+    const ratingMapper = {
+        "2" : "value"
+    }
+    return JSON.stringify({"2": values[ratingMapper["2"]]})
+}
 
 const successIcon = (
     <Icon
@@ -85,14 +81,12 @@ export const useReviewForm = props => {
         async formValues => {
             setIsSubmitting(true);
 
-            const ratings = getRatings(formValues);
-
             delete formValues.review_images;
 
             const variables = {
                 productId,
                 ...formValues,
-                ratings: JSON.stringify(ratings),
+                ratings: getRatings(formValues),
                 tmp_images_path: tmpImgPath,
                 gdpr: has(formValues, 'gdpr') ? formValues.gdpr : false
             };
