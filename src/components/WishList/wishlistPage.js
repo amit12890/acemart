@@ -304,7 +304,13 @@ const AddToCartBlock = ({ classes, qty, sku }) => {
                         Add to Cart
                     </Button>
                 }
-                Loader={() => <div className={classes.actionsContainer}>Loading....</div>}
+                Loader={() =>
+                    <Button
+                        priority="high"
+                        disabled
+                    >
+                        Add to Cart
+                </Button>}
             />
         </div>
     )
