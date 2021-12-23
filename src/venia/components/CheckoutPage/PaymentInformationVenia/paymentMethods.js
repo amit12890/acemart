@@ -19,6 +19,7 @@ const PaymentMethods = props => {
         onPaymentSuccess,
         resetShouldSubmit,
         shouldSubmit,
+        selectedPaymentMethod,
         updatePaymentSelection
     } = props;
 
@@ -36,7 +37,7 @@ const PaymentMethods = props => {
         initialSelectedMethod,
         isLoading,
     } = talonProps;
-    console.log("🚀 ~ file: paymentMethods.js ~ line 37 ~ availablePaymentMethods", currentSelectedPaymentMethod)
+    console.log("🚀 ~ file: paymentMethods.js ~ line 37 ~ availablePaymentMethods", currentSelectedPaymentMethod, initialSelectedMethod)
 
     if (isLoading) {
         return null;
@@ -44,7 +45,7 @@ const PaymentMethods = props => {
 
     const radios = availablePaymentMethods
         .map(({ code, title }) => {
-            const isActive = currentSelectedPaymentMethod === code
+            const isActive = selectedPaymentMethod === code
             return (
                 <div
                     style={{

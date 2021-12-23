@@ -108,7 +108,21 @@ export const GET_CUSTOMER = gql`
     }
 `;
 
+export const SET_GUEST_EMAIL = gql`
+    mutation setGuestEmailOnCart($cartId: String!, $email: String!){
+        setGuestEmailOnCart(input: {
+            cart_id: $cartId
+            email: $email
+        }) {
+            cart {
+                email
+            }
+        }
+    }
+`;
+
 export default {
+    setGuestCartEmail: SET_GUEST_EMAIL,
     createCartMutation: CREATE_CART,
     getCheckoutDetailsQuery: GET_CHECKOUT_DETAILS,
     setStorePickupShippingAdressMutation: SET_STORE_PICKUP_SHIPPING_ADDRESS,

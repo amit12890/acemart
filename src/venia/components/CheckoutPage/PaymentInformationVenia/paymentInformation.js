@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Form } from 'informed';
 import { shape, func, string, bool, instanceOf } from 'prop-types';
@@ -44,8 +44,16 @@ const PaymentInformation = props => {
         isLoading,
         isEditModalActive,
         showEditModal,
+        selectedPaymentMethod,
         updatePaymentSelection
     } = talonProps;
+    console.log("🚀 ~ file: paymentInformation.js ~ line 50 ~ selectedPaymentMethod", selectedPaymentMethod)
+
+    useEffect(() => {
+        if (selectedPaymentMethod === 'cashondelivery') {
+            handlePaymentSuccess()
+        }
+    }, [selectedPaymentMethod])
 
     if (isLoading) {
         return (
@@ -68,6 +76,7 @@ const PaymentInformation = props => {
                 resetShouldSubmit={resetShouldSubmit}
                 shouldSubmit={shouldSubmit}
                 updatePaymentSelection={updatePaymentSelection}
+                selectedPaymentMethod={selectedPaymentMethod}
             />
         </Form>
     );
