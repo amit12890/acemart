@@ -170,7 +170,7 @@ const Product = props => {
                     </div>
                 </div>
                 <div className={classes.cartItemActions}>
-
+                {isSignedIn ?
                     <div className={classes.addToList}>
                         <div className={classes.toWishlist} onClick={openWishlistPopup}>
                             <i className={classes.iconWrapper}>
@@ -181,6 +181,7 @@ const Product = props => {
                             </i>
                         </div>
                     </div>
+                : null}
 
                     <Button
                         onClick={handleRemoveFromCart}
