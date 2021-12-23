@@ -77,7 +77,6 @@ const productPerPage = props => {
                     />
                 </span>
             </Button>
-            <span className={classes.label}>per page</span>
             {sortElements}
         </div>
     );
