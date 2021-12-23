@@ -61,7 +61,7 @@ const Wishlist = props => {
             );
     const loadMoreButton =
         items && items.length < itemsCount ? (
-            <div>
+            <div className={classes.actionToolbar}>
                 <Button
                     className={classes.loadMore}
                     disabled={isFetchingMore}

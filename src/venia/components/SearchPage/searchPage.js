@@ -6,8 +6,6 @@ import { useSearchPage } from '../../../magento/peregrine/talons/SearchPage/useS
 
 import Pagination from '../../components/Pagination';
 import defaultClasses from './searchPage.css';
-import Image from '../Image';
-import searchBanner from '../../../assets/searchBanner.jpg';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
@@ -15,14 +13,13 @@ import { Title } from '@magento/venia-ui/lib/components/Head';
 
 import SearchProducts from './searchProducts';
 
-import SP_DATA from './searchPageData.json';
 import { size } from 'lodash-es';
 import SearchSort from './searchSort';
 import SearchPerPage from './searchPerPage';
 import FilterSidebar from './filterSidebar';
 import { Link } from 'react-router-dom';
 import { SEARCH_PAGE_PATH } from '../../../url.utils';
-import CompareListBlock from '../../../components/CompareListPage/compareListBlock';
+import RichContent from '../RichContent/richContent';
 
 const POPULAR_SEARCH = [
     'sale',
@@ -35,7 +32,7 @@ const POPULAR_SEARCH = [
 
 const SearchPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
-    const talonProps = useSearchPage(SP_DATA);
+    const talonProps = useSearchPage();
     const {
         products,
         searchTerm,
@@ -48,7 +45,8 @@ const SearchPage = props => {
         setFilter,
         searchError,
         searchLoading,
-        categoryFiltered
+        categoryFiltered,
+        header,
     } = talonProps;
 
     const isProducts = size(products);
@@ -88,7 +86,7 @@ const SearchPage = props => {
                             {POPULAR_SEARCH.map(keyword => (
                                 <div>
                                     <Link
-                                        to={`${SEARCH_PAGE_PATH}?query=${keyword}`}
+                                        to={`${SEARCH_PAGE_PATH}?q=${keyword}`}
                                     >
                                         {keyword}
                                     </Link>
@@ -134,7 +132,7 @@ const SearchPage = props => {
                 ),
                 term: searchTerm
             }}
-            defaultMessage={'Showing results:'}
+            defaultMessage={'Search Results for :'}
         />
     ) : (
         <FormattedMessage
@@ -179,12 +177,15 @@ const SearchPage = props => {
             <div className={classes.contentWrapper}>
                 <div className={classes.sidebar}>
                     {maybeSidebar}
-                    <CompareListBlock />
                 </div>
 
                 <div className={classes.searchContent}>
                     <div className={classes.searchBannerWrapper}>
-                        <Image src={searchBanner} />
+                        {header.map((item) => {
+                            return (
+                                <RichContent html={item} />
+                            )
+                        })}
                     </div>
                     <div className={classes.heading}>
                         <div className={classes.searchInfo}>

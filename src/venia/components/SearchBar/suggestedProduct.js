@@ -19,7 +19,9 @@ const SuggestedProduct = props => {
         onNavigate,
         price,
         thumbnailImageUrl,
-        baseless_url
+        baseless_url,
+        brand,
+        mpn,
     } = props;
 
     const handleClick = useCallback(() => {
@@ -46,7 +48,7 @@ const SuggestedProduct = props => {
                         width={IMAGE_WIDTH}
                     />
                 </div>
-                <div className={classes.name}>{replaceSpecialChars(name)}</div>
+                <div className={classes.name}>{replaceSpecialChars(`${brand} ${mpn} ${name}`)}</div>
                 <div className={classes.sku}>{sku}</div>
                 <div className={classes.price}>
                     <Price currencyCode={'USD'} value={price} />

@@ -29,7 +29,7 @@ export const useSearchPage = (props = {}) => {
     // get the URL query parameters.
     const location = useLocation();
     const { pathname, search } = location;
-    const inputText = getSearchParam('query', location);
+    const inputText = getSearchParam('q', location);
 
     const { callApi: callSearchApi, ...searchResult } = useApiData({
         isLazy: true
@@ -44,15 +44,12 @@ export const useSearchPage = (props = {}) => {
     const sortProps = get(searchResult.response, 'sorting.options', []);
     const breadcrumbs = get(searchResult.response, 'breadcrumbs', []);
     const filterSummary = get(searchResult.response, 'filterSummary', []);
+    const header = get(searchResult.response, 'merchandising.content.header', []);
+    const footer = get(searchResult.response, 'merchandising.content.footer', []);
 
     useEffect(() => {
         const params = new URLSearchParams(search);
-        // update query to q
-        if (params.has('query')) {
-            const value = params.get('query');
-            params.delete('query');
-            params.append('q', value);
-        }
+
         if (!params.has('resultsPerPage')) {
             params.append('resultsPerPage', 12); // default
         }
@@ -179,6 +176,8 @@ export const useSearchPage = (props = {}) => {
         setFilter,
         searchError,
         searchLoading,
-        categoryFiltered
+        categoryFiltered,
+        header,
+        footer
     };
 };

@@ -1,7 +1,8 @@
-import { RESET_WISHLIST_SESSION, SET_WISHLIST_SESSION } from "./appState.action"
+import { RESET_WISHLIST_SESSION, SET_WISHLIST_SESSION, UDPATE_APP_STATE } from "./appState.action"
 
 const INIT_STATE = {
-    wishlist_session: {}
+    wishlist_session: {},
+    isCMS: false
 }
 
 export const appStateReducer = (state = INIT_STATE, action) => {
@@ -16,6 +17,12 @@ export const appStateReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 wishlist_session: {}
+            }
+        }
+        case UDPATE_APP_STATE: {
+            return {
+                ...state,
+                ...action.payload
             }
         }
         default: {

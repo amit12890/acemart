@@ -130,6 +130,7 @@ display: inline-flex;
 
 .addrBlock {
     margin-left: 20px;
+    flex: 1 1 0;
 }
 .addrBlock:first-child { 
     margin-left: 0;  

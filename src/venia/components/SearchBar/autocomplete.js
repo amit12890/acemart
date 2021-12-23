@@ -1,7 +1,6 @@
 import React from 'react';
-import { gql } from '@apollo/client';
 import { bool, func, shape, string } from 'prop-types';
-import { useIntl } from 'react-intl';
+import { get } from "lodash"
 
 import { useAutocomplete } from '../../../magento/peregrine/talons/SearchBar';
 import defaultClasses from './autocomplete.css';
@@ -19,57 +18,24 @@ const Autocomplete = props => {
         productLoading,
         suggestions,
         products,
-        messageType,
-        value,
+        // messageType,
+        // value,
         displayResult
     } = talonProps;
 
     const classes = useStyle(defaultClasses, props.classes);
-    const rootClassName = visible ? classes.root_visible : classes.root_hidden;
 
-    const { formatMessage } = useIntl();
-    const MESSAGES = new Map()
-        .set(
-            'PROMPT',
-            formatMessage({
-                id: 'autocomplete.prompt',
-                defaultMessage: 'Search for a product'
-            })
-        )
-        .set(
-            'SUGGESTION_ERROR',
-            formatMessage({
-                id: 'autocomplete.suggestion_error',
-                defaultMessage: 'An error occurred while fetching suggestions.'
-            })
-        )
-        .set(
-            'PRODUCT_ERROR',
-            formatMessage({
-                id: 'autocomplete.product_error',
-                defaultMessage: 'An error occurred while fetching products.'
-            })
-        )
-        .set(
-            'LOADING',
-            formatMessage({
-                id: 'autocomplete.loading',
-                defaultMessage: 'Fetching results...'
-            })
-        )
-        .set(
-            'INVALID_CHARACTER_LENGTH',
-            formatMessage({
-                id: 'autocomplete.invalidCharacterLength',
-                defaultMessage: 'Search term must be at least three characters'
-            })
-        );
-
-    const message = MESSAGES.get(messageType);
+    const shouldVisible =
+        displayResult &&
+        visible &&
+        (!!get(products, 'results.length') ||
+            !!get(suggestions, 'alternatives.length'));
+    const rootClassName = shouldVisible
+        ? classes.root_visible
+        : classes.root_hidden;
 
     return (
         <div className={rootClassName}>
-            <div className={classes.message}>{message}</div>
             <div className={classes.suggestions}>
                 <Suggestions
                     suggestionLoading={suggestionLoading}

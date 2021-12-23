@@ -38,7 +38,7 @@ export const useAutocomplete = props => {
             debounce(inputText => {
                 callSuggestionApi(apiGetSearchSuggestions(inputText));
                 callproductSearchApi(apiGetAutocompleteSearchResult(inputText));
-            }, 500),
+            }, 2000),
         []
     );
 
@@ -49,7 +49,6 @@ export const useAutocomplete = props => {
         }
     }, [debouncedRunQuery, valid, value, visible]);
 
-    const invalidCharacterLength = !valid && value ? true : false;
     let messageType = '';
 
     const suggestionError = suggestionResult.error;
@@ -62,21 +61,7 @@ export const useAutocomplete = props => {
     const products = productResult.response;
 
     const hasResult = size(suggestions) || size(products);
-    const displayResult = valid && hasResult;
-
-    if (invalidCharacterLength) {
-        messageType = 'INVALID_CHARACTER_LENGTH';
-    } else if (suggestionError) {
-        messageType = 'SUGGESTION_ERROR';
-    } else if (productError) {
-        messageType = 'PRODUCT_ERROR';
-    } else if (suggestionLoading || productLoading) {
-        messageType = 'LOADING';
-    } else if (!displayResult) {
-        messageType = 'PROMPT';
-    } else {
-        messageType = 'RESULT_SUMMARY';
-    }
+    const displayResult = !!(valid && hasResult);
 
     return {
         suggestionLoading,

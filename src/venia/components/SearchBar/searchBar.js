@@ -14,7 +14,6 @@ const SearchBar = React.forwardRef((props, ref) => {
     const {
         containerRef,
         handleChange,
-        handleFocus,
         handleSubmit,
         initialValues,
         isAutoCompleteOpen,
@@ -45,7 +44,6 @@ const SearchBar = React.forwardRef((props, ref) => {
                         <SearchField
                             isSearchOpen={isOpen}
                             onChange={handleChange}
-                            onFocus={handleFocus}
                             className={classes.test}
                         />
                     </div>

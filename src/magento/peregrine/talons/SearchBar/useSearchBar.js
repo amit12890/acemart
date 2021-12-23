@@ -27,23 +27,18 @@ export const useSearchBar = () => {
     const handleChange = useCallback(
         value => {
             const hasValue = !!value;
-            const isValid = hasValue && value.length > 2;
+            const isValid = hasValue && value.length > 1;
             setValid(isValid);
             setIsAutoCompleteOpen(hasValue);
         },
         [setIsAutoCompleteOpen, setValid]
     );
 
-    // expand on focus
-    const handleFocus = useCallback(() => {
-        setIsAutoCompleteOpen(true);
-    }, [setIsAutoCompleteOpen]);
-
     // navigate on submit
     const handleSubmit = useCallback(
         ({ search_query }) => {
             if (search_query != null && search_query.trim().length > 0) {
-                push(`${SEARCH_PAGE_PATH}?query=${search_query}`);
+                push(`${SEARCH_PAGE_PATH}?q=${search_query}`);
                 setIsAutoCompleteOpen(false);
             }
         },
@@ -53,7 +48,6 @@ export const useSearchBar = () => {
     return {
         containerRef: elementRef,
         handleChange,
-        handleFocus,
         handleSubmit,
         initialValues,
         isAutoCompleteOpen,
