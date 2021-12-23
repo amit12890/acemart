@@ -18,10 +18,9 @@
 
 }
 .catImageWrapper {
-    min-height: 130px;
+    margin-bottom: 10px;
 }
 .image {
-    height: auto;
     object-fit: contain;
 }
 .subcatListItem:hover .name {
