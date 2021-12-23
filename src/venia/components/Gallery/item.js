@@ -220,14 +220,14 @@ const GalleryItem = props => {
 
 
                 <div className={classes.productActions}>
-                    <div className={classes.viewMore}>
-                        <Link
-                            onClick={handleLinkClick}
-                            to={productLink}
-                        >
+                    <Link
+                        onClick={handleLinkClick}
+                        to={productLink}
+                    >
+                        <div className={classes.viewMore}>
                             <span>View More</span>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
 
                     {!!productLabel.totalCount &&
                         <div className={classes.labelWrapper}>

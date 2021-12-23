@@ -155,11 +155,11 @@ export default function Item(props) {
                     <span className={classes.unit}>{uom}</span>
                 </div>
                 <div className={classes.productActions}>
-                    <div className={classes.viewMore}>
-                        <Link to={productLink}>
+                    <Link to={productLink}>
+                        <div className={classes.viewMore}>
                             <span>View More</span>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
 
                     {size(stickers) && (
                         <div className={classes.labelWrapper}>
