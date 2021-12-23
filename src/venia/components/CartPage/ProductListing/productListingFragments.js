@@ -12,7 +12,7 @@ export const ProductListingFragment = gql`
                 url_key
                 url_suffix
                 uom
-                ship_info
+                ship_time
                 product_links {
                     link_type
                     linked_product_sku

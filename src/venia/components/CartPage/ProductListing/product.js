@@ -63,7 +63,7 @@ const Product = props => {
         urlSuffix,
     } = product;
 
-    const { uom, ship_info, sku } = item.product
+    const { uom, ship_time, sku } = item.product
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -139,9 +139,9 @@ const Product = props => {
                             <span className={classes.stockStatusMessage}>
                                 {stockStatusMessage}
                             </span>
-                            {ship_info &&  // extra note about shipping delays
+                            {ship_time &&  // extra note about shipping delays
                                 <div>
-                                    {ship_info}
+                                    {ship_time}
                                 </div>
                             }
                             <div className={classes.quantity}>
