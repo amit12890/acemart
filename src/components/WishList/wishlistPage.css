@@ -198,6 +198,9 @@
     text-align: left;
     color: rgb(var(--product-name-color));
     text-transform: uppercase;
+    height: 50px;
+    overflow-y: hidden;
+    line-height: var(--fontSize-200);;
 }
 .itemPrice {
     font-weight: var(--font-weight-bold);
@@ -388,7 +391,7 @@
 .listItemDetails {
     margin-left: 10px;
     position: relative;
-    padding-right: 20px;
+    padding-right: 30px;
     flex-grow: 1;
 }
 
