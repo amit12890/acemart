@@ -5,6 +5,7 @@ import { useStyle } from '../../classify';
 import defaultClasses from './megaMenuItem.css';
 import Submenu from './submenu';
 import PropTypes from 'prop-types';
+import { searchPage } from '../../../url.utils';
 
 /**
  * The MegaMenuItem component displays mega menu item
@@ -16,9 +17,12 @@ import PropTypes from 'prop-types';
 const MegaMenuItem = props => {
     const { activeCategoryId, category, mainNavWidth } = props;
     const classes = useStyle(defaultClasses, props.classes);
-    const categoryUrl = resourceUrl(
-        `/${category.canonical_url}${category.url_suffix || ''}`
-    );
+    const categoryUrl =
+        category.canonical_url === 'specials'
+            ? resourceUrl(`${searchPage()}?q=${category.canonical_url}`)
+            : resourceUrl(
+                `/${category.canonical_url}${category.url_suffix || ''}`
+            );
 
     const children = category.children.length ? (
         <Submenu items={category.children} mainNavWidth={mainNavWidth} />

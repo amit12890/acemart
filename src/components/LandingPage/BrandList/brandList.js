@@ -30,7 +30,7 @@ export default ({ data, onItemClick }) => {
     if (size(data) === 0) return null
 
     return (
-        <div className={classes.root} onClick={onItemClick}>
+        <div className={classes.root}>
             <div className={classes.homeSection}>
                 <h3>Featured Brands</h3>
                 <div className={classes.brandWrapper}>
@@ -54,7 +54,9 @@ export default ({ data, onItemClick }) => {
                                         <Slide
                                             className={classes.mycustomclass}
                                             index={i}>
-                                            <div className={classes.brandItem}>
+                                            <div className={classes.brandItem}
+                                                onClick={() => onItemClick(get(item, "brand_label"))}
+                                            >
                                                 <div className={classes.brandImage}>
                                                     <img src={imageUrl} />
                                                 </div>

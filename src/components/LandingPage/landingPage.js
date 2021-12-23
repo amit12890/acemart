@@ -15,6 +15,7 @@ import { useStyle } from '../../venia/classify';
 
 import defaultClasses from './landingPage.css';
 import { Title, Meta } from '@magento/venia-ui/lib/components/Head';
+import { searchPage } from '../../url.utils';
 
 const toHTML = str => ({ __html: str });
 
@@ -53,7 +54,10 @@ const LandingPage = (props) => {
                     }} />
                 <BrandList
                     data={get(landingPageData, "brand.items", [])}
-                    onItemClick={() => {
+                    onItemClick={(brandLabel) => {
+                        if(brandLabel) {
+                            history.push(`${searchPage()}?q=${brandLabel}`)
+                        }
                     }} />
             </div>
         )

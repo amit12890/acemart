@@ -18,7 +18,7 @@ import SearchSort from './searchSort';
 import SearchPerPage from './searchPerPage';
 import FilterSidebar from './filterSidebar';
 import { Link } from 'react-router-dom';
-import { SEARCH_PAGE_PATH } from '../../../url.utils';
+import { searchPage } from '../../../url.utils';
 import RichContent from '../RichContent/richContent';
 
 const POPULAR_SEARCH = [
@@ -86,7 +86,7 @@ const SearchPage = props => {
                             {POPULAR_SEARCH.map(keyword => (
                                 <div>
                                     <Link
-                                        to={`${SEARCH_PAGE_PATH}?q=${keyword}`}
+                                        to={`${searchPage()}?q=${keyword}`}
                                     >
                                         {keyword}
                                     </Link>
