@@ -11,6 +11,10 @@ import { get, size } from 'lodash';
 
 import RatingMini from '../../@amasty/components/Rating/rating_mini';
 import ProductPerPage from '../../RootComponents/Category/productPerPage';
+import RichText from '../../venia/components/RichText';
+import { Link } from 'react-router-dom';
+import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
+import { replaceSpecialChars } from "../../app.utils"
 
 const MyReviewPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -64,15 +68,22 @@ const MyReviewPage = props => {
                     </thead>
                     <tbody>
                         {reviewList.map(item => {
+                            const { product, created_at, text } = item;
+                            const { name, url_rewrites, url_suffix } = product;
+                            const productLink = resourceUrl(
+                                `/${get(url_rewrites[0], 'url', '')}${url_suffix ||
+                                    ''}`
+                            );
                             return (
                                 <tr>
                                     <td className={[classes.col, classes.date].join(" ")}>
-                                        {new Date(
-                                            item.created_at
-                                        ).toLocaleDateString()}
+                                        <Link to={productLink}>
+                                            {new Date(created_at).toLocaleDateString()}
+                                        </Link>
                                     </td>
-                                    <td className={[classes.col, classes.name].join(" ")}>{item.product.name}</td>
-                                    {/* <td>{item.ratings_breakdown.value}</td> */}
+                                    <td className={[classes.col, classes.name].join(" ")}>
+                                        {replaceSpecialChars(name)}
+                                    </td>
                                     <td className={[classes.col, classes.rating].join(" ")}>
                                         <RatingMini
                                             percent={20}
@@ -80,8 +91,12 @@ const MyReviewPage = props => {
                                             showValue={false}
                                         />
                                     </td>
-                                    <td className={[classes.col, classes.review].join(" ")}>{item.text}</td>
-                                    <td className={[classes.col, classes.action].join(" ")}><span>See Details</span></td>
+                                    <td className={[classes.col, classes.review].join(" ")}>
+                                        {text}
+                                    </td>
+                                    <td className={[classes.col, classes.action].join(" ")}>
+                                        <span>See Details</span>
+                                    </td>
                                 </tr>
                             );
                         })}
