@@ -4,6 +4,8 @@
     grid-template-columns: 100%;
     margin-left: -0.375rem;
     padding-bottom: 1.25rem;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .itemHidden {
@@ -14,6 +16,7 @@
     display: flex;
     justify-content: space-between;
     font-size: var(--fontSize-50);
+
 }
 
 .item strong{
