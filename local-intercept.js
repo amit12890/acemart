@@ -129,9 +129,15 @@ function localIntercept(targets) {
         });
         routes.push({
             name: "Checkout Page",
-            pattern: "/checkout/",
+            pattern: "/checkout",
             exact: true,
             path: require.resolve("./src/venia/components/CheckoutPage")
+        });
+        routes.push({
+            name: "Custom Checkout Page",
+            pattern: "/checkout/custom",
+            exact: true,
+            path: require.resolve("./src/components/Checkout")
         });
         routes.push({
             name: "Checkout success Page",

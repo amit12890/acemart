@@ -34,6 +34,7 @@ import CheckoutGuestInput from '../../../components/CheckoutGuestInput';
 
 import defaultClasses from './checkoutPage.css';
 import { get, size } from 'lodash';
+import BillingAddress from './BillingAddress/billingAddress';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
@@ -417,6 +418,12 @@ const CheckoutPage = props => {
                         {shippingMethodSection}
                     </ScrollAnchor>
                 </div>
+                {/* <div>
+                    <ScrollAnchor ref={shippingInformationRef}>
+                        <BillingAddress
+                            isS/>
+                    </ScrollAnchor>
+                </div> */}
                 <div className={classes.payment_information_container}>
                     {paymentInformationSection}
                 </div>

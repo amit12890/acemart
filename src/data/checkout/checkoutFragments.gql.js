@@ -1,32 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const OrderConfirmationPageFragment = gql`
-    fragment OrderConfirmationPageFragment on Cart {
-        id
-        email
-        total_quantity
-        shipping_addresses {
-            firstname
-            lastname
-            street
-            city
-            region {
-                label
-            }
-            postcode
-            country {
-                label
-            }
-
-            selected_shipping_method {
-                carrier_title
-                method_title
-            }
-        }
-    }
-`;
-
-
 export const MultiShippingFragment = gql`
     fragment multiShippingFragment on Cart {
         multi_shipping {
@@ -345,3 +318,28 @@ export const ShippingAddressesFragment = gql`
         }
     }
 `
+export const OrderConfirmationPageFragment = gql`
+    fragment OrderConfirmationPageFragment on Cart {
+        id
+        email
+        total_quantity
+        shipping_addresses {
+            firstname
+            lastname
+            street
+            city
+            region {
+                label
+            }
+            postcode
+            country {
+                label
+            }
+
+            selected_shipping_method {
+                carrier_title
+                method_title
+            }
+        }
+    }
+`;
