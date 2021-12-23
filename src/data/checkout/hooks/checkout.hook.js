@@ -7,9 +7,9 @@ import { get } from 'lodash'
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher'
 import { useCartContext } from '@magento/peregrine/lib/context/cart'
 
-import { checkoutFetched, fetchingCheckout, setInitTestData } from './checkout.action'
+import { checkoutFetched, fetchingCheckout, setInitTestData } from '../checkout.action'
 
-import gql from './checkout.gql'
+import gql from '../checkout.gql'
 
 
 const { getCheckoutDetailsQuery, setStorePickupShippingAdressMutation } = gql

@@ -136,6 +136,14 @@ export const GET_CUSTOMER = gql`
     }
 `;
 
+export const EMAIL_EXIST_GQL = gql`
+    query isEmailAvailable($email: String!){
+        isEmailAvailable(email:$email) {
+        is_email_available
+        }
+    }
+`
+
 export default {
     setGuestCartEmail: SET_GUEST_EMAIL,
     createCartMutation: CREATE_CART,
@@ -143,5 +151,6 @@ export default {
     setStorePickupShippingAdressMutation: SET_STORE_PICKUP_SHIPPING_ADDRESS,
     getCustomerQuery: GET_CUSTOMER,
     getOrderDetailsQuery: GET_ORDER_DETAILS,
-    placeOrderMutation: PLACE_ORDER
+    placeOrderMutation: PLACE_ORDER,
+    emailAvailableCheckQuery: EMAIL_EXIST_GQL
 };
