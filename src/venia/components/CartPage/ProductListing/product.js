@@ -140,7 +140,7 @@ const Product = props => {
                                 {stockStatusMessage}
                             </span>
                             {ship_time &&  // extra note about shipping delays
-                                <div>
+                                <div className={classes.shipTime}>
                                     {ship_time}
                                 </div>
                             }
@@ -170,18 +170,18 @@ const Product = props => {
                     </div>
                 </div>
                 <div className={classes.cartItemActions}>
-                {isSignedIn ?
-                    <div className={classes.addToList}>
-                        <div className={classes.toWishlist} onClick={openWishlistPopup}>
-                            <i className={classes.iconWrapper}>
-                                <svg className={[classes.svgIcon, classes.wishlist].join(" ")} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                    <title>Move to wishlist</title>
-                                    <path d="M16 30q-0.219 0-0.422-0.078t-0.359-0.234l-11.156-10.75q-0.031-0.063-0.688-0.719t-1.406-1.734-1.344-2.516q-0.625-1.438-0.625-3.031 0-1.969 0.594-3.531 0.563-1.531 1.672-2.609t2.672-1.641q1.594-0.594 3.594-0.594 2.344 0 4.375 1.406t3.094 2.469q1.063-1.063 3.094-2.469t4.375-1.406q2 0 3.594 0.594 1.563 0.563 2.672 1.641t1.672 2.609q0.594 1.563 0.594 3.531 0 1.594-0.625 3.031-0.594 1.438-1.359 2.531t-1.391 1.75l-0.719 0.719-11.125 10.719q-0.156 0.156-0.359 0.234t-0.422 0.078v0z"></path>
-                                </svg>
-                            </i>
+                    {isSignedIn ?
+                        <div className={classes.addToList}>
+                            <div className={classes.toWishlist} onClick={openWishlistPopup}>
+                                <i className={classes.iconWrapper}>
+                                    <svg className={[classes.svgIcon, classes.wishlist].join(" ")} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                        <title>Move to wishlist</title>
+                                        <path d="M16 30q-0.219 0-0.422-0.078t-0.359-0.234l-11.156-10.75q-0.031-0.063-0.688-0.719t-1.406-1.734-1.344-2.516q-0.625-1.438-0.625-3.031 0-1.969 0.594-3.531 0.563-1.531 1.672-2.609t2.672-1.641q1.594-0.594 3.594-0.594 2.344 0 4.375 1.406t3.094 2.469q1.063-1.063 3.094-2.469t4.375-1.406q2 0 3.594 0.594 1.563 0.563 2.672 1.641t1.672 2.609q0.594 1.563 0.594 3.531 0 1.594-0.625 3.031-0.594 1.438-1.359 2.531t-1.391 1.75l-0.719 0.719-11.125 10.719q-0.156 0.156-0.359 0.234t-0.422 0.078v0z"></path>
+                                    </svg>
+                                </i>
+                            </div>
                         </div>
-                    </div>
-                : null}
+                        : null}
 
                     <Button
                         onClick={handleRemoveFromCart}
