@@ -1,18 +1,19 @@
 {
-  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.5de64938f814dd9e8d60.js",
-  "RootCmp_PRODUCT__default.js": "/RootCmp_PRODUCT__default.afa4ad69f1e8281a84f8.js",
+  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.4bc0554035a21593c584.js",
+  "RootCmp_CMS_PAGE__default.js": "/RootCmp_CMS_PAGE__default.14165cf76c3ac7f5e4f6.js",
+  "RootCmp_PRODUCT__default.js": "/RootCmp_PRODUCT__default.e2daeadf82d1d2eea391.js",
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
   "bad.png": "/bad-r1m.png",
   "balloons.png": "/balloons-miQ.png",
   "bulk-savings.png": "/bulk-savings-mhz.png",
-  "client.js": "/client.6085ca2210b7e7e338db.js",
+  "client.js": "/client.ce001ae6876b294959e4.js",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
     "client": {
       "js": [
-        "/runtime.cc8e2063647e54f0a06d.js",
+        "/runtime.30147bc6ad4884d6edab.js",
         "/vendors.c40c4dca990590e9e637.js",
-        "/client.6085ca2210b7e7e338db.js"
+        "/client.ce001ae6876b294959e4.js"
       ]
     }
   },
@@ -22,7 +23,7 @@
   "footer-payment.png": "/footer-payment-gfh.png",
   "free-shipping.png": "/free-shipping-aVx.png",
   "good.png": "/good-qxp.png",
-  "i18n-en_US.js": "/i18n-en_US.6c13480b1404babceccd.js",
+  "i18n-en_US.js": "/i18n-en_US.9cc2f8cbbc34d4113b17.js",
   "inappr.png": "/inappr-gdc.png",
   "labelSprite.png": "/labelSprite-so4.png",
   "linkedIn.svg": "/linkedIn-sUt.svg",
@@ -32,37 +33,36 @@
   "noProductsFound.png": "/noProductsFound-e9n.png",
   "online-price.png": "/online-price-8Hp.png",
   "pinterest.svg": "/pinterest-m58.svg",
-  "runtime.js": "/runtime.cc8e2063647e54f0a06d.js",
+  "runtime.js": "/runtime.30147bc6ad4884d6edab.js",
   "sale.png": "/sale-vv6.png",
-  "searchBanner.jpg": "/searchBanner-tuS.jpg",
   "small_warning.png": "/small_warning-6Ej.png",
   "store-pickup.png": "/store-pickup-kz9.png",
   "truckicon.png": "/truckicon-7ZC.png",
   "twitter.svg": "/twitter-obp.svg",
   "vendors.js": "/vendors.c40c4dca990590e9e637.js",
-  "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.6ed79fa55fdbebc54181.js",
-  "vendors~RootCmp_CMS_PAGE__default.js": "/vendors~RootCmp_CMS_PAGE__default.4f2c076a6cfb381e7e10.js",
+  "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.js": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.764ae29112826334dfae.js",
   "vendors~RootCmp_SEARCH__default.js": "/vendors~RootCmp_SEARCH__default.e84d2d32a6164089ae12.js",
   "bundles": {
     "load": [
-      "/runtime.cc8e2063647e54f0a06d.js",
+      "/runtime.30147bc6ad4884d6edab.js",
       "/vendors.c40c4dca990590e9e637.js",
-      "/client.6085ca2210b7e7e338db.js"
+      "/client.ce001ae6876b294959e4.js"
     ],
     "prefetch": [
-      "/RootCmp_CATEGORY__default.5de64938f814dd9e8d60.js",
-      "/RootCmp_PRODUCT__default.afa4ad69f1e8281a84f8.js"
+      "/RootCmp_CATEGORY__default.4bc0554035a21593c584.js",
+      "/RootCmp_CMS_PAGE__default.14165cf76c3ac7f5e4f6.js",
+      "/RootCmp_PRODUCT__default.e2daeadf82d1d2eea391.js"
     ]
   },
   "js": {
-    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.5de64938f814dd9e8d60.js",
-    "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.afa4ad69f1e8281a84f8.js",
-    "client": "/client.6085ca2210b7e7e338db.js",
-    "i18n-en_US": "/i18n-en_US.6c13480b1404babceccd.js",
-    "runtime": "/runtime.cc8e2063647e54f0a06d.js",
+    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.4bc0554035a21593c584.js",
+    "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.14165cf76c3ac7f5e4f6.js",
+    "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.e2daeadf82d1d2eea391.js",
+    "client": "/client.ce001ae6876b294959e4.js",
+    "i18n-en_US": "/i18n-en_US.9cc2f8cbbc34d4113b17.js",
+    "runtime": "/runtime.30147bc6ad4884d6edab.js",
     "vendors": "/vendors.c40c4dca990590e9e637.js",
-    "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.6ed79fa55fdbebc54181.js",
-    "vendors~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CMS_PAGE__default.4f2c076a6cfb381e7e10.js",
+    "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.764ae29112826334dfae.js",
     "vendors~RootCmp_SEARCH__default": "/vendors~RootCmp_SEARCH__default.e84d2d32a6164089ae12.js"
   },
   "svg": {
@@ -94,7 +94,6 @@
     "truckicon": "/truckicon-7ZC.png"
   },
   "jpg": {
-    "map": "/map-cvT.jpg",
-    "searchBanner": "/searchBanner-tuS.jpg"
+    "map": "/map-cvT.jpg"
   }
 }
