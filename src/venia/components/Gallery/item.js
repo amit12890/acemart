@@ -222,6 +222,7 @@ const GalleryItem = props => {
                 <div className={classes.productActions}>
                     <div className={classes.viewMore}>
                         <Link
+                            className={classes.viewmoreAction}
                             onClick={handleLinkClick}
                             to={productLink}
                         >

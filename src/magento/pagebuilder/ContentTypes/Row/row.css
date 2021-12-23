@@ -90,6 +90,12 @@ width: 130px;
     border:10px solid green;
 }
 
+
+
+.financeRow {
+background-color:blue;
+}
+
 @media only screen and (max-width: 768px) {
     .root {
         background-attachment: scroll !important;

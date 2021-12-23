@@ -8,7 +8,8 @@ import { replaceSpecialChars } from '../../../app.utils';
 import Image from '../Image';
 import defaultClasses from './suggestedProducts.css';
 
-const IMAGE_WIDTH = 100;
+const IMAGE_WIDTH = 75;
+const IMAGE_HEIGHT = 75;
 
 const SuggestedProduct = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -46,6 +47,7 @@ const SuggestedProduct = props => {
                         }}
                         resource={thumbnailImageUrl}
                         width={IMAGE_WIDTH}
+                        height={IMAGE_HEIGHT}
                     />
                 </div>
                 <div className={classes.name}>{replaceSpecialChars(`${brand} ${mpn} ${name}`)}</div>

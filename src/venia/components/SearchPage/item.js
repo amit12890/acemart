@@ -24,7 +24,7 @@ const style = {
 // The placeholder image is 4:5, so we should make sure to size our product
 // images appropriately.
 const IMAGE_WIDTH = 240;
-const IMAGE_HEIGHT = 300;
+const IMAGE_HEIGHT = 240;
 
 // Gallery switches from two columns to three at 640px.
 const IMAGE_WIDTHS = new Map()
@@ -156,7 +156,9 @@ export default function Item(props) {
                 </div>
                 <div className={classes.productActions}>
                     <div className={classes.viewMore}>
-                        <Link to={productLink}>
+                        <Link
+                            className={classes.viewmoreAction}
+                            to={productLink}>
                             <span>View More</span>
                         </Link>
                     </div>

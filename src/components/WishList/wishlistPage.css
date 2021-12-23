@@ -99,6 +99,7 @@
 }
 .actionsToolbar button {
     margin-right: 10px;
+    min-width: auto;
 }
 
 .actionsToolbarWrapper {
@@ -141,7 +142,6 @@
     display: grid;
     grid-template-columns: 1fr;
     line-height: 1;
-    margin-top: 3rem;
 }
 
 .galleryItemsGrid {
@@ -214,6 +214,7 @@
     display: flex;
     align-items: center;
     font-size: var(--fontSize-90);
+    margin-bottom: 10px;
 }
 
 .qtyLabel {
@@ -276,6 +277,15 @@
 
 .productItemQuickActions .action:hover {
     background-color: transparent;
+
+}
+.productItemQuickActions span {
+    display: inline-flex;
+}
+
+.productItemQuickActions .iconWrapper {
+    display: inline-flex;
+    align-items: center;
 
 }
 
