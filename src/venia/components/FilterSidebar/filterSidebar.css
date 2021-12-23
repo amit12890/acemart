@@ -53,8 +53,7 @@
 .labelItem {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    min-height: 30px;
+    margin-bottom: 10px;
     line-height: normal;
     cursor: pointer;
 }
@@ -83,7 +82,7 @@
  flex-grow: 1;
  text-align: left;
  font-size: var(--fontSize-100);
- text-transform: uppercase;
+ text-transform: capitalize;
  color: rgb(var(--color-black));
  font-weight: var(--font-weight-bold);
 }

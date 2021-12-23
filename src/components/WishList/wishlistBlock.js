@@ -154,15 +154,17 @@ const ProductListing = props => {
                                             {replaceSpecialChars(name)}
                                         </div>
                                     </Link>
-                                    <Price
-                                        currencyCode={"USD"}
-                                        value={price}
-                                        classes={{
-                                            currency: classes.currency,
-                                            decimal: classes.decimal,
-                                            fraction: classes.fraction
-                                        }}
-                                    />
+                                    <div className={classes.listItemPrice}>
+                                        <Price
+                                            currencyCode={"USD"}
+                                            value={price}
+                                            classes={{
+                                                currency: classes.currency,
+                                                decimal: classes.decimal,
+                                                fraction: classes.fraction
+                                            }}
+                                        />
+                                    </div>
 
                                     <div className={classes.ItemQuickActions}>
                                         <div className={[classes.action, classes.edit].join(" ")}

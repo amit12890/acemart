@@ -149,6 +149,8 @@
     border-width: 1px;
     background-color: rgb(var(--theme-color-primary-alt));
     border-color: rgb(var(--theme-color-primary-alt));
+    display: flex;
+    align-items: center;
 }
 
 .cartItemActions button:hover {
@@ -239,6 +241,11 @@
     transition-property: background-color, border-color, color;
     transition-timing-function: var(--venia-global-anim-standard);
     cursor: pointer;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+
 
 }
 
