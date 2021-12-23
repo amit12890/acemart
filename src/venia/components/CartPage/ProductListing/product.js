@@ -21,6 +21,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 import WishlistPopup from '../../../../components/WishList/wishlistPopup';
 import RichText from '../../RichText';
 import Button from '../../Button';
+import { replaceSpecialChars } from '../../../../app.utils';
 
 const IMAGE_SIZE = 100;
 
@@ -157,13 +158,13 @@ const Product = props => {
                             <div className={classes.price}>
                                 <div className={classes.colHead}>Price</div>
                                 <div className={classes.priceWrapper}>
-                                    <Price currencyCode={currency} value={unitPrice} /> / {uom}
+                                    <Price currencyCode={currency} value={unitPrice} />
                                 </div>
                             </div>
                             <div className={classes.subTotal}>
                                 <div className={classes.colHead}>Subtotal</div>
                                 <div className={classes.priceWrapper}>
-                                    <Price currencyCode={currency} value={unitPrice * quantity} /> / {item.product.uom}
+                                    <Price currencyCode={currency} value={unitPrice * quantity} />
                                 </div>
                             </div>
                         </div>
@@ -208,6 +209,7 @@ const Product = props => {
                     isPopupVisible={showWishlistPopup}
                     productId={item.product.id}
                     productQty={quantity}
+                    productName={replaceSpecialChars(name)}
                     closeWishlistPopup={closeWishlistPopup}
                 />
             )}

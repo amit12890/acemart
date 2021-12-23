@@ -6,8 +6,12 @@ import { concat, filter, get, map } from 'lodash-es';
 import { GET_CART_RELATED_PRODUCTS } from './cartPage.gql';
 import GalleryGrid from '../GalleryGrid';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
+import defaultClasses from './cartPage.css';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 
 const CrossSellProducts = ({ isLoading, items }) => {
+    const classes = useStyle(defaultClasses);
+
     if (isLoading) {
         return (
             <LoadingIndicator>Fetching Crosssell Products...</LoadingIndicator>
@@ -33,7 +37,20 @@ const CrossSellProducts = ({ isLoading, items }) => {
     }, [items]);
 
     if (upsellProducts.length) {
-        return <CrossSellProductsContent skuList={upsellProducts} />;
+        return (
+            <section className={classes.crossSellSection}>
+                <div className={classes.sectionTitleWrapper}>
+                    <h2 className={classes.sectionSubTitle}>
+                        <span>People also bought:</span>
+                    </h2>
+                </div>
+                <div className={classes.sectionContent}>
+                    <div className={classes.gallery}>
+                        <CrossSellProductsContent skuList={upsellProducts} />
+                    </div>
+                </div>
+            </section>
+        );
     }
     return null;
 };

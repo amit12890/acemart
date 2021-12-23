@@ -23,6 +23,7 @@ import LoadingButtonSmall from '../../../components/LoadingButtonSmall'
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { loginPage } from '../../../url.utils';
 import { useWishlistSession } from '../../../data/appState/appState.hook'
+import { replaceSpecialChars } from '../../../app.utils';
 
 const style = {
     '--productLabel': `url("${productLabelImage}")`,
@@ -284,7 +285,7 @@ const GalleryItem = props => {
                                 isPopupVisible={showWishlistPopup}
                                 productId={item.id}
                                 productQty={wishlistButtonProps.item.quantity}
-                                productName={item.product_name}
+                                productName={replaceSpecialChars(get(item, "product_name", ""))}
                                 closeWishlistPopup={closeWishlistPopup} />
                         </>
                     }
