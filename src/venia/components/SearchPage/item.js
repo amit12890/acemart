@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { size, split, camelCase, unescape } from 'lodash-es';
 
 import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
@@ -13,9 +13,13 @@ import RatingMini from '../../../@amasty/components/Rating/rating_mini';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import LoadingButtonSmall from '../../../components/LoadingButtonSmall';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useWishlistSession } from '../../../data/appState/appState.hook'
 
 import productLabelImage from '../../../assets/labelSprite.png';
 import defaultClasses from './item.css';
+import { loginPage } from '../../../url.utils';
+import { replaceSpecialChars } from '../../../app.utils';
 
 const style = {
     '--productLabel': `url("${productLabelImage}")`
@@ -50,6 +54,9 @@ const ItemPlaceholder = ({ classes }) => (
 
 export default function Item(props) {
     const classes = useStyle(defaultClasses, props.classes);
+    const [{ isSignedIn }] = useUserContext();
+    const { addProductToWishlistSession } = useWishlistSession()
+    const history = useHistory()
 
     if (!props.item) {
         return <ItemPlaceholder classes={classes} />;
@@ -67,17 +74,25 @@ export default function Item(props) {
         num_reviews,
         rating,
         uid,
-        mage2_id
+        mage2_id,
+        mpn,
+        brand
     } = props.item;
     const productLink = baseless_url ? `/${baseless_url}` : '#';
+    const productName = replaceSpecialChars(`${brand} ${mpn} ${name}`);
 
     const showReviewBlock = !isNaN(Number(num_reviews));
 
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
 
-    const openWishlistPopup = useCallback((e) => {
-        setShowWishlistPopup(true);
-    }, []);
+    const openWishlistPopup = useCallback(() => {
+        if (isSignedIn) {
+            setShowWishlistPopup(true)
+        } else {
+            history.push(loginPage())
+            addProductToWishlistSession(props.item)
+        }
+    }, [setShowWishlistPopup, isSignedIn, props.item, addProductToWishlistSession])
 
     const closeWishlistPopup = useCallback((e) => {
         setShowWishlistPopup(false);
@@ -105,7 +120,7 @@ export default function Item(props) {
                         to={productLink}
                         className={classes.name}
                     >
-                        <RichText content={unescape(name)} />
+                        <RichText content={productName} />
                     </Link>
                 </div>
                 <div className={classes.sku}>{sku}</div>
@@ -154,6 +169,24 @@ export default function Item(props) {
                     />
                     <span className={classes.unit}>{uom}</span>
                 </div>
+                {price > 500 ? (
+                    <div className={classes.piSectionRow}>
+                        <div className={classes.finance}>
+                            <Link
+                                to="/financing"
+                            >
+                                <strong>
+                                    {'Finance for as low as '}
+                                    <Price
+                                        currencyCode={'USD'}
+                                        value={price / 39.5}
+                                    />
+                                    /month
+                                </strong>
+                            </Link>
+                        </div>
+                    </div>
+                ) : null}
                 <div className={classes.productActions}>
                     <div className={classes.viewMore}>
                         <Link
@@ -231,7 +264,7 @@ export default function Item(props) {
                                 isPopupVisible={showWishlistPopup}
                                 productId={mage2_id}
                                 productQty={1}
-                                productName={name}
+                                productName={productName}
                                 closeWishlistPopup={closeWishlistPopup}
                             />
                         )}
