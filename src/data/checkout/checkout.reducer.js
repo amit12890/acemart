@@ -1,3 +1,4 @@
+import { get, size } from "lodash"
 import {
     CHECKOUT_FETCHING,
     CHECKOUT_FETCHED,
@@ -50,11 +51,15 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
             }
         }
         case CHECKOUT_FETCHED: {
+            const { multi_shipping, ...restPayload } = action.payload
+            const isMultiShipping = size(multi_shipping.boss) > 0
             return {
                 ...state,
                 fetching: false,
                 fetched: true,
-                ...action.payload
+                ...restPayload,
+                isMultiShipping,
+                multi_shipping
             }
         }
         case CHECKOUT_FETCH_ERROR: {
