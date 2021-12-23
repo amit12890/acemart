@@ -776,7 +776,7 @@ const ProductFullDetail = props => {
                         <h2 className={classes.sectionTitle}>
                             <span>
                                 <FormattedMessage
-                                    id={'productFullDetail.productDescription'}
+                                    id={'am.productFullDetail.productDescription'}
                                     defaultMessage={'DESCRIPTION'}
                                 />
                             </span>

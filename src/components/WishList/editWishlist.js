@@ -96,18 +96,23 @@ const EditWishlist = props => {
                     </Field>
                     <div className={classes.actionsToolbar}>
                         <Button
-                            classes={classes.confirmButton}
                             disabled={loading}
                             priority="high"
                             type="submit"
+
+                            classes={{
+                                button_small: classes.button_small
+                            }}
                         >
                             {loading ? "Loading..." : "Edit"}
                         </Button>
                         {(props.multi_wishlist_id !== 0) &&
                             <Button
-                                classes={classes.confirmButton}
                                 disabled={loadingDelete}
                                 onClick={handleDelete}
+                                classes={{
+                                    root: classes.confirmButton
+                                }}
                             >
                                 {loadingDelete ? "Loading..." : "Delete"}
                             </Button>

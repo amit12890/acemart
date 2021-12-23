@@ -17,6 +17,11 @@ flex-direction: column;
     flex-direction: column;
 }
 
+.productDescription {
+    font-size: var(--fontSize-100);
+    line-height: 1.3rem;
+}
+
 /* Product View section start Here */
 .productView {
 
@@ -549,6 +554,7 @@ flex-direction: column;
 .warningContent {
     font-size: var(--fontSize-100);
     cursor: pointer;
+    line-height: normal;
 }
 /* Product Additional Section */
 
