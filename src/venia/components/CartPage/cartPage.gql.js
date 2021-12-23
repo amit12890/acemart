@@ -95,3 +95,21 @@ export const ADD_PRODUCT_TO_CART = gql`
     ${CartTriggerFragment}
     ${MiniCartFragment}
 `;
+
+export const ADD_ALL_PRODUCT_TO_CART = gql`
+    mutation AddAllProductsToCart($cartId: String!, $cartItems: [CartItemInput!]!) {
+        addProductsToCart(cartId: $cartId, cartItems: $cartItems) {
+            cart {
+                id
+                ...CartTriggerFragment
+                ...MiniCartFragment
+            }
+            user_errors {
+                code
+                message
+            }
+        }
+    }
+    ${CartTriggerFragment}
+    ${MiniCartFragment}
+`;
