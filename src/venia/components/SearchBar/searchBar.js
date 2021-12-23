@@ -45,7 +45,6 @@ const SearchBar = React.forwardRef((props, ref) => {
                             isSearchOpen={isOpen}
                             onChange={handleChange}
                             className={classes.test}
-                            setVisible={setIsAutoCompleteOpen}
                         />
                     </div>
                 </Form>

@@ -26,11 +26,10 @@ export const useSearchBar = () => {
     // expand or collapse on input change
     const handleChange = useCallback(
         value => {
-            const isValid = !!value && value.length > 1;
+            const hasValue = !!value;
+            const isValid = hasValue && value.length > 1;
             setValid(isValid);
-            if (!isValid) {
-                setIsAutoCompleteOpen(false);
-            }
+            setIsAutoCompleteOpen(hasValue);
         },
         [setIsAutoCompleteOpen, setValid]
     );

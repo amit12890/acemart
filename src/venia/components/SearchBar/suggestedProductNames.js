@@ -17,10 +17,10 @@ const suggestedProductNames = props => {
     const handleClick = useCallback(
         text => () => {
             history.push(`${SEARCH_PAGE_PATH}?q=${text}`);
-            setVisible(false);
             fieldApi.setValue(text);
+            setVisible(false);
         },
-        [history, setVisible, fieldApi]
+        [history, setVisible]
     );
 
     return (

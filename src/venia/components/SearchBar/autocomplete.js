@@ -1,7 +1,6 @@
 import React from 'react';
-import { gql } from '@apollo/client';
 import { bool, func, shape, string } from 'prop-types';
-import { useIntl } from 'react-intl';
+import { get } from "lodash"
 
 import { useAutocomplete } from '../../../magento/peregrine/talons/SearchBar';
 import defaultClasses from './autocomplete.css';
@@ -9,22 +8,31 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Suggestions from './suggestions';
 
 const Autocomplete = props => {
-    const { setVisible, valid, visible, handleChange } = props;
+    const { setVisible, valid, visible } = props;
     const talonProps = useAutocomplete({
         valid,
-        visible,
-        setVisible
+        visible
     });
     const {
         suggestionLoading,
         productLoading,
         suggestions,
         products,
+        // messageType,
+        // value,
         displayResult
     } = talonProps;
 
     const classes = useStyle(defaultClasses, props.classes);
-    const rootClassName = visible ? classes.root_visible : classes.root_hidden;
+
+    const shouldVisible =
+        displayResult &&
+        visible &&
+        (!!get(products, 'results.length') ||
+            !!get(suggestions, 'alternatives.length'));
+    const rootClassName = shouldVisible
+        ? classes.root_visible
+        : classes.root_hidden;
 
     return (
         <div className={rootClassName}>
@@ -37,7 +45,6 @@ const Autocomplete = props => {
                     setVisible={setVisible}
                     visible={visible}
                     displayResult={displayResult}
-                    handleChange={handleChange}
                 />
             </div>
         </div>
