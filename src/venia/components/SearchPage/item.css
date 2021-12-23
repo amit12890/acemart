@@ -116,19 +116,17 @@
 
 
 .productActions {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+
     
 }
 
-.viewMore {
+.viewmoreAction {
     composes: root_highPriority from '../../components/Button/button.css';
     background-color: rgb(var(--theme-color-primary-alt));
     border-color: rgb(var(--theme-color-primary-alt));
 }
 
-.viewMore:hover {
+.viewmoreAction:hover {
     border-color: rgb(var(--theme-color-primary-alt));
     color: rgb(var(--theme-color-primary-alt));
 }
@@ -176,6 +174,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin: 1.2rem 0;
 }
 
 .labelItem {
@@ -203,7 +202,7 @@
     background-position: -134px -6px;
 }
 
-.onlinePricing {
+.onlinePrice {
     background-position: -70px -70px;
    
 }

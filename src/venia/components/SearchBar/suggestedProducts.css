@@ -34,6 +34,8 @@
 .listWrapper {
     flex: 2;
     border-left: 1px solid #ddd;
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 .itemInfo {
@@ -60,14 +62,14 @@
     color: var(--product-name-color);
     line-height: normal; 
     flex: 1;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .sku {
     font-size: var(--fontSize-90);
     color: rgb(var(--color-gray-middle3));
     flex: 1;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .price {

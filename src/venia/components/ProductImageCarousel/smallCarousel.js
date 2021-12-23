@@ -14,8 +14,8 @@ import Thumbnail from './thumbnail';
 import { size } from 'lodash-es';
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 
-const IMAGE_WIDTH = 535;
-const IMAGE_HEIGHT = 535;
+const IMAGE_WIDTH = 500;
+const IMAGE_HEIGHT = 500;
 
 const SmallCarousel = props => {
     const {
@@ -117,9 +117,9 @@ const SmallCarousel = props => {
                     visibleSlides={3}
                     totalSlides={size(sortedImages)}
                 >
-                    <div className={classes.thumbnailList}>
+                    {/* <div className={classes.thumbnailList}>
                         <Slider>{thumbnails}</Slider>
-                    </div>
+                    </div> */}
                 </CarouselProvider>
             )}
         </div>
