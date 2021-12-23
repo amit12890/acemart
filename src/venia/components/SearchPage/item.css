@@ -14,7 +14,6 @@
 .itemImageContainer {
     order: 1;
     flex: 0 1 250px;
-    display: flex;
 }
 
 .images {
@@ -28,7 +27,6 @@
 
 .image {
     display: block;
-    height: 100%;
     object-fit: contain;
     opacity: 1;
     transition-duration: 512ms;

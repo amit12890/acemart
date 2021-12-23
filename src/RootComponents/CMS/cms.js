@@ -65,7 +65,14 @@ const CMSPage = props => {
                 <Meta name="title" content={pageTitle} />
                 <Meta name="description" content={meta_description} />
                 {headingElement}
-                <RichContent html={content} />
+                <div className={classes.cmswrapper}>
+                    <RichContent
+                        classes={{
+                            root: classes.test
+                        }}
+
+                        html={content} />
+                </div>
             </Fragment>
         );
     }

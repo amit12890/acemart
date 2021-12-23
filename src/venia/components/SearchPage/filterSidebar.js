@@ -76,7 +76,7 @@ const FilterSidebar = props => {
                                         <span className={classes.filterLabel}>
                                             {startCase(label)}
                                         </span>
-                                        <span>{count}</span>
+                                        <strong>{count}</strong>
                                     </div>
                                 );
                             })
@@ -150,7 +150,7 @@ const FilterBlock = props => {
                 </Form>
             )}
             {values && values.length ? (
-                <Form className={classes.list}>
+                <Form className={classes.list123}>
                     <ul className={classes.items}>
                         {values.map(item => {
                             const { active, value, label, count } = item;

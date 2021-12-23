@@ -14,7 +14,6 @@
 .itemImageContainer {
     order: 1;
     flex: 0 1 250px;
-    display: flex;
 }
 
 .images {

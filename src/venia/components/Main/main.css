@@ -7,13 +7,14 @@
 .root_masked {
     composes: root;
 }
-
-.page {
-    margin: 0 auto;
+.page:not(.cms_page) {
     max-width: var(--venia-global-maxWidth);
-    min-height: 40rem;
     padding-left: var(--layout-indent-width);
     padding-right: var(--layout-indent-width);
+}
+.page {
+    margin: 0 auto;
+    min-height: 40rem;
 }
 
 .page_masked {
@@ -21,7 +22,7 @@
 }
 
 .cms_page{
-    background-color: green !important;
+    
 }
 @media (min-height: 640px) {
     .page {
