@@ -32,6 +32,7 @@ const SearchField = props => {
             classes={{
                 input:classes.searchTextInput
             }}
+            placeholder="Search Ace Mart"
         />
     );
 };
