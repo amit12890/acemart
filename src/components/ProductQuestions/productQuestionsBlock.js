@@ -268,9 +268,10 @@ const QuestionBlock = ({ questions }) => {
                                     >
                                         <span>Collapse All</span>
                                         <i className={classes.iconWrapper}>
-                                            <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                                <title>store</title>
-                                                <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                            <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                <title>collapse</title>
+                                                <path d="M7.405 15.429h17.191v1.143h-17.191v-1.143z"></path>
+                                            </svg>
                                         </i>
                                     </Button>
                                     :
@@ -280,9 +281,10 @@ const QuestionBlock = ({ questions }) => {
                                     >
                                         <span>Expand All</span>
                                         <i className={classes.iconWrapper}>
-                                            <svg className={[classes.svgIcon, classes.store].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-                                                <title>store</title>
-                                                <path d="M32 30v-2h-2v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-6v-12h2v-2h-6v2h2v12h-2v2h-2v2h34v-2h-2zM16 0h2l16 10v2h-34v-2z"></path>                                            </svg>
+                                            <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                <title>expand</title>
+                                                <path d="M24.595 15.426h-8.007v-8.022h-1.143v8.022h-8.041v1.143h8.041v8.026h1.143v-8.026h8.007z"></path>
+                                            </svg>
                                         </i>
                                     </Button>
                                 }

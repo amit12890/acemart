@@ -95,6 +95,7 @@
 }
 
 .priceWrapper {
+    white-space: nowrap;
 
 }
 
@@ -167,6 +168,11 @@
     width: 18px; 
 }
 
+.shipTime {
+    color: rgb(var(--color-red10));
+    margin: 10px 0;
+    font-size: var(--fontSize-100);
+}
 
 
 .kebab {
