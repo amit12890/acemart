@@ -1,1 +1,1 @@
-export { default } from './checkoutAddressForm'
+export { default } from './addressForm'

@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from 'react'
 
-import AddressListItem from '../components/AddressListItem'
-import CheckoutAddressForm from './CheckoutAddressForm'
-import RadioButton from '../../common/RadioButton'
+import AddressListItem from '../AddressListItem'
+import AddressForm from '../AddressForm'
+import RadioButton from '../../RadioButton'
 
-import { useCartData } from '@vihasshah/ktpl-lib-v2'
 
 import { get, size, find } from 'lodash'
 
 
 
-
-const CheckoutAddressStep = props => {
-    /**
-     * render address list initially and render form if user clicks on add new address
-     */
-    const { enabled, title, onApplyAddress, data, loading, showSameAsButton, onSameAsButtonClick, initialValues, isShippingStep, isUserLoggedIn, setting } = props
+/**
+ * render address list initially and render form if user clicks on add new address
+ * 
+ * Parent
+ *      Checkout
+ */
+const AddressStep = props => {
+    const {
+        enabled,
+        title,
+        onApplyAddress,
+        data,
+        loading,
+        showSameAsButton,
+        onSameAsButtonClick,
+        initialValues,
+        isShippingStep,
+        isUserLoggedIn,
+        setting,
+        isDefaultStore
+    } = props
 
     let initCustomerAddressId = get(initialValues, "customer_address_id", -1)
     let isNewAddress = get(initialValues, "customer_address_id", -1) == null
@@ -46,7 +60,6 @@ const CheckoutAddressStep = props => {
     const changeAddressSelection = (newId) => setAddressId(newId === selectedAddressId ? -1 : newId)
     const toggleEditMode = (forceFlag = false) => forceFlag ? setInEditMode(forceFlag) : setInEditMode(!editMode)
     let hasAddresses = size(data) > 0
-
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -193,18 +206,24 @@ const CheckoutAddressStep = props => {
                 {hasInitValue &&
                     <AddressListItem address={initialValues} containerClass="address" />
                 }
-                <div className="actions-toolbar">
-                    <div className="secondary">
-                        <button
-                            className="action submit secondary"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                toggleEditMode(true)
-                            }}>
-                            <span>{hasInitValue ? " Change" : "Add"}</span>
-                        </button>
+                {/* 
+                    user should only be able to change or edit shipping adderess if 
+                    it has default store is not selected
+                */}
+                {isDefaultStore && (
+                    <div className="actions-toolbar">
+                        <div className="secondary">
+                            <button
+                                className="action submit secondary"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    toggleEditMode(true)
+                                }}>
+                                <span>{hasInitValue ? " Change" : "Add"}</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         )
     }
@@ -216,7 +235,7 @@ const CheckoutAddressStep = props => {
                 {title}
             </div>
             {showAddressForm || !isUserLoggedIn ? (
-                <CheckoutAddressForm
+                <AddressForm
                     isUserLoggedIn={isUserLoggedIn}
                     initialValues={get(initialValues, "customer_address_id", -1) == null ? initialValues : {}}
                     setting={setting}
@@ -234,4 +253,4 @@ const CheckoutAddressStep = props => {
     )
 }
 
-export default CheckoutAddressStep
+export default AddressStep

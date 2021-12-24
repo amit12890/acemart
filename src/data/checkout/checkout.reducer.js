@@ -27,6 +27,7 @@ const INIT_STATE = {
     },
     items: [],
 
+    shipping_addresses: [],
     billing_address: null,
     email: null,
     prices: {},

@@ -12,7 +12,8 @@ import {
     ProductListingFragment,
     SelectedPaymentMethodFragment,
     ShippingAddressesFragment,
-    OrderConfirmationPageFragment
+    OrderConfirmationPageFragment,
+    ShippingAddressItemFragment
 } from './checkoutFragments.gql';
 
 
@@ -126,6 +127,8 @@ export const CREATE_CART = gql`
     }
 `;
 
+
+
 export const GET_CUSTOMER = gql`
     query GetCustomerForCheckout {
         customer {
@@ -144,6 +147,70 @@ export const EMAIL_EXIST_GQL = gql`
     }
 `
 
+export const SET_SHIPPING_ADDRESS_GQL = gql`
+mutation setShippingAddressesOnCart($input:SetShippingAddressesOnCartInput){
+    setShippingAddressesOnCart(
+        input: $input
+    ) {
+        cart {
+            shipping_addresses {
+                customer_address_id
+                save_in_address_book
+                ...shippingAddressItemFragment
+            }
+        }
+    }
+}
+${ShippingAddressItemFragment}
+`
+
+
+export const SET_SHIPPING_METHOD_ON_CART = gql`
+mutation setShippingMethodsOnCart($input:SetShippingMethodsOnCartInput){
+    setShippingMethodsOnCart(
+      input: $input
+    ) {
+        cart {
+            shipping_addresses {
+                ...shippingAddressItemFragment
+            }
+        }
+    }
+}
+${ShippingAddressItemFragment}
+`
+
+
+export const SET_BILLING_ADDRESS_GQL = gql`
+mutation setBillingAddressOnCart($input:SetBillingAddressOnCartInput){
+    setBillingAddressOnCart(
+        input: $input
+    ) {
+        cart {
+            billing_address {
+                customer_address_id
+                save_in_address_book
+                firstname
+                lastname
+                company
+                street
+                city
+                region{
+                    code
+                    label
+                }
+                postcode
+                telephone
+                country{
+                    code
+                    label
+                }
+            }
+        }
+    }
+}
+`
+
 export default {
     setGuestCartEmail: SET_GUEST_EMAIL,
     createCartMutation: CREATE_CART,
@@ -152,5 +219,8 @@ export default {
     getCustomerQuery: GET_CUSTOMER,
     getOrderDetailsQuery: GET_ORDER_DETAILS,
     placeOrderMutation: PLACE_ORDER,
-    emailAvailableCheckQuery: EMAIL_EXIST_GQL
+    emailAvailableCheckQuery: EMAIL_EXIST_GQL,
+    setShippingAddressMutation: SET_SHIPPING_ADDRESS_GQL,
+    setBillingAddressMutation: SET_BILLING_ADDRESS_GQL,
+    setShippingMethodMutation: SET_SHIPPING_METHOD_ON_CART
 };

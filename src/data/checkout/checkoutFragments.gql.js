@@ -343,3 +343,53 @@ export const OrderConfirmationPageFragment = gql`
         }
     }
 `;
+
+export const ShippingAddressItemFragment = `
+fragment shippingAddressItemFragment on Cart {
+    firstname
+    lastname
+    company
+    street
+    city
+    region {
+        code
+        label
+    }
+    postcode
+    telephone
+    country {
+        code
+        label
+    }
+    available_shipping_methods {
+        amount {
+            currency
+            value
+        }
+        available
+        carrier_code
+        carrier_title
+        error_message
+        method_code
+        method_title
+        price_excl_tax {
+            value
+            currency
+        }
+        price_incl_tax {
+            value
+            currency
+        }
+    }
+    selected_shipping_method {
+        amount {
+            value
+            currency
+        }
+        carrier_code
+        carrier_title
+        method_code
+        method_title
+    }
+}
+`

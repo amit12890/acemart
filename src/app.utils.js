@@ -1,4 +1,4 @@
-import { drop, includes, unescape, get, isObject, sum, mapKeys } from "lodash"
+import { drop, includes, unescape, get, isObject, sum, mapKeys, size } from "lodash"
 
 // TODO: remove temp image fix
 export const getOriginalImage = (url) => {

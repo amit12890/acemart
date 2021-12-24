@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import SearchablePicker from '../../account/components/SearchablePicker'
+import SearchablePicker from '../../SearchablePicker'
 import TextInput from '../../TextInput'
 import Checkbox from '../../Checkbox'
 
-import { useCustomerAddressData } from '@vihasshah/ktpl-lib-v2'
+// import { useCustomerAddressData } from '@vihasshah/ktpl-lib-v2'
 
 import { get, size, trim, join } from 'lodash'
 import { transpileCheckoutAddressRegion, findCountryByCode, emptyCheck } from '../../../app.utils'
@@ -16,12 +16,12 @@ const CheckoutAddressForm = props => {
      * render address form for checkout 
      * 
      * Parent 
-     *      CheckoutAddressStep
+     *      AddressStep
      */
     const { isUserLoggedIn, initialValues, onSaveAddress, setting, isShippingStep, toggleForm, onSameAsButtonClick, showSameAsButton } = props
 
-    const { countryData, fetchCountries } = useCustomerAddressData()
-
+    // const { countryData, fetchCountries } = useCustomerAddressData()
+    const countryData = []
 
     const [firstname, setFirstname] = useState(get(initialValues, "firstname", ''))
     const [lastname, setLastname] = useState(get(initialValues, "lastname", ''))
@@ -35,9 +35,9 @@ const CheckoutAddressForm = props => {
     const [errors, setErrors] = useState({})
 
 
-    useEffect(() => {
-        fetchCountries()
-    }, [])
+    // useEffect(() => {
+    //     fetchCountries()
+    // }, [])
 
 
     // set selected country after successfully fetching data of country
