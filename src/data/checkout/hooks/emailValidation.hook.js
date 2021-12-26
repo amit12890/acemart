@@ -12,7 +12,7 @@ import { updateCheckoutField } from '../checkout.action'
 
 const { emailAvailableCheckQuery, setGuestCartEmail } = gql
 
-export const useEmailStep = (props) => {
+export const useEmailStep = () => {
     const dispatch = useDispatch()
     // graphql call
     const [checkEmailExist, { loading, data }] = useLazyQuery(
@@ -23,10 +23,10 @@ export const useEmailStep = (props) => {
     )
 
     const checkEmailAvailable = useCallback((email) => {
-        checkEmailExist({ email })
+        checkEmailExist({ variables: { email } })
     }, [])
 
-    const [setGuestEmailMutation, { loading: settingEmail, data: guestEmailData, error: guestEmailErr }] = useMutation(setGuestCartEmail, {
+    const [setGuestEmailMutation, { loading: settingEmail }] = useMutation(setGuestCartEmail, {
         onCompleted: (data) => {
             // console.log("-----------[log]------------", "set email on cart successfully", data)
             let guestEmail = get(data, "setGuestEmailOnCart.cart.email", [])
@@ -36,6 +36,7 @@ export const useEmailStep = (props) => {
     })
 
     const setGuestEmailOnCart = useCallback((cartId, email) => {
+        console.log("here===>", cartId, email)
         setGuestEmailMutation({
             variables: { cartId, email }
         })
@@ -44,7 +45,7 @@ export const useEmailStep = (props) => {
     return {
         loading,
         settingEmail,
-        isEmailAvailable: get(data, "isEmailAvailable.is_email_available", false),
+        isEmailAvailable: get(data, "isEmailAvailable.is_email_available", true),
         checkEmailAvailable,
         setGuestEmailOnCart
     }

@@ -60,7 +60,7 @@ export const useCheckout = () => {
         },
         onCompleted: (data) => {
             console.log("🚀 ~ file: checkout.hook.js ~ line 50 ~ useCheckout ~ data", data)
-            // dispatch(checkoutFetched(get(data, "setStorePickupShippingAddressesOnCart.cart", {})))
+            dispatch(checkoutFetched(get(data, "setStorePickupShippingAddressesOnCart.cart", {})))
         }
     })
 
@@ -72,11 +72,8 @@ export const useCheckout = () => {
 
     useEffect(() => {
         if (isDefaultStore) {
-            // below dispatch is test
-            dispatch(setInitTestData())
             fetchCheckoutDetails()
         } else {
-            dispatch(setInitTestData())
             setStorePickupAndFetchDetails()
         }
     }, [isDefaultStore])

@@ -92,7 +92,7 @@ export default connect(store => ({
                     <EmailStep enabled={true} />
                 )}
                 <AddressStep
-                    enabled={isEmailAdded}
+                    enabled={isEmailAdded || !isDefaultStore}
                     data={customerAddresses}
                     title="Shipping Address"
                     setting={settingShippingAddress}
@@ -110,14 +110,18 @@ export default connect(store => ({
                             }]
                         }
                         setShippingAddressOnCart(addressData)
-                        /**
-                         * during the time of shipping cart saving by default bill address will be saved
-                         * so by default billing and shipping address will remain same
-                         */
-                        setBillingAddressOnCart({
-                            ...addressData[0],
-                            same_as_shipping: true
-                        })
+
+                        // set billing and shipping same when default store code is set
+                        if (isDefaultStore) {
+                            /**
+                             * during the time of shipping cart saving by default bill address will be saved
+                             * so by default billing and shipping address will remain same
+                             */
+                            setBillingAddressOnCart({
+                                ...addressData[0],
+                                same_as_shipping: true
+                            })
+                        }
                     }}
                     isShippingStep={true}
                     isUserLoggedIn={isSignedIn}
@@ -125,7 +129,7 @@ export default connect(store => ({
                     isDefaultStore={isDefaultStore} />
 
                 <ListStep
-                    enabled={isShippingAddressSelected}
+                    enabled={isShippingAddressSelected || !isDefaultStore}
                     title="Shipping Method"
                     data={get(shipping_addresses[0], "available_shipping_methods", [])}
                     initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}
@@ -163,18 +167,11 @@ export default connect(store => ({
                                 same_as_shipping: address.id === selectedShippingAddress.id
                             }
                         }
-                        setBillingAddressOnCart(variables, {
-                            onCompleted: (data) => {
-                                // toggleShippingAddressListModal()
-                            },
-                            onError: ({ message, code }) => {
-                                parseErrorCode(code, () => history.push('/'))
-                                showMessage(message)
-                            }
-                        })
+                        console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
+                        setBillingAddressOnCart(variables)
                     }}
                     isUserLoggedIn={isSignedIn}
-                    showSameAsButton={!isDefaultStore}
+                    showSameAsButton={isDefaultStore}
                     onSameAsButtonClick={() => {
                         let selectedShippingAddress = shipping_addresses[0]
                         let variables = null
@@ -204,7 +201,7 @@ export default connect(store => ({
 
 
                 <PaymentListStep
-                    enabled={true || isBillingAddressSelected && isShippingMethodSelected}
+                    enabled={isBillingAddressSelected && isShippingMethodSelected}
                     title="Payment Method"
                     data={available_payment_methods}
                     initialValues={selected_payment_method}
@@ -213,19 +210,21 @@ export default connect(store => ({
                     }}
                     isDefaultStore={isDefaultStore} />
 
-                <div className={classes.primaryButtonWrapper}>
-                    <div onClick={() => {
-                        setReviewCheckout(true)
-                        globalThis.scrollTo({
-                            top: 0,
-                            left: 0,
-                            behavior: 'smooth'
-                        })
-                    }}
-                        className={classes.primaryButton}>
-                        Review Order
+                {enablePlaceOrderButton && (
+                    <div className={classes.primaryButtonWrapper}>
+                        <div onClick={() => {
+                            setReviewCheckout(true)
+                            globalThis.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: 'smooth'
+                            })
+                        }}
+                            className={classes.primaryButton}>
+                            Review Order
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
             <div>
                 <CartSummary />

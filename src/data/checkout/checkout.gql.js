@@ -142,7 +142,7 @@ export const GET_CUSTOMER = gql`
 export const EMAIL_EXIST_GQL = gql`
     query isEmailAvailable($email: String!){
         isEmailAvailable(email:$email) {
-        is_email_available
+            is_email_available
         }
     }
 `

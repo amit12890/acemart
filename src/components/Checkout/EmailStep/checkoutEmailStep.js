@@ -38,7 +38,8 @@ const errorIcon = (
 
 export default connect(store => {
     return {
-        email: store.checkout.email
+        email: store.checkout.email,
+        is_email_available: store.checkout.is_email_available
     }
 })((props) => {
 
@@ -199,7 +200,7 @@ export default connect(store => {
                         {emailValidating &&
                             <LoadingIndicator style={{ width: 200, height: 50, margin: '0 auto' }} />
                         }
-                        {(size(email) > 0 && isEmailAvailable) &&
+                        {(size(email) > 0 && !isEmailAvailable) &&
                             <TextInput
                                 containerClass="field password required"
                                 label="Password"
@@ -222,9 +223,9 @@ export default connect(store => {
                                 <button
                                     type="submit"
                                     className="action primary add-email"
-                                    onClick={isEmailAvailable ? loginUser : addEmailToCart}
+                                    onClick={!isEmailAvailable ? loginUser : addEmailToCart}
                                     disabled={email === props.email && !isEmailAvailable}>
-                                    <span>{isEmailAvailable ? "Login" : "Continue"}</span>
+                                    <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
                                 </button>
                             </div>
                         </div>
