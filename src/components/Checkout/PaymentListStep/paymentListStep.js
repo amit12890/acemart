@@ -43,7 +43,6 @@ const PaymentListStep = props => {
 
 
     const renderItem = useCallback((item, index) => {
-        console.log("🚀 ~ file: PaymentListStep.js ~ line 46 ~ renderItem ~ item", item)
         let isActive = item.code === get(initialValues, "code", "")
         return (
             <div className="field choice checkout-choice required" key={item.code} onClick={() => onItemClick(item)}>

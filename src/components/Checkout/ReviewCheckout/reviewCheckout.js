@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { useStyle } from '../../../venia/classify'
 import AddressListItem from '../AddressListItem'
+import CartSummary from '../CartSummary'
 
 import defaultClasses from './reviewCheckout.css'
 
@@ -90,7 +91,7 @@ export default connect((store) => {
                 </div>
             </div>
             <div>
-                <h1>price block goes here</h1>
+                <CartSummary />
             </div>
         </div >
     )

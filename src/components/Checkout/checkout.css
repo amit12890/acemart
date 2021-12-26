@@ -1,5 +1,14 @@
-.root{
+.root {
+    display: flex;
+    flex-direction: row;
     padding: 2rem;
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    margin-right: 1.5rem;
 }
 
 .primaryButtonWrapper {
