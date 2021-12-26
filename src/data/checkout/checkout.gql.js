@@ -211,6 +211,19 @@ mutation setBillingAddressOnCart($input:SetBillingAddressOnCartInput){
 }
 `
 
+export const SET_PAYMENT_METHOD_ON_CART = gql`
+mutation setPaymentMethodOnCart($input:SetPaymentMethodOnCartInput){
+    setPaymentMethodOnCart(input: $input) {
+        cart {
+            selected_payment_method {
+                code
+                title
+            }
+        }
+    }
+}
+`
+
 export default {
     setGuestCartEmail: SET_GUEST_EMAIL,
     createCartMutation: CREATE_CART,
@@ -222,5 +235,6 @@ export default {
     emailAvailableCheckQuery: EMAIL_EXIST_GQL,
     setShippingAddressMutation: SET_SHIPPING_ADDRESS_GQL,
     setBillingAddressMutation: SET_BILLING_ADDRESS_GQL,
-    setShippingMethodMutation: SET_SHIPPING_METHOD_ON_CART
+    setShippingMethodMutation: SET_SHIPPING_METHOD_ON_CART,
+    setPaymentMethodMutation: SET_PAYMENT_METHOD_ON_CART
 };

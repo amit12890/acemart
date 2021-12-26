@@ -27,12 +27,15 @@ const INIT_STATE = {
     },
     items: [],
 
+    //it will contain shipping address and selected shipping method in cart
+    // it will have index 0
     shipping_addresses: [],
     billing_address: null,
     email: null,
     prices: {},
 
     available_shipping_methods: [],
+    // when user sets shiiping method
     selected_shipping_method: {},
 
     selected_payment_method: {},

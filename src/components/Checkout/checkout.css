@@ -1,3 +1,19 @@
 .root{
     padding: 2rem;
 }
+
+.primaryButtonWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.primaryButton {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: darkblue;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}

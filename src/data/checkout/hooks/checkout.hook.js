@@ -18,17 +18,22 @@ const {
     getCheckoutDetailsQuery,
     setStorePickupShippingAdressMutation,
     setShippingAddressMutation,
-    setBillingAddressMutation
+    setBillingAddressMutation,
+    setShippingMethodMutation,
+    placeOrderMutation
 } = gql
 
 const { getCustomerAddressesQuery } = addressGql
 
 
+//============================================================================================================================
+// CHECKOUT DETAILS
+//============================================================================================================================
+
 
 export const useCheckout = () => {
     const dispatch = useDispatch()
     const [{ cartId }] = useCartContext()
-    console.log("🚀 ~ file: checkout.hook.js ~ line 20 ~ useCheckout ~ cartId", cartId)
     // as based on this checkout graphql will be called
     const { currentStoreName, availableStores } = useStoreSwitcher()
     const defaultStoreName = get(availableStores.get('default'), "storeName", "")
@@ -81,6 +86,11 @@ export const useCheckout = () => {
         isDefaultStore
     }
 }
+
+
+//============================================================================================================================
+// CHECKOUT ADDRESS
+//============================================================================================================================
 
 
 export const useCheckoutAddresses = () => {
@@ -163,4 +173,80 @@ export const useCheckoutAddresses = () => {
         getCustomerAddresses,
         customerAddresses: get(customerAddressesData, "customer.addresses", [])
     }
-} 
+}
+
+
+//============================================================================================================================
+// CHECKOUT SHIPPING METHOD
+//============================================================================================================================
+
+
+export const useShippingMethods = () => {
+
+    const dispatch = useDispatch()
+    const [{ cartId }] = useCartContext()
+
+    const [setShippingMethod, { loading: settingShippingMethod }] = useMutation(setShippingMethodMutation, {
+        onCompleted: (data) => {
+            // console.log("-----------[log]------------", "shipping method set successfully", data)
+            let shipping_addresses = get(data, "setShippingMethodsOnCart.cart.shipping_addresses", [])
+            dispatch(updateCheckoutField({ shipping_addresses }))
+        }
+    })
+
+    /**
+     * set shipping method on cart
+     * cartId will be taken directly form reducer
+     * @param {Object} addressData => { customer_address_id , address }
+     */
+    const setShippingMethodOnCart = useCallback((shippingMethods) => {
+        if (!settingShippingMethod) return
+        let data = {
+            input: {
+                cart_id: cartId,
+                shipping_methods: shippingMethods
+            }
+        }
+        console.log("variable", data)
+        setShippingMethod({
+            variables: data
+        })
+
+    }, [cartId, settingShippingMethod])
+
+    return {
+        setShippingMethodOnCart,
+        settingShippingMethod
+    }
+}
+
+
+//============================================================================================================================
+// PLACE ORDER
+//============================================================================================================================
+
+
+export const usePlaceOrder = () => {
+    const dispatch = useDispatch()
+
+    const [{ cartId }] = useCartContext()
+    const [{ isSignedIn }] = useUserContext()
+
+    const [orderPlace, { loading: placingOrder }] = useMutation(placeOrderMutation, {
+        onCompleted: (data) => {
+            // console.log("-----------[log]------------", "order placed successfully", data)
+            let orderNumber = get(data, "placeOrder.order.order_number", 0)
+            dispatch(updateCheckoutField({ orderNumber }))
+        }
+    })
+
+    const placeOrder = useCallback(() => {
+        if (placingOrder) return
+        orderPlace({ variables: { cartId } })
+    }, [placingOrder, cartId])
+
+    return {
+        placeOrder,
+        placingOrder
+    }
+}
