@@ -4,7 +4,8 @@ import { get, groupBy, size, difference, orderBy, sortBy } from 'lodash-es';
 
 import Button from '../../venia/components/Button';
 
-import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
+
+// import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
 import Mask from '@magento/venia-ui/lib/components/Mask';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
@@ -13,6 +14,7 @@ import { getProductStoreLocatorData } from './productStoreLocator.gql';
 import { useStyle } from '../../venia/classify';
 import mapImage from '../../assets/map.jpg';
 import defaultClasses from './productStoreLocator.css';
+import { useStoreSwitcher } from '../../magento/peregrine/talons/Header/useStoreSwitcher';
 
 // Acemart.com store will be under this group
 // don't show it in group list
