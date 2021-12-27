@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, func, shape, string } from 'prop-types';
-import { get } from "lodash"
+import { get } from 'lodash';
 
 import { useAutocomplete } from '../../../magento/peregrine/talons/SearchBar';
 import defaultClasses from './autocomplete.css';
@@ -14,13 +14,12 @@ const Autocomplete = props => {
         visible
     });
     const {
-        suggestionLoading,
-        productLoading,
         suggestions,
         products,
         // messageType,
         // value,
-        displayResult
+        displayResult,
+        isLoading
     } = talonProps;
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -32,14 +31,17 @@ const Autocomplete = props => {
             !!get(suggestions, 'alternatives.length'));
     const rootClassName = shouldVisible
         ? classes.root_visible
+        : isLoading
+        ? classes.root_loading
         : classes.root_hidden;
 
     return (
         <div className={rootClassName}>
+            {isLoading && (
+                <div className={classes.message}>Fetching results...</div>
+            )}
             <div className={classes.suggestions}>
                 <Suggestions
-                    suggestionLoading={suggestionLoading}
-                    productLoading={productLoading}
                     suggestions={suggestions}
                     products={products}
                     setVisible={setVisible}
