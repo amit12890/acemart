@@ -63,12 +63,11 @@ export default connect(store => ({
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0
     let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0
-    console.log("🚀 ~ file: checkout.js ~ line 66 ~ isShippingMethodSelected", isShippingMethodSelected)
+
     let isBillingAddressSelected = size(billing_address) > 0
     let isPaymentMethodSelected = size(selected_payment_method) > 0
     let enablePlaceOrderButton = isShippingAddressSelected && isBillingAddressSelected && isPaymentMethodSelected && isShippingMethodSelected
 
-    console.log("🚀 ~ file: checkout.js ~ line 254 ~ billing_address", billing_address)
 
     let existBillingAddress = billing_address
     let initBillinAddress = {}
@@ -113,6 +112,7 @@ export default connect(store => ({
                     setting={settingShippingAddress}
                     initialValues={shipping_addresses[0]}
                     onApplyAddress={(address, isNewAddress = false) => {
+                        console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
                         let addressData = null
                         if (isNewAddress) {
                             addressData = [{
@@ -124,6 +124,12 @@ export default connect(store => ({
                                 customer_address_id: get(address, "id", '')
                             }]
                         }
+
+                        // addres object will pass by default 
+                        // let addressData = [{
+                        //     customer_address_id: get(address, "id", null),
+                        //     address
+                        // }]
                         setShippingAddressOnCart(addressData)
 
                         // set billing and shipping same when default store code is set
@@ -183,6 +189,13 @@ export default connect(store => ({
                                 same_as_shipping: address.id === selectedShippingAddress.id
                             }
                         }
+
+                        // addres object will pass by default 
+                        // let variables = {
+                        //     customer_address_id: null,
+                        //     address,
+                        //     same_as_shipping: address.id === selectedShippingAddress.id
+                        // }
                         console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
                         setBillingAddressOnCart(variables)
                     }}
@@ -192,29 +205,29 @@ export default connect(store => ({
                         let selectedShippingAddress = shipping_addresses[0]
                         let variables = null
 
-                        if (selectedShippingAddress.customer_address_id == null) {
-                            variables = {
-                                address: {
-                                    region_id: selectedShippingAddress.region.region_id,
-                                    region: selectedShippingAddress.region.code, // pass whole region object
-                                    country_code: selectedShippingAddress.country.code, // pass only country id
-                                    street: selectedShippingAddress.street, // street array
-                                    telephone: selectedShippingAddress.telephone,
-                                    postcode: selectedShippingAddress.postcode,
-                                    city: selectedShippingAddress.city,
-                                    firstname: selectedShippingAddress.firstname,
-                                    lastname: selectedShippingAddress.lastname,
-                                },
-                                same_as_shipping: false,
-                                use_for_shipping: false
-                            }
-                        } else {
-                            variables = {
-                                customer_address_id: selectedShippingAddress.customer_address_id,
-                                same_as_shipping: false,
-                                use_for_shipping: false
-                            }
+                        // if (selectedShippingAddress.customer_address_id == null) {
+                        variables = {
+                            address: {
+                                region_id: selectedShippingAddress.region.region_id,
+                                region: selectedShippingAddress.region.code, // pass whole region object
+                                country_code: selectedShippingAddress.country.code, // pass only country id
+                                street: selectedShippingAddress.street, // street array
+                                telephone: selectedShippingAddress.telephone,
+                                postcode: selectedShippingAddress.postcode,
+                                city: selectedShippingAddress.city,
+                                firstname: selectedShippingAddress.firstname,
+                                lastname: selectedShippingAddress.lastname,
+                            },
+                            same_as_shipping: false,
+                            use_for_shipping: false
                         }
+                        // } else {
+                        //     variables = {
+                        //         customer_address_id: selectedShippingAddress.customer_address_id,
+                        //         same_as_shipping: false,
+                        //         use_for_shipping: false
+                        //     }
+                        // }
                         setBillingAddressOnCart(variables)
                     }} />
 

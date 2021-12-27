@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
+import { useApolloClient, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { get } from 'lodash'
 
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher'
@@ -12,6 +12,8 @@ import { checkoutFetched, fetchingCheckout, setInitTestData, updateCheckoutField
 import addressGql from '../../../venia/components/AddressBookPage/addressBookPage.gql'
 import gql from '../checkout.gql'
 import { useUserContext } from '@magento/peregrine/lib/context/user'
+import { clearCartDataFromCache } from '@magento/peregrine/lib/Apollo/clearCartDataFromCache'
+import { removeCart } from '@magento/peregrine/lib/store/actions/cart/asyncActions'
 
 
 const {
@@ -21,7 +23,8 @@ const {
     setShippingAddressMutation,
     setBillingAddressMutation,
     setShippingMethodMutation,
-    placeOrderMutation
+    placeOrderMutation,
+    createCartMutation
 } = gql
 
 const { getCustomerAddressesQuery } = addressGql
@@ -74,8 +77,10 @@ export const useCheckout = () => {
 
     useEffect(() => {
         if (isDefaultStore) {
+            console.log("fetching default......")
             fetchCheckoutDetails()
         } else {
+            console.log("set pickup store......")
             setStorePickupAndFetchDetails()
         }
     }, [isDefaultStore])
@@ -130,6 +135,14 @@ export const useCheckoutAddresses = () => {
 
     const setShippingAddressOnCart = useCallback((address) => {
         if (settingShippingAddress) return
+        console.log("setShippingAddressOnCart", {
+            variables: {
+                input: {
+                    cart_id: cartId,
+                    shipping_addresses: address
+                }
+            }
+        })
         setShippingAddress({
             variables: {
                 input: {
@@ -226,15 +239,24 @@ export const useShippingMethods = () => {
 
 export const usePlaceOrder = () => {
     const dispatch = useDispatch()
+    const apolloClient = useApolloClient();
 
-    const [{ cartId }] = useCartContext()
+    const [{ cartId }, { createCart, removeCart }] = useCartContext()
     const [{ isSignedIn }] = useUserContext()
 
+    const [fetchCartId] = useMutation(createCartMutation);
+
     const [orderPlace, { loading: placingOrder }] = useMutation(placeOrderMutation, {
-        onCompleted: (data) => {
+        onCompleted: async (data) => {
             // console.log("-----------[log]------------", "order placed successfully", data)
             let orderNumber = get(data, "placeOrder.order.order_number", 0)
             dispatch(updateCheckoutField({ orderNumber }))
+            await removeCart();
+            await clearCartDataFromCache(apolloClient);
+
+            await createCart({
+                fetchCartId
+            });
         }
     })
 

@@ -46,6 +46,7 @@ const AddressStep = props => {
 
 
     const [selectedAddressId, setAddressId] = useState(initCustomerAddressId)
+    console.log("🚀 ~ file: addressStep.js ~ line 49 ~ selectedAddressId", selectedAddressId)
     const [showAddressForm, setFormVisibility] = useState(isNewAddress)
     const [editMode, setInEditMode] = useState(size(initialValues) === 0)
 
@@ -70,10 +71,9 @@ const AddressStep = props => {
             console.log("🚀 ~ file: addressStep.js ~ line 69 ~ submitForm ~ selectedAddressId", selectedAddressId)
             selectedAddressObj = find(data, (address) => address.id === selectedAddressId)
         }
-        console.log("🚀 ~ file: addressStep.js ~ line 70 ~ submitForm ~ selectedAddressObj", selectedAddressObj)
         onApplyAddress(selectedAddressObj)
         toggleEditMode()
-    }, [])
+    }, [selectedAddressId])
 
 
     //==================================================================================================================================================================================================================
@@ -151,6 +151,7 @@ const AddressStep = props => {
                                         onClick={(e) => {
                                             e.preventDefault()
                                             changeAddressSelection(address.id)
+                                            console.log("🚀 ~ file: addressStep.js ~ line 154 ~ data.map ~ address.id", address.id)
                                         }}>
                                         <div className="option-choice custom-radio-field">
                                             <RadioButton isActive={isSelected} />

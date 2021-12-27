@@ -6,11 +6,15 @@ import { get, size } from 'lodash'
 
 export default connect(store => {
     return {
-        cartItems: store.checkout.items
+        cart_items: store.checkout.items
     }
 })(React.memo(({
-    cartItems
+    data = false,
+    cart_items
 }) => {
+
+    const cartItems = data || cart_items
+
     return (
         <div>
             <strong className="summary title">{size(cartItems)} Items in Cart</strong>

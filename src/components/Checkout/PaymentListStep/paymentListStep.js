@@ -91,9 +91,6 @@ const PaymentListStep = props => {
 }
 
 PaymentListStep.propTypes = {
-    mapLabel: func.isRequired,
-    mapKey: func.isRequired,
-    mapValue: func.isRequired,
     renderItem: oneOfType([bool, func]),
     title: string.isRequired,
     data: array.isRequired,

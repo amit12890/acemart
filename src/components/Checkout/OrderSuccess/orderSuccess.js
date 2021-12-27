@@ -1,27 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
 import { get } from 'lodash';
 import CartItemList from '../CartItemList';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useStyle } from '../../../venia/classify';
+import defaultClasses from './orderSuccess.css'
+import { resetCheckout } from '../../../data/checkout/checkout.action';
 
 
 export default connect(store => {
     return {
-        orderNumber: store.checkout.orderNumber,
-        email: store.checkout.email,
+        order_number: store.checkout.orderNumber,
+        user_email: store.checkout.email,
         shipping_addresses: store.checkout.shipping_addresses,
+        cart_items: store.checkout.items
     }
 })(React.memo(({
-    orderNumber,
-    email,
-    shipping_addresses
+    order_number,
+    user_email,
+    shipping_addresses,
+    cart_items,
+    dispatch
 }) => {
 
-    const selectedShippingAddress = shipping_addresses[0]
+    const [orderNumber, setOrderNumber] = useState(order_number)
+    const [selectedShippingAddress, setSelectedShippingAddress] = useState(shipping_addresses[0])
+    const [email, setEmail] = useState(user_email)
+    const [cartItems, setCartItems] = useState(cart_items)
+
+
+    useEffect(() => {
+        console.log("clearing checkout reducer....")
+        dispatch(resetCheckout())
+    }, [])
+    const classes = useStyle(defaultClasses)
+    const { formatMessage } = useIntl();
     console.log("🚀 ~ file: orderSuccess.js ~ line 18 ~ selectedShippingAddress", selectedShippingAddress)
-    const selectedShippingMethod = get(shipping_addresses[0], "available_shipping_methods", [])
+    const selectedShippingMethod = get(selectedShippingAddress, "available_shipping_methods", [])
 
     const firstname = get(selectedShippingAddress, "firstname", "")
     const lastname = get(selectedShippingAddress, "lastname", "")
@@ -29,7 +46,7 @@ export default connect(store => {
     const region = get(selectedShippingAddress, "region.label", "")
     const postcode = get(selectedShippingAddress, "postcode", "")
     const country = get(selectedShippingAddress, "country.label", "")
-    const streetRows = selectedShippingAddress.street && selectedShippingAddress.street.map((row, index) => {
+    const streetRows = get(selectedShippingAddress, "street", false) && selectedShippingAddress.street.map((row, index) => {
         return (
             <span key={index} className={classes.addressStreet}>
                 {row}
@@ -86,7 +103,7 @@ export default connect(store => {
                 </div>
                 <div className={classes.shippingMethod}>{shippingMethod}</div>
                 <div className={classes.itemsReview}>
-                    <CartItemList />
+                    <CartItemList data={cartItems} />
                 </div>
                 <div className={classes.additionalText}>
                     <FormattedMessage
