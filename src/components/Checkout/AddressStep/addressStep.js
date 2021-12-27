@@ -240,7 +240,7 @@ const AddressStep = props => {
             {showAddressForm || !isUserLoggedIn ? (
                 <AddressForm
                     isUserLoggedIn={isUserLoggedIn}
-                    initialValues={get(initialValues, "customer_address_id", -1) == null ? initialValues : {}}
+                    initialValues={get(initialValues, "customer_address_id", null) == null ? initialValues : {}}
                     setting={setting}
                     isShippingStep={isShippingStep}
                     onSaveAddress={(address) => {

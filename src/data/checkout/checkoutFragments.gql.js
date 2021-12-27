@@ -86,22 +86,22 @@ export const AvailablePaymentMethodsFragment = gql`
 export const BillingAddressFragment = gql`
     fragment billingAddressFragment on Cart{
         billing_address{
-        city
-        company
-        country {
-            code
-            label
-        }    
-        firstname
-        lastname
-        postcode
-        region {
-            code
-            label
-            region_id
-        }
-        street
-        telephone
+            city
+            company
+            country {
+                code
+                label
+            }    
+            firstname
+            lastname
+            postcode
+            region {
+                code
+                label
+                region_id
+            }
+            street
+            telephone
         }
     }
 `
@@ -344,8 +344,16 @@ export const OrderConfirmationPageFragment = gql`
     }
 `;
 
+/**
+ * TODO:
+ * customer_address_id
+ * save_in_address_book
+ * 
+ * add above keys in item fragment
+ */
 export const ShippingAddressItemFragment = `
 fragment shippingAddressItemFragment on ShippingCartAddress {
+    
     firstname
     lastname
     company
@@ -354,6 +362,7 @@ fragment shippingAddressItemFragment on ShippingCartAddress {
     region {
         code
         label
+        region_id
     }
     postcode
     telephone

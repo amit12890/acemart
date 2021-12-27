@@ -195,7 +195,7 @@ export default connect(store => ({
                         if (selectedShippingAddress.customer_address_id == null) {
                             variables = {
                                 address: {
-                                    region_id: selectedShippingAddress.region.code,
+                                    region_id: selectedShippingAddress.region.region_id,
                                     region: selectedShippingAddress.region.code, // pass whole region object
                                     country_code: selectedShippingAddress.country.code, // pass only country id
                                     street: selectedShippingAddress.street, // street array

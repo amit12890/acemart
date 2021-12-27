@@ -167,8 +167,6 @@ mutation setShippingAddressesOnCart($input:SetShippingAddressesOnCartInput){
     ) {
         cart {
             shipping_addresses {
-                customer_address_id
-                save_in_address_book
                 ...shippingAddressItemFragment
             }
         }
@@ -200,26 +198,11 @@ mutation setBillingAddressOnCart($input:SetBillingAddressOnCartInput){
         input: $input
     ) {
         cart {
-            billing_address {
-                firstname
-                lastname
-                company
-                street
-                city
-                region{
-                    code
-                    label
-                }
-                postcode
-                telephone
-                country{
-                    code
-                    label
-                }
-            }
+           ...billingAddressFragment
         }
     }
 }
+${BillingAddressFragment}
 `
 
 export const SET_PAYMENT_METHOD_ON_CART = gql`
