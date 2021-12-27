@@ -7,6 +7,7 @@ import { useCartContext } from '@magento/peregrine/lib/context/cart'
 
 import gql from '../checkout.gql'
 import { updateCheckoutField } from '../checkout.action'
+import { get } from 'lodash'
 
 const { setPaymentMethodMutation } = gql
 

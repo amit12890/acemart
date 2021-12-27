@@ -345,7 +345,7 @@ export const OrderConfirmationPageFragment = gql`
 `;
 
 export const ShippingAddressItemFragment = `
-fragment shippingAddressItemFragment on Cart {
+fragment shippingAddressItemFragment on ShippingCartAddress {
     firstname
     lastname
     company

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 
 import SearchablePicker from '../../SearchablePicker'
 import TextInput from '../../TextInput'
@@ -7,7 +7,8 @@ import Checkbox from '../../Checkbox'
 // import { useCustomerAddressData } from '@vihasshah/ktpl-lib-v2'
 
 import { get, size, trim, join } from 'lodash'
-import { transpileCheckoutAddressRegion, findCountryByCode, emptyCheck } from '../../../app.utils'
+import { transpileCheckoutAddressRegion, findCountryByCode, emptyCheck, findCountryById } from '../../../app.utils'
+import { useCountries } from '../../../data/checkout/hooks/checkout.hook'
 
 
 
@@ -20,8 +21,7 @@ const CheckoutAddressForm = props => {
      */
     const { isUserLoggedIn, initialValues, onSaveAddress, setting, isShippingStep, toggleForm, onSameAsButtonClick, showSameAsButton } = props
 
-    // const { countryData, fetchCountries } = useCustomerAddressData()
-    const countryData = []
+    const { countries: countryData } = useCountries()
 
     const [firstname, setFirstname] = useState(get(initialValues, "firstname", ''))
     const [lastname, setLastname] = useState(get(initialValues, "lastname", ''))
@@ -35,11 +35,6 @@ const CheckoutAddressForm = props => {
     const [errors, setErrors] = useState({})
 
 
-    // useEffect(() => {
-    //     fetchCountries()
-    // }, [])
-
-
     // set selected country after successfully fetching data of country
     useEffect(() => {
         setFirstname(get(initialValues, "firstname", ''))
@@ -50,11 +45,19 @@ const CheckoutAddressForm = props => {
         setZip(get(initialValues, "postcode", ''))
         setRegion(transpileCheckoutAddressRegion(get(initialValues, "region", {})))
         if (size(countryData) > 0) {
-            let country = findCountryByCode(get(initialValues, "country.code", {}), countryData)
+            let country = findCountryByCode(get(initialValues, "country.code", 'US'), countryData)
             setCountry(country)
         }
         setSaveInAddressBook(get(initialValues, "save_in_address_book", false))
     }, [initialValues])
+
+    useEffect(() => {
+        if (size(countryData) > 0) {
+            let country = findCountryByCode('US', countryData)
+            console.log("🚀 ~ file: AddressForm.js ~ line 62 ~ useEffect ~ country", country)
+            setCountry(country)
+        }
+    }, [countryData])
 
 
     let availableRegions = get(country, "available_regions", [])
@@ -74,21 +77,31 @@ const CheckoutAddressForm = props => {
     //=======================================================================================================================================================
 
 
-    const submitForm = (e) => {
+    const submitForm = useCallback((e) => {
         e.preventDefault()
-
         // street array will join for validation but default array structure will pass to add or update operation
         let mergeStreet = trim(join(street, ""))
-        let emptyErrors = emptyCheck({ firstname, lastname, mobile, street: mergeStreet, city, zip, region: get(region, "name", ''), country: country.id })
+        let emptyErrors = emptyCheck({
+            firstname,
+            lastname,
+            mobile,
+            street: mergeStreet,
+            city,
+            zip,
+            region: get(region, "name", ''),
+            country: get(country, "id", "US")
+        })
 
         if (size(emptyErrors) > 0) {
             setErrors(emptyErrors)
             return
         }
         setErrors({})
+        console.log("🚀 ~ file: AddressForm.js ~ line 102 ~ submitForm ~ region", region)
         let data = {
-            region: region.code, // pass whole region object
-            country_code: country.id, // pass only country id
+            region_id: get(region, "id", ""),
+            region: region.code || 'CA',
+            country_code: country.id || 'US', // pass only country id
             street, // street array
             telephone: String(mobile),
             postcode: String(zip),
@@ -97,9 +110,14 @@ const CheckoutAddressForm = props => {
             lastname,
             save_in_address_book: saveInAddressBook,
         }
+        console.log("🚀 ~ file: AddressForm.js ~ line 100 ~ submitForm ~ data", data)
 
         onSaveAddress(data)
-    }
+    }, [
+        region, country,
+        street, mobile, zip, city,
+        firstname, lastname, saveInAddressBook
+    ])
 
 
     return (
@@ -289,4 +307,4 @@ const CheckoutAddressForm = props => {
     )
 }
 
-export default CheckoutAddressForm
+export default React.memo(CheckoutAddressForm)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import { useUserContext } from '@magento/peregrine/lib/context/user'
 import { useCheckout, useCheckoutAddresses, usePlaceOrder, useShippingMethods } from '../../data/checkout/hooks/checkout.hook'
@@ -17,6 +18,7 @@ import { get, size } from 'lodash'
 import { useCheckoutPayment } from '../../data/checkout/hooks/payment.hook'
 import ReviewCheckout from './ReviewCheckout'
 import CartSummary from './CartSummary'
+import CartItemList from './CartItemList'
 
 export default connect(store => ({
     isMultiShipping: store.checkout.isMultiShipping,
@@ -25,7 +27,8 @@ export default connect(store => ({
     shipping_addresses: store.checkout.shipping_addresses,
     selected_payment_method: store.checkout.selected_payment_method,
     billing_address: store.checkout.billing_address,
-    available_payment_methods: store.checkout.available_payment_methods
+    available_payment_methods: store.checkout.available_payment_methods,
+    orderNumber: store.checkout.orderNumber
 }))(({
     isMultiShipping,
     multiShipping,
@@ -34,9 +37,10 @@ export default connect(store => ({
     selected_payment_method,
     billing_address,
     available_payment_methods,
+    orderNumber,
     dispatch
 }) => {
-
+    const history = useHistory()
     const [{ isSignedIn }] = useUserContext()
     const { isDefaultStore } = useCheckout()
 
@@ -59,17 +63,26 @@ export default connect(store => ({
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0
     let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0
+    console.log("🚀 ~ file: checkout.js ~ line 66 ~ isShippingMethodSelected", isShippingMethodSelected)
     let isBillingAddressSelected = size(billing_address) > 0
     let isPaymentMethodSelected = size(selected_payment_method) > 0
     let enablePlaceOrderButton = isShippingAddressSelected && isBillingAddressSelected && isPaymentMethodSelected && isShippingMethodSelected
+
+    console.log("🚀 ~ file: checkout.js ~ line 254 ~ billing_address", billing_address)
 
     let existBillingAddress = billing_address
     let initBillinAddress = {}
     if (size(existBillingAddress) > 0) {
         initBillinAddress = existBillingAddress
-    } else if (!isMultiShipping) {
-        initBillinAddress = shipping_addresses
+    } else if (isDefaultStore) {
+        initBillinAddress = shipping_addresses[0]
     }
+
+    useEffect(() => {
+        if (size(orderNumber) > 0) {
+            history.push('/checkout/success')
+        }
+    }, [orderNumber])
 
     if (showReviewCheckout) {
         return (
@@ -79,6 +92,8 @@ export default connect(store => ({
                 onPlaceOrderButtonPress={() => placeOrder()} />
         )
     }
+
+    console.log("🚀 ~ file: checkout.js ~ line 166 ~ initBillinAddress", initBillinAddress)
 
     return (
         <div className={classes.root}>
@@ -137,6 +152,7 @@ export default connect(store => ({
                     mapKey={(item) => get(item, "method_code", '')}
                     mapValue={(item) => get(item, "method_code", '')}
                     onItemClick={(shippingMethod) => {
+                        console.log("🚀 ~ file: checkout.js ~ line 162 ~ shippingMethod", shippingMethod)
                         setShippingMethodOnCart([
                             {
                                 carrier_code: get(shippingMethod, "carrier_code", ''),
@@ -153,7 +169,7 @@ export default connect(store => ({
                     setting={settingBillingAddress}
                     initialValues={initBillinAddress}
                     onApplyAddress={(address, isNewAddress = false) => {
-                        let selectedShippingAddress = get(cart, "shipping_addresses[0]", [])
+                        let selectedShippingAddress = shipping_addresses[0]
                         let variables = null
                         if (isNewAddress) {
                             variables = {
@@ -179,6 +195,7 @@ export default connect(store => ({
                         if (selectedShippingAddress.customer_address_id == null) {
                             variables = {
                                 address: {
+                                    region_id: selectedShippingAddress.region.code,
                                     region: selectedShippingAddress.region.code, // pass whole region object
                                     country_code: selectedShippingAddress.country.code, // pass only country id
                                     street: selectedShippingAddress.street, // street array
@@ -188,12 +205,14 @@ export default connect(store => ({
                                     firstname: selectedShippingAddress.firstname,
                                     lastname: selectedShippingAddress.lastname,
                                 },
-                                same_as_shipping: true
+                                same_as_shipping: false,
+                                use_for_shipping: false
                             }
                         } else {
                             variables = {
                                 customer_address_id: selectedShippingAddress.customer_address_id,
-                                same_as_shipping: true
+                                same_as_shipping: false,
+                                use_for_shipping: false
                             }
                         }
                         setBillingAddressOnCart(variables)
@@ -226,8 +245,11 @@ export default connect(store => ({
                     </div>
                 )}
             </div>
-            <div>
+            <div style={{
+                flexDirection: 'column'
+            }}>
                 <CartSummary />
+                <CartItemList />
             </div>
         </div>
     )

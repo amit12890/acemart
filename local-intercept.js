@@ -149,7 +149,7 @@ function localIntercept(targets) {
             name: "Checkout success Page",
             pattern: "/checkout/success",
             exact: true,
-            path: require.resolve("./src/venia/components/CheckoutPage/OrderConfirmationPage")
+            path: require.resolve("./src/components/Checkout/OrderSuccess")
         });
         routes.push({
             name: "Search",

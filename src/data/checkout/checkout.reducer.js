@@ -34,14 +34,13 @@ const INIT_STATE = {
     email: null,
     prices: {},
 
+    // shipping method will be added in shipping address only
     available_shipping_methods: [],
-    // when user sets shiiping method
-    selected_shipping_method: {},
 
     selected_payment_method: {},
     available_payment_methods: [],
 
-    orderNumer: '',
+    orderNumber: '',
     orderId: ''
 }
 

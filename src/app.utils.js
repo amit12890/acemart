@@ -1,4 +1,4 @@
-import { drop, includes, unescape, get, isObject, sum, mapKeys, size } from "lodash"
+import { drop, includes, unescape, get, isObject, sum, mapKeys, size, find } from "lodash"
 
 // TODO: remove temp image fix
 export const getOriginalImage = (url) => {
@@ -142,6 +142,21 @@ export const findCountryByCode = (code = '', coutries) => {
 
     return find(coutries, (country) => country.id == code)
 }
+
+/**
+ * get matched country raw object
+ * @param {Integer / String } id 
+ * @param {Array} coutries 
+ */
+export const findCountryById = (id = '', coutries) => {
+    if (size(String(id)) === 0) {
+        return {}
+    }
+
+    return find(coutries, (country) => country.id == id)
+}
+
+
 
 
 /**

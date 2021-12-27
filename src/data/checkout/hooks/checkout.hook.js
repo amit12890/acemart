@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { get } from 'lodash'
 
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher'
@@ -15,6 +15,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user'
 
 
 const {
+    getCountries,
     getCheckoutDetailsQuery,
     setStorePickupShippingAdressMutation,
     setShippingAddressMutation,
@@ -34,6 +35,7 @@ const { getCustomerAddressesQuery } = addressGql
 export const useCheckout = () => {
     const dispatch = useDispatch()
     const [{ cartId }] = useCartContext()
+
     // as based on this checkout graphql will be called
     const { currentStoreName, availableStores } = useStoreSwitcher()
     const defaultStoreName = get(availableStores.get('default'), "storeName", "")
@@ -148,7 +150,7 @@ export const useCheckoutAddresses = () => {
         console.log("variable", {
             input: {
                 cart_id: cartId,
-                billing_addresses: address
+                billing_address: address
             }
         })
         if (settingBillingAddress) return
@@ -185,7 +187,7 @@ export const useShippingMethods = () => {
 
     const [setShippingMethod, { loading: settingShippingMethod }] = useMutation(setShippingMethodMutation, {
         onCompleted: (data) => {
-            // console.log("-----------[log]------------", "shipping method set successfully", data)
+            console.log("-----------[log]------------", "shipping method set successfully", data)
             let shipping_addresses = get(data, "setShippingMethodsOnCart.cart.shipping_addresses", [])
             dispatch(updateCheckoutField({ shipping_addresses }))
         }
@@ -194,10 +196,9 @@ export const useShippingMethods = () => {
     /**
      * set shipping method on cart
      * cartId will be taken directly form reducer
-     * @param {Object} addressData => { customer_address_id , address }
      */
     const setShippingMethodOnCart = useCallback((shippingMethods) => {
-        if (!settingShippingMethod) return
+        if (settingShippingMethod) return
         let data = {
             input: {
                 cart_id: cartId,
@@ -245,5 +246,12 @@ export const usePlaceOrder = () => {
     return {
         placeOrder,
         placingOrder
+    }
+}
+
+export const useCountries = () => {
+    const { data } = useQuery(getCountries, { nextFetchPolicy: 'cache-first' })
+    return {
+        countries: get(data, "countries", [])
     }
 }

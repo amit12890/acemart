@@ -36,7 +36,6 @@ export const useEmailStep = () => {
     })
 
     const setGuestEmailOnCart = useCallback((cartId, email) => {
-        console.log("here===>", cartId, email)
         setGuestEmailMutation({
             variables: { cartId, email }
         })

@@ -16,7 +16,20 @@ import {
     ShippingAddressItemFragment
 } from './checkoutFragments.gql';
 
-
+export const GET_COUNTRIES = gql`
+query countries {
+    countries {
+        available_regions {
+            id code name
+        }
+        full_name_english
+        full_name_locale
+        id
+        three_letter_abbreviation
+        two_letter_abbreviation
+    }
+}
+`
 
 export const PLACE_ORDER = gql`
     mutation placeOrder($cartId: String!) {
@@ -188,8 +201,6 @@ mutation setBillingAddressOnCart($input:SetBillingAddressOnCartInput){
     ) {
         cart {
             billing_address {
-                customer_address_id
-                save_in_address_book
                 firstname
                 lastname
                 company
@@ -225,6 +236,7 @@ mutation setPaymentMethodOnCart($input:SetPaymentMethodOnCartInput){
 `
 
 export default {
+    getCountries: GET_COUNTRIES,
     setGuestCartEmail: SET_GUEST_EMAIL,
     createCartMutation: CREATE_CART,
     getCheckoutDetailsQuery: GET_CHECKOUT_DETAILS,

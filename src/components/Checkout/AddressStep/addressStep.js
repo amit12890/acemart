@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import AddressListItem from '../AddressListItem'
 import AddressForm from '../AddressForm'
@@ -61,16 +61,19 @@ const AddressStep = props => {
     const toggleEditMode = (forceFlag = false) => forceFlag ? setInEditMode(forceFlag) : setInEditMode(!editMode)
     let hasAddresses = size(data) > 0
 
-    const submitForm = (e) => {
+    const submitForm = useCallback((e) => {
         e.preventDefault()
 
+        console.log("🚀 ~ file: addressStep.js ~ line 69 ~ submitForm ~ isNewAddress", isNewAddress)
         let selectedAddressObj = {}
         if (selectedAddressId != -1 || !isNewAddress) {
+            console.log("🚀 ~ file: addressStep.js ~ line 69 ~ submitForm ~ selectedAddressId", selectedAddressId)
             selectedAddressObj = find(data, (address) => address.id === selectedAddressId)
         }
+        console.log("🚀 ~ file: addressStep.js ~ line 70 ~ submitForm ~ selectedAddressObj", selectedAddressObj)
         onApplyAddress(selectedAddressObj)
         toggleEditMode()
-    }
+    }, [])
 
 
     //==================================================================================================================================================================================================================
@@ -210,7 +213,7 @@ const AddressStep = props => {
                     user should only be able to change or edit shipping adderess if 
                     it has default store is not selected
                 */}
-                {isDefaultStore && (
+                {(isDefaultStore || !isShippingStep) && (
                     <div className="actions-toolbar">
                         <div className="secondary">
                             <button
@@ -241,6 +244,7 @@ const AddressStep = props => {
                     setting={setting}
                     isShippingStep={isShippingStep}
                     onSaveAddress={(address) => {
+                        console.log("🚀 ~ file: addressStep.js ~ line 251 ~ address", address)
                         toggleEditMode(false)
                         onApplyAddress(address, true)
                         setFormVisibility(false)
