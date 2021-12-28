@@ -25,11 +25,16 @@ import Price from '../../venia/components/Price';
 import Button from '../../venia/components/Button';
 import AddToCart from '../../venia/components/CartPage/addToCart';
 import AddAllToCart from '../../venia/components/CartPage/addAllToCart';
+import { GET_STORE_CONFIG_DATA } from '../../magento/peregrine/talons/Header/storeSwitcher.gql';
+
 
 const WishlistPage = props => {
     const { formatMessage } = useIntl();
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+
+    const queryRes = useQuery(GET_STORE_CONFIG_DATA);
+    const defaultCurrency = get(queryRes, "data.storeConfig.default_display_currency_code", "");
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
@@ -111,8 +116,11 @@ const WishlistPage = props => {
                             multi_wishlist_id={selectedWishlist.multi_wishlist_id}
                             name={selectedWishlist.wishlist_name} />
                         <div className={classes.wishlistGridWrapper}>
-                            <ProductListing selectedWishlist={selectedWishlist} wishlists={wishlists}
-                                refreshWishlist={refreshWishlist} />
+                            <ProductListing defaultCurrency={defaultCurrency}
+                                selectedWishlist={selectedWishlist}
+                                wishlists={wishlists}
+                                refreshWishlist={refreshWishlist}
+                            />
                         </div>
                         <div className={classes.actionsToolbarWrapper}>
                             <Button priority="low">UPDATE WISH LIST</Button>
@@ -150,7 +158,7 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const { selectedWishlist, wishlists, refreshWishlist } = props;
+    const { selectedWishlist, wishlists, refreshWishlist, defaultCurrency } = props;
     // { productId, productQty }
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [removingItemId, setRemovingItemId] = useState(null);
@@ -217,7 +225,7 @@ const ProductListing = props => {
                                     </Link>
                                     <div className={classes.itemPrice}>
                                         <Price
-                                            currencyCode={"USD"}
+                                            currencyCode={defaultCurrency}
                                             value={price}
                                             classes={{
                                                 currency: classes.currency,

@@ -7,6 +7,7 @@ export const GET_STORE_CONFIG_DATA = gql`
             code
             store_name
             store_group_name
+            default_display_currency_code
         }
     }
 `;

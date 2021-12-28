@@ -161,7 +161,7 @@ export default function Item(props) {
             <div className={classes.itemActions}>
                 <div className={classes.price}>
                     <Price
-                        currencyCode={'USD'}
+                        currencyCode={props.defaultCurrency}
                         value={price}
                         classes={{
                             currency: classes.currency
@@ -178,7 +178,7 @@ export default function Item(props) {
                                 <strong>
                                     {'Finance for as low as '}
                                     <Price
-                                        currencyCode={'USD'}
+                                        currencyCode={props.defaultCurrency}
                                         value={price / 39.5}
                                     />
                                     /month
