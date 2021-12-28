@@ -196,7 +196,7 @@ export default function Item(props) {
                         </Link>
                     </div>
 
-                    {size(stickers) && (
+                    {!!size(stickers) ? (
                         <div className={classes.labelWrapper}>
                             {stickers.map((sticker, i) => {
                                 return (
@@ -213,7 +213,7 @@ export default function Item(props) {
                                 );
                             })}
                         </div>
-                    )}
+                    ) : null}
 
                     <div className={classes.actionsContainer}>
                         <div className={classes.addTo} onClick={openWishlistPopup}>
