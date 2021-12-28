@@ -86,6 +86,8 @@ const StoreSwitcher = props => {
                     closeStoreLocatorPopup={closeStoreLocatorPopup}
                     availableStores={availableStoresData.availableStores}
                     selectStore={handleStoreSwitch}
+                    currentStoreName={currentStoreName}
+                    currentGroupName={currentGroupName}
                 />
             ) : null}
         </div>
@@ -95,7 +97,9 @@ const StoreSwitcher = props => {
 const StoreSwitcherPopup = ({
     closeStoreLocatorPopup,
     availableStores,
-    selectStore
+    selectStore,
+    currentStoreName,
+    currentGroupName
 }) => {
     const classes = useStyle(storeLocatorClasses);
 
@@ -128,6 +132,8 @@ const StoreSwitcherPopup = ({
                             <StoreSwitcherPopupContent
                                 availableStores={availableStores}
                                 selectStore={selectStore}
+                                currentStoreName={currentStoreName}
+                                currentGroupName={currentGroupName}
                             />
                         </div>
                     </div>

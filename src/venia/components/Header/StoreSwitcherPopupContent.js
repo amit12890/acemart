@@ -4,6 +4,7 @@ import { get, groupBy, size, difference, orderBy, sortBy } from 'lodash-es';
 import { useStyle } from '../../classify';
 import defaultClasses from '../../../components/StoreLocator/productStoreLocator.css';
 import Button from '../Button';
+import { Link } from 'react-router-dom';
 
 // Acemart.com store will be under this group
 // don't show it in group list
@@ -11,7 +12,9 @@ const DEFAULT_STORE_GROUP_NAME = "Shopping"
 
 export default function StoreSwitcherPopupContent({
     availableStores,
-    selectStore
+    selectStore,
+    currentStoreName,
+    currentGroupName
 }) {
     const classes = useStyle(defaultClasses);
     // 1: select Area, 2: select Store, 3: details / stock
@@ -61,8 +64,33 @@ export default function StoreSwitcherPopupContent({
 
     return (
         <div className={classes.content}>
+
+            <div>
+                <div>
+                    <h2>Currently Shopping</h2>
+                    <div>{currentStoreName}</div>
+                    <ul>
+                        <li>address and driving directions</li>
+                        <li>Time info</li>
+                        <li>contact</li>
+                    </ul>
+                </div>
+                <div>
+                    {currentStoreName !== "Acemart.com" ?
+                        <Button onClick={handleSwitchStoreClick("default")}>
+                            Ship Direct on Acemart.com
+                        </Button>
+                        :
+                        null
+                    }
+                    <Link to={"#"}>
+                        <Button>View All Store Locations</Button>
+                    </Link>
+                </div>
+            </div>
+
             <div className={classes.heading}>
-                Check A Different Store
+                Shop Your Local Store:
             </div>
 
             <div className={classes.contentContainer}>
@@ -91,10 +119,12 @@ export default function StoreSwitcherPopupContent({
                     {popupState === 1 &&
                         <div className={[classes.tabsItemContent, classes.tabContentArea].join(" ")}>
                             <div className={[classes.instructions, classes.storeInfo].join(" ")}>
-                                <p>First, select an area to pick a store and check stock.</p>
+                                <p>First, select an area below for Store Pickup:</p>
                             </div>
                             <div className={classes.areas}>
                                 {groupList.map((group) => {
+                                    // add active class here
+                                    const isActive = group === currentGroupName
                                     return (
                                         <div key={group} className={classes.areaSwitcher}
                                             onClick={() => handleGroupSelect(group)}>
@@ -120,6 +150,8 @@ export default function StoreSwitcherPopupContent({
                                     <div className={classes.storeListItemWrapper}>
                                         {groupStoreList.map((store, sInd) => {
                                             const { id, store_name, code } = store;
+                                            // add active class here
+                                            const isActive = store_name === currentStoreName
                                             return (
                                                 <div key={id} className={classes.listItem}>
                                                     <div className={classes.listLabel}>
@@ -128,8 +160,17 @@ export default function StoreSwitcherPopupContent({
                                                         </span></div>
                                                     <div className={classes.storeAddressWrapper}>
                                                         <h4 className={classes.storeName}>{store_name}</h4>
+                                                        <p>ADDRESS</p>
+                                                        <p>CONTECT</p>
+                                                        <p>WEEK DAYS</p>
+                                                        <p>Sat</p>
+                                                        <p>Sun</p>
+                                                        {isActive ?
+                                                            <div>MY STORE</div>
+                                                            :
+                                                            <Button onClick={handleSwitchStoreClick(code)}>Shop this store</Button>
+                                                        }
                                                     </div>
-                                                    <Button onClick={handleSwitchStoreClick(code)}>Shop this store</Button>
                                                 </div>
                                             )
                                         })}
