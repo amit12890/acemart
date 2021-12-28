@@ -18,10 +18,8 @@ export const useApiData = ({ url = "", method = "get", headers = {}, data = {}, 
                 let requestHeaders = { ...headers }
                 // auth header will be only passed if token has values
                 if (size(token) > 0) {
-                    requestHeaders = {
-                        ...requestHeaders,
-                        authorization: token ? `Bearer ${token}` : ''
-                    }
+                    requestHeaders = requestHeaders ? 
+                        requestHeaders : { authorization : token ? `Bearer ${token}` : '' }
                 }
                 const response = await Axios({
                     method, url: cbUrl ? cbUrl : url,

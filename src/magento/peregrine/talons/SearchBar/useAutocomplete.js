@@ -26,10 +26,10 @@ export const useAutocomplete = props => {
     const { value } = useFieldState('search_query');
 
     const { callApi: callSuggestionApi, ...suggestionResult } = useApiData({
-        isLazy: true
+        isLazy: true, headers: {},
     });
     const { callApi: callproductSearchApi, ...productResult } = useApiData({
-        isLazy: true
+        isLazy: true, headers: {},
     });
     // Create a debounced function so we only search some delay after the last
     // keypress.
