@@ -5,16 +5,24 @@ import { useStyle } from '../../classify';
 import defaultClasses from '../../../components/StoreLocator/productStoreLocator.css';
 import Button from '../Button';
 import { Link } from 'react-router-dom';
+import { StoreHours } from '../../../components/StoreLocator/productStoreLocator';
+import mapImage from "../../../assets/map.jpg"
 
 // Acemart.com store will be under this group
 // don't show it in group list
 const DEFAULT_STORE_GROUP_NAME = "Shopping"
 
+const getMapStype = (image) => {
+    return {
+        '--mapImage': `url("${image}")`
+    }
+}
 export default function StoreSwitcherPopupContent({
     availableStores,
     selectStore,
     currentStoreName,
-    currentGroupName
+    currentGroupName,
+    currentStoreConfig
 }) {
     const classes = useStyle(defaultClasses);
     // 1: select Area, 2: select Store, 3: details / stock
@@ -62,6 +70,8 @@ export default function StoreSwitcherPopupContent({
         [availableStores]
     );
 
+    const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
+
     return (
         <div className={classes.content}>
 
@@ -69,11 +79,54 @@ export default function StoreSwitcherPopupContent({
                 <div>
                     <h2>Currently Shopping</h2>
                     <div>{currentStoreName}</div>
+                    {currentStoreConfig.store_name === "Acemart.com" ?
                     <ul>
-                        <li>address and driving directions</li>
-                        <li>Time info</li>
-                        <li>contact</li>
+                        <li>
+                            <div>Delivery Options Available:</div>
+                            <ul>
+                                <li>Shipping Direct.</li>
+                                <li>Pickup at Warehouse.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
+                            <div>
+                                <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
+                                <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
+                            </div>
+                            <div>
+                                <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
+                                    Driving directions
+                                </Link>
+                            </div>
+                        </li>
+                        <li>
+                            <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
+                        </li>
                     </ul>
+                    :
+                    <ul>
+                        <li>
+                            <div>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
+                            <div>
+                                <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
+                                <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
+                            </div>
+                            <div>
+                                <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
+                                    Driving directions
+                                </Link>
+                            </div>
+                        </li>
+                        <li>
+                            <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
+                        </li>
+                        <li>
+                            <div>Phone : {get(currentStoreConfig, "store_locator_info.phone", "")}</div>
+                            <div>Fax : {get(currentStoreConfig, "store_locator_info.fax", "")}</div>
+                        </li>
+                    </ul>
+                    }
                 </div>
                 <div>
                     {currentStoreName !== "Acemart.com" ?
@@ -143,7 +196,7 @@ export default function StoreSwitcherPopupContent({
                             </div>
                             <div className={classes.selectStoreWrapper}>
                                 <div className={classes.mapContainer}>
-                                    {/* <div className={classes.mapContent} style={getMapStype(selectedMapImage)}></div> */}
+                                    <div className={classes.mapContent} style={getMapStype(selectedMapImage)}></div>
                                 </div>
 
                                 <div className={classes.storeListContainer}>
@@ -160,11 +213,12 @@ export default function StoreSwitcherPopupContent({
                                                         </span></div>
                                                     <div className={classes.storeAddressWrapper}>
                                                         <h4 className={classes.storeName}>{store_name}</h4>
-                                                        <p>ADDRESS</p>
-                                                        <p>CONTECT</p>
-                                                        <p>WEEK DAYS</p>
-                                                        <p>Sat</p>
-                                                        <p>Sun</p>
+                                                        <p>{store.store_locator_info.street}</p>
+                                                        <p>{store.store_locator_info.city}, {store.store_locator_info.state} {store.store_locator_info.zip}</p>
+                                                        <p>{store.store_locator_info.phone}</p>
+                                                        <div>
+                                                            <StoreHours hours={store.store_locator_info.hours} />
+                                                        </div>
                                                         {isActive ?
                                                             <div>MY STORE</div>
                                                             :

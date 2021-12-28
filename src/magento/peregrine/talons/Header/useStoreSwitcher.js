@@ -106,6 +106,12 @@ export const useStoreSwitcher = (props = {}) => {
         }
     }, [storeConfigData]);
 
+    const currentStoreConfig = useMemo(() => {
+        if (storeConfigData) {
+            return storeConfigData.storeConfig;
+        }
+    }, [storeConfigData]);
+
     const pageType = useMemo(() => {
         if (urlResolverData && urlResolverData.urlResolver) {
             return urlResolverData.urlResolver.type;
@@ -252,6 +258,7 @@ export const useStoreSwitcher = (props = {}) => {
         storeMenuIsOpen,
         handleTriggerClick,
         handleSwitchStore,
-        availableStoresData
+        availableStoresData,
+        currentStoreConfig
     };
 };
