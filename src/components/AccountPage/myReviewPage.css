@@ -19,7 +19,7 @@
     text-transform: uppercase;
 }
 
-.reviewListWrapper {
+.reviewListWrapper { 
     padding: 0;
 }
 
@@ -75,4 +75,54 @@
 .headerButtons {
     display: flex;
     justify-content: center;
+}
+
+
+
+/* */
+
+.orderHistoryTable { 
+    display: grid;
+    row-gap: 1rem;
+}
+
+
+.reviewRow {
+    border: 1px solid #e9eaec;
+    display: grid;
+    grid-template-columns: 8rem 1fr 1fr;
+    font-size: 14px;
+}
+
+.cell {
+    border-left: 1px solid rgb(var(--venia-global-color-gray));
+    padding: 1.5rem;
+    overflow: hidden;
+}
+.cell:first-child {
+    border-left: none;
+
+}
+
+.stackedCell {
+    composes: cell;
+    display: grid;
+    row-gap: 0.25rem;
+}
+
+.productImageContainer,
+.productNameContainer,
+.reviewDateContainer {
+    composes: stackedCell;
+}
+
+.reviewDate {
+    text-align: right; 
+}
+
+.avgRatings {
+
+}
+.productReview {
+
 }
