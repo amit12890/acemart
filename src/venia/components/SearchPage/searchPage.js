@@ -20,6 +20,7 @@ import FilterSidebar from './filterSidebar';
 import { Link } from 'react-router-dom';
 import { searchPage } from '../../../url.utils';
 import RichContent from '../RichContent/richContent';
+import RichText from '../RichText';
 
 const POPULAR_SEARCH = [
     'sale',
@@ -47,9 +48,28 @@ const SearchPage = props => {
         searchLoading,
         categoryFiltered,
         header,
+        didYouMean
     } = talonProps;
 
     const hasProducts = !!size(products);
+
+    const searchResultsHeading = searchTerm ? (
+        <FormattedMessage
+            id={'searchPage.searchTermText'}
+            values={{
+                highlight: chunks => (
+                    <span className={classes.headingHighlight}>"{chunks}"</span>
+                ),
+                term: searchTerm
+            }}
+            defaultMessage={'Search Results for :'}
+        />
+    ) : (
+        <FormattedMessage
+            id={'searchPage.searchTermEmpty'}
+            defaultMessage={'Showing all results:'}
+        />
+    );
 
     const content = useMemo(() => {
         if (searchLoading) return fullPageLoadingIndicator;
@@ -75,11 +95,13 @@ const SearchPage = props => {
             return (
                 <div>
                     <div className={classes.noResult}>
-                        <FormattedMessage
-                            id={'searchPage.noResultImportant'}
-                            defaultMessage={'No results found!'}
-                        />
+                        Sorry no results found for "{searchTerm}"
                     </div>
+                    {didYouMean ? (
+                        <div>
+                            Did you mean: <Link to={`${searchPage()}?q=${didYouMean.query}`}><RichText content={didYouMean.highlighted} /></Link>?
+                        </div>
+                    ) : null}
                     <div>
                         <div>Below are some of our popular searches:</div>
                         <div>
@@ -122,24 +144,6 @@ const SearchPage = props => {
         searchError,
         searchLoading
     ]);
-
-    const searchResultsHeading = !hasProducts ? null : searchTerm ? (
-        <FormattedMessage
-            id={'searchPage.searchTermText'}
-            values={{
-                highlight: chunks => (
-                    <span className={classes.headingHighlight}>"{chunks}"</span>
-                ),
-                term: searchTerm
-            }}
-            defaultMessage={'Search Results for :'}
-        />
-    ) : (
-        <FormattedMessage
-            id={'searchPage.searchTermEmpty'}
-            defaultMessage={'Showing all results:'}
-        />
-    );
 
     const itemCountHeading =
         hasProducts ? (
