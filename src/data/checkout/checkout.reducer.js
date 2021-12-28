@@ -12,8 +12,10 @@ import {
 
 
 const INIT_STATE = {
-    fetching: false,
+    fetching: true,
     fetched: false,
+    // used when user tries to login from checkout
+    login_and_fetching: false,
     // for single action loading
     is_action_loading: false,
     action_loading_identifier: '',
@@ -33,9 +35,6 @@ const INIT_STATE = {
     billing_address: null,
     email: null,
     prices: {},
-
-    // shipping method will be added in shipping address only
-    available_shipping_methods: [],
 
     selected_payment_method: {},
     available_payment_methods: [],

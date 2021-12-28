@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
 
 import { useUserContext } from '@magento/peregrine/lib/context/user'
 import { useCheckout, useCheckoutAddresses, usePlaceOrder, useShippingMethods } from '../../data/checkout/hooks/checkout.hook'
@@ -19,8 +20,13 @@ import { useCheckoutPayment } from '../../data/checkout/hooks/payment.hook'
 import ReviewCheckout from './ReviewCheckout'
 import CartSummary from './CartSummary'
 import CartItemList from './CartItemList'
+import LoadingIndicator from '../../venia/components/LoadingIndicator'
+
+
 
 export default connect(store => ({
+    fetching: store.checkout.fetching,
+    login_and_fetching: store.checkout.login_and_fetching,
     isMultiShipping: store.checkout.isMultiShipping,
     multiShipping: store.checkout.multi_shipping,
     email: store.checkout.email,
@@ -30,6 +36,7 @@ export default connect(store => ({
     available_payment_methods: store.checkout.available_payment_methods,
     orderNumber: store.checkout.orderNumber
 }))(({
+    fetching,
     isMultiShipping,
     multiShipping,
     email,
@@ -38,6 +45,7 @@ export default connect(store => ({
     billing_address,
     available_payment_methods,
     orderNumber,
+    login_and_fetching,
     dispatch
 }) => {
     const history = useHistory()
@@ -57,7 +65,6 @@ export default connect(store => ({
     const { placeOrder, placingOrder } = usePlaceOrder()
 
     const classes = useStyle(defaultClasses)
-
     const [showReviewCheckout, setReviewCheckout] = useState(false)
 
     let isEmailAdded = size(email) > 0
@@ -83,6 +90,18 @@ export default connect(store => ({
         }
     }, [orderNumber])
 
+    console.log("🚀 ~ file: checkout.js ~ line 95 ~ login_and_fetching", login_and_fetching)
+    if (fetching || login_and_fetching) {
+        return (
+            <LoadingIndicator>
+                <FormattedMessage
+                    id={'checkout.loading'}
+                    defaultMessage={'Fetching Checkout...'}
+                />
+            </LoadingIndicator>
+        )
+    }
+
     if (showReviewCheckout) {
         return (
             <ReviewCheckout
@@ -91,8 +110,6 @@ export default connect(store => ({
                 onPlaceOrderButtonPress={() => placeOrder()} />
         )
     }
-
-    console.log("🚀 ~ file: checkout.js ~ line 166 ~ initBillinAddress", initBillinAddress)
 
     return (
         <div className={classes.root}>

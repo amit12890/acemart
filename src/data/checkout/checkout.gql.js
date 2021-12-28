@@ -218,6 +218,44 @@ mutation setPaymentMethodOnCart($input:SetPaymentMethodOnCartInput){
 }
 `
 
+export const MERGE_CART_MUTATION = gql`
+    mutation MergeCartsAfterSignIn(
+        $sourceCartId: String!
+        $destinationCartId: String!
+    ) {
+        mergeCarts(
+            source_cart_id: $sourceCartId
+            destination_cart_id: $destinationCartId
+        ){
+             id
+            is_virtual
+            total_quantity  
+            ...multiShippingFragment  
+            ...appliedCouponsFragment    
+            ...availablePaymentMethodsFragment
+            ...billingAddressFragment
+            ...emailFragment
+            ...giftMessageFragment    
+            ...itemsFragment
+            ...priceSummaryFragment
+            ...selectedPaymentMethodFragment
+            ...shippingAddressesFragment 
+        }
+    }
+    ${AppliedCouponsFragment}
+    ${AvailablePaymentMethodsFragment}
+    ${BillingAddressFragment}
+    ${EmailFragment}
+    ${GiftMessageFragment}
+    ${ItemsFragment}
+    ${PriceSummaryFragment}
+    ${SelectedPaymentMethodFragment}
+    ${ShippingAddressesFragment}
+    ${ItemPricesFragment}
+    ${ProductListingFragment}
+    ${MultiShippingFragment}
+`
+
 export default {
     getCountries: GET_COUNTRIES,
     setGuestCartEmail: SET_GUEST_EMAIL,
@@ -231,5 +269,6 @@ export default {
     setShippingAddressMutation: SET_SHIPPING_ADDRESS_GQL,
     setBillingAddressMutation: SET_BILLING_ADDRESS_GQL,
     setShippingMethodMutation: SET_SHIPPING_METHOD_ON_CART,
-    setPaymentMethodMutation: SET_PAYMENT_METHOD_ON_CART
+    setPaymentMethodMutation: SET_PAYMENT_METHOD_ON_CART,
+    mergeCartMutation: MERGE_CART_MUTATION
 };

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useApolloClient, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { get } from 'lodash'
@@ -7,7 +7,7 @@ import { get } from 'lodash'
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher'
 import { useCartContext } from '@magento/peregrine/lib/context/cart'
 
-import { checkoutFetched, fetchingCheckout, setInitTestData, updateCheckoutField } from '../checkout.action'
+import { checkoutFetched, fetchingCheckout, updateCheckoutField } from '../checkout.action'
 
 import addressGql from '../../../venia/components/AddressBookPage/addressBookPage.gql'
 import gql from '../checkout.gql'
@@ -37,6 +37,7 @@ const { getCustomerAddressesQuery } = addressGql
 
 export const useCheckout = () => {
     const dispatch = useDispatch()
+    const fetching = useSelector(store => store.checkout.fetching)
     const [{ cartId }] = useCartContext()
 
     // as based on this checkout graphql will be called
@@ -83,10 +84,9 @@ export const useCheckout = () => {
             console.log("set pickup store......")
             setStorePickupAndFetchDetails()
         }
-    }, [isDefaultStore])
+    }, [isDefaultStore, fetching])
 
     return {
-        fetchCheckout: isDefaultStore ? fetchCheckoutDetails : setStorePickupAndFetchDetails,
         isDefaultStore
     }
 }

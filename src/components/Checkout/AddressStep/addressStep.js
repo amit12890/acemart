@@ -46,7 +46,6 @@ const AddressStep = props => {
 
 
     const [selectedAddressId, setAddressId] = useState(initCustomerAddressId)
-    console.log("🚀 ~ file: addressStep.js ~ line 49 ~ selectedAddressId", selectedAddressId)
     const [showAddressForm, setFormVisibility] = useState(isNewAddress)
     const [editMode, setInEditMode] = useState(size(initialValues) === 0)
 

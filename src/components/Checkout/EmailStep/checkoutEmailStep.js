@@ -16,6 +16,9 @@ import { useEmailStep } from '../../../data/checkout/hooks/emailValidation.hook'
 
 import { get, size, debounce } from 'lodash'
 import { validateEmail, validatePassword } from '../../../app.utils'
+import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
+import { GET_CART_DETAILS_QUERY } from '../../../venia/components/SignIn/signIn.gql'
+import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action';
 
 
 const successIcon = (
@@ -42,11 +45,15 @@ export default connect(store => {
         is_email_available: store.checkout.is_email_available
     }
 })((props) => {
-
+    const { dispatch } = props
+    const { handleSubmit } = useSignIn({
+        getCartDetailsQuery: GET_CART_DETAILS_QUERY
+    })
     const emailInputRef = useRef({})
     const [{ cartId }] = useCartContext()
     const [{ isSignedIn }] = useUserContext()
     const { isEmailAvailable, loading: emailValidating, checkEmailAvailable, setGuestEmailOnCart, settingEmail } = useEmailStep()
+    console.log("🚀 ~ file: checkoutEmailStep.js ~ line 50 ~ isEmailAvailable", isEmailAvailable)
     const [, { addToast }] = useToasts();
 
     const [email, setEmail] = useState(props.email)
@@ -93,6 +100,9 @@ export default connect(store => {
        */
     const loginUser = useCallback((e) => {
         e.preventDefault()
+        console.log(
+            "===========> hrere"
+        )
         let errorInCheck = {}
         let data = { "email": email, "password": password }
         let emailValidErrStr = validateEmail(data.email)
@@ -103,35 +113,15 @@ export default connect(store => {
         if (size(password) === 0) {
             errorInCheck = { ...errorInCheck, password: passwordValidErrStr }
         }
+        console.log("🚀 ~ file: checkoutEmailStep.js ~ line 112 ~ loginUser ~ errorInCheck", errorInCheck)
         if (size(errorInCheck) > 0) {
             setErrors(errorInCheck)
             return
         }
         setErrors({})
-
-        // TODO : LOGIN
-
-
-        // Login.authenticateCustomer(data, {
-        //     onCompleted: () => {
-        //         addToast({
-        //             type: 'success',
-        //             icon: successIcon,
-        //             message: "Logged in Successfully",
-        //             dismissable: true,
-        //             timeout: 10000
-        //         });
-        //     },
-        //     onError: ({ message }) => {
-        //         addToast({
-        //             type: 'error',
-        //             icon: errorIcon,
-        //             message,
-        //             dismissable: true,
-        //             timeout: 10000
-        //         });
-        //     }
-        // })
+        console.log("doing login.....")
+        dispatch(loginAndFetchingCheckout())
+        handleSubmit({ email, password })
 
     }, [email, password])
 

@@ -19,7 +19,6 @@ const PaymentListStep = props => {
         initialValues,
         isDefaultStore
     } = props
-    console.log("🚀 ~ file: PaymentListStep.js ~ line 22 ~ enabled", enabled)
 
 
     // let mappedValue = mapValue(initialValues)

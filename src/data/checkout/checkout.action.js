@@ -27,6 +27,24 @@ export const checkoutFetched = (payload) => ({
     payload
 })
 
+export const checkoutFetchError = (payload) => ({
+    type: CHECKOUT_FETCH_ERROR
+})
+
+export const loginAndFetchingCheckout = () => ({
+    type: UPDATE_CHECKOUT_FIELD,
+    payload: { login_and_fetching: true }
+})
+
+export const loginAndFetchCheckoutComplete = (payload = {}) => ({
+    type: UPDATE_CHECKOUT_FIELD,
+    payload: {
+        login_and_fetching: false,
+        ...payload
+    }
+})
+
+
 /**
  * 
  * @param {Object} payload 
@@ -35,19 +53,6 @@ export const updateCheckoutField = (payload) => ({
     type: UPDATE_CHECKOUT_FIELD,
     payload
 })
-
-export const setInitTestData = () => async dispatch => {
-    dispatch({
-        type: CHECKOUT_FETCHING
-    })
-    setTimeout(() => {
-        console.log("here")
-        dispatch({
-            type: CHECKOUT_FETCHED,
-            payload: TEST_DATA.cart
-        })
-    }, 800)
-}
 
 export const actionLoading = (identifier) => ({
     type: ACTION_LOADING,
