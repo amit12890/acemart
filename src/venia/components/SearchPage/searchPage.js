@@ -49,7 +49,7 @@ const SearchPage = props => {
         header,
     } = talonProps;
 
-    const isProducts = size(products);
+    const hasProducts = !!size(products);
 
     const content = useMemo(() => {
         if (searchLoading) return fullPageLoadingIndicator;
@@ -123,7 +123,7 @@ const SearchPage = props => {
         searchLoading
     ]);
 
-    const searchResultsHeading = !isProducts ? null : searchTerm ? (
+    const searchResultsHeading = !hasProducts ? null : searchTerm ? (
         <FormattedMessage
             id={'searchPage.searchTermText'}
             values={{
@@ -142,7 +142,7 @@ const SearchPage = props => {
     );
 
     const itemCountHeading =
-        isProducts > 0 ? (
+        hasProducts ? (
             <div>
                 Items {pagination.begin}-{pagination.end} of{' '}
                 {pagination.totalResults}
@@ -187,15 +187,17 @@ const SearchPage = props => {
                             )
                         })}
                     </div>
-                    <div className={classes.heading}>
-                        <div className={classes.searchInfo}>
-                            {itemCountHeading}
+                    {hasProducts ? (
+                        <div className={classes.heading}>
+                            <div className={classes.searchInfo}>
+                                {itemCountHeading}
+                            </div>
+                            <div className={classes.headerButtons}>
+                                {maybePageSize}
+                                {maybeSortButton}
+                            </div>
                         </div>
-                        <div className={classes.headerButtons}>
-                            {maybePageSize}
-                            {maybeSortButton}
-                        </div>
-                    </div>
+                    ) : null}
                     {content}
                 </div>
             </div>
