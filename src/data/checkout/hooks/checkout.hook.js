@@ -84,7 +84,7 @@ export const useCheckout = () => {
             console.log("set pickup store......")
             setStorePickupAndFetchDetails()
         }
-    }, [isDefaultStore, fetching])
+    }, [isDefaultStore])
 
     return {
         isDefaultStore
@@ -118,8 +118,8 @@ export const useCheckoutAddresses = () => {
     const [setShippingAddress, { loading: settingShippingAddress }] = useMutation(setShippingAddressMutation, {
         onCompleted: (data) => {
             // console.log("-----------[log]------------", "shipping address set successfully", data)
-            let shippingAddresses = get(data, "setShippingAddressesOnCart.cart.shipping_addresses", [])
-            dispatch(updateCheckoutField({ shipping_addresses: shippingAddresses }))
+            let shipping_addresses = get(data, "setShippingAddressesOnCart.cart.shipping_addresses", [])
+            dispatch(updateCheckoutField({ shipping_addresses }))
         }
     })
 
@@ -128,7 +128,8 @@ export const useCheckoutAddresses = () => {
         onCompleted: (data) => {
             // console.log("-----------[log]------------", "billing address set successfully", data)
             let billing_address = get(data, "setBillingAddressOnCart.cart.billing_address", {})
-            dispatch(updateCheckoutField({ billing_address }))
+            let shipping_addresses = get(data, "setBillingAddressOnCart.cart.shipping_addresses", {})
+            dispatch(updateCheckoutField({ billing_address, shipping_addresses }))
         }
     })
 

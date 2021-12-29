@@ -63,8 +63,6 @@ const AddressStep = props => {
 
     const submitForm = useCallback((e) => {
         e.preventDefault()
-
-        console.log("🚀 ~ file: addressStep.js ~ line 69 ~ submitForm ~ isNewAddress", isNewAddress)
         let selectedAddressObj = {}
         if (selectedAddressId != -1 || !isNewAddress) {
             console.log("🚀 ~ file: addressStep.js ~ line 69 ~ submitForm ~ selectedAddressId", selectedAddressId)
@@ -244,7 +242,6 @@ const AddressStep = props => {
                     setting={setting}
                     isShippingStep={isShippingStep}
                     onSaveAddress={(address) => {
-                        console.log("🚀 ~ file: addressStep.js ~ line 251 ~ address", address)
                         toggleEditMode(false)
                         onApplyAddress(address, true)
                         setFormVisibility(false)
