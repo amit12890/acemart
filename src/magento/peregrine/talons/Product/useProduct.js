@@ -26,8 +26,9 @@ export const useProduct = props => {
     const { mapProduct } = props;
 
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
-    const { getStoreConfigData, getProductDetailQuery } = operations;
+    const { getStoreConfigData, getProductDetailQuery, getPdpRouteDetailsQuery } = operations;
     const { pathname } = useLocation();
+    // console.log("🚀 ~ file: useProduct.js ~ line 31 ~ pathname", pathname)
     const [
         ,
         {
@@ -57,6 +58,17 @@ export const useProduct = props => {
             urlKey: sku
         }
     });
+
+    // const { error: pdpRouteErr, loading: pdpRouteLoading, data: pdpRouteData } = useQuery(getPdpRouteDetailsQuery, {
+    //     fetchPolicy: 'cache-and-network',
+    //     nextFetchPolicy: 'cache-first',
+    //     skip: !storeConfigData,
+    //     variables: {
+    //         url: pathname
+    //     }
+    // });
+    // console.log("🚀 ~ file: useProduct.js ~ line 63 ~ pdpRouteErr", pdpRouteErr)
+    // console.log("🚀 ~ file: useProduct.js ~ line 71 ~ pdpRouteData", pdpRouteData)
 
     const isBackgroundLoading = !!data && loading;
 
