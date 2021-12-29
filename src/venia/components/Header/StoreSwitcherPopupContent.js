@@ -149,11 +149,9 @@ export default function StoreSwitcherPopupContent({
                     }
                     <Link to={"#"}>
                         <Button
-                            classes={{
-                                root: classes.button_small
-                            }}
-
-                        >View All Store Locations</Button>
+                            className={classes.buttonSmall}>
+                            View All Store Locations
+                        </Button>
                     </Link>
                 </div>
             </div>

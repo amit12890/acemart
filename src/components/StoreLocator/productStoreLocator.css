@@ -62,7 +62,35 @@
 }
 
 .buttonSmall {
+    --stroke: var(--theme-color-primary);
+    background: none;
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 1px;
+    color: rgb(var(--stroke));
+    font-size: var(--fontSize-90);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-height: 1.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: normal;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
 
+}
+
+.buttonSmall:hover {
+    background-color: rgb(var(--stroke)) ;
+    color: rgb(var(--color-white)); 
+    border-color: rgb(var(--stroke));
+}
+
+.buttonSmall:focus {
+    box-shadow: none;
 }
 
 .addressStreet {
