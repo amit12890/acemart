@@ -303,7 +303,7 @@ const ProductStoreLocatorPopup = props => {
     );
 };
 
-const StoreHours = ({ hours }) => {
+export const StoreHours = ({ hours }) => {
     const classes = useStyle(defaultClasses);
     const normalDayHours = get(hours, 'mon', []);
     const satDayHours = get(hours, 'sat', []);

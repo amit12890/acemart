@@ -17,13 +17,12 @@ const StoreSwitcher = props => {
         currentStoreName,
         storeGroups,
         availableStoresData,
-        handleSwitchStore
+        handleSwitchStore,
+        currentStoreConfig
     } = useStoreSwitcher();
 
     const classes = useStyle(defaultClasses, props.classes);
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false);
-
-    if (!availableStores || availableStores.size <= 1) return null;
 
     const hasOnlyOneGroup = storeGroups.size === 1;
 
@@ -47,6 +46,8 @@ const StoreSwitcher = props => {
         handleSwitchStore(code);
         closeStoreLocatorPopup();
     }, []);
+
+    if (!availableStores || availableStores.size <= 1) return null;
 
     return (
         <div className={classes.root}>
@@ -88,6 +89,7 @@ const StoreSwitcher = props => {
                     selectStore={handleStoreSwitch}
                     currentStoreName={currentStoreName}
                     currentGroupName={currentGroupName}
+                    currentStoreConfig={currentStoreConfig}
                 />
             ) : null}
         </div>
@@ -99,7 +101,8 @@ const StoreSwitcherPopup = ({
     availableStores,
     selectStore,
     currentStoreName,
-    currentGroupName
+    currentGroupName,
+    currentStoreConfig
 }) => {
     const classes = useStyle(storeLocatorClasses);
 
@@ -134,6 +137,7 @@ const StoreSwitcherPopup = ({
                                 selectStore={selectStore}
                                 currentStoreName={currentStoreName}
                                 currentGroupName={currentGroupName}
+                                currentStoreConfig={currentStoreConfig}
                             />
                         </div>
                     </div>

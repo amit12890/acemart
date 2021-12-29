@@ -38,6 +38,7 @@ query getAvailableProductStoresData($productId:Int){
             store_long
             qty
             stock_status
+            __typename
         }
         __typename
     }
