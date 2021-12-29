@@ -1,0 +1,30 @@
+.finananceTopColumn {
+    padding: 5%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.finance.toprow h1 { 
+    font-weight: bold;
+    font-size: 3.3em; 
+    color: #fff;
+    margin: 0 0 4rem 0;
+    text-shadow: 0 0 10px #2f2f2f;
+}
+
+.finance.toprow h4 { 
+    font-weight: bold;
+    font-size: 1.65em; 
+    color: #fff;
+    padding: 1.5rem 0;
+    text-shadow: 0 0 10px #000;
+    margin: 0 0 4rem 0;
+}
+
+.finance.toprow .primary {
+    padding: 1.3rem 0
+}
+
+
+.finance-advantages {
+    
+}
