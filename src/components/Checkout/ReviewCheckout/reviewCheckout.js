@@ -22,6 +22,7 @@ export default connect((store) => {
     billing_address,
     selected_payment_method,
     onPlaceOrderButtonPress,
+    goBack,
     dispatch
 }) => {
     const classes = useStyle(defaultClasses)
@@ -35,11 +36,6 @@ export default connect((store) => {
                 <div className={classes.block}>
                     <div className={classes.header}>
                         <p>{isDefaultStore ? "Shipping address" : "Pickup From"}</p>
-                        {isDefaultStore && (
-                            <div className={classes.editButton}>
-                                Edit
-                            </div>
-                        )}
                     </div>
                     <div className={classes.contentBlock}>
                         <AddressListItem address={shipping_addresses[0]} containerClass="address" />
@@ -49,11 +45,6 @@ export default connect((store) => {
                 <div className={classes.block}>
                     <div className={classes.header}>
                         <p>Shipping Method</p>
-                        {isDefaultStore && (
-                            <div className={classes.editButton}>
-                                Edit
-                            </div>
-                        )}
                     </div>
                     <div className={[classes.contentBlock, classes.shippingMethod].join(" ")}>
                         <p>{get(selected_shipping_method, "carrier_title", "")}</p>
@@ -64,9 +55,6 @@ export default connect((store) => {
                 <div className={classes.block}>
                     <div className={classes.header}>
                         <p>Billing Address</p>
-                        <div className={classes.editButton}>
-                            Edit
-                        </div>
                     </div>
                     <div className={classes.contentBlock}>
                         <AddressListItem address={billing_address} containerClass="address" />
@@ -76,15 +64,16 @@ export default connect((store) => {
                 <div className={classes.block}>
                     <div className={classes.header}>
                         <p>Payment Option</p>
-                        <div className={classes.editButton}>
-                            Edit
-                        </div>
                     </div>
                     <div className={[classes.contentBlock, classes.shippingMethod].join(" ")}>
                         <p>{get(selected_payment_method, "title", "")}</p>
                     </div>
                 </div>
                 <div className={classes.primaryButtonWrapper}>
+                    <div onClick={goBack}
+                        className={classes.primaryButton}>
+                        Edit Checkout
+                    </div>
                     <div onClick={onPlaceOrderButtonPress}
                         className={classes.primaryButton}>
                         Place Order

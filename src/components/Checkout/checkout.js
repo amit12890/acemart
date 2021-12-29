@@ -90,7 +90,6 @@ export default connect(store => ({
         }
     }, [orderNumber])
 
-    console.log("🚀 ~ file: checkout.js ~ line 95 ~ login_and_fetching", login_and_fetching)
     if (fetching || login_and_fetching) {
         return (
             <LoadingIndicator>
@@ -107,6 +106,7 @@ export default connect(store => ({
             <ReviewCheckout
                 isDefaultStore={isDefaultStore}
                 placingOrder={placingOrder}
+                goBack={() => { setReviewCheckout(false) }}
                 onPlaceOrderButtonPress={() => placeOrder()} />
         )
     }
