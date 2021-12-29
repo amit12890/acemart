@@ -11,6 +11,13 @@ const ProductListFragment = gql`
                 name
                 url_key
                 url_suffix
+                url_rewrites {
+                    url
+                    parameters {
+                      name
+                      value
+                    }
+                }
                 uom
                 thumbnail {
                     url
