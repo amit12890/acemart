@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { ChevronDown, ChevronUp } from 'react-feather';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
+
 
 import { GET_CUSTOMER_REVIEWS } from './myReviewPage.gql';
 import defaultClasses from './myReviewPage.css';
@@ -15,6 +18,10 @@ import RichText from '../../venia/components/RichText';
 import { Link } from 'react-router-dom';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { replaceSpecialChars } from "../../app.utils"
+
+
+
+
 
 const MyReviewPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -56,52 +63,46 @@ const MyReviewPage = props => {
             </div>
 
             <div className={classes.reviewListWrapper}>
-                <table className={[classes.data, classes.table].join(" ")}>
-                    <thead>
-                        <tr>
-                            <th className={[classes.col, classes.date].join(" ")}>CREATED</th>
-                            <th className={[classes.col, classes.name].join(" ")}>PRODUCT NAME</th>
-                            <th className={[classes.col, classes.rating].join(" ")}>RATING</th>
-                            <th className={[classes.col, classes.review].join(" ")}>REVIEW</th>
-                            <th className={[classes.col, classes.action].join(" ")}></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {reviewList.map(item => {
-                            const { product, created_at, text } = item;
-                            const { name, url_rewrites, url_suffix } = product;
-                            const productLink = resourceUrl(
-                                `/${get(url_rewrites[0], 'url', '')}${url_suffix ||
-                                    ''}`
-                            );
-                            return (
-                                <tr>
-                                    <td className={[classes.col, classes.date].join(" ")}>
-                                        <Link to={productLink}>
-                                            {new Date(created_at).toLocaleDateString()}
-                                        </Link>
-                                    </td>
-                                    <td className={[classes.col, classes.name].join(" ")}>
-                                        {replaceSpecialChars(name)}
-                                    </td>
-                                    <td className={[classes.col, classes.rating].join(" ")}>
+                <ul className={classes.orderHistoryTable}>
+                    {reviewList.map(item => {
+                        const { product, created_at, text } = item;
+                        const { name, url_rewrites, url_suffix } = product;
+                        const productLink = resourceUrl(
+                            `/${get(url_rewrites[0], 'url', '')}${url_suffix ||
+                            ''}`
+                        );
+                        return (
+                            <li className={classes.reviewRow}>
+                                <div className={classes.productImageContainer}>
+                                    Image Details
+                                </div>
+                                <div className={classes.productNameContainer}>
+
+                                    <strong>{replaceSpecialChars(name)}</strong>
+
+                                </div>
+                                <div className={classes.reviewDateContainer}>
+                                    <div className={classes.reviewDate}>{new Date(created_at).toLocaleDateString()}</div>
+                                    <div className={classes.avgRatings}>
                                         <RatingMini
                                             percent={20}
                                             value={5}
                                             showValue={false}
                                         />
-                                    </td>
-                                    <td className={[classes.col, classes.review].join(" ")}>
-                                        {text}
-                                    </td>
-                                    <td className={[classes.col, classes.action].join(" ")}>
-                                        <span>See Details</span>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                                    </div>
+                                    <div className={classes.productReview}>{text}</div>
+
+
+                                </div>
+
+                            </li>
+                        );
+                    })}
+
+
+
+
+                </ul>
             </div>
 
             <div className={classes.heading}>
@@ -121,7 +122,7 @@ const MyReviewPage = props => {
 
 
 
-        </div>
+        </div >
     );
 };
 

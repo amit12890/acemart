@@ -28,6 +28,12 @@
 .home-section {
     margin-bottom: 20px;
 }
+
+.home-section {
+    
+}
+
+
 .banner-callout {
     margin-bottom: 40px;
 }
@@ -92,8 +98,11 @@ width: 130px;
 
 
 
-.financeRow {
-background-color:blue;
+
+
+:global(.financeRow) {
+    max-width: 100%;
+    background-color:blue;
 }
 
 @media only screen and (max-width: 768px) {

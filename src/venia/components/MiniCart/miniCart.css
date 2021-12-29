@@ -13,7 +13,7 @@
     max-width: calc(
         var(--venia-global-maxWidth) + var(--content-width) * 2 - 8rem
     );
-    z-index: 11;
+   
     right: 0;
     left: auto;
    
@@ -26,6 +26,7 @@
     transition: opacity 224ms var(--venia-global-anim-in),
         visibility 224ms var(--venia-global-anim-in), left 0s;
     visibility: visible;
+    z-index: 11;
 }
 
 .contents {

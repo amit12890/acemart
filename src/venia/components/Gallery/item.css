@@ -118,9 +118,9 @@
 
 
 .productActions {
-
-    
-    
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .viewmoreAction {
@@ -177,7 +177,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin: 1.2rem 0;
 }
 
 .labelItem {
@@ -263,6 +262,7 @@
 }
 .addToLabel {
     color: rgb(var(--text-color)); 
+    
 }
 .addTo:hover .addToLabel {
     color: rgb(var(--theme-color-primary));

@@ -11,10 +11,12 @@
     max-width: var(--venia-global-maxWidth);
     padding-left: var(--layout-indent-width);
     padding-right: var(--layout-indent-width);
+    
 }
 .page {
     margin: 0 auto;
     min-height: 40rem;
+    position: relative;
 }
 
 .page_masked {
