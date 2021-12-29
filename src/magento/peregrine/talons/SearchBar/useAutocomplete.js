@@ -65,7 +65,7 @@ export const useAutocomplete = props => {
     const displayResult =
         !!(valid && hasResult) && !isDataLoading && !isSearchUpdated;
 
-    const isLoading = valid && !displayResult;
+    const isLoading = valid && isDataLoading;
 
     return {
         suggestionLoading,
