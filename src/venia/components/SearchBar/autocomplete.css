@@ -39,10 +39,21 @@
     border-color: rgb(var(--color-gray-middle2)); 
 }
 
+.root_loading {
+    composes: root visible;
+    border-color: rgb(var(--color-gray-middle2));
+    width: 100%;
+    max-width: 475px;
+    min-height: 200px;
+}
+
 .message {
     color: rgb(var(--venia-global-color-text-alt));
     padding: 0 0.75rem;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .message:empty {

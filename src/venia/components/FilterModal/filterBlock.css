@@ -3,6 +3,7 @@
     border-style: dashed;
     border-width: 1px 0 0;
     display: grid;
+    padding-top: 10px;
 }
 
 .header {
@@ -10,7 +11,7 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr auto;
-    min-height: 3.125rem;
+    margin-bottom: 10px;
 }
 
 .header svg {
@@ -21,8 +22,8 @@
     height: 1.5rem;
     line-height: 1.5rem;
     text-align: left;
-    font-size: var(--fontSize-100);
-    text-transform: uppercase;
+    font-size: var(--fontSize-200);
+    text-transform: capitalize;
     color: rgb(var(--color-black));
     font-weight: var(--font-weight-bold);
 }

@@ -4,7 +4,6 @@ import { arrayOf, bool, func, shape, string } from 'prop-types';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import SuggestedProducts from './suggestedProducts';
 import defaultClasses from './suggestions.css';
-import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import SuggestedProductNames from './suggestedProductNames';
 
@@ -22,8 +21,7 @@ const Suggestions = props => {
     const shouldRender = visible && displayResult;
     // render null without data
     if (!shouldRender) {
-        // return null;
-        return fullPageLoadingIndicator;
+        return null;
     }
 
     return (

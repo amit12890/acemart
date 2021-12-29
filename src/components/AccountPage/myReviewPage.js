@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { ChevronDown, ChevronUp } from 'react-feather';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
+
 
 import { GET_CUSTOMER_REVIEWS } from './myReviewPage.gql';
 import defaultClasses from './myReviewPage.css';
@@ -11,6 +14,14 @@ import { get, size } from 'lodash';
 
 import RatingMini from '../../@amasty/components/Rating/rating_mini';
 import ProductPerPage from '../../RootComponents/Category/productPerPage';
+import RichText from '../../venia/components/RichText';
+import { Link } from 'react-router-dom';
+import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
+import { replaceSpecialChars } from "../../app.utils"
+
+
+
+
 
 const MyReviewPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -44,54 +55,74 @@ const MyReviewPage = props => {
     };
 
     return (
-        <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>CREATED</th>
-                        <th>PRODUCT NAME</th>
-                        <th>RATING</th>
-                        <th>REVIEW</th>
-                        <th />
-                    </tr>
+        <div className={classes.root}>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
+                    My Product Reviews
+                </h1>
+            </div>
+
+            <div className={classes.reviewListWrapper}>
+                <ul className={classes.orderHistoryTable}>
                     {reviewList.map(item => {
+                        const { product, created_at, text } = item;
+                        const { name, url_rewrites, url_suffix } = product;
+                        const productLink = resourceUrl(
+                            `/${get(url_rewrites[0], 'url', '')}${url_suffix ||
+                            ''}`
+                        );
                         return (
-                            <tr>
-                                <td>
-                                    {new Date(
-                                        item.created_at
-                                    ).toLocaleDateString()}
-                                </td>
-                                <td>{item.product.name}</td>
-                                {/* <td>{item.ratings_breakdown.value}</td> */}
-                                <td>
-                                    <RatingMini
-                                        percent={20}
-                                        value={5}
-                                        showValue={false}
-                                    />
-                                </td>
-                                <td>{item.text}</td>
-                                <td>See Details</td>
-                            </tr>
+                            <li className={classes.reviewRow}>
+                                <div className={classes.productImageContainer}>
+                                    Image Details
+                                </div>
+                                <div className={classes.productNameContainer}>
+
+                                    <strong>{replaceSpecialChars(name)}</strong>
+
+                                </div>
+                                <div className={classes.reviewDateContainer}>
+                                    <div className={classes.reviewDate}>{new Date(created_at).toLocaleDateString()}</div>
+                                    <div className={classes.avgRatings}>
+                                        <RatingMini
+                                            percent={20}
+                                            value={5}
+                                            showValue={false}
+                                        />
+                                    </div>
+                                    <div className={classes.productReview}>{text}</div>
+
+
+                                </div>
+
+                            </li>
                         );
                     })}
-                </tbody>
-            </table>
-            <div>
-                <div>
+
+
+
+
+                </ul>
+            </div>
+
+            <div className={classes.heading}>
+                <div className={classes.categoryInfo}>
                     {reviewListSize > 1
                         ? `${reviewListSize} Items`
                         : `${reviewListSize} Item`}
                 </div>
-                <div>
+                <div className={classes.headerButtons}>
                     <ProductPerPage
                         pageSize={pageSize}
                         pageSizeSelect={pageSizeSelect}
                     />
                 </div>
+
             </div>
-        </div>
+
+
+
+        </div >
     );
 };
 

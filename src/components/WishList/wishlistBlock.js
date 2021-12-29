@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { size } from 'lodash';
+import { size, get } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './wishlistPage.css';
@@ -13,10 +13,14 @@ import { REMOVE_PRODUCTS_FROM_WISHLIST } from '@magento/peregrine/lib/talons/Wis
 import { Link } from 'react-router-dom';
 import { replaceSpecialChars } from "../../app.utils"
 import Price from '../../venia/components/Price';
+import { GET_STORE_CONFIG_DATA } from '../../magento/peregrine/talons/Header/storeSwitcher.gql';
 
 const WishlistPage = props => {
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+
+    const queryRes = useQuery(GET_STORE_CONFIG_DATA);
+    const defaultCurrency = get(queryRes, "data.storeConfig.default_display_currency_code", "");
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
@@ -67,6 +71,7 @@ const WishlistPage = props => {
             <ProductListing
                 wishlists={finalWishlist}
                 refreshWishlist={refreshWishlist}
+                defaultCurrency={defaultCurrency}
             />
         )
     }
@@ -98,7 +103,7 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const { wishlists, refreshWishlist } = props;
+    const { wishlists, refreshWishlist, defaultCurrency } = props;
 
     const classes = useStyle(defaultClasses, props.classes);
     const [removingItemId, setRemovingItemId] = useState(null);
@@ -154,15 +159,17 @@ const ProductListing = props => {
                                             {replaceSpecialChars(name)}
                                         </div>
                                     </Link>
-                                    <Price
-                                        currencyCode={"USD"}
-                                        value={price}
-                                        classes={{
-                                            currency: classes.currency,
-                                            decimal: classes.decimal,
-                                            fraction: classes.fraction
-                                        }}
-                                    />
+                                    <div className={classes.listItemPrice}>
+                                        <Price
+                                            currencyCode={defaultCurrency}
+                                            value={price}
+                                            classes={{
+                                                currency: classes.currency,
+                                                decimal: classes.decimal,
+                                                fraction: classes.fraction
+                                            }}
+                                        />
+                                    </div>
 
                                     <div className={classes.ItemQuickActions}>
                                         <div className={[classes.action, classes.edit].join(" ")}

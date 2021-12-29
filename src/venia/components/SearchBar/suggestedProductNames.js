@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { size } from 'lodash';
 import { useFieldApi } from 'informed';
 
-import { SEARCH_PAGE_PATH } from '../../../url.utils';
+import { searchPage } from '../../../url.utils';
 
 import { useStyle } from '../../classify';
 import defaultClasses from './suggestedProductNames.css';
@@ -16,7 +16,7 @@ const suggestedProductNames = props => {
 
     const handleClick = useCallback(
         text => () => {
-            history.push(`${SEARCH_PAGE_PATH}?q=${text}`);
+            history.push(`${searchPage()}?q=${text}`);
             fieldApi.setValue(text);
             setVisible(false);
         },

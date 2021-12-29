@@ -13,6 +13,19 @@ export const GET_CUSTOMER_REVIEWS = gql`
                     name
                     sku
                     id
+                    rating_summary
+                    review_count
+                    url_suffix
+                    small_image {
+                        url
+                    }
+                    url_rewrites {
+                        url
+                        parameters {
+                            name
+                            value
+                        }
+                    }
                 }
                 images {
                     resized_path

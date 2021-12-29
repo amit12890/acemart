@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { get, size } from 'lodash';
+import { get, size, map } from 'lodash';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
@@ -24,11 +24,17 @@ import { useStyle } from '../../venia/classify';
 import Price from '../../venia/components/Price';
 import Button from '../../venia/components/Button';
 import AddToCart from '../../venia/components/CartPage/addToCart';
+import AddAllToCart from '../../venia/components/CartPage/addAllToCart';
+import { GET_STORE_CONFIG_DATA } from '../../magento/peregrine/talons/Header/storeSwitcher.gql';
+
 
 const WishlistPage = props => {
     const { formatMessage } = useIntl();
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+
+    const queryRes = useQuery(GET_STORE_CONFIG_DATA);
+    const defaultCurrency = get(queryRes, "data.storeConfig.default_display_currency_code", "");
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
         fetchPolicy: 'cache-and-network',
@@ -110,15 +116,18 @@ const WishlistPage = props => {
                             multi_wishlist_id={selectedWishlist.multi_wishlist_id}
                             name={selectedWishlist.wishlist_name} />
                         <div className={classes.wishlistGridWrapper}>
-                            <ProductListing selectedWishlist={selectedWishlist} wishlists={wishlists}
-                                refreshWishlist={refreshWishlist} />
+                            <ProductListing defaultCurrency={defaultCurrency}
+                                selectedWishlist={selectedWishlist}
+                                wishlists={wishlists}
+                                refreshWishlist={refreshWishlist}
+                            />
                         </div>
                         <div className={classes.actionsToolbarWrapper}>
                             <Button priority="low">UPDATE WISH LIST</Button>
                             <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
                                 <Button priority="low">SHARE WISH LIST</Button>
                             </Link>
-                            <Button priority="low">ADD ALL TO CART</Button>
+                            <AddAllToCartWrapper selectedWishlist={selectedWishlist} />
                         </div>
 
                     </div>
@@ -149,7 +158,7 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const { selectedWishlist, wishlists, refreshWishlist } = props;
+    const { selectedWishlist, wishlists, refreshWishlist, defaultCurrency } = props;
     // { productId, productQty }
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [removingItemId, setRemovingItemId] = useState(null);
@@ -216,7 +225,7 @@ const ProductListing = props => {
                                     </Link>
                                     <div className={classes.itemPrice}>
                                         <Price
-                                            currencyCode={"USD"}
+                                            currencyCode={defaultCurrency}
                                             value={price}
                                             classes={{
                                                 currency: classes.currency,
@@ -318,4 +327,41 @@ const AddToCartBlock = ({ classes, qty, sku }) => {
             />
         </div>
     )
+}
+
+const AddAllToCartWrapper = props => {
+    const { selectedWishlist } = props
+    const products = get(selectedWishlist, 'product', [])
+    
+    const cartItems = useMemo(() => {
+        return map(products, (data) => ({
+            sku: data.product.sku,
+            quantity: 1,
+        }))
+    }, [products])
+
+    if(cartItems.length) {
+        return (
+            <AddAllToCart 
+                cartItems={cartItems}
+                Child={()=>
+                    <Button
+                        priority="low"
+                        type="submit"
+                    >
+                        ADD ALL TO CART
+                    </Button>
+                }
+                Loader={() =>
+                    <Button
+                        priority="low"
+                        disabled
+                    >
+                        ADD ALL TO CART
+                    </Button>
+                }
+            />
+        )
+    }
+    return null;
 }

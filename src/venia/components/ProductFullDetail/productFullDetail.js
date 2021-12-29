@@ -1,5 +1,6 @@
 import React, { Fragment, Suspense, useState, useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useQuery } from '@apollo/client';
 
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -42,6 +43,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useWishlistSession } from '../../../data/appState/appState.hook';
 import { toLower } from 'lodash-es';
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
+import { GET_STORE_CONFIG_DATA } from '../../../magento/peregrine/talons/Header/storeSwitcher.gql';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -78,6 +80,7 @@ const ProductFullDetail = props => {
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
     const [showLabelsPopup, setLabelsPopup] = useState(false)
     const [showCaliforniaPopup, setCaliforniaPopup] = useState(false)
+    const storeConfig = useQuery(GET_STORE_CONFIG_DATA, { fetchPolicy: "cache-first" });
 
     const reviewRef = useRef(null)
 
@@ -616,6 +619,14 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
+                                    {(get(storeConfig, "data.storeConfig.store_name") === "Acemart.com" && product.ship_time) ? (
+                                        <div className={classes.apSectionRow}>
+                                            <div className={classes.extraShipInfo}>
+                                                {product.ship_time}
+                                            </div>
+                                        </div>
+                                    ) : null}
+
                                     {/* Product Shipping Infor */}
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.shippingInfo}>
@@ -658,7 +669,6 @@ const ProductFullDetail = props => {
                                     {/* Product Add To Links */}
                                     <div className={classes.apSectionRow}>
                                         <div className={classes.addToLinks}>
-
                                             <div
                                                 className={[
                                                     classes.action,
@@ -675,7 +685,6 @@ const ProductFullDetail = props => {
                                                     <span>Add to wishlist</span>
                                                 </Button>
                                             </div>
-
                                             <div
                                                 className={[
                                                     classes.action,
@@ -698,7 +707,6 @@ const ProductFullDetail = props => {
                                                     Loader={() => <LoadingButton />}
                                                 />
                                             </div>
-
                                             <div
                                                 className={[
                                                     classes.action,
@@ -737,13 +745,6 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
-                                    {product.ship_info && (
-                                        <div className={classes.apSectionRow}>
-                                            <div className={classes.extraShipInfo}>
-                                                {product.ship_info}
-                                            </div>
-                                        </div>
-                                    )}
                                     {product.specsheet && (
                                         <div className={classes.apSectionRow}>
                                             <div className={classes.specsheet}>

@@ -18,8 +18,9 @@ import SearchSort from './searchSort';
 import SearchPerPage from './searchPerPage';
 import FilterSidebar from './filterSidebar';
 import { Link } from 'react-router-dom';
-import { SEARCH_PAGE_PATH } from '../../../url.utils';
+import { searchPage } from '../../../url.utils';
 import RichContent from '../RichContent/richContent';
+import RichText from '../RichText';
 
 const POPULAR_SEARCH = [
     'sale',
@@ -47,9 +48,28 @@ const SearchPage = props => {
         searchLoading,
         categoryFiltered,
         header,
+        didYouMean
     } = talonProps;
 
-    const isProducts = size(products);
+    const hasProducts = !!size(products);
+
+    const searchResultsHeading = searchTerm ? (
+        <FormattedMessage
+            id={'searchPage.searchTermText'}
+            values={{
+                highlight: chunks => (
+                    <span className={classes.headingHighlight}>"{chunks}"</span>
+                ),
+                term: searchTerm
+            }}
+            defaultMessage={'Search Results for :'}
+        />
+    ) : (
+        <FormattedMessage
+            id={'searchPage.searchTermEmpty'}
+            defaultMessage={'Showing all results:'}
+        />
+    );
 
     const content = useMemo(() => {
         if (searchLoading) return fullPageLoadingIndicator;
@@ -75,18 +95,20 @@ const SearchPage = props => {
             return (
                 <div>
                     <div className={classes.noResult}>
-                        <FormattedMessage
-                            id={'searchPage.noResultImportant'}
-                            defaultMessage={'No results found!'}
-                        />
+                        Sorry no results found for "{searchTerm}"
                     </div>
+                    {didYouMean ? (
+                        <div>
+                            Did you mean: <Link to={`${searchPage()}?q=${didYouMean.query}`}><RichText content={didYouMean.highlighted} /></Link>?
+                        </div>
+                    ) : null}
                     <div>
                         <div>Below are some of our popular searches:</div>
                         <div>
                             {POPULAR_SEARCH.map(keyword => (
                                 <div>
                                     <Link
-                                        to={`${SEARCH_PAGE_PATH}?q=${keyword}`}
+                                        to={`${searchPage()}?q=${keyword}`}
                                     >
                                         {keyword}
                                     </Link>
@@ -123,26 +145,8 @@ const SearchPage = props => {
         searchLoading
     ]);
 
-    const searchResultsHeading = !isProducts ? null : searchTerm ? (
-        <FormattedMessage
-            id={'searchPage.searchTermText'}
-            values={{
-                highlight: chunks => (
-                    <span className={classes.headingHighlight}>"{chunks}"</span>
-                ),
-                term: searchTerm
-            }}
-            defaultMessage={'Search Results for :'}
-        />
-    ) : (
-        <FormattedMessage
-            id={'searchPage.searchTermEmpty'}
-            defaultMessage={'Showing all results:'}
-        />
-    );
-
     const itemCountHeading =
-        isProducts > 0 ? (
+        hasProducts ? (
             <div>
                 Items {pagination.begin}-{pagination.end} of{' '}
                 {pagination.totalResults}
@@ -187,15 +191,17 @@ const SearchPage = props => {
                             )
                         })}
                     </div>
-                    <div className={classes.heading}>
-                        <div className={classes.searchInfo}>
-                            {itemCountHeading}
+                    {hasProducts ? (
+                        <div className={classes.heading}>
+                            <div className={classes.searchInfo}>
+                                {itemCountHeading}
+                            </div>
+                            <div className={classes.headerButtons}>
+                                {maybePageSize}
+                                {maybeSortButton}
+                            </div>
                         </div>
-                        <div className={classes.headerButtons}>
-                            {maybePageSize}
-                            {maybeSortButton}
-                        </div>
-                    </div>
+                    ) : null}
                     {content}
                 </div>
             </div>

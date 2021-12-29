@@ -7,7 +7,7 @@ import {
     apiGetAutocompleteSearchResult,
     apiGetSearchSuggestions
 } from '../../../../url.utils';
-import { size } from 'lodash';
+import { size, get } from 'lodash';
 
 /**
  * @typedef { import("graphql").DocumentNode } DocumentNode
@@ -26,10 +26,10 @@ export const useAutocomplete = props => {
     const { value } = useFieldState('search_query');
 
     const { callApi: callSuggestionApi, ...suggestionResult } = useApiData({
-        isLazy: true
+        isLazy: true, headers: {},
     });
     const { callApi: callproductSearchApi, ...productResult } = useApiData({
-        isLazy: true
+        isLazy: true, headers: {},
     });
     // Create a debounced function so we only search some delay after the last
     // keypress.
@@ -38,7 +38,7 @@ export const useAutocomplete = props => {
             debounce(inputText => {
                 callSuggestionApi(apiGetSearchSuggestions(inputText));
                 callproductSearchApi(apiGetAutocompleteSearchResult(inputText));
-            }, 2000),
+            }, 1000),
         []
     );
 
@@ -51,17 +51,21 @@ export const useAutocomplete = props => {
 
     let messageType = '';
 
-    const suggestionError = suggestionResult.error;
-    const productError = productResult.error;
-
     const suggestionLoading = suggestionResult.loading;
     const productLoading = productResult.loading;
+    const isDataLoading = suggestionLoading || productLoading;
 
     const suggestions = suggestionResult.response;
     const products = productResult.response;
+    const previousSearch = get(suggestions, 'query', '');
+
+    const isSearchUpdated = previousSearch && previousSearch !== value;
 
     const hasResult = size(suggestions) || size(products);
-    const displayResult = !!(valid && hasResult);
+    const displayResult =
+        !!(valid && hasResult) && !isDataLoading && !isSearchUpdated;
+
+    const isLoading = valid && !displayResult;
 
     return {
         suggestionLoading,
@@ -70,6 +74,7 @@ export const useAutocomplete = props => {
         products,
         messageType,
         value,
-        displayResult
+        displayResult,
+        isLoading
     };
 };

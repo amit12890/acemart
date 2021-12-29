@@ -31,6 +31,7 @@ export const editAddress = (id = null) => {
 export const compareListPage = () => '/catalog/product_compare/';
 export const cartPage = () => '/checkout/cart/';
 export const reviewPage = () => '/review/customer/';
+export const searchPage = () => "/catalogsearch/result/";
 
 /** API urls */
 
@@ -50,8 +51,6 @@ export const apiGetAutocompleteSearchResult = (query, resultsPerPage = "4") =>
 
 export const apiGetSearchResult = (queryString) =>
     `https://${SITE_ID}.a.searchspring.io/api/search/search.json?${queryString}`
-
-export const SEARCH_PAGE_PATH = "/catalogsearch/result/";
 
 /** Footer Other Urls */
 export const customerServiceUrl = () => '/customer-service';

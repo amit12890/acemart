@@ -46,6 +46,7 @@ export const useSearchPage = (props = {}) => {
     const filterSummary = get(searchResult.response, 'filterSummary', []);
     const header = get(searchResult.response, 'merchandising.content.header', []);
     const footer = get(searchResult.response, 'merchandising.content.footer', []);
+    const didYouMean = get(searchResult.response, "didYouMean", null);
 
     useEffect(() => {
         const params = new URLSearchParams(search);
@@ -178,6 +179,7 @@ export const useSearchPage = (props = {}) => {
         searchLoading,
         categoryFiltered,
         header,
-        footer
+        footer,
+        didYouMean
     };
 };

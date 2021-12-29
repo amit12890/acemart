@@ -23,6 +23,7 @@ const SuggestedProduct = props => {
         baseless_url,
         brand,
         mpn,
+        defaultCurrency
     } = props;
 
     const handleClick = useCallback(() => {
@@ -53,7 +54,7 @@ const SuggestedProduct = props => {
                 <div className={classes.name}>{replaceSpecialChars(`${brand} ${mpn} ${name}`)}</div>
                 <div className={classes.sku}>{sku}</div>
                 <div className={classes.price}>
-                    <Price currencyCode={'USD'} value={price} />
+                    <Price currencyCode={defaultCurrency} value={price} />
                     <span className={classes.unit}>{uom}</span>
                 </div>
             </a>

@@ -170,6 +170,7 @@ const GalleryItem = props => {
                                         isPopupVisible={showWishlistPopup}
                                         productId={item.id}
                                         productQty={wishlistButtonProps.item.quantity}
+                                        productName={get(item, "product_name", "")}
                                         closeWishlistPopup={closeWishlistPopup} />
                                 </>
                             }

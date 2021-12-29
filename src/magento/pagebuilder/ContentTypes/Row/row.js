@@ -245,7 +245,7 @@ const Row = props => {
     })
 
     return (
-        <div className={[classes.contained, ...mapClasses].join(' ')}> 
+        <div className={[classes.contained, ...mapClasses].join(' ')}>
             <div
                 ref={backgroundElement}
                 className={classes.inner}
