@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { get } from 'lodash';
 import { useAppContext } from '@magento/peregrine/lib/context/app';
 
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
@@ -28,7 +30,7 @@ export const useProduct = props => {
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const { getStoreConfigData, getProductDetailQuery, getPdpRouteDetailsQuery } = operations;
     const { pathname } = useLocation();
-    // console.log("🚀 ~ file: useProduct.js ~ line 31 ~ pathname", pathname)
+
     const [
         ,
         {
@@ -50,25 +52,23 @@ export const useProduct = props => {
     const sku = pathname.split('/').pop();
     const urlKey = productUrlSuffix ? sku.replace(productUrlSuffix, '') : sku;
 
-    const { error, loading, data } = useQuery(getProductDetailQuery, {
-        fetchPolicy: 'cache-and-network',
-        nextFetchPolicy: 'cache-first',
-        skip: !storeConfigData,
-        variables: {
-            urlKey: sku
-        }
-    });
-
-    // const { error: pdpRouteErr, loading: pdpRouteLoading, data: pdpRouteData } = useQuery(getPdpRouteDetailsQuery, {
+    // const { error, loading, data } = useQuery(getProductDetailQuery, {
     //     fetchPolicy: 'cache-and-network',
     //     nextFetchPolicy: 'cache-first',
     //     skip: !storeConfigData,
     //     variables: {
-    //         url: pathname
+    //         urlKey: sku
     //     }
     // });
-    // console.log("🚀 ~ file: useProduct.js ~ line 63 ~ pdpRouteErr", pdpRouteErr)
-    // console.log("🚀 ~ file: useProduct.js ~ line 71 ~ pdpRouteData", pdpRouteData)
+
+    const { error, loading, data } = useQuery(getPdpRouteDetailsQuery, {
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first',
+        skip: !storeConfigData,
+        variables: {
+            url: pathname
+        }
+    });
 
     const isBackgroundLoading = !!data && loading;
 
@@ -77,21 +77,8 @@ export const useProduct = props => {
             // The product isn't in the cache and we don't have a response from GraphQL yet.
             return null;
         }
-
-        // Note: if a product is out of stock _and_ the backend specifies not to
-        // display OOS items, the items array will be empty.
-
-        // Only return the product that we queried for.
-        const product = data.products.items.find(
-            item => item.sku === urlKey
-        );
-
-        if (!product) {
-            return null;
-        }
-
-        return mapProduct(product);
-    }, [data, mapProduct, urlKey]);
+        return get(data, 'route', null);
+    }, [data]);
 
     // Update the page indicator if the GraphQL query is in flight.
     useEffect(() => {

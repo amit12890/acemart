@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useState, useCallback, useMemo, useRef } from 'react';
+import React, { Fragment, useState, useCallback, useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQuery } from '@apollo/client';
 
@@ -11,8 +11,6 @@ import { Link, useHistory } from 'react-router-dom';
 import Price from '../Price';
 import FormError from '@magento/venia-ui/lib/components/FormError';
 import { useProductFullDetail } from "../../../magento/peregrine/talons/ProductFullDetail/useProductFullDetail";
-import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
-import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { QuantityFields } from './quantity';
 
 import { useStyle } from '../../classify';
@@ -49,8 +47,6 @@ const style = {
     '--productLabel': `url("${productLabel}")`
 };
 
-const Options = React.lazy(() => import('../ProductOptions'));
-
 // Correlate a GQL error message to a field. GQL could return a longer error
 // string but it may contain contextual info such as product id. We can use
 // parts of the string to check for which field to apply the error.
@@ -68,7 +64,7 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 const ProductFullDetail = props => {
     const { product } = props;
 
-    const { id, pos_stock_manage, only_x_left_in_stock,
+    const { id, pos_stock_manage,
         mpn, uom, productLabel, media_gallery
     } = product;
 
@@ -86,6 +82,17 @@ const ProductFullDetail = props => {
 
     const { handleSwitchStore } = useStoreSwitcher()
     const talonProps = useProductFullDetail({ product });
+    const {
+        breadcrumbCategoryId,
+        errorMessage,
+        handleAddToCart,
+        isAddToCartDisabled,
+        isSupportedProductType,
+        mediaGalleryEntries,
+        productDetails,
+        wishlistButtonProps
+    } = talonProps;
+    const { formatMessage } = useIntl();
 
     // handlers for wishlist popup
     const openWishlistPopup = useCallback(() => {
@@ -139,29 +146,8 @@ const ProductFullDetail = props => {
         reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, [reviewRef])
 
-    const {
-        breadcrumbCategoryId,
-        errorMessage,
-        handleAddToCart,
-        handleSelectionChange,
-        isAddToCartDisabled,
-        isSupportedProductType,
-        mediaGalleryEntries,
-        productDetails,
-        wishlistButtonProps
-    } = talonProps;
-    const { formatMessage } = useIntl();
 
     const classes = useStyle(defaultClasses, props.classes);
-
-    const options = isProductConfigurable(product) ? (
-        <Suspense fallback={fullPageLoadingIndicator}>
-            <Options
-                onSelectionChange={handleSelectionChange}
-                options={product.configurable_options}
-            />
-        </Suspense>
-    ) : null;
 
     const breadcrumbs = breadcrumbCategoryId ? (
         <Breadcrumbs
