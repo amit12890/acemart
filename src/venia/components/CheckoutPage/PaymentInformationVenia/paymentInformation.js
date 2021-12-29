@@ -1,15 +1,15 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Form } from 'informed';
 import { shape, func, string, bool, instanceOf } from 'prop-types';
 
-import { usePaymentInformation } from '@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/usePaymentInformation';
+import { usePaymentInformation } from '../../../../magento/peregrine/talons/CheckoutPage/PaymentInformation/usePaymentInformation';
 import CheckoutError from '@magento/peregrine/lib/talons/CheckoutPage/CheckoutError';
 
 import { useStyle } from '../../../classify';
 import paymentInformationOperations from './paymentInformation.gql';
 import defaultClasses from './paymentInformation.css';
-import LoadingIndicator from '../../LoadingIndicator';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 const PaymentMethods = React.lazy(() => import('./paymentMethods'));
 const EditModal = React.lazy(() => import('./editModal'));
@@ -43,8 +43,17 @@ const PaymentInformation = props => {
         hideEditModal,
         isLoading,
         isEditModalActive,
-        showEditModal
+        showEditModal,
+        selectedPaymentMethod,
+        updatePaymentSelection
     } = talonProps;
+    console.log("🚀 ~ file: paymentInformation.js ~ line 50 ~ selectedPaymentMethod", selectedPaymentMethod)
+
+    useEffect(() => {
+        if (selectedPaymentMethod === 'cashondelivery') {
+            handlePaymentSuccess()
+        }
+    }, [selectedPaymentMethod])
 
     if (isLoading) {
         return (
@@ -66,6 +75,8 @@ const PaymentInformation = props => {
                 onPaymentSuccess={handlePaymentSuccess}
                 resetShouldSubmit={resetShouldSubmit}
                 shouldSubmit={shouldSubmit}
+                updatePaymentSelection={updatePaymentSelection}
+                selectedPaymentMethod={selectedPaymentMethod}
             />
         </Form>
     );

@@ -10,11 +10,17 @@ import { useAwaitQuery } from '@magento/peregrine/lib/hooks/useAwaitQuery';
 import { retrieveCartId } from '@magento/peregrine/lib/store/actions/cart';
 
 import DEFAULT_OPERATIONS from './signIn.gql';
+import gql from '../../../../data/checkout/checkout.gql'
 import { useCompareList } from '../../../../components/CompareListPage/useCompareList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { size } from 'lodash-es';
+import { checkoutFetched, checkoutFetchError, loginAndFetchCheckoutComplete, updateCheckoutField } from '../../../../data/checkout/checkout.action';
+import { get } from 'lodash';
+
+const { mergeCartMutation } = gql
 
 export const useSignIn = props => {
+    const dispatch = useDispatch()
     const {
         getCartDetailsQuery,
         setDefaultUsername,
@@ -26,7 +32,6 @@ export const useSignIn = props => {
     const {
         createCartMutation,
         getCustomerQuery,
-        mergeCartsMutation,
         signInMutation
     } = operations;
 
@@ -50,7 +55,24 @@ export const useSignIn = props => {
     });
 
     const [fetchCartId] = useMutation(createCartMutation);
-    const [mergeCarts] = useMutation(mergeCartsMutation);
+
+    /**
+     * this merge cart mutation is calling from the 
+     * data/checkout/checkout.gql
+     * 
+     * each merge cart will fill checkout data 
+     * during normal login it won't affect
+     */
+    const [mergeCarts] = useMutation(mergeCartMutation, {
+        onCompleted: (data) => {
+            const cart = get(data, "mergeCarts", {})
+            console.log("🚀 ~ file: useSignIn.js ~ line 69 ~ cart", cart)
+            dispatch(loginAndFetchCheckoutComplete({ ...cart }))
+        },
+        onError: () => {
+            dispatch(loginAndFetchCheckoutComplete())
+        }
+    });
     const fetchUserDetails = useAwaitQuery(getCustomerQuery);
     const fetchCartDetails = useAwaitQuery(getCartDetailsQuery);
 
@@ -63,6 +85,7 @@ export const useSignIn = props => {
             try {
                 // Get source cart id (guest cart id).
                 const sourceCartId = cartId;
+                console.log("🚀 ~ file: useSignIn.js ~ line 66 ~ sourceCartId", sourceCartId)
 
                 // Sign in and set the token.
                 const signInResponse = await signIn({
@@ -86,6 +109,7 @@ export const useSignIn = props => {
                     fetchCartId
                 });
                 const destinationCartId = await retrieveCartId();
+                console.log("🚀 ~ file: useSignIn.js ~ line 90 ~ destinationCartId", destinationCartId)
 
                 // Merge the guest cart into the customer cart.
                 await mergeCarts({

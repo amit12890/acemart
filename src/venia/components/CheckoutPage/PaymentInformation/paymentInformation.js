@@ -8,23 +8,40 @@ import { get, size } from 'lodash'
  * parent
  *      CheckoutPage
  */
-export default ({ data, selectedPayment }) => {
-    console.log("🚀 ~ file: paymentInformation.js ~ line 8 ~ data", data)
+export default (props) => {
+    const { selectedPaymentMethod, data, updateSelection } = props
+
+    const talonProps = usePaymentInformation();
+
+    const {
+        doneEditing,
+        handlePaymentError,
+        handlePaymentSuccess,
+        hideEditModal,
+        isLoading,
+        isEditModalActive,
+        showEditModal
+    } = talonProps;
 
     const paymentInfoItem = useCallback((item) => {
-        const isActive = get(item, "code", '') === get(selectedPayment, "code", '')
+        const isActive = get(item, "code", '') === get(selectedPaymentMethod, "code", '')
         return (
-            <div style={{
-                padding: 16,
-                display: 'flex'
-            }}>
+            <div
+                style={{
+                    padding: 16,
+                    display: 'flex'
+                }}
+                onClick={(e) => {
+                    e.preventDefault()
+                    updateSelection(item)
+                }}>
                 {isActive ? (
-                    <div>
-                        <Circle />
+                    <div >
+                        <CheckCircle color='#009988' />
                     </div>
                 ) : (
                     <div>
-                        <CheckCircle />
+                        <Circle />
                     </div>
                 )}
                 <div style={{
@@ -34,9 +51,21 @@ export default ({ data, selectedPayment }) => {
                 </div>
             </div>
         )
-    }, [])
+    }, [selectedPaymentMethod])
 
     if (size(data) === 0) return null
+
+    if (isLoading) {
+        return (
+            <LoadingIndicator classes={{ root: classes.loading }}>
+                <FormattedMessage
+                    id={'checkoutPage.loadingPaymentInformation'}
+                    defaultMessage={'Fetching Payment Information'}
+                />
+            </LoadingIndicator>
+        );
+    }
+
     return (
         <div>
             <div style={{

@@ -128,16 +128,28 @@ function localIntercept(targets) {
             path: require.resolve("./src/venia/components/CartPage")
         });
         routes.push({
-            name: "Checkout Page",
-            pattern: "/checkout/",
+            name: "Old Checkout Page",
+            pattern: "/checkout/old",
             exact: true,
             path: require.resolve("./src/venia/components/CheckoutPage")
+        });
+        routes.push({
+            name: "Checkout Page",
+            pattern: "/checkout",
+            exact: true,
+            path: require.resolve("./src/components/Checkout")
+        });
+        routes.push({
+            name: "Custom Checkout Page",
+            pattern: "/checkout/custom",
+            exact: true,
+            path: require.resolve("./src/components/Checkout")
         });
         routes.push({
             name: "Checkout success Page",
             pattern: "/checkout/success",
             exact: true,
-            path: require.resolve("./src/venia/components/CheckoutPage/OrderConfirmationPage")
+            path: require.resolve("./src/components/Checkout/OrderSuccess")
         });
         routes.push({
             name: "Search",

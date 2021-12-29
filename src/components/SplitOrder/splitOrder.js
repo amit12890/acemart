@@ -9,7 +9,7 @@ import SplitOrderItem from './SplitOrderItem'
  * render block of multishipping
  * 
  * Parent
- *  vania -> CheckoutPage
+ *  vania -> CheckoutPage, Checkout
  */
 export default ({ data }) => {
     const classes = useStyle(defaultClasses)
