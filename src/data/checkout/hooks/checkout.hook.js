@@ -15,6 +15,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user'
 import { clearCartDataFromCache } from '@magento/peregrine/lib/Apollo/clearCartDataFromCache'
 import { removeCart } from '@magento/peregrine/lib/store/actions/cart/asyncActions'
 
+import checkoutData from '../checkout-response-with-storepickup.json'
 
 const {
     getCountries,
@@ -77,6 +78,11 @@ export const useCheckout = () => {
     }, [loading, storePickupNetworkStatus])
 
     useEffect(() => {
+        //TODO REMOVE TEST DATA
+        dispatch(checkoutFetched({
+            ...checkoutData.data.cart
+        }))
+        return
         if (isDefaultStore) {
             console.log("fetching default......")
             fetchCheckoutDetails()
