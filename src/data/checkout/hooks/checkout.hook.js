@@ -52,6 +52,7 @@ export const useCheckout = () => {
         variables: {
             cartId
         },
+        fetchPolicy: 'network-only',
         onCompleted: (data) => {
             console.log("🚀 ~ file: checkout.hook.js ~ line 31 ~ useCheckout ~ data", data)
             const checkoutData = get(data, "cart", {})
@@ -65,6 +66,7 @@ export const useCheckout = () => {
         variables: {
             cartId
         },
+        fetchPolicy: 'network-only',
         onCompleted: (data) => {
             console.log("🚀 ~ file: checkout.hook.js ~ line 50 ~ useCheckout ~ data", data)
             dispatch(checkoutFetched(get(data, "setStorePickupShippingAddressesOnCart.cart", {})))
@@ -79,10 +81,10 @@ export const useCheckout = () => {
 
     useEffect(() => {
         //TODO REMOVE TEST DATA
-        dispatch(checkoutFetched({
-            ...checkoutData.data.cart
-        }))
-        return
+        // dispatch(checkoutFetched({
+        //     ...checkoutData.data.cart
+        // }))
+        // return
         if (isDefaultStore) {
             console.log("fetching default......")
             fetchCheckoutDetails()
