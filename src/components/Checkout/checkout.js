@@ -11,7 +11,7 @@ import { useAddressBookPage } from '../../venia/components/AddressBookPage/useAd
 import EmailStep from './EmailStep'
 import SplitOrder from '../SplitOrder'
 import AddressStep from './AddressStep'
-import ListStep from './ListStep'
+import ShippingMethodsStep from './ShippingMethodsStep'
 import PaymentListStep from './PaymentListStep'
 
 import defaultClasses from './checkout.css'
@@ -175,14 +175,11 @@ export default connect(store => ({
                     showSameAsButton={false}
                     isDefaultStore={isDefaultStore} />
 
-                <ListStep
+                <ShippingMethodsStep
                     enabled={isShippingAddressSelected || isDefaultStore}
                     title="Shipping Method"
                     data={get(shipping_addresses[0], "available_shipping_methods", [])}
                     initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}
-                    mapLabel={(item) => get(item, "method_title", '')}
-                    mapKey={(item) => get(item, "method_code", '')}
-                    mapValue={(item) => get(item, "method_code", '')}
                     onItemClick={(shippingMethod) => {
                         console.log("🚀 ~ file: checkout.js ~ line 162 ~ shippingMethod", shippingMethod)
                         setShippingMethodOnCart([
@@ -215,13 +212,6 @@ export default connect(store => ({
                                 same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
                             }
                         }
-
-                        // addres object will pass by default 
-                        // let variables = {
-                        //     customer_address_id: null,
-                        //     address,
-                        //     same_as_shipping: address.id === selectedShippingAddress.id
-                        // }
                         console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
                         setBillingAddressOnCart(variables)
                     }}
@@ -230,30 +220,30 @@ export default connect(store => ({
                     onSameAsButtonClick={() => {
                         let selectedShippingAddress = shipping_addresses[0]
                         let variables = null
-
-                        // if (selectedShippingAddress.customer_address_id == null) {
-                        variables = {
-                            address: {
-                                region_id: selectedShippingAddress.region.region_id,
-                                region: selectedShippingAddress.region.code, // pass whole region object
-                                country_code: selectedShippingAddress.country.code, // pass only country id
-                                street: selectedShippingAddress.street, // street array
-                                telephone: selectedShippingAddress.telephone,
-                                postcode: selectedShippingAddress.postcode,
-                                city: selectedShippingAddress.city,
-                                firstname: selectedShippingAddress.firstname,
-                                lastname: selectedShippingAddress.lastname,
-                            },
-                            same_as_shipping: false,
-                            use_for_shipping: false
+                        // same as shipping only work if its default store code
+                        if (selectedShippingAddress.customer_address_id == null) {
+                            variables = {
+                                address: {
+                                    region_id: selectedShippingAddress.region.region_id,
+                                    region: selectedShippingAddress.region.code, // pass whole region object
+                                    country_code: selectedShippingAddress.country.code, // pass only country id
+                                    street: selectedShippingAddress.street, // street array
+                                    telephone: selectedShippingAddress.telephone,
+                                    postcode: selectedShippingAddress.postcode,
+                                    city: selectedShippingAddress.city,
+                                    firstname: selectedShippingAddress.firstname,
+                                    lastname: selectedShippingAddress.lastname,
+                                },
+                                same_as_shipping: isDefaultStore,
+                                use_for_shipping: isDefaultStore
+                            }
+                        } else {
+                            variables = {
+                                customer_address_id: selectedShippingAddress.customer_address_id,
+                                same_as_shipping: isDefaultStore,
+                                use_for_shipping: isDefaultStore
+                            }
                         }
-                        // } else {
-                        //     variables = {
-                        //         customer_address_id: selectedShippingAddress.customer_address_id,
-                        //         same_as_shipping: false,
-                        //         use_for_shipping: false
-                        //     }
-                        // }
                         setBillingAddressOnCart(variables)
                     }} />
 

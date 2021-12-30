@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { string, number, shape, func, arrayOf, oneOf } from 'prop-types';
 import { Trash2 as DeleteIcon } from 'react-feather';
 import { Link } from 'react-router-dom';
+import { get } from 'lodash';
 
 import Price from '../../Price';
 import { useItem } from '@magento/peregrine/lib/talons/MiniCart/useItem';
@@ -32,9 +33,8 @@ const Item = props => {
 
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, propClasses);
-    const itemLink = useMemo(
-        () => resourceUrl(`/${product.url_key}${product.url_suffix || ''}`),
-        [product.url_key, product.url_suffix]
+    const itemLink = resourceUrl(
+        `/${get(product.url_rewrites[0], "url", "")}${product.url_suffix || ""}`
     );
     const stockStatusText =
         product.stock_status === 'OUT_OF_STOCK'
