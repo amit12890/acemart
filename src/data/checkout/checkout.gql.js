@@ -182,13 +182,11 @@ mutation setShippingMethodsOnCart($input:SetShippingMethodsOnCartInput){
       input: $input
     ) {
         cart {
-            shipping_addresses {
-                ...shippingAddressItemFragment
-            }
+            ...shippingAddressesFragment 
         }
     }
 }
-${ShippingAddressItemFragment}
+${ShippingAddressesFragment}
 `
 
 

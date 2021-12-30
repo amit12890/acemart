@@ -270,6 +270,17 @@ export const ShippingAddressesFragment = gql`
                 error_message
                 method_code
                 method_title
+                additional_information {
+                    distance
+                    pickup
+                    storename
+                    street
+                    city
+                    state
+                    zip
+                    telephone
+                    hours
+                }
             price_excl_tax {
                     currency
                     value
