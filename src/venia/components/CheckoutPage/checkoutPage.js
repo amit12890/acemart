@@ -22,7 +22,7 @@ import FormError from '../FormError';
 import AddressBook from './AddressBook';
 import GuestSignIn from './GuestSignIn';
 import OrderSummary from './OrderSummary';
-import PaymentInformation from './PaymentInformation';
+import PaymentInformation from './PaymentInformationVenia';
 import payments from './PaymentInformationVenia/paymentMethodCollection';
 import PriceAdjustments from './PriceAdjustments';
 import ShippingMethod from './ShippingMethod';
@@ -30,16 +30,17 @@ import ShippingInformation from './ShippingInformation';
 import OrderConfirmationPage from './OrderConfirmationPage';
 import ItemsReview from './ItemsReview';
 import SplitOrder from '../../../components/SplitOrder';
+import CheckoutGuestInput from '../../../components/CheckoutGuestInput';
 
 import defaultClasses from './checkoutPage.css';
-import { size } from 'lodash';
+import { get, size } from 'lodash';
+import BillingAddress from './BillingAddress/billingAddress';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
 const CheckoutPage = props => {
     const { classes: propClasses } = props;
 
-    const [selectedPayment, setSelectedPayment] = useState(false)
     const { formatMessage } = useIntl();
     const talonProps = useCheckoutPage();
 
@@ -50,6 +51,8 @@ const CheckoutPage = props => {
          */
         isDefaultStore,
         activeContent,
+        handleGuestEmail,
+        settingEmail,
         availablePaymentMethods,
         cartItems,
         checkoutStep,
@@ -84,8 +87,6 @@ const CheckoutPage = props => {
         multiShipping,
         isMultiShipping
     } = talonProps;
-    console.log("🚀 ~ file: checkoutPage.js ~ line 85 ~ availablePaymentMethods", availablePaymentMethods)
-    console.log("🚀 ~ file: checkoutPage.js ~ line 81 ~ checkoutData", checkoutData)
 
     const [, { addToast }] = useToasts();
 
@@ -155,26 +156,41 @@ const CheckoutPage = props => {
             </div>
         );
     } else {
+
+
+        //==================================================================================================================
+        // GUEST USER SIGNIN BLOCK
+        //==================================================================================================================
+
+
         const signInContainerElement = isGuestCheckout ? (
-            <div className={classes.signInContainer}>
-                {/* <span className={classes.signInLabel}>
+            <div>
+                <div className={classes.signInContainer}>
+                    {/* <span className={classes.signInLabel}>
                     <FormattedMessage
                         id={'checkoutPage.signInLabel'}
                         defaultMessage={'Sign in for Express Checkout'}
                     />
                 </span> */}
-                <Button
-                    className={classes.signInButton}
-                    onClick={toggleSignInContent}
-                    priority="normal"
-                >
-                    <FormattedMessage
-                        id={'checkoutPage.signInButton'}
-                        defaultMessage={'Sign In'}
-                    />
-                </Button>
+                    <Button
+                        className={classes.signInButton}
+                        onClick={toggleSignInContent}
+                        priority="normal"
+                    >
+                        <FormattedMessage
+                            id={'checkoutPage.signInButton'}
+                            defaultMessage={'Sign In'}
+                        />
+                    </Button>
+                </div>
             </div>
         ) : null;
+
+
+        //==================================================================================================================
+        // SHIPPING METHOD
+        //==================================================================================================================
+
 
         const shippingMethodSection =
             checkoutStep >= CHECKOUT_STEP.SHIPPING_METHOD ? (
@@ -212,18 +228,29 @@ const CheckoutPage = props => {
             );
         }
 
+
+        //==================================================================================================================
+        // PAYMENT INFO BLOCK
+        //==================================================================================================================
+
+
         const paymentInformationSection =
             checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
-                <PaymentInformation data={availablePaymentMethods} />
-            )
-                : (
-                    <h3 className={classes.payment_information_heading}>
-                        <FormattedMessage
-                            id={'checkoutPage.paymentInformationStep'}
-                            defaultMessage={'3. Payment Information'}
-                        />
-                    </h3>
-                );
+                <PaymentInformation
+                    onSave={setPaymentInformationDone}
+                    checkoutError={error}
+                    resetShouldSubmit={resetReviewOrderButtonClicked}
+                    setCheckoutStep={setCheckoutStep}
+                    shouldSubmit={reviewOrderButtonClicked}
+                />
+            ) : (
+                <h3 className={classes.payment_information_heading}>
+                    <FormattedMessage
+                        id={'checkoutPage.paymentInformationStep'}
+                        defaultMessage={'3. Payment Information'}
+                    />
+                </h3>
+            );
 
         const priceAdjustmentsSection =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
@@ -231,6 +258,12 @@ const CheckoutPage = props => {
                     <PriceAdjustments setPageIsUpdating={setIsUpdating} />
                 </div>
             ) : null;
+
+
+        //==================================================================================================================
+        // REVIEW ORDER BUTTON
+        //==================================================================================================================
+
 
         const reviewOrderButton =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
@@ -242,14 +275,19 @@ const CheckoutPage = props => {
                         reviewOrderButtonClicked ||
                         isUpdating ||
                         !isPaymentAvailable
-                    }
-                >
+                    }>
                     <FormattedMessage
                         id={'checkoutPage.reviewOrder'}
                         defaultMessage={'Review Order'}
                     />
                 </Button>
             ) : null;
+
+
+        //==================================================================================================================
+        // ITEM REVIEW COMPONENT
+        //==================================================================================================================
+
 
         const itemsReview =
             checkoutStep === CHECKOUT_STEP.REVIEW ? (
@@ -327,11 +365,15 @@ const CheckoutPage = props => {
                 </Link>
             </Fragment>
         );
+
+
+        //==================================================================================================================
+        // CHECKOUT PAGE COMPONENT MERGIN ADDED HERE
+        //==================================================================================================================
+
+
         checkoutContent = (
             <div className={checkoutContentClass}>
-                {isMultiShipping && (
-                    <SplitOrder data={multiShipping} />
-                )}
                 <div className={classes.heading_container}>
                     <FormError
                         classes={{
@@ -349,6 +391,19 @@ const CheckoutPage = props => {
                     </div>
                 </div>
                 <div className={classes.shipping_information_container}>
+                    {isMultiShipping && (
+                        <SplitOrder data={multiShipping} />
+                    )}
+                    {isGuestCheckout && (
+                        <div style={{ paddingTop: 16, paddingBottom: 16 }}>
+                            <CheckoutGuestInput
+                                initialValue={get(checkoutData, "cart.email", "")}
+                                onSave={(email) => {
+                                    handleGuestEmail(email)
+                                }}
+                                loading={settingEmail} />
+                        </div>
+                    )}
                     <ScrollAnchor ref={shippingInformationRef}>
                         <ShippingInformation
                             onSave={setShippingInformationDone}
@@ -363,6 +418,12 @@ const CheckoutPage = props => {
                         {shippingMethodSection}
                     </ScrollAnchor>
                 </div>
+                {/* <div>
+                    <ScrollAnchor ref={shippingInformationRef}>
+                        <BillingAddress
+                            isS/>
+                    </ScrollAnchor>
+                </div> */}
                 <div className={classes.payment_information_container}>
                     {paymentInformationSection}
                 </div>

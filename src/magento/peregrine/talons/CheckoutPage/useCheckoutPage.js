@@ -12,7 +12,7 @@ import { useCartContext } from '@magento/peregrine/lib/context/cart';
 
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
 
-import DEFAULT_OPERATIONS from './checkoutPage.gql.js';
+import DEFAULT_OPERATIONS, { SET_GUEST_EMAIL } from './checkoutPage.gql.js';
 
 import CheckoutError from './CheckoutError';
 import { get, size } from 'lodash';
@@ -100,6 +100,30 @@ export const useCheckoutPage = (props = {}) => {
     const [{ isSignedIn }] = useUserContext();
     const [{ cartId }, { createCart, removeCart }] = useCartContext();
 
+    //==================================================================================================================
+    // SET EMAIL MUTATION AND RELATED HANDLER FUNCTIONS
+    //==================================================================================================================
+
+    const [setEmailToCart, { loading: settingEmail }] = useMutation(SET_GUEST_EMAIL, {
+        onCompleted: (data) => {
+            const cart = { ...checkoutData.cart, email: get(data, "setGuestEmailOnCart.cart.email", "") }
+            setCheckoutData({ ...checkoutData, cart })
+        }
+    })
+
+    const handleGuestEmail = useCallback((email) => {
+        setEmailToCart({
+            variables: {
+                cartId, email
+            }
+        })
+    }, [cartId])
+
+    //==================================================================================================================
+    // PLACE ORDER MUTATION
+    //==================================================================================================================
+
+
     const [fetchCartId] = useMutation(createCartMutation);
     const [
         placeOrder,
@@ -110,6 +134,11 @@ export const useCheckoutPage = (props = {}) => {
         }
     ] = useMutation(placeOrderMutation);
 
+
+    //==================================================================================================================
+    // FETCH CART ID MUTATION
+    //==================================================================================================================
+
     const [
         getOrderDetails,
         { data: orderDetailsData, loading: orderDetailsLoading }
@@ -119,6 +148,12 @@ export const useCheckoutPage = (props = {}) => {
         // because it may contain PII.
         fetchPolicy: 'no-cache'
     });
+
+
+    //==================================================================================================================
+    // CHECKOUT DETAILS FETCH AND SET STORE PICKUP GQL
+    //==================================================================================================================
+
 
     const { data: customerData, loading: customerLoading } = useQuery(
         getCustomerQuery,
@@ -164,13 +199,17 @@ export const useCheckoutPage = (props = {}) => {
      */
     useEffect(() => {
         if (isDefaultStore) {
-            console.log("fetching checkout deatils.....")
             fetchCheckoutDetails()
         } else {
-            console.log("seting store pickup.....")
             setStorePickupAndFetchDetails()
         }
     }, [isDefaultStore])
+
+
+    //==================================================================================================================
+    // DATA MAPPING AND STEPS RELATED FUNCTIONS
+    //==================================================================================================================
+
 
     const cartItems = useMemo(() => {
         return (checkoutData && checkoutData.cart.items) || [];
@@ -258,6 +297,10 @@ export const useCheckoutPage = (props = {}) => {
         }
     }, [checkoutStep]);
 
+    //==================================================================================================================
+    // PLACE ORDER CALL
+    //==================================================================================================================
+
     const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
     const handlePlaceOrder = useCallback(async () => {
@@ -323,6 +366,8 @@ export const useCheckoutPage = (props = {}) => {
     return {
         isDefaultStore,
         activeContent,
+        handleGuestEmail,
+        settingEmail,
         availablePaymentMethods: checkoutData
             ? checkoutData.cart.available_payment_methods
             : null,

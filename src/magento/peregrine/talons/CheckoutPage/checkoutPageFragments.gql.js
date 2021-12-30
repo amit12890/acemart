@@ -1,22 +1,31 @@
 import { gql } from '@apollo/client';
 
-// export const CheckoutPageFragment = gql`
-//     fragment CheckoutPageFragment on Cart {
-//         id
-//         items {
-//             id
-//             product {
-//                 id
-//                 stock_status
-//             }
-//         }
-//         # If total quantity is falsy we render empty.
-//         total_quantity
-//         available_payment_methods {
-//             code
-//         }
-//     }
-// `;
+export const OrderConfirmationPageFragment = gql`
+    fragment OrderConfirmationPageFragment on Cart {
+        id
+        email
+        total_quantity
+        shipping_addresses {
+            firstname
+            lastname
+            street
+            city
+            region {
+                label
+            }
+            postcode
+            country {
+                label
+            }
+
+            selected_shipping_method {
+                carrier_title
+                method_title
+            }
+        }
+    }
+`;
+
 
 export const MultiShippingFragment = gql`
     fragment multiShippingFragment on Cart {
