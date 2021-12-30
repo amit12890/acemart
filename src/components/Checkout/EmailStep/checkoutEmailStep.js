@@ -53,7 +53,6 @@ export default connect(store => {
     const [{ cartId }] = useCartContext()
     const [{ isSignedIn }] = useUserContext()
     const { isEmailAvailable, loading: emailValidating, checkEmailAvailable, setGuestEmailOnCart, settingEmail } = useEmailStep()
-    console.log("🚀 ~ file: checkoutEmailStep.js ~ line 50 ~ isEmailAvailable", isEmailAvailable)
     const [, { addToast }] = useToasts();
 
     const [email, setEmail] = useState(props.email)

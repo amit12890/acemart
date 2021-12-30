@@ -9,7 +9,10 @@ import gql from '../checkout.gql'
 import { updateCheckoutField } from '../checkout.action'
 import { get } from 'lodash'
 
-const { setPaymentMethodMutation } = gql
+const {
+    setPaymentMethodMutation,
+    generatePayPalTokenMutation
+} = gql
 
 
 export const useCheckoutPayment = () => {
@@ -20,7 +23,8 @@ export const useCheckoutPayment = () => {
         onCompleted: (data) => {
             // console.log("-----------[log]------------","payment method set successfully",data)
             let selected_payment_method = get(data, "setPaymentMethodOnCart.cart.selected_payment_method", {})
-            dispatch(updateCheckoutField({ selected_payment_method }))
+            let shipping_addresses = get(data, "setPaymentMethodOnCart.cart.shipping_addresses", {})
+            dispatch(updateCheckoutField({ selected_payment_method, shipping_addresses }))
         }
     })
 
@@ -56,5 +60,33 @@ export const useCheckoutPayment = () => {
     return {
         setPaymentMethodOnCart,
         settingPaymentMethod
+    }
+}
+
+export const usePayPal = () => {
+    const dispatch = useDispatch()
+    const [{ cartId }] = useCartContext()
+
+    const [generatePayPalToken, { loading: generatingToken, data: paypalData }] = useMutation(generatePayPalTokenMutation, {
+        fetchPolicy: 'network-only',
+        onCompleted: (data) => {
+            // console.log("-----------[log]------------","payment method set successfully",data)
+            let selected_payment_method = get(data, "setPaymentMethodOnCart.cart.selected_payment_method", {})
+            let shipping_addresses = get(data, "setPaymentMethodOnCart.cart.shipping_addresses", {})
+            dispatch(updateCheckoutField({ selected_payment_method, shipping_addresses }))
+        }
+    })
+
+    const handleGeneratePayPalToken = useCallback(() => {
+        generatePayPalToken({
+            variables: {
+                cartId
+            }
+        })
+    }, [cartId])
+
+    return {
+        handleGeneratePayPalToken,
+        paypalData
     }
 }

@@ -199,10 +199,12 @@ mutation setBillingAddressOnCart($input:SetBillingAddressOnCartInput){
     ) {
         cart {
            ...billingAddressFragment
+           ...shippingAddressesFragment 
         }
     }
 }
 ${BillingAddressFragment}
+${ShippingAddressesFragment}
 `
 
 export const SET_PAYMENT_METHOD_ON_CART = gql`
@@ -213,9 +215,11 @@ mutation setPaymentMethodOnCart($input:SetPaymentMethodOnCartInput){
                 code
                 title
             }
+            ...shippingAddressesFragment 
         }
     }
 }
+${ShippingAddressesFragment}
 `
 
 export const MERGE_CART_MUTATION = gql`
@@ -256,6 +260,28 @@ export const MERGE_CART_MUTATION = gql`
     ${MultiShippingFragment}
 `
 
+export const PAYPAL_GENERATE_TOKEN = gql`
+mutation createPaypalExpressToken($cartId: String!){
+    createPaypalExpressToken(
+      input: {
+        cart_id: $cartId
+        code: "paypal_express"
+        express_button: true
+        urls: {
+          return_url: "paypal/action/return.html"
+          cancel_url: "paypal/action/cancel.html"
+        }
+      }
+    ) {
+      token
+      paypal_urls {
+        start
+        edit
+      }
+    }
+  }
+`
+
 export default {
     getCountries: GET_COUNTRIES,
     setGuestCartEmail: SET_GUEST_EMAIL,
@@ -270,5 +296,7 @@ export default {
     setBillingAddressMutation: SET_BILLING_ADDRESS_GQL,
     setShippingMethodMutation: SET_SHIPPING_METHOD_ON_CART,
     setPaymentMethodMutation: SET_PAYMENT_METHOD_ON_CART,
-    mergeCartMutation: MERGE_CART_MUTATION
+    mergeCartMutation: MERGE_CART_MUTATION,
+
+    generatePayPalTokenMutation: PAYPAL_GENERATE_TOKEN
 };

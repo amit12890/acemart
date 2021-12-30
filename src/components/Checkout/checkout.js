@@ -16,7 +16,7 @@ import PaymentListStep from './PaymentListStep'
 
 import defaultClasses from './checkout.css'
 import { get, size } from 'lodash'
-import { useCheckoutPayment } from '../../data/checkout/hooks/payment.hook'
+import { useCheckoutPayment, usePayPal } from '../../data/checkout/hooks/payment.hook'
 import ReviewCheckout from './ReviewCheckout'
 import CartSummary from './CartSummary'
 import CartItemList from './CartItemList'
@@ -62,6 +62,8 @@ export default connect(store => ({
 
     const { setShippingMethodOnCart } = useShippingMethods()
     const { setPaymentMethodOnCart, settingPaymentMethod } = useCheckoutPayment()
+    const { handleGeneratePayPalToken, paypalData } = usePayPal()
+    console.log("🚀 ~ file: checkout.js ~ line 66 ~ paypalData", paypalData)
     const { placeOrder, placingOrder } = usePlaceOrder()
 
     const classes = useStyle(defaultClasses)
@@ -83,6 +85,13 @@ export default connect(store => ({
     } else if (isDefaultStore) {
         initBillinAddress = shipping_addresses[0]
     }
+
+    useEffect(() => {
+        if (size(paypalData) > 0) {
+            console.log("🚀 ~ file: checkout.js ~ line 91 ~ useEffect ~ paypalData", paypalData)
+            history.replace(get(paypalData, "data.paypal_urls.start", ""))
+        }
+    }, [paypalData])
 
     useEffect(() => {
         if (size(orderNumber) > 0) {
@@ -123,7 +132,7 @@ export default connect(store => ({
                     <EmailStep enabled={true} />
                 )}
                 <AddressStep
-                    enabled={isEmailAdded || !isDefaultStore}
+                    enabled={isEmailAdded || isDefaultStore}
                     data={customerAddresses}
                     title="Shipping Address"
                     setting={settingShippingAddress}
@@ -167,7 +176,7 @@ export default connect(store => ({
                     isDefaultStore={isDefaultStore} />
 
                 <ListStep
-                    enabled={isShippingAddressSelected || !isDefaultStore}
+                    enabled={isShippingAddressSelected || isDefaultStore}
                     title="Shipping Method"
                     data={get(shipping_addresses[0], "available_shipping_methods", [])}
                     initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}
@@ -198,12 +207,12 @@ export default connect(store => ({
                             variables = {
                                 customer_address_id: null,
                                 address,
-                                same_as_shipping: address.id === selectedShippingAddress.id
+                                same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
                             }
                         } else {
                             variables = {
                                 customer_address_id: get(address, "id", ''),
-                                same_as_shipping: address.id === selectedShippingAddress.id
+                                same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
                             }
                         }
 
@@ -255,7 +264,12 @@ export default connect(store => ({
                     data={available_payment_methods}
                     initialValues={selected_payment_method}
                     onItemClick={(paymentOpt) => {
-                        setPaymentMethodOnCart(get(paymentOpt, "code", ''))
+                        const code = get(paymentOpt, "code", '')
+                        if (code === 'paypal_express') {
+                            handleGeneratePayPalToken()
+                        } else {
+                            setPaymentMethodOnCart(get(paymentOpt, "code", ''))
+                        }
                     }}
                     isDefaultStore={isDefaultStore} />
 

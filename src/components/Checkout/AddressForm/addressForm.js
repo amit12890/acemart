@@ -54,7 +54,6 @@ const CheckoutAddressForm = props => {
     useEffect(() => {
         if (size(countryData) > 0) {
             let country = findCountryByCode('US', countryData)
-            console.log("🚀 ~ file: AddressForm.js ~ line 62 ~ useEffect ~ country", country)
             setCountry(country)
         }
     }, [countryData])
@@ -97,7 +96,6 @@ const CheckoutAddressForm = props => {
             return
         }
         setErrors({})
-        console.log("🚀 ~ file: AddressForm.js ~ line 102 ~ submitForm ~ region", region)
         let data = {
             region_id: get(region, "id", ""),
             region: region.code || 'CA',
@@ -110,7 +108,6 @@ const CheckoutAddressForm = props => {
             lastname,
             save_in_address_book: saveInAddressBook,
         }
-        console.log("🚀 ~ file: AddressForm.js ~ line 100 ~ submitForm ~ data", data)
 
         onSaveAddress(data)
     }, [
