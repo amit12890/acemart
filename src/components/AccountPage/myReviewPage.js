@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { ChevronDown, ChevronUp } from 'react-feather';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
-
+import { get, size } from 'lodash';
 
 import { GET_CUSTOMER_REVIEWS } from './myReviewPage.gql';
 import defaultClasses from './myReviewPage.css';
 
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { get, size } from 'lodash';
 
 import RatingMini from '../../@amasty/components/Rating/rating_mini';
 import ProductPerPage from '../../RootComponents/Category/productPerPage';
-import RichText from '../../venia/components/RichText';
-import { Link } from 'react-router-dom';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { replaceSpecialChars } from "../../app.utils"
-
-
-
 
 
 const MyReviewPage = props => {
@@ -38,7 +31,11 @@ const MyReviewPage = props => {
     if (loading) return fullPageLoadingIndicator;
 
     if (error) {
-        return <div className={classes.noResult}>No review yet</div>;
+        return (
+            <div className={classes.noResult}>
+                Error while loading review data !
+            </div>
+        )
     }
 
     if (!data) {
@@ -65,43 +62,37 @@ const MyReviewPage = props => {
             <div className={classes.reviewListWrapper}>
                 <ul className={classes.orderHistoryTable}>
                     {reviewList.map(item => {
-                        const { product, created_at, text } = item;
-                        const { name, url_rewrites, url_suffix } = product;
+                        const { product, average_rating, created_at, text } = item;
+                        const { name, small_image, url_rewrites, url_suffix } = product;
                         const productLink = resourceUrl(
-                            `/${get(url_rewrites[0], 'url', '')}${url_suffix ||
-                            ''}`
+                            `/${get(url_rewrites[0], 'url', '')}${url_suffix || ''}`
                         );
+
                         return (
                             <li className={classes.reviewRow}>
                                 <div className={classes.productImageContainer}>
-                                    Image Details
+                                    <img src={get(small_image, 'url')} />
                                 </div>
-                                <div className={classes.productNameContainer}>
 
-                                    <strong>{replaceSpecialChars(name)}</strong>
-
-                                </div>
+                                <Link to={productLink}>
+                                    <div className={classes.productNameContainer}>
+                                        <strong>{replaceSpecialChars(name)}</strong>
+                                    </div>
+                                </Link>
                                 <div className={classes.reviewDateContainer}>
-                                    <div className={classes.reviewDate}>{new Date(created_at).toLocaleDateString()}</div>
+                                    <div className={classes.reviewDate}>{created_at}</div>
                                     <div className={classes.avgRatings}>
                                         <RatingMini
-                                            percent={20}
+                                            percent={average_rating}
                                             value={5}
                                             showValue={false}
                                         />
                                     </div>
                                     <div className={classes.productReview}>{text}</div>
-
-
                                 </div>
-
                             </li>
                         );
                     })}
-
-
-
-
                 </ul>
             </div>
 
