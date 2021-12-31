@@ -74,61 +74,72 @@ export default function StoreSwitcherPopupContent({
 
     return (
         <div className={classes.content}>
-
-            <div>
-                <div>
+            <div className={classes.panelHeader}>
+                <div className={classes.panelTopRow}>
                     <h2>Currently Shopping</h2>
-                    <div>{currentStoreName}</div>
+                    <h3>{currentStoreName}</h3>
                     {currentStoreConfig.store_name === "Acemart.com" ?
-                    <ul>
-                        <li>
-                            <div>Delivery Options Available:</div>
-                            <ul>
-                                <li>Shipping Direct.</li>
-                                <li>Pickup at Warehouse.</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
-                            <div>
-                                <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
-                                <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
-                            </div>
-                            <div>
-                                <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
-                                    Driving directions
-                                </Link>
-                            </div>
-                        </li>
-                        <li>
-                            <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
-                        </li>
-                    </ul>
-                    :
-                    <ul>
-                        <li>
-                            <div>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
-                            <div>
-                                <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
-                                <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
-                            </div>
-                            <div>
-                                <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
-                                    Driving directions
-                                </Link>
-                            </div>
-                        </li>
-                        <li>
-                            <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
-                        </li>
-                        <li>
-                            <div>Phone : {get(currentStoreConfig, "store_locator_info.phone", "")}</div>
-                            <div>Fax : {get(currentStoreConfig, "store_locator_info.fax", "")}</div>
-                        </li>
-                    </ul>
+                        <ul className={classes.storeData}>
+                            <li className={classes.storeDataItem}>
+                                <div><strong>Delivery Options Available:</strong></div>
+                                <ul className={classes.storeDeliveryOptions}>
+                                    <li>Shipping Direct.</li>
+                                    <li>Pickup at Warehouse.</li>
+                                </ul>
+                            </li>
+                            <li className={classes.storeDataItem}>
+                                <div className={classes.addressStreet}>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
+                                <div className={classes.addressCityZip}>
+                                    <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
+                                    <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
+                                </div>
+                                <div className={classes.storeDirection}>
+                                    <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="37" height="32" viewBox="0 0 37 32">
+                                                <title>car</title>
+                                                <path d="M8.563 19.719q0-1.188-0.828-2.031t-2.016-0.844-2.031 0.844-0.844 2.031 0.844 2.016 2.031 0.828 2.016-0.828 0.828-2.016zM9.219 14h18.125l-1.563-6.375q-0.063-0.156-0.266-0.313t-0.359-0.156h-13.719q-0.156 0-0.375 0.156t-0.25 0.313zM33.719 19.719q0-1.188-0.844-2.031t-2.031-0.844q-1.156 0-2 0.844t-0.844 2.031 0.844 2.016 2 0.828q1.188 0 2.031-0.828t0.844-2.016zM36.563 18v6.844q0 0.25-0.156 0.422t-0.406 0.172h-1.719v2.281q0 1.406-1 2.422t-2.438 1.016q-1.406 0-2.406-1.016t-1-2.422v-2.281h-18.281v2.281q0 1.406-1.016 2.422t-2.422 1.016q-1.438 0-2.438-1.016t-1-2.422v-2.281h-1.719q-0.219 0-0.391-0.172t-0.172-0.422v-6.844q0-1.656 1.172-2.828t2.828-1.172h0.5l1.875-7.469q0.406-1.688 1.859-2.828t3.203-1.141h13.719q1.719 0 3.172 1.141t1.859 2.828l1.875 7.469h0.5q1.656 0 2.828 1.172t1.172 2.828v0z"></path>
+                                            </svg>
+                                        </i>
+                                        <span>Driving directions</span>
+                                    </Link>
+                                </div>
+                            </li>
+                            <li className={classes.storeDataItem}>
+                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
+                            </li>
+                        </ul>
+                        :
+                        <ul className={classes.storeData}>
+                            <li className={classes.storeDataItem}>
+                                <div className={classes.addressStreet}>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
+                                <div className={classes.addressCityZip}>
+                                    <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
+                                    <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
+                                </div>
+                                <div className={classes.storeDirection}>
+                                    <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
+                                        <i className={classes.iconWrapper}>
+                                            <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="37" height="32" viewBox="0 0 37 32">
+                                                <title>car</title>
+                                                <path d="M8.563 19.719q0-1.188-0.828-2.031t-2.016-0.844-2.031 0.844-0.844 2.031 0.844 2.016 2.031 0.828 2.016-0.828 0.828-2.016zM9.219 14h18.125l-1.563-6.375q-0.063-0.156-0.266-0.313t-0.359-0.156h-13.719q-0.156 0-0.375 0.156t-0.25 0.313zM33.719 19.719q0-1.188-0.844-2.031t-2.031-0.844q-1.156 0-2 0.844t-0.844 2.031 0.844 2.016 2 0.828q1.188 0 2.031-0.828t0.844-2.016zM36.563 18v6.844q0 0.25-0.156 0.422t-0.406 0.172h-1.719v2.281q0 1.406-1 2.422t-2.438 1.016q-1.406 0-2.406-1.016t-1-2.422v-2.281h-18.281v2.281q0 1.406-1.016 2.422t-2.422 1.016q-1.438 0-2.438-1.016t-1-2.422v-2.281h-1.719q-0.219 0-0.391-0.172t-0.172-0.422v-6.844q0-1.656 1.172-2.828t2.828-1.172h0.5l1.875-7.469q0.406-1.688 1.859-2.828t3.203-1.141h13.719q1.719 0 3.172 1.141t1.859 2.828l1.875 7.469h0.5q1.656 0 2.828 1.172t1.172 2.828v0z"></path>
+                                            </svg>
+                                        </i>
+                                        <span>Driving directions</span>
+                                    </Link>
+                                </div>
+                            </li>
+                            <li className={classes.storeDataItem}>
+                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
+                            </li>
+                            <li className={classes.storeDataItem}>
+                                <div className={classes.addressPhone}>Phone : {get(currentStoreConfig, "store_locator_info.phone", "")}</div>
+                                <div className={classes.addressPhone}>Fax : {get(currentStoreConfig, "store_locator_info.fax", "")}</div>
+                            </li>
+                        </ul>
                     }
                 </div>
-                <div>
+                <div className={classes.panelBottomRow}>
                     {currentStoreName !== "Acemart.com" ?
                         <Button onClick={handleSwitchStoreClick("default")}>
                             Ship Direct on Acemart.com
@@ -137,7 +148,10 @@ export default function StoreSwitcherPopupContent({
                         null
                     }
                     <Link to={"#"}>
-                        <Button>View All Store Locations</Button>
+                        <Button
+                            className={classes.buttonSmall}>
+                            View All Store Locations
+                        </Button>
                     </Link>
                 </div>
             </div>

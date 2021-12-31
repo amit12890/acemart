@@ -112,14 +112,14 @@ const SmallCarousel = props => {
             {size(sortedImages) > 1 && (
                 <CarouselProvider
                     naturalSlideWidth={200}
-                    naturalSlideHeight={100}
+                    naturalSlideHeight={200}
                     isPlaying={false}
-                    visibleSlides={3}
+                    visibleSlides={4}
                     totalSlides={size(sortedImages)}
                 >
-                    {/* <div className={classes.thumbnailList}>
+                    {<div className={classes.thumbnailList}>
                         <Slider>{thumbnails}</Slider>
-                    </div> */}
+                    </div>}
                 </CarouselProvider>
             )}
         </div>

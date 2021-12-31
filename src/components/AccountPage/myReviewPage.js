@@ -80,7 +80,6 @@ const MyReviewPage = props => {
                                     </div>
                                 </Link>
                                 <div className={classes.reviewDateContainer}>
-                                    <div className={classes.reviewDate}>{created_at}</div>
                                     <div className={classes.avgRatings}>
                                         <RatingMini
                                             percent={average_rating}
@@ -89,6 +88,7 @@ const MyReviewPage = props => {
                                         />
                                     </div>
                                     <div className={classes.productReview}>{text}</div>
+                                    <div className={classes.reviewDate}>{new Date(created_at).toLocaleDateString()}</div>
                                 </div>
                             </li>
                         );
