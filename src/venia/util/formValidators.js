@@ -1,3 +1,5 @@
+import { hasLengthAtLeast } from '@magento/venia-ui/lib/util/formValidators';
+
 const SUCCESS = undefined;
 
 export const isRequired = value => {
