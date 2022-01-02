@@ -44,7 +44,7 @@ const ProductReviews = props => {
 
     return (
         <div ref={rootRef} className={classes.root}>
-            {size(productReviews.items) !== 0 && (
+            {Boolean(productReviews.totalRecords) ? (
                 <>
                     <div className={classes.title}>Customer Reviews</div>
                     <Summary
@@ -63,10 +63,14 @@ const ProductReviews = props => {
                         handleStarFilter={handleStarFilter}
                     />
                 </>
-            )}
+            ) : null}
             <div ref={reviewFormRef} className={classes.reviewFormWrapper}>
                 <div className={classes.reviewFormContainer}>
-                    <ReviewForm {...settings} productName={name} productId={id} />
+                    <ReviewForm
+                        {...settings}
+                        productName={name}
+                        productId={id}
+                    />
                 </div>
             </div>
         </div>
