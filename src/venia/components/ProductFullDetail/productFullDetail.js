@@ -288,7 +288,7 @@ const ProductFullDetail = props => {
             return (
                 <div className={classes.piSectionRow}>
                     <div className={classes.instock}>
-                        {get(pos_stock_manage, "stock_final_label", "")}
+                        {storeFinalLabel}
                     </div>
                 </div>
             )
@@ -298,7 +298,7 @@ const ProductFullDetail = props => {
                     <div
                         className={classes.stockAvailability}
                         style={{ borderBottomWidth: 0 }}>
-                        {get(pos_stock_manage, "stock_label", "")}
+                        {storeFinalLabel}
                     </div>
                 </div>
             )

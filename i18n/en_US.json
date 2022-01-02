@@ -1,7 +1,9 @@
 {
+    "autocomplete.resultSummary": "{resultCount} items",
+    "autocomplete.suggestion_error": "An error occurred while fetching suggestions.",
+    "autocomplete.product_error": "An error occurred while fetching products.",
     "form.errors.isRequired": "This is a required field.",
     "signup.formTitle": "Create New Customer Account",
-    "autocomplete.resultSummary": "{resultCount} items",
     "sortItem.recommended": "Recommended",
     "sortItem.price_asc": "Price Asc",
     "sortItem.price_desc": "Price Desc",
@@ -12,8 +14,6 @@
     "editAccountInfo.title": "Edit Account Information",
     "newsletterSubscription.title": "Newsletter Subscription",
     "landingPage.title": "Ace Mart Restaurant Supply",
-    "autocomplete.suggestion_error": "An error occurred while fetching suggestions.",
-    "autocomplete.product_error": "An error occurred while fetching products.",
     "landingPage.description": "Ace Mart Restaurant Supply has a large inventory of in-stock restaurant equipment and supplies available at wholesale prices. Shop online or in-store today.",
     "searchPage.searchTermText": "Search Results for <highlight>{term}</highlight>"
 }
