@@ -1,4 +1,5 @@
 {
+    "form.errors.isRequired": "This is a required field.",
     "signup.formTitle": "Create New Customer Account",
     "autocomplete.resultSummary": "{resultCount} items",
     "sortItem.recommended": "Recommended",

@@ -12,7 +12,9 @@ import Password from '../Password';
 import LinkButton from '../LinkButton';
 import FormError from '../FormError/formError';
 
-import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
+import {
+    isRequired,
+} from '../../util/formValidators';
 import { useStyle } from '../../classify';
 import { GET_CART_DETAILS_QUERY } from './signIn.gql';
 import defaultClasses from './signIn.css';
