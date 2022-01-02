@@ -608,7 +608,7 @@ const ProductFullDetail = props => {
                                     {(get(storeConfig, "data.storeConfig.store_name") === "Acemart.com" && product.ship_time) ? (
                                         <div className={classes.apSectionRow}>
                                             <div className={classes.extraShipInfo}>
-                                                {product.ship_time}
+                                                <RichText content={product.ship_time} />
                                             </div>
                                         </div>
                                     ) : null}
@@ -770,7 +770,7 @@ const ProductFullDetail = props => {
                         </h2>
                     </div>
                     <div className={classes.sectionContent}>
-                        <RichText content={productDetails.description} />
+                        <RichText content={get(productDetails, "description.html", "")} />
                     </div>
                     <br />
                     <div className={classes.californiaResident} onClick={openCaliforniaPopup}>
