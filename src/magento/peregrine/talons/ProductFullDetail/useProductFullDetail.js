@@ -9,7 +9,7 @@ import { findMatchingVariant } from '@magento/peregrine/lib/util/findMatchingPro
 import { isProductConfigurable } from '@magento/peregrine/lib/util/isProductConfigurable';
 import { deriveErrorMessage } from '@magento/peregrine/lib/util/deriveErrorMessage';
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
-import defaultOperations from '@magento/peregrine/lib/talons/ProductFullDetail/productFullDetail.gql';
+import defaultOperations from "./productFullDetail.gql"
 
 import { useToasts } from '@magento/peregrine';
 import Icon from '@magento/venia-ui/lib/components/Icon';
@@ -17,6 +17,7 @@ import {
     CheckCircle as CheckIcon,
     AlertCircle as AlertCircleIcon
 } from 'react-feather';
+import { get, size } from "lodash"
 
 const INITIAL_OPTION_CODES = new Map();
 const INITIAL_OPTION_SELECTIONS = new Map();
@@ -167,6 +168,8 @@ const successIcon = (
     />
 );
 
+const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
+
 /**
  * @param {GraphQLDocument} props.addConfigurableProductToCartMutation - configurable product mutation
  * @param {GraphQLDocument} props.addSimpleProductToCartMutation - configurable product mutation
@@ -265,14 +268,28 @@ export const useProductFullDetail = props => {
         { error: errorAddingProductToCart, loading: isAddProductLoading }
     ] = useMutation(operations.addProductToCartMutation, {
         onCompleted: data => {
-            addToast({
-                type: 'success',
-                icon: successIcon,
-                message:
-                    product.product_name + ' successfully added into cart.',
-                dismissable: true,
-                timeout: 3000
-            });
+            const user_errors = get(data, 'addProductsToCart.user_errors');
+            if (size(user_errors)) {
+                for (let index = 0; index < user_errors.length; index++) {
+                    const error = user_errors[index];
+                    addToast({
+                        type: 'error',
+                        icon: ErrorIcon,
+                        message: error.message,
+                        dismissable: true,
+                        timeout: 3000
+                    });
+                }
+            } else {
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message:
+                        product.product_name + ' successfully added into cart.',
+                    dismissable: true,
+                    timeout: 3000
+                });
+            }
         }
     });
 
