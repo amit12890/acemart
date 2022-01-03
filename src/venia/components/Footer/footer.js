@@ -309,7 +309,8 @@ const Footer = props => {
                                 <NewsletterSubscriptionInput />
                             </div>
                             <div className={classes.blockPaymentAccepted}>
-                                <Image src={footerPayment} />
+                                <Image
+                                    src={footerPayment} />
                             </div>
                             <div className={classes.blockCustomerId}>
                                 <span>Customer WebID:</span> 185 273 042
