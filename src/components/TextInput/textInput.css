@@ -1,6 +1,6 @@
 
 .input {
-    composes: input from '../Field/field.css';
+    composes: input from '../../venia/components/Field/field.css';
     background-color: red;
     
 
@@ -15,11 +15,11 @@
 }
 
 .input_error {
-    composes: input from '../Field/field.css';
+    composes: input from '../../venia/components/Field/field.css';
     border-color: rgb(var(--venia-global-color-red-400));
 }
 
 .inputText {
-    composes: input from '../Field/field.css'; 
+    composes: input from '../../venia/components/Field/field.css';
 }
 
