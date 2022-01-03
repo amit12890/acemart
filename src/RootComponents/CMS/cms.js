@@ -16,7 +16,7 @@ import { updateAppState } from '../../data/appState/appState.action';
 const CMSPage = props => {
     const { id } = props;
     const dispatch = useDispatch()
-    const talonProps = useCmsPage({ id });
+    const talonProps = useCmsPage({ id: Number(id) });
     const {
         cmsPage,
         hasContent,
