@@ -73,3 +73,5 @@ export const productSpecsheetUrl = specsheet =>
     `${HOST_URL}/pub/media/specsheets/${specsheet}.pdf`;
 export const productSpecsheetLogoUrl = () =>
     `${HOST_URL}/pub/media/attribute/pdf-logo32px.svg.png`;
+
+export const comingSoonImage = () => 'https://cdn.acemart.com/pub/media/catalog/product/placeholder/default/Image-Coming-Soon.jpg'
