@@ -84,17 +84,21 @@ const WishlistPage = props => {
             <div className={classes.blockContent}>
                 {content}
             </div>
-            <div className={classes.blockAction}>
-                <Link to={myWishlistPage()}>
-                    <i className={classes.iconWrapper}>
-                        <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                            <title>arrow-right-thin</title>
-                            <path d="M25.875 14l-9.719-9.719 2.281-2.25 13.563 13.563-13.563 13.594-2.281-2.281 9.719-9.719h-25.875v-3.188h25.875z"></path>
-                        </svg>
-                    </i>
-                    <span>Go to Wish List</span>
-                </Link>
-            </div>
+            {isUserSignedIn ?
+                <div className={classes.blockAction}>
+                    <Link to={myWishlistPage()}>
+                        <i className={classes.iconWrapper}>
+                            <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                <title>arrow-right-thin</title>
+                                <path d="M25.875 14l-9.719-9.719 2.281-2.25 13.563 13.563-13.563 13.594-2.281-2.281 9.719-9.719h-25.875v-3.188h25.875z"></path>
+                            </svg>
+                        </i>
+                        <span>Go to Wish List</span>
+                    </Link>
+                </div>
+                :
+                null
+            }
         </div>
     );
 };

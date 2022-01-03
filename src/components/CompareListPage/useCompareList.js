@@ -20,6 +20,7 @@ import { useUserContext } from "@magento/peregrine/lib/context/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { compareListPage } from "../../url.utils";
+import { replaceSpecialChars } from "../../app.utils";
 
 
 const successIcon = (
@@ -69,13 +70,15 @@ export const useCompareList = props => {
         onCompleted: (data) => {
             const items = get(data, "createCompareList.items", [])
             const lastAddedItem = last(items)
+            let message = `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`
+            message = replaceSpecialChars(message)
             addToast({
                 type: 'success',
                 icon: successIcon,
-                message: `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`,
+                message,
                 dismissable: false,
                 timeout: 10000,
-                actionText: "Compare",
+                actionText: "Comparison list",
                 onAction: () => history.push(compareListPage())
             })
         }
@@ -89,13 +92,15 @@ export const useCompareList = props => {
             onCompleted: (data) => {
                 const items = get(data, "addProductsToCompareList.items", [])
                 const lastAddedItem = last(items)
+                let message = `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`
+                message = replaceSpecialChars(message)
                 addToast({
                     type: 'success',
                     icon: successIcon,
-                    message: `${get(lastAddedItem, "product.name", "Product")} ${successMessage}`,
+                    message,
                     dismissable: false,
                     timeout: 10000,
-                    actionText: "Compare",
+                    actionText: "Comparison list",
                     onAction: () => history.push(compareListPage())
                 })
             }

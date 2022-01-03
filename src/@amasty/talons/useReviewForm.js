@@ -126,21 +126,6 @@ export const useReviewForm = props => {
     );
 
     const handleSubmitFailure = useCallback(errors => {
-        const errorFields = Object.keys(errors);
-
-        if (!Array.isArray(errorFields) || !errorFields.length) {
-            return null;
-        }
-
-        const el = document.getElementsByName(errorFields[0]);
-
-        if (el && el[0]) {
-            window.scrollTo({
-                top: el[0].offsetTop - Y_OFFSET,
-                left: 0,
-                behavior: 'smooth'
-            });
-        }
     }, []);
 
     useEffect(() => {
