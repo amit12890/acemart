@@ -6,6 +6,7 @@ import Image from '../../venia/components/Image';
 
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './productCategory.css';
+import { comingSoonImage } from '../../url.utils';
 
 const getUrlPath = (path, key) => {
     return '/' + path + '/' + key;
@@ -30,7 +31,7 @@ export default ({ data }) => {
                             width="85"
                             height=""
                             classes={{ image: classes.image }}
-                            src={image}
+                            src={image ? image : comingSoonImage()}
                         />
                     </div>
                     <div className={classes.name}>{item.name}</div>
