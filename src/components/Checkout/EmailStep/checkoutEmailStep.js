@@ -182,7 +182,7 @@ export default connect(store => {
                             type="email"
                             name="email"
                             autoComplete="email"
-                            className="inputText"
+
                             value={email}
                             onChange={(e) => {
                                 setEmail(e.target.value)
