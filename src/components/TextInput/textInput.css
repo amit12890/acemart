@@ -1,7 +1,7 @@
 
 .input {
     composes: input from '../../venia/components/Field/field.css';
-    
+    background-color: red;
     
 
 }
@@ -23,11 +23,3 @@
     composes: input from '../../venia/components/Field/field.css';
 }
 
-.control {
-    margin-bottom: 30px; 
-    background-color: red;
-}
-
-.label {
-    font-size: var(--fontSize-100);
-}

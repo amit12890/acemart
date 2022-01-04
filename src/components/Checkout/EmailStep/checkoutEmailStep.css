@@ -3,11 +3,11 @@
 }
 
 .blockTitle {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     
 }
 
@@ -19,7 +19,6 @@
     border: 0;
     margin: 0 0 40px;
     padding: 0;
-    max-width: 450px;
 }
 
 .fieldset > .field {
@@ -32,15 +31,4 @@
 
 .control {
 
-}
-
-.actionToolbar {
-
-}
-
-.primary {
-
-}
-.addemail {
-    
 }
