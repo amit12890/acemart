@@ -23,6 +23,7 @@ const CMSPage = props => {
         rootCategoryId,
         shouldShowLoadingIndicator
     } = talonProps;
+        // console.log("🚀 ~ file: cms.js ~ line 26 ~ cmsPage", cmsPage)
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -49,8 +50,15 @@ const CMSPage = props => {
             title,
             meta_title,
             meta_description,
-            content
+            content,
+            url_key
         } = cmsPage;
+
+        // if (url_key === "store-locator") {
+        //     return (
+        //         <h1>This will be custom component</h1>
+        //     )
+        // }
 
         const headingElement =
             content_heading !== '' ? (
