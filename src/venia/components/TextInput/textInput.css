@@ -1,7 +1,6 @@
 
 .input {
     composes: input from '../Field/field.css';
-    background-color: green;
     
 
 }
@@ -21,6 +20,10 @@
 
 .inputText {
     composes: input from '../Field/field.css'; 
+}
+
+.control {
+    margin-bottom: 30px; 
 }
 
 

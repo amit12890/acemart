@@ -4,6 +4,9 @@ import SearchablePicker from '../../SearchablePicker'
 import TextInput from '../../TextInput'
 import Checkbox from '../../Checkbox'
 
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import defaultClasses from './addressForm.css'
+
 // import { useCustomerAddressData } from '@vihasshah/ktpl-lib-v2'
 
 import { get, size, trim, join } from 'lodash'
@@ -14,6 +17,8 @@ import { useCountries } from '../../../data/checkout/hooks/checkout.hook'
 
 
 const CheckoutAddressForm = props => {
+
+    const classes = useStyle(defaultClasses)
 
     /**
      * render address form for checkout 
@@ -120,13 +125,13 @@ const CheckoutAddressForm = props => {
 
 
     return (
-        <div className="block-content">
-            <div className="form-address-edit">
-                <fieldset className="fieldset">
+        <div className={classes.blockContent}>
+            <div className={classes.formAddressEdit}>
+                <fieldset className={classes.fieldset}>
                     {showSameAsButton && (
-                        <div className="actions-toolbar">
-                            <div className="secondary">
-                                <button className="action submit secondary" onClick={onSameAsButtonClick}><span>Same as Shipping Address</span></button>
+                        <div className={classes.actionToolbar}>
+                            <div className={classes.secondary}>
+                                <button className={[classes.action, classes.secondary].join(" ")} onClick={onSameAsButtonClick}><span>Same as Shipping Address</span></button>
                             </div>
                         </div>
                     )}
@@ -137,7 +142,7 @@ const CheckoutAddressForm = props => {
                     ==================================================================================
                     */}
                     <TextInput
-                        containerClass="field field-name-firstname required"
+                        containerClass={[classes.field, classes.firstName].join(" ")}
                         label="First Name"
                         type="text"
                         className="input-text required-entry"
@@ -148,7 +153,7 @@ const CheckoutAddressForm = props => {
                         errorMessage={get(errors, "firstname", '')} />
 
                     <TextInput
-                        containerClass="field field-name-lastname required"
+                        containerClass={[classes.field, classes.lastName].join(" ")}
                         label="Last Name"
                         type="text"
                         className="input-text required-entry"
@@ -159,7 +164,7 @@ const CheckoutAddressForm = props => {
                         errorMessage={get(errors, "lastname", '')} />
 
                     <TextInput
-                        containerClass="field telephone required"
+                        containerClass={[classes.field, classes.telephone].join(" ")}
                         label="Mobile"
                         type="text"
                         className="input-text required-entry"
@@ -176,7 +181,7 @@ const CheckoutAddressForm = props => {
                     */}
 
                     <TextInput
-                        containerClass="field street line1 required"
+                        containerClass={[classes.field, classes.street, classes.line1].join(" ")}
                         label="Street"
                         type="text"
                         className="input-text required-entry"
@@ -187,7 +192,7 @@ const CheckoutAddressForm = props => {
                         errorMessage={get(errors, "street[0]", '')} />
 
                     <TextInput
-                        containerClass="field street line2"
+                        containerClass={[classes.field, classes.street, classes.line1].join(" ")}
                         type="text"
                         className="input-text required-entry"
                         value={street[1]}
@@ -197,7 +202,7 @@ const CheckoutAddressForm = props => {
                         errorMessage={get(errors, "street[1]", '')} />
 
                     <TextInput
-                        containerClass="field street required"
+                        containerClass={[classes.field, classes.city].join(" ")}
                         label="City"
                         type="text"
                         className="input-text required-entry"
@@ -215,9 +220,9 @@ const CheckoutAddressForm = props => {
 
                     <SearchablePicker
                         label="Country"
-                        containerClass="field country required"
-                        labelClass="label"
-                        dropdownClass="required-entry"
+                        containerClass={[classes.field, classes.country].join(" ")}
+                        labelClass={classes.label}
+                        dropdownClass={classes.select}
                         initialValues={{ ...country }}
                         options={countryData}
                         mapLabel={(country) => get(country, "full_name_locale", '--') == null ? get(country, 'id', '') : get(country, 'full_name_locale', '')}
@@ -235,9 +240,9 @@ const CheckoutAddressForm = props => {
 
                         <SearchablePicker
                             label="Region"
-                            containerClass="field region required"
-                            labelClass="label"
-                            dropdownClass="validate-select region_id required-entry"
+                            containerClass={[classes.field, classes.state].join(" ")}
+                            labelClass={classes.label}
+                            dropdownClass={classes.select}
                             initialValues={region}
                             options={availableRegions}
                             mapLabel={(region) => get(region, "name", null) == null ? region.code : region.name}
@@ -248,7 +253,7 @@ const CheckoutAddressForm = props => {
                             }} />
                     ) : (
                         <TextInput
-                            containerClass="field region required"
+                            containerClass={[classes.field, classes.region].join(" ")}
                             label="Region"
                             type="text"
                             className="input-text required-entry"
@@ -271,7 +276,7 @@ const CheckoutAddressForm = props => {
                     */}
 
                     <TextInput
-                        containerClass="field zip required"
+                        containerClass={[classes.field, classes.zip].join(" ")}
                         label="Zip"
                         type="text"
                         className="input-text required-entry"
@@ -289,15 +294,16 @@ const CheckoutAddressForm = props => {
                     }
                 </fieldset>
 
-                <div className="actions-toolbar actions-toolbar-delivery-address">
-                    <div className="primary">
-                        <button className="action primary delivery-address" onClick={submitForm}>
+                <div className={classes.actionsToolbar}>
+                    <div className={classes.primary}>
+
+                        <button className={classes.action} onClick={submitForm}>
                             <span>{isShippingStep ? 'Delivery To This Address' : 'Use This Address'}</span>
                         </button>
                     </div>
                     {isUserLoggedIn &&
-                        <div className="secondary cancel-action">
-                            <button className="action secondary cancel" onClick={toggleForm}><span>Cancel</span></button>
+                        <div className={classes.secondary}>
+                            <button className={classes.action} onClick={toggleForm}><span>Cancel</span></button>
                         </div>
                     }
                 </div>
