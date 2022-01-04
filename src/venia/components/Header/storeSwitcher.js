@@ -42,10 +42,10 @@ const StoreSwitcher = props => {
         setStoreLocatorPopup(false);
     }, [setStoreLocatorPopup]);
 
-    const handleStoreSwitch = useCallback(code => {
+    const handleStoreSwitch = code => {
         handleSwitchStore(code);
         closeStoreLocatorPopup();
-    }, []);
+    }
 
     if (!availableStores || availableStores.size <= 1) return null;
 
@@ -138,6 +138,7 @@ const StoreSwitcherPopup = ({
                                 currentStoreName={currentStoreName}
                                 currentGroupName={currentGroupName}
                                 currentStoreConfig={currentStoreConfig}
+                                closeStoreLocatorPopup={closeStoreLocatorPopup}
                             />
                         </div>
                     </div>
