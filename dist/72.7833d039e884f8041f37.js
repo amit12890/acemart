@@ -1,5 +1,5 @@
 /*!
- * @version d762f6e-dev
+ * @version f32215d-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[72],{"/SI8":function(e,a,n){(a=e.exports=n("JPst")(!1)).push([e.i,".summary-root-3hX {\n    display: grid;\n    gap: 1.125rem;\n    padding: 2rem;\n}\n\n.summary-heading_container-3e4 {\n    display: grid;\n    grid-auto-flow: column;\n    grid-template-columns: 1fr;\n}\n\n.summary-heading-mDA {\n    font-weight: 600;\n}\n\n.summary-card_details_container-3OR {\n    display: grid;\n    gap: 0.5rem;\n}\n\n.summary-payment_details-3Nf {\n}\n",""]),a.locals={root:"summary-root-3hX",heading_container:"summary-heading_container-3e4",heading:"summary-heading-mDA",card_details_container:"summary-card_details_container-3OR",payment_details:"summary-payment_details-3Nf"}},DBny:function(e,a,n){"use strict"
