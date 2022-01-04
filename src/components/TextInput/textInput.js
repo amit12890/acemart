@@ -22,11 +22,11 @@ const TextInput = props => {
     return (
         <div className={containerClass}>
             {size(label) > 0 &&
-                <label className={classes.label} htmlFor={htmlFor}>
+                <label className="label" htmlFor={htmlFor}>
                     <span>{label}</span>
                 </label>
             }
-            <div className={classes.control}>
+            <div className="control">
                 <input
                     ref={innerRef ? innerRef : textInputRef}
                     id={htmlFor}
