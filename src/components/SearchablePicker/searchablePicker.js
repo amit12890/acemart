@@ -2,9 +2,15 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { func, array, object, string, oneOfType } from 'prop-types'
 
 import { size, get, find } from 'lodash'
+import { mergeClasses } from '@magento/venia-ui/lib/classify'
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import defaultClasses from './searchablePicker.css'
+
 
 
 const SearchablePicker = props => {
+
+    const classes = useStyle(defaultClasses)
     /**
      * render dropdown based on  data
      */
@@ -31,19 +37,21 @@ const SearchablePicker = props => {
             <label className={labelClass} style={labelStyle}>
                 <span>{label}</span>
             </label>
-            <select
-                className={dropdownClass}
-                value={selectedValue}
-                onChange={onDropdownValueChange}>
-                {options.map((opt, index) => {
-                    let label = mapLabel(opt)
-                    let value = mapValue(opt)
-                    let key = keyExtractor(opt)
-                    return (
-                        <option value={value} key={key}>{label}</option>
-                    )
-                })}
-            </select>
+            <div className={classes.control}>
+                <select
+                    className={dropdownClass}
+                    value={selectedValue}
+                    onChange={onDropdownValueChange}>
+                    {options.map((opt, index) => {
+                        let label = mapLabel(opt)
+                        let value = mapValue(opt)
+                        let key = keyExtractor(opt)
+                        return (
+                            <option value={value} key={key}>{label}</option>
+                        )
+                    })}
+                </select>
+            </div>
         </div>
     )
 }
