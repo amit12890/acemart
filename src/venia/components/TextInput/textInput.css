@@ -1,7 +1,7 @@
 
 .input {
     composes: input from '../Field/field.css';
-    background-color: green;
+    
     
 
 }
