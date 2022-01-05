@@ -1,34 +1,15 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
-import {
-    ChevronLeft as ChevronLeftIcon,
-    ChevronRight as ChevronRightIcon
-} from 'react-feather';
 
-import { transparentPlaceholder } from '@magento/peregrine/lib/util/images';
 import { useProductImageCarousel } from '../../../magento/peregrine/talons/ProductImageCarousel/useProductImageCarousel';
-import { useWindowSize } from '../../../magento/peregrine/talons/ProductImageCarousel/useWindowSize';
-import { Portal } from '@magento/venia-ui/lib/components/Portal';
 
-import { useStyle } from '../../classify';
-import Icon from '../Icon';
-import Image from '../Image';
-import defaultClasses from './carousel.css';
-import Thumbnail from './thumbnail';
-import Button from '../Button';
-import { size } from 'lodash-es';
-import {
-    CarouselProvider,
-    Slider,
-    Slide,
-    ButtonBack,
-    ButtonNext
-} from 'pure-react-carousel';
 import SmallCarousel from './smallCarousel';
 import FullCarousel from './fullCarousel';
 
 const IMAGE_WIDTH = 535;
 const IMAGE_HEIGHT = 535;
+
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 /**
  * Carousel component for product images
