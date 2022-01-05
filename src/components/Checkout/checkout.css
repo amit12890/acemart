@@ -7,8 +7,39 @@
 .mainContent {
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
     flex:1;
     margin-right: 1.5rem;
+}
+
+.mainContentWrapper {
+    display: flex;
+    
+
+}
+
+
+.checkoutSidebar {
+
+}
+
+.pageTitleWrapper {
+
+}
+
+
+.title {
+    justify-self: center;
+    margin-bottom: 10px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    margin-bottom: 30px;
 }
 
 .primaryButtonWrapper {

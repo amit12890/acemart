@@ -1,9 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import defaultClasses from './cartSummary.css'
+
 import { get, size } from 'lodash'
 
 export default connect(store => {
+    const classes = useStyle(defaultClasses)
     return {
         prices: store.checkout.prices,
         shipping_addresses: store.checkout.shipping_addresses
@@ -19,7 +23,7 @@ export default connect(store => {
     let selectedShippingMethod = get(shipping_addresses[0], "selected_shipping_method", {})
 
     return (
-        <div>
+        <div className={[classes.block, classes.orderSummary].join(" ")}>
             <strong className="summary title">Order Summary</strong>
             <div id="cart-totals" className="cart-totals">
 
