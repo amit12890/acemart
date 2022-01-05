@@ -212,14 +212,11 @@ export default connect(store => {
                                 errorMessage={get(errors, "password", '')} />
                         }
 
-
-                        <div className={classes.actionToolbar}>
-                            <div className={classes.primary}>
+                        <div className="actions-toolbar">
+                            <div className="primary">
                                 <button
                                     type="submit"
-                                    classes={{
-                                        root: classes.addemail
-                                    }}
+                                    className="action primary add-email"
                                     onClick={!isEmailAvailable ? loginUser : addEmailToCart}
                                     disabled={email === props.email && !isEmailAvailable}>
                                     <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
