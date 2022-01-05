@@ -1,29 +1,57 @@
 .root {
-    display: grid;
-    grid-template-areas:
-        'main'
-        'thumbs';
-    grid-template-columns: auto;
-    grid-template-rows: auto;
-    grid-gap: 1.5rem;
 }
 
-.carouselContainer {
-    display: grid;
-    grid-area: main;
-    grid-template-columns: 80px 1fr 80px;
+.fullroot {
+    height: 100%;
+    width: 100%;
+}
+
+.fullcarouselContainer{
+    position: relative;
+    height: calc(100% - 120px);
+    width: 100%;
+}
+
+.carouselContainer{
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.thumbCarouselContainer {
+    position: relative;
+}
+
+.thumbFullCarouselContainer {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    padding: 5px 0;
 }
 
 .imageContainer {
-    grid-area: 1 / 1 / 2 / 4;
-    justify-content: center;
-    text-align: center;
-    margin: 0 auto;
+    position: unset;
+    cursor: pointer;
+}
+
+.fullimageContainer {
+    /* position: unset; */
+    cursor: pointer;
 }
 
 .currentImage {
     top: 0;
     bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.fullcurrentImage {
+    margin: auto;
+}
+
+.fullcurrentImage > div {
+    background-size: contain !important;
+    background-repeat: no-repeat;
 }
 
 .currentImage_placeholder {
@@ -36,16 +64,35 @@
     display: flex;
     outline: none;
     z-index: 1;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s ease-in-out;  
+}
+
+.previousButton:hover,
+.nextButton:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
 }
 
 .previousButton {
-    justify-content: flex-start;
-    grid-area: 1 / 1 / 2 / 2;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80px;
 }
 
 .nextButton {
-    justify-content: flex-end;
-    grid-area: 1 / 3 / 2 / 4;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80px;
+}
+
+.smallButton {
+    width: 30px;
 }
 
 .chevron {
@@ -58,7 +105,7 @@
 .chevron svg {
     stroke-width: 1px;
     /* stroke: rgb(var(--color-gray-light03)); */
-    stroke: #cacaca;
+    stroke: #000;
 }
 
 .nextButton:focus > .chevron,
@@ -67,15 +114,13 @@
     border-radius: 0.5rem;
 }
 
-.thumbnailList {
-    /* align-content: stretch;
-    display: grid;
-    grid-auto-flow: column;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, 1rem);
-    justify-content: center;
-    margin-top: 1rem;
-    z-index: 1; */
+.thumbVisible {
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.thumbActive {
+    border: 1px solid #006;
 }
 
 .modalHeader {
@@ -147,7 +192,7 @@
 
     .previousButton,
     .nextButton {
-        display: none;
+        display: block;
     }
 
     .thumbnailList {
@@ -183,7 +228,7 @@
 
 .contentWrapper {
     background-color: rgb(var(--page-background-color));
-    transform: translate3d(0, -8px, 0);
+    transform: translate3d(0, 0, 0);
     transition-duration: 192ms;
     transition-property: transform;
     transition-timing-function: var(--venia-global-anim-out);
@@ -191,10 +236,12 @@
     position: relative;
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-    padding: 1rem;
+    flex: 1;
 }
 
 .modalClose {
