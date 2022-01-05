@@ -209,15 +209,13 @@ export const SET_PAYMENT_METHOD_ON_CART = gql`
 mutation setPaymentMethodOnCart($input:SetPaymentMethodOnCartInput){
     setPaymentMethodOnCart(input: $input) {
         cart {
-            selected_payment_method {
-                code
-                title
-            }
+            ...selectedPaymentMethodFragment
             ...shippingAddressesFragment 
         }
     }
 }
 ${ShippingAddressesFragment}
+${SelectedPaymentMethodFragment}
 `
 
 export const MERGE_CART_MUTATION = gql`
@@ -259,15 +257,16 @@ export const MERGE_CART_MUTATION = gql`
 `
 
 export const PAYPAL_GENERATE_TOKEN = gql`
-mutation createPaypalExpressToken($cartId: String!){
+mutation createPaypalExpressToken($cartId: String!, $returnUrl: String!, $cancelUrl: String!){
     createPaypalExpressToken(
       input: {
         cart_id: $cartId
         code: "paypal_express"
         express_button: true
         urls: {
-          return_url: "paypal/action/return.html"
-          cancel_url: "paypal/action/cancel.html"
+          success_url: $returnUrl
+          return_url: $returnUrl
+          cancel_url: $cancelUrl
         }
       }
     ) {
@@ -278,6 +277,91 @@ mutation createPaypalExpressToken($cartId: String!){
       }
     }
   }
+`
+
+export const ORDER_SUCCESS_QUERY = gql`
+query successOrderPage($incrementId:String!) {
+    successOrderPage(increment_id:$incrementId) {
+        id 
+        increment_id
+        order_date
+        status
+        shipping_method
+        pickup_datetime
+        customer_email
+        carrier
+        payment_methods {
+            name            
+            additional_data {
+                name
+                value
+            }
+        }
+        shipping_address {
+            firstname
+            lastname
+            middlename
+            street
+            city
+            region
+            postcode
+            country_code
+            company
+            telephone
+        }
+        billing_address {
+            firstname
+            lastname
+            middlename
+            street
+            city
+            region
+            postcode
+            country_code
+            company
+            telephone
+        }
+        items {
+            id
+            product_name
+            product_sku
+            product_sale_price {
+                currency
+                value
+            }
+            quantity_ordered
+        }
+        total{
+            subtotal {
+                currency
+                value
+            }
+            grand_total {
+                currency
+                value
+            }
+            total_shipping {
+                currency
+                value
+            }
+            total_tax {
+                currency
+                value
+            }
+            discounts {
+                amount {
+                    currency
+                    value
+                }
+                label
+            }
+        }
+        comments {
+            timestamp
+            message
+        }
+    }
+}
 `
 
 export default {
@@ -296,5 +380,6 @@ export default {
     setPaymentMethodMutation: SET_PAYMENT_METHOD_ON_CART,
     mergeCartMutation: MERGE_CART_MUTATION,
 
-    generatePayPalTokenMutation: PAYPAL_GENERATE_TOKEN
+    generatePayPalTokenMutation: PAYPAL_GENERATE_TOKEN,
+    orderSuccessQuery: ORDER_SUCCESS_QUERY
 };

@@ -1,11 +1,19 @@
 import { combineReducers, createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist'
 import { enhancer, reducers } from '@magento/peregrine';
 // custom
+import storage from 'redux-persist/lib/storage'
+
 import { compareReducer } from './data/compare/compare.reducer';
 import { appStateReducer } from './data/appState/appState.reducer';
 import { checkoutReducer } from './data/checkout/checkout.reducer';
+import { checkoutSuccessReducer } from './data/checkout/checkoutSuccess.reducer';
 
-
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['checkout']
+}
 // This is the connective layer between the Peregrine store and the
 // venia-concept UI. You can add your own reducers/enhancers here and combine
 // them with the Peregrine exports.
@@ -15,8 +23,12 @@ const rootReducer = combineReducers({
     ...reducers,
     compare: compareReducer,
     appState: appStateReducer,
-    checkout: checkoutReducer
+    checkout: checkoutReducer,
+    checkoutSuccess: checkoutSuccessReducer
 });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 // const rootEnhancer = composeEnhancers(enhancer, myEnhancer);
 // export default createStore(rootReducer, rootEnhancer);
 // const rootReducer = combineReducers(reducers);
