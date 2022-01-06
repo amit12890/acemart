@@ -12,6 +12,7 @@ import { useIntl } from 'react-intl';
 
 import defaultClasses from './cms.css';
 import { updateAppState } from '../../data/appState/appState.action';
+import CmsContent from "./cmsContent";
 
 const CMSPage = props => {
     const { id } = props;
@@ -62,7 +63,7 @@ const CMSPage = props => {
 
         if (url_key === "store-locator") {
             return (
-                <h1>This is store locator page</h1>
+                <CmsContent />
             )
         }
         return (

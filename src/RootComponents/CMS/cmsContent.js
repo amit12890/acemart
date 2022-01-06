@@ -6,10 +6,14 @@ import {
     Marker,
     InfoWindow
 } from 'react-google-maps';
+import { useQuery } from '@apollo/client';
+import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import { get, groupBy, size, difference, orderBy, sortBy } from 'lodash-es';
 import { useStyle } from '../../venia/classify';
+import { getProductStoreLocatorData } from '../../components/StoreLocator/productStoreLocator.gql';
 
+import defaultClasses from './cms.css';
 import productStoreLocatorCss from '../../components/StoreLocator/productStoreLocator.css';
 import { StoreHours } from '../../components/StoreLocator/productStoreLocator';
 import { GOOGLE_MAP_API_KEY } from '../../url.utils';
@@ -212,4 +216,38 @@ MapContainer.defaultProps = {
     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&v=3.exp`
 };
 
-export default CmsContent;
+const StoreLocatorPage = props => {
+    const classes = useStyle(defaultClasses, props.classes);
+
+    const {
+        data: availableStoresData,
+        loading: storeDataLoading,
+        error: storeDataError
+    } = useQuery(getProductStoreLocatorData, {
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first'
+    });
+
+    let content;
+    if (storeDataLoading) {
+        content = fullPageLoadingIndicator;
+    } else if (!!storeDataError) {
+        content = <div>An Error Occured while loading store data...</div>;
+    } else {
+        content = size(availableStoresData && availableStoresData.availableStores) ? (
+            <CmsContent availableStores={availableStoresData.availableStores} />
+        ) : (
+            <div />
+        );
+    }
+
+    return (
+        <div className={classes.cmswrapper}>
+            <div className={classes.root}>
+                {content}
+            </div>
+        </div>
+    );
+};
+
+export default StoreLocatorPage;
