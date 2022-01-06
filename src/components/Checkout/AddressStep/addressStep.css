@@ -1,5 +1,7 @@
 .block {
     margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 15px;
 }
 
 .blockTitle {
@@ -33,6 +35,10 @@
 }
 
 .blockContent {
+
+}
+
+.deliveryAddressDetails {
 
 }
 
@@ -75,5 +81,9 @@
 
 .actionToolbar {
     margin-top: 30px;
+}
+
+.address {
+    font-size: var(--fontSize-90)
 }
 

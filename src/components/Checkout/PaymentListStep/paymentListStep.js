@@ -4,7 +4,7 @@ import { func, oneOfType, bool, string, array } from 'prop-types'
 import RadioButton from '../../RadioButton'
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
-import defaultClasses from './shippingMethodStep.css'
+import defaultClasses from './paymentListStep.css'
 
 import { get, size } from 'lodash'
 

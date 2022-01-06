@@ -2,7 +2,7 @@ import { get } from 'lodash'
 import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 
-import { useStyle } from '../../../venia/classify'
+import { useStyle } from '@magento/venia-ui/lib/classify';
 import AddressListItem from '../AddressListItem'
 import CartItemList from '../CartItemList'
 import CartSummary from '../CartSummary'
@@ -71,7 +71,7 @@ export default connect((store) => {
                 </div>
                 <div className={classes.primaryButtonWrapper}>
                     <div onClick={goBack}
-                        className={classes.primaryButton}>
+                        className={classes.secondaryButton}>
                         Edit Checkout
                     </div>
                     <div onClick={onPlaceOrderButtonPress}

@@ -1,11 +1,5 @@
 .input {
     composes: input from '../Field/field.css';
-<<<<<<< HEAD
-    
-    
-
-=======
->>>>>>> 1c51b1d6c2f04e086565a1ff2663db29b51f0df5
 }
 
 .input:focus,

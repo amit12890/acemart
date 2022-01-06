@@ -162,8 +162,9 @@ const AddressStep = props => {
                                         <div className={[classes.field, classes.choice].join(" ")}>
                                             <RadioButton isActive={isSelected} />
                                         </div>
-                                        <div className="delivery-address-details">
-                                            <AddressListItem address={address} containerClass="address" />
+                                        <div className={classes.deliveryAddressDetails}>
+                                            <AddressListItem address={address}
+                                                containerClass={classes.address} />
                                         </div>
                                     </div>
 
@@ -217,7 +218,8 @@ const AddressStep = props => {
                 <div className={classes.blockContent}>
 
                     {hasInitValue &&
-                        <AddressListItem address={initialValues} containerClass="address" />
+                        <AddressListItem address={initialValues}
+                            containerClass={classes.address} />
                     }
                     {/* 
                     user should only be able to change or edit shipping adderess if 

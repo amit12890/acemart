@@ -1,5 +1,11 @@
 .block {
     margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 15px;
+}
+
+.paymentMethod {
+
 }
 
 .blockTitle {
@@ -16,7 +22,7 @@
 
 .fieldset {
     border: 0;
-    margin: 0 0 40px;
+    margin: 0;
     padding: 0;
     max-width: 450px; 
 }
@@ -24,6 +30,11 @@
 .field {
     display: flex;
     align-items: center;
+    margin-bottom: 1rem;
+}
+
+.field:last-child {
+    margin-bottom: 0;
 }
 
 .choice {
@@ -31,7 +42,7 @@
 }
 
 .optionChoice {
-    margin-right: 15px;
+    margin-right: 1rem;
     display: inline-flex;
 }
 
@@ -40,7 +51,8 @@
 }
 
 .methodDetails {
-
+font-size: var(--fontSize-100);
+cursor: pointer;
 
 }
 

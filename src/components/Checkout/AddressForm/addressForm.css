@@ -1,5 +1,7 @@
 .block {
-
+    margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 15px;
 }
 
 .blockTitle {

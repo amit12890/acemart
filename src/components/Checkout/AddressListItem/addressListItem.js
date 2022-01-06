@@ -2,6 +2,9 @@ import React from 'react'
 
 import { get, join, size, isObject, isArray } from 'lodash'
 
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import defaultClasses from './addressListItem.css'
+
 /**
  * render address list item 
  * 
@@ -10,6 +13,7 @@ import { get, join, size, isObject, isArray } from 'lodash'
  *      2. CheckoutAddressListModal
  */
 const AddressListItem = props => {
+    const classes = useStyle(defaultClasses)
 
     const { address, containerClass, textStyle } = props
 
@@ -35,7 +39,7 @@ const AddressListItem = props => {
         }
         return (
             <React.Fragment>
-                <span>{street}</span>
+                <span className={classes.street}>{street}</span>
                 <br />
             </React.Fragment>
         )
@@ -44,16 +48,16 @@ const AddressListItem = props => {
 
     return (
         <div className={containerClass}>
-            <span className="name">{get(address, "firstname", '')} {get(address, "lastname", '')}</span><br />
+            <span className={classes.name}>{get(address, "firstname", '')} {get(address, "lastname", '')}</span><br />
             {renderStreet()}
             {size(regionInString(address)) > 0 &&
                 <React.Fragment>
-                    <span>{regionInString(address)}</span>
+                    <span className={classes.region}>{regionInString(address)}</span>
                     <br />
                 </React.Fragment>
             }
-            <span>{get(address, "city", '')}</span><br />
-            <span>{get(address, "telephone", '')}</span><br />
+            <span className={classes.city}>{get(address, "city", '')}</span><br />
+            <span className={classes.telephone}>{get(address, "telephone", '')}</span><br />
         </div>
     )
 }

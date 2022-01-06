@@ -1,5 +1,7 @@
 .block {
     margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 15px;
 }
 
 .blockTitle {
@@ -16,16 +18,16 @@
 
 .fieldset {
     border: 0;
-    margin: 0 0 40px;
+    margin: 0 0;
     padding: 0;
     max-width: 450px;
 }
 
-.fieldset > .field {
+ .field {
     margin: 0 0 30px;
 }
 
-.fieldset > .field:last-child {
+.field:last-child {
     margin: 0;
 }
 

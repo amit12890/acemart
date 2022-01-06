@@ -24,17 +24,18 @@
 
 .item {
     display: flex;
+    border-top: 1px solid #eee;
     flex-direction: column;
-}
-
-.product {
-    display: flex;
-    border-top: 1px solid rgb(var(--border-color-base));
     padding-top: 10px;
     margin-top: 10px;
 }
 
-.product:first-child {
+.product {
+    display: flex;
+
+}
+
+.item:first-child {
     border-top: none;
     padding-top: 0;
     margin-top: 0; 
@@ -43,6 +44,10 @@
 .thumbnailContainer {
     margin-right: 15px;
     max-width: 85px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 3px;
+    display: inline-flex;
+    align-items: center;
 }
 
 

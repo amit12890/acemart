@@ -179,7 +179,7 @@ export default connect(store => {
                     <fieldset className={classes.fieldset}>
                         <TextInput
                             innerRef={emailInputRef}
-                            containerClass="field required"
+                            containerClass={[classes.field, classes.email].join(" ")}
                             label="Email"
                             type="email"
                             name="email"
@@ -198,7 +198,7 @@ export default connect(store => {
                         }
                         {(size(email) > 0 && !isEmailAvailable) &&
                             <TextInput
-                                containerClass="field password required"
+                                containerClass={[classes.field, classes.password].join(" ")}
                                 label="Password"
                                 type="password"
                                 className="input-text"
