@@ -15,9 +15,6 @@ import { useUserContext } from '@magento/peregrine/lib/context/user'
 import { clearCartDataFromCache } from '@magento/peregrine/lib/Apollo/clearCartDataFromCache'
 import { removeCart } from '@magento/peregrine/lib/store/actions/cart/asyncActions'
 
-import checkoutData from '../checkout-response-with-storepickup.json'
-import { setCheckoutOrderData } from '../checkoutSuccess.action'
-
 const {
     getCountries,
     getCheckoutDetailsQuery,

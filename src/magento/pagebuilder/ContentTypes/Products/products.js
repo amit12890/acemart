@@ -278,6 +278,16 @@ export const GET_PRODUCTS_BY_SKU = gql`
                 uom
                 url_key
                 url_suffix
+                canonical_url
+                url_rewrites {
+                    url
+                    parameters {
+                      name
+                      value
+                      __typename
+                    }
+                    __typename
+                  }
                 productLabel {
                     items {
                         labelname

@@ -7,7 +7,6 @@ import storage from 'redux-persist/lib/storage'
 import { compareReducer } from './data/compare/compare.reducer';
 import { appStateReducer } from './data/appState/appState.reducer';
 import { checkoutReducer } from './data/checkout/checkout.reducer';
-import { checkoutSuccessReducer } from './data/checkout/checkoutSuccess.reducer';
 
 const persistConfig = {
     key: 'root',
@@ -24,7 +23,6 @@ const rootReducer = combineReducers({
     compare: compareReducer,
     appState: appStateReducer,
     checkout: checkoutReducer,
-    checkoutSuccess: checkoutSuccessReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
