@@ -1,10 +1,8 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { func, oneOfType, bool, string, array } from 'prop-types'
 
 import RadioButton from '../../RadioButton'
-
 import { get, size } from 'lodash'
-
 
 
 const PaymentListStep = props => {
@@ -19,6 +17,52 @@ const PaymentListStep = props => {
         initialValues,
         isDefaultStore
     } = props
+
+    const initialCode = get(initialValues, "code", "")
+
+    const [selectedPaymentCode, setSelectedPaymentCode] = useState(initialCode)
+
+    useEffect(() => {
+        setSelectedPaymentCode(initialCode)
+    }, [initialCode])
+
+
+    const renderItem = useCallback((item, index) => {
+        let isActive = item.code === selectedPaymentCode
+        return (
+            <div
+                className="field choice checkout-choice required"
+                key={item.code}
+                onClick={() => {
+                    setSelectedPaymentCode(item.code)
+                    onItemClick(item)
+                }}>
+                <div className="option-choice custom-radio-field">
+                    <RadioButton isActive={isActive} />
+                </div>
+                <div className="delivery-methods-details">
+                    <div className="method-label">{get(item, "title", "")}</div>
+                </div>
+            </div>
+        )
+    }, [selectedPaymentCode])
+
+    // if (!isDefaultStore) {
+    //     return (
+    //         <div className="block block-checkout payment-options">
+    //             <div className="block-title">
+    //                 {title}
+    //             </div>
+    //             <div className="block-content">
+    //                 <div className="checkout-payment-methods">
+    //                     <fieldset className="fieldset">
+    //                         {renderItem(initialValues, 0)}
+    //                     </fieldset>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )
+    // } else {
 
 
     // let mappedValue = mapValue(initialValues)
@@ -40,38 +84,6 @@ const PaymentListStep = props => {
         )
     }
 
-
-    const renderItem = useCallback((item, index) => {
-        let isActive = item.code === get(initialValues, "code", "")
-        return (
-            <div className="field choice checkout-choice required" key={item.code} onClick={() => onItemClick(item)}>
-                <div className="option-choice custom-radio-field">
-                    <RadioButton isActive={isActive} />
-                </div>
-                <div className="delivery-methods-details">
-                    <div className="method-label">{get(item, "title", "")}</div>
-                </div>
-
-            </div>
-        )
-    }, [initialValues])
-
-    // if (!isDefaultStore) {
-    //     return (
-    //         <div className="block block-checkout payment-options">
-    //             <div className="block-title">
-    //                 {title}
-    //             </div>
-    //             <div className="block-content">
-    //                 <div className="checkout-payment-methods">
-    //                     <fieldset className="fieldset">
-    //                         {renderItem(initialValues, 0)}
-    //                     </fieldset>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // } else {
     return (
         <div className="block block-checkout payment-options">
             <div className="block-title">

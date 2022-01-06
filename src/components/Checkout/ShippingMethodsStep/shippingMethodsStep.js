@@ -24,26 +24,6 @@ const ShippingMethodStep = props => {
         isDefaultStore
     } = props
 
-
-    // let mappedValue = mapValue(initialValues)
-    if (!enabled) {
-        return (
-            <div className="block block-checkout inactive">
-                <div className="block-title">
-                    {title}
-                </div>
-            </div>
-        )
-    }
-
-    if (size(data) === 0) {
-        return (
-            <div className="no-data-found">
-                No Data Found
-            </div>
-        )
-    }
-
     const renderItem = useCallback((item, index) => {
         let isActive = get(item, "method_code", '') === get(initialValues, "method_code", '')
         return (
@@ -100,6 +80,27 @@ const ShippingMethodStep = props => {
             </div>
         )
     }, [initialValues])
+
+
+    // let mappedValue = mapValue(initialValues)
+    if (!enabled) {
+        return (
+            <div className="block block-checkout inactive">
+                <div className="block-title">
+                    {title}
+                </div>
+            </div>
+        )
+    }
+
+    if (size(data) === 0) {
+        return (
+            <div className="no-data-found">
+                No Data Found
+            </div>
+        )
+    }
+
 
     /**
      * if default store code is not selected then it must be store pickup only
