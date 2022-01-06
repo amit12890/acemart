@@ -68,12 +68,16 @@ export default connect(store => {
                 })}
             </StoreTitle>
             <div className={classes.mainContainer}>
-                <h2 className={classes.heading}>
-                    <FormattedMessage
-                        id={'checkoutPage.thankYou'}
-                        defaultMessage={'Thank you for your order!'}
-                    />
-                </h2>
+                <div className={classes.pageTitleWrapper}>
+                    <h1 className={classes.title}>
+                        <span className={classes.base}>
+                            Thank you
+                        </span>
+                        <span className={classes.subtitle}>
+                            for your order!
+                        </span>
+                    </h1>
+                </div>
                 <div className={classes.orderNumber}>
                     <FormattedMessage
                         id={'checkoutPage.orderNumber'}
@@ -112,6 +116,12 @@ export default connect(store => {
                             'You will also receive an email with the details and we will let you know when your order has shipped.'
                         }
                     />
+                </div>
+
+                <div className={classes.primaryButtonWrapper}>
+                    <div className={classes.primaryButton}>
+                        Continue Shopping
+                    </div>
                 </div>
             </div>
         </div>

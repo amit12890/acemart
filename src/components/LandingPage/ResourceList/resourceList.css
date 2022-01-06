@@ -47,9 +47,29 @@
 .resouresImage {
     display: block;
     padding: 0 5px;
+   cursor: pointer;
 }
-.resouresImage img {
+
+.resouresImageContainer {
+    overflow: hidden;
+}
+
+.resouresImageContainer img {
     max-width: 100%;
+    -moz-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.resouresImageContainer:hover img{
+    -moz-transform: scale(1.1,1.1) rotate(2deg);
+    -webkit-transform: scale(1.1,1.1) rotate(2deg);
+    -o-transform: scale(1.1,1.1) rotate(2deg);
+    transform: scale(1.1,1.1) rotate(2deg); 
 }
 
 .resouresDetails {
