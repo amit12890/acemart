@@ -150,20 +150,21 @@ const AddressStep = props => {
                                 let isSelected = get(address, "id", -1) == selectedAddressId
                                 return (
 
-                                    <div
-                                        className={[classes.field, classes.choice].join(" ")}
+                                    <div className={[classes.field, classes.choice].join(" ")}
                                         key={address.id + " " + index}
                                         onClick={(e) => {
                                             e.preventDefault()
                                             changeAddressSelection(address.id)
                                             console.log("🚀 ~ file: addressStep.js ~ line 154 ~ data.map ~ address.id", address.id)
                                         }}>
-                                        <div className={[classes.field, classes.choice].join(" ")}>
-                                            <RadioButton isActive={isSelected} />
-                                        </div>
-                                        <div className={classes.deliveryAddressDetails}>
-                                            <AddressListItem address={address}
-                                                containerClass={classes.address} />
+                                        <div className={classes.control}>
+                                            <div className={classes.deliveryAddressDetails}>
+                                                <AddressListItem address={address}
+                                                    containerClass={classes.address} />
+                                            </div>
+                                            <div className={classes.radioButtonWrapper}>
+                                                <RadioButton isActive={isSelected} />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -182,20 +183,20 @@ const AddressStep = props => {
                         )
                     }
                     {showSameAsButton && (
-                        <div className={classes.actionToolbar}>
+                        <div className={[classes.actionToolbar, classes.secondaryAction].join(" ")}>
                             <div className={classes.secondary}>
-                                <button className={[classes.action, classes.secondary].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
+                                <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
                             </div>
                         </div>
                     )}
 
                     <div className={classes.actionToolbar}>
                         <div className={classes.secondary}>
-                            <button className={[classes.action, classes.secondary].join(" ")} onClick={submitForm}>
+                            <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={submitForm}>
                                 <span>{isShippingStep ? 'Delivery To This Address' : 'Use This Address'}</span>
                             </button>
                         </div>
-                        <div className={classes.secondary}>
+                        <div className={classes.primary}>
                             {renderAddButton()}
                         </div>
                     </div>

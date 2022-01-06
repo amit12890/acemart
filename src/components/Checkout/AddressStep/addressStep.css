@@ -17,15 +17,41 @@
     border: 0;
     margin: 0 0;
     padding: 0;
-    max-width: 450px;
+       display: flex;
+       flex-wrap: wrap;
 }
 
-.fieldset > .field {
-    margin: 0 0 30px;
+ .field {
+    margin: 0 0 30px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 30.333%;
+    padding: 0;
+    cursor: pointer;
 }
 
-.fieldset > .field:last-child {
+.field:nth-child(3n + 1) {
+    margin-left: 0;
+  }
+
+.field:last-child {
     margin: 0;
+}
+
+.control {
+    border: 1px solid rgb(var(--border-color-base));
+    display: flex;
+    flex-direction: column;
+}
+
+.radioButtonWrapper {
+    padding: 10px 10px;
+    background-color: rgb(var(--border-color-base));
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .control {
@@ -37,7 +63,7 @@
 }
 
 .deliveryAddressDetails {
-
+ padding: 10px;
 }
 
 .action {
@@ -77,11 +103,56 @@
     --stroke: var(--theme-color-primary);
 }
 
-.actionToolbar {
-    margin-top: 30px;
+.actionToolbar .secondary{
+    margin-top: 0;
+    flex-basis: 100%;
+}
+
+.actionToolbar .primary {
+ margin-top: 30px;
+}
+
+.secondaryButton {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--color-white)) ;
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    text-transform: none;
+}
+
+.secondaryButton:hover {
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+}
+
+.secondaryButton:focus {
+    box-shadow: none;
+}
+
+.secondaryButton:active {
+    transition-duration: 128ms;
+    --stroke: var(--theme-color-primary);
 }
 
 .address {
     
 }
+
+
 

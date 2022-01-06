@@ -264,7 +264,7 @@ export default connect(store => ({
                             }} />
 
 
-                        <PaymentListStep
+                        {/* <PaymentListStep
                             enabled={isBillingAddressSelected && isShippingMethodSelected}
                             title="Payment Method"
                             data={available_payment_methods}
@@ -277,37 +277,38 @@ export default connect(store => ({
                                     setPaymentMethodOnCart(get(paymentOpt, "code", ''))
                                 }
                             }}
+                            isDefaultStore={isDefaultStore} /> */}
+
+                        <PaymentListStep
+                            enabled={isBillingAddressSelected && isShippingMethodSelected}
+                            title="Payment Method"
+                            data={available_payment_methods}
+                            initialValues={selected_payment_method}
+                            onItemClick={(paymentOpt) => {
+                                const code = get(paymentOpt, "code", '')
+                                if (code === 'paypal_express') {
+                                    handleGeneratePayPalToken()
+                                }
+                                setPaymentMethodOnCart({ code })
+                            }}
                             isDefaultStore={isDefaultStore} />
 
-                <PaymentListStep
-                    enabled={isBillingAddressSelected && isShippingMethodSelected}
-                    title="Payment Method"
-                    data={available_payment_methods}
-                    initialValues={selected_payment_method}
-                    onItemClick={(paymentOpt) => {
-                        const code = get(paymentOpt, "code", '')
-                        if (code === 'paypal_express') {
-                            handleGeneratePayPalToken()
-                        }
-                        setPaymentMethodOnCart({ code })
-                    }}
-                    isDefaultStore={isDefaultStore} />
-
-                {enablePlaceOrderButton && (
-                    <div className={classes.primaryButtonWrapper}>
-                        <div onClick={() => {
-                            setReviewCheckout(true)
-                            globalThis.scrollTo({
-                                top: 0,
-                                left: 0,
-                                behavior: 'smooth'
-                            })
-                        }}
-                            className={classes.primaryButton}>
-                            Review Order
-                        </div>
+                        {enablePlaceOrderButton && (
+                            <div className={classes.primaryButtonWrapper}>
+                                <div onClick={() => {
+                                    setReviewCheckout(true)
+                                    globalThis.scrollTo({
+                                        top: 0,
+                                        left: 0,
+                                        behavior: 'smooth'
+                                    })
+                                }}
+                                    className={classes.primaryButton}>
+                                    Review Order
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
                     <div lassName={classes.checkoutSidebar} >
                         <CartSummary />
                         <CartItemList />
@@ -315,5 +316,6 @@ export default connect(store => ({
                 </div>
             </div>
         </div>
+
     )
 })
