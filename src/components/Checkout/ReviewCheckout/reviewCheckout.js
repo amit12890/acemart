@@ -147,6 +147,6 @@ export default connect((store) => {
                 <CartSummary />
                 <CartItemList />
             </div>
-        </div >
+        </div>
     )
 })
