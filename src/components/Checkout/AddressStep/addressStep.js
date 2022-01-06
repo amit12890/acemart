@@ -251,7 +251,7 @@ const AddressStep = props => {
                         </div>
                     )}
                 </div>
-                <div className={classes.main}>Loader</div>
+
             </div>
         )
     }
