@@ -5,6 +5,7 @@ import {
     useFieldApi,
     useFieldState
 } from 'informed';
+import { kebabCase } from 'lodash';
 
 import { useStyle } from '../../classify';
 import { Message } from '../Field';
@@ -39,6 +40,11 @@ const Checkbox = props => {
         }
     }, [fieldApi, fieldState.value, fieldValue]);
 
+    const iconClass = `${classes.icon} ${
+        props.group === 'color_group' || props.group === 'color'
+            ? `${classes[`swatch-${kebabCase(props.title)}`]}`
+            : ''
+    }`;
     return (
         <Fragment>
             <label aria-label={ariaLabel} className={classes.root} htmlFor={id}>
@@ -48,7 +54,7 @@ const Checkbox = props => {
                     field={field}
                     id={id}
                 />
-                <span className={classes.icon}>{icon}</span>
+                <span className={iconClass}>{icon}</span>
                 <span className={classes.label}>{label}</span>
             </label>
             <Message fieldState={fieldState}>{message}</Message>

@@ -166,6 +166,8 @@ const FilterBlock = props => {
                                             item,
                                             facet_active
                                         )}
+                                        group={field}
+                                        title={value}
                                     />
                                     <strong>{count}</strong>
                                 </li>
