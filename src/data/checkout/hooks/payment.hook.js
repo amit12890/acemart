@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { useMutation } from '@apollo/client'
@@ -7,7 +7,9 @@ import { useCartContext } from '@magento/peregrine/lib/context/cart'
 
 import gql from '../checkout.gql'
 import { updateCheckoutField } from '../checkout.action'
-import { get } from 'lodash'
+import { get, has, size } from 'lodash'
+import { usePlaceOrder } from './checkout.hook'
+import { HOST_URL } from '../../../url.utils'
 
 const {
     setPaymentMethodMutation,
@@ -18,13 +20,19 @@ const {
 export const useCheckoutPayment = () => {
     const dispatch = useDispatch()
     const [{ cartId }] = useCartContext()
+    const { placeOrder } = usePlaceOrder()
+    const [hasToken, setToken] = useState(false)
 
     const [setPaymentMethod, { loading: settingPaymentMethod }] = useMutation(setPaymentMethodMutation, {
         onCompleted: (data) => {
-            // console.log("-----------[log]------------","payment method set successfully",data)
+            console.log("-----------[log]------------", "payment method set successfully", data)
             let selected_payment_method = get(data, "setPaymentMethodOnCart.cart.selected_payment_method", {})
             let shipping_addresses = get(data, "setPaymentMethodOnCart.cart.shipping_addresses", {})
             dispatch(updateCheckoutField({ selected_payment_method, shipping_addresses }))
+            if (hasToken) {
+                console.log("placing order.....")
+                placeOrder()
+            }
         }
     })
 
@@ -34,24 +42,21 @@ export const useCheckoutPayment = () => {
      * @param {String} paymentCode => payment code
      * @param {*} handlers => { onCompleted , onError }
      */
-    const setPaymentMethodOnCart = useCallback((paymentCode) => {
+    const setPaymentMethodOnCart = useCallback((selectedPaymentMethod) => {
+        console.log("🚀 ~ file: payment.hook.js ~ line 44 ~ setPaymentMethodOnCart ~ selectedPaymentMethod", selectedPaymentMethod)
         if (settingPaymentMethod) return
         console.log("variable", {
             input: {
                 cart_id: cartId,
-                payment_method: {
-                    code: paymentCode
-                }
+                payment_method: selectedPaymentMethod
             }
         })
-
+        setToken(size(get(selectedPaymentMethod, "paypal_express.token", "")) > 0)
         setPaymentMethod({
             variables: {
                 input: {
                     cart_id: cartId,
-                    payment_method: {
-                        code: paymentCode
-                    }
+                    payment_method: selectedPaymentMethod
                 }
             }
         })
@@ -67,26 +72,28 @@ export const usePayPal = () => {
     const dispatch = useDispatch()
     const [{ cartId }] = useCartContext()
 
-    const [generatePayPalToken, { loading: generatingToken, data: paypalData }] = useMutation(generatePayPalTokenMutation, {
-        fetchPolicy: 'network-only',
+    const [setPaymentMethod, { loading: generatingToken }] = useMutation(generatePayPalTokenMutation, {
         onCompleted: (data) => {
             // console.log("-----------[log]------------","payment method set successfully",data)
-            let selected_payment_method = get(data, "setPaymentMethodOnCart.cart.selected_payment_method", {})
-            let shipping_addresses = get(data, "setPaymentMethodOnCart.cart.shipping_addresses", {})
-            dispatch(updateCheckoutField({ selected_payment_method, shipping_addresses }))
+            let paypal = get(data, "createPaypalExpressToken", {})
+            dispatch(updateCheckoutField({ paypal }))
         }
     })
 
     const handleGeneratePayPalToken = useCallback(() => {
-        generatePayPalToken({
+        const returnUrl = `http://0.0.0.0:10000/checkout/success`
+        const cancelUrl = `http://0.0.0.0:10000/checkout`
+        setPaymentMethod({
             variables: {
-                cartId
+                cartId,
+                returnUrl,
+                cancelUrl
             }
         })
     }, [cartId])
 
     return {
         handleGeneratePayPalToken,
-        paypalData
+        generatingToken
     }
 }

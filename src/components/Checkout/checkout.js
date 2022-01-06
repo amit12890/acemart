@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 
 import { useUserContext } from '@magento/peregrine/lib/context/user'
@@ -34,6 +34,7 @@ export default connect(store => ({
     selected_payment_method: store.checkout.selected_payment_method,
     billing_address: store.checkout.billing_address,
     available_payment_methods: store.checkout.available_payment_methods,
+    paypal: store.checkout.paypal,
     orderNumber: store.checkout.orderNumber
 }))(({
     fetching,
@@ -46,6 +47,7 @@ export default connect(store => ({
     available_payment_methods,
     orderNumber,
     login_and_fetching,
+    paypal,
     dispatch
 }) => {
     const history = useHistory()
@@ -62,12 +64,14 @@ export default connect(store => ({
 
     const { setShippingMethodOnCart } = useShippingMethods()
     const { setPaymentMethodOnCart, settingPaymentMethod } = useCheckoutPayment()
-    const { handleGeneratePayPalToken, paypalData } = usePayPal()
-    console.log("🚀 ~ file: checkout.js ~ line 66 ~ paypalData", paypalData)
+    const { handleGeneratePayPalToken } = usePayPal()
+
     const { placeOrder, placingOrder } = usePlaceOrder()
 
     const classes = useStyle(defaultClasses)
     const [showReviewCheckout, setReviewCheckout] = useState(false)
+    const [paymentWindow, setPaymentWindow] = useState(false)
+    console.log("🚀 ~ file: checkout.js ~ line 75 ~ paymentWindow", paymentWindow)
 
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0
@@ -87,11 +91,12 @@ export default connect(store => ({
     }
 
     useEffect(() => {
-        if (size(paypalData) > 0) {
-            console.log("🚀 ~ file: checkout.js ~ line 91 ~ useEffect ~ paypalData", paypalData)
-            history.replace(get(paypalData, "data.paypal_urls.start", ""))
+        if (size(paypal) > 0) {
+            console.log("🚀 ~ file: checkout.js ~ line 91 ~ useEffect ~ paypal", paypal)
+            // window.open(get(paypal, "paypal_urls.start", ""))
         }
-    }, [paypalData])
+    }, [paypal])
+
 
     useEffect(() => {
         if (size(orderNumber) > 0) {
@@ -116,7 +121,15 @@ export default connect(store => ({
                 isDefaultStore={isDefaultStore}
                 placingOrder={placingOrder}
                 goBack={() => { setReviewCheckout(false) }}
-                onPlaceOrderButtonPress={() => placeOrder()} />
+                onPlaceOrderButtonPress={() => {
+                    if (get(selected_payment_method, "code", '') === 'paypal_express') {
+                        const w = window.open(get(paypal, "paypal_urls.start", ""))
+                        // w.close()
+                    } else {
+                        placeOrder()
+                    }
+                }}
+                setPaymentMethodOnCart={setPaymentMethodOnCart} />
         )
     }
 
@@ -257,9 +270,8 @@ export default connect(store => ({
                         const code = get(paymentOpt, "code", '')
                         if (code === 'paypal_express') {
                             handleGeneratePayPalToken()
-                        } else {
-                            setPaymentMethodOnCart(get(paymentOpt, "code", ''))
                         }
+                        setPaymentMethodOnCart({ code })
                     }}
                     isDefaultStore={isDefaultStore} />
 

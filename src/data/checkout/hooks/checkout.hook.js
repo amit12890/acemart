@@ -7,15 +7,13 @@ import { get } from 'lodash'
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher'
 import { useCartContext } from '@magento/peregrine/lib/context/cart'
 
-import { checkoutFetched, fetchingCheckout, updateCheckoutField } from '../checkout.action'
+import { checkoutFetched, fetchingCheckout, resetCheckout, updateCheckoutField } from '../checkout.action'
 
 import addressGql from '../../../venia/components/AddressBookPage/addressBookPage.gql'
 import gql from '../checkout.gql'
 import { useUserContext } from '@magento/peregrine/lib/context/user'
 import { clearCartDataFromCache } from '@magento/peregrine/lib/Apollo/clearCartDataFromCache'
 import { removeCart } from '@magento/peregrine/lib/store/actions/cart/asyncActions'
-
-import checkoutData from '../checkout-response-with-storepickup.json'
 
 const {
     getCountries,
@@ -25,7 +23,8 @@ const {
     setBillingAddressMutation,
     setShippingMethodMutation,
     placeOrderMutation,
-    createCartMutation
+    createCartMutation,
+    orderSuccessQuery
 } = gql
 
 const { getCustomerAddressesQuery } = addressGql
@@ -143,23 +142,24 @@ export const useCheckoutAddresses = () => {
 
 
     const setShippingAddressOnCart = useCallback((address) => {
-        if (settingShippingAddress) return
-        console.log("setShippingAddressOnCart", {
-            variables: {
-                input: {
-                    cart_id: cartId,
-                    shipping_addresses: address
+        if (!settingShippingAddress) {
+            console.log("setShippingAddressOnCart", {
+                variables: {
+                    input: {
+                        cart_id: cartId,
+                        shipping_addresses: address
+                    }
                 }
-            }
-        })
-        setShippingAddress({
-            variables: {
-                input: {
-                    cart_id: cartId,
-                    shipping_addresses: address
+            })
+            setShippingAddress({
+                variables: {
+                    input: {
+                        cart_id: cartId,
+                        shipping_addresses: address
+                    }
                 }
-            }
-        })
+            })
+        }
     }, [cartId, settingShippingAddress])
 
     /**
@@ -175,15 +175,16 @@ export const useCheckoutAddresses = () => {
                 billing_address: address
             }
         })
-        if (settingBillingAddress) return
-        setBillingAddress({
-            variables: {
-                input: {
-                    cart_id: cartId,
-                    billing_address: address,
+        if (!settingBillingAddress) {
+            setBillingAddress({
+                variables: {
+                    input: {
+                        cart_id: cartId,
+                        billing_address: address,
+                    }
                 }
-            }
-        })
+            })
+        }
     }, [cartId, settingBillingAddress])
 
     return {
@@ -220,18 +221,18 @@ export const useShippingMethods = () => {
      * cartId will be taken directly form reducer
      */
     const setShippingMethodOnCart = useCallback((shippingMethods) => {
-        if (settingShippingMethod) return
-        let data = {
-            input: {
-                cart_id: cartId,
-                shipping_methods: shippingMethods
+        if (!settingShippingMethod) {
+            let data = {
+                input: {
+                    cart_id: cartId,
+                    shipping_methods: shippingMethods
+                }
             }
+            console.log("variable", data)
+            setShippingMethod({
+                variables: data
+            })
         }
-        console.log("variable", data)
-        setShippingMethod({
-            variables: data
-        })
-
     }, [cartId, settingShippingMethod])
 
     return {
@@ -270,8 +271,9 @@ export const usePlaceOrder = () => {
     })
 
     const placeOrder = useCallback(() => {
-        if (placingOrder) return
-        orderPlace({ variables: { cartId } })
+        if (!placingOrder) {
+            orderPlace({ variables: { cartId } })
+        }
     }, [placingOrder, cartId])
 
     return {
@@ -284,5 +286,16 @@ export const useCountries = () => {
     const { data } = useQuery(getCountries, { nextFetchPolicy: 'cache-first' })
     return {
         countries: get(data, "countries", [])
+    }
+}
+
+
+export const useCheckoutSuccess = () => {
+    const [fetchCheckoutSuccess, { loading: checkoutSuccessFetching, data: successData }] = useLazyQuery(orderSuccessQuery)
+
+    return {
+        fetchCheckoutSuccess,
+        checkoutSuccessFetching,
+        data: get(successData, "successOrderPage", {})
     }
 }
