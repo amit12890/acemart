@@ -22,18 +22,18 @@ const TextInput = props => {
     return (
         <div className={containerClass}>
             {size(label) > 0 &&
-                <label className="label" htmlFor={htmlFor}>
+                <label className={classes.label} htmlFor={htmlFor}>
                     <span>{label}</span>
                 </label>
             }
-            <div className="control">
+            <div className={classes.control}>
                 <input
                     ref={innerRef ? innerRef : textInputRef}
                     id={htmlFor}
                     className={classes.input}
                     {...restProps} />
                 {isError &&
-                    <div htmlFor={htmlFor} generated={"true"} className="mage-error">{errorMessage}</div>
+                    <div htmlFor={htmlFor} generated={"true"} className={classes.mageError}>{errorMessage}</div>
                 }
             </div>
         </div>

@@ -16,8 +16,14 @@
 }
 
 .submit {
+   
     composes: root_normalPriority from '../../../Button/button.css';
     justify-self: flex-start;
+}
+
+.actionToolbar {
+    grid-area: submit;
+
 }
 
 @media (max-width: 640px) {

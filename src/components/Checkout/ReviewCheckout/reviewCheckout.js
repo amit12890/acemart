@@ -16,8 +16,6 @@ import BarCode from 'react-barcode'
 // import PayPalButton from '../../PayPalButton'
 
 
-
-
 const paypal_client = {
     sandbox: 'AbQv7VN-6ZoDUuQtksqW0xARAk-eoTME6VZNtxoOMA3mX-Bx2H7ijWa2bNgrcJql9BpMLFXlB_PiCGQS',
     production: 'aa',
@@ -91,7 +89,7 @@ export default connect((store) => {
                 </div>
                 <div className={classes.primaryButtonWrapper}>
                     <div onClick={goBack}
-                        className={classes.primaryButton}>
+                        className={classes.secondaryButton}>
                         Edit Checkout
                     </div>
                     {/* {showPaypalExpressButton ? (

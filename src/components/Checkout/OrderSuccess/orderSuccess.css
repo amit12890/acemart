@@ -2,17 +2,12 @@
     padding: 2.5rem 3rem;
     max-width: 1080px;
     margin: 0 auto;
-
     display: grid;
-    gap: 2rem;
-    grid-template-columns: 2fr 1fr;
 }
 
 .mainContainer {
-    grid-column: 1;
-
     display: grid;
-    row-gap: 1rem;
+    row-gap: 2rem;
 }
 
 .sidebarContainer {

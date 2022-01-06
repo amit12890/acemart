@@ -1,0 +1,109 @@
+.block {
+    margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 15px;
+}
+
+.blockTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.inactive {
+    opacity: 0.1;
+}
+
+.blockcontent {
+
+}
+
+.fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    max-width: 450px; 
+}
+
+
+
+.fieldset > .field:last-child {
+    margin: 0;
+}
+
+.shippingMethod {
+
+}
+
+
+.field {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.choice {
+
+}
+
+.optionChoice {
+    margin-right: 15px;
+    display: inline-flex;
+}
+
+.customRadio {
+
+}
+
+.methodDetails {
+
+}
+
+.addressDetails {
+
+}
+
+.methodLabel  {
+
+}
+
+.storeAddress {
+
+
+}
+
+.street {
+
+}
+
+.additionalInfo {
+
+}
+.storeHours {
+
+}
+
+.distance {
+
+}
+
+.estimateDetails {
+
+}
+
+.paymentMethods {
+
+}
+
+.paymentOptions {
+
+}
+
+.paymentMethods {
+
+}
+
+.fieldset {
+
+}

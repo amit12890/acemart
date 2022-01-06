@@ -1,0 +1,151 @@
+.block {
+    margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 15px;
+}
+
+.blockTitle {
+font-size: 1.5rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 15px;
+
+}
+
+.blockcontent {
+
+}
+
+.field {
+
+}
+
+.street {
+
+}
+
+.line1 {
+
+}
+
+.city {
+
+}
+
+.state {
+
+}
+
+.country {
+
+}
+
+.label {
+font-size: var(--fontSize-100);
+}
+
+.select {
+background-color: rgb(var(--color-white));
+border: 1px solid rgb(var(--border-color-base));
+border-radius: 0;
+color: rgb(var(--text-color));
+display: inline-flex;
+flex: 0 0 100%;
+font-size: 1rem;
+height: 40px;
+margin: 0;
+max-width: 100%;
+padding: 10px 10px 10px 10px;
+width: 100%;
+font-size: var(--fontSize-100);
+}
+
+.select:focus,
+.select:focus-visible {
+border-color: rgb(var(--theme-color-secondary));
+}
+
+.fieldset {
+border: 0;
+margin: 0 0;
+padding: 0;
+max-width: 450px;
+}
+
+.fieldset > .field {
+    margin: 0 0 30px;
+}
+
+.fieldset > .field:last-child {
+margin: 0;
+}
+
+.control {
+
+}
+
+.mage-error {
+    font-size: var(--fontSize-75);
+}
+
+.formAddressEdit {
+
+}
+
+.actionToolbar {
+
+}
+
+.secondary {
+
+}
+.primary {
+
+}
+
+.action {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+
+}
+
+.action:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.action:focus {
+    box-shadow: none;
+}
+
+.action:active {
+    transition-duration: 128ms;
+    --stroke: var(--theme-color-primary);
+}
+
+.actionToolbar {
+    margin-top: 30px;
+}
+
+
+
+
