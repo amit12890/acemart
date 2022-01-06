@@ -127,7 +127,7 @@ const Product = props => {
                             </span>
                             {ship_time &&  // extra note about shipping delays
                                 <div className={classes.shipTime}>
-                                    {ship_time}
+                                    <RichText content={ship_time} />
                                 </div>
                             }
                             <div className={classes.quantity}>
