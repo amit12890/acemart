@@ -10,6 +10,37 @@
     row-gap: 2rem;
 }
 
+.pageTitleWrapper {
+
+}
+
+
+.title {
+    justify-self: center;
+    margin-bottom: 10px;
+    font-size: var(--fontSize-700);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.base {
+    font-size: 3.6rem;
+    line-height: 3.6rem;
+    text-transform: uppercase;
+    color: #8bc53f;
+    display: block;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.subTitle {
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+    text-transform: uppercase;
+    display: block;
+    letter-spacing: 1px;
+}
+
 .sidebarContainer {
     grid-column: 2;
 }
@@ -24,6 +55,9 @@
 
 .orderNumber {
     composes: header;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
 .shippingInfoHeading {
@@ -49,6 +83,51 @@
 
 .additionalText {
     composes: text;
+    text-align: center;
+}
+
+.primaryButtonWrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.primaryButton {
+    --stroke: var(--theme-color-primary-alt);
+    background:  rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-200);
+    font-weight: var(--font-weight-bold);
+    line-height: 2.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 3.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    cursor: pointer;
+}
+
+.primaryButton:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.primaryButton:focus {
+    box-shadow: none;
+}
+
+.primaryButton:active {
+    transition-duration: 128ms;
+    --stroke:  var(--theme-color-primary-alt);
 }
 
 /*

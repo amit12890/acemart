@@ -153,7 +153,7 @@ export default connect(store => {
                 <div className={classes.blockTitle}>
                     Email Address
                 </div>
-                <div className={classes.blockcontent}>
+                <div className={classes.blockContent}>
                     <fieldset className={classes.fieldset}>
                         <div className={classes.field}>
                             <div className={classes.control}>
@@ -175,7 +175,7 @@ export default connect(store => {
                 <div className={classes.blockTitle}>
                     Email Address
                 </div>
-                <div className={classes.blockcontent}>
+                <div className={classes.blockContent}>
                     <fieldset className={classes.fieldset}>
                         <TextInput
                             innerRef={emailInputRef}

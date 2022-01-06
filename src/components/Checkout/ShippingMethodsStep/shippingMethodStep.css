@@ -8,7 +8,7 @@
     font-size: 1.3rem;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-bottom: 15px;
+    
 }
 
 .inactive {
@@ -16,7 +16,7 @@
 }
 
 .blockcontent {
-
+    margin-top: 15px;
 }
 
 .fieldset {
