@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useApolloClient, useMutation } from '@apollo/client';
 
 import { clearCartDataFromCache } from '@magento/peregrine/lib/Apollo/clearCartDataFromCache';
@@ -13,6 +13,18 @@ import DEFAULT_OPERATIONS from './createAccount.gql';
 import { useCompareList } from '../../../../components/CompareListPage/useCompareList';
 import { useSelector } from 'react-redux';
 import { size } from 'lodash-es';
+import { useToasts } from '@magento/peregrine';
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import Icon from '../../../../venia/components/Icon';
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 /**
  * Returns props necessary to render CreateAccount component. In particular this
@@ -32,6 +44,7 @@ import { size } from 'lodash-es';
  */
 export const useCreateAccount = props => {
     const { initialValues = {}, onSubmit, onCancel } = props;
+    const [_, { addToast }] = useToasts();
 
     const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const {
@@ -44,8 +57,8 @@ export const useCreateAccount = props => {
     } = operations;
     const apolloClient = useApolloClient();
 
-    const { assignCompareList } = useCompareList()
-    const uid = useSelector(store => store.compare.uid)
+    const { assignCompareList } = useCompareList();
+    const uid = useSelector(store => store.compare.uid);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [
@@ -66,7 +79,17 @@ export const useCreateAccount = props => {
     const [createAccount, { error: createAccountError }] = useMutation(
         createAccountMutation,
         {
-            fetchPolicy: 'no-cache'
+            fetchPolicy: 'no-cache',
+            onCompleted: data => {
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message:
+                        'Thank you for registering with Ace Mart Restaurant Supply.',
+                    dismissable: true,
+                    timeout: 3000
+                });
+            }
         }
     );
 
@@ -109,7 +132,7 @@ export const useCreateAccount = props => {
 
                 // Assign Compare list to logged in customer
                 if (size(uid) > 0) {
-                    assignCompareList({ variables: { uid } })
+                    assignCompareList({ variables: { uid } });
                 }
 
                 // Clear all cart/customer data from cache and redux.

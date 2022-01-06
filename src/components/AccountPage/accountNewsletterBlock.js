@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { useIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import { GET_CUSTOMER_SUBSCRIPTION } from './newsletterSubscription.gql';
@@ -12,6 +13,7 @@ import { newsletterPage } from '../../url.utils';
 const AccountNewsletterBlock = () => {
     const classes = useStyle(defaultClasses);
     const { loading, error, data } = useQuery(GET_CUSTOMER_SUBSCRIPTION);
+    const { formatMessage } = useIntl();
     const subscription = get(data, "customer.is_subscribed", false)
 
     if (loading) {
@@ -23,9 +25,16 @@ const AccountNewsletterBlock = () => {
             <h2 className={classes.red}>Newsletters</h2>
             <div className={classes.panelContent}>
                 {subscription ?
-                    'You are subscribed to "General Subscription"'
+                    formatMessage({ 
+                        id: "accountNewsletterBlock.subscribed",
+                        defaultMessage: 'You are subscribed to "General Subscription"'
+                    })
                     :
-                    'You are NOT subscribed to "General Subscription"'}
+                    formatMessage({ 
+                        id: "accountNewsletterBlock.unsubscribed",
+                        defaultMessage: "You aren't subscribed to our newsletter."
+                    })
+                }
                 <div className={classes.actionToolbar}>
                     <Link
                         className={classes.action}

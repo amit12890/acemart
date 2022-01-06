@@ -32,6 +32,7 @@ import {
     reportAnswerMutation
 } from './productQuestions.gql';
 import { partial } from 'lodash-es';
+import RichText from '../../venia/components/RichText';
 
 const sortOptions = [
     { value: '1', label: 'Most Recent Questions' },
@@ -318,7 +319,7 @@ const QuestionBlock = ({ questions }) => {
                                                             <path d="M10.625 17.438q0 0.094-0.047 0.203t-0.141 0.203l-8.313 8.313q-0.094 0.094-0.203 0.141t-0.203 0.047q-0.125 0-0.234-0.047t-0.172-0.141l-0.906-0.875q-0.063-0.094-0.125-0.203t-0.063-0.234q0-0.094 0.063-0.203t0.125-0.203l7.031-7-7.031-7.031q-0.063-0.063-0.125-0.188t-0.063-0.219 0.063-0.219 0.125-0.188l0.906-0.906q0.063-0.063 0.172-0.109t0.234-0.047q0.094 0 0.203 0.047t0.203 0.109l8.313 8.344q0.094 0.063 0.141 0.172t0.047 0.234v0z"></path>
                                                         </svg>
                                                     </i>
-                                                    {item.content}
+                                                    <RichText content={item.content}/>
                                                 </div>
                                                 <div className={classes.count}>
                                                     {ansCount > 1
@@ -373,7 +374,9 @@ const QuestionBlock = ({ questions }) => {
                                                     return (
                                                         <div key={ans.id} className={classes.anslistItemWrapper}>
                                                             <div className={classes.answerListItem}>
-                                                                <div className={classes.listContent}>{ans.content}</div>
+                                                                <div className={classes.listContent}>
+                                                                    <RichText content={ans.content} />
+                                                                </div>
                                                             </div>
                                                             <div className={classes.answerListHelper}>
                                                                 <div className={classes.nickName}>by {ans.nickname}</div>

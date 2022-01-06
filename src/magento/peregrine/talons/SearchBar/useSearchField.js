@@ -28,7 +28,7 @@ export const useSearchField = props => {
     // We purposefully only ever run this effect on initial mount.
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
-        const urlTerm = getSearchParam('query', location);
+        const urlTerm = getSearchParam('q', location);
 
         if (!formApi || !urlTerm) {
             return;

@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import { string } from 'prop-types'
 
 import { size, get, has } from 'lodash'
+import { useStyle } from '@magento/venia-ui/lib/classify'
+import defaultClasses from './textInput.css'
 
 
 
@@ -13,6 +15,7 @@ const TextInput = props => {
     const textInputRef = useRef(null)
     const { htmlFor, containerClass, label, errorMessage, className, innerRef, ...restProps } = props
 
+    const classes = useStyle(defaultClasses)
     let isError = size(errorMessage) > 0
 
 
@@ -27,7 +30,7 @@ const TextInput = props => {
                 <input
                     ref={innerRef ? innerRef : textInputRef}
                     id={htmlFor}
-                    className={`${className} ${isError ? "mage-error" : ""}`}
+                    className={classes.input}
                     {...restProps} />
                 {isError &&
                     <div htmlFor={htmlFor} generated={"true"} className="mage-error">{errorMessage}</div>

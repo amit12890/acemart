@@ -6,9 +6,11 @@ import { useStyle } from '../../classify';
 import defaultClasses from './field.css';
 
 const Field = props => {
-    const { children, id, label, optional } = props;
+    const { children, id, label, optional, showStar } = props;
     const classes = useStyle(defaultClasses, props.classes);
-    const optionalSymbol = optional ? (
+    const optionalSymbol = showStar
+        ? <span>*</span>
+        : optional ? (
         <span className={classes.optional}>
             <FormattedMessage
                 id={'field.optional'}

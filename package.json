@@ -39,6 +39,7 @@
     "react-map-interaction": "^2.1.0",
     "react-paypal-express-checkout": "^1.0.5",
     "redux-persist": "^6.0.0",
+    "react-google-maps": "^9.4.5",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

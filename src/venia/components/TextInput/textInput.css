@@ -1,8 +1,5 @@
-
 .input {
     composes: input from '../Field/field.css';
-    
-
 }
 
 .input:focus,
@@ -16,4 +13,12 @@
 .input_error {
     composes: input from '../Field/field.css';
     border-color: rgb(var(--venia-global-color-red-400));
+}
+
+.inputText {
+    composes: input from '../Field/field.css'; 
+}
+
+.control {
+    margin-bottom: 30px; 
 }

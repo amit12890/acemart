@@ -1,0 +1,25 @@
+
+.input {
+    composes: input from '../../venia/components/Field/field.css';
+    background-color: red;
+    
+
+}
+
+.input:focus,
+.input:focus-visible {
+    border-color: rgb(var(--theme-color-secondary));
+}
+.input:disabled {
+    color: rgb(var(--venia-global-color-gray-darker));
+}
+
+.input_error {
+    composes: input from '../../venia/components/Field/field.css';
+    border-color: rgb(var(--venia-global-color-red-400));
+}
+
+.inputText {
+    composes: input from '../../venia/components/Field/field.css';
+}
+

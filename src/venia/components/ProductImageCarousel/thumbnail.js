@@ -9,8 +9,8 @@ import { useStyle } from '../../classify';
 import defaultClasses from './thumbnail.css';
 import Image from '../Image';
 
-const DEFAULT_THUMBNAIL_HEIGHT = 135;
-const DEFAULT_THUMBNAIL_WIDTH = 135;
+const DEFAULT_THUMBNAIL_HEIGHT = 90;
+const DEFAULT_THUMBNAIL_WIDTH = 90;
 
 /**
  * The Thumbnail Component is used for showing thumbnail preview image for ProductImageCarousel

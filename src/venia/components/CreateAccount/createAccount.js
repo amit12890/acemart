@@ -10,10 +10,12 @@ import { useCreateAccount } from '../../../magento/peregrine/talons/CreateAccoun
 import combine from '@magento/venia-ui/lib/util/combineValidators';
 import {
     hasLengthAtLeast,
-    isRequired,
     validatePassword,
     isEqualToField,
 } from '@magento/venia-ui/lib/util/formValidators';
+import {
+    isRequired,
+} from '../../util/formValidators';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import Field from '../Field';
@@ -116,6 +118,7 @@ const CreateAccount = props => {
                                 id: 'createAccount.firstNameText',
                                 defaultMessage: 'First Name'
                             })}
+                            showStar
                         >
                             <TextInput
                                 field="customer.firstname"
@@ -131,6 +134,7 @@ const CreateAccount = props => {
                                 id: 'createAccount.lastNameText',
                                 defaultMessage: 'Last Name'
                             })}
+                            showStar
                         >
                             <TextInput
                                 field="customer.lastname"
@@ -159,6 +163,7 @@ const CreateAccount = props => {
                                 id: 'createAccount.emailText',
                                 defaultMessage: 'Email'
                             })}
+                            showStar
                         >
                             <TextInput
                                 field="customer.email"
@@ -186,10 +191,12 @@ const CreateAccount = props => {
                             validateOnBlur
                             mask={value => value && value.trim()}
                             maskOnBlur={true}
+                            showStar
                         />
 
                         <PasswordStrengthMeter score={passwordScore} />
                         <Password
+                            showStar
                             fieldName="confirmPassword"
                             label='Confirm Password'
                             validate={combine([

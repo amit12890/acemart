@@ -13,12 +13,15 @@ import {
 } from 'react-feather';
 
 import { useEmailStep } from '../../../data/checkout/hooks/emailValidation.hook';
-
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import defaultClasses from './checkoutEmailStep.css'
 import { get, size, debounce } from 'lodash'
 import { validateEmail, validatePassword } from '../../../app.utils'
 import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
 import { GET_CART_DETAILS_QUERY } from '../../../venia/components/SignIn/signIn.gql'
 import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action';
+
+
 
 
 const successIcon = (
@@ -45,6 +48,8 @@ export default connect(store => {
         is_email_available: store.checkout.is_email_available
     }
 })((props) => {
+
+    const classes = useStyle(defaultClasses)
     const { dispatch } = props
     const { handleSubmit } = useSignIn({
         getCartDetailsQuery: GET_CART_DETAILS_QUERY
@@ -142,14 +147,14 @@ export default connect(store => {
 
     const renderNonEditableField = () => {
         return (
-            <div className="block block-checkout email-address">
-                <div className="block-title">
+            <div className={classes.block}>
+                <div className={classes.blockTitle}>
                     Email Address
                 </div>
-                <div className="block-content">
-                    <fieldset className="fieldset">
-                        <div className="field required">
-                            <div className="control">
+                <div className={classes.blockcontent}>
+                    <fieldset className={classes.fieldset}>
+                        <div className={classes.field}>
+                            <div className={classes.control}>
                                 <span>{props.email}</span>
                             </div>
                         </div>
@@ -164,12 +169,12 @@ export default connect(store => {
         let timeout = null
         return (
 
-            <div className="block block-checkout email-address">
-                <div className="block-title">
+            <div className={classes.block}>
+                <div className={classes.blockTitle}>
                     Email Address
                 </div>
-                <div className="block-content">
-                    <fieldset className="fieldset">
+                <div className={classes.blockcontent}>
+                    <fieldset className={classes.fieldset}>
                         <TextInput
                             innerRef={emailInputRef}
                             containerClass="field required"
@@ -177,7 +182,7 @@ export default connect(store => {
                             type="email"
                             name="email"
                             autoComplete="email"
-                            className="input-text"
+
                             value={email}
                             onChange={(e) => {
                                 setEmail(e.target.value)
