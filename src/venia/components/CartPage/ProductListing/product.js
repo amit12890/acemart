@@ -2,6 +2,8 @@ import React, { useMemo, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import { get } from 'lodash';
+
 import { useProduct } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProduct';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import Price from '../../Price';
@@ -9,7 +11,6 @@ import Price from '../../Price';
 import { useStyle } from '../../../classify';
 import Image from '../../Image';
 import ProductOptions from '../..//LegacyMiniCart/productOptions';
-import Section from '../../LegacyMiniCart/section';
 import Quantity from './quantity';
 
 import defaultClasses from './product.css';
@@ -42,12 +43,9 @@ const Product = props => {
     });
 
     const {
-        addToWishlistProps,
         errorMessage,
-        handleEditItem,
         handleRemoveFromCart,
         handleUpdateItemQuantity,
-        isEditable,
         product,
         isProductUpdating
     } = talonProps;
@@ -60,11 +58,10 @@ const Product = props => {
         quantity,
         stockStatus,
         unitPrice,
-        urlKey,
         urlSuffix,
     } = product;
-
-    const { uom, ship_time, sku } = item.product
+    
+    const { ship_time, sku, url_rewrites } = item.product
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -80,23 +77,11 @@ const Product = props => {
         ? classes.item_disabled
         : classes.item;
 
-    const editItemSection = isEditable ? (
-        <Section
-            text={formatMessage({
-                id: 'product.editItem',
-                defaultMessage: 'Edit item'
-            })}
-            onClick={handleEditItem}
-            icon="Edit2"
-            classes={{
-                text: classes.sectionText
-            }}
-        />
-    ) : null;
-
     const itemLink = useMemo(
-        () => resourceUrl(`/${urlKey}${urlSuffix || ''}`),
-        [urlKey, urlSuffix]
+        () => resourceUrl(
+            `/${get(url_rewrites[0], "url", "")}${urlSuffix || ""}`
+        ),
+        [url_rewrites, urlSuffix]
     );
 
     const stockStatusMessage =
@@ -197,10 +182,6 @@ const Product = props => {
                                 <path d="M9.156 13.438v10.281q0 0.25-0.172 0.406t-0.422 0.156h-1.125q-0.25 0-0.422-0.156t-0.172-0.406v-10.281q0-0.25 0.172-0.422t0.422-0.172h1.125q0.25 0 0.422 0.172t0.172 0.422zM13.719 13.438v10.281q0 0.25-0.172 0.406t-0.391 0.156h-1.156q-0.25 0-0.406-0.156t-0.156-0.406v-10.281q0-0.25 0.156-0.422t0.406-0.172h1.156q0.219 0 0.391 0.172t0.172 0.422zM18.281 13.438v10.281q0 0.25-0.156 0.406t-0.406 0.156h-1.156q-0.219 0-0.391-0.156t-0.172-0.406v-10.281q0-0.25 0.172-0.422t0.391-0.172h1.156q0.25 0 0.406 0.172t0.156 0.422zM20.563 26.344v-16.906h-16v16.906q0 0.656 0.25 1.016t0.344 0.359h14.844q0.063 0 0.313-0.359t0.25-1.016v0zM8.563 7.156h8l-0.844-2.094q-0.031-0.063-0.141-0.125t-0.172-0.094h-5.656q-0.094 0.031-0.172 0.094t-0.141 0.125zM25.156 7.719v1.125q0 0.25-0.172 0.422t-0.422 0.172h-1.719v16.906q0 1.5-0.828 2.578t-2.016 1.078h-14.844q-1.188 0-2.031-1.047t-0.844-2.516v-17h-1.719q-0.219 0-0.391-0.172t-0.172-0.422v-1.125q0-0.25 0.172-0.406t0.391-0.156h5.531l1.25-3q0.25-0.656 0.953-1.125t1.422-0.469h5.719q0.688 0 1.391 0.469t0.984 1.125l1.25 3h5.5q0.25 0 0.422 0.156t0.172 0.406v0z"></path>
                             </svg>
                         </i>
-                        {/* {formatMessage({
-                            id: 'am.product.removeFromCart',
-                            defaultMessage: 'Remove Item'
-                        })} */}
                     </Button>
                 </div>
             </li>

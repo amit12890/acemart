@@ -64,7 +64,10 @@ export default ({ data, onItemClick, showTitle = true }) => {
                                             }}>
                                             <div className={classes.resourcesItem}>
                                                 <div className={classes.resouresImage}>
-                                                    <img src={imageUrl} />
+                                                    <div className={classes.resouresImageContainer}>
+
+                                                        <img src={imageUrl} />
+                                                    </div>
                                                 </div>
                                                 <div className={classes.resouresDetails}>
                                                     <h4>{item.title}</h4>

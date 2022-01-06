@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import { get, groupBy, size, difference, orderBy, sortBy } from 'lodash-es';
+import React, { useCallback, useState, useMemo } from 'react';
+import { get, groupBy, size, difference, orderBy, sortBy, has } from 'lodash-es';
 
 import { useStyle } from '../../classify';
 import defaultClasses from '../../../components/StoreLocator/productStoreLocator.css';
@@ -7,10 +7,12 @@ import Button from '../Button';
 import { Link } from 'react-router-dom';
 import { StoreHours } from '../../../components/StoreLocator/productStoreLocator';
 import mapImage from "../../../assets/map.jpg"
+import { storeLocatorUrl } from '../../../url.utils';
 
 // Acemart.com store will be under this group
 // don't show it in group list
 const DEFAULT_STORE_GROUP_NAME = "Shopping"
+const DEFAULT_STORE_GROUP_STORE_NAME = "Acemart.com"
 
 const getMapStype = (image) => {
     return {
@@ -22,7 +24,8 @@ export default function StoreSwitcherPopupContent({
     selectStore,
     currentStoreName,
     currentGroupName,
-    currentStoreConfig
+    currentStoreConfig,
+    closeStoreLocatorPopup
 }) {
     const classes = useStyle(defaultClasses);
     // 1: select Area, 2: select Store, 3: details / stock
@@ -41,6 +44,22 @@ export default function StoreSwitcherPopupContent({
             get(storeGroupData, selectedGroup, []),
             ['store_group_name', 'store_sort_order'], ['desc', 'asc']
         )
+    }
+
+    const isDistributionCenter = useMemo(() => {
+        let hasCenter = false;
+        for (let index = 0; index < groupStoreList.length; index++) {
+            const config = groupStoreList[index];
+            if(get(config, "store_locator_info.is_distribution_center", false)) {
+                hasCenter = true;
+                break;
+            }
+        }
+        return hasCenter;
+    }, [groupStoreList])
+
+    if(isDistributionCenter) {
+        groupStoreList.push(DEFAULT_STORE_DATA)
     }
 
     const handleNavigationClick = useCallback((state) => {
@@ -62,13 +81,10 @@ export default function StoreSwitcherPopupContent({
         setPopupState(2);
     }, [setSelectedGroup, setPopupState])
 
-    const handleSwitchStoreClick = useCallback(
-        // Change store view code and currency to be used in Apollo link request headers
-        storeCode => () => {
-            selectStore(storeCode)
-        },
-        [availableStores]
-    );
+    // Change store view code and currency to be used in Apollo link request headers
+    const handleSwitchStoreClick = storeCode => () => {
+        selectStore(storeCode)
+    }
 
     const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
 
@@ -78,7 +94,7 @@ export default function StoreSwitcherPopupContent({
                 <div className={classes.panelTopRow}>
                     <h2>Currently Shopping</h2>
                     <h3>{currentStoreName}</h3>
-                    {currentStoreConfig.store_name === "Acemart.com" ?
+                    {currentStoreConfig.store_name === DEFAULT_STORE_GROUP_STORE_NAME ?
                         <ul className={classes.storeData}>
                             <li className={classes.storeDataItem}>
                                 <div><strong>Delivery Options Available:</strong></div>
@@ -94,7 +110,7 @@ export default function StoreSwitcherPopupContent({
                                     <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
                                 </div>
                                 <div className={classes.storeDirection}>
-                                    <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
+                                    <a href={get(currentStoreConfig, "store_locator_info.driving_directions", "#")} target="_blank">
                                         <i className={classes.iconWrapper}>
                                             <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="37" height="32" viewBox="0 0 37 32">
                                                 <title>car</title>
@@ -102,7 +118,7 @@ export default function StoreSwitcherPopupContent({
                                             </svg>
                                         </i>
                                         <span>Driving directions</span>
-                                    </Link>
+                                    </a>
                                 </div>
                             </li>
                             <li className={classes.storeDataItem}>
@@ -118,7 +134,7 @@ export default function StoreSwitcherPopupContent({
                                     <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
                                 </div>
                                 <div className={classes.storeDirection}>
-                                    <Link to={get(currentStoreConfig, "store_locator_info.driving_directions", "#")}>
+                                    <a href={get(currentStoreConfig, "store_locator_info.driving_directions", "#")} target="_blank">
                                         <i className={classes.iconWrapper}>
                                             <svg className={classes.svgIcon} xmlns="http://www.w3.org/2000/svg" width="37" height="32" viewBox="0 0 37 32">
                                                 <title>car</title>
@@ -126,7 +142,7 @@ export default function StoreSwitcherPopupContent({
                                             </svg>
                                         </i>
                                         <span>Driving directions</span>
-                                    </Link>
+                                    </a>
                                 </div>
                             </li>
                             <li className={classes.storeDataItem}>
@@ -140,16 +156,17 @@ export default function StoreSwitcherPopupContent({
                     }
                 </div>
                 <div className={classes.panelBottomRow}>
-                    {currentStoreName !== "Acemart.com" ?
+                    {currentStoreName !== DEFAULT_STORE_GROUP_STORE_NAME ?
                         <Button onClick={handleSwitchStoreClick("default")}>
                             Ship Direct on Acemart.com
                         </Button>
                         :
                         null
                     }
-                    <Link to={"#"}>
+                    <Link to={storeLocatorUrl()}>
                         <Button
-                            className={classes.buttonSmall}>
+                            className={classes.buttonSmall}
+                            onClick={closeStoreLocatorPopup}>
                             View All Store Locations
                         </Button>
                     </Link>
@@ -216,9 +233,16 @@ export default function StoreSwitcherPopupContent({
                                 <div className={classes.storeListContainer}>
                                     <div className={classes.storeListItemWrapper}>
                                         {groupStoreList.map((store, sInd) => {
-                                            const { id, store_name, code } = store;
+                                            const { id, store_name, code, store_group_name } = store;
                                             // add active class here
-                                            const isActive = store_name === currentStoreName
+                                            const isActive = (
+                                                store_name === currentStoreName || 
+                                                (
+                                                    store_group_name === DEFAULT_STORE_GROUP_NAME &&
+                                                    currentStoreName === DEFAULT_STORE_GROUP_STORE_NAME
+                                                )
+                                            )
+
                                             return (
                                                 <div key={id} className={classes.listItem}>
                                                     <div className={classes.listLabel}>
@@ -229,7 +253,10 @@ export default function StoreSwitcherPopupContent({
                                                         <h4 className={classes.storeName}>{store_name}</h4>
                                                         <p>{store.store_locator_info.street}</p>
                                                         <p>{store.store_locator_info.city}, {store.store_locator_info.state} {store.store_locator_info.zip}</p>
-                                                        <p>{store.store_locator_info.phone}</p>
+                                                        <a href={`tel:${store.store_locator_info.phone}`}>
+                                                            {/* <span>phone icon here</span> */}
+                                                            {store.store_locator_info.phone}
+                                                        </a>
                                                         <div>
                                                             <StoreHours hours={store.store_locator_info.hours} />
                                                         </div>
@@ -252,4 +279,66 @@ export default function StoreSwitcherPopupContent({
             </div>
         </div>
     );
+}
+
+
+const DEFAULT_STORE_DATA = {
+    "__typename": "StoreConfig",
+    "category_url_suffix": null,
+    "code": "default",
+    "default_display_currency_code": "USD",
+    "id": 1,
+    "locale": "en_US",
+    "product_url_suffix": null,
+    "secure_base_media_url": "https://qa-acemart-backend.magedelight.magentoprojects.net/pub/media/",
+    "store_group_code": "main_website_store",
+    "store_group_name": "Shopping",
+    "store_name": "Distribution Center",
+    "store_sort_order": 0,
+    "store_locator_info": {
+        "__typename": "StoreLocatorConfig",
+        "street": "9850 Doerr Ln",
+        "city": "Schertz",
+        "zip": "78154",
+        "state": "TX",
+        "phone": "210-323-4550",
+        "hours": {
+            "__typename": "StoreLocatorHours",
+            "mon": [
+                "8:30 am",
+                "5:30 pm"
+            ],
+            "tue": [
+                "8:30 am",
+                "5:30 pm"
+            ],
+            "wed": [
+                "8:30 am",
+                "5:30 pm"
+            ],
+            "thu": [
+                "8:30 am",
+                "5:30 pm"
+            ],
+            "fri": [
+                "8:30 am",
+                "5:30 pm"
+            ],
+            "sat": [
+                "Closed"
+            ],
+            "sun": [
+                "Closed"
+            ]
+        },
+        "map": null,
+        "temporary_closure": false,
+        "fax": "",
+        "driving_directions": "https://www.google.com/maps/dir/Your+Location/9850+Doerr+Ln+St+Schertz+TX+78154",
+        "is_distribution_center": false,
+        "store_lat": "29.610927",
+        "store_long": "-98.292624",
+        "qty": null,
+        "stock_status": null
+    }
 }

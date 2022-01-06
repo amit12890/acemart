@@ -2,41 +2,78 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
-import { get } from 'lodash';
+import { forEach, get, size, split } from 'lodash';
 import CartItemList from '../CartItemList';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStyle } from '../../../venia/classify';
 import defaultClasses from './orderSuccess.css'
 import { resetCheckout } from '../../../data/checkout/checkout.action';
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator'
+import { useLocation } from 'react-router-dom';
+import { useCheckoutPayment } from '../../../data/checkout/hooks/payment.hook'
+import { useCheckoutSuccess } from '../../../data/checkout/hooks/checkout.hook';
+import CheckoutOrder from './CheckoutOrder';
 
 
 export default connect(store => {
     return {
-        order_number: store.checkout.orderNumber,
-        user_email: store.checkout.email,
-        shipping_addresses: store.checkout.shipping_addresses,
-        cart_items: store.checkout.items
+        order_number: store.checkout.orderNumber
     }
 })(React.memo(({
     order_number,
-    user_email,
-    shipping_addresses,
-    cart_items,
     dispatch
 }) => {
+    const { setPaymentMethodOnCart, settingPaymentMethod } = useCheckoutPayment()
+    const search = useLocation().search
+    const searchParams = new URLSearchParams(search)
+    const paypal_response = {
+        token: searchParams.get('token'),
+        payerId: searchParams.get('PayerID')
+    }
 
     const [orderNumber, setOrderNumber] = useState(order_number)
-    const [selectedShippingAddress, setSelectedShippingAddress] = useState(shipping_addresses[0])
-    const [email, setEmail] = useState(user_email)
-    const [cartItems, setCartItems] = useState(cart_items)
-
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        console.log("clearing checkout reducer....")
-        dispatch(resetCheckout())
-    }, [])
+        if (size(paypal_response.payerId) > 0 && size(order_number) === 0 && !loading) {
+            setLoading(true)
+            console.log("setting payment on cart....")
+            setPaymentMethodOnCart({
+                code: "paypal_express",
+                paypal_express: {
+                    payer_id: get(paypal_response, "payerId", ""),
+                    token: get(paypal_response, "token", "")
+                }
+            })
+        }
+    }, [paypal_response, order_number, loading])
+
     const classes = useStyle(defaultClasses)
     const { formatMessage } = useIntl();
+
+    if (loading) {
+        return (
+            <LoadingIndicator>
+                <FormattedMessage
+                    id={'checkout.success.loading'}
+                    defaultMessage={'Placing Order...'}
+                />
+            </LoadingIndicator>
+        )
+    }
+
+    const orderNumbers = split(order_number, ",")
+    console.log("🚀 ~ file: orderSuccess.js ~ line 83 ~ orderNumbers", orderNumbers)
+    return (
+        <div>
+            {orderNumbers.map((number) => {
+                return (
+                    <CheckoutOrder orderNumber={number.trim()} />
+                )
+            })}
+        </div>
+    )
+
     console.log("🚀 ~ file: orderSuccess.js ~ line 18 ~ selectedShippingAddress", selectedShippingAddress)
     const selectedShippingMethod = get(selectedShippingAddress, "available_shipping_methods", [])
 
@@ -68,12 +105,16 @@ export default connect(store => {
                 })}
             </StoreTitle>
             <div className={classes.mainContainer}>
-                <h2 className={classes.heading}>
-                    <FormattedMessage
-                        id={'checkoutPage.thankYou'}
-                        defaultMessage={'Thank you for your order!'}
-                    />
-                </h2>
+                <div className={classes.pageTitleWrapper}>
+                    <h1 className={classes.title}>
+                        <span className={classes.base}>
+                            Thank you
+                        </span>
+                        <span className={classes.subtitle}>
+                            for your order!
+                        </span>
+                    </h1>
+                </div>
                 <div className={classes.orderNumber}>
                     <FormattedMessage
                         id={'checkoutPage.orderNumber'}
@@ -112,6 +153,12 @@ export default connect(store => {
                             'You will also receive an email with the details and we will let you know when your order has shipped.'
                         }
                     />
+                </div>
+
+                <div className={classes.primaryButtonWrapper}>
+                    <div className={classes.primaryButton}>
+                        Continue Shopping
+                    </div>
                 </div>
             </div>
         </div>

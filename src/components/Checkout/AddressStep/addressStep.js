@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
+import TextInput from '../../TextInput'
 import AddressListItem from '../AddressListItem'
 import AddressForm from '../AddressForm'
 import RadioButton from '../../RadioButton'
+
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import defaultClasses from './addressStep.css'
 
 
 import { get, size, find } from 'lodash'
@@ -16,6 +20,8 @@ import { get, size, find } from 'lodash'
  *      Checkout
  */
 const AddressStep = props => {
+
+    const classes = useStyle(defaultClasses)
     const {
         enabled,
         title,
@@ -82,36 +88,38 @@ const AddressStep = props => {
      */
     if (!enabled) {
         return (
-            <div className="block block-checkout inactive">
-                <div className="block-title">
+            <div className={classes.block}>
+                <div className={classes.blockTitle}>
                     {title}
                 </div>
             </div>
         )
     }
 
-
     const renderAddButton = () => {
         if (size(initialValues) > 0 && get(initialValues, "customer_address_id", null) == null) {
             return (
-
-                <button className="action secondary edit"
-                    onClick={(e) => {
-                        e.preventDefault()
-                    }}>
-                    <span>Edit Current Address</span>
-                </button>
+                <div className={classes.actionToolbar}>
+                    <button className={classes.action}
+                        onClick={(e) => {
+                            e.preventDefault()
+                        }}>
+                        <span>Edit Current Address</span>
+                    </button>
+                </div>
 
             )
         } else {
             return (
-                <button className="action secondary new"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        setFormVisibility(true)
-                    }}>
-                    <span>Add New Address</span>
-                </button>
+                <div className={classes.actionToolbar}>
+                    <button className={classes.action}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setFormVisibility(true)
+                        }}>
+                        <span>Add New Address</span>
+                    </button>
+                </div>
 
             )
         }
@@ -133,8 +141,8 @@ const AddressStep = props => {
             )
         }
         return (
-            <div className="block-content">
-                <fieldset className="fieldset">
+            <div className={classes.blockContent}>
+                <fieldset className={classes.fieldset}>
 
                     {hasAddresses ?
                         (
@@ -143,27 +151,29 @@ const AddressStep = props => {
                                 return (
 
                                     <div
-                                        className="field address-list-field choice checkout-choice"
+                                        className={[classes.field, classes.choice].join(" ")}
                                         key={address.id + " " + index}
                                         onClick={(e) => {
                                             e.preventDefault()
                                             changeAddressSelection(address.id)
                                             console.log("🚀 ~ file: addressStep.js ~ line 154 ~ data.map ~ address.id", address.id)
                                         }}>
-                                        <div className="option-choice custom-radio-field">
+                                        <div className={[classes.field, classes.choice].join(" ")}>
                                             <RadioButton isActive={isSelected} />
                                         </div>
-                                        <div className="delivery-address-details">
-                                            <AddressListItem address={address} containerClass="address" />
+                                        <div className={classes.deliveryAddressDetails}>
+                                            <AddressListItem address={address}
+                                                containerClass={classes.address} />
                                         </div>
                                     </div>
 
                                 )
                             })
                         ) : (
-                            <div className="block block-dashboard-addresses">
-                                <div className="block-content">
-                                    <div className="no-result">
+                            <div className={classes.block}>
+                                <div className={classes.blockContent}>
+
+                                    <div className={classes.noResult}>
                                         No Addresses Found
                                     </div>
                                 </div>
@@ -172,20 +182,20 @@ const AddressStep = props => {
                         )
                     }
                     {showSameAsButton && (
-                        <div className="actions-toolbar">
-                            <div className="secondary">
-                                <button className="action submit secondary" onClick={sameAddress}><span>Same as Shipping Address</span></button>
+                        <div className={classes.actionToolbar}>
+                            <div className={classes.secondary}>
+                                <button className={[classes.action, classes.secondary].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
                             </div>
                         </div>
                     )}
 
-                    <div className="actions-toolbar actions-toolbar-delivery-address">
-                        <div className="primary">
-                            <button className="action primary delivery-address" onClick={submitForm}>
+                    <div className={classes.actionToolbar}>
+                        <div className={classes.secondary}>
+                            <button className={[classes.action, classes.secondary].join(" ")} onClick={submitForm}>
                                 <span>{isShippingStep ? 'Delivery To This Address' : 'Use This Address'}</span>
                             </button>
                         </div>
-                        <div className="secondary">
+                        <div className={classes.secondary}>
                             {renderAddButton()}
                         </div>
                     </div>
@@ -196,60 +206,78 @@ const AddressStep = props => {
         )
     }
 
+    /**
+    * render diff UI is email is not presented in cart
+    */
+    if (!enabled) {
+        return (
+            <div className="block block-checkout inactive">
+                <div className="block-title">
+                    {title}
+                </div>
+            </div>
+        )
+    }
 
     if (!editMode) {
         let hasInitValue = size(initialValues) > 0
         return (
-            <div className={`block block-checkout ${isShippingStep ? "delivery-address" : "billing-address"}`}>
-                <div className="block-title">
+            <div className={classes.block}>
+                <div className={classes.blockTitle}>
                     {title}
                 </div>
-                {hasInitValue &&
-                    <AddressListItem address={initialValues} containerClass="address" />
-                }
-                {/* 
+                <div className={classes.blockContent}>
+
+                    {hasInitValue &&
+                        <AddressListItem address={initialValues}
+                            containerClass={classes.address} />
+                    }
+                    {/* 
                     user should only be able to change or edit shipping adderess if 
                     it has default store is not selected
                 */}
-                {(isDefaultStore || !isShippingStep) && (
-                    <div className="actions-toolbar">
-                        <div className="secondary">
-                            <button
-                                className="action submit secondary"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    toggleEditMode(true)
-                                }}>
-                                <span>{hasInitValue ? " Change" : "Add"}</span>
-                            </button>
+                    {(isDefaultStore || !isShippingStep) && (
+                        <div className={classes.actionToolbar}>
+                            <div className={classes.secondary}>
+                                <button
+                                    className={[classes.action, classes.secondary].join(" ")}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        toggleEditMode(true)
+                                    }}>
+                                    <span>{hasInitValue ? " Change" : "Add"}</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         )
     }
 
 
     return (
-        <div className={`block block-checkout ${isShippingStep ? "delivery-address" : "billing-address"}`}>
-            <div className="block-title">
+        <div className={classes.block}>
+            <div className={classes.blockTitle}>
                 {title}
             </div>
-            {showAddressForm || !isUserLoggedIn ? (
-                <AddressForm
-                    isUserLoggedIn={isUserLoggedIn}
-                    initialValues={get(initialValues, "customer_address_id", null) == null ? initialValues : {}}
-                    setting={setting}
-                    isShippingStep={isShippingStep}
-                    onSaveAddress={(address) => {
-                        toggleEditMode(false)
-                        onApplyAddress(address, true)
-                        setFormVisibility(false)
-                    }}
-                    showSameAsButton={showSameAsButton}
-                    onSameAsButtonClick={sameAddress}
-                    toggleForm={() => setFormVisibility(false)} />
-            ) : renderAddressList()}
+            <div className={classes.blockContent}>
+                {showAddressForm || !isUserLoggedIn ? (
+                    <AddressForm
+                        isUserLoggedIn={isUserLoggedIn}
+                        initialValues={get(initialValues, "customer_address_id", null) == null ? initialValues : {}}
+                        setting={setting}
+                        isShippingStep={isShippingStep}
+                        onSaveAddress={(address) => {
+                            toggleEditMode(false)
+                            onApplyAddress(address, true)
+                            setFormVisibility(false)
+                        }}
+                        showSameAsButton={showSameAsButton}
+                        onSameAsButtonClick={sameAddress}
+                        toggleForm={() => setFormVisibility(false)} />
+                ) : renderAddressList()}
+            </div>
         </div>
     )
 }

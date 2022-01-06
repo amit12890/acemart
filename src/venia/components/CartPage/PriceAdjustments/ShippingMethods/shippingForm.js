@@ -73,16 +73,18 @@ const ShippingForm = props => {
                     onValueChange={handleZipChange}
                 />
                 {!hasMethods ? (
-                    <Button
-                        classes={{
-                            root_normalPriority: classes.submit
-                        }}
-                        disabled={isSetShippingLoading}
-                        priority="normal"
-                        type="submit"
-                    >
-                        {shippingStatusMessage}
-                    </Button>
+                    <div className={classes.actionToolbar}>
+                        <Button
+                            classes={{
+                                root_normalPriority: classes.submit
+                            }}
+                            disabled={isSetShippingLoading}
+                            priority="normal"
+                            type="submit"
+                        >
+                            {shippingStatusMessage}
+                        </Button>
+                    </div>
                 ) : null}
             </Form>
         </Fragment>

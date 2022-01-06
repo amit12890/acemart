@@ -55,7 +55,7 @@ const LandingPage = (props) => {
                 <BrandList
                     data={get(landingPageData, "brand.items", [])}
                     onItemClick={(brandLabel) => {
-                        if(brandLabel) {
+                        if (brandLabel) {
                             history.push(`${searchPage()}?q=${brandLabel}`)
                         }
                     }} />

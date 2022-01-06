@@ -38,6 +38,8 @@ const INIT_STATE = {
 
     selected_payment_method: {},
     available_payment_methods: [],
+    // token , paypal_urls
+    paypal: {},
 
     orderNumber: '',
     orderId: ''

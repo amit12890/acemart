@@ -36,6 +36,7 @@ const FilterItem = props => {
                 onClick={handleClick}
                 title={title}
                 value={value}
+                group={group}
             />
             <strong>{count}</strong>
         </>

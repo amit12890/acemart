@@ -32,7 +32,8 @@ export const useSearchPage = (props = {}) => {
     const inputText = getSearchParam('q', location);
 
     const { callApi: callSearchApi, ...searchResult } = useApiData({
-        isLazy: true
+        isLazy: true,
+        useAuth: false
     });
 
     const searchError = searchResult.error;

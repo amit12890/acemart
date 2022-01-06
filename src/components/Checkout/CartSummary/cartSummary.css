@@ -1,0 +1,88 @@
+.block {
+
+}
+
+.orderSummary {
+    
+}
+
+.blockTitle {
+
+}
+
+.blockcontent {
+
+}
+
+.orderTotalWrapper {
+margin-bottom: 20px;
+}
+
+.orderTotal {
+    display: grid;
+    grid-gap: 0.5rem;
+    border: 1px solid rgb(var(--border-color-base));
+}
+
+.orderTotalItems {
+    
+}
+
+.orderTotalItems:last-child {
+    background-color: rgb(var(--color-gray-light01));  
+}
+
+
+
+.mark {
+    justify-self: start;
+    font-weight: var(--font-weight-bold);
+}
+
+.markTitle {
+
+} 
+
+.coupon {
+
+}
+
+.carrierTitle {
+    font-size: var(--fontSize-75);
+    font-weight: normal;
+}
+
+.methodTitle {
+    font-size: var(--fontSize-75);
+    font-weight: normal;
+}
+
+.amount {
+    justify-self: end;
+    font-weight: var(--font-weight-bold);
+}
+
+.totalLabel {
+    font-size: var(--fontSize-600);
+    font-weight: bold;
+    color: rgb(var(--color-black));
+}
+
+.totalPrice {
+    font-size: var(--fontSize-600);
+    color: rgb(var(--theme-color-primary-alt));
+    font-weight: var(--font-weight-bold);
+}
+
+
+.orderTotalItems {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 1fr auto;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+}
+
+.price {
+
+}
