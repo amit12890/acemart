@@ -1,5 +1,5 @@
 /*!
- * @version b0e3a22-dev
+ * @version e686b56-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[87],{Oaag:function(t,n,r){(n=t.exports=r("JPst")(!1)).push([t.i,".buttons-root-ya1 {\n    max-width: 100%;\n}\n.buttons-root-ya1 > div {\n    display: inline-block;\n    margin-bottom: 0.5rem;\n    max-width: 100%;\n}\n\n.buttons-stacked-1PR {\n    display: flex;\n    flex-wrap: wrap;\n    flex-direction: column;\n}\n.buttons-inline-1A0 > div {\n    margin-inline-end: 0.5rem;\n}\n\n\n.buttons-root-ya1 button[class]:hover {\n    background-color: rgb(var(--color-white));\n    color: rgb(var(--stroke));\n    border-color: rgb(var(--stroke));\n}\n\n.buttons-root-ya1 button[class]:focus {\n    box-shadow: none;\n}\n\n.buttons-root_lowPriority-3lF {\n    background-color: var(--color-white);\n}\n.buttons-root_lowPriority-3lF:hover {\n    background-color: rgb(var(--stroke));\n    color: rgb(var(--color-white));\n}\n\n\n\n",""]),n.locals={root:"buttons-root-ya1",stacked:"buttons-stacked-1PR",inline:"buttons-inline-1A0",root_lowPriority:"buttons-root_lowPriority-3lF buttons-root-ya1"}},PblN:function(t,n,r){"use strict"

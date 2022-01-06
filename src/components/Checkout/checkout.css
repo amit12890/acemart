@@ -7,22 +7,83 @@
 .mainContent {
     display: flex;
     flex-direction: column;
-    flex:1;
-    margin-right: 1.5rem;
+    width: 100%;
+}
+
+.main {
+
+    grid-area: items;
+}
+
+.mainContentWrapper {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 23rem;
+    /* The summary grid item spans the entire right column. */
+    grid-template-areas:
+        'items summary'
+        'adjustments summary';
+
+}
+
+
+.checkoutSidebar {
+    grid-area: summary;
+    height: 100%;
+}
+
+.pageTitleWrapper {
+
+}
+
+
+.title {
+    justify-self: center;
+    margin-bottom: 10px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    margin-bottom: 30px;
 }
 
 .primaryButtonWrapper {
     display: flex;
-    justify-content: center;
 }
 
 .primaryButton {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    background-color: darkblue;
-    color: white;
-    border-radius: 0.5rem;
+    --stroke: var(--theme-color-primary-alt);
+    background:  rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-200);
+    font-weight: var(--font-weight-bold);
+    line-height: 2.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 3.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
     cursor: pointer;
+}
+
+.primaryButton:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.primaryButton:focus {
+    box-shadow: none;
+}
+
+.primaryButton:active {
+    transition-duration: 128ms;
+    --stroke:  var(--theme-color-primary-alt);
 }

@@ -15,11 +15,13 @@ import {
 import { useEmailStep } from '../../../data/checkout/hooks/emailValidation.hook';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './checkoutEmailStep.css'
+import button from '../../../venia/components/Button'
 import { get, size, debounce } from 'lodash'
 import { validateEmail, validatePassword } from '../../../app.utils'
 import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
 import { GET_CART_DETAILS_QUERY } from '../../../venia/components/SignIn/signIn.gql'
 import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action';
+import Button from '../../../venia/components/Button';
 
 
 
@@ -151,7 +153,7 @@ export default connect(store => {
                 <div className={classes.blockTitle}>
                     Email Address
                 </div>
-                <div className={classes.blockcontent}>
+                <div className={classes.blockContent}>
                     <fieldset className={classes.fieldset}>
                         <div className={classes.field}>
                             <div className={classes.control}>
@@ -173,11 +175,11 @@ export default connect(store => {
                 <div className={classes.blockTitle}>
                     Email Address
                 </div>
-                <div className={classes.blockcontent}>
+                <div className={classes.blockContent}>
                     <fieldset className={classes.fieldset}>
                         <TextInput
                             innerRef={emailInputRef}
-                            containerClass="field required"
+                            containerClass={[classes.field, classes.email].join(" ")}
                             label="Email"
                             type="email"
                             name="email"
@@ -196,7 +198,7 @@ export default connect(store => {
                         }
                         {(size(email) > 0 && !isEmailAvailable) &&
                             <TextInput
-                                containerClass="field password required"
+                                containerClass={[classes.field, classes.password].join(" ")}
                                 label="Password"
                                 type="password"
                                 className="input-text"
@@ -212,11 +214,12 @@ export default connect(store => {
                                 errorMessage={get(errors, "password", '')} />
                         }
 
-                        <div className="actions-toolbar">
-                            <div className="primary">
+
+                        <div className={classes.actionToolbar}>
+                            <div className={classes.primary}>
                                 <button
                                     type="submit"
-                                    className="action primary add-email"
+                                    className={classes.action}
                                     onClick={!isEmailAvailable ? loginUser : addEmailToCart}
                                     disabled={email === props.email && !isEmailAvailable}>
                                     <span>{!isEmailAvailable ? "Login" : "Continue"}</span>

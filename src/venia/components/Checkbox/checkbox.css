@@ -7,7 +7,7 @@
     grid-template-areas: 'input label';
     grid-template-columns: min-content 1fr;
     justify-items: center;
-    line-height: 1rem;
+    line-height: 1.2rem;
 }
 
 .input {
@@ -17,22 +17,26 @@
     border-radius: 4px;
     cursor: pointer;
     grid-area: input;
-    height: 1rem;
-    width: 1rem;
+    height: 1.2rem;
+    width: 1.2rem;
     margin: 0;
 }
 
 .icon {
     grid-area: input;
-    height: 1rem;
+    height: 1.2rem;
     pointer-events: none;
-    width: 1rem;
+    width: 1.2rem;
 }
 
 .icon svg {
     stroke: rgb(var(--theme-color-primary));
-    width: 1rem;
-    height: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.swatch svg {
+    stroke: none;
 }
 
 .label {
@@ -49,7 +53,6 @@
     cursor: default;
 }
 
-/* When the input is disabled, update the cursor on the sibling label element. */
 .input:disabled ~ .label {
     cursor: default;
 }
@@ -62,4 +65,258 @@
 .input:focus:enabled {
     outline: none;
     box-shadow: none; 
+}
+
+
+.swatch-assorted {
+    background: linear-gradient(
+        to right,
+        #dc0000 0%,
+        #dc0000 25%,
+        #3d881f 25%,
+        #3d881f 50%,
+        #fbcc28 50%,
+        #fbcc28 75%,
+        #004cdd 75%,
+        #004cdd 100%
+    );
+}
+.swatch-beige {
+    background-image: linear-gradient(
+        to bottom right,
+        #faf6e6,
+        #f5eccd,
+        #f5eccd
+    );
+}
+.swatch-black {
+    background-color: #111;
+}
+.swatch-blue {
+    background-image: linear-gradient(
+        to bottom right,
+        #86a3d0,
+        #0d47a1,
+        #0d47a1
+    );
+}
+.swatch-brass {
+    background-image: linear-gradient(
+        to bottom right,
+        #c99072,
+        #e2af93,
+        #c99072
+    );
+}
+.swatch-bronze {
+    background-image: linear-gradient(
+        to bottom right,
+        #cd8032,
+        #ea9c50,
+        #cd8032
+    );
+}
+.swatch-brown {
+    background-image: linear-gradient(
+        to bottom right,
+        #ac9c91,
+        #593922,
+        #593922
+    );
+}
+.swatch-clear {
+    background-image: linear-gradient(to bottom right, #f0f0f0, #fff, #f0f0f0);
+}
+.swatch-copper {
+    background-image: linear-gradient(
+        to bottom right,
+        #9c5c05,
+        #c57209,
+        #b25539,
+        #bb8a6c
+    );
+}
+.swatch-gold {
+    background-image: linear-gradient(
+        to bottom right,
+        #fedb37,
+        #fdb931,
+        #9f7928,
+        #8a6e2f,
+        #d1b464
+    );
+}
+.swatch-gray {
+    background-image: linear-gradient(
+        to bottom right,
+        #b9b7b7,
+        #736f6e,
+        #736f6e
+    );
+}
+.swatch-grey {
+    background-image: linear-gradient(
+        to bottom right,
+        #b9b7b7,
+        #736f6e,
+        #736f6e
+    );
+}
+.swatch-green {
+    background-image: linear-gradient(
+        to bottom right,
+        #9ec48f,
+        #3d881f,
+        #3d881f
+    );
+}
+.swatch-metallic {
+    background-image: linear-gradient(
+        to bottom right,
+        #767674,
+        #ead9cc,
+        #64563c
+    );
+}
+.swatch-multicolor {
+    background-image: linear-gradient(to right, red, blue, #ff0, green);
+}
+.swatch-off-white {
+    background-image: linear-gradient(
+        to bottom right,
+        #faf7f3,
+        #f5efe6,
+        #f5efe6
+    );
+}
+.swatch-orange {
+    background-image: linear-gradient(
+        to bottom right,
+        #fcb98c,
+        #f87318,
+        #f87318
+    );
+}
+.swatch-pink {
+    background-image: linear-gradient(
+        to bottom right,
+        #fbb0d5,
+        #f660aa,
+        #f660aa
+    );
+}
+.swatch-purple {
+    background-image: linear-gradient(
+        to bottom right,
+        #ba99c4,
+        #743289,
+        #743289
+    );
+}
+.swatch-red {
+    background-image: linear-gradient(to bottom right, #d58080, #a00, #a00);
+}
+.swatch-silver {
+    background-image: linear-gradient(
+        to bottom right,
+        #aaa,
+        #eee,
+        #ccc,
+        #aaa,
+        #eee
+    );
+}
+.swatch-tan {
+    background-image: linear-gradient(
+        to bottom right,
+        #eddfcb,
+        #dbbe96,
+        #dbbe96
+    );
+}
+.swatch-translucent {
+    background-image: linear-gradient(
+        to bottom right,
+        #f0f0f0,
+        #f8f8f8,
+        #f0f0f0
+    );
+}
+.swatch-varied {
+    background-image: linear-gradient(red, blue, #ff0, green, orange);
+}
+.swatch-wood {
+    background-image: linear-gradient(
+        to bottom right,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922
+    );
+}
+.swatch-wood-grain {
+    background-image: linear-gradient(
+        to bottom right,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #e7933d,
+        #593922
+    );
+}
+.swatch-white {
+    background-color: #fff;
+}
+.swatch-yellow {
+    background-image: linear-gradient(to bottom right, #ffff80, #ff0, #ff0);
+}
+.swatch-natural {
+    background-image: linear-gradient(
+        to bottom right,
+        #e2b58b 0%,
+        #e2b58b 20%,
+        #edc197 80%,
+        #e2a667 100%
+    );
 }

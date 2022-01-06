@@ -136,167 +136,186 @@ export default connect(store => ({
     return (
         <div className={classes.root}>
             <div className={classes.mainContent}>
-                <h1>Checkout</h1>
+                <div className={classes.pageTitleWrapper}>
+                    <h1 className={classes.title}>Checkout</h1>
+                </div>
+                <div className={classes.mainContentWrapper}>
+                    <div className={classes.main}>
+                        {isMultiShipping && (
+                            <SplitOrder data={multiShipping} />
+                        )}
+                        {!isSignedIn && (
+                            <EmailStep enabled={true} />
+                        )}
+                        <AddressStep
+                            enabled={isEmailAdded || isDefaultStore}
+                            data={customerAddresses}
+                            title="Shipping Address"
+                            setting={settingShippingAddress}
+                            initialValues={shipping_addresses[0]}
+                            onApplyAddress={(address, isNewAddress = false) => {
+                                console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
+                                let addressData = null
+                                if (isNewAddress) {
+                                    addressData = [{
+                                        customer_address_id: null,
+                                        address
+                                    }]
+                                } else {
+                                    addressData = [{
+                                        customer_address_id: get(address, "id", '')
+                                    }]
+                                }
 
-                {isMultiShipping && (
-                    <SplitOrder data={multiShipping} />
-                )}
-                {!isSignedIn && (
-                    <EmailStep enabled={true} />
-                )}
-                <AddressStep
-                    enabled={isEmailAdded || isDefaultStore}
-                    data={customerAddresses}
-                    title="Shipping Address"
-                    setting={settingShippingAddress}
-                    initialValues={shipping_addresses[0]}
-                    onApplyAddress={(address, isNewAddress = false) => {
-                        console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
-                        let addressData = null
-                        if (isNewAddress) {
-                            addressData = [{
-                                customer_address_id: null,
-                                address
-                            }]
-                        } else {
-                            addressData = [{
-                                customer_address_id: get(address, "id", '')
-                            }]
-                        }
+                                // addres object will pass by default 
+                                // let addressData = [{
+                                //     customer_address_id: get(address, "id", null),
+                                //     address
+                                // }]
+                                setShippingAddressOnCart(addressData)
 
-                        // addres object will pass by default 
-                        // let addressData = [{
-                        //     customer_address_id: get(address, "id", null),
-                        //     address
-                        // }]
-                        setShippingAddressOnCart(addressData)
+                                // set billing and shipping same when default store code is set
+                                if (isDefaultStore) {
+                                    /**
+                                     * during the time of shipping cart saving by default bill address will be saved
+                                     * so by default billing and shipping address will remain same
+                                     */
+                                    setBillingAddressOnCart({
+                                        ...addressData[0],
+                                        same_as_shipping: true
+                                    })
+                                }
+                            }}
+                            isShippingStep={true}
+                            isUserLoggedIn={isSignedIn}
+                            showSameAsButton={false}
+                            isDefaultStore={isDefaultStore} />
 
-                        // set billing and shipping same when default store code is set
-                        if (isDefaultStore) {
-                            /**
-                             * during the time of shipping cart saving by default bill address will be saved
-                             * so by default billing and shipping address will remain same
-                             */
-                            setBillingAddressOnCart({
-                                ...addressData[0],
-                                same_as_shipping: true
-                            })
-                        }
-                    }}
-                    isShippingStep={true}
-                    isUserLoggedIn={isSignedIn}
-                    showSameAsButton={false}
-                    isDefaultStore={isDefaultStore} />
+                        <ShippingMethodsStep
+                            enabled={isShippingAddressSelected || isDefaultStore}
+                            title="Shipping Method"
+                            data={get(shipping_addresses[0], "available_shipping_methods", [])}
+                            initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}
+                            onItemClick={(shippingMethod) => {
+                                console.log("🚀 ~ file: checkout.js ~ line 162 ~ shippingMethod", shippingMethod)
+                                setShippingMethodOnCart([
+                                    {
+                                        carrier_code: get(shippingMethod, "carrier_code", ''),
+                                        method_code: get(shippingMethod, "method_code", '')
+                                    }
+                                ])
+                            }}
+                            isDefaultStore={isDefaultStore} />
 
-                <ShippingMethodsStep
-                    enabled={isShippingAddressSelected || isDefaultStore}
-                    title="Shipping Method"
-                    data={get(shipping_addresses[0], "available_shipping_methods", [])}
-                    initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}
-                    onItemClick={(shippingMethod) => {
-                        console.log("🚀 ~ file: checkout.js ~ line 162 ~ shippingMethod", shippingMethod)
-                        setShippingMethodOnCart([
-                            {
-                                carrier_code: get(shippingMethod, "carrier_code", ''),
-                                method_code: get(shippingMethod, "method_code", '')
-                            }
-                        ])
-                    }}
-                    isDefaultStore={isDefaultStore} />
-
-                <AddressStep
-                    enabled={isShippingMethodSelected}
-                    data={customerAddresses}
-                    title="Billing Address"
-                    setting={settingBillingAddress}
-                    initialValues={initBillinAddress}
-                    onApplyAddress={(address, isNewAddress = false) => {
-                        let selectedShippingAddress = shipping_addresses[0]
-                        let variables = null
-                        if (isNewAddress) {
-                            variables = {
-                                customer_address_id: null,
-                                address,
-                                same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
-                            }
-                        } else {
-                            variables = {
-                                customer_address_id: get(address, "id", ''),
-                                same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
-                            }
-                        }
-                        console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
-                        setBillingAddressOnCart(variables)
-                    }}
-                    isUserLoggedIn={isSignedIn}
-                    showSameAsButton={isDefaultStore}
-                    onSameAsButtonClick={() => {
-                        let selectedShippingAddress = shipping_addresses[0]
-                        let variables = null
-                        // same as shipping only work if its default store code
-                        if (selectedShippingAddress.customer_address_id == null) {
-                            variables = {
-                                address: {
-                                    region_id: selectedShippingAddress.region.region_id,
-                                    region: selectedShippingAddress.region.code, // pass whole region object
-                                    country_code: selectedShippingAddress.country.code, // pass only country id
-                                    street: selectedShippingAddress.street, // street array
-                                    telephone: selectedShippingAddress.telephone,
-                                    postcode: selectedShippingAddress.postcode,
-                                    city: selectedShippingAddress.city,
-                                    firstname: selectedShippingAddress.firstname,
-                                    lastname: selectedShippingAddress.lastname,
-                                },
-                                same_as_shipping: isDefaultStore,
-                                use_for_shipping: isDefaultStore
-                            }
-                        } else {
-                            variables = {
-                                customer_address_id: selectedShippingAddress.customer_address_id,
-                                same_as_shipping: isDefaultStore,
-                                use_for_shipping: isDefaultStore
-                            }
-                        }
-                        setBillingAddressOnCart(variables)
-                    }} />
+                        <AddressStep
+                            enabled={isShippingMethodSelected}
+                            data={customerAddresses}
+                            title="Billing Address"
+                            setting={settingBillingAddress}
+                            initialValues={initBillinAddress}
+                            onApplyAddress={(address, isNewAddress = false) => {
+                                let selectedShippingAddress = shipping_addresses[0]
+                                let variables = null
+                                if (isNewAddress) {
+                                    variables = {
+                                        customer_address_id: null,
+                                        address,
+                                        same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
+                                    }
+                                } else {
+                                    variables = {
+                                        customer_address_id: get(address, "id", ''),
+                                        same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
+                                    }
+                                }
+                                console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
+                                setBillingAddressOnCart(variables)
+                            }}
+                            isUserLoggedIn={isSignedIn}
+                            showSameAsButton={isDefaultStore}
+                            onSameAsButtonClick={() => {
+                                let selectedShippingAddress = shipping_addresses[0]
+                                let variables = null
+                                // same as shipping only work if its default store code
+                                if (selectedShippingAddress.customer_address_id == null) {
+                                    variables = {
+                                        address: {
+                                            region_id: selectedShippingAddress.region.region_id,
+                                            region: selectedShippingAddress.region.code, // pass whole region object
+                                            country_code: selectedShippingAddress.country.code, // pass only country id
+                                            street: selectedShippingAddress.street, // street array
+                                            telephone: selectedShippingAddress.telephone,
+                                            postcode: selectedShippingAddress.postcode,
+                                            city: selectedShippingAddress.city,
+                                            firstname: selectedShippingAddress.firstname,
+                                            lastname: selectedShippingAddress.lastname,
+                                        },
+                                        same_as_shipping: isDefaultStore,
+                                        use_for_shipping: isDefaultStore
+                                    }
+                                } else {
+                                    variables = {
+                                        customer_address_id: selectedShippingAddress.customer_address_id,
+                                        same_as_shipping: isDefaultStore,
+                                        use_for_shipping: isDefaultStore
+                                    }
+                                }
+                                setBillingAddressOnCart(variables)
+                            }} />
 
 
-                <PaymentListStep
-                    enabled={isBillingAddressSelected && isShippingMethodSelected}
-                    title="Payment Method"
-                    data={available_payment_methods}
-                    initialValues={selected_payment_method}
-                    onItemClick={(paymentOpt) => {
-                        const code = get(paymentOpt, "code", '')
-                        if (code === 'paypal_express') {
-                            handleGeneratePayPalToken()
-                        }
-                        setPaymentMethodOnCart({ code })
-                    }}
-                    isDefaultStore={isDefaultStore} />
+                        {/* <PaymentListStep
+                            enabled={isBillingAddressSelected && isShippingMethodSelected}
+                            title="Payment Method"
+                            data={available_payment_methods}
+                            initialValues={selected_payment_method}
+                            onItemClick={(paymentOpt) => {
+                                const code = get(paymentOpt, "code", '')
+                                if (code === 'paypal_express') {
+                                    handleGeneratePayPalToken()
+                                } else {
+                                    setPaymentMethodOnCart(get(paymentOpt, "code", ''))
+                                }
+                            }}
+                            isDefaultStore={isDefaultStore} /> */}
 
-                {enablePlaceOrderButton && (
-                    <div className={classes.primaryButtonWrapper}>
-                        <div onClick={() => {
-                            setReviewCheckout(true)
-                            globalThis.scrollTo({
-                                top: 0,
-                                left: 0,
-                                behavior: 'smooth'
-                            })
-                        }}
-                            className={classes.primaryButton}>
-                            Review Order
-                        </div>
+                        <PaymentListStep
+                            enabled={isBillingAddressSelected && isShippingMethodSelected}
+                            title="Payment Method"
+                            data={available_payment_methods}
+                            initialValues={selected_payment_method}
+                            onItemClick={(paymentOpt) => {
+                                const code = get(paymentOpt, "code", '')
+                                if (code === 'paypal_express') {
+                                    handleGeneratePayPalToken()
+                                }
+                                setPaymentMethodOnCart({ code })
+                            }}
+                            isDefaultStore={isDefaultStore} />
+
+                        {enablePlaceOrderButton && (
+                            <div className={classes.primaryButtonWrapper}>
+                                <div onClick={() => {
+                                    setReviewCheckout(true)
+                                    globalThis.scrollTo({
+                                        top: 0,
+                                        left: 0,
+                                        behavior: 'smooth'
+                                    })
+                                }}
+                                    className={classes.primaryButton}>
+                                    Review Order
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-            <div style={{
-                flexDirection: 'column'
-            }}>
-                <CartSummary />
-                <CartItemList />
+                    <div lassName={classes.checkoutSidebar} >
+                        <CartSummary />
+                        <CartItemList />
+                    </div>
+                </div>
             </div>
         </div>
+
     )
 })
