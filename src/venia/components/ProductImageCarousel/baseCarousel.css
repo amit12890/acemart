@@ -17,6 +17,15 @@
     padding-bottom: 1.5rem;
 }
 
+.carouselContainer_placeholder {
+
+}
+
+.imageContainer_placeholder {
+    position: relative;
+    height: 500px;
+}
+
 .thumbCarouselContainer {
     position: relative;
 }
@@ -24,8 +33,7 @@
 .thumbFullCarouselContainer {
     position: relative;
     width: 100%;
-    height: 120px;
-    padding: 5px 0;
+    padding: 5px;
 }
 
 .imageContainer {
@@ -46,17 +54,20 @@
 }
 
 .fullcurrentImage {
+    width: auto;
+    max-width: 70%;
     margin: auto;
 }
 
 .fullcurrentImage > div {
     background-size: contain !important;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .currentImage_placeholder {
     composes: currentImage;
-    background-color: rgb(var(--venia-global-color-gray));
+    width: 100%;
 }
 
 .previousButton,

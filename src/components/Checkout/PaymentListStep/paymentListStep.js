@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { func, oneOfType, bool, string, array } from 'prop-types'
 
 import RadioButton from '../../RadioButton'
@@ -7,7 +7,6 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './paymentListStep.css'
 
 import { get, size } from 'lodash'
-
 
 
 const PaymentListStep = props => {
@@ -25,33 +24,17 @@ const PaymentListStep = props => {
         isDefaultStore
     } = props
 
+    const initialCode = get(initialValues, "code", "")
 
-    // let mappedValue = mapValue(initialValues)
-    if (!enabled) {
-        return (
+    const [selectedPaymentCode, setSelectedPaymentCode] = useState(initialCode)
 
-            <div className={[classes.block, classes.paymentMethod].join(" ")}>
-                <div className={classes.blockTitle}>
-                    <strong>{title}</strong>
-                </div>
-            </div>
-        )
-    }
-
-    if (size(data) === 0) {
-        return (
-            <div className={[classes.block, classes.paymentMethod].join(" ")}>
-                <div className={classes.blockcontent}>
-                    No Data Found
-                </div>
-            </div>
-
-        )
-    }
+    useEffect(() => {
+        setSelectedPaymentCode(initialCode)
+    }, [initialCode])
 
 
     const renderItem = useCallback((item, index) => {
-        let isActive = item.code === get(initialValues, "code", "")
+        let isActive = item.code === selectedPaymentCode
         return (
             <div className={[classes.field, classes.choice].join(" ")} key={item.code} onClick={() => onItemClick(item)}>
                 <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
@@ -60,10 +43,9 @@ const PaymentListStep = props => {
                 <div className={classes.methodDetails}>
                     <div className={classes.methodLabel}>{get(item, "title", "")}</div>
                 </div>
-
             </div>
         )
-    }, [initialValues])
+    }, [selectedPaymentCode])
 
 
     return (
