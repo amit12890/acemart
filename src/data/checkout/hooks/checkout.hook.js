@@ -65,7 +65,6 @@ export const useCheckout = () => {
         variables: {
             cartId
         },
-        fetchPolicy: 'network-only',
         onCompleted: (data) => {
             console.log("🚀 ~ file: checkout.hook.js ~ line 50 ~ useCheckout ~ data", data)
             dispatch(checkoutFetched(get(data, "setStorePickupShippingAddressesOnCart.cart", {})))
