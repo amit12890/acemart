@@ -31,6 +31,30 @@ const PaymentListStep = props => {
     useEffect(() => {
         setSelectedPaymentCode(initialCode)
     }, [initialCode])
+
+
+
+    const renderItem = useCallback((item, index) => {
+        let isActive = item.code === selectedPaymentCode
+        return (
+            <div className={[classes.field, classes.choice].join(" ")}
+                key={item.code}
+                onClick={() => {
+                    setSelectedPaymentCode(item.code)
+                    onItemClick(item)
+                }}
+            >
+                <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
+                    <RadioButton isActive={isActive} />
+                </div>
+                <div className={classes.methodDetails}>
+                    <div className={classes.methodLabel}>{get(item, "title", "")}</div>
+                </div>
+            </div>
+        )
+    }, [selectedPaymentCode])
+
+
     // let mappedValue = mapValue(initialValues)
     if (!enabled) {
         return (
@@ -53,27 +77,6 @@ const PaymentListStep = props => {
 
         )
     }
-
-
-    const renderItem = useCallback((item, index) => {
-        let isActive = item.code === selectedPaymentCode
-        return (
-            <div className={[classes.field, classes.choice].join(" ")}
-                key={item.code}
-                onClick={() => {
-                    setSelectedPaymentCode(item.code)
-                    onItemClick(item)
-                }}
-            >
-                <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
-                    <RadioButton isActive={isActive} />
-                </div>
-                <div className={classes.methodDetails}>
-                    <div className={classes.methodLabel}>{get(item, "title", "")}</div>
-                </div>
-            </div>
-        )
-    }, [selectedPaymentCode])
 
     // if (!isDefaultStore) {
     //     return (
