@@ -63,7 +63,8 @@
 }
 
 .deliveryAddressDetails {
- padding: 10px;
+    padding: 10px;
+    min-height: 200px;
 }
 
 .action {
@@ -124,15 +125,20 @@
     font-weight: var(--font-weight-bold);
     line-height: 1.25rem;
     max-width: 100%;
-    min-width: 10rem;
+    min-width: auto;
     min-height: 2.5rem;
     outline: none;
-    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    padding: calc(0.25rem + 1px) 1.5rem calc(0.25rem - 1px);
     text-transform: uppercase;
     transition-duration: 256ms;
     transition-property: background-color, border-color, color;
     transition-timing-function: var(--venia-global-anim-standard);
     text-transform: none;
+    margin-left: 1rem;
+}
+
+.secondaryButton:first-child {
+    margin-left: 0;
 }
 
 .secondaryButton:hover {
@@ -151,7 +157,11 @@
 }
 
 .address {
-    
+ margin-bottom: 15px;   
+}
+
+.actionToolbar {
+    flex-basis: 100%;
 }
 
 

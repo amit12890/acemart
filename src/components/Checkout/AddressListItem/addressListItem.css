@@ -1,5 +1,14 @@
 .name {
-    font-size: var(--fontSize-100);
     font-weight: var(--font-weight-bold);
+    display: block;
+    margin-bottom: 5px;
 }
+
+.street,
+.region,
+.city,
+.telephone {
+
+}
+
 
