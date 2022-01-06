@@ -33,6 +33,7 @@
     "fuse.js": "^6.4.6",
     "pure-react-carousel": "^1.27.6",
     "react-feather": "^2.0.9",
+    "react-google-maps": "^9.4.5",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
