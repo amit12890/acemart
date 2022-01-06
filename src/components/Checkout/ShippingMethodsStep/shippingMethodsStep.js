@@ -29,27 +29,6 @@ const ShippingMethodStep = props => {
         isDefaultStore
     } = props
 
-    // let mappedValue = mapValue(initialValues)
-    if (!enabled) {
-        return (
-            <div className={[classes.block, classes.shippingMethod].join(" ")}>
-                <div className={classes.blockTitle}>
-                    <strong>{title}</strong>
-                </div>
-            </div>
-        )
-    }
-
-    if (size(data) === 0) {
-        return (
-            <div className={[classes.block, classes.shippingMethod].join(" ")}>
-                <div className={classes.blockcontent}>
-                    No Data Found
-                </div>
-
-            </div>
-        )
-    }
 
     const renderItem = useCallback((item, index) => {
         let isActive = get(item, "method_code", '') === get(initialValues, "method_code", '')
@@ -104,12 +83,13 @@ const ShippingMethodStep = props => {
     }, [initialValues])
 
 
+
     // let mappedValue = mapValue(initialValues)
     if (!enabled) {
         return (
-            <div className="block block-checkout inactive">
-                <div className="block-title">
-                    {title}
+            <div className={[classes.block, classes.shippingMethod].join(" ")}>
+                <div className={classes.blockTitle}>
+                    <strong>{title}</strong>
                 </div>
             </div>
         )
@@ -117,12 +97,14 @@ const ShippingMethodStep = props => {
 
     if (size(data) === 0) {
         return (
-            <div className="no-data-found">
-                No Data Found
+            <div className={[classes.block, classes.shippingMethod].join(" ")}>
+                <div className={classes.blockcontent}>
+                    No Data Found
+                </div>
+
             </div>
         )
     }
-
 
     /**
      * if default store code is not selected then it must be store pickup only
@@ -173,16 +155,20 @@ const ShippingMethodStep = props => {
                         </div>
                     </>
                 )}
-                <div className={classes.blockTitle}>
-                    <strong> {title}</strong>
-                </div>
-                <div className={classes.blockcontent}>
-                    <div className={classes.paymentMethods}>
-                        <fieldset className={classes.fieldset}>
-                            {normalMethodData.map(renderItem)}
-                        </fieldset>
-                    </div>
-                </div>
+                {size(normalMethodData) > 0 && (
+                    <>
+                        <div className={classes.blockTitle}>
+                            <strong> {title}</strong>
+                        </div>
+                        <div className={classes.blockcontent}>
+                            <div className={classes.paymentMethods}>
+                                <fieldset className={classes.fieldset}>
+                                    {normalMethodData.map(renderItem)}
+                                </fieldset>
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         )
     }
