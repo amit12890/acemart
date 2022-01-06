@@ -62,9 +62,7 @@ const CMSPage = props => {
         const pageTitle = meta_title || title;
 
         if (url_key === "store-locator") {
-            return (
-                <CmsContent />
-            )
+            return <CmsContent />;
         }
         return (
             <Fragment>
