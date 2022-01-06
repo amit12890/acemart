@@ -2,6 +2,8 @@
     "autocomplete.resultSummary": "{resultCount} items",
     "autocomplete.suggestion_error": "An error occurred while fetching suggestions.",
     "autocomplete.product_error": "An error occurred while fetching products.",
+    "accountNewsletterBlock.subscribed": "You are subscribed to \"General Subscription\"",
+    "accountNewsletterBlock.unsubscribed": "You aren't subscribed to our newsletter.",
     "form.errors.isRequired": "This is a required field.",
     "signup.formTitle": "Create New Customer Account",
     "sortItem.recommended": "Recommended",

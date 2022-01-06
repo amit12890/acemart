@@ -1,0 +1,282 @@
+.root {
+}
+
+.fullroot {
+    height: 100%;
+    width: 100%;
+}
+
+.fullcarouselContainer{
+    position: relative;
+    height: calc(100% - 120px);
+    width: 100%;
+}
+
+.carouselContainer{
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.carouselContainer_placeholder {
+
+}
+
+.imageContainer_placeholder {
+    position: relative;
+    height: 500px;
+}
+
+.thumbCarouselContainer {
+    position: relative;
+}
+
+.thumbFullCarouselContainer {
+    position: relative;
+    width: 100%;
+    padding: 5px;
+}
+
+.imageContainer {
+    position: unset;
+    cursor: pointer;
+}
+
+.fullimageContainer {
+    /* position: unset; */
+    cursor: pointer;
+}
+
+.currentImage {
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.fullcurrentImage {
+    width: auto;
+    max-width: 70%;
+    margin: auto;
+}
+
+.fullcurrentImage > div {
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.currentImage_placeholder {
+    composes: currentImage;
+    width: 100%;
+}
+
+.previousButton,
+.nextButton {
+    display: flex;
+    outline: none;
+    z-index: 1;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s ease-in-out;  
+}
+
+.previousButton:hover,
+.nextButton:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.previousButton {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80px;
+}
+
+.nextButton {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80px;
+}
+
+.smallButton {
+    width: 30px;
+}
+
+.chevron {
+    composes: root from '../Icon/icon.css';
+    align-self: center;
+    border: 1px solid transparent;
+    
+}
+
+.chevron svg {
+    stroke-width: 1px;
+    /* stroke: rgb(var(--color-gray-light03)); */
+    stroke: #000;
+}
+
+.nextButton:focus > .chevron,
+.previousButton:focus > .chevron {
+    box-shadow: 0 0 4px 2px rgb(var(--venia-teal));
+    border-radius: 0.5rem;
+}
+
+.thumbVisible {
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.thumbActive {
+    border: 1px solid #006;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 20px;
+}
+
+.close {
+
+}
+
+.zoomin {
+
+}
+
+.zoomout {
+
+}
+
+.iconWrapper {
+
+}
+
+.svgIcon {
+    fill: currentColor;
+    width: 20px;
+    height: auto;
+}
+
+.buttonSmall {
+    --stroke: var(--theme-color-primary);
+    background: none;
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 1px;
+    color: rgb(var(--stroke));
+    font-size: var(--fontSize-90);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+    min-height: 1.5rem;
+    outline: none;
+    padding: calc(0.25rem + 1px) .5rem calc(0.25rem - 1px);
+    text-transform: normal;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+
+}
+
+.buttonSmall:hover {
+    background-color: rgb(var(--stroke)) ;
+    color: rgb(var(--color-white)); 
+    border-color: rgb(var(--stroke));
+}
+
+.buttonSmall:focus {
+    box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+
+    .carouselContainer:hover .previousButton,
+    .carouselContainer:hover .nextButton {
+        display: block;
+    }
+
+    .previousButton,
+    .nextButton {
+        display: block;
+    }
+
+    .thumbnailList {
+        /* align-content: start;
+        grid-auto-flow: row;
+        grid-gap: 0.5rem;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 0; */
+    }
+}
+
+
+@media print {   
+    .previousButton,
+    .nextButton {
+        display: none;
+    }
+
+    .currentImage {
+        height: 300px;
+        width: auto;
+    }
+}
+
+.portalRoot {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.contentWrapper {
+    background-color: rgb(var(--page-background-color));
+    transform: translate3d(0, 0, 0);
+    transition-duration: 192ms;
+    transition-property: transform;
+    transition-timing-function: var(--venia-global-anim-out);
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+.modalClose {
+    display: inline-flex;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    top: .875rem;
+    right: 1rem;
+}
+
+.modalClose button{
+    width: 24px;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    height: 24px;
+    min-height: auto;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.modalClose .svgIcon {
+    width: 24px;
+    height: 24px;
+    fill: rgb(var(--color-gray-middle3));
+}

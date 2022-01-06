@@ -22,6 +22,8 @@
 }
 
 .currentImage {
+    top: 0;
+    bottom: 0;
 }
 
 .currentImage_placeholder {

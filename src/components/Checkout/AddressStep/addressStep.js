@@ -77,18 +77,7 @@ const AddressStep = props => {
     // RENDER METHODS
     //==================================================================================================================================================================================================================
 
-    /**
-     * render diff UI is email is not presented in cart
-     */
-    if (!enabled) {
-        return (
-            <div className="block block-checkout inactive">
-                <div className="block-title">
-                    {title}
-                </div>
-            </div>
-        )
-    }
+
 
 
     const renderAddButton = () => {
@@ -196,6 +185,18 @@ const AddressStep = props => {
         )
     }
 
+    /**
+    * render diff UI is email is not presented in cart
+    */
+    if (!enabled) {
+        return (
+            <div className="block block-checkout inactive">
+                <div className="block-title">
+                    {title}
+                </div>
+            </div>
+        )
+    }
 
     if (!editMode) {
         let hasInitValue = size(initialValues) > 0

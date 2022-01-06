@@ -9,6 +9,7 @@ const Carousel = props => {
     const { storeConfig } = useCarousel();
 
     const galleryItems = items.map((item, index) => {
+        console.log("🚀 ~ file: carousel.js ~ line 12 ~ galleryItems ~ item", item)
         return (
             <GalleryItem key={index} item={item} storeConfig={storeConfig} />
         );

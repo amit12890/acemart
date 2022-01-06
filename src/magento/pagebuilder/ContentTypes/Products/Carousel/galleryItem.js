@@ -13,7 +13,8 @@ import productLabel from '../../../../../assets/labelSprite.png';
 import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
-import { drop, includes, camelCase, size, filter, orderBy } from 'lodash'
+import { drop, includes, camelCase, size, filter, orderBy, get } from 'lodash'
+import { replaceSpecialChars } from '../../../../../app.utils';
 
 
 const style = {
@@ -68,9 +69,16 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom } = item;
+    const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom, url_rewrites } = item;
+
+    if (size(url_rewrites) === 0) {
+        console.log("url reqrite emoty =>>", sku)
+    }
     const { url: smallImageURL } = small_image;
-    const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
+    // OLD CODE
+    // const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);
+    // for acemart specifct url rewrite for product
+    const productLink = resourceUrl(`/${get(url_rewrites[0], "url", "")}`)
 
     const processedProductLabels = useMemo(() => {
         let resultLabels = filter(productLabel.items, ["status", 1]);
@@ -108,7 +116,7 @@ const GalleryItem = props => {
                 to={productLink}
                 className={classes.name}
             >
-                <span>{name}</span>
+                <span>{replaceSpecialChars(name)}</span>
             </Link>
             <div className={classes.sku}>
                 <span>{sku}</span>
