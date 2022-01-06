@@ -1,0 +1,53 @@
+.block {
+    margin-bottom: 40px;
+}
+
+.blockTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    
+}
+
+.blockcontent {
+
+}
+
+.fieldset {
+    border: 0;
+    margin: 0 0 40px;
+    padding: 0;
+    max-width: 450px; 
+}
+
+.field {
+    display: flex;
+    align-items: center;
+}
+
+.choice {
+
+}
+
+.optionChoice {
+    margin-right: 15px;
+    display: inline-flex;
+}
+
+.customRadio {
+
+}
+
+.methodDetails {
+
+
+}
+
+.paymentOptions {
+
+}
+
+.paymentMethods {
+    
+}

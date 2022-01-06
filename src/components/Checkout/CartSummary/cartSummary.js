@@ -7,7 +7,7 @@ import defaultClasses from './cartSummary.css'
 import { get, size } from 'lodash'
 
 export default connect(store => {
-    const classes = useStyle(defaultClasses)
+
     return {
         prices: store.checkout.prices,
         shipping_addresses: store.checkout.shipping_addresses
@@ -17,76 +17,83 @@ export default connect(store => {
     prices,
     dispatch
 }) => {
-
+    const classes = useStyle(defaultClasses)
     let discounts = get(prices, "discounts", [])
     let appliedTaxes = get(prices, "applied_taxes", [])
     let selectedShippingMethod = get(shipping_addresses[0], "selected_shipping_method", {})
 
     return (
         <div className={[classes.block, classes.orderSummary].join(" ")}>
-            <strong className="summary title">Order Summary</strong>
-            <div id="cart-totals" className="cart-totals">
+            <div className={classes.blockcontent}>
+                <div id="cart-totals" className={classes.orderTotalWrapper}>
+                    <div className={classes.orderTotal}>
+                        <div className={classes.orderTotalItems}>
+                            <div className={classes.mark}>Subtotal</div>
+                            <div className={classes.amount}>
+                                <span className={classes.price}>${get(prices, "subtotal_excluding_tax.value", '')}</span>
+                            </div>
+                        </div>
+                        {size(discounts) > 0 &&
+                            discounts.map((disc, index) => {
+                                return (
+                                    <div className={classes.orderTotalItems} key={disc.label + index}>
+                                        <div className={classes.mark}>
+                                            <div className={classes.markTitle}>{get(disc, "label", "")}</div>
+                                            <span className={classes.coupon}></span>
+                                        </div>
+                                        <div className={classes.amount}>
+                                            <span><span className={classes.price}>-${get(disc, "amount.value", '0')}</span></span>
+                                        </div>
+                                    </div>
+                                )
+                            })
 
-                <div className="table-wrapper">
-                    <table className="data table totals">
-                        <caption className="table-caption">Total</caption>
-                        <tbody>
-                            <tr className="totals sub">
-                                <th className="mark">Subtotal</th>
-                                <td className="amount">
-                                    <span className="price" data-th="Subtotal">${get(prices, "subtotal_excluding_tax.value", '')}</span>
-                                </td>
-                            </tr>
-                            {size(discounts) > 0 &&
-                                discounts.map((disc, index) => {
-                                    return (
-                                        <tr className="totals" key={disc.label + index}>
-                                            <th colSpan="1" className="mark" scope="row">
-                                                <span className="title">{get(disc, "label", "")}</span>
-                                                <span className="discount coupon"></span>
-                                            </th>
-                                            <td className="amount" data-th="Discount">
-                                                <span><span className="price">-${get(disc, "amount.value", '0')}</span></span>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
+                        }
+                        {size(appliedTaxes) > 0 &&
+                            appliedTaxes.map((tax, index) => {
+                                return (
+                                    <div className={classes.orderTotalItems}>
+                                        <div className={classes.mark}>{get(tax, "label", '')}</div>
+                                        <div className={classes.amount}>
+                                            <span className={classes.price}>${get(tax, "amount.value", '')}</span>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
 
-                            }
-                            {size(appliedTaxes) > 0 &&
-                                appliedTaxes.map((tax, index) => {
-                                    return (
-                                        <tr className="totals-tax">
-                                            <th className="mark" colSpan="1" scope="row">{get(tax, "label", '')}</th>
-                                            <td className="amount" data-th="Tax">
-                                                <span className="price">${get(tax, "amount.value", '')}</span>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
+                        {size(selectedShippingMethod) > 0 &&
+                            <div className={classes.orderTotalItems}>
+                                <div className={classes.mark}>
+                                    <div className={classes.markTitle}>Shipping</div>
+                                    <span className={classes.carrierTitle}>
+                                        {get(selectedShippingMethod, "carrier_title", "")}
+                                    </span> -
+                                    <span className={classes.methodTitle}>
+                                        {get(selectedShippingMethod, "method_title", "")}</span>
+                                </div>
+                                <div className={classes.amount}>
+                                    <span className={classes.price}>${get(selectedShippingMethod, "amount.value", '')}</span>
+                                </div>
+                            </div>
+                        }
 
-                            {size(selectedShippingMethod) > 0 &&
-                                <tr className="totals-tax">
-                                    <th className="mark" colSpan="1" scope="row">Shipping {get(selectedShippingMethod, "carrier_title", "")} - {get(selectedShippingMethod, "method_title", "")}</th>
-                                    <td className="amount" data-th="Tax">
-                                        <span className="price">${get(selectedShippingMethod, "amount.value", '')}</span>
-                                    </td>
-                                </tr>
-                            }
+                        <div className={classes.orderTotalItems}>
+                            <div className={classes.totalLabel}>
+                                <strong>Order Total</strong>
+                            </div>
+                            <div className={classes.totalPrice}>
+                                <strong>
+                                    <span className={classes.price}>${get(prices, "grand_total.value", '')}</span>
+                                </strong>
+                            </div>
+                        </div>
 
-                            <tr className="grand totals">
-                                <th className="mark" scope="row">
-                                    <strong style={{ fontWeight: 'bold' }}>Order Total</strong>
-                                </th>
-                                <td className="amount" data-th="Order Total">
-                                    <strong><span className="price">${get(prices, "grand_total.value", '')}</span></strong>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
+
             </div>
+
         </div>
     )
 }))

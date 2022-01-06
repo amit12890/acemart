@@ -1,11 +1,10 @@
 .block {
-
+    margin-bottom: 40px;
 }
 
 .blockTitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 15px;
 }

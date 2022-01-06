@@ -210,56 +210,61 @@ const AddressStep = props => {
     if (!editMode) {
         let hasInitValue = size(initialValues) > 0
         return (
-            <div className={`block block-checkout ${isShippingStep ? "delivery-address" : "billing-address"}`}>
+            <div className={classes.block}>
                 <div className={classes.blockTitle}>
                     {title}
                 </div>
-                {hasInitValue &&
-                    <AddressListItem address={initialValues} containerClass="address" />
-                }
-                {/* 
+                <div className={classes.blockContent}>
+
+                    {hasInitValue &&
+                        <AddressListItem address={initialValues} containerClass="address" />
+                    }
+                    {/* 
                     user should only be able to change or edit shipping adderess if 
                     it has default store is not selected
                 */}
-                {(isDefaultStore || !isShippingStep) && (
-                    <div className={classes.actionToolbar}>
-                        <div className={classes.secondary}>
-                            <button
-                                className={[classes.action, classes.secondary].join(" ")}
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    toggleEditMode(true)
-                                }}>
-                                <span>{hasInitValue ? " Change" : "Add"}</span>
-                            </button>
+                    {(isDefaultStore || !isShippingStep) && (
+                        <div className={classes.actionToolbar}>
+                            <div className={classes.secondary}>
+                                <button
+                                    className={[classes.action, classes.secondary].join(" ")}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        toggleEditMode(true)
+                                    }}>
+                                    <span>{hasInitValue ? " Change" : "Add"}</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         )
     }
 
 
     return (
-        <div className={`block block-checkout ${isShippingStep ? "delivery-address" : "billing-address"}`}>
+        <div className={classes.block}>
             <div className={classes.blockTitle}>
                 {title}
             </div>
-            {showAddressForm || !isUserLoggedIn ? (
-                <AddressForm
-                    isUserLoggedIn={isUserLoggedIn}
-                    initialValues={get(initialValues, "customer_address_id", null) == null ? initialValues : {}}
-                    setting={setting}
-                    isShippingStep={isShippingStep}
-                    onSaveAddress={(address) => {
-                        toggleEditMode(false)
-                        onApplyAddress(address, true)
-                        setFormVisibility(false)
-                    }}
-                    showSameAsButton={showSameAsButton}
-                    onSameAsButtonClick={sameAddress}
-                    toggleForm={() => setFormVisibility(false)} />
-            ) : renderAddressList()}
+            <div className={classes.blockContent}>
+                {showAddressForm || !isUserLoggedIn ? (
+                    <AddressForm
+                        isUserLoggedIn={isUserLoggedIn}
+                        initialValues={get(initialValues, "customer_address_id", null) == null ? initialValues : {}}
+                        setting={setting}
+                        isShippingStep={isShippingStep}
+                        onSaveAddress={(address) => {
+                            toggleEditMode(false)
+                            onApplyAddress(address, true)
+                            setFormVisibility(false)
+                        }}
+                        showSameAsButton={showSameAsButton}
+                        onSameAsButtonClick={sameAddress}
+                        toggleForm={() => setFormVisibility(false)} />
+                ) : renderAddressList()}
+            </div>
         </div>
     )
 }

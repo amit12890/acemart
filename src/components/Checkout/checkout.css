@@ -11,21 +11,25 @@
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    flex:1;
-    margin-right: 1.5rem;
+
+    grid-area: items;
 }
 
 .mainContentWrapper {
-    display: flex;
-    
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 23rem;
+    /* The summary grid item spans the entire right column. */
+    grid-template-areas:
+        'items summary'
+        'adjustments summary';
 
 }
 
 
 .checkoutSidebar {
-
+    grid-area: summary;
+    height: 100%;
 }
 
 .pageTitleWrapper {
