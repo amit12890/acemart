@@ -144,7 +144,7 @@ export default connect((store) => {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className={classes.sidebar}>
                 <CartSummary />
                 <CartItemList />
             </div>

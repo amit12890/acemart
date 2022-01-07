@@ -32,15 +32,15 @@ const AddressListItem = props => {
         if (isArray(street)) {
             return street.map((item, index) => (
                 <React.Fragment key={index}>
-                    <span key={item + index}>{item}</span>
-                    <br />
+                    <p key={item + index}>{item}</p>
+
                 </React.Fragment>
             ))
         }
         return (
             <React.Fragment>
-                <span className={classes.street}>{street}</span>
-                <br />
+                <p className={classes.street}>{street}</p>
+
             </React.Fragment>
         )
     }
@@ -48,16 +48,15 @@ const AddressListItem = props => {
 
     return (
         <div className={containerClass}>
-            <span className={classes.name}>{get(address, "firstname", '')} {get(address, "lastname", '')}</span><br />
+            <p className={classes.name}>{get(address, "firstname", '')} {get(address, "lastname", '')}</p>
             {renderStreet()}
             {size(regionInString(address)) > 0 &&
                 <React.Fragment>
-                    <span className={classes.region}>{regionInString(address)}</span>
-                    <br />
+                    <p className={classes.region}>{regionInString(address)}</p>
                 </React.Fragment>
             }
-            <span className={classes.city}>{get(address, "city", '')}</span><br />
-            <span className={classes.telephone}>{get(address, "telephone", '')}</span><br />
+            <p className={classes.city}>{get(address, "city", '')}</p>
+            <p className={classes.telephone}>{get(address, "telephone", '')}</p>
         </div>
     )
 }

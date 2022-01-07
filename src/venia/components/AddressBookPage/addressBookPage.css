@@ -41,6 +41,10 @@ h2 {
 
 }
 
+.defaultAddressPanel {
+
+}
+
 .panelBodyTitle {
     font-size: var(--fontSize-300);
     font-weight: var(--font-weight-bold);
@@ -111,11 +115,25 @@ display: inline-flex;
 
 .addrBlockWrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    
 }
 
+.defaultAddrBlockWrapper {
+    
+}
 
+.defaultAddrBlockWrapper .accountAddressBlock {
+    flex: 1;
+
+}
+
+.additionalAddrBlock {
+    
+}
+
+.test {
+
+}
 
 .addrBookBlockWrapper {
     flex-direction: column;
@@ -128,9 +146,14 @@ display: inline-flex;
     margin-bottom: 10px;
 }
 
+.accountAddressBlock {
+    display: flex;
+    flex-direction: column;
+}
+
 .addrBlock {
-    margin-left: 20px;
-    flex: 1 1 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 .addrBlock:first-child { 
     margin-left: 0;  
