@@ -49,7 +49,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    font-size: 13px;
+    font-size: var(--fontSize-100);
 }
 
 .storeDataItem{
@@ -63,19 +63,19 @@
 
 .buttonSmall {
     --stroke: var(--theme-color-primary);
-    background: none;
+    background: rgb(var(--stroke));
     border-color: rgb(var(--stroke));
     border-radius: 0;
     border-style: solid;
-    border-width: 1px;
-    color: rgb(var(--stroke));
-    font-size: var(--fontSize-90);
-    font-weight: var(--font-weight-bold);
+    border-width: 2px;
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-100);
+    font-weight:normal;
     line-height: 1.25rem;
     max-width: 100%;
     min-height: 1.5rem;
     outline: none;
-    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    padding: calc(0.25rem + 1px) 1rem calc(0.25rem - 1px);
     text-transform: normal;
     transition-duration: 256ms;
     transition-property: background-color, border-color, color;
@@ -84,9 +84,9 @@
 }
 
 .buttonSmall:hover {
-    background-color: rgb(var(--stroke)) ;
-    color: rgb(var(--color-white)); 
-    border-color: rgb(var(--stroke));
+    background-color: rgb(var(--color-white)) ; 
+    color:rgb(var(--stroke));
+    border-color: rgb(var(--stroke)); 
 }
 
 .buttonSmall:focus {
@@ -536,7 +536,6 @@ color: rgb(var(--color-red10));
 
 .storeDirection {
     color: rgb(var(--theme-color-primary));
-
 }
 
 .storeDirection a {
@@ -549,6 +548,7 @@ color: rgb(var(--color-red10));
     width: 16px;
     height: auto;
     display: inline-flex;
+    fill: currentColor;
 }
 
 .iconWrapper {
