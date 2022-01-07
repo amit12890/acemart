@@ -312,21 +312,22 @@ export const StoreHours = ({ hours }) => {
     return (
         <div className={classes.storeHours}>
             {size(normalDayHours) > 1 ?
-                <p>Mon-Fri {get(normalDayHours, '0')} to {get(normalDayHours, '1')} </p>
+                <p><strong>Mon-Fri</strong> {get(normalDayHours, '0')} to {get(normalDayHours, '1')} </p>
                 :
-                <p>Mon-Fri {get(normalDayHours, '0')}</p>
+                <p><strong>Mon-Fri</strong> {get(normalDayHours, '0')}</p>
             }
             {size(satDayHours) > 1 ?
-                <p>Sat: {get(satDayHours, '0')} to {get(satDayHours, '1')} </p>
+                <p><strong>Sat</strong> {get(satDayHours, '0')} to {get(satDayHours, '1')} </p>
                 :
-                <p>Sat: {get(satDayHours, '0')}</p>
+                <p><strong>Sat</strong> {get(satDayHours, '0')}</p>
             }
-            {size(sunDayHours) > 1 ?
-                <p>Sun: {get(sunDayHours, '0')} to {get(sunDayHours, '1')} </p>
-                :
-                <p>Sun: {get(sunDayHours, '0')}</p>
+            {
+                size(sunDayHours) > 1 ?
+                    <p><strong>Sun</strong> {get(sunDayHours, '0')} to {get(sunDayHours, '1')} </p>
+                    :
+                    <p><strong>Sun</strong> {get(sunDayHours, '0')}</p>
             }
-        </div>
+        </div >
     )
 }
 

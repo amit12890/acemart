@@ -139,7 +139,7 @@ export default connect(store => ({
                 </div>
                 <div className={classes.mainContentWrapper}>
                     <div className={classes.main}>
-                        <div className={classes.main}>Loader</div>
+
                         {isMultiShipping && (
                             <SplitOrder data={multiShipping} />
                         )}

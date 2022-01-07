@@ -93,28 +93,26 @@ const SearchPage = props => {
 
         if (products.length === 0) {
             return (
-                <div>
-                    <div className={classes.noResult}>
-                        Sorry no results found for "{searchTerm}"
-                    </div>
+                <div className={classes.noResultWrapper}>
+
                     {didYouMean ? (
-                        <div>
+                        <div className={classes.didYouMean}>
                             Did you mean: <Link to={`${searchPage()}?q=${didYouMean.query}`}><RichText content={didYouMean.highlighted} /></Link>?
                         </div>
                     ) : null}
-                    <div>
-                        <div>Below are some of our popular searches:</div>
-                        <div>
+                    <div className={classes.popularSearchWrapper}>
+                        <div className={classes.searchReference}>Below are some of our popular searches:</div>
+                        <ol className={classes.searchItems}>
                             {POPULAR_SEARCH.map(keyword => (
-                                <div>
+                                <li className={classes.searchListItem}>
                                     <Link
                                         to={`${searchPage()}?q=${keyword}`}
                                     >
                                         {keyword}
                                     </Link>
-                                </div>
+                                </li>
                             ))}
-                        </div>
+                        </ol>
                     </div>
                 </div>
             );
