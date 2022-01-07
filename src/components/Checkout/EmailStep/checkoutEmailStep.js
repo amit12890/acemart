@@ -70,7 +70,7 @@ export default connect(store => {
 
     useEffect(() => {
         setEmail(email);
-    }, [email])
+    }, [props.email])
 
 
     useEffect(() => {
@@ -148,7 +148,7 @@ export default connect(store => {
     }, [email, cartId])
 
 
-    const renderNonEditableField = () => {
+    const renderNonEditableField = useCallback(() => {
         return (
             <div className={classes.block}>
                 <div className={classes.blockTitle}>
@@ -158,14 +158,14 @@ export default connect(store => {
                     <fieldset className={classes.fieldset}>
                         <div className={classes.field}>
                             <div className={classes.control}>
-                                <span>{props.email}</span>
+                                <span>{email}</span>
                             </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
         )
-    }
+    }, [email])
 
     const renderEditableField = () => {
 
@@ -193,10 +193,7 @@ export default connect(store => {
                             name="checkoutEmail"
                             htmlFor="checkoutEmail"
                             errorMessage={get(errors, "email", '')} />
-                        {/* 
-                        {emailValidating &&
-                            <LoadingIndicator style={{ width: 200, height: 50, margin: '0 auto' }} />
-                        } */}
+
                         {(size(email) > 0 && !isEmailAvailable) &&
                             <TextInput
                                 containerClass={[classes.field, classes.password].join(" ")}

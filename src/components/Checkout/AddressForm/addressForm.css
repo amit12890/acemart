@@ -94,11 +94,10 @@ margin: 0;
 }
 
 .actionToolbar {
-
+ display: flex;
 }
 
 .secondary {
-
 }
 .primary {
 
@@ -116,7 +115,7 @@ margin: 0;
     font-weight: var(--font-weight-bold);
     line-height: 1.25rem;
     max-width: 100%;
-    min-width: 10rem;
+    min-width: 15rem;
     min-height: 2.5rem;
     outline: none;
     padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
@@ -146,6 +145,8 @@ margin: 0;
     margin-top: 30px;
 }
 
-
-
-
+.loadingButton {
+    min-width: 15rem;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    min-height: 2.5rem;
+}

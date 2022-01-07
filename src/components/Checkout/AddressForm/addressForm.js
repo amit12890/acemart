@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import SearchablePicker from '../../SearchablePicker'
 import TextInput from '../../TextInput'
 import Checkbox from '../../Checkbox'
+import LoadingButton from '../../LoadingButton'
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './addressForm.css'
@@ -27,6 +28,7 @@ const CheckoutAddressForm = props => {
      *      AddressStep
      */
     const { isUserLoggedIn, initialValues, onSaveAddress, setting, isShippingStep, toggleForm, onSameAsButtonClick, showSameAsButton } = props
+    console.log("🚀 ~ file: addressForm.js ~ line 31 ~ setting", setting)
 
     const { countries: countryData } = useCountries()
 
@@ -296,18 +298,22 @@ const CheckoutAddressForm = props => {
 
                 <div className={classes.actionToolbar}>
                     <div className={classes.primary}>
-                        <button className={[classes.action, classes.secondary].join(" ")} onClick={submitForm}>
-                            <span>{isShippingStep ? 'Delivery To This Address' : 'Use This Address'}</span>
-                        </button>
+                        {setting ? (
+                            <LoadingButton classes={{ wrapper: classes.loadingButton }} />
+                        ) : (
+                            <button className={[classes.action, classes.secondary].join(" ")} onClick={submitForm}>
+                                <span>Delivery To This Address</span>
+                            </button>
+                        )}
                     </div>
                     {isUserLoggedIn &&
-                        <div className={classes.secondary}>
+                        <div className={classes.secondary} style={{ marginLeft: '1rem' }}>
                             <button className={classes.action} onClick={toggleForm}><span>Cancel</span></button>
                         </div>
                     }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

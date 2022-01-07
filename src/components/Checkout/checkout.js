@@ -70,8 +70,6 @@ export default connect(store => ({
 
     const classes = useStyle(defaultClasses)
     const [showReviewCheckout, setReviewCheckout] = useState(false)
-    const [paymentWindow, setPaymentWindow] = useState(false)
-    console.log("🚀 ~ file: checkout.js ~ line 75 ~ paymentWindow", paymentWindow)
 
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0
@@ -145,9 +143,9 @@ export default connect(store => ({
                         {isMultiShipping && (
                             <SplitOrder data={multiShipping} />
                         )}
-                        {!isSignedIn && (
-                            <EmailStep enabled={true} />
-                        )}
+
+                        <EmailStep enabled={true} />
+
                         <AddressStep
                             enabled={isEmailAdded || isDefaultStore}
                             data={customerAddresses}
@@ -155,6 +153,7 @@ export default connect(store => ({
                             setting={settingShippingAddress}
                             initialValues={shipping_addresses[0]}
                             onApplyAddress={(address, isNewAddress = false) => {
+                                if (settingShippingAddress) return
                                 console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
                                 let addressData = null
                                 if (isNewAddress) {
@@ -190,7 +189,8 @@ export default connect(store => ({
                             isShippingStep={true}
                             isUserLoggedIn={isSignedIn}
                             showSameAsButton={false}
-                            isDefaultStore={isDefaultStore} />
+                            isDefaultStore={isDefaultStore}
+                            setting={settingShippingAddress} />
 
                         <ShippingMethodsStep
                             enabled={isShippingAddressSelected}
