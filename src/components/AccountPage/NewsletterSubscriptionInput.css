@@ -10,19 +10,32 @@
 
     background-color: transparent;
     border-width: 0 0 1px 0;
-    border-color: #fff;
+    border-color: rgb(var(--color-white));;
     height: 40px;
     width: 100%;
-    color: #fff;
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-100);
 
 }
 
+.root ::-webkit-input-placeholder { /* Edge */
+    color: rgb(var(--color-white));
+  }
+  
+  .root :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(var(--color-white));
+  }
+  
+  .root ::placeholder {
+    color: rgb(var(--color-white));
+  }
 
 
-.controlInput input:focus {
-    border: none;
-    border-radius: 0;
+.controlInput input:focus,
+.controlInput input:focus-visible {
+   outline: none;
 }
+
 
 
 .actionToolbar button {
