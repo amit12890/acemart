@@ -4,12 +4,13 @@ import { get } from 'lodash'
 
 import { useCheckoutSuccess } from '../../../../data/checkout/hooks/checkout.hook'
 import BarCode from 'react-barcode'
+import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator'
 import { format } from 'date-fns'
 
 
 export default ({ orderNumber }) => {
-    const { fetchCheckoutSuccess, data } = useCheckoutSuccess()
-    console.log("🚀 ~ file: checkoutOrder.js ~ line 8 ~ data", data)
+    const { fetchCheckoutSuccess, data, checkoutSuccessFetching } = useCheckoutSuccess()
+
     useEffect(() => {
         fetchCheckoutSuccess({
             variables: {
@@ -24,6 +25,12 @@ export default ({ orderNumber }) => {
     const shippingInfo = get(data, "shipping_address", {})
     const items = get(data, "items", [])
     console.log("🚀 ~ file: checkoutOrder.js ~ line 26 ~ items", items)
+
+    if (checkoutSuccessFetching) {
+        return (
+            <LoadingIndicator />
+        )
+    }
     return (
         <div>
             <div>{incrementId}</div>
