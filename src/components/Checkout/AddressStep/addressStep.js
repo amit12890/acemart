@@ -186,16 +186,15 @@ const AddressStep = props => {
                         <div className={[classes.actionToolbar, classes.secondaryAction].join(" ")}>
                             <div className={classes.secondary}>
                                 <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
+
+                                <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={submitForm}>
+                                    <span>{isShippingStep ? 'Delivery To This Address' : 'Use This Address'}</span>
+                                </button>
                             </div>
                         </div>
                     )}
 
                     <div className={classes.actionToolbar}>
-                        <div className={classes.secondary}>
-                            <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={submitForm}>
-                                <span>{isShippingStep ? 'Delivery To This Address' : 'Use This Address'}</span>
-                            </button>
-                        </div>
                         <div className={classes.primary}>
                             {renderAddButton()}
                         </div>
@@ -241,7 +240,7 @@ const AddressStep = props => {
                         <div className={classes.actionToolbar}>
                             <div className={classes.secondary}>
                                 <button
-                                    className={[classes.action, classes.secondary].join(" ")}
+                                    className={[classes.action, classes.secondaryButton].join(" ")}
                                     onClick={(e) => {
                                         e.preventDefault()
                                         toggleEditMode(true)
@@ -252,6 +251,7 @@ const AddressStep = props => {
                         </div>
                     )}
                 </div>
+
             </div>
         )
     }

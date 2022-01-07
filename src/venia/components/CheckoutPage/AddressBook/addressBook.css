@@ -62,23 +62,4 @@
 .addButton:hover {
 }
 
-@media (max-width: 960px) {
-    .root_active {
-        grid-template-areas:
-            'header'
-            'content'
-            'buttons';
-        grid-template-columns: 1fr;
-        grid-template-rows: 60px 1fr 60px;
-    }
 
-    .buttonContainer {
-        justify-content: center;
-    }
-
-    .content {
-        border-top: none;
-        grid-template-columns: 1fr;
-        padding-top: 0;
-    }
-}
