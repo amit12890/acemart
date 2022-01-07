@@ -50,7 +50,7 @@ export default function StoreSwitcherPopupContent({
         let hasCenter = false;
         for (let index = 0; index < groupStoreList.length; index++) {
             const config = groupStoreList[index];
-            if(get(config, "store_locator_info.is_distribution_center", false)) {
+            if (get(config, "store_locator_info.is_distribution_center", false)) {
                 hasCenter = true;
                 break;
             }
@@ -58,7 +58,7 @@ export default function StoreSwitcherPopupContent({
         return hasCenter;
     }, [groupStoreList])
 
-    if(isDistributionCenter) {
+    if (isDistributionCenter) {
         groupStoreList.push(DEFAULT_STORE_DATA)
     }
 
@@ -236,7 +236,7 @@ export default function StoreSwitcherPopupContent({
                                             const { id, store_name, code, store_group_name } = store;
                                             // add active class here
                                             const isActive = (
-                                                store_name === currentStoreName || 
+                                                store_name === currentStoreName ||
                                                 (
                                                     store_group_name === DEFAULT_STORE_GROUP_NAME &&
                                                     currentStoreName === DEFAULT_STORE_GROUP_STORE_NAME
@@ -255,15 +255,23 @@ export default function StoreSwitcherPopupContent({
                                                         <p>{store.store_locator_info.city}, {store.store_locator_info.state} {store.store_locator_info.zip}</p>
                                                         <a href={`tel:${store.store_locator_info.phone}`}>
                                                             {/* <span>phone icon here</span> */}
+                                                            <i className={classes.iconWrapper}>
+                                                                <svg className={[classes.svgIcon, classes.phone].join(" ")} xmlns="http://www.w3.org/2000/svg" width="25" height="32" viewBox="0 0 25 32">
+                                                                    <title>phone</title>
+                                                                    <path d="M25.156 22.438q0 0.469-0.188 1.25t-0.375 1.219q-0.281 0.656-0.938 1.109t-1.25 0.797q-0.781 0.406-1.594 0.656t-1.719 0.25q-1.25 0-2.391-0.406t-2.297-0.844q-0.813-0.281-1.594-0.641t-1.531-0.828q-1.125-0.719-2.344-1.719t-2.375-2.141-2.156-2.359-1.688-2.344q-0.469-0.75-0.828-1.531t-0.672-1.594q-0.406-1.156-0.813-2.297t-0.406-2.391q0-0.906 0.234-1.719t0.672-1.594q0.344-0.625 0.797-1.266t1.109-0.922q0.438-0.188 1.219-0.375t1.25-0.188q0.094 0 0.188 0.016t0.188 0.047q0.281 0.094 0.547 0.594t0.391 0.75q0.438 0.781 0.859 1.547t0.859 1.516q0.219 0.344 0.531 0.766t0.313 0.828q0 0.813-1.625 1.859t-1.625 1.797q0 0.344 0.25 0.766t0.438 0.766q1.375 2.438 3.125 4.188t4.188 3.094q0.313 0.188 0.75 0.453t0.781 0.266q0.719 0 1.781-1.625t1.875-1.625q0.406 0 0.828 0.313t0.766 0.531q0.75 0.438 1.516 0.859t1.516 0.828q0.281 0.156 0.781 0.422t0.594 0.547q0.031 0.094 0.047 0.188t0.016 0.188v0z"></path>
+                                                                </svg>
+                                                            </i>
                                                             {store.store_locator_info.phone}
                                                         </a>
-                                                        <div>
+                                                        <div className={classes.storeHours}>
                                                             <StoreHours hours={store.store_locator_info.hours} />
                                                         </div>
                                                         {isActive ?
                                                             <div>MY STORE</div>
                                                             :
-                                                            <Button onClick={handleSwitchStoreClick(code)}>Shop this store</Button>
+                                                            <Button
+                                                                className={classes.shophere}
+                                                                onClick={handleSwitchStoreClick(code)}>Shop this store</Button>
                                                         }
                                                     </div>
                                                 </div>

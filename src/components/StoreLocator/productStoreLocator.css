@@ -19,7 +19,7 @@
 }
 
 .panelHeader {
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .panelTopRow {
@@ -159,10 +159,10 @@ display: flex;
 }
 
 .heading {
-    font-size: 16px;
+    font-size: var(--fontSize-400);
     font-weight: bold;
     line-height: normal;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 .modalHeader {
     
@@ -268,7 +268,7 @@ display: flex;
 }
 
 .tabLabel {
-    
+  font-weight: normal;  
 }
 
 .tabLabel:after {
@@ -312,20 +312,21 @@ display: flex;
     border-style: solid;
     border-width: 2px;
     font-size: var(--fontSize-100);
-    font-weight: var(--font-weight-bold);
+    font-weight: normal;
     line-height: 1.25rem;
     max-width: 100%;
     min-width: 10rem;
     min-height: 2.5rem;
     outline: none;
-    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
-    text-transform: uppercase;
+    padding: calc(0.25rem + 1px) 1rem calc(0.25rem - 1px);
+    text-transform: capitalize;
     transition-duration: 256ms;
     transition-property: background-color, border-color, color;
     transition-timing-function: var(--venia-global-anim-standard);
     text-align: center;
     padding: 10px;
     cursor: pointer;
+
 }
 
 .areaSwitcher:hover{
@@ -410,7 +411,7 @@ display: flex;
 
 .listItem {
     display: flex;
-    border-top: 2px solid rgb(var(--border-color-base));
+    border-top: 1px solid rgb(var(--border-color-base));
     cursor: pointer;
 }
 .listItem:first-child {
@@ -422,7 +423,7 @@ display: flex;
 }
 
 .listLabel {
-    margin: 15px;    
+    margin: 10px;    
 }
 .listLabel span {
     background-color:rgb(var(--theme-color-primary));
@@ -430,11 +431,15 @@ display: flex;
     height: 32px;
     border-radius: 50%;
     color: rgb(var(--color-white));
-    font-weight: var(--font-weight-bold);
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
+}
+
+.storeHours {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .storeAddressWrapper {
@@ -462,6 +467,18 @@ display: flex;
 
 .stockLabel {
 
+}
+
+.storeAddressWrapper a {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.storeAddressWrapper .svgIcon {
+    width: 13px;
+    height: auto;
+    fill: currentColor;
 }
 
 .stockvalue {
@@ -535,13 +552,17 @@ color: rgb(var(--color-red10));
 }
 
 .storeDirection {
-    color: rgb(var(--theme-color-primary));
+    color: rgb(var(--theme-color-primary)); 
 }
 
 .storeDirection a {
     display: flex;
     align-items: center;
     font-weight: var(--font-weight-regular);
+}
+
+.storeDirection a:hover {
+    color: rgb(var(--text-color)); 
 }
 
 .storeDirection .svgIcon{
@@ -589,6 +610,42 @@ color: rgb(var(--color-red10));
     text-align: center;
     cursor: pointer;
     
+}
+
+.shophere { 
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke)); 
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-90);
+    font-weight: var(--font-weight-bold);
+    outline: none;
+    padding: calc(0.35rem + 1px) 1rem calc(0.35rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    text-align: center;
+    cursor: pointer;
+    line-height: 1.25rem;
+}
+
+.shophere:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.shophere:focus {
+    box-shadow: none;
+}
+
+.shophere:active {
+    transition-duration: 128ms;
+    --stroke: var(--theme-color-primary);
 }
 
 .shopStore span:hover{ 
