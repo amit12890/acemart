@@ -123,7 +123,7 @@ export default connect(store => ({
                 goBack={() => { setReviewCheckout(false) }}
                 onPlaceOrderButtonPress={() => {
                     if (get(selected_payment_method, "code", '') === 'paypal_express') {
-                        const w = window.open(get(paypal, "paypal_urls.start", ""))
+                        window.open(get(paypal, "paypal_urls.start", ""), '_self')
                         // w.close()
                     } else {
                         placeOrder()
@@ -192,7 +192,7 @@ export default connect(store => ({
                             isDefaultStore={isDefaultStore} />
 
                         <ShippingMethodsStep
-                            enabled={isShippingAddressSelected || isDefaultStore}
+                            enabled={isShippingAddressSelected}
                             title="Shipping Method"
                             data={get(shipping_addresses[0], "available_shipping_methods", [])}
                             initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}

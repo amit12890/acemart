@@ -20,7 +20,7 @@ const {
 export const useCheckoutPayment = () => {
     const dispatch = useDispatch()
     const [{ cartId }] = useCartContext()
-    const { placeOrder } = usePlaceOrder()
+    const { placeOrder, placingOrder } = usePlaceOrder()
     const [hasToken, setToken] = useState(false)
 
     const [setPaymentMethod, { loading: settingPaymentMethod }] = useMutation(setPaymentMethodMutation, {
@@ -64,7 +64,8 @@ export const useCheckoutPayment = () => {
 
     return {
         setPaymentMethodOnCart,
-        settingPaymentMethod
+        settingPaymentMethod,
+        placingOrder
     }
 }
 
