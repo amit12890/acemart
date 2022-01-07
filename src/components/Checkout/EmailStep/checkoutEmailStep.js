@@ -22,6 +22,7 @@ import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
 import { GET_CART_DETAILS_QUERY } from '../../../venia/components/SignIn/signIn.gql'
 import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action';
 import Button from '../../../venia/components/Button';
+import LoadingButton from '../../LoadingButton'
 
 
 
@@ -192,10 +193,10 @@ export default connect(store => {
                             name="checkoutEmail"
                             htmlFor="checkoutEmail"
                             errorMessage={get(errors, "email", '')} />
-
+                        {/* 
                         {emailValidating &&
                             <LoadingIndicator style={{ width: 200, height: 50, margin: '0 auto' }} />
-                        }
+                        } */}
                         {(size(email) > 0 && !isEmailAvailable) &&
                             <TextInput
                                 containerClass={[classes.field, classes.password].join(" ")}
@@ -217,13 +218,17 @@ export default connect(store => {
 
                         <div className={classes.actionToolbar}>
                             <div className={classes.primary}>
-                                <button
-                                    type="submit"
-                                    className={classes.action}
-                                    onClick={!isEmailAvailable ? loginUser : addEmailToCart}
-                                    disabled={email === props.email && !isEmailAvailable}>
-                                    <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
-                                </button>
+                                {(emailValidating || settingEmail) ? (
+                                    <LoadingButton classes={{ wrapper: classes.loadingButton }} />
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className={classes.action}
+                                        onClick={!isEmailAvailable ? loginUser : addEmailToCart}
+                                        disabled={email === props.email && !isEmailAvailable}>
+                                        <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
+                                    </button>
+                                )}
                             </div>
                         </div>
 
