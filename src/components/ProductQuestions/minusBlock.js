@@ -5,9 +5,10 @@ import helperBad from '../../assets/bad.png';
 import defaultClasses from './productQuestions.css';
 import { useMutation } from '@apollo/client';
 import { get } from 'lodash-es';
+import { loginPage } from '../../url.utils';
 
 
-export default function MinusBlock({queryType, mutation, variables, count, onSuccess}) {
+export default function MinusBlock({queryType, mutation, variables, count, onSuccess, history, isSignedIn}) {
     const [updateMinus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
@@ -15,6 +16,9 @@ export default function MinusBlock({queryType, mutation, variables, count, onSuc
     const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
+        if(!isSignedIn) {
+            history.push(loginPage())
+        }
         try {
             const { data } = await updateMinus({
                 variables: variables
@@ -25,7 +29,7 @@ export default function MinusBlock({queryType, mutation, variables, count, onSuc
         } catch (error) {
             console.log('Error during down vote', error);
         }
-    }, [updateMinus, variables]);
+    }, [updateMinus, variables, isSignedIn, history]);
 
     return (
         <div className={classes.helperContainer} onClick={handleClick}>

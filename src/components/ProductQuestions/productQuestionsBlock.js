@@ -9,9 +9,11 @@ import React, {
 import { useQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
 import { get, size, range, sortBy, cloneDeep } from 'lodash';
+import { useHistory } from 'react-router-dom';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 import Button from '../../venia/components/Button';
 import defaultClasses from './productQuestions.css';
@@ -93,6 +95,8 @@ const QuestionBlock = ({ questions }) => {
     const [userSelectedSort, setSortBy] = useState(sortOptions[0])
     const [queData, dispatch] = useReducer(questionReducer, { questions: [] })
     const fuseSearch = useRef();
+    const history = useHistory()
+    const [{ isSignedIn }] = useUserContext();
 
     useEffect(() => {
         // create new state for questions
@@ -338,6 +342,8 @@ const QuestionBlock = ({ questions }) => {
                                                         variables={{
                                                             question_id: item.id
                                                         }}
+                                                        history={history}
+                                                        isSignedIn={isSignedIn}
                                                     />
                                                 </div>
                                                 <div className={[classes.helper, classes.minus].join(" ")}>
@@ -348,6 +354,8 @@ const QuestionBlock = ({ questions }) => {
                                                         variables={{
                                                             question_id: item.id
                                                         }}
+                                                        history={history}
+                                                        isSignedIn={isSignedIn}
                                                     />
                                                 </div>
                                                 <div className={[classes.helper, classes.reportBlock].join(" ")} >
@@ -356,7 +364,10 @@ const QuestionBlock = ({ questions }) => {
                                                         variables={{
                                                             question_id: item.id
                                                         }}
+                                                        history={history}
+                                                        isSignedIn={isSignedIn}
                                                     />
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -391,6 +402,8 @@ const QuestionBlock = ({ questions }) => {
                                                                         variables={{
                                                                             ans_id: ans.id
                                                                         }}
+                                                                        history={history}
+                                                                        isSignedIn={isSignedIn}
                                                                     />
                                                                 </div>
                                                                 <div className={[classes.helper, classes.minus].join(" ")}>
@@ -403,6 +416,8 @@ const QuestionBlock = ({ questions }) => {
                                                                         variables={{
                                                                             ans_id: ans.id
                                                                         }}
+                                                                        history={history}
+                                                                        isSignedIn={isSignedIn}
                                                                     />
                                                                 </div>
                                                                 <div className={[classes.helper, classes.reportBlock].join(" ")} >
@@ -413,6 +428,8 @@ const QuestionBlock = ({ questions }) => {
                                                                         variables={{
                                                                             ans_id: ans.id
                                                                         }}
+                                                                        history={history}
+                                                                        isSignedIn={isSignedIn}
                                                                     />
                                                                 </div>
                                                             </div>
