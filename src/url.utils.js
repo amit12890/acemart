@@ -76,3 +76,11 @@ export const productSpecsheetLogoUrl = () =>
     `${HOST_URL}/pub/media/attribute/pdf-logo32px.svg.png`;
 
 export const comingSoonImage = () => 'https://cdn.acemart.com/pub/media/catalog/product/placeholder/default/Image-Coming-Soon.jpg'
+
+export const customMapMarkerIcon = (iconName) => `https://qa-acemart-backend.magedelight.magentoprojects.net/pub/media/maps/images/${iconName}.png`;
+
+// Austin
+export const getDefaultLatLong = () => ({
+    lat: 30.071,
+    lng: -97.90559
+})

@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useMemo } from 'react';
-import { get, groupBy, size, difference, orderBy, sortBy, has } from 'lodash-es';
+import { get, groupBy, difference, orderBy, sortBy, has } from 'lodash-es';
 
 import { useStyle } from '../../classify';
 import defaultClasses from '../../../components/StoreLocator/productStoreLocator.css';
@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { StoreHours } from '../../../components/StoreLocator/productStoreLocator';
 import mapImage from "../../../assets/map.jpg"
 import { storeLocatorUrl } from '../../../url.utils';
+
+import DEFAULT_STORE_DATA from "./distribution_center_data.json"
 
 // Acemart.com store will be under this group
 // don't show it in group list
@@ -287,66 +289,4 @@ export default function StoreSwitcherPopupContent({
             </div>
         </div>
     );
-}
-
-
-const DEFAULT_STORE_DATA = {
-    "__typename": "StoreConfig",
-    "category_url_suffix": null,
-    "code": "default",
-    "default_display_currency_code": "USD",
-    "id": 1,
-    "locale": "en_US",
-    "product_url_suffix": null,
-    "secure_base_media_url": "https://qa-acemart-backend.magedelight.magentoprojects.net/pub/media/",
-    "store_group_code": "main_website_store",
-    "store_group_name": "Shopping",
-    "store_name": "Distribution Center",
-    "store_sort_order": 0,
-    "store_locator_info": {
-        "__typename": "StoreLocatorConfig",
-        "street": "9850 Doerr Ln",
-        "city": "Schertz",
-        "zip": "78154",
-        "state": "TX",
-        "phone": "210-323-4550",
-        "hours": {
-            "__typename": "StoreLocatorHours",
-            "mon": [
-                "8:30 am",
-                "5:30 pm"
-            ],
-            "tue": [
-                "8:30 am",
-                "5:30 pm"
-            ],
-            "wed": [
-                "8:30 am",
-                "5:30 pm"
-            ],
-            "thu": [
-                "8:30 am",
-                "5:30 pm"
-            ],
-            "fri": [
-                "8:30 am",
-                "5:30 pm"
-            ],
-            "sat": [
-                "Closed"
-            ],
-            "sun": [
-                "Closed"
-            ]
-        },
-        "map": null,
-        "temporary_closure": false,
-        "fax": "",
-        "driving_directions": "https://www.google.com/maps/dir/Your+Location/9850+Doerr+Ln+St+Schertz+TX+78154",
-        "is_distribution_center": false,
-        "store_lat": "29.610927",
-        "store_long": "-98.292624",
-        "qty": null,
-        "stock_status": null
-    }
 }
