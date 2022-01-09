@@ -8,6 +8,7 @@ export const GET_PRODUCT_FILTERS_BY_CATEGORY = gql`
             aggregations {
                 label
                 attribute_code
+                position
                 options {
                     label
                     value
