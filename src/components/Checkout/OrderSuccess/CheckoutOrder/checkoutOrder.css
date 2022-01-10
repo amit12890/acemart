@@ -1,0 +1,174 @@
+
+
+.orderItem {
+    border: 1px solid rgb(var(--border-color-base));
+    font-size: var(--fontSize-100);
+}
+
+.panelHeader {
+    padding: 0.5rem;
+    display: flex;
+}
+
+.panelLeft {
+    flex-grow: 1;
+}
+
+.panelRight {
+
+}
+
+.orderNumber {
+
+}
+
+.estimateddate {
+   color: rgb(var(--color-red10))
+}
+
+.barcodeWrapper {
+
+}
+
+.block {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.block:first-child {
+    margin-left: 0;
+}
+
+
+.billing {
+
+}
+
+.shipping {
+
+}
+
+.blockTitle {
+    font-weight: bold;
+    font-size: var(--fontSize-100);
+    background-color:  rgb(var(--color-gray30));
+    padding: 0.5rem;
+    color: rgb(var(--color-white));
+}
+
+.blockContent {
+    padding: 0.5rem;
+}
+
+.addressWrapper {
+    display: flex;
+    
+}
+
+.name {
+    font-weight: bold;
+}
+
+.street {
+
+}
+
+.city {
+
+}
+
+.telephone {
+
+}
+
+.panelBody {
+    
+}
+
+.panelFooter {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderItems {
+    font-weight: bold;
+    font-size: var(--fontSize-100);
+    background-color:  rgb(var(--color-gray30));
+    padding: 0.5rem;
+    color: rgb(var(--color-white));
+    margin-bottom: 10px;
+}
+
+.tableWrapper {
+    padding: 0.5rem;
+}
+
+.tableHead {
+    background-color:  rgb(var(--border-color-base));
+    padding: 0.25rem 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: var(--fontSize-100);
+    display: flex;
+}
+
+.productDetails {
+    flex-grow: 1;
+}
+
+.tableHead  .price {
+   flex-basis: 130px; 
+   text-align: center;
+}
+
+.tableHead  .qty {
+    flex-basis: 130px;
+    text-align: center;
+}
+
+.tableHead  .subtotal {
+    flex-basis: 150px;
+    text-align: right;
+}
+
+.tablebody {
+    padding: 1rem 1rem;
+    font-size: var(--fontSize-100);
+    display: flex;
+}
+.productName {
+    font-weight: bold;
+}
+
+.tablebody  .price {
+    flex-basis: 130px; 
+    text-align: center;
+ }
+ 
+ .tablebody  .qty {
+     flex-basis: 130px;
+     text-align: center;
+ }
+ 
+ .tablebody .subtotal {
+     flex-basis: 150px;
+     text-align: right; 
+ }
+
+ .tableFooter {
+    padding: 1rem 1rem;
+    display: flex;
+ }
+
+ .mark {
+     flex-grow: 1;
+     text-align: right;
+     font-weight: bold;
+     font-size: var(--fontSize-200);
+ }
+ .value {
+    flex-basis: 150px; 
+    text-align: right;
+    font-weight: bold;
+    font-size: var(--fontSize-200);
+ }

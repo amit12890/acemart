@@ -1,6 +1,5 @@
 .root {
-    padding: 2.5rem 3rem;
-    max-width: 1080px;
+    padding: 3rem 0;
     margin: 0 auto;
     display: grid;
 }
@@ -11,16 +10,21 @@
 }
 
 .pageTitleWrapper {
+    margin-bottom: 2rem;
+}
 
+.orderItemsWrapper {
+    margin-bottom: 2rem;
 }
 
 
 .title {
-    justify-self: center;
-    margin-bottom: 10px;
-    font-size: var(--fontSize-700);
-    text-transform: uppercase;
-    text-align: center;
+    margin-bottom: 20px;
+    font-size: var(--fontSize-500);
+    color: rgb(var(--theme-color-primary));
+    text-transform: none;
+    font-weight: bold;
+
 }
 
 .base {
@@ -130,6 +134,19 @@
     --stroke:  var(--theme-color-primary-alt);
 }
 
+
+.footerNotes {
+    text-align: center;
+    font-size: var(--fontSize-100);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.notes p {
+    margin: 0;
+}
 /*
  * Mobile-specific styles.
  */
