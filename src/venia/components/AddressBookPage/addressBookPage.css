@@ -128,12 +128,21 @@ display: inline-flex;
 }
 
 .additionalAddrBlock {
+
+}
+
+.additionalAddrBlockWrapper {
+
+}
+
+.additionalAddrBlockWrapper .additionalAddrBlock {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 2.5rem;
     
 }
 
-.test {
 
-}
 
 .addrBookBlockWrapper {
     flex-direction: column;

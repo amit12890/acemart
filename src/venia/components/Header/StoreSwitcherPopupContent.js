@@ -157,7 +157,9 @@ export default function StoreSwitcherPopupContent({
                 </div>
                 <div className={classes.panelBottomRow}>
                     {currentStoreName !== DEFAULT_STORE_GROUP_STORE_NAME ?
-                        <Button onClick={handleSwitchStoreClick("default")}>
+                        <Button
+                            className={classes.buttonSmall}
+                            onClick={handleSwitchStoreClick("default")}>
                             Ship Direct on Acemart.com
                         </Button>
                         :

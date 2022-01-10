@@ -86,13 +86,15 @@
 .price {
     font-weight: var(--font-weight-bold);
     font-size: var(--fontSize-800);
-    color: rgb(var(--product-price-color)); 
+    line-height: var(--fontSize-800);
+    color: rgb(var(--product-price-color));
     display: flex;
     justify-content: flex-end;
 }
 
 .currency {
     font-size: 1rem;
+    margin-top: -5px;
 }
 
 .unit {
@@ -114,6 +116,7 @@
     display: flex;
     align-items: center;
     color: rgb(var(--color-green10));  
+    justify-content: flex-end;
 }
 
 

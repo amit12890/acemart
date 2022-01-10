@@ -163,7 +163,7 @@ const AddressBookPage = props => {
                 <div className={classes.panelWrapper}>
                     <div className={classes.panelBody}>
                         <h2 className={classes.panelBodyTitle}>Additional Addresses Entries</h2>
-                        <div className={[classes.addrBlockWrapper, classes.defaultAddrBlockWrapper].join(" ")}>
+                        <div className={[classes.addrBlockWrapper, classes.additionalAddrBlockWrapper].join(" ")}>
                             <div className={classes.additionalAddrBlock}>
                                 {!!size(additionalAddresses) ?
                                     <>
