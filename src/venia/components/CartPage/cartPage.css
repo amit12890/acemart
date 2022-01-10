@@ -113,10 +113,26 @@ margin-bottom: 3rem;
 .buttonClearCart {
 margin: 5px;
 }
-        
+     
+.emptyCart {
+    font-size: var(--fontSize-200);
+} 
+
+.emptyCart a {
+    color: rgb(var(--link-color));
+    text-decoration: underline;
+}
+
+.emptyCart a:hover {
+    color: rgb(var(--link-color-hover));
+    text-decoration: none;
+}
 
 .emptyCart h3 {
+    margin: 0 0 0 0;
     text-transform: none;
+    font-weight: normal;
+    font-size: inherit;
 }
 
 .buttonContinue .action,

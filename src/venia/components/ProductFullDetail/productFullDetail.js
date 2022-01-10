@@ -631,7 +631,7 @@ const ProductFullDetail = props => {
                                                     return (
                                                         <div className={classes.bulkOfferWrapper} key={ind}>
                                                             <div className={classes.tierQuantity}>
-                                                                <span>Buy at least</span> <strong>{tier.quantity}</strong>
+                                                                <span className={classes.tierLabel} >Buy at least</span> <strong>{tier.quantity}</strong>
                                                             </div>
                                                             <div className={classes.tierPice}>
                                                                 <Price

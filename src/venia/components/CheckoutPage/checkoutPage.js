@@ -149,8 +149,8 @@ const CheckoutPage = props => {
                 </div>
                 <h3>
                     <FormattedMessage
-                        id={'checkoutPage.emptyMessage'}
-                        defaultMessage={'There are no items in your cart.'}
+                        id={'am.cartPage.emptyCart'}
+                        defaultMessage={'You have no items in your Shopping cart.'}
                     />
                 </h3>
             </div>
