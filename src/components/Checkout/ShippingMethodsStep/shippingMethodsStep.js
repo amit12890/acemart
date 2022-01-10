@@ -2,9 +2,11 @@ import React, { useCallback } from 'react'
 import { func, oneOfType, bool, string, array } from 'prop-types'
 
 import RadioButton from '../../RadioButton'
+import { FormattedMessage } from 'react-intl'
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './shippingMethodStep.css'
+import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 
 import { get, size } from 'lodash'
 
@@ -19,14 +21,11 @@ const ShippingMethodStep = props => {
     const {
         enabled,
         title,
-        renderItem: renderItemsParam = false,
         data,
         onItemClick,
-        mapLabel,
-        mapKey,
-        mapValue,
         initialValues,
-        isDefaultStore
+        isDefaultStore,
+        loading
     } = props
 
 
@@ -84,7 +83,6 @@ const ShippingMethodStep = props => {
 
 
 
-    // let mappedValue = mapValue(initialValues)
     if (!enabled) {
         return (
             <div className={[classes.block, classes.shippingMethod].join(" ")}>
@@ -129,6 +127,29 @@ const ShippingMethodStep = props => {
             </div>
         )
     } else {
+
+        if (loading) {
+            return (
+                <div className={[classes.block, classes.paymentOptions].join(" ")}>
+                    <div className={classes.blockTitle}>
+                        <strong> {title}</strong>
+                    </div>
+                    <div className={classes.blockcontent}>
+                        <div className={classes.horizontalLoaderWrapper}>
+                            <LoadingIndicator
+                                classes={{
+                                    root: classes.horizontalLoader
+                                }}>
+                                <FormattedMessage
+                                    id={'shippingMethod.setting'}
+                                    defaultMessage={'Saving Shipping Method...'}
+                                />
+                            </LoadingIndicator>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
         const storePickupData = [], normalMethodData = []
         data.map((item) => {
             const carrier_code = get(item, "carrier_code", "")
@@ -178,14 +199,9 @@ ShippingMethodStep.propTypes = {
     mapLabel: func.isRequired,
     mapKey: func.isRequired,
     mapValue: func.isRequired,
-    renderItem: oneOfType([bool, func]),
     title: string.isRequired,
     data: array.isRequired,
     onItemClick: func.isRequired
-}
-
-ShippingMethodStep.defaultProps = {
-    renderItem: false
 }
 
 export default React.memo(ShippingMethodStep)

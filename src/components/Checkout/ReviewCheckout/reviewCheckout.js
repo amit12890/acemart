@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 
-import PaypalExpressBtn from 'react-paypal-express-checkout'
 import { get } from 'lodash'
 
 import { useStyle } from '../../../venia/classify'
@@ -10,10 +9,7 @@ import CartItemList from '../CartItemList'
 import CartSummary from '../CartSummary'
 
 import defaultClasses from './reviewCheckout.css'
-import { useCheckoutPayment } from '../../../data/checkout/hooks/payment.hook'
-
-import BarCode from 'react-barcode'
-// import PayPalButton from '../../PayPalButton'
+import LoadingButton from '../../LoadingButton'
 
 
 const paypal_client = {
@@ -40,6 +36,7 @@ export default connect((store) => {
     setPaymentMethodOnCart,
     paypalClientId,
     prices,
+    placingOrder,
     dispatch
 }) => {
     console.log("🚀 ~ file: reviewCheckout.js ~ line 47 ~ connect ~ selected_payment_method", selected_payment_method)
@@ -138,16 +135,20 @@ export default connect((store) => {
                             Place Order
                         </div>
                     )} */}
-                    <div onClick={onPlaceOrderButtonPress}
-                        className={classes.primaryButton}>
-                        Place Order
-                    </div>
+                    {placingOrder ? (
+                        <LoadingButton classes={{ wrapper: classes.loadingButton }} />
+                    ) : (
+                        <div onClick={onPlaceOrderButtonPress}
+                            className={classes.primaryButton}>
+                            Place Order
+                        </div>
+                    )}
                 </div>
             </div>
             <div className={classes.sidebar}>
                 <CartSummary />
                 <CartItemList />
             </div>
-        </div>
+        </div >
     )
 })

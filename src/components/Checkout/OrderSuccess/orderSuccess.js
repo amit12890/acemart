@@ -23,6 +23,8 @@ export default connect(store => {
     order_number,
     dispatch
 }) => {
+
+    const classes = useStyle(defaultClasses)
     const { setPaymentMethodOnCart, settingPaymentMethod, placingOrder } = useCheckoutPayment()
     const search = useLocation().search
     const searchParams = new URLSearchParams(search)
@@ -31,11 +33,18 @@ export default connect(store => {
         payerId: searchParams.get('PayerID')
     }
 
-    const [orderNumber, setOrderNumber] = useState(order_number)
-    const [loading, setLoading] = useState(false)
+    const initorderNumbers = size(order_number) > 0 ? split(order_number, ",") : []
+    const [orderNumbers, setOrderNumbers] = useState(initorderNumbers)
+    console.log("🚀 ~ file: orderSuccess.js ~ line 38 ~ orderNumbers", orderNumbers)
 
     useEffect(() => {
-        if (size(paypal_response.payerId) > 0 && size(order_number) === 0) {
+        if (size(initorderNumbers) > 0 && size(orderNumbers) === 0) {
+            setOrderNumbers(initorderNumbers)
+        }
+    }, [initorderNumbers, orderNumbers])
+
+    useEffect(() => {
+        if (size(paypal_response.payerId) > 0 && size(orderNumbers) === 0) {
             console.log("setting payment on cart....")
             setPaymentMethodOnCart({
                 code: "paypal_express",
@@ -45,10 +54,9 @@ export default connect(store => {
                 }
             })
         }
-    }, [paypal_response, order_number, loading])
+    }, [paypal_response.payerId, orderNumbers])
 
 
-    const classes = useStyle(defaultClasses)
     const { formatMessage } = useIntl();
 
     if (settingPaymentMethod || placingOrder) {
@@ -62,15 +70,39 @@ export default connect(store => {
         )
     }
 
-    const orderNumbers = split(order_number, ",")
-    console.log("🚀 ~ file: orderSuccess.js ~ line 83 ~ orderNumbers", orderNumbers)
     return (
         <div>
+            <StoreTitle>
+                {formatMessage({
+                    id: 'checkoutPage.titleReceipt',
+                    defaultMessage: 'Receipt'
+                })}
+            </StoreTitle>
+            <div className={classes.pageTitleWrapper}>
+                <h1 className={classes.title}>
+                    <span className={classes.base}>
+                        Thank you
+                    </span>
+                    <span className={classes.subtitle}>
+                        for your order!
+                    </span>
+                </h1>
+            </div>
             {orderNumbers.map((number) => {
                 return (
-                    <CheckoutOrder orderNumber={number.trim()} />
+                    <CheckoutOrder
+                        orderNumber={number.trim()}
+                        onCheckoutOrderFetched={() => {
+                            dispatch(resetCheckout())
+                        }}
+                        classes={classes} />
                 )
             })}
+            <div className={classes.primaryButtonWrapper}>
+                <div className={classes.primaryButton}>
+                    Continue Shopping
+                </div>
+            </div>
         </div>
     )
 

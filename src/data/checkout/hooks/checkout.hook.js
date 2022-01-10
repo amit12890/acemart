@@ -255,9 +255,9 @@ export const usePlaceOrder = () => {
 
     const [fetchCartId] = useMutation(createCartMutation);
 
-    const [orderPlace, { loading: placingOrder }] = useMutation(placeOrderMutation, {
+    const [orderPlace, { loading: placingOrder, data }] = useMutation(placeOrderMutation, {
         onCompleted: async (data) => {
-            // console.log("-----------[log]------------", "order placed successfully", data)
+            console.log("-----------[log]------------", "order placed successfully", data)
             let orderNumber = get(data, "placeOrder.order.order_number", 0)
             dispatch(updateCheckoutField({ orderNumber }))
             await removeCart();
