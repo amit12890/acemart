@@ -79,12 +79,12 @@ export const useReviewForm = props => {
 
             delete formValues.review_images;
 
-            const ratingsObj = {}
+            const ratingsObj = {};
             for (let ratInd = 0; ratInd < ratings.length; ratInd++) {
                 const currRating = ratings[ratInd];
                 const ratingKey = snakeCase(currRating.rating_code);
                 if (has(formValues, ratingKey)) {
-                    ratingsObj[currRating.rating_id] = formValues[ratingKey]
+                    ratingsObj[currRating.rating_id] = formValues[ratingKey];
                 }
             }
 
@@ -126,6 +126,14 @@ export const useReviewForm = props => {
     );
 
     const handleSubmitFailure = useCallback(errors => {
+        const errorFields = Object.keys(errors);
+        if (!Array.isArray(errorFields) || !errorFields.length) {
+            return null;
+        }
+        const el = document.getElementById('review-form-wrapper');
+        if (el) {
+            el.scrollIntoView({behavior: 'smooth'})
+        }
     }, []);
 
     useEffect(() => {

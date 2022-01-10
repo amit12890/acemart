@@ -64,6 +64,7 @@ const ProductReviews = props => {
                     />
                 </>
             ) : null}
+            <div id="review-form-wrapper" />
             <div ref={reviewFormRef} className={classes.reviewFormWrapper}>
                 <div className={classes.reviewFormContainer}>
                     <ReviewForm
