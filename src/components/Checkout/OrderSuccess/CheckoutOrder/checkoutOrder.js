@@ -11,7 +11,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify'
 import defaultClasses from './checkoutOrder.css'
 
 
-export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses }) => {
+export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange }) => {
     const classes = useStyle(propsClasses, defaultClasses)
     const { fetchCheckoutSuccess, data, checkoutSuccessFetching } = useCheckoutSuccess()
     console.log("🚀 ~ file: checkoutOrder.js ~ line 14 ~ data", data)
@@ -23,6 +23,10 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
             }
         })
     }, [orderNumber])
+
+    useEffect(() => {
+        onEmailChange(data.customer_email)
+    }, [data.customer_email])
 
     useEffect(() => {
         if (!checkoutSuccessFetching && size(data) > 0) {
@@ -48,7 +52,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
         <div className={classes.orderItem}>
             <div className={classes.panelHeader}>
                 <div className={classes.panelLeft}>
-                    <div className={classes.orderNumber}><strong>Order Numbe: </strong>{incrementId}</div>
+                    <div className={classes.orderNumber}><strong>Order Number: </strong>{incrementId}</div>
                     <div className={classes.estimateddate}><strong>Estimated Pickup date: </strong>{pickupDate}</div>
                 </div>
                 <div className={classes.panelRight}>

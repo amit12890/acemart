@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { StoreTitle } from '@magento/venia-ui/lib/components/Head';
@@ -9,7 +9,7 @@ import { useStyle } from '../../../venia/classify';
 import defaultClasses from './orderSuccess.css'
 import { resetCheckout } from '../../../data/checkout/checkout.action';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator'
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useCheckoutPayment } from '../../../data/checkout/hooks/payment.hook'
 import { useCheckoutSuccess } from '../../../data/checkout/hooks/checkout.hook';
 import CheckoutOrder from './CheckoutOrder';
@@ -17,13 +17,15 @@ import CheckoutOrder from './CheckoutOrder';
 
 export default connect(store => {
     return {
-        order_number: '14000000252-1 , 14000000252-2' || store.checkout.orderNumber
+        order_number: '14000000252-1 , 14000000252-2' || store.checkout.orderNumber,
+        customerEmail: store.checkout.email
     }
 })(React.memo(({
     order_number,
+    customerEmail,
     dispatch
 }) => {
-
+    const history = useHistory()
     const classes = useStyle(defaultClasses)
     const { setPaymentMethodOnCart, settingPaymentMethod, placingOrder } = useCheckoutPayment()
     const search = useLocation().search
@@ -35,6 +37,7 @@ export default connect(store => {
 
     const initorderNumbers = size(order_number) > 0 ? split(order_number, ",") : []
     const [orderNumbers, setOrderNumbers] = useState(initorderNumbers)
+    const [email, setEmail] = useState(customerEmail)
     console.log("🚀 ~ file: orderSuccess.js ~ line 38 ~ orderNumbers", orderNumbers)
 
     useEffect(() => {
@@ -55,6 +58,12 @@ export default connect(store => {
             })
         }
     }, [paypal_response.payerId, orderNumbers])
+
+
+    const goToHome = useCallback((e) => {
+        e.preventDefault()
+        history.replace('/')
+    }, [])
 
 
     const { formatMessage } = useIntl();
@@ -80,7 +89,7 @@ export default connect(store => {
             </StoreTitle>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>Thank you for Your Purchase!</h1>
-                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>(email)</strong>. Your order details are below</p>
+                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>({email})</strong>. Your order details are below</p>
             </div>
             {orderNumbers.map((number) => {
                 return (
@@ -90,115 +99,26 @@ export default connect(store => {
                             onCheckoutOrderFetched={() => {
                                 dispatch(resetCheckout())
                             }}
-                            classes={classes} />
+                            classes={classes}
+                            onEmailChange={setEmail} />
                     </div>
                 )
             })}
             <div className={classes.primaryButtonWrapper}>
-                <div className={classes.primaryButton}>
+                <div className={classes.primaryButton} onClick={goToHome}>
                     Continue Shopping
                 </div>
             </div>
             <div className={classes.footerNotes}>
                 <div className={classes.notes}>
                     <p>You can track your order status by creating an account. </p>
-                    <p><strong>Email Address:</strong> nikhil.solanki+qa@magedelight.com</p>
+                    <p><strong>Email Address:</strong> {email}</p>
                 </div>
                 <div className={classes.primaryButton}>
                     Create Account
                 </div>
             </div>
 
-        </div>
-    )
-
-    console.log("🚀 ~ file: orderSuccess.js ~ line 18 ~ selectedShippingAddress", selectedShippingAddress)
-    const selectedShippingMethod = get(selectedShippingAddress, "available_shipping_methods", [])
-
-    const firstname = get(selectedShippingAddress, "firstname", "")
-    const lastname = get(selectedShippingAddress, "lastname", "")
-    const city = get(selectedShippingAddress, "city", "")
-    const region = get(selectedShippingAddress, "region.label", "")
-    const postcode = get(selectedShippingAddress, "postcode", "")
-    const country = get(selectedShippingAddress, "country.label", "")
-    const streetRows = get(selectedShippingAddress, "street", false) && selectedShippingAddress.street.map((row, index) => {
-        return (
-            <span key={index} className={classes.addressStreet}>
-                {row}
-            </span>
-        );
-    });
-
-    const shippingMethod = get(selectedShippingMethod, "method_title", "")
-
-    const nameString = `${firstname} ${lastname}`;
-    const additionalAddressString = `${city}, ${region} ${postcode} ${country}`;
-
-    return (
-        <div className={classes.root}>
-            <StoreTitle>
-                {formatMessage({
-                    id: 'checkoutPage.titleReceipt',
-                    defaultMessage: 'Receipt'
-                })}
-            </StoreTitle>
-            <div className={classes.mainContainer}>
-                <div className={classes.pageTitleWrapper}>
-                    <h1 className={classes.title}>
-                        <span className={classes.base}>
-                            Thank you
-                        </span>
-                        <span className={classes.subtitle}>
-                            for your order!
-                        </span>
-                    </h1>
-                </div>
-                <div className={classes.orderNumber}>
-                    <FormattedMessage
-                        id={'checkoutPage.orderNumber'}
-                        defaultMessage={'Order Number'}
-                        values={{ orderNumber }}
-                    />
-                </div>
-                <div className={classes.shippingInfoHeading}>
-                    <FormattedMessage
-                        id={'global.shippingInformation'}
-                        defaultMessage={'Shipping Information'}
-                    />
-                </div>
-                <div className={classes.shippingInfo}>
-                    <span className={classes.email}>{email}</span>
-                    <span className={classes.name}>{nameString}</span>
-                    {streetRows}
-                    <span className={classes.addressAdditional}>
-                        {additionalAddressString}
-                    </span>
-                </div>
-                <div className={classes.shippingMethodHeading}>
-                    <FormattedMessage
-                        id={'global.shippingMethod'}
-                        defaultMessage={'Shipping Method'}
-                    />
-                </div>
-                <div className={classes.shippingMethod}>{shippingMethod}</div>
-                <div className={classes.itemsReview}>
-                    <CartItemList data={cartItems} />
-                </div>
-                <div className={classes.additionalText}>
-                    <FormattedMessage
-                        id={'checkoutPage.additionalText'}
-                        defaultMessage={
-                            'You will also receive an email with the details and we will let you know when your order has shipped.'
-                        }
-                    />
-                </div>
-
-                <div className={classes.primaryButtonWrapper}>
-                    <div className={classes.primaryButton}>
-                        Continue Shopping
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }))

@@ -1,0 +1,63 @@
+.splitOrderBlock{
+    margin-bottom: 40px;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 0.9rem;
+}
+
+.orderList {
+    margin:1rem 0rem;
+}
+
+.orderRow {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ flex: 1;
+ justify-content: space-between;
+ padding: 0.5rem 1rem;
+ background-color: #f0f0f0;
+}
+
+.orderRow :first-child {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: black;
+}
+
+.orderRow :last-child {
+    font-size: 1rem;
+    font-weight: 700;
+    color: red;
+}
+
+.bopsList {
+    margin-bottom: 1rem;
+}
+
+.headerBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0.25rem 1rem 0 1rem;
+}
+
+.headerContent{
+    display: flex;
+    flex:1;
+}
+
+.headerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.headerTitleCell {
+    display: flex;
+    align-items: center;
+    min-width: 5rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}

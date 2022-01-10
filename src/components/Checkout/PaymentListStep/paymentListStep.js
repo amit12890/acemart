@@ -7,7 +7,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './paymentListStep.css'
 import { FormattedMessage } from 'react-intl'
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
-import { get, size } from 'lodash'
+import { get, includes, size } from 'lodash'
 
 
 const PaymentListStep = props => {
@@ -23,11 +23,16 @@ const PaymentListStep = props => {
         onItemClick,
         initialValues,
         isDefaultStore,
+        isMultiShipping,
         loading
     } = props
 
     const initialCode = get(initialValues, "code", "")
 
+    let filteredData = data
+    if (isMultiShipping) {
+        filteredData = data.filter((item) => !includes(item.code, "paypal"))
+    }
     const [selectedPaymentCode, setSelectedPaymentCode] = useState(initialCode)
 
     useEffect(() => {
@@ -127,7 +132,7 @@ const PaymentListStep = props => {
                 <div className={classes.paymentMethods}>
 
                     <fieldset className={classes.fieldset}>
-                        {data.map(renderItem)}
+                        {filteredData.map(renderItem)}
                     </fieldset>
                 </div>
             </div>
