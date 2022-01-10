@@ -12,11 +12,11 @@ import { useIntl } from 'react-intl';
 
 import defaultClasses from './cms.css';
 import { updateAppState } from '../../data/appState/appState.action';
-import CmsContent from "./cmsContent";
+import CmsContent from './cmsContent';
 
 const CMSPage = props => {
     const { id } = props;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const talonProps = useCmsPage({ id: Number(id) });
     const {
         cmsPage,
@@ -28,17 +28,17 @@ const CMSPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     /**
-     * isCMS flag status updated added on component create 
+     * isCMS flag status updated added on component create
      * and destory
-     * 
+     *
      *  reducer: appState
      */
     useEffect(() => {
-        dispatch(updateAppState({ isCMS: true }))
+        dispatch(updateAppState({ isCMS: true }));
         return () => {
-            dispatch(updateAppState({ isCMS: false }))
-        }
-    }, [])
+            dispatch(updateAppState({ isCMS: false }));
+        };
+    }, []);
 
     if (shouldShowLoadingIndicator) {
         return fullPageLoadingIndicator;
@@ -51,7 +51,7 @@ const CMSPage = props => {
             meta_title,
             meta_description,
             content,
-            url_key,
+            url_key
         } = cmsPage;
 
         const headingElement =
@@ -61,8 +61,15 @@ const CMSPage = props => {
 
         const pageTitle = meta_title || title;
 
-        if (url_key === "store-locator") {
-            return <CmsContent />;
+        if (url_key === 'store-locator') {
+            return (
+                <Fragment>
+                    <StoreTitle>{pageTitle}</StoreTitle>
+                    <Meta name="title" content={pageTitle} />
+                    <Meta name="description" content={meta_description} />
+                    <CmsContent />
+                </Fragment>
+            );
         }
         return (
             <Fragment>
@@ -75,8 +82,8 @@ const CMSPage = props => {
                         classes={{
                             root: classes.test
                         }}
-
-                        html={content} />
+                        html={content}
+                    />
                 </div>
             </Fragment>
         );

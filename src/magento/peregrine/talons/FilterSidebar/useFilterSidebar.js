@@ -75,6 +75,7 @@ export const useFilterSidebar = props => {
 
     // iterate over filters once to set up all the collections we need
     const [filterNames, filterKeys, filterItems] = useMemo(() => {
+        // const sortedFilters = orderBy(filters, ['position'], ['asc'])
         const sortedFilters = orderBy(filters, ['label'], ['asc'])
         const names = new Map();
         const keys = new Set();

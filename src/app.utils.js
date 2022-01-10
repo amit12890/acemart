@@ -202,3 +202,12 @@ export const emptyCheck = (stateObject) => {
     });
     return errors;
 }
+
+export const isPasswordSame = (value, values, fieldKey) => {
+    const message = {
+        id: 'validation.isEqualToFieldNew',
+        defaultMessage: 'Please enter the same value again.',
+        value: fieldKey
+    };
+    return value === values[fieldKey] ? undefined : message;
+};

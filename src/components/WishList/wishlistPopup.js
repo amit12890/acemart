@@ -33,7 +33,7 @@ const successMessage = "has been added to wish list"
 const WishlistPopup = props => {
     const { closeWishlistPopup, productId, productQty = 1, isPopupVisible, productName } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
-    const [selectedWishlist, setSelectedWishlist] = useState(null);
+    const [selectedWishlist, setSelectedWishlist] = useState(0);
     const [_, { addToast }] = useToasts()
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(GET_CUSTOMER_DETAILS, {
@@ -82,9 +82,10 @@ const WishlistPopup = props => {
     const wishlistTabs = useMemo(() => {
         if (loading || loadingCustomerDetails)
             return <LoadingIndicator />;
-        if (size(wishlists) === 0)
+        if (size(wishlists) === 0) {
             return <div>You have no wishlist to choose from !!</div>
-
+        }
+        
         return (
             <div className={classes.wishlistItemWrapper}>
                 {wishlists.map((wishlist) => {

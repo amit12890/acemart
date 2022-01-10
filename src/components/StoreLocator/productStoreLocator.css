@@ -330,7 +330,7 @@ display: flex;
 
 }
 
-.areaSwitcher:hover{
+.areaSwitcher:hover, .areaSwitcher.active {
     background-color: var(--color-white);
     color: rgb(var(--stroke));
     border-color: rgb(var(--stroke));
@@ -423,6 +423,10 @@ display: flex;
     background-color: rgb(var(--color-gray-light0));
 }
 
+.listItem.active {
+    background-color: rgb(var(--color-gray-light02));;
+}
+
 .listLabel {
     margin: 10px;    
 }
@@ -430,12 +434,17 @@ display: flex;
     background-color:rgb(var(--theme-color-primary));
     width: 32px;
     height: 32px;
+    line-height: 32px;
     border-radius: 50%;
     color: rgb(var(--color-white));
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
+}
+
+.listLabel.active span {
+    background-color: #E60000;
 }
 
 .storeHours {

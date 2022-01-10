@@ -62,7 +62,7 @@ export default connect(store => ({
         setShippingAddressOnCart
     } = useCheckoutAddresses()
 
-    const { setShippingMethodOnCart } = useShippingMethods()
+    const { setShippingMethodOnCart, settingShippingMethod } = useShippingMethods()
     const { setPaymentMethodOnCart, settingPaymentMethod } = useCheckoutPayment()
     const { handleGeneratePayPalToken } = usePayPal()
 
@@ -72,12 +72,12 @@ export default connect(store => ({
     const [showReviewCheckout, setReviewCheckout] = useState(false)
 
     let isEmailAdded = size(email) > 0
-    let isShippingAddressSelected = size(shipping_addresses) > 0
-    let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0
+    let isShippingAddressSelected = size(shipping_addresses) > 0 && !settingShippingAddress
+    let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0 && !settingShippingMethod
 
-    let isBillingAddressSelected = size(billing_address) > 0
-    let isPaymentMethodSelected = size(selected_payment_method) > 0
-    let enablePlaceOrderButton = isShippingAddressSelected && isBillingAddressSelected && isPaymentMethodSelected && isShippingMethodSelected
+    let isBillingAddressSelected = size(billing_address) > 0 && !settingBillingAddress
+    let isPaymentMethodSelected = size(selected_payment_method) > 0 && !settingPaymentMethod
+    let enablePlaceOrderButton = isShippingAddressSelected && isBillingAddressSelected && isPaymentMethodSelected && isShippingMethodSelected && isEmailAdded
 
 
     let existBillingAddress = billing_address
@@ -127,7 +127,8 @@ export default connect(store => ({
                         placeOrder()
                     }
                 }}
-                setPaymentMethodOnCart={setPaymentMethodOnCart} />
+                setPaymentMethodOnCart={setPaymentMethodOnCart}
+                placingOrder={placingOrder} />
         )
     }
 
@@ -147,7 +148,7 @@ export default connect(store => ({
                         <EmailStep enabled={true} />
 
                         <AddressStep
-                            enabled={isEmailAdded || isDefaultStore}
+                            enabled={isEmailAdded || !isDefaultStore}
                             data={customerAddresses}
                             title="Shipping Address"
                             setting={settingShippingAddress}
@@ -206,7 +207,8 @@ export default connect(store => ({
                                     }
                                 ])
                             }}
-                            isDefaultStore={isDefaultStore} />
+                            isDefaultStore={isDefaultStore}
+                            loading={settingShippingMethod} />
 
                         <AddressStep
                             enabled={isShippingMethodSelected}
@@ -292,7 +294,8 @@ export default connect(store => ({
                                 }
                                 setPaymentMethodOnCart({ code })
                             }}
-                            isDefaultStore={isDefaultStore} />
+                            isDefaultStore={isDefaultStore}
+                            loading={settingPaymentMethod} />
 
                         {enablePlaceOrderButton && (
                             <div className={classes.primaryButtonWrapper}>

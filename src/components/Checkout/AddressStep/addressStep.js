@@ -236,8 +236,8 @@ const AddressStep = props => {
                 {setting ? (
                     <LoadingIndicator>
                         <FormattedMessage
-                            id={'shippingAddress.setting'}
-                            defaultMessage={'Saving Shipping Address...'}
+                            id={`${isShippingStep ? "shippingAddress" : "billingAddress"}.setting`}
+                            defaultMessage={`Saving ${isShippingStep ? 'Shipping' : 'Billing'} Address...`}
                         />
                     </LoadingIndicator>
                 ) : (
@@ -276,8 +276,16 @@ const AddressStep = props => {
             <div className={classes.blockTitle}>
                 {title}
             </div>
+            {/* 
+                this loading wll be set when user is loggedin
+            */}
             {setting ? (
-                <div>Loading....</div>
+                <LoadingIndicator>
+                    <FormattedMessage
+                        id={`${isShippingStep ? "shippingAddress" : "billingAddress"}.setting`}
+                        defaultMessage={`Saving ${isShippingStep ? 'Shipping' : 'Billing'} Address...`}
+                    />
+                </LoadingIndicator>
             ) : (
                 <div className={classes.blockContent}>
                     {showAddressForm || !isUserLoggedIn ? (

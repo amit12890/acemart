@@ -82,3 +82,46 @@ position: absolute;
 right: 0;
 top:0;
 }
+
+
+.portalRoot {
+    position: fixed;
+    margin: auto;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 100;
+    margin-top: 4rem;
+}
+
+.contentWrapper {
+    background-color: rgb(var(--page-background-color));
+    border-radius: 1px;
+    box-shadow: 0 1px 6px rgb(var(--color-gray40) / 0.2);
+    transform: translate3d(0, -8px, 0);
+    transition-duration: 192ms;
+    transition-property: transform;
+    transition-timing-function: var(--venia-global-anim-out);
+    width: var(--content-width);
+    left: 0;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    padding: 2rem;
+}
+
+.content {
+    text-align: center;
+}
+
+.actions {
+    margin-top: 1.5rem;
+}
+
+.actions button {
+    min-width: 6rem;
+    margin: 0 0.5rem;
+}
