@@ -5,7 +5,8 @@ import RadioButton from '../../RadioButton'
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './paymentListStep.css'
-
+import { FormattedMessage } from 'react-intl'
+import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 import { get, size } from 'lodash'
 
 
@@ -21,7 +22,8 @@ const PaymentListStep = props => {
         data,
         onItemClick,
         initialValues,
-        isDefaultStore
+        isDefaultStore,
+        loading
     } = props
 
     const initialCode = get(initialValues, "code", "")
@@ -96,21 +98,20 @@ const PaymentListStep = props => {
     // } else {
 
 
-    // let mappedValue = mapValue(initialValues)
-    if (!enabled) {
+    if (loading) {
         return (
-            <div className="block block-checkout inactive">
-                <div className="block-title">
-                    {title}
+            <div className={[classes.block, classes.paymentOptions].join(" ")}>
+                <div className={classes.blockTitle}>
+                    <strong>{title}</strong>
                 </div>
-            </div>
-        )
-    }
-
-    if (size(data) === 0) {
-        return (
-            <div className="no-data-found">
-                No Data Found
+                <div className={classes.blockcontent}>
+                    <LoadingIndicator>
+                        <FormattedMessage
+                            id={'paymentMethod.setting'}
+                            defaultMessage={'Saving Payment Method...'}
+                        />
+                    </LoadingIndicator>
+                </div>
             </div>
         )
     }
