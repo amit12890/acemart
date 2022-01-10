@@ -18,7 +18,7 @@ export const useEmailStep = () => {
     const [checkEmailExist, { loading, data }] = useLazyQuery(
         emailAvailableCheckQuery,
         {
-            fetchPolicy: 'cache-and-network'
+            fetchPolicy: 'network-only'
         }
     )
 
