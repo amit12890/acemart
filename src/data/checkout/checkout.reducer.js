@@ -56,7 +56,7 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
         }
         case CHECKOUT_FETCHED: {
             const { multi_shipping, ...restPayload } = action.payload
-            const isMultiShipping = size(multi_shipping.boss) > 0
+            const isMultiShipping = size(get(multi_shipping, "boss", '')) > 0
             return {
                 ...state,
                 fetching: false,

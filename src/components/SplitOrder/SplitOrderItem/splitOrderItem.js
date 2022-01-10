@@ -22,9 +22,9 @@ export default ({ item, isLast }) => {
     const price = get(item, "price", "")
     const subTotal = get(item, "sub_total", "")
     const currencyCode = get(item, "currency_code", 'USD')
-    const itemBlockClass = isLast ? classes.itemBlock : [classes.itemBlock, classses.bottomBorder].join(" ")
+    const itemBlockClass = isLast ? classes.itemBlock : [classes.itemBlock, classes.bottomBorder].join(" ")
     return (
-        <div className={itemBlockClass}>
+        <div className={[classes.itemBlock, classes.bottomBorder].join(" ")}>
             <div>
                 <Image
                     src={productImage}

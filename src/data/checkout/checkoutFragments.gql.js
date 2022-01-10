@@ -141,7 +141,6 @@ export const ItemsFragment = gql`
       uid
       ...itemPricesFragment
       ...productListingFragment    
-      __typename
     }
   }
 `

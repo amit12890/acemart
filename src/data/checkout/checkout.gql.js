@@ -46,8 +46,7 @@ export const GET_CHECKOUT_DETAILS = gql`
         cart(cart_id: $cartId) {
             id
             is_virtual
-            total_quantity  
-            ...multiShippingFragment  
+            total_quantity
             ...appliedCouponsFragment    
             ...availablePaymentMethodsFragment
             ...billingAddressFragment
@@ -70,7 +69,6 @@ export const GET_CHECKOUT_DETAILS = gql`
     ${ShippingAddressesFragment}
     ${ItemPricesFragment}
     ${ProductListingFragment}
-    ${MultiShippingFragment}
 `;
 
 export const SET_STORE_PICKUP_SHIPPING_ADDRESS = gql`

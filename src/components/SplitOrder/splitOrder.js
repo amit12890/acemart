@@ -5,6 +5,7 @@ import { useStyle } from '../../venia/classify'
 import defaultClasses from './splitOrder.css'
 import SplitOrderItem from './SplitOrderItem'
 import WarningBlock from '../WarningBlock'
+import OrderPriceBlock from './OrderPriceBlock'
 
 
 const top_label = "No all of the items for your order are available for immediate pickup from your selected store location. Some items will be shipped to your store location and will be ready for pickup according to the estimated pickup dates shown below."
@@ -18,7 +19,16 @@ const bottom_label = "Multishipping checkout with PayPal is currently not suppor
 export default ({ data, disableWarnings = false }) => {
     const classes = useStyle(defaultClasses)
     const bops = get(data, "bops", {})
+    console.log("🚀 ~ file: splitOrder.js ~ line 21 ~ bops", bops)
+    const bopsCurrencyCode = get(bops, "currency_code", "")
+    const bopsSubtotal = get(bops, "sub_total", "")
+    const bopsTax = get(bops, "tax", "")
+    const bopsGrandTotal = get(bops, "total", "")
     const boss = get(data, "boss", {})
+    const bossCurrencyCode = get(boss, "currency_code", "")
+    const bossSubtotal = get(boss, "sub_total", "")
+    const bossTax = get(boss, "tax", "")
+    const bossGrandTotal = get(boss, "total", "")
     const bopsItems = get(bops, "items", [])
     const bossItems = get(boss, "items", [])
     const orderListStyle = disableWarnings ? '' : classes.orderList
@@ -55,6 +65,11 @@ export default ({ data, disableWarnings = false }) => {
                                 isLast={index === size(bopsItems) - 1} />
                         )
                     })}
+                    <OrderPriceBlock
+                        currencyCode={bopsCurrencyCode}
+                        subTotal={bopsSubtotal}
+                        tax={bopsTax}
+                        grandTotal={bopsGrandTotal} />
                 </div>
                 <div className={classes.orderRow}>
                     <span>{get(boss, "label", "")}</span>
@@ -83,6 +98,11 @@ export default ({ data, disableWarnings = false }) => {
                                 isLast={index === size(bopsItems) - 1} />
                         )
                     })}
+                    <OrderPriceBlock
+                        currencyCode={bossCurrencyCode}
+                        subTotal={bossSubtotal}
+                        tax={bossTax}
+                        grandTotal={bossGrandTotal} />
                 </div>
             </div>
             {!disableWarnings && (
