@@ -126,3 +126,23 @@ mutation answerRatingMinus($ans_id: Int!) {
     }
 }
 `
+
+export const getStoreConfig = gql`
+query getStoreConfig {
+    storeConfig { id website_id }
+}
+`
+
+export const getProductQAConfiguration = gql`
+query getProductQAConfiguration(
+    $storeId : Int
+    $websiteId: Int
+) {
+    productQAConfiguration(
+        storeId: $storeId
+        websiteId: $websiteId
+    ) {
+        allow_subscribing_question
+    }
+}
+`
