@@ -5,8 +5,8 @@ import TextInput from '../../TextInput'
 import { useToasts } from '@magento/peregrine';
 import { useCartContext } from '@magento/peregrine/lib/context/cart';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
-import LoadingIndicator from '../../LoadingIndicator'
 import Icon from '../../../venia/components/Icon'
+import { FormattedMessage } from 'react-intl'
 import {
     CheckCircle as CheckCircleIcon,
     AlertCircle as AlertCircleIcon
@@ -22,6 +22,7 @@ import { useSignIn } from '../../../magento/peregrine/talons/SignIn/useSignIn';
 import { GET_CART_DETAILS_QUERY } from '../../../venia/components/SignIn/signIn.gql'
 import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action';
 import Button from '../../../venia/components/Button';
+import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 import LoadingButton from '../../LoadingButton'
 
 
@@ -61,6 +62,7 @@ export default connect(store => {
     const [{ cartId }] = useCartContext()
     const [{ isSignedIn }] = useUserContext()
     const { isEmailAvailable, loading: emailValidating, checkEmailAvailable, setGuestEmailOnCart, settingEmail } = useEmailStep()
+    console.log("🚀 ~ file: checkoutEmailStep.js ~ line 65 ~ emailValidating", emailValidating)
     const [, { addToast }] = useToasts();
 
     const [email, setEmail] = useState(props.email)
@@ -73,32 +75,20 @@ export default connect(store => {
     }, [props.email])
 
 
-    useEffect(() => {
-        if (size(emailInputRef.current) === 0) {
-            return
+    const debouncedEmailCheck = useCallback(debounce((inputText) => {
+        if (size(validateEmail(inputText)) === 0) {
+            if (!emailValidating) {
+                checkEmailAvailable(inputText)
+            }
+        } else {
+            setPassword('')
         }
-        let timeout = null;
+    }, 1000), [emailValidating])
 
-        emailInputRef.current.addEventListener("keyup", () => {
-            // Clear the timeout if it has already been set.
-            // This will prevent the previous task from executing
-            // if it has been less than <MILLISECONDS>
-            clearTimeout(timeout);
-            // Make a new timeout set to go off in 1000ms (1 second)
-            timeout = setTimeout(() => {
-                let inputText = emailInputRef.current.value
-                if (size(validateEmail(inputText)) === 0) {
-                    if (!emailValidating) {
-                        checkEmailAvailable(inputText)
-                    }
-                } else {
-                    setPassword('')
-                }
-            }, 1000);
-        })
-
+    const onEmailChange = useCallback((email) => {
+        setEmail(email)
+        debouncedEmailCheck(email)
     }, [])
-
 
 
     /**
@@ -177,62 +167,74 @@ export default connect(store => {
                     Email Address
                 </div>
                 <div className={classes.blockContent}>
-                    <fieldset className={classes.fieldset}>
-                        <TextInput
-                            innerRef={emailInputRef}
-                            containerClass={[classes.field, classes.email].join(" ")}
-                            label="Email"
-                            type="email"
-                            name="email"
-                            autoComplete="email"
-
-                            value={email}
-                            onChange={(e) => {
-                                setEmail(e.target.value)
-                            }}
-                            name="checkoutEmail"
-                            htmlFor="checkoutEmail"
-                            errorMessage={get(errors, "email", '')} />
-
-                        {(size(email) > 0 && !isEmailAvailable) &&
-                            <TextInput
-                                containerClass={[classes.field, classes.password].join(" ")}
-                                label="Password"
-                                type="password"
-                                className="input-text"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                name="password"
-                                htmlFor="password"
-                                onKeyPress={(e) => {
-                                    if (e.key === 'Enter') {
-                                        loginUser(e)
-                                    }
-                                }}
-                                errorMessage={get(errors, "password", '')} />
-                        }
-
-
-                        <div className={classes.actionToolbar}>
-                            <div className={classes.primary}>
-                                {(emailValidating || settingEmail) ? (
-                                    <LoadingButton classes={{ wrapper: classes.loadingButton }} />
-                                ) : (
-                                    <button
-                                        type="submit"
-                                        className={classes.action}
-                                        onClick={!isEmailAvailable ? loginUser : addEmailToCart}
-                                        disabled={email === props.email && !isEmailAvailable}>
-                                        <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
-                                    </button>
-                                )}
-                            </div>
+                    {emailValidating ? (
+                        <div className={classes.horizontalLoaderWrapper}>
+                            <LoadingIndicator
+                                classes={{
+                                    root: classes.horizontalLoader
+                                }}>
+                                <FormattedMessage
+                                    id={'email.validating'}
+                                    defaultMessage={'Validating Email Address...'}
+                                />
+                            </LoadingIndicator>
                         </div>
+                    ) : (
+                        <fieldset className={classes.fieldset}>
+                            <TextInput
+                                innerRef={emailInputRef}
+                                containerClass={[classes.field, classes.email].join(" ")}
+                                label="Email"
+                                type="email"
+                                name="email"
+                                autoComplete="email"
+
+                                value={email}
+                                onChange={(e) => onEmailChange(e.target.value)}
+                                name="checkoutEmail"
+                                htmlFor="checkoutEmail"
+                                errorMessage={get(errors, "email", '')} />
+
+                            {(size(email) > 0 && !isEmailAvailable) &&
+                                <TextInput
+                                    containerClass={[classes.field, classes.password].join(" ")}
+                                    label="Password"
+                                    type="password"
+                                    className="input-text"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    name="password"
+                                    htmlFor="password"
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter') {
+                                            loginUser(e)
+                                        }
+                                    }}
+                                    errorMessage={get(errors, "password", '')} />
+                            }
 
 
-                    </fieldset>
+                            <div className={classes.actionToolbar}>
+                                <div className={classes.primary}>
+                                    {(emailValidating || settingEmail) ? (
+                                        <LoadingButton classes={{ wrapper: classes.loadingButton }} />
+                                    ) : (
+                                        <button
+                                            type="submit"
+                                            className={classes.action}
+                                            onClick={!isEmailAvailable ? loginUser : addEmailToCart}
+                                            disabled={email === props.email && !isEmailAvailable}>
+                                            <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+                    )}
                 </div>
-            </div>
+            </div >
         )
     }
 
