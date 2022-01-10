@@ -122,13 +122,17 @@ const WishlistPage = props => {
                                 refreshWishlist={refreshWishlist}
                             />
                         </div>
-                        <div className={classes.actionsToolbarWrapper}>
-                            <Button priority="low">UPDATE WISH LIST</Button>
-                            <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
-                                <Button priority="low">SHARE WISH LIST</Button>
-                            </Link>
-                            <AddAllToCartWrapper selectedWishlist={selectedWishlist} />
-                        </div>
+                        {get(selectedWishlist, 'product.length', 0) ? 
+                            <div className={classes.actionsToolbarWrapper}>
+                                <Button priority="low">UPDATE WISH LIST</Button>
+                                <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
+                                    <Button priority="low">SHARE WISH LIST</Button>
+                                </Link>
+                                <AddAllToCartWrapper selectedWishlist={selectedWishlist} />
+                            </div>
+                            :
+                            null
+                        }
 
                     </div>
                 }

@@ -42,6 +42,8 @@ export const apiAddToWishlist = wishlistId =>
     `${HOST_URL}/rest/V2/wishlist/add?wishlist_id=${wishlistId}`;
 export const apiUpdateProductWishlist = () =>
     `${HOST_URL}/rest/V2/wishlist/update`;
+export const apiShareWishlist = () =>
+    `${HOST_URL}/rest/V2/wishlist/share`;
 
 /** Search Apis */
 export const apiGetSearchSuggestions = (query, suggestionCount = "8") =>
