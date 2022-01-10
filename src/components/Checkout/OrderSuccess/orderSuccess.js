@@ -17,10 +17,12 @@ import CheckoutOrder from './CheckoutOrder';
 
 export default connect(store => {
     return {
-        order_number: '14000000252-1 , 14000000252-2' || store.checkout.orderNumber
+        order_number: '14000000252-1 , 14000000252-2' || store.checkout.orderNumber,
+        customerEmail: store.checkout.email
     }
 })(React.memo(({
     order_number,
+    customerEmail,
     dispatch
 }) => {
     const history = useHistory()
@@ -35,6 +37,7 @@ export default connect(store => {
 
     const initorderNumbers = size(order_number) > 0 ? split(order_number, ",") : []
     const [orderNumbers, setOrderNumbers] = useState(initorderNumbers)
+    const [email, setEmail] = useState(customerEmail)
     console.log("🚀 ~ file: orderSuccess.js ~ line 38 ~ orderNumbers", orderNumbers)
 
     useEffect(() => {
@@ -86,7 +89,7 @@ export default connect(store => {
             </StoreTitle>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>Thank you for Your Purchase!</h1>
-                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>(email)</strong>. Your order details are below</p>
+                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>({email})</strong>. Your order details are below</p>
             </div>
             {orderNumbers.map((number) => {
                 return (
@@ -96,7 +99,8 @@ export default connect(store => {
                             onCheckoutOrderFetched={() => {
                                 dispatch(resetCheckout())
                             }}
-                            classes={classes} />
+                            classes={classes}
+                            onEmailChange={setEmail} />
                     </div>
                 )
             })}
@@ -108,7 +112,7 @@ export default connect(store => {
             <div className={classes.footerNotes}>
                 <div className={classes.notes}>
                     <p>You can track your order status by creating an account. </p>
-                    <p><strong>Email Address:</strong> nikhil.solanki+qa@magedelight.com</p>
+                    <p><strong>Email Address:</strong> {email}</p>
                 </div>
                 <div className={classes.primaryButton}>
                     Create Account
