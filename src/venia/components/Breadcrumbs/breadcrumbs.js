@@ -37,7 +37,7 @@ const Breadcrumbs = props => {
             // do not add link if current text is last one in breadcrumbs
             if (!currentProduct && currentCategory === text) {
                 return (
-                    <Fragment>
+                    <Fragment key={text}>
                         <span className={classes.divider}><ChevronRight /></span>
                         <span className={classes.currentState}>{text}</span>
                     </Fragment>

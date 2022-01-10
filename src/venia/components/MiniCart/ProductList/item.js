@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { string, number, shape, func, arrayOf, oneOf } from 'prop-types';
 import { Trash2 as DeleteIcon } from 'react-feather';
@@ -17,6 +17,9 @@ import { useStyle } from '../../../classify';
 import configuredVariant from '@magento/peregrine/lib/util/configuredVariant';
 
 import defaultClasses from './item.css';
+import { Portal } from '@magento/venia-ui/lib/components/Portal';
+import Button from '../../Button';
+import Mask from '@magento/venia-ui/lib/components/Mask';
 
 const Item = props => {
     const {
@@ -33,15 +36,17 @@ const Item = props => {
 
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, propClasses);
+    const [isOpen, setOpen] = useState(false);
+
     const itemLink = resourceUrl(
-        `/${get(product.url_rewrites[0], "url", "")}${product.url_suffix || ""}`
+        `/${get(product.url_rewrites[0], 'url', '')}${product.url_suffix || ''}`
     );
     const stockStatusText =
         product.stock_status === 'OUT_OF_STOCK'
             ? formatMessage({
-                id: 'productList.outOfStock',
-                defaultMessage: 'Out-of-stock'
-            })
+                  id: 'productList.outOfStock',
+                  defaultMessage: 'Out-of-stock'
+              })
             : '';
 
     const { isDeleting, removeItem } = useItem({
@@ -69,7 +74,7 @@ const Item = props => {
                         height={75}
                         src={
                             configurableThumbnailSource === 'itself' &&
-                                configured_variant
+                            configured_variant
                                 ? configured_variant.thumbnail.url
                                 : product.thumbnail.url
                         }
@@ -108,7 +113,7 @@ const Item = props => {
                 </div>
                 <span className={classes.stockStatus}>{stockStatusText}</span>
                 <button
-                    onClick={removeItem}
+                    onClick={() => setOpen(true)}
                     type="button"
                     className={classes.deleteButton}
                     disabled={isDeleting}
@@ -122,6 +127,37 @@ const Item = props => {
                     />
                 </button>
             </div>
+            {isOpen ? (
+                <Portal>
+                    <div>
+                        <Mask isActive dismiss={() => setOpen(false)} />
+                        <div className={classes.portalRoot}>
+                            <div className={classes.contentWrapper}>
+                                <div className={classes.content}>
+                                    <div className={classes.text}>
+                                        Are you sure you would like to remove
+                                        this item from the shopping cart?
+                                    </div>
+                                    <div className={classes.actions}>
+                                        <Button priority="low" onClick={() => setOpen(false)}>
+                                            CANCEL
+                                        </Button>
+                                        <Button
+                                            priority="low"
+                                            onClick={() => {
+                                                setOpen(false);
+                                                removeItem();
+                                            }}
+                                        >
+                                            OK
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Portal>
+            ) : null}
         </div>
     );
 };

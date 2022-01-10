@@ -29,11 +29,11 @@ export const useAutocomplete = props => {
 
     const { callApi: callSuggestionApi, ...suggestionResult } = useApiData({
         isLazy: true,
-        headers: {}
+        useAuth: false
     });
     const { callApi: callproductSearchApi, ...productResult } = useApiData({
         isLazy: true,
-        headers: {}
+        useAuth: false
     });
     // Create a debounced function so we only search some delay after the last
     // keypress.

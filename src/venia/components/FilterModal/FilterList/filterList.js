@@ -32,10 +32,11 @@ const FilterList = props => {
             items.map((item, index) => {
                 const { title, value } = item;
                 const key = `item-${group}-${value}`;
-                const itemClass =
-                    isListExpanded || index < itemCountToShow
-                        ? classes.item
-                        : classes.itemHidden;
+                // const itemClass =
+                //     isListExpanded || index < itemCountToShow
+                //         ? classes.item
+                //         : classes.itemHidden;
+                const itemClass = classes.item;
 
                 // create an element for each item
                 const element = (
@@ -106,9 +107,9 @@ const FilterList = props => {
 
     return (
         <Fragment>
-            <ul className={classes.items}>
+            <ul className={[classes.items, classes.fixHeight].join(" ")}>
                 {itemElements}
-                {showMoreLessItem}
+                {/* {showMoreLessItem} */}
             </ul>
         </Fragment>
     );

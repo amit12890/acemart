@@ -32,6 +32,7 @@ import { Title } from '@magento/venia-ui/lib/components/Head';
 import { CheckCircle as CheckCircleIcon } from 'react-feather';
 import Icon from '../../venia/components/Icon/icon.js';
 import { useToasts } from '@magento/peregrine';
+import { isPasswordSame } from '../../app.utils.js';
 
 const successIcon = (
     <Icon
@@ -235,7 +236,7 @@ const EditAccountInfo = ({ path }) => {
                                             [hasLengthAtLeast, 8],
                                             validatePassword,
                                             [isNotEqualToField, 'password'],
-                                            [isEqualToField, 'newPassword'],
+                                            [isPasswordSame, 'newPassword'],
                                         ])}
                                         isToggleButtonHidden={false}
                                     />

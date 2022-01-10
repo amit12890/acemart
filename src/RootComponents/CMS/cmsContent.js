@@ -1,32 +1,62 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Marker,
-    InfoWindow
+    Marker
 } from 'react-google-maps';
 import { useQuery } from '@apollo/client';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
-import { get, groupBy, size, difference, orderBy, sortBy } from 'lodash-es';
+import {
+    get,
+    groupBy,
+    size,
+    difference,
+    orderBy,
+    sortBy,
+    map
+} from 'lodash-es';
 import { useStyle } from '../../venia/classify';
 import { getProductStoreLocatorData } from '../../components/StoreLocator/productStoreLocator.gql';
 
 import defaultClasses from './cms.css';
 import productStoreLocatorCss from '../../components/StoreLocator/productStoreLocator.css';
 import { StoreHours } from '../../components/StoreLocator/productStoreLocator';
-import { GOOGLE_MAP_API_KEY } from '../../url.utils';
+import {
+    customMapMarkerIcon,
+    getDefaultLatLong,
+    GOOGLE_MAP_API_KEY
+} from '../../url.utils';
+import DEFAULT_STORE_DATA from '../../venia/components/Header/distribution_center_data.json';
 
 const DEFAULT_STORE_GROUP_NAME = 'Shopping';
 
-const CmsContent = ({ availableStores }) => {
-    const classes = useStyle(productStoreLocatorCss);
+const CmsContent = ({ availableStores, ...restProps }) => {
+    const classes = useStyle(productStoreLocatorCss, restProps.classes);
 
     const [selectedGroup, setSelectedGroup] = useState('');
+    const [groupStoreList, setGroupStoreList] = useState([]);
+    const [groupList, setGroupList] = useState([]);
+    const [selectedStoreIndex, setSelectedStoreIndex] = useState(null);
+    const mapRef = useRef(null);
 
-    const { storeGroupData, groupList } = useMemo(() => {
-        const storeGroupData = groupBy(availableStores, 'store_group_name');
+    const checkDistributionCenter = useCallback(groupStoreList => {
+        let hasCenter = false;
+        for (let index = 0; index < groupStoreList.length; index++) {
+            const config = groupStoreList[index];
+            if (
+                get(config, 'store_locator_info.is_distribution_center', false)
+            ) {
+                hasCenter = true;
+                break;
+            }
+        }
+        return hasCenter;
+    }, []);
+
+    const storeGroupData = groupBy(availableStores, 'store_group_name');
+    useEffect(() => {
         const groupList = sortBy(
             difference(Object.keys(storeGroupData), [DEFAULT_STORE_GROUP_NAME]),
             [
@@ -35,35 +65,90 @@ const CmsContent = ({ availableStores }) => {
                 }
             ]
         );
-        setSelectedGroup(groupList[0]);
-        return { storeGroupData, groupList };
-    }, [availableStores]);
 
-    let groupStoreList = [];
-    if (!!selectedGroup) {
-        groupStoreList = orderBy(
-            get(storeGroupData, selectedGroup, []),
+        const groupName = groupList[0];
+
+        let groupStoreList = orderBy(
+            get(storeGroupData, groupName, []),
             ['store_group_name', 'store_sort_order'],
             ['desc', 'asc']
         );
-    }
+
+        if (checkDistributionCenter(groupStoreList)) {
+            groupStoreList.push(DEFAULT_STORE_DATA);
+        }
+
+        setSelectedGroup(groupName);
+        setGroupStoreList(groupStoreList);
+        setGroupList(groupList);
+    }, []);
+
+    const handleGroupClick = useCallback(
+        groupName => () => {
+            setSelectedGroup(groupName);
+            setSelectedStoreIndex(null);
+
+            let groupStoreList = orderBy(
+                get(storeGroupData, groupName, []),
+                ['store_group_name', 'store_sort_order'],
+                ['desc', 'asc']
+            );
+
+            if (checkDistributionCenter(groupStoreList)) {
+                groupStoreList.push(DEFAULT_STORE_DATA);
+            }
+
+            setSelectedGroup(groupName);
+            setGroupStoreList(groupStoreList);
+
+            const cordsList = map(groupStoreList, store => [
+                Number(get(store, 'store_locator_info.store_lat')),
+                Number(get(store, 'store_locator_info.store_long'))
+            ]);
+            const center = cordsList.length
+                ? getCenterFromDegrees(cordsList)
+                : null;
+
+            if (center && mapRef.current) {
+                mapRef.current.panTo({
+                    lat: center[0],
+                    lng: center[1]
+                });
+            }
+
+            const addressWrapperEle = document.getElementById(
+                'sl-address-list'
+            );
+            addressWrapperEle.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        },
+        [mapRef.current]
+    );
 
     return (
         <div>
-            <StaticContent />
+            <StaticContent classes={classes} />
             <div
                 className={[
                     classes.tabsItemContent,
                     classes.tabContentArea
                 ].join(' ')}
             >
-                <div className={classes.areas}>
+                <div className={[classes.areas, classes.slAreas].join(' ')}>
                     {groupList.map(group => {
+                        const isActive = selectedGroup === group;
                         return (
                             <div
                                 key={group}
-                                className={classes.areaSwitcher}
-                                onClick={() => setSelectedGroup(group)}
+                                className={[
+                                    classes.areaSwitcher,
+                                    classes.slSwitcher,
+                                    isActive ? classes.active : ''
+                                ].join(' ')}
+                                onClick={handleGroupClick(group)}
                             >
                                 <span>{group}</span>
                             </div>
@@ -76,17 +161,50 @@ const CmsContent = ({ availableStores }) => {
                 style={{ height: '500px', marginTop: '1em' }}
             >
                 <div className={classes.mapContainer}>
-                    <MapContainer storeList={groupStoreList} />
+                    <MapContainer
+                        mapRef={mapRef}
+                        storeList={groupStoreList}
+                        selectedStoreIndex={selectedStoreIndex}
+                        setSelectedStoreIndex={setSelectedStoreIndex}
+                    />
                 </div>
 
                 <div className={classes.storeListContainer}>
-                    <div className={classes.storeListItemWrapper}>
+                    <div
+                        id="sl-address-list"
+                        className={classes.storeListItemWrapper}
+                    >
                         {groupStoreList.map((store, sInd) => {
                             const { id, store_name } = store;
-
+                            const latLng = {
+                                lat: Number(
+                                    get(store, 'store_locator_info.store_lat')
+                                ),
+                                lng: Number(
+                                    get(store, 'store_locator_info.store_long')
+                                )
+                            };
+                            const isActive = sInd === selectedStoreIndex;
                             return (
-                                <div key={id} className={classes.listItem}>
-                                    <div className={classes.listLabel}>
+                                <div
+                                    key={id}
+                                    id={`sl-address-${sInd}`}
+                                    className={[
+                                        classes.listItem,
+                                        isActive ? classes.active : ''
+                                    ].join(' ')}
+                                    onClick={() => {
+                                        if (sInd === selectedStoreIndex) return;
+                                        mapRef.current.panTo(latLng);
+                                        setSelectedStoreIndex(sInd);
+                                    }}
+                                >
+                                    <div
+                                        className={[
+                                            classes.listLabel,
+                                            isActive ? classes.active : ''
+                                        ].join(' ')}
+                                    >
                                         <span>
                                             {String.fromCharCode(65 + sInd)}
                                         </span>
@@ -130,9 +248,142 @@ const CmsContent = ({ availableStores }) => {
     );
 };
 
-const StaticContent = () => {
+const MapContainer = withScriptjs(
+    withGoogleMap(props => {
+        const {
+            storeList,
+            selectedStoreIndex,
+            setSelectedStoreIndex,
+            mapRef
+        } = props;
+
+        return (
+            <GoogleMap
+                ref={mapRef}
+                defaultZoom={10}
+                defaultCenter={getDefaultLatLong()}
+                defaultOptions={{
+                    mapTypeControl: false,
+                    streetViewControl: false
+                }}
+            >
+                {storeList.map((store, sInd) => {
+                    const latLng = {
+                        lat: Number(get(store, 'store_locator_info.store_lat')),
+                        lng: Number(get(store, 'store_locator_info.store_long'))
+                    };
+                    const label = String.fromCharCode(65 + sInd);
+                    const isActive = sInd === selectedStoreIndex;
+                    return (
+                        <Marker
+                            key={sInd}
+                            title={label}
+                            position={latLng}
+                            onClick={e => {
+                                if (sInd === selectedStoreIndex) return;
+                                mapRef.current.panTo(e.latLng);
+                                setSelectedStoreIndex(sInd);
+
+                                const addressWrapperEle = document.getElementById(
+                                    'sl-address-list'
+                                );
+                                const addressEle = document.getElementById(
+                                    `sl-address-${sInd}`
+                                );
+                                if (addressEle) {
+                                    const scroll = getScrollPosition(
+                                        sInd,
+                                        storeList.length,
+                                        addressEle,
+                                        addressWrapperEle
+                                    );
+                                    addressWrapperEle.scrollTo({
+                                        top: scroll,
+                                        left: 0,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }}
+                            icon={customMapMarkerIcon(
+                                isActive ? 'red' : 'blue'
+                            )}
+                            label={{
+                                text: label,
+                                color: '#FFF'
+                            }}
+                        />
+                    );
+                })}
+            </GoogleMap>
+        );
+    })
+);
+
+MapContainer.defaultProps = {
+    loadingElement: (
+        <div style={{ height: '100%', backgroundColor: '#7b7c81' }} />
+    ),
+    containerElement: <div style={{ height: '500px' }} />, // same height as parent map-container class
+    mapElement: <div style={{ height: '100%' }} />,
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&v=3.exp`
+};
+
+const getScrollPosition = (index, dataLength, element, parent) => {
+    let position = 0;
+    const elePos = element.getBoundingClientRect();
+    if (index === 0) {
+        // first
+        return position;
+    } else if (index === dataLength - 1) {
+        // last
+        return elePos.top + elePos.height;
+    } else {
+        // total above address height should scroll
+        position = (index - 1) * elePos.height;
+        return position;
+    }
+};
+const getCenterFromDegrees = data => {
+    if (!(data.length > 0)) {
+        return false;
+    }
+
+    const num_coords = data.length;
+
+    let X = 0.0;
+    let Y = 0.0;
+    let Z = 0.0;
+
+    for (let i = 0; i < data.length; i++) {
+        const lat = (data[i][0] * Math.PI) / 180;
+        const lon = (data[i][1] * Math.PI) / 180;
+
+        const a = Math.cos(lat) * Math.cos(lon);
+        const b = Math.cos(lat) * Math.sin(lon);
+        const c = Math.sin(lat);
+
+        X += a;
+        Y += b;
+        Z += c;
+    }
+
+    X /= num_coords;
+    Y /= num_coords;
+    Z /= num_coords;
+
+    const lon = Math.atan2(Y, X);
+    const hyp = Math.sqrt(X * X + Y * Y);
+    const lat = Math.atan2(Z, hyp);
+
+    const newX = (lat * 180) / Math.PI;
+    const newY = (lon * 180) / Math.PI;
+
+    return new Array(newX, newY);
+};
+
+const StaticContent = ({ classes }) => {
     return (
-        <div>
+        <div className={classes.cmsContent}>
             <h2>Store Locations</h2>
             <p>
                 We have <span>15 stores</span> located throughout the State of
@@ -163,59 +414,6 @@ const StaticContent = () => {
     );
 };
 
-const MapContainer = withScriptjs(
-    withGoogleMap(props => {
-        const mapRef = useRef(null);
-        const [center, setCenter] = useState({
-            lat: 0,
-            lng: 0
-        });
-
-        return (
-            <GoogleMap
-                ref={mapRef}
-                defaultZoom={12}
-                // center={{
-                //     lat: 51.5073509,
-                //     lng: -0.1277583
-                // }}
-                defaultCenter={center}
-                defaultOptions={{
-                    mapTypeControl: false,
-                    streetViewControl: false
-                }}
-                onBoundsChanged={() => {
-                    setCenter(mapRef.current.getCenter());
-                }}
-            >
-                {props.storeList.map((store, sInd) => {
-                    const latLng = {
-                        lat: Number(get(store, 'store_locator_info.store_lat')),
-                        lng: Number(get(store, 'store_locator_info.store_long'))
-                    };
-                    return (
-                        <Marker
-                            key={sInd}
-                            title={String.fromCharCode(65 + sInd)}
-                            position={latLng}
-                            onClick={() => {}}
-                        />
-                    );
-                })}
-            </GoogleMap>
-        );
-    })
-);
-
-MapContainer.defaultProps = {
-    loadingElement: (
-        <div style={{ height: '100%', backgroundColor: '#7b7c81' }} />
-    ),
-    containerElement: <div style={{ height: '500px' }} />, // same height as parent map-container class
-    mapElement: <div style={{ height: '100%' }} />,
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&v=3.exp`
-};
-
 const StoreLocatorPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -234,18 +432,21 @@ const StoreLocatorPage = props => {
     } else if (!!storeDataError) {
         content = <div>An Error Occured while loading store data...</div>;
     } else {
-        content = size(availableStoresData && availableStoresData.availableStores) ? (
-            <CmsContent availableStores={availableStoresData.availableStores} />
+        content = size(
+            availableStoresData && availableStoresData.availableStores
+        ) ? (
+            <CmsContent
+                availableStores={availableStoresData.availableStores}
+                classes={classes}
+            />
         ) : (
             <div />
         );
     }
 
     return (
-        <div className={classes.cmswrapper}>
-            <div className={classes.root}>
-                {content}
-            </div>
+        <div className={classes.cmsContentwrapper}>
+            <div className={[classes.root, classes.slRoot].join(" ")}>{content}</div>
         </div>
     );
 };

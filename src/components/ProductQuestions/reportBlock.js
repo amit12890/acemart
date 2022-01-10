@@ -5,6 +5,8 @@ import Image from '../../venia/components/Image';
 import helperReport from '../../assets/inappr.png';
 import defaultClasses from './productQuestions.css';
 import { useMutation } from '@apollo/client';
+import { loginPage } from '../../url.utils';
+
 
 export default function ReportBlock(props) {
     const [updateReport, { loading }] = useMutation(props.mutation, {
@@ -14,6 +16,9 @@ export default function ReportBlock(props) {
     const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
+        if(!props.isSignedIn) {
+            props.history.push(loginPage())
+        }
         try {
             const { data } = await updateReport({
                 variables: props.variables
@@ -22,7 +27,7 @@ export default function ReportBlock(props) {
         } catch (error) {
             console.log('ggwp ReportBlock error', error);
         }
-    }, [updateReport, props.variables]);
+    }, [updateReport, props.variables, props.history, props.isSignedIn]);
 
     return (
         <div className={classes.helperContainer} onClick={handleClick}>

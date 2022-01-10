@@ -7,13 +7,15 @@ import defaultClasses from './productQuestions.css';
 
 import { useMutation } from '@apollo/client';
 import { get } from 'lodash-es';
+import { loginPage } from '../../url.utils';
 
 /**
  * 
  * @props {String} queryType questionRatingPlus | answerRatingPlus
  * @returns 
  */
-export default function PlusBlock({queryType, mutation, variables, count, onSuccess}) {
+export default function PlusBlock({queryType, mutation, variables, count, onSuccess, history, isSignedIn}) {
+
     const [updatePlus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
@@ -21,6 +23,9 @@ export default function PlusBlock({queryType, mutation, variables, count, onSucc
     const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
+        if(!isSignedIn) {
+            history.push(loginPage())
+        }
         try {
             const { data } = await updatePlus({
                 variables: variables
@@ -31,7 +36,7 @@ export default function PlusBlock({queryType, mutation, variables, count, onSucc
         } catch (error) {
             console.log('Error during up vote', error);
         }
-    }, [updatePlus, variables]);
+    }, [updatePlus, variables, isSignedIn, history]);
 
     return (
         <div className={classes.helperContainer} onClick={handleClick}>

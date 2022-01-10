@@ -75,4 +75,43 @@ h5 {
 }
 
 
+.slRoot {
+    padding: 3% 2%;
+}
 
+.cmsContentwrapper {
+    max-width: var(--venia-global-maxWidth);
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cmsContent h2{
+    font-size: 40px;
+    margin: 0 0 10px;
+    color: black;
+}
+
+.cmsContent p{
+    padding: 6px 0;
+    font-size: 14px;
+    margin: 0;
+    color: black;
+}
+
+.cmsContent span {
+    font-weight: bold;
+}
+
+.cmsContent a {
+    color: #006;
+    text-decoration: underline;
+}
+
+.slAreas {
+    margin: 36px auto 6px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.slSwitcher {
+}

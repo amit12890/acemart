@@ -42,6 +42,8 @@ export const apiAddToWishlist = wishlistId =>
     `${HOST_URL}/rest/V2/wishlist/add?wishlist_id=${wishlistId}`;
 export const apiUpdateProductWishlist = () =>
     `${HOST_URL}/rest/V2/wishlist/update`;
+export const apiShareWishlist = () =>
+    `${HOST_URL}/rest/V2/wishlist/share`;
 
 /** Search Apis */
 export const apiGetSearchSuggestions = (query, suggestionCount = "8") =>
@@ -76,3 +78,11 @@ export const productSpecsheetLogoUrl = () =>
     `${HOST_URL}/pub/media/attribute/pdf-logo32px.svg.png`;
 
 export const comingSoonImage = () => 'https://cdn.acemart.com/pub/media/catalog/product/placeholder/default/Image-Coming-Soon.jpg'
+
+export const customMapMarkerIcon = (iconName) => `https://qa-acemart-backend.magedelight.magentoprojects.net/pub/media/maps/images/${iconName}.png`;
+
+// Austin
+export const getDefaultLatLong = () => ({
+    lat: 30.071,
+    lng: -97.90559
+})
