@@ -36,7 +36,7 @@ const Item = props => {
 
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, propClasses);
-    const [isOpen, setOpen] = useState(false);
+    const [isDelete, setDelete] = useState(false);
 
     const itemLink = resourceUrl(
         `/${get(product.url_rewrites[0], 'url', '')}${product.url_suffix || ''}`
@@ -56,6 +56,31 @@ const Item = props => {
 
     const rootClass = isDeleting ? classes.root_disabled : classes.root;
     const configured_variant = configuredVariant(configurable_options, product);
+
+    if (isDelete) {
+        return (
+            <div className={classes.content}>
+                <div className={classes.text}>
+                    Are you sure you would like to remove this item from the
+                    shopping cart?
+                </div>
+                <div className={classes.actions}>
+                    <Button priority="low" onClick={() => setDelete(false)}>
+                        CANCEL
+                    </Button>
+                    <Button
+                        priority="low"
+                        onClick={() => {
+                            setDelete(false);
+                            removeItem();
+                        }}
+                    >
+                        OK
+                    </Button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={rootClass}>
@@ -113,7 +138,7 @@ const Item = props => {
                 </div>
                 <span className={classes.stockStatus}>{stockStatusText}</span>
                 <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => setDelete(true)}
                     type="button"
                     className={classes.deleteButton}
                     disabled={isDeleting}
@@ -127,37 +152,6 @@ const Item = props => {
                     />
                 </button>
             </div>
-            {isOpen ? (
-                <Portal>
-                    <div>
-                        <Mask isActive dismiss={() => setOpen(false)} />
-                        <div className={classes.portalRoot}>
-                            <div className={classes.contentWrapper}>
-                                <div className={classes.content}>
-                                    <div className={classes.text}>
-                                        Are you sure you would like to remove
-                                        this item from the shopping cart?
-                                    </div>
-                                    <div className={classes.actions}>
-                                        <Button priority="low" onClick={() => setOpen(false)}>
-                                            CANCEL
-                                        </Button>
-                                        <Button
-                                            priority="low"
-                                            onClick={() => {
-                                                setOpen(false);
-                                                removeItem();
-                                            }}
-                                        >
-                                            OK
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Portal>
-            ) : null}
         </div>
     );
 };
