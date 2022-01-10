@@ -70,8 +70,6 @@ export default connect(store => ({
 
     const classes = useStyle(defaultClasses)
     const [showReviewCheckout, setReviewCheckout] = useState(false)
-    const [paymentWindow, setPaymentWindow] = useState(false)
-    console.log("🚀 ~ file: checkout.js ~ line 75 ~ paymentWindow", paymentWindow)
 
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0
@@ -123,7 +121,7 @@ export default connect(store => ({
                 goBack={() => { setReviewCheckout(false) }}
                 onPlaceOrderButtonPress={() => {
                     if (get(selected_payment_method, "code", '') === 'paypal_express') {
-                        const w = window.open(get(paypal, "paypal_urls.start", ""))
+                        window.open(get(paypal, "paypal_urls.start", ""), '_self')
                         // w.close()
                     } else {
                         placeOrder()
@@ -141,13 +139,13 @@ export default connect(store => ({
                 </div>
                 <div className={classes.mainContentWrapper}>
                     <div className={classes.main}>
-                        <div className={classes.main}>Loader</div>
+
                         {isMultiShipping && (
                             <SplitOrder data={multiShipping} />
                         )}
-                        {!isSignedIn && (
-                            <EmailStep enabled={true} />
-                        )}
+
+                        <EmailStep enabled={true} />
+
                         <AddressStep
                             enabled={isEmailAdded || isDefaultStore}
                             data={customerAddresses}
@@ -155,6 +153,7 @@ export default connect(store => ({
                             setting={settingShippingAddress}
                             initialValues={shipping_addresses[0]}
                             onApplyAddress={(address, isNewAddress = false) => {
+                                if (settingShippingAddress) return
                                 console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
                                 let addressData = null
                                 if (isNewAddress) {
@@ -190,10 +189,11 @@ export default connect(store => ({
                             isShippingStep={true}
                             isUserLoggedIn={isSignedIn}
                             showSameAsButton={false}
-                            isDefaultStore={isDefaultStore} />
+                            isDefaultStore={isDefaultStore}
+                            setting={settingShippingAddress} />
 
                         <ShippingMethodsStep
-                            enabled={isShippingAddressSelected || isDefaultStore}
+                            enabled={isShippingAddressSelected}
                             title="Shipping Method"
                             data={get(shipping_addresses[0], "available_shipping_methods", [])}
                             initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}

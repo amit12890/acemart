@@ -74,3 +74,9 @@
     transition-duration: 128ms;
     --stroke: var(--theme-color-primary);
 }
+
+.loadingButton {
+    min-width: 10rem;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    min-height: 2.5rem;
+}

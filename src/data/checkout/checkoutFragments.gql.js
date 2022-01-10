@@ -86,6 +86,7 @@ export const AvailablePaymentMethodsFragment = gql`
 export const BillingAddressFragment = gql`
     fragment billingAddressFragment on Cart{
         billing_address{
+            customer_address_id
             city
             company
             country {
@@ -301,6 +302,7 @@ export const ShippingAddressesFragment = gql`
                 label
             }
             customer_notes
+            customer_address_id
             firstname
             items_weight
             lastname

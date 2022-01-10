@@ -116,6 +116,10 @@
     composes: stackedCell;
 }
 
+.productImageContainer img {
+    max-width: 100%;
+}
+
 .reviewDate {
     text-align: right; 
 }

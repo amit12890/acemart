@@ -10,6 +10,50 @@
     display: flex;
 }
 
+.noResultWrapper {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.didYouMean {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.didYouMean a {
+    color: rgb(var(--theme-color-primary));
+    font-style: italic;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.popularSearchWrapper {
+    
+}
+
+.searchReference {
+    margin-bottom: 1rem;
+}
+
+.searchItems {
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+
+.searchListItem {
+    margin-bottom: 10px;
+
+}
+
+.searchListItem a {
+    color: rgb(var(--theme-color-primary));
+}
+
+.searchListItem a:hover {
+    color: rgb(var(--text-color));
+}
+
 .headerButtons {
     display: flex;
     flex-basis: 100%;

@@ -23,7 +23,7 @@ export default connect(store => {
     order_number,
     dispatch
 }) => {
-    const { setPaymentMethodOnCart, settingPaymentMethod } = useCheckoutPayment()
+    const { setPaymentMethodOnCart, settingPaymentMethod, placingOrder } = useCheckoutPayment()
     const search = useLocation().search
     const searchParams = new URLSearchParams(search)
     const paypal_response = {
@@ -35,8 +35,7 @@ export default connect(store => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (size(paypal_response.payerId) > 0 && size(order_number) === 0 && !loading) {
-            setLoading(true)
+        if (size(paypal_response.payerId) > 0 && size(order_number) === 0) {
             console.log("setting payment on cart....")
             setPaymentMethodOnCart({
                 code: "paypal_express",
@@ -48,10 +47,11 @@ export default connect(store => {
         }
     }, [paypal_response, order_number, loading])
 
+
     const classes = useStyle(defaultClasses)
     const { formatMessage } = useIntl();
 
-    if (loading) {
+    if (settingPaymentMethod || placingOrder) {
         return (
             <LoadingIndicator>
                 <FormattedMessage
