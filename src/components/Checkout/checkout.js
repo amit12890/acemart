@@ -295,7 +295,8 @@ export default connect(store => ({
                                 setPaymentMethodOnCart({ code })
                             }}
                             isDefaultStore={isDefaultStore}
-                            loading={settingPaymentMethod} />
+                            loading={settingPaymentMethod}
+                            isMultiShipping={isMultiShipping} />
 
                         {enablePlaceOrderButton && (
                             <div className={classes.primaryButtonWrapper}>
