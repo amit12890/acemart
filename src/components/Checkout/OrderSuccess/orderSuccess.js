@@ -71,7 +71,7 @@ export default connect(store => {
     }
 
     return (
-        <div>
+        <div className={classes.root}>
             <StoreTitle>
                 {formatMessage({
                     id: 'checkoutPage.titleReceipt',
@@ -79,23 +79,19 @@ export default connect(store => {
                 })}
             </StoreTitle>
             <div className={classes.pageTitleWrapper}>
-                <h1 className={classes.title}>
-                    <span className={classes.base}>
-                        Thank you
-                    </span>
-                    <span className={classes.subtitle}>
-                        for your order!
-                    </span>
-                </h1>
+                <h1 className={classes.title}>Thank you for Your Purchase!</h1>
+                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>(email)</strong>. Your order details are below</p>
             </div>
             {orderNumbers.map((number) => {
                 return (
-                    <CheckoutOrder
-                        orderNumber={number.trim()}
-                        onCheckoutOrderFetched={() => {
-                            dispatch(resetCheckout())
-                        }}
-                        classes={classes} />
+                    <div className={classes.orderItemsWrapper}>
+                        <CheckoutOrder
+                            orderNumber={number.trim()}
+                            onCheckoutOrderFetched={() => {
+                                dispatch(resetCheckout())
+                            }}
+                            classes={classes} />
+                    </div>
                 )
             })}
             <div className={classes.primaryButtonWrapper}>
@@ -103,6 +99,16 @@ export default connect(store => {
                     Continue Shopping
                 </div>
             </div>
+            <div className={classes.footerNotes}>
+                <div className={classes.notes}>
+                    <p>You can track your order status by creating an account. </p>
+                    <p><strong>Email Address:</strong> nikhil.solanki+qa@magedelight.com</p>
+                </div>
+                <div className={classes.primaryButton}>
+                    Create Account
+                </div>
+            </div>
+
         </div>
     )
 
