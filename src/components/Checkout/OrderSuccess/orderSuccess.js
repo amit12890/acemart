@@ -17,7 +17,7 @@ import CheckoutOrder from './CheckoutOrder';
 
 export default connect(store => {
     return {
-        order_number: store.checkout.orderNumber
+        order_number: '14000000252-1 , 14000000252-2' || store.checkout.orderNumber
     }
 })(React.memo(({
     order_number,
