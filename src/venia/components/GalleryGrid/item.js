@@ -127,7 +127,7 @@ const GalleryItem = props => {
                         <span className={classes.unit}>{get(item, "uom", "")}</span>
                     </div>
                     <div className={classes.productInner}>
-                        <div className={classes.productActions}>
+                        <div className={classes.productAddtoActions}>
                             <AddToCart
                                 sku={item.sku}
                                 Child={() =>

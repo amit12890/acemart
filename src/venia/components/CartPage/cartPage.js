@@ -162,10 +162,17 @@ const CartPage = props => {
         <div className={classes.emptyCart}>
             <h3>
                 <FormattedMessage
-                    id={'cartPage.emptyCart'}
-                    defaultMessage={'There are no items in your cart.'}
+                    id={'am.cartPage.emptyCart'}
+                    defaultMessage={'You have no items in your Shopping cart.'}
                 />
             </h3>
+            <p>
+                <Link
+                    to={resourceUrl('/')}
+                    className={classes.action}
+                >
+                    click here</Link>
+                &nbsp;to continue shopping</p>
         </div>
     );
 
@@ -205,7 +212,7 @@ const CartPage = props => {
                         {productListing}
                     </div>
                     <div className={classes.cartActions}>
-                        <div className={classes.buttonContinue}>
+                        {/* <div className={classes.buttonContinue}> 
                             <Link
                                 to={resourceUrl('/')}
                                 className={classes.action}
@@ -224,7 +231,7 @@ const CartPage = props => {
                                 </i>
                                 <span>Continue Shopping</span>
                             </Link>
-                        </div>
+                        </div> */}
                         {hasItems && (
                             <div className={classes.buttonClearCart}>
                                 <Button onClick={handleRemoveCart}>

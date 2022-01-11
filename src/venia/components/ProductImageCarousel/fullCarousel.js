@@ -55,7 +55,7 @@ const FullCarousel = props => {
         };
         return () => {
             document.body.style.overflow = '';
-            window.onkeyup = () => {};
+            window.onkeyup = () => { };
         };
     }, []);
 

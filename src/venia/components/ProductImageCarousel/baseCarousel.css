@@ -33,7 +33,12 @@
 .thumbFullCarouselContainer {
     position: relative;
     width: 100%;
-    padding: 5px;
+    padding: 5px 40px;
+    margin: 0 auto;
+}
+
+.thumbFullCarouselContainer {
+    
 }
 
 .imageContainer {

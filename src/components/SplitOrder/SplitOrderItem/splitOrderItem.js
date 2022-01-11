@@ -12,44 +12,50 @@ import Price from '../../../venia/components/Price'
  * parent
  *      SplitOrder
  */
-export default ({ item }) => {
+export default ({ item, isLast }) => {
+    console.log("🚀 ~ file: splitOrderItem.js ~ line 16 ~ isLast", item)
     const classes = useStyle(defaultClasses)
     const productName = get(item, "product.product_name", "")
     const productImage = get(item, "product.small_image.url", "")
     const sku = get(item, "product.sku", "")
     const qty = get(item, "qty", "")
-    const price = get(item, "sub_total", "")
+    const price = get(item, "price", "")
+    const subTotal = get(item, "sub_total", "")
+    const currencyCode = get(item, "currency_code", 'USD')
+    const itemBlockClass = isLast ? classes.itemBlock : [classes.itemBlock, classses.bottomBorder].join(" ")
     return (
-        <div style={{
-            display: 'flex',
-            alignItems: 'center'
-        }}>
+        <div className={itemBlockClass}>
             <div>
                 <Image
                     src={productImage}
                     width={60}
                     height={60} />
             </div>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-                marginLeft: 16
-            }}>
-                <div>
+            <div className={classes.itemTextWrapper}>
+                <div className={classes.title}>
                     {productName}
                 </div>
-                <div>
+                <div className={classes.sku}>
                     {sku}
                 </div>
                 <strong>
                     <Price
-                        currencyCode='USD'
+                        currencyCode={currencyCode}
                         value={price} />
                 </strong>
             </div>
-            <div>
-                {qty}
+            <div className={classes.priceBlock}>
+                <div className={classes.priceBlockCell}>
+                    <Price
+                        currencyCode={currencyCode}
+                        value={price} />
+                </div>
+                <div className={classes.priceBlockCell}>Qty: {qty}</div>
+                <div className={classes.priceBlockCell}>
+                    <Price
+                        currencyCode={currencyCode}
+                        value={subTotal} />
+                </div>
             </div>
         </div>
     )

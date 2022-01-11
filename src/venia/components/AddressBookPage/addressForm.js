@@ -164,7 +164,7 @@ const AddressForm = props => {
                                 priority="low"
                                 type="reset"
                             >
-                                Cancle
+                                Cancel
                             </Button>
                             <Button
                                 classes={classes.confirmButton}

@@ -109,8 +109,8 @@ const MiniCart = React.forwardRef((props, ref) => {
                 <div className={classes.emptyCart}>
                     <div className={classes.emptyMessage}>
                         <FormattedMessage
-                            id={'miniCart.emptyMessage'}
-                            defaultMessage={'There are no items in your cart.'}
+                            id={'am.cartPage.emptyCart'}
+                            defaultMessage={'You have no items in your Shopping cart.'}
                         />
                     </div>
                 </div>

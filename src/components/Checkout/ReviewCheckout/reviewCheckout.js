@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 
-import PaypalExpressBtn from 'react-paypal-express-checkout'
 import { get } from 'lodash'
 
 import { useStyle } from '../../../venia/classify'
@@ -10,10 +9,8 @@ import CartItemList from '../CartItemList'
 import CartSummary from '../CartSummary'
 
 import defaultClasses from './reviewCheckout.css'
-import { useCheckoutPayment } from '../../../data/checkout/hooks/payment.hook'
-
-import BarCode from 'react-barcode'
-// import PayPalButton from '../../PayPalButton'
+import LoadingButton from '../../LoadingButton'
+import SplitOrder from '../../SplitOrder'
 
 
 const paypal_client = {
@@ -26,9 +23,11 @@ export default connect((store) => {
     return {
         shipping_addresses: store.checkout.shipping_addresses,
         billing_address: store.checkout.billing_address,
+        multiShipping: store.checkout.multi_shipping,
         selected_payment_method: store.checkout.selected_payment_method,
         prices: store.checkout.prices,
-        paypalClientId: get(store.checkout, "paypal.token", "")
+        paypalClientId: get(store.checkout, "paypal.token", ""),
+        isMultiShipping: store.checkout.isMultiShipping,
     }
 })(({
     isDefaultStore,
@@ -40,6 +39,9 @@ export default connect((store) => {
     setPaymentMethodOnCart,
     paypalClientId,
     prices,
+    isMultiShipping,
+    multiShipping,
+    placingOrder,
     dispatch
 }) => {
     console.log("🚀 ~ file: reviewCheckout.js ~ line 47 ~ connect ~ selected_payment_method", selected_payment_method)
@@ -50,6 +52,9 @@ export default connect((store) => {
     return (
         <div className={classes.page}>
             <div className={classes.container}>
+                {isMultiShipping && (
+                    <SplitOrder data={multiShipping} disableWarnings={true} />
+                )}
                 {/* Shipping address */}
                 <div className={classes.block}>
                     <div className={classes.header}>
@@ -138,16 +143,20 @@ export default connect((store) => {
                             Place Order
                         </div>
                     )} */}
-                    <div onClick={onPlaceOrderButtonPress}
-                        className={classes.primaryButton}>
-                        Place Order
-                    </div>
+                    {placingOrder ? (
+                        <LoadingButton classes={{ wrapper: classes.loadingButton }} />
+                    ) : (
+                        <div onClick={onPlaceOrderButtonPress}
+                            className={classes.primaryButton}>
+                            Place Order
+                        </div>
+                    )}
                 </div>
             </div>
             <div className={classes.sidebar}>
                 <CartSummary />
                 <CartItemList />
             </div>
-        </div>
+        </div >
     )
 })

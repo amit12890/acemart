@@ -5,6 +5,7 @@ export const MultiShippingFragment = gql`
         multi_shipping {
         boss {
             items {
+            currency_code
             item_id
             product_id        
             qty
@@ -32,9 +33,14 @@ export const MultiShippingFragment = gql`
             }
             label
             pickup
+            sub_total
+            total
+            tax
+            currency_code
         }
         bops {
             items {
+            currency_code
             item_id
             product_id        
             qty
@@ -62,6 +68,10 @@ export const MultiShippingFragment = gql`
             }
             label
             pickup
+            sub_total
+            total
+            tax
+            currency_code
         }
         }
     }

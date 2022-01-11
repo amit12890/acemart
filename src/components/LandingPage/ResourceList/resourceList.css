@@ -42,12 +42,13 @@
     justify-content: flex-start;
     position: relative;
     margin-right: 6px;
+    cursor: pointer;
 }
 
 .resouresImage {
     display: block;
     padding: 0 5px;
-   cursor: pointer;
+  
 }
 
 .resouresImageContainer {
@@ -92,6 +93,9 @@
     margin-bottom: 10px;
     text-transform: uppercase;
 }
+.resouresDetails h4:hover {
+    font-style: italic;
+ }
 
 .resouresDetails p {
     margin-bottom: 0;

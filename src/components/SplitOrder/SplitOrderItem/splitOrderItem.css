@@ -1,0 +1,50 @@
+.itemBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0.5rem 1rem;
+}
+
+.itemTextWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.title {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.sku {
+    font-size: 0.8rem;
+    font-weight: lighter;
+    color: #888;
+}
+
+.bottomBorder {
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(var(--border-color-base));
+    border-bottom-style: solid;
+}
+
+.qty {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.priceBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.priceBlockCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 5rem;
+    padding:0.5em;
+    font-weight: bold;
+}
