@@ -29,10 +29,11 @@ import { useStyle } from '../../venia/classify';
 import defaultClasses from './editAccountInfo.css';
 import { accountPageUrl } from '../../url.utils.js';
 import { Title } from '@magento/venia-ui/lib/components/Head';
-import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import { CheckCircle as CheckCircleIcon, AlertCircle as AlertCircleIcon } from 'react-feather';
 import Icon from '../../venia/components/Icon/icon.js';
 import { useToasts } from '@magento/peregrine';
-import { isPasswordSame } from '../../app.utils.js';
+import { isPasswordSame, isValidEmail } from '../../app.utils.js';
+import { get } from 'lodash';
 
 const successIcon = (
     <Icon
@@ -42,6 +43,8 @@ const successIcon = (
         }}
     />
 );
+
+const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
 
 const EditAccountInfo = ({ path }) => {
     const { formatMessage } = useIntl();
@@ -71,17 +74,7 @@ const EditAccountInfo = ({ path }) => {
             error: customerInformationUpdateError,
             loading: isUpdatingCustomerInformation
         }
-    ] = useMutation(SET_CUSTOMER_INFORMATION, {
-        onCompleted: data => {
-            addToast({
-                type: 'success',
-                icon: successIcon,
-                message: 'Account information updated successfully.',
-                dismissable: true,
-                timeout: 3000
-            });
-        }
-    });
+    ] = useMutation(SET_CUSTOMER_INFORMATION);
     const [
         changeCustomerPassword,
         {
@@ -90,44 +83,91 @@ const EditAccountInfo = ({ path }) => {
         }
     ] = useMutation(CHANGE_CUSTOMER_PASSWORD);
 
-    const handleSubmit = useCallback(
-        async ({ email, firstname, lastname, password, newPassword }) => {
-            setError(null);
-            try {
-                if (
-                    initialValues.customer.email !== email
-                ) {
-                    await setCustomerInformation({
-                        variables: {
-                            customerInput: { email, firstname, lastname, password }
-                        }
-                    });
-                }
-                else if (
-                    initialValues.customer.firstname !== firstname ||
-                    initialValues.customer.lastname !== lastname
-                ) {
-                    await setCustomerInformation({
-                        variables: {
-                            customerInput: { firstname, lastname, }
-                        }
-                    });
-                }
+    const handleSubmit = async ({ email, firstname, lastname, password, newPassword }) => {
+        setError(null);
+        try {
+            if (
+                initialValues.customer.email !== email
+            ) {
+                await setCustomerInformation({
+                    variables: {
+                        customerInput: { email, firstname, lastname, password }
+                    }
+                });
+            }
+            else if (
+                initialValues.customer.firstname !== firstname ||
+                initialValues.customer.lastname !== lastname
+            ) {
+                await setCustomerInformation({
+                    variables: {
+                        customerInput: { firstname, lastname, }
+                    }
+                });
+            }
+
+            if(showPassword) {
                 // password update
                 if (password && newPassword) {
-                    await changeCustomerPassword({
-                        variables: {
-                            currentPassword: password,
-                            newPassword: newPassword
-                        }
-                    });
+                    await handleChangePassword({ email, firstname, lastname, password, newPassword })
                 }
+            } else {
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message: 'Account information updated successfully.',
+                    dismissable: true,
+                    timeout: 3000
+                });
                 history.push(accountPageUrl())
-            } catch (error) {
-                console.log(error);
-                setError("Your data was not updated due to an error !!");
             }
-        }, []);
+        } catch (error) {
+            const errType = get(error, "graphQLErrors.0.path.0", "");
+            if(errType === "updateCustomer") {
+                addToast({
+                    type: 'error',
+                    icon: ErrorIcon,
+                    message: "The password doesn't match this account. Verify the password and try again.",
+                    dismissable: true,
+                    timeout: 3000
+                });
+            } else if(errType === "changeCustomerPassword") {
+                addToast({
+                    type: 'error',
+                    icon: ErrorIcon,
+                    message: "The password doesn't match this account. Verify the password and try again.",
+                    dismissable: true,
+                    timeout: 3000
+                });
+            }
+        }
+    };
+
+    const handleChangePassword = async ({ email, firstname, lastname, password, newPassword }) => {
+        changeCustomerPassword({
+            variables: {
+                currentPassword: password,
+                newPassword: newPassword
+            }
+        }).then(() => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Account information updated successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+            history.push(accountPageUrl())
+        }).catch(() => {
+            addToast({
+                type: 'error',
+                icon: ErrorIcon,
+                message: "The password doesn't match this account. Verify the password and try again.",
+                dismissable: true,
+                timeout: 3000
+            });
+        })
+    }
 
     const isLoading = isUpdatingCustomerInformation || isChangingCustomerPassword;
 
@@ -196,7 +236,9 @@ const EditAccountInfo = ({ path }) => {
                                     id="email"
                                     label='Email'
                                 >
-                                    <TextInput field="email" validate={isRequired} />
+                                    <TextInput field="email"
+                                        validate={combine([isRequired, isValidEmail])} 
+                                    />
                                 </Field>
                             </div>
                         }
