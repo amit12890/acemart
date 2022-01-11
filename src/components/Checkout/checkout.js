@@ -223,12 +223,12 @@ export default connect(store => ({
                                     variables = {
                                         customer_address_id: null,
                                         address,
-                                        same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
+                                        same_as_shipping: isDefaultStore && get(address, "id", 0) === get(selectedShippingAddress, "id", 0)
                                     }
                                 } else {
                                     variables = {
                                         customer_address_id: get(address, "id", ''),
-                                        same_as_shipping: isDefaultStore && address.id === selectedShippingAddress.id
+                                        same_as_shipping: isDefaultStore && get(address, "id", 0) === get(selectedShippingAddress, "id", 0)
                                     }
                                 }
                                 console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
@@ -240,7 +240,7 @@ export default connect(store => ({
                                 let selectedShippingAddress = shipping_addresses[0]
                                 let variables = null
                                 // same as shipping only work if its default store code
-                                if (selectedShippingAddress.customer_address_id == null) {
+                                if (get(selectedShippingAddress, "customer_address_id", null) == null) {
                                     variables = {
                                         address: {
                                             region_id: selectedShippingAddress.region.region_id,
@@ -254,13 +254,13 @@ export default connect(store => ({
                                             lastname: selectedShippingAddress.lastname,
                                         },
                                         same_as_shipping: isDefaultStore,
-                                        use_for_shipping: isDefaultStore
+                                        use_for_shipping: false
                                     }
                                 } else {
                                     variables = {
-                                        customer_address_id: selectedShippingAddress.customer_address_id,
+                                        customer_address_id: Number(selectedShippingAddress.customer_address_id),
                                         same_as_shipping: isDefaultStore,
-                                        use_for_shipping: isDefaultStore
+                                        use_for_shipping: false
                                     }
                                 }
                                 setBillingAddressOnCart(variables)

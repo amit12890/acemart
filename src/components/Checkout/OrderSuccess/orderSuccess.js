@@ -18,7 +18,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 export default connect(store => {
     return {
-        order_number: "8000000294-1 , 8000000294-2" || store.checkout.orderNumber,
+        order_number: store.checkout.orderNumber,
         customerEmail: store.checkout.email
     }
 })(React.memo(({
@@ -96,7 +96,9 @@ export default connect(store => {
             </StoreTitle>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>Thank you for Your Purchase!</h1>
-                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>({email})</strong>. Your order details are below</p>
+                {size(email) > 0 && (
+                    <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>({email})</strong>. Your order details are below</p>
+                )}
             </div>
             {orderNumbers.map((number) => {
                 return (
@@ -116,7 +118,7 @@ export default connect(store => {
                     Continue Shopping
                 </div>
             </div>
-            {isSignedIn && (
+            {!isSignedIn && size(email) > 0 && (
                 <div className={classes.footerNotes}>
                     <div className={classes.notes}>
                         <p>You can track your order status by creating an account. </p>
