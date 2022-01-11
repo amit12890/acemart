@@ -79,3 +79,9 @@
     width: 15px;
     height: auto;
 }
+
+.mageError {
+    font-size: var(--fontSize-75);
+    color: rgb(var(--color-error));
+    padding: 4px 0;
+}
