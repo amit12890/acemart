@@ -116,6 +116,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Account Quetion and Answer",
+            pattern: "/itorisproductQa/customer/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "Compare List",
             pattern: "/catalog/product_compare/",
             exact: true,

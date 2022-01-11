@@ -28,6 +28,7 @@ export const editAddress = (id = null) => {
     }
     return '/customer/address/edit/';
 };
+export const accountQandAPage = () => '/itorisproductQa/customer/';
 
 export const compareListPage = () => '/catalog/product_compare/';
 export const cartPage = () => '/checkout/cart/';
