@@ -3,26 +3,62 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import Button from '../../venia/components/Button';
 import defaultClasses from './NewsletterSubscriptionInput.css';
-import { get } from 'lodash';
+import { get, size } from 'lodash';
 import { useStyle } from '../../venia/classify';
-
-
+import { useToasts } from '@magento/peregrine';
+import { CheckCircle as CheckCircleIcon, AlertCircle as AlertCircleIcon } from 'react-feather';
 
 import {
     GET_CUSTOMER_SUBSCRIPTION,
     SET_CUSTOMER_SUBSCRIPTION
 } from './newsletterSubscription.gql';
+import { validateEmail } from '../../app.utils';
+import Icon from '../../venia/components/Icon';
+
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
+
+const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
+
 
 const NewsletterSubscriptionInput = () => {
 
     const classes = useStyle(defaultClasses)
+    const [_, { addToast }] = useToasts();
 
     const [email, setEmail] = useState('');
+    const [errMsg, setError] = useState(false);
 
     const [
         setNewsletter,
         { loading: isDataUpdating, error: newsletterError }
-    ] = useMutation(SET_CUSTOMER_SUBSCRIPTION);
+    ] = useMutation(SET_CUSTOMER_SUBSCRIPTION, {
+        onCompleted: () => {
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Thank you for your subscription.',
+                dismissable: true,
+                timeout: 3000
+            });
+        },
+        onError: (error) => {
+            addToast({
+                type: 'error',
+                icon: ErrorIcon,
+                message: error.message,
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    });
 
     const { loading, error, data } = useQuery(GET_CUSTOMER_SUBSCRIPTION);
 
@@ -33,7 +69,16 @@ const NewsletterSubscriptionInput = () => {
     }, [data]);
 
     const submit = useCallback(async () => {
-        const res = await setNewsletter({ variables: { email } });
+        let emailValidateError = validateEmail(email)
+        if (size(emailValidateError) > 0) {
+            setError(emailValidateError);
+            return;
+        }
+        try {
+            const res = await setNewsletter({ variables: { email } });
+            setError(false);
+        } catch (error) {
+        }
     }, [setNewsletter, data, email]);
 
     if (loading) {
@@ -48,6 +93,11 @@ const NewsletterSubscriptionInput = () => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
+                {errMsg ?
+                    <div className={classes.mageError}>{errMsg}</div>
+                    :
+                    null
+                }
             </div>
             <div className={classes.actionToolbar}>
                 <Button onClick={submit} disabled={isDataUpdating}>

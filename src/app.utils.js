@@ -211,3 +211,20 @@ export const isPasswordSame = (value, values, fieldKey) => {
     };
     return value === values[fieldKey] ? undefined : message;
 };
+
+export const isValidEmail = (value) => {
+    const isValid = String(value)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    
+    if(isValid) {
+        return SUCCESS
+    } else {
+        return {
+            id: 'validation.validateEmail',
+            defaultMessage: 'Please enter a valid email address.'
+        };
+    }
+};

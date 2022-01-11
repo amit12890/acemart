@@ -69,6 +69,7 @@ const CreateWishlist = props => {
                             validate={isRequired}
                             validateOnBlur
                             placeholder="List Name"
+                            maxLength="40"
                         />
                     </Field>
                     <div className={classes.actionsToolbar}>

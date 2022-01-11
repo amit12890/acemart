@@ -27,7 +27,7 @@ const successIcon = (
     />
 );
 
-const AddQuestionBlock = ({ productId }) => {
+const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
     const [{ currentUser, isSignedIn }] = useUserContext();
     const [_, { addToast }] = useToasts();
 
@@ -148,13 +148,17 @@ const AddQuestionBlock = ({ productId }) => {
                                 />
                             </div>
                         </Relevant>
-                        <div className={classes.qaFieldWrapper}>
-                            <Checkbox
-                                field="newsletter"
-                                label="Sign Up for Newsletter"
-                                validateOnBlur
-                            />
-                        </div>
+                        {allowSubscribingQuestion ?
+                            <div className={classes.qaFieldWrapper}>
+                                <Checkbox
+                                    field="newsletter"
+                                    label="Sign Up for Newsletter"
+                                    validateOnBlur
+                                />
+                            </div>
+                            :
+                            null
+                        }
                         <Relevant
                             when={({ values }) => {
                                 return values.newsletter && !isSignedIn;
