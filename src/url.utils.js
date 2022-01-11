@@ -1,7 +1,7 @@
 // export const HOST_URL = 'https://dev-acemart.magedelight.magentoprojects.net';
 export const HOST_URL = "https://qa-acemart-backend.magedelight.magentoprojects.net";
 export const SITE_ID = 'qficp5';
-export const GOOGLE_MAP_API_KEY = 'AIzaSyDZGmmsWta_y3fizag6aY7jiaaVIXD_Bnk';
+export const GOOGLE_MAP_API_KEY = 'AIzaSyC2FlOz5QUyReshHY4iG6SvWkW0rDF3scY';
 
 
 /** Handle all url routes */

@@ -150,7 +150,7 @@ export default connect(store => ({
                         <AddressStep
                             enabled={isEmailAdded || !isDefaultStore}
                             data={customerAddresses}
-                            title="Shipping Address"
+                            title={isDefaultStore ? "Shipping Address" : "Store Pickup"}
                             setting={settingShippingAddress}
                             initialValues={shipping_addresses[0]}
                             onApplyAddress={(address, isNewAddress = false) => {
