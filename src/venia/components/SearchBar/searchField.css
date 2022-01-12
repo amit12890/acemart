@@ -12,8 +12,25 @@
 .searchTextInput:focus-visible {
     border-color: rgb(var(--theme-color-primary)); 
     border-radius: 0;
+    outline: none;
 }
 
-.myAfterClass {
-    background-color: red;
+.searchControl {
+    background-color: rgb(var(--theme-color-primary));
+    border: 2px solid rgb(var(--theme-color-primary))
+    color: rgb(var(--color-white));
+    display: flex;
+    padding: 0 10px;
+    align-items: center;
+}
+
+.searchControl:hover {
+    background-color: #727171; 
+    border-color: #727171;
+}
+
+.searchControl svg{
+    stroke: currentColor;
+    width: 20px;
+    height: auto;
 }

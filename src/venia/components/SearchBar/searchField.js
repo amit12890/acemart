@@ -43,7 +43,7 @@ const SearchField = props => {
             forwardedRef={inputRef}
             classes={{
                 input: classes.searchTextInput,
-                after: classes.myAfterClass
+                after: classes.searchControl
             }}
             placeholder="Search Ace Mart"
         />
