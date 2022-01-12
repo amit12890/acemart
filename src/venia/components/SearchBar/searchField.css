@@ -17,11 +17,12 @@
 
 .searchControl {
     background-color: rgb(var(--theme-color-primary));
-    border: 2px solid rgb(var(--theme-color-primary))
+    border: 2px solid rgb(var(--theme-color-primary));
     color: rgb(var(--color-white));
     display: flex;
     padding: 0 10px;
     align-items: center;
+    cursor: pointer;
 }
 
 .searchControl:hover {
