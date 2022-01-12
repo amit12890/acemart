@@ -29,9 +29,13 @@ const successIcon = (
     />
 );
 const successMessage = "has been added to wish list"
+const successMoveMessage = "has been moved to wish list"
 
 const WishlistPopup = props => {
-    const { closeWishlistPopup, productId, productQty = 1, isPopupVisible, productName } = props;
+    const { closeWishlistPopup, productId, productQty = 1, 
+        isPopupVisible, productName, onSuccess = () => {},
+        isMoveAction,
+    } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(0);
     const [_, { addToast }] = useToasts()
@@ -55,11 +59,12 @@ const WishlistPopup = props => {
             addToast({
                 type: 'success',
                 icon: successIcon,
-                message: `${productName} ${successMessage}`,
+                message: `${productName} ${isMoveAction ? successMoveMessage : successMessage}`,
                 dismissable: true,
                 timeout: 3000
             })
-            closeWishlistPopup()
+            closeWishlistPopup();
+            onSuccess()
         }
     })
 
@@ -116,7 +121,9 @@ const WishlistPopup = props => {
                 {addToWishlistLoading ?
                     <Button disabled>Loading...</Button>
                     :
-                    <Button onClick={handleSubmit}>Add To Wishlist</Button>
+                    <Button onClick={handleSubmit}>
+                        {isMoveAction ? "Move To Wishlist" : "Add To Wishlist"}
+                    </Button>
                 }
             </div>
         )
