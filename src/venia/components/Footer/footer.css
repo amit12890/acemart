@@ -333,6 +333,41 @@ h4:hover {
     font-size: var(--fontSize-100);
 }
 
+
+@media (max-width: 1023px) {
+
+    .root {
+        display: none;
+    }
+
+    .serviceItem {
+        flex-basis: 50%;
+    }
+
+    .blockMiddle {
+        flex-direction: column;
+    }
+
+    .blockLeft {
+        flex-direction: column;
+        order: 1;
+    }
+
+    .footerBox {
+        margin: 0 0 1rem 0;
+    }
+
+    .groupTitle {
+        font-style: italic;
+    }
+
+    .blockRight {
+        order: 2;
+    }
+
+}
+
+
 @media print { 
     .sectionTop,
     .sectionMiddle {

@@ -30,22 +30,6 @@
 
 }
 
-@media (min-width: 641px) {
-    .switchers {
-        position: relative;
-        z-index: 11;
-        margin: 0 auto;
-    }
-
-    .switchersContainer {
-        width: 100%;
-    }
-
-    .toolbar {
-
-        
-    }
-}
 
 .logo {
     grid-area: title;
@@ -340,6 +324,20 @@
     align-items: center;
     display: flex;
     flex-grow: 1;
+}
+
+
+@media (max-width: 1023px) {
+
+    .headerNotice,
+    .topMenuWrapper {
+        
+    }
+
+    .navContainer {
+        display: none;
+    }
+
 }
 
 
