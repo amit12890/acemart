@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 
 import { number, shape, string } from 'prop-types';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { useCmsPage } from '@magento/peregrine/lib/talons/Cms/useCmsPage';
 import RichContent from '../../venia/components/RichContent';
 import CategoryList from '@magento/venia-ui/lib/components/CategoryList';
 import { Meta, StoreTitle } from '@magento/venia-ui/lib/components/Head';
@@ -13,6 +12,7 @@ import { useIntl } from 'react-intl';
 import defaultClasses from './cms.css';
 import { updateAppState } from '../../data/appState/appState.action';
 import CmsContent from './cmsContent';
+import { useCmsPage } from '../../magento/peregrine/talons/Cms/useCmsPage';
 
 const CMSPage = props => {
     const { id } = props;
