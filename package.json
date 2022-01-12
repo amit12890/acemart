@@ -38,6 +38,7 @@
     "react-barcode": "^1.4.1",
     "react-feather": "^2.0.9",
     "react-google-maps": "^9.4.5",
+    "react-google-recaptcha": "^2.1.0",
     "react-map-interaction": "^2.1.0",
     "react-paypal-express-checkout": "^1.0.5",
     "redux-persist": "^6.0.0",

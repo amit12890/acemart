@@ -35,8 +35,8 @@ const Footer = props => {
                     <div className={[classes.contentBlock, classes.blockUpper].join(" ")}>
                         <div className={classes.companyService}>
                             <div className={classes.serviceItem}>
-                                <Link
-                                    to="/terms-of-use#ship_policy"
+                                <a
+                                    href="/terms-of-use#ship_policy/"
                                     className={classes.action}>
                                     <div className={classes.itemIcon}>
                                         <i className={classes.iconWrapper}>
@@ -50,12 +50,12 @@ const Footer = props => {
                                         <h4 className={classes.itemTitle}>Fast Shipping</h4>
                                         <p className={classes.itemSubTitle}>On every order, every day!</p>
                                     </div>
-                                </Link>
+                                </a>
                             </div>
 
                             <div className={classes.serviceItem}>
-                                <Link
-                                    to="/terms-of-use#security"
+                                <a
+                                    href="/terms-of-use#security/"
                                     className={classes.action}>
                                     <div className={classes.itemIcon}>
                                         <i className={classes.iconWrapper}>
@@ -70,7 +70,7 @@ const Footer = props => {
                                         <h4 className={classes.itemTitle}>Secure Payment</h4>
                                         <p className={classes.itemSubTitle}>We value your security</p>
                                     </div>
-                                </Link>
+                                </a>
                             </div>
 
                             <div className={classes.serviceItem}>
