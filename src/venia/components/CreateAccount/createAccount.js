@@ -24,6 +24,7 @@ import Password from '../Password';
 import defaultClasses from './createAccount.css';
 import FormError from '../FormError';
 import PasswordStrengthMeter from './passwordStrengthMeter';
+import { isValidEmail } from '../../../app.utils';
 
 
 const CreateAccount = props => {
@@ -168,7 +169,7 @@ const CreateAccount = props => {
                             <TextInput
                                 field="customer.email"
                                 autoComplete="email"
-                                validate={isRequired}
+                                validate={combine([isRequired, isValidEmail])}
                                 validateOnBlur
                                 mask={value => value && value.trim()}
                                 maskOnBlur={true}
