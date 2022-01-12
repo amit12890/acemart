@@ -192,6 +192,8 @@ const Product = props => {
                     productQty={quantity}
                     productName={replaceSpecialChars(name)}
                     closeWishlistPopup={closeWishlistPopup}
+                    onSuccess={handleRemoveFromCart}
+                    isMoveAction
                 />
             )}
         </>

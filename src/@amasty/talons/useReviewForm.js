@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import React, { useCallback, useState, useMemo, useEffect, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { has, snakeCase } from 'lodash-es';
@@ -32,6 +32,7 @@ export const useReviewForm = props => {
     const [isShowSuccessMessage, setIsShowSuccessMessage] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [_, { addToast }] = useToasts();
+    const recaptchaRef = useRef()
 
     const [addReview] = useMutation(ADD_REVIEW, {
         fetchPolicy: 'no-cache',
@@ -75,6 +76,9 @@ export const useReviewForm = props => {
 
     const handleSubmit = useCallback(
         async formValues => {
+            const recaptchaValue = recaptchaRef.current.getValue();
+            console.log("🚀 ~ file: useReviewForm.js ~ line 80 ~ recaptchaValue", recaptchaValue)
+
             setIsSubmitting(true);
 
             delete formValues.review_images;
@@ -151,6 +155,7 @@ export const useReviewForm = props => {
         setTmpImgPath,
         isShowSuccessMessage,
         handleSubmitFailure,
-        formApi
+        formApi,
+        recaptchaRef
     };
 };
