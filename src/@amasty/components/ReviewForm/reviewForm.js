@@ -11,6 +11,7 @@ import Button from '../../../venia/components/Button';
 import TextArea from '@magento/venia-ui/lib/components/TextArea';
 import Checkbox from '../../../venia/components/Checkbox';
 import Icon from '@magento/venia-ui/lib/components/Icon';
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 import RatingInput from '../RatingInput';
@@ -24,6 +25,7 @@ import LoadingButtonSmall from '../../../components/LoadingButtonSmall';
 
 import defaultClasses from './reviewForm.css';
 import RichText from '../../../venia/components/RichText';
+import { GOOGLE_RECAPTCHA } from '../../../url.utils';
 
 const toHTML = str => ({ __html: str });
 
@@ -55,7 +57,8 @@ const ReviewForm = props => {
         setTmpImgPath,
         isShowSuccessMessage,
         handleSubmitFailure,
-        formApi
+        formApi,
+        recaptchaRef
     } = useReviewForm({ productId, ratings });
 
     const { handleUpload, loading } = useUpload({ setTmpImgPath, formApi });
@@ -152,6 +155,13 @@ const ReviewForm = props => {
                             rows={6}
                         />
                     </Field>
+                </div>
+
+                <div className={classes.field}>
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={GOOGLE_RECAPTCHA}
+                    />
                 </div>
 
                 {isProsConsEnabled && (
