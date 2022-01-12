@@ -96,13 +96,16 @@ export default () => {
 
                         </li>
                     </ul>
-
-                    <Button
-                        classes={{ root_lowPriority: classes.loadMoreButton }}
-                        priority="low"
-                    >
-                        Load More
-                    </Button>
+                    <div className={classes.actionToolbar}>
+                        <div className={classes.primary}>
+                            <Button
+                                classes={{ root_lowPriority: classes.loadMoreButton }}
+                                priority="low"
+                            >
+                                Load More
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
