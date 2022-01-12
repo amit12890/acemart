@@ -1,0 +1,72 @@
+a {
+    -webkit-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+a:hover {
+    -webkit-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+button:focus {outline: none;}
+
+
+/* Block Comments */
+.blockComments .cCount {margin: 0 0 20px;padding: 0;border-bottom: 1px solid #222222;font-weight: 400;}
+.blockComments .cCount strong {border-bottom: 3px solid #222222;padding-bottom: 2px;font-weight: 400;font-size: 18px;display: inline-block;}
+.cReply {position: relative;margin-bottom: 18px;}
+.cReply input {color: #222;background: #fff !important;display: block;}
+.cReply textarea {border-bottom: 1px solid #bbbbbb;height: 70px;padding: 8px;border-radius: 1px;font-size: 14px;line-height: 1.42857143;margin: 0;vertical-align: baseline;width: 100%;resize: vertical;}
+.cReply .cBtnHld .inputBox {width: 100%;text-align: left;padding: 6px 0;display: inline-block;float: left;margin: 16px 0;}
+.cReply .cBtnHld .inputBox .requiredEntry {float: left;margin: 4px 10px 0 0;}
+.cReply .cBtnHld .lrHld {display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-justify-content: center;-ms-flex-pack: justify;justify-content: space-between;}
+.cReply .cBtnHld .lrHld input {background: #ffffff;background-clip: padding-box;border: 1px solid #c2c2c2;border-radius: 1px;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 14px;height: 32px;line-height: 1.42857143;padding: 0 9px;vertical-align: baseline;width: 100%;box-sizing: border-box;}
+.cReply .leftHld,
+.cReply .rightHld {width: 49%;padding: 0;-webkit-flex: 0 0 49%;-ms-flex: 0 0 49%;flex: 0 0 49%;}
+/* Button */
+.cReply button {display: inline-block;color: #fff;background-color: #4db2ec;border: none;border-radius: 0;font-size: 13px;font-weight: 500;line-height: 1;padding: 10px 15px;margin-top: 10px;}
+.cReply button:hover {color: #ffffff;background-color: #222222;}
+.cReply button.cancel {background-color: #f6f7f9;border-color: #ced0d4;color: #4b4f56;margin-right: 10px;}
+.cReply button.cancel:hover {background-color: #e9ebee;}
+/* Comment */
+.cComments {margin-top: 20px;border-top: 1px solid #ddd;padding-top: 30px;padding-left: 25px;}
+.cPost .pInfo {margin-bottom: 10px;}
+.cPost .pName {font-weight: 700;color: #222222;display: inline-block;float: left;margin-right: 10px;font-size: 14px;line-height: 20px;}
+.cPost .publishDate {font-size: 11px;color: #bbbbbb;display: inline-block;line-height: 20px;vertical-align: text-bottom;}
+.cPost .pActions {padding: 8px 0 10px;}
+.cPost .pActions {font-size: 12px;}
+.cPost .pActions a {color: #bbbbbb !important;}
+.success {background-color: #4caf50;}
+@media (max-width: 420px) {
+    .blockComments {max-width:345px; overflow-y: scroll;}
+}
+.cLoadMoreComments {display: block;width: 100%;font-weight: 700;font-size: 14px;color: #ffffff;background: #4db2ec;margin-top: 24px;line-height: 40px;text-align: center;border-radius: 3px;transition: 200ms cubic-bezier(.08,.52,.52,1) background-color;text-decoration: none;border-radius: 0;}
+.cLoadMoreComments:hover {background-color: #222222;color: #ffffff;text-decoration: none;border-radius: 0;}
+.postComments {margin-right: 20px;}
+/* Replies */
+.pReplies {border-left: 1px dotted #bdbdbd;padding-left: 10px;}
+.pReplies .cComment {margin-bottom: 10px;}
+.pReplies .cMore {display: inline-block;;background-color: #4db2ec;padding: 5px 10px;font-size: 12px;text-decoration: none;font-weight: 700;color: #ffffff;border-radius: 0;}
+.pReplies .cMore:hover {background: #222222;color: #ffffff;}
+.pReplies .cMore:visited {color: #ffffff;}
+/*.pReplies .cMore a {color: #4267b2;font-weight: 700;font-size: 11px;}*/
+/*.pReplies .cMore a:hover {text-decoration: underline;}*/
+.pReplies .cMore i {width: 0;height: 0;border-left: 3px solid rgba(0, 0, 0, 0);border-right: 3px solid rgba(0, 0, 0, 0);border-top: 3px solid #768196;vertical-align: middle;margin-left: 3px;position: relative;top: 7px;display: none;}
+.pReplies .cPost {margin-left: 20px;border-bottom: 1px dashed #eee;}
+
+.pReplies .cComment .cPost .root button {border-radius: 0;}
+.postBottom .root  {border-radius: 0;}
+/* Form */
+.c-replyform button {margin-right: 10px;}
+.c-replyform .c-btn-hld {padding-bottom: 20px;}
+@media screen and (max-width: 450px) {
+    .cPost {font-size: 13px;}
+    .cPost .pActions {font-size: 11px;}
+    .cReply, .cComment {position: relative; margin-bottom: 18px;}
+    .pReplies {padding-left: 5px;}
+    .pReplies .cPost {margin-left: 34px;}
+}
+
+.alert {margin-top: 15px;padding: 10px 15px;background-color: #5cb85c;color: white;margin-bottom: 15px;border-radius: 3px;}
+
+.cReply .cBtnHld .inputBox .link {color: #4db2ec;}

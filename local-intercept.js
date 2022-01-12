@@ -170,6 +170,11 @@ function localIntercept(targets) {
             exact: true,
             path: require.resolve("./src/venia/components/SearchPage")
         });
+        routes.push({
+            name: "Resources",
+            pattern: "/resources",
+            path: require.resolve("./src/blogs/components/Routes")
+        });
         return routes;
     });
 }

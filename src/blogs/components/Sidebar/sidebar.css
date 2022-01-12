@@ -1,0 +1,82 @@
+a,
+button {
+    -webkit-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+button:hover,
+a:hover {
+    -webkit-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+/* Block Title */
+.blockTitle {margin: 0 0 20px;border-bottom: 1px solid #222222;padding: 2px 0;}
+.blockTitle strong {border-bottom: 3px solid #222222;padding-bottom: 3px;font-weight: 400;font-size: 18px;}
+
+.postList {margin-top: 0px;margin-bottom: 20px;list-style: none;padding-left: 0}
+
+/* Animation Zoom */
+.imageWrapper .animationTypeZoom {display: block;line-height: 0;overflow: hidden;position: relative;}
+.imageContainer .animationTypeZoom {-webkit-transition: transform .3s ease,opacity .3s;transition: transform .3s ease,opacity .3s;}
+.imageContainer:hover .animationTypeZoom {transform: scale3d(1.1,1.1,1);  -webkit-transform: scale3d(1.1,1.1,1);}
+
+/* Block Search */
+.blogSearch {width:100%;margin-bottom: 40px;position: relative;}
+.blogSearch .blockContent {margin-bottom: 0;position: relative;}
+.blogSearch label {border: 0;clip: rect(0, 0, 0, 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;text-decoration: none;display: inline-block;float: right;}
+.blogSearch .control {border-top: 0;margin: 0;padding: 0;clear: both;}
+/*.blogSearch input {position: static;padding-right: 35px;margin: 0;left: -300%;border: 1px solid #bbbbbb;}*/
+.blogSearch .blockContent .inputText {position: static;padding-right: 35px;margin: 0;left: -300%;border: 1px solid #bbbbbb;border-radius: 0;}
+.blogSearch .blockContent .inputText:focus {border: 1px solid #222222;outline: none;}
+.blogSearch .actionSearch {position: absolute;right: 0px;top: 0;top: calc(50% - 16px);z-index: 1;display: inline-block;background: #222222;-moz-box-sizing: content-box;border: 0;box-shadow: none;line-height: inherit;margin: 0;padding: 0 10px;text-decoration: none;text-shadow: none;font-weight: 400;border-radius: 0;}
+.blogSearch .actionSearch:focus,
+.blogSearch .actionSearch:active {outline: none;}
+.blogSearch .actionSearch:hover {opacity: .8;}
+.blogSearch .actionSearch:before {-webkit-font-smoothing: antialiased;content: '';margin: 0;vertical-align: top;display: inline-block;overflow: hidden;speak: none;width: 16px;height: 32px;background: url(../../images/search-icon-white.svg) no-repeat -10px -7px;background-size: 35px;opacity: 1;}
+.blogSearch .actionSearch > span {border: 0;clip: rect(0, 0, 0, 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}
+.blogSearch .inputText {background: #ffffff;background-clip: padding-box;border: 1px solid #c2c2c2;border-radius: 1px;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 14px;height: 32px;line-height: 1.42857143;padding: 0 9px;vertical-align: baseline;width: 100%;box-sizing: border-box;}
+
+/* Block Category */
+.blockCategories .accordion {margin: 5px 0 5px 0; font-size: 14px;}
+.blockCategories .accordion li {list-style: none;margin: 6px 0 6px 10px;font-weight: 600;color: #222222;}
+.blockCategories .accordion li a {display: inline-block;font-weight: 600;}
+.blockCategories .accordion>li>ul>li a {font-weight: 400;}
+.blockCategories ul {
+    list-style: initial;
+    padding-left:0;
+}
+
+.blockCategories ul {list-style: initial;padding-left:0;}
+.blockCategories ul ul {margin-left:20px;}
+.blockCategories ul,
+.blockCategories li {margin: 5px 0 5px 9px;padding: 0;}
+
+/* Posts List */
+.blockListPosts .postList .postItem  {
+    display: -ms-flexbox;display: flex;
+    -webkit-flex-direction: column;-ms-flex-direction: column;flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+.blockListPosts .postList .postItem .imageContainer {-ms-flex: 0 0;flex: 0 0;width: 100%;display: block;order: 0;margin-bottom: 10px;}
+/* Span Background */
+.blockListPosts .postList .imageContainer .imageWrapper {display: block;line-height: 0;overflow: hidden;position: relative;padding-bottom: 70%;}
+.blockListPosts .postList .imageContainer .imageWrapper .bgImg {position: absolute;display: block;width: 100%;height: 100%;background-size: cover;background-position: center;}
+/* Post Info */
+.blockListPosts .postList .postItem .blockInfo {padding-left: 0;padding-right: 0;}
+.blockListPosts .postList .postItem .blockInfo .postItemName {margin: 0 0 0.5rem 0;}
+.blockListPosts .postList .postItem .blockInfo .postItemNameLink {font-size: 14px;line-height: 20px;font-weight: 600;text-decoration: none;}
+.blockListPosts .postList .postItem .blockInfo .blockDate {color: #bbbbbb;font-size: 14px;}
+/* END Post List */
+
+/* Archive */
+.blockArchive .archiveItemLink {font-weight: 600;font-size: 14px;}
+
+.blockCategories:not(:last-child),
+.blogSearch:not(:last-child),
+.tagCloud:not(:last-child),
+.blockArchive:not(:last-child),
+.blockListPosts:not(:last-child),
+.blockCustom,
+.blockCustom2 {margin-bottom: 30px;}
