@@ -1,3 +1,143 @@
-.wrapper {
-    padding: 100px;
+.root {
+
+}
+
+.pageTitleWrapper {
+
+}
+
+
+.title {
+    justify-self: center;
+    background-color: #f5f5f5;
+    margin-bottom: 10px;
+    padding: 15px 30px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+
+.panelWrapper {
+    padding: 30px 0;
+}
+
+.answerWrapper {
+
+}
+
+.panelBody {
+
+
+}
+
+.panelBodyTitle {
+    font-size: var(--fontSize-300);
+    font-weight: var(--font-weight-bold);
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+.filterRow {
+    margin-bottom: 1rem;
+}
+
+.pageInfo {
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+}
+
+.qalistItems {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.item {
+    border: 1px solid #e9eaec;
+    display: grid;
+    grid-template-columns:7rem minmax(6rem, 1fr) minmax(6rem, 1fr) 7rem;
+    font-size: var(--fontSize-100);
+    align-items: flex-start;
+}
+
+.itemAnswer {
+    grid-template-columns:7rem minmax(6rem, 1fr) minmax(6rem, 1fr) minmax(6rem, 1fr) 7rem;
+}
+
+.itemQuesiton {
+
+}
+
+.cell {
+    border-left: 1px solid rgb(var(--venia-global-color-gray));
+    padding: 1rem;
+    overflow: hidden;
+}
+.cell:first-child {
+    border-left: none;
+
+}
+
+.stackedCell {
+    composes: cell;
+    display: flex;
+    flex-direction: column  ;
+    row-gap: 0.25rem;
+    min-height: 120px;
+}
+
+.action {
+    color: rgb(var(--link-color));
+}
+
+.action:hover {
+    color: rgb(var(--link-color-hover)); 
+}
+
+.postedon,
+.productName,
+.productQuestion {
+    composes: stackedCell;
+}
+
+.status {
+    composes: stackedCell;
+    row-gap: 0.75rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: rgb(var(--color-gray-light0));
+}
+
+
+.replyAnswer {
+    display: block; 
+    font-style: italic;
+}
+
+.question {
+
+}
+
+.postedon {
+
+}
+
+.productName {
+
+}
+
+.productQuestion {
+
+}
+.status {
+
+}
+
+.label {
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+}
+
+.value {
+
 }
