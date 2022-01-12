@@ -9,15 +9,15 @@ const Field = props => {
     const { children, id, label, optional, showStar } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const optionalSymbol = showStar
-        ? <span>*</span>
+        ? <span className={classes.required}>*</span>
         : optional ? (
-        <span className={classes.optional}>
-            <FormattedMessage
-                id={'field.optional'}
-                defaultMessage={'Optional'}
-            />
-        </span>
-    ) : null;
+            <span className={classes.optional}>
+                <FormattedMessage
+                    id={'field.optional'}
+                    defaultMessage={'Optional'}
+                />
+            </span>
+        ) : null;
 
     return (
         <div className={classes.root}>

@@ -29,6 +29,10 @@
     composes: title from '../SignIn/signIn.css';
     
 }
+
+.test {
+    background-color: red;
+}
 .loginContainer {
     border: 1px solid rgb(var(--border-color-light));
 }

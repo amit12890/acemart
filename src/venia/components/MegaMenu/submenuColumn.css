@@ -53,10 +53,8 @@
 .submenuChild {
     margin-top: 0px;
     position: absolute;
-   
     width: 14.5rem;
     background-color: rgb(var(--color-white));
-
     top: 0;
     left: 100%;
     visibility: hidden;

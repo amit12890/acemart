@@ -11,6 +11,8 @@ import { useStyle } from '../../classify';
 import { useSearchField } from '../../../magento/peregrine/talons/SearchBar/useSearchField';
 import { searchPage } from '../../../url.utils';
 
+
+
 const clearIcon = <Icon src={ClearIcon} size={24} />;
 const searchIcon = <Icon src={SearchIcon} size={24} />;
 

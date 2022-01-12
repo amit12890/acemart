@@ -29,6 +29,7 @@ const ForgotPasswordForm = props => {
                     id: 'am.forgotPasswordForm.emailAddressText',
                     defaultMessage: 'Email'
                 })}
+                showStar
             >
                 <TextInput
                     autoComplete="email"

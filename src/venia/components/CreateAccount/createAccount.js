@@ -115,6 +115,7 @@ const CreateAccount = props => {
                     <div className={classes.personalInfo}>
                         <h2 className={classes.h2}>Personal Information</h2>
                         <Field
+                            className={classes.test}
                             label={formatMessage({
                                 id: 'createAccount.firstNameText',
                                 defaultMessage: 'First Name'

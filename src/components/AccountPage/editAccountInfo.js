@@ -106,7 +106,7 @@ const EditAccountInfo = ({ path }) => {
                 });
             }
 
-            if(showPassword) {
+            if (showPassword) {
                 // password update
                 if (password && newPassword) {
                     await handleChangePassword({ email, firstname, lastname, password, newPassword })
@@ -123,7 +123,7 @@ const EditAccountInfo = ({ path }) => {
             }
         } catch (error) {
             const errType = get(error, "graphQLErrors.0.path.0", "");
-            if(errType === "updateCustomer") {
+            if (errType === "updateCustomer") {
                 addToast({
                     type: 'error',
                     icon: ErrorIcon,
@@ -131,7 +131,7 @@ const EditAccountInfo = ({ path }) => {
                     dismissable: true,
                     timeout: 3000
                 });
-            } else if(errType === "changeCustomerPassword") {
+            } else if (errType === "changeCustomerPassword") {
                 addToast({
                     type: 'error',
                     icon: ErrorIcon,
@@ -192,6 +192,7 @@ const EditAccountInfo = ({ path }) => {
                             <Field
                                 id="firstname"
                                 label="First Name"
+                                showStar
                             >
                                 <TextInput field="firstname" validate={isRequired} />
                             </Field>
@@ -200,6 +201,7 @@ const EditAccountInfo = ({ path }) => {
                             <Field
                                 id="lastname"
                                 label='Last Name'
+                                showStar
                             >
                                 <TextInput field="lastname" validate={isRequired} />
                             </Field>
@@ -235,9 +237,10 @@ const EditAccountInfo = ({ path }) => {
                                 <Field
                                     id="email"
                                     label='Email'
+                                    showStar
                                 >
                                     <TextInput field="email"
-                                        validate={combine([isRequired, isValidEmail])} 
+                                        validate={combine([isRequired, isValidEmail])}
                                     />
                                 </Field>
                             </div>
