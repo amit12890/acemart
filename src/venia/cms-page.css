@@ -4,3 +4,7 @@
 :global(.finance-row) {
     
 }
+
+:global(.new-deals) :global(.price-div) {
+    color: #006E8E;
+}
