@@ -13,3 +13,7 @@
     border-color: rgb(var(--theme-color-primary)); 
     border-radius: 0;
 }
+
+.myAfterClass {
+    background-color: red;
+}

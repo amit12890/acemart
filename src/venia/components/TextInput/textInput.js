@@ -21,7 +21,7 @@ const TextInput = props => {
 
     return (
         <Fragment>
-            <FieldIcons after={after} before={before}>
+            <FieldIcons after={after} before={before} classes={{ after: classes.after, before: classes.before }}>
                 <InformedText {...rest} className={inputClass} field={field} />
             </FieldIcons>
             <Message fieldState={fieldState}>{message}</Message>
@@ -35,7 +35,9 @@ TextInput.propTypes = {
     after: node,
     before: node,
     classes: shape({
-        input: string
+        input: string,
+        after: string,
+        before: string,
     }),
     field: string.isRequired,
     message: node
