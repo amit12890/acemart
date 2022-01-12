@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { get, size } from 'lodash-es';
@@ -18,6 +18,12 @@ import RemoveItemFromCompareList from './removeItemFromCompareList';
 
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useCompareList } from './useCompareList';
+import WishlistPopup from '../WishList/wishlistPopup';
+import RichText from '../../venia/components/RichText';
+import { replaceSpecialChars } from '../../app.utils';
+import { useWishlistSession } from '../../data/appState/appState.hook';
+import { loginPage } from '../../url.utils';
+import { useHistory } from 'react-router-dom';
 
 
 const CompareListPage = (props) => {
@@ -25,6 +31,8 @@ const CompareListPage = (props) => {
     const classes = useStyle(defaultClasses);
     const { loadingCompareList, fetchCompareList } = useCompareList()
     const [{ isSignedIn }] = useUserContext();
+    const { addProductToWishlistSession } = useWishlistSession()
+    const history = useHistory()
 
     useEffect(() => {
         if (isSignedIn) {
@@ -42,7 +50,7 @@ const CompareListPage = (props) => {
     let hasItems = item_count, listId = uid
 
     const productCompareFields = [
-        { hideName: true, name: 'Header Block', renderer: itemHeaderBlock, },
+        { hideName: true, name: 'Header Block', isHeader: true },
         { name: 'SKU', path: "sku" },
         { name: 'Description', path: "description.html", renderer: itemDescriptionBlock },
         { name: 'Short Description', path: "short_description.html", renderer: itemDescriptionBlock },
@@ -116,9 +124,18 @@ const CompareListPage = (props) => {
                                             const product = item.product;
                                             return (
                                                 <td className={classes.attribute} key={item.uid}>
-                                                    {!!compareField.renderer
-                                                        ? compareField.renderer(classes, product, compareField.path)
-                                                        : (<div>{get(product, compareField.path, "")}</div>)
+                                                    {!!compareField.isHeader
+                                                    ? (
+                                                        <Header classes={classes} 
+                                                            item={product}
+                                                            isSignedIn={isSignedIn}
+                                                            addProductToWishlistSession={addProductToWishlistSession}
+                                                            history={history}
+                                                        />
+                                                    )
+                                                    : !!compareField.renderer
+                                                    ? compareField.renderer(classes, product, compareField.path)
+                                                    : (<div>{get(product, compareField.path, "")}</div>)
                                                     }
                                                 </td>
                                             )
@@ -152,15 +169,32 @@ export default connect(store => {
     }
 })(CompareListPage)
 
-
-const itemHeaderBlock = (classes, item) => {
+const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession }) => {
     let url = get(item, "url_rewrites.0.url");
     url = url ? "/" + url : "#";
+
+    const [showWishlistPopup, setShowWishlistPopup] = useState(false);
+
+    const openWishlistPopup = useCallback(() => {
+        if(isSignedIn) {
+            setShowWishlistPopup(true);
+        } else {
+            history.push(loginPage())
+            addProductToWishlistSession(item)
+        }
+    }, [setShowWishlistPopup, isSignedIn, item, addProductToWishlistSession]);
+
+    const closeWishlistPopup = useCallback(() => {
+        setShowWishlistPopup(false);
+    }, [setShowWishlistPopup]);
+
     return (
         <div className={classes.productInfo}>
             <a href={url}>
                 <img src={get(item, 'image.url', "")} className={classes.itemThumbnail} />
-                <div className={classes.name}>{item.name}</div>
+                <div className={classes.name}>
+                    <RichText content={item.name} />
+                </div>
             </a>
             <div className={classes.price}>
                 <Price
@@ -175,7 +209,7 @@ const itemHeaderBlock = (classes, item) => {
                         defaultMessage={'Add to Cart'}
                     />
                 </Button>
-                <div className={classes.actionsContainer}>
+                <div className={classes.actionsContainer} onClick={openWishlistPopup}>
                     <i className={classes.iconWrapper}>
                         <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                             <title>wishlist-full</title>
@@ -184,11 +218,20 @@ const itemHeaderBlock = (classes, item) => {
                     </i>
                 </div>
             </div>
+            {showWishlistPopup && (
+                <WishlistPopup
+                    isPopupVisible={showWishlistPopup}
+                    productId={item.id}
+                    productQty={1}
+                    productName={replaceSpecialChars(item.name)}
+                    closeWishlistPopup={closeWishlistPopup}
+                />
+            )}
         </div>
 
     )
 }
 
-const itemDescriptionBlock = (classes, item, path) => {
+const itemDescriptionBlock = (classes, item, path, props) => {
     return <RichContent html={get(item, path, "")} />;
 }
