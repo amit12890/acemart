@@ -73,16 +73,13 @@ const AddressStep = props => {
 
     const submitForm = useCallback((e) => {
         e.preventDefault()
-        console.log("=====> submit is called")
         let selectedAddressObj = {}
-        console.log("🚀 ~ file: addressStep.js ~ line 82 ~ selectedAddressId", selectedAddressId, isNewAddress)
-        if (selectedAddressId != -1 || !isNewAddress) {
+        if (selectedAddressId != -1 || !showAddressForm) {
             selectedAddressObj = find(data, (address) => address.id == selectedAddressId)
         }
         toggleEditMode()
-        console.log("🚀 ~ file: addressStep.js ~ line 79 ~ submitForm ~ selectedAddressObj", selectedAddressObj)
-        onApplyAddress(selectedAddressObj, isNewAddress)
-    }, [selectedAddressId, isNewAddress, data])
+        onApplyAddress(selectedAddressObj, showAddressForm)
+    }, [selectedAddressId, showAddressForm, data])
 
 
 

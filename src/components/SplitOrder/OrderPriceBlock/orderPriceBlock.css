@@ -1,0 +1,26 @@
+.totalPriceBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0.5rem 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0.2rem 1rem;
+    font-size: 0.9rem;
+}
+
+.field  div {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 5rem;
+    font-weight: 700;
+}
+
+.highlight {
+    font-size: 1.1rem;
+    font-weight: bold;
+}

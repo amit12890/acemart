@@ -13,6 +13,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useCheckoutPayment } from '../../../data/checkout/hooks/payment.hook'
 import { useCheckoutSuccess } from '../../../data/checkout/hooks/checkout.hook';
 import CheckoutOrder from './CheckoutOrder';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 
 export default connect(store => {
@@ -25,6 +26,7 @@ export default connect(store => {
     customerEmail,
     dispatch
 }) => {
+    const [{ isSignedIn }] = useUserContext()
     const history = useHistory()
     const classes = useStyle(defaultClasses)
     const { setPaymentMethodOnCart, settingPaymentMethod, placingOrder } = useCheckoutPayment()
@@ -65,6 +67,11 @@ export default connect(store => {
         history.replace('/')
     }, [])
 
+    const navigateToCreateAccount = useCallback((e) => {
+        e.preventDefault()
+        history.replace('/customer/account/create')
+    }, [])
+
 
     const { formatMessage } = useIntl();
 
@@ -89,7 +96,9 @@ export default connect(store => {
             </StoreTitle>
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>Thank you for Your Purchase!</h1>
-                <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>({email})</strong>. Your order details are below</p>
+                {size(email) > 0 && (
+                    <p>Thank you for your order!,  We'll email you an order confirmation and updates as your order is processed to <strong>({email})</strong>. Your order details are below</p>
+                )}
             </div>
             {orderNumbers.map((number) => {
                 return (
@@ -109,16 +118,17 @@ export default connect(store => {
                     Continue Shopping
                 </div>
             </div>
-            <div className={classes.footerNotes}>
-                <div className={classes.notes}>
-                    <p>You can track your order status by creating an account. </p>
-                    <p><strong>Email Address:</strong> {email}</p>
+            {!isSignedIn && size(email) > 0 && (
+                <div className={classes.footerNotes}>
+                    <div className={classes.notes}>
+                        <p>You can track your order status by creating an account. </p>
+                        <p><strong>Email Address:</strong> {email}</p>
+                    </div>
+                    <div className={classes.primaryButton} onClick={navigateToCreateAccount}>
+                        Create Account
+                    </div>
                 </div>
-                <div className={classes.primaryButton}>
-                    Create Account
-                </div>
-            </div>
-
+            )}
         </div>
     )
 }))

@@ -5,6 +5,7 @@ import { get, size } from 'lodash'
 import { useCheckoutSuccess } from '../../../../data/checkout/hooks/checkout.hook'
 import BarCode from 'react-barcode'
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator'
+import Price from '../../../../venia/components/Price'
 import { format } from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { useStyle } from '@magento/venia-ui/lib/classify'
@@ -41,6 +42,9 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
     const items = get(data, "items", [])
     const shippingStreet = get(shippingInfo, "street", [])
     const billingStreet = get(billingInfo, "street", [])
+
+    const shipping = get(data, "total.total_shipping.value", 0)
+    const isFreeShipping = shipping == 0
     console.log("🚀 ~ file: checkoutOrder.js ~ line 26 ~ items", items)
 
     if (checkoutSuccessFetching) {
@@ -58,7 +62,6 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                 <div className={classes.panelRight}>
                     <div className={classes.barcodeWrapper}>
                         <BarCode
-
                             value={incrementId} />
                     </div>
                 </div>
@@ -142,27 +145,69 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         return (
                             <div className={classes.tablebody} key={item.id}>
                                 <div className={classes.productDetails}>
-                                    <div className={classes.productName}>{get(item, "produdct_name", "")}</div>
+                                    <div className={classes.productName}>{get(item, "product_name", "")}</div>
                                     <div className={classes.sku}>{get(item, "product_sku", "")}</div>
                                 </div>
                                 <div className={classes.price}>
-                                    13.95
+                                    <Price
+                                        currencyCode={get(item, "product_sale_price.currency", "USD")}
+                                        value={get(item, "product_sale_price.value", 0)} />
                                 </div>
                                 <div className={classes.qty}>
-                                    1
+                                    {get(item, "quantity_ordered", "1")}
                                 </div>
                                 <div className={classes.subtotal}>
-                                    13.95
+                                    <Price
+                                        currencyCode={get(item, "product_sale_price.currency", "USD")}
+                                        value={get(item, "product_sale_price.value", 0)} />
                                 </div>
                             </div>
                         )
                     }))}
                     <div className={classes.tableFooter}>
-                        <div className={classes.mark}>
-                            <span>Subtotal</span>
+                        <div className={classes.tableRow}>
+                            <div className={classes.mark}>
+                                <span>Subtotal</span>
+                            </div>
+                            <div className={classes.value}>
+                                <Price
+                                    currencyCode={get(data, "total.subtotal.currency", "USD")}
+                                    value={get(data, "total.subtotal.value", 0)} />
+                            </div>
                         </div>
-                        <div className={classes.value}>
-                            13.95
+                        <div className={classes.tableRow}>
+                            <div className={classes.mark}>
+                                <span>Shipping</span>
+                            </div>
+                            <div className={classes.value}>
+                                {isFreeShipping ? (
+                                    "Free"
+                                ) : (
+                                    <Price
+                                        currencyCode={get(data, "total.total_shipping.currency", "USD")}
+                                        value={get(data, "total.total_shipping.value", 0)} />
+                                )}
+                            </div>
+                        </div>
+                        <div className={classes.tableRow}>
+                            <div className={classes.mark}>
+                                <span>Tax</span>
+                            </div>
+                            <div className={classes.value}>
+                                <Price
+                                    currencyCode={get(data, "total.total_tax.currency", "USD")}
+                                    value={get(data, "total.total_tax.value", 0)} />
+                            </div>
+                        </div>
+                        <div className={classes.tableRow}>
+                            <div className={classes.mark}>
+                                <span>Total</span>
+                            </div>
+                            <div className={classes.value}>
+                                <Price
+                                    currencyCode={get(data, "total.grand_total.currency", "USD")}
+                                    value={get(data, "total.grand_total.value", 0)} />
+                            </div>
                         </div>
                     </div>
                 </div>

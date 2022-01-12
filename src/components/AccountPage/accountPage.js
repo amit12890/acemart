@@ -14,7 +14,7 @@ import {
     myWishlistPage,
     newsletterPage,
     reviewPage,
-    myWishlistSharePage
+    accountQandAPage
 } from '../../url.utils';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './accountPage.css';
@@ -28,6 +28,8 @@ import OrderDetailsPage from './orderDetailsPage';
 import CompareListBlock from '../CompareListPage/compareListBlock';
 import WishlistBlock from '../WishList/wishlistBlock';
 import ReviewPage from "./myReviewPage";
+import QuestionAnswerPage from './questionAnswerPage';
+
 
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -73,6 +75,9 @@ const AccountPage = (props) => {
                     </Route>
                     <Route path={reviewPage()}>
                         <ReviewPage />
+                    </Route>
+                    <Route exact path={accountQandAPage()}>
+                        <QuestionAnswerPage />
                     </Route>
                     <Route exact path="*">
                         <div>Page Not Found !!</div>
