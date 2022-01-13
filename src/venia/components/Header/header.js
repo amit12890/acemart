@@ -56,7 +56,7 @@ const Header = props => {
     return (
         <Fragment>
             <header className={rootClass}>
-                {/* {size(topHeader1Content) > 0 && (
+                {size(topHeader1Content) > 0 && (
                     <div className={classes.myFirtClass}>
                         <RichContent
                             classes={{ root: classes.test }}
@@ -65,7 +65,7 @@ const Header = props => {
                 )}
                 {size(topHeader2Content) > 0 && (
                     <RichContent html={topHeader2Content} />
-                )} */}
+                )}
                 {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>

@@ -6,7 +6,6 @@
 .trigger {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 13px;
     display: flex;
     align-items: center;
@@ -70,6 +69,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 5px;
+    text-align: left;
 }
 .storeLabel {
     font-size: var(--fontSize-200);

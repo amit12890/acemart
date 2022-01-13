@@ -29,8 +29,7 @@
 }
 
 .tabsItem {
-    
-
+    cursor: pointer;
 }
 
 .tabsItem_active {

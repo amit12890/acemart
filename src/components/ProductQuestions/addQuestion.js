@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { CheckCircle as CheckIcon } from 'react-feather';
 
 import { Form, Relevant } from 'informed';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './productQuestions.css';
@@ -17,6 +18,8 @@ import Icon from '../../venia/components/Icon';
 import { isRequired } from '../../@amasty/utils/validators';
 import { addQuestionMutation } from './productQuestions.gql';
 import { useToasts } from '@magento/peregrine';
+
+import { GOOGLE_RECAPTCHA } from "../../url.utils"
 
 const successIcon = (
     <Icon
@@ -48,9 +51,12 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
     const [showForm, setShowForm] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
+    const recaptchaRef = useRef()
 
     const handleSubmit = useCallback(
         async formValues => {
+            const recaptchaValue = recaptchaRef.current.getValue();
+            console.log("🚀 ~ file: addQuestion.js ~ line 59 ~ AddQuestionBlock ~ recaptchaValue", recaptchaValue)
             const variables = {
                 product_id: productId,
                 nickname_question: formValues.nickname_question,
@@ -175,6 +181,12 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                                 />
                             </div>
                         </Relevant>
+                        <div className={classes.qaFieldWrapper}>
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={GOOGLE_RECAPTCHA}
+                            />
+                        </div>
                         <div className={classes.actionToolbar}>
                             <Button
                                 disabled={loading}
@@ -194,7 +206,7 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                     </Form>
                 </div>
                 {successMessage && (
-                    <div>
+                    <div className={classes.successMessage}>
                         <Icon src={CheckIcon} size={20} />
                         <span>{successMessage}</span>
                     </div>

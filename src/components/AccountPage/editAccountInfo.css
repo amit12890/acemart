@@ -49,6 +49,10 @@
     grid-column-end: span 2;
 }
 
+.field label {
+    
+}
+
 .actionToolbar {
     margin-top: 20px;
     display: flex;

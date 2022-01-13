@@ -11,6 +11,8 @@ import { useStyle } from '../../classify';
 import { useSearchField } from '../../../magento/peregrine/talons/SearchBar/useSearchField';
 import { searchPage } from '../../../url.utils';
 
+
+
 const clearIcon = <Icon src={ClearIcon} size={24} />;
 const searchIcon = <Icon src={SearchIcon} size={24} />;
 
@@ -40,7 +42,8 @@ const SearchField = props => {
             onValueChange={onChange}
             forwardedRef={inputRef}
             classes={{
-                input: classes.searchTextInput
+                input: classes.searchTextInput,
+                after: classes.searchControl
             }}
             placeholder="Search Ace Mart"
         />

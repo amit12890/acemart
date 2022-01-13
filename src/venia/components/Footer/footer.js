@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
@@ -28,6 +28,27 @@ const Footer = props => {
 
     const { copyrightText } = talonProps;
 
+    const handleShipClick = useCallback(() => {
+        const ele = document.getElementById('ship_policy/');
+        if (ele) {
+            ele.scrollIntoView({ behavior: 'smooth' });
+        }
+    },[])
+
+    const handleReturnClick = useCallback(() => {
+        const ele = document.getElementById('return_policy/');
+        if (ele) {
+            ele.scrollIntoView({ behavior: 'smooth' });
+        }
+    },[])
+
+    const handleSecurityClick = useCallback(() => {
+        const ele = document.getElementById('security/');
+        if (ele) {
+            ele.scrollIntoView({ behavior: 'smooth' });
+        }
+    },[])
+
     return (
         <footer className={classes.root}>
             <div className={[classes.footerSectionWrapper, classes.sectionTop].join(" ")}>
@@ -36,8 +57,10 @@ const Footer = props => {
                         <div className={classes.companyService}>
                             <div className={classes.serviceItem}>
                                 <Link
-                                    to="/terms-of-use#ship_policy"
-                                    className={classes.action}>
+                                    to="/terms-of-use#ship_policy/"
+                                    className={classes.action}
+                                    onClick={handleShipClick}
+                                >
                                     <div className={classes.itemIcon}>
                                         <i className={classes.iconWrapper}>
                                             <svg className={[classes.svgIcon, classes.resources].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32">
@@ -55,8 +78,10 @@ const Footer = props => {
 
                             <div className={classes.serviceItem}>
                                 <Link
-                                    to="/terms-of-use#security"
-                                    className={classes.action}>
+                                    to="/terms-of-use#security/"
+                                    className={classes.action}
+                                    onClick={handleSecurityClick}
+                                >
                                     <div className={classes.itemIcon}>
                                         <i className={classes.iconWrapper}>
                                             <svg className={[classes.svgIcon, classes.resources].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="21" height="32" viewBox="0 0 21 32">
@@ -149,14 +174,18 @@ const Footer = props => {
                                     <li className={classes.link}>
                                         <Link
                                             to={UrlFuncs.returnPolicyUrl()}
-                                            className={classes.action}>
+                                            className={classes.action}
+                                            onClick={handleReturnClick}
+                                        >
                                             Returns
                                         </Link>
                                     </li>
                                     <li className={classes.link}>
                                         <Link
                                             to={UrlFuncs.shippingPolicyUrl()}
-                                            className={classes.action}>
+                                            className={classes.action}
+                                            onClick={handleShipClick}
+                                        >
                                             Shipping Policies
                                         </Link>
                                     </li>

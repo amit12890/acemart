@@ -361,3 +361,18 @@
 .countWrapper {
     margin-right: 5px;
 }
+
+
+
+.successMessage {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 0.5rem;
+    color: rgba(var(--venia-global-color-teal));
+  }
+  
+  .successMessage svg {
+    stroke: rgba(var(--venia-global-color-teal));
+    margin-right: 0.5rem;
+  }

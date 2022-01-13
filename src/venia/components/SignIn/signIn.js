@@ -80,7 +80,7 @@ const SignIn = props => {
             <h1 className={classes.title}>
                 <FormattedMessage
                     id={'am.signIn.titleText'}
-                    defaultMessage={'Sign-in to Your Account'}
+                    defaultMessage={'Customer Login'}
                 />
             </h1>
             <div className={classes.loginContainer}>
@@ -106,6 +106,7 @@ const SignIn = props => {
                                     defaultMessage: 'Email'
                                 })}
                                 classes={label_class}
+                                showStar
                             >
                                 <TextInput
                                     autoComplete="email"

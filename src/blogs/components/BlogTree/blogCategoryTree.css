@@ -1,0 +1,28 @@
+.rootBlog {
+    display: -ms-flexbox;display: flex;
+    -ms-flex-direction: column;flex-direction: column;
+    border-bottom: 1px solid rgb(var(--venia-global-color-border));
+    margin: 0 1.25rem;
+}
+
+.rootBlog:last-child {
+    border: none;
+}
+
+.targetBlog {
+    display: -ms-flexbox;display: flex;
+    -ms-flex-align: center;align-items: center;
+    -ms-flex-pack: start;justify-content: flex-start;
+    -ms-flex: auto;flex: auto;
+    height: 3.5rem;
+    margin: 0 -1.25rem;
+    padding: 0 1.5rem;
+    width: 100%;
+}
+
+.textBlog {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

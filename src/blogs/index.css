@@ -1,0 +1,24 @@
+.blogPage main {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    /*font-size: 1rem;*/
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    background-color: #fff;
+}
+
+.blogPage * {zoom: 1;}
+
+.blogPage main a {color: #222222;text-decoration: none;-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
+.blogPage main a:visited {color: #222222;text-decoration: none;}
+.blogPage main a:hover {color: #4db2ec;text-decoration: none;-webkit-transition: all 0.2s;-ms-transition: all 0.2s;transition: all 0.2s;}
+
+.blogPage main img {max-width: 100%;max-height: 100%; height: auto;}
+
+/* Templates */
+.blogPage {position: relative;overflow: hidden;}
+
+.blogPage h1, h2, h3, h4, h5, h6 {font-family: sans-serif;}
+
+.blogPage button {box-shadow: none !important;}
+

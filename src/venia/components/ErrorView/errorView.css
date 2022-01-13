@@ -1,9 +1,9 @@
 .root {
     background: var(--backroundImageUrl);
     background-repeat: no-repeat;
-    background-size: auto 450px;
+    background-size: auto auto;
     background-position:  center center;
-    height: 700px;
+    height: 650px;
     padding: 1rem;
     display: grid;
     /* two column grid because the "hangers" are on the right side of the page */

@@ -27,7 +27,8 @@
     top: 40px;
     transition-property: opacity, transform, visibility;
     z-index: 2;
-    width: 800px;
+   
+    width: 100%;
 }
 
 .root_hidden {
@@ -67,4 +68,11 @@
 
 .suggestions:empty {
     display: none;
+}
+
+
+@media (max-width: 1023px) {
+    .root {
+        max-width: 800px;
+    }
 }

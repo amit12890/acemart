@@ -49,7 +49,7 @@ export const useCategory = props => {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first'
     });
-    let pageSize = pageSizeData && pageSizeData.storeConfig.grid_per_page;
+    let pageSize = pageSizeData && pageSizeData.storeConfig.list_per_page;
 
     const [paginationValues, paginationApi] = usePagination();
     const { currentPage, totalPages } = paginationValues;

@@ -41,7 +41,7 @@ const Password = props => {
     const fieldType = visible ? 'text' : 'password';
 
     return (
-        <Field label={label} showStar={!!showStar} classes={{ root: classes.root, label:classes.label}}>
+        <Field label={label} showStar={!!showStar} classes={{ root: classes.root, label: classes.label }} showStar>
             <TextInput
                 after={!isToggleButtonHidden && passwordButton}
                 autoComplete={autoComplete}
@@ -60,7 +60,7 @@ Password.propTypes = {
     autoComplete: string,
     classes: shape({
         root: string,
-        label:string
+        label: string
     }),
     label: string,
     fieldName: string,

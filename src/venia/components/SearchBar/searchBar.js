@@ -44,7 +44,6 @@ const SearchBar = React.forwardRef((props, ref) => {
                         <SearchField
                             isSearchOpen={isOpen}
                             onChange={handleChange}
-                            className={classes.test}
                         />
                     </div>
                 </Form>

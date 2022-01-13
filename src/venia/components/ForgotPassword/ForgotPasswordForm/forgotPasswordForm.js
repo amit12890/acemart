@@ -4,11 +4,13 @@ import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
 
 import { useStyle } from '../../../classify';
-import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import Button from '../../Button';
 import Field from '../../Field';
 import TextInput from '../../TextInput';
 import defaultClasses from './forgotPasswordForm.css';
+import combine from '@magento/venia-ui/lib/util/combineValidators';
+import { isValidEmail } from '../../../../app.utils';
+import { isRequired } from '../../../util/formValidators';
 
 const ForgotPasswordForm = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -27,11 +29,12 @@ const ForgotPasswordForm = props => {
                     id: 'am.forgotPasswordForm.emailAddressText',
                     defaultMessage: 'Email'
                 })}
+                showStar
             >
                 <TextInput
                     autoComplete="email"
                     field="email"
-                    validate={isRequired}
+                    validate={combine([isRequired, isValidEmail])}
                 />
             </Field>
             <div className={classes.buttonContainer}>

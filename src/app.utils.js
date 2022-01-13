@@ -224,7 +224,7 @@ export const isValidEmail = (value) => {
     } else {
         return {
             id: 'validation.validateEmail',
-            defaultMessage: 'Please enter a valid email address.'
+            defaultMessage: 'Please enter a valid email address (Ex: johndoe@domain.com).'
         };
     }
 };

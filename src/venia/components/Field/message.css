@@ -13,5 +13,5 @@
 .root_error {
     composes: root;
     color: rgb(var(--color-error));
-    font-weight: var(--font-weight-bold);;
+    font-weight: normal;
 }

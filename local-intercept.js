@@ -116,6 +116,12 @@ function localIntercept(targets) {
             path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
+            name: "Account Quetion and Answer",
+            pattern: "/itorisproductQa/customer/",
+            exact: true,
+            path: require.resolve("./src/components/AccountPage")
+        });
+        routes.push({
             name: "Compare List",
             pattern: "/catalog/product_compare/",
             exact: true,
@@ -163,6 +169,11 @@ function localIntercept(targets) {
             pattern: "/catalogsearch/result/",
             exact: true,
             path: require.resolve("./src/venia/components/SearchPage")
+        });
+        routes.push({
+            name: "Resources",
+            pattern: "/resources",
+            path: require.resolve("./src/blogs/components/Routes")
         });
         return routes;
     });
