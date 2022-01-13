@@ -27,12 +27,12 @@
     
 }
 
-.checkout_page {
+.page.checkout_page {
+    max-width: 100%;
+    background-color: #f6f6f6;
 }
 
 
 @media (max-width: 1023px) {
-    .page {
-        display: none;
-    }
+   
 }

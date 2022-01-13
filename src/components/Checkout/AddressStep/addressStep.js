@@ -107,29 +107,23 @@ const AddressStep = props => {
     const renderAddButton = () => {
         if (size(initialValues) > 0 && get(initialValues, "customer_address_id", null) == null) {
             return (
-                <div className={classes.actionToolbar}>
-                    <button className={classes.action}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setFormVisibility(true)
-                        }}>
-                        <span>Edit Current Address</span>
-                    </button>
-                </div>
-
+                <button className={classes.action}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        setFormVisibility(true)
+                    }}>
+                    <span>Edit Current Address</span>
+                </button>
             )
         } else {
             return (
-                <div className={classes.actionToolbar}>
-                    <button className={classes.action}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setFormVisibility(true)
-                        }}>
-                        <span>Add New Address</span>
-                    </button>
-                </div>
-
+                <button className={classes.action}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        setFormVisibility(true)
+                    }}>
+                    <span>Add New Address</span>
+                </button>
             )
         }
 
@@ -188,20 +182,18 @@ const AddressStep = props => {
                         )
                     }
                     {showSameAsButton && (
-                        <div className={[classes.actionToolbar, classes.secondaryAction].join(" ")}>
+                        <div className={[classes.actionToolbar, classes.sameAsShipping].join(" ")}>
                             <div className={classes.secondary}>
                                 <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
                             </div>
                         </div>
                     )}
 
-                    <div className={classes.actionToolbar}>
+                    <div className={[classes.actionToolbar, classes.primaryAction].join(" ")}>
                         <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={submitForm}>
                             <span>Delivery To This Address</span>
                         </button>
-                        <div className={classes.primary}>
-                            {renderAddButton()}
-                        </div>
+                        {renderAddButton()}
                     </div>
 
 
