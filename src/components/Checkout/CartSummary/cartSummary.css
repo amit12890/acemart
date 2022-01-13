@@ -1,5 +1,6 @@
 .block {
-
+    margin-bottom: 20px;
+    background-color: rgb(var(--color-white));
 }
 
 .orderSummary {
@@ -21,7 +22,6 @@ margin-bottom: 20px;
 .orderTotal {
     display: grid;
     grid-gap: 0.5rem;
-    border: 1px solid rgb(var(--border-color-base));
 }
 
 .orderTotalItems {

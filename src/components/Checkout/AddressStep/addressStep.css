@@ -1,7 +1,7 @@
 .block {
-    margin-bottom: 40px;
-    border: 1px solid rgb(var(--border-color-base));
+    margin-bottom: 20px;
     padding: 15px;
+    background-color: rgb(var(--color-white));
 }
 
 .blockTitle {
@@ -107,8 +107,20 @@
     flex-basis: 100%;
 }
 
+.primaryAction {
+
+}
+
+.primaryAction button {
+    margin-right: 15px;
+}
+
 .actionToolbar .primary {
  margin-top: 15px;
+}
+
+.sameAsShipping {
+    margin-bottom: 15px;
 }
 
 .secondaryButton {

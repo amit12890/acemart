@@ -14,7 +14,7 @@ const SearchablePicker = props => {
     /**
      * render dropdown based on  data
      */
-    const { options, mapLabel, mapValue, keyExtractor, initialValues, labelClass, labelStyle, label, onPickerValueChange, containerClass, dropdownClass } = props
+    const { options, mapLabel, mapValue, keyExtractor, initialValues, labelClass, controlClasses, labelStyle, label, onPickerValueChange, containerClass, dropdownClass } = props
     let mapInitValue = mapValue(initialValues)
     // get value for mapValue conditions
     const [selectedValue, setSelectedValue] = useState(mapInitValue)
@@ -37,7 +37,7 @@ const SearchablePicker = props => {
             <label className={labelClass} style={labelStyle}>
                 <span>{label}</span>
             </label>
-            <div className={classes.control}>
+            <div className={`${classes.control} ${controlClasses}`}>
                 <select
                     className={dropdownClass}
                     value={selectedValue}

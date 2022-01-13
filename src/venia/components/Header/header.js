@@ -59,7 +59,7 @@ const Header = props => {
         <Fragment>
             <header className={rootClass}>
                 {size(topHeader1Content) > 0 && (
-                    <div className={classes.myFirtClass}>
+                    <div className={classes.topPromotion}>
                         <RichContent
                             classes={{ root: classes.test }}
                             html={topHeader1Content} />
@@ -69,7 +69,7 @@ const Header = props => {
                     <RichContent html={topHeader2Content} />
                 )}
                 {/** This is top NoticeBar */}
-                <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
+                {/* <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>
                         <p>
                             <Link
@@ -87,7 +87,7 @@ const Header = props => {
                             </Link>
                         </p>
                     </div>
-                </div>
+                </div> */}
                 {/** This is top CMSMenuBar */}
                 <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.topMenuContainer].join(" ")}>

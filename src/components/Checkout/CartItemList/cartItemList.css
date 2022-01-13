@@ -1,5 +1,6 @@
 .block {
-
+    background-color: rgb(var(--color-white));
+    padding: 15px;
 }
 
 .cartSummary {

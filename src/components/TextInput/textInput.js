@@ -13,7 +13,7 @@ const TextInput = props => {
      *  its wrapper component which will handle input box, label and error message
      */
     const textInputRef = useRef(null)
-    const { htmlFor, containerClass, label, labelClasses, errorMessage, className, innerRef, ...restProps } = props
+    const { htmlFor, containerClass, label, labelClasses, controlClasses, errorMessage, className, innerRef, ...restProps } = props
 
     const classes = useStyle(defaultClasses)
     let isError = size(errorMessage) > 0
@@ -26,7 +26,7 @@ const TextInput = props => {
                     <span>{label}</span>
                 </label>
             }
-            <div className={classes.control}>
+            <div className={`${classes.control} ${controlClasses}`}>
                 <input
                     ref={innerRef ? innerRef : textInputRef}
                     id={htmlFor}

@@ -36,14 +36,14 @@ const ShippingMethodStep = props => {
         let isActive = get(item, "method_code", '') === get(initialValues, "method_code", '')
         const hasAmount = get(item, "amount.value", 0) > 0
         return (
-            <div className={[classes.field, classes.choice].join(" ")} key={get(item, "method_code", '')} onClick={() => onItemClick(item)}>
+            <div className={[classes.field, classes.choice, classes.methodChoice].join(" ")} key={get(item, "method_code", '')} onClick={() => onItemClick(item)}>
                 <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
                     <RadioButton isActive={isActive} />
                 </div>
                 <div className={classes.methodDetails}>
                     <div className={classes.methodLabel}>{get(item, "method_title", '')}</div>
                     {hasAmount && (
-                        <div>
+                        <div className={classes.methodPrice}>
                             <Price
                                 currencyCode={get(item, "amount.currency", "USD")}
                                 value={get(item, "amount.value", "USD")} />
@@ -60,7 +60,7 @@ const ShippingMethodStep = props => {
         const hasAmount = get(item, "amount.value", 0) > 0
         const additional_information = get(item, "additional_information", "")
         return (
-            <div className={[classes.field, classes.choice].join(" ")} key={get(item, "method_code", '')} onClick={() => onItemClick(item)}>
+            <div className={[classes.field, classes.choice, classes.addressChoice].join(" ")} key={get(item, "method_code", '')} onClick={() => onItemClick(item)}>
                 <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
                     <RadioButton isActive={isActive} />
                 </div>
@@ -131,13 +131,13 @@ const ShippingMethodStep = props => {
      */
     if (!isDefaultStore) {
         return (
-            <div className={[classes.block, classes.paymentOptions].join(" ")}>
+            <div className={[classes.block, classes.shippingOptions].join(" ")}>
                 <div className={classes.blockTitle}>
                     <strong>{title}</strong>
                 </div>
                 <div className={classes.blockcontent}>
-                    <div className={classes.paymentMethods}>
-                        <fieldset className={classes.fieldset}>
+                    <div className={classes.shippingMethods}>
+                        <fieldset className={[classes.fieldset, classes.methodFieldset].join(" ")}>
                             {renderItem(initialValues, 0)}
                         </fieldset>
                     </div>
@@ -148,7 +148,7 @@ const ShippingMethodStep = props => {
 
         if (loading) {
             return (
-                <div className={[classes.block, classes.paymentOptions].join(" ")}>
+                <div className={[classes.block, classes.shippingOptions].join(" ")}>
                     <div className={classes.blockTitle}>
                         <strong> {title}</strong>
                     </div>
@@ -179,35 +179,40 @@ const ShippingMethodStep = props => {
         })
         const hasStorePickupData = size(storePickupData) > 0
         return (
-            <div className={[classes.block, classes.paymentOptions].join(" ")}>
+            <div className={classes.blockWrapper}>
                 {hasStorePickupData && (
                     <>
-                        <div className={classes.blockTitle}>
-                            <strong>Store Pickup</strong>
-                        </div>
-                        <div className={classes.blockcontent}>
-                            <div className={classes.paymentMethods}>
-                                <fieldset className={classes.fieldset}>
-                                    {storePickupData.map(renderStorePickupItem)}
-                                </fieldset>
+                        <div className={[classes.block, classes.storePickupBlock].join(" ")}>
+                            <div className={classes.blockTitle}>
+                                <strong>Store Pickup</strong>
+                            </div>
+                            <div className={classes.blockcontent}>
+                                <div className={classes.paymentMethods}>
+                                    <fieldset className={classes.fieldset}>
+                                        {storePickupData.map(renderStorePickupItem)}
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
                     </>
                 )}
                 {size(normalMethodData) > 0 && (
                     <>
-                        <div className={classes.blockTitle}>
-                            <strong> {title}</strong>
-                        </div>
-                        <div className={classes.blockcontent}>
-                            <div className={classes.paymentMethods}>
-                                <fieldset className={classes.fieldset}>
-                                    {normalMethodData.map(renderItem)}
-                                </fieldset>
+                        <div className={[classes.block, classes.shippingMethodBlock].join(" ")}>
+                            <div className={classes.blockTitle}>
+                                <strong> {title}</strong>
+                            </div>
+                            <div className={classes.blockcontent}>
+                                <div className={classes.paymentMethods}>
+                                    <fieldset className={classes.fieldset}>
+                                        {normalMethodData.map(renderItem)}
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
                     </>
                 )}
+
             </div>
         )
     }
