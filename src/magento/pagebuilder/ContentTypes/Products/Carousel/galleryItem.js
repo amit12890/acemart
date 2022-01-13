@@ -122,7 +122,7 @@ const GalleryItem = props => {
                 <span>{sku}</span>
             </div>
 
-            <div className={classes.price}>
+            <div className={[classes.price, "price-div"].join(" ")}>
                 <Price
                     value={price.regularPrice.amount.value}
                     currencyCode={price.regularPrice.amount.currency}
