@@ -1,5 +1,5 @@
 /*!
- * @version 673431f-dev
+ * @version 2b602f8-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[0],{"/Gi5":function(e,t,r){"use strict"
