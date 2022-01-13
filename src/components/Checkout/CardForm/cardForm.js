@@ -41,9 +41,22 @@ class CardForm extends React.Component {
     submit = (e, cardType) => {
         e.preventDefault()
         const expArr = this.state.expiry.split(" / ")
+
+        let cc_type;
+        if (cardType === 'mastercard') {
+            cc_type = "MC"
+        } else if (cardType === 'mastercard') {
+            cc_type = "VI"
+        } else if (cardType === 'amex') {
+            cc_type = 'AE'
+        } else if (cardType === 'discover') {
+            cc_type = 'DI'
+        } else {
+            cc_type = cardType
+        }
         console.log({
             cc_number: this.state.cardNumber,
-            cc_type: "MC",
+            cc_type,
             cc_cid: this.state.cvv,
             expiration: expArr[0].trim(),
             expiration_yr: expArr[1].trim(),
@@ -51,10 +64,11 @@ class CardForm extends React.Component {
         })
         this.props.onSave({
             cc_number: this.state.cardNumber.replace(/ /g, ''),
-            cc_type: "MC",
+            cc_type,
             cc_cid: this.state.cvv,
             expiration: expArr[0].trim(),
             expiration_yr: expArr[1].trim(),
+            save_card: true,
             transarmor_id: "new"
         })
     }

@@ -37,6 +37,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
 
     const incrementId = get(data, "increment_id", "")
     const pickupDate = get(data, "pickup_datetime", "")
+    console.log("🚀 ~ file: checkoutOrder.js ~ line 40 ~ React.memo ~ pickupDate", pickupDate)
     const billingInfo = get(data, "billing_address", {})
     const shippingInfo = get(data, "shipping_address", {})
     const items = get(data, "items", [])
@@ -62,7 +63,10 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                 <div className={classes.panelRight}>
                     <div className={classes.barcodeWrapper}>
                         <BarCode
-                            value={incrementId} />
+                            value={incrementId}
+                            height={30}
+                            width={1}
+                            fontSize={16} />
                     </div>
                 </div>
             </div>
