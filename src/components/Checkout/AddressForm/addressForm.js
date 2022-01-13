@@ -212,6 +212,7 @@ const CheckoutAddressForm = props => {
                         onChange={(e) => setCity(e.target.value)}
                         name="city"
                         htmlFor="city"
+                        labelClass={classes.label}
                         errorMessage={get(errors, "city", '')} />
 
                     {/* 
