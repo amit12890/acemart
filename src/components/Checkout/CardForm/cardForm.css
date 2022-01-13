@@ -1,0 +1,164 @@
+.cardBlock {
+    padding: 1rem;
+}
+
+.inputContainer {
+    max-width: 450px;
+}
+
+.cardField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.leftMargin{
+    margin-left: 1rem;
+}
+
+.block {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.cardIcon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input {
+    composes: input from '../../../venia/components/Field/field.css';
+}
+
+.errorBorder {
+    border-color: rgb(var(--color-error));
+}
+
+.input:focus,
+.input:focus-visible {
+    border-color: rgb(var(--theme-color-secondary));
+}
+.input:disabled {
+    color: rgb(var(--venia-global-color-gray-darker));
+}
+
+.checkboxWrapper {
+    margin-top: 1rem;
+}
+
+.actionToolbar {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.actionToolbar div:last-child {
+    margin-left: 1rem;
+}
+
+.fieldset {
+    border: 0;
+    margin: 0 0;
+    padding: 0;
+    max-width: 450px;
+}
+
+.field {
+    margin: 0 0 30px;
+}
+
+.action {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+}
+
+.action:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.action:focus {
+    box-shadow: none;
+}
+
+.action:active {
+    transition-duration: 128ms;
+    --stroke: var(--theme-color-primary);
+}
+
+.secondaryButton {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--color-white)) ;
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: auto;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.25rem + 1px) 1.5rem calc(0.25rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    text-transform: none;
+    margin-left: 1rem;
+}
+
+.secondaryButton:first-child {
+    margin-left: 0;
+}
+
+.secondaryButton:hover {
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+}
+
+.secondaryButton:focus {
+    box-shadow: none;
+}
+
+.secondaryButton:active {
+    transition-duration: 128ms;
+    --stroke: var(--theme-color-primary);
+}
+
+
+.loadingButton {
+    min-width: 10rem;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    min-height: 2.5rem;
+}
+
+.mageError {
+    font-size: var(--fontSize-75);
+    color: rgb(var(--color-error));
+    padding: 4px 0;
+}

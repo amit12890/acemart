@@ -42,9 +42,11 @@
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^6.1.0",
     "react-map-interaction": "^2.1.0",
+    "react-payment-inputs": "^1.1.8",
     "react-moment": "^1.1.1",
     "react-paypal-express-checkout": "^1.0.5",
     "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.3",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

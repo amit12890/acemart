@@ -7,6 +7,7 @@
 .blockTitle {
     font-size: 1.3rem;
     font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .blockContent {
@@ -21,7 +22,7 @@
 }
 
  .field {
-    margin: 0 0 15px;
+    margin: 0 0 30px;
 }
 
 .field:last-child {
@@ -31,7 +32,7 @@
 .control {}
 
 .actionToolbar {
-    margin-top: 0;
+    margin-top: 30px;
 }
 
 .primary {}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
@@ -266,22 +266,6 @@ export default connect(store => ({
                                 setBillingAddressOnCart(variables)
                             }} />
 
-
-                        {/* <PaymentListStep
-                            enabled={isBillingAddressSelected && isShippingMethodSelected}
-                            title="Payment Method"
-                            data={available_payment_methods}
-                            initialValues={selected_payment_method}
-                            onItemClick={(paymentOpt) => {
-                                const code = get(paymentOpt, "code", '')
-                                if (code === 'paypal_express') {
-                                    handleGeneratePayPalToken()
-                                } else {
-                                    setPaymentMethodOnCart(get(paymentOpt, "code", ''))
-                                }
-                            }}
-                            isDefaultStore={isDefaultStore} /> */}
-
                         <PaymentListStep
                             enabled={isBillingAddressSelected && isShippingMethodSelected}
                             title="Payment Method"
@@ -291,6 +275,10 @@ export default connect(store => ({
                                 const code = get(paymentOpt, "code", '')
                                 if (code === 'paypal_express') {
                                     handleGeneratePayPalToken()
+                                } else if (code === 'md_firstdata') {
+                                    // it will contianer { code , md_firstdata }
+                                    setPaymentMethodOnCart(paymentOpt)
+                                    return
                                 }
                                 setPaymentMethodOnCart({ code })
                             }}

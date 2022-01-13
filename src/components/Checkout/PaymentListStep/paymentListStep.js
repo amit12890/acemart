@@ -8,14 +8,18 @@ import defaultClasses from './paymentListStep.css'
 import { FormattedMessage } from 'react-intl'
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 import { get, includes, size } from 'lodash'
+import CardForm from '../CardForm';
 
-
+/**
+ * render list component will  
+ * 
+ * Parent
+ *      Checkout
+ */
 const PaymentListStep = props => {
 
     const classes = useStyle(defaultClasses)
-    /**
-     * render list component will  
-     */
+
     const {
         enabled,
         title,
@@ -34,11 +38,16 @@ const PaymentListStep = props => {
         filteredData = data.filter((item) => !includes(item.code, "paypal"))
     }
     const [selectedPaymentCode, setSelectedPaymentCode] = useState(initialCode)
+    const [showCardForm, setCardFormVisibility] = useState(false)
 
     useEffect(() => {
         setSelectedPaymentCode(initialCode)
     }, [initialCode])
 
+
+    const toggleCardForm = useCallback(() => {
+        setCardFormVisibility(!showCardForm)
+    }, [showCardForm])
 
 
     const renderItem = useCallback((item, index) => {
@@ -47,8 +56,13 @@ const PaymentListStep = props => {
             <div className={[classes.field, classes.choice].join(" ")}
                 key={item.code}
                 onClick={() => {
-                    setSelectedPaymentCode(item.code)
-                    onItemClick(item)
+                    if (item.code === "md_firstdata") {
+                        setSelectedPaymentCode(item.code)
+                        toggleCardForm()
+                    } else {
+                        setSelectedPaymentCode(item.code)
+                        onItemClick(item)
+                    }
                 }}
             >
                 <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
@@ -62,7 +76,6 @@ const PaymentListStep = props => {
     }, [selectedPaymentCode])
 
 
-    // let mappedValue = mapValue(initialValues)
     if (!enabled) {
         return (
 
@@ -84,24 +97,6 @@ const PaymentListStep = props => {
 
         )
     }
-
-    // if (!isDefaultStore) {
-    //     return (
-    //         <div className="block block-checkout payment-options">
-    //             <div className="block-title">
-    //                 {title}
-    //             </div>
-    //             <div className="block-content">
-    //                 <div className="checkout-payment-methods">
-    //                     <fieldset className="fieldset">
-    //                         {renderItem(initialValues, 0)}
-    //                     </fieldset>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // } else {
-
 
     if (loading) {
         return (
@@ -130,10 +125,22 @@ const PaymentListStep = props => {
 
             <div className={classes.blockcontent}>
                 <div className={classes.paymentMethods}>
-
-                    <fieldset className={classes.fieldset}>
-                        {filteredData.map(renderItem)}
-                    </fieldset>
+                    {showCardForm ? (
+                        <CardForm
+                            onSave={(cardInfo) => {
+                                // currently toggleling card form
+                                toggleCardForm()
+                                onItemClick({
+                                    code: selectedPaymentCode,
+                                    md_firstdata: cardInfo
+                                })
+                            }}
+                            toggleCardForm={toggleCardForm} />
+                    ) : (
+                        <fieldset className={classes.fieldset}>
+                            {filteredData.map(renderItem)}
+                        </fieldset>
+                    )}
                 </div>
             </div>
         </div >

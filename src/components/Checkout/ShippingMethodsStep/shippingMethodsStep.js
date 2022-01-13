@@ -9,6 +9,7 @@ import defaultClasses from './shippingMethodStep.css'
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 
 import { get, size } from 'lodash'
+import Price from '../../../venia/components/Price';
 
 
 
@@ -27,10 +28,13 @@ const ShippingMethodStep = props => {
         isDefaultStore,
         loading
     } = props
+    console.log("🚀 ~ file: shippingMethodsStep.js ~ line 30 ~ data", data)
 
 
     const renderItem = useCallback((item, index) => {
+        console.log("🚀 ~ file: shippingMethodsStep.js ~ line 35 ~ renderItem ~ item", item)
         let isActive = get(item, "method_code", '') === get(initialValues, "method_code", '')
+        const hasAmount = get(item, "amount.value", 0) > 0
         return (
             <div className={[classes.field, classes.choice].join(" ")} key={get(item, "method_code", '')} onClick={() => onItemClick(item)}>
                 <div className={[classes.optionChoice, classes.customRadio].join(" ")}>
@@ -38,6 +42,13 @@ const ShippingMethodStep = props => {
                 </div>
                 <div className={classes.methodDetails}>
                     <div className={classes.methodLabel}>{get(item, "method_title", '')}</div>
+                    {hasAmount && (
+                        <div>
+                            <Price
+                                currencyCode={get(item, "amount.currency", "USD")}
+                                value={get(item, "amount.value", "USD")} />
+                        </div>
+                    )}
                 </div>
 
             </div>
@@ -46,7 +57,7 @@ const ShippingMethodStep = props => {
 
     const renderStorePickupItem = useCallback((item) => {
         let isActive = get(item, "method_code", '') === get(initialValues, "method_code", '')
-
+        const hasAmount = get(item, "amount.value", 0) > 0
         const additional_information = get(item, "additional_information", "")
         return (
             <div className={[classes.field, classes.choice].join(" ")} key={get(item, "method_code", '')} onClick={() => onItemClick(item)}>
@@ -74,6 +85,13 @@ const ShippingMethodStep = props => {
                         <div className={classes.pickupDate}>Estimated Pickup date:</div>
                         <div className={classes.pickup}>{get(additional_information, "pickup", "")}</div>
                         <div className={classes.freePickup}>Free Pickup at Store</div>
+                        {hasAmount && (
+                            <div>
+                                <Price
+                                    currencyCode={get(item, "amount.currency", "USD")}
+                                    value={get(item, "amount.value", "USD")} />
+                            </div>
+                        )}
                     </div>
                 </div>
 

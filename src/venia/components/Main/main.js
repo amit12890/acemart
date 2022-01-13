@@ -33,7 +33,10 @@ const Main = props => {
     }
     // for checkout page show different header and no footer
     const showCheckoutLayout = pathname === "/checkout" || pathname === "/checkout/"
-
+    // add specific class for checkout
+    if (showCheckoutLayout) {
+        pageClass = [...pageClass, classes.checkout_page]
+    }
     useScrollLock(isMasked);
 
     return (

@@ -40,7 +40,9 @@ const Header = props => {
 
     const { loading, data } = useQuery(TOP_HEADERS_GQL)
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
+    console.log("🚀 ~ file: header.js ~ line 43 ~ topHeader1Content", topHeader1Content)
     const topHeader2Content = get(data, "topHeader2.items[0].content", "")
+    console.log("🚀 ~ file: header.js ~ line 45 ~ topHeader2Content", topHeader2Content)
 
     const classes = useStyle(defaultClasses, props.classes)
     const rootClass = isSearchOpen ? classes.open : classes.closed;
@@ -56,7 +58,7 @@ const Header = props => {
     return (
         <Fragment>
             <header className={rootClass}>
-                {/* {size(topHeader1Content) > 0 && (
+                {size(topHeader1Content) > 0 && (
                     <div className={classes.myFirtClass}>
                         <RichContent
                             classes={{ root: classes.test }}
@@ -65,7 +67,7 @@ const Header = props => {
                 )}
                 {size(topHeader2Content) > 0 && (
                     <RichContent html={topHeader2Content} />
-                )} */}
+                )}
                 {/** This is top NoticeBar */}
                 <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>
