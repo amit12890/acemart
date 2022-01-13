@@ -35,7 +35,6 @@ class CardForm extends React.Component {
         cardType: '',
         cvv: '',
         expiry: '',
-        saveCard: false,
         cardName: ''
     }
 
@@ -48,7 +47,6 @@ class CardForm extends React.Component {
             cc_cid: this.state.cvv,
             expiration: expArr[0].trim(),
             expiration_yr: expArr[1].trim(),
-            save_card: this.state.saveCard,
             transarmor_id: "new"
         })
         this.props.onSave({
@@ -57,7 +55,6 @@ class CardForm extends React.Component {
             cc_cid: this.state.cvv,
             expiration: expArr[0].trim(),
             expiration_yr: expArr[1].trim(),
-            save_card: this.state.saveCard,
             transarmor_id: "new"
         })
     }
@@ -109,12 +106,6 @@ class CardForm extends React.Component {
                                             value={this.state.cvv}
                                             error={touchedInputs.cvc && erroredInputs.cvc}
                                             classes={{ ...classes, inputMargin: classes.leftMargin }} />
-                                    </div>
-                                    <div className={classes.checkboxWrapper}>
-                                        <Checkbox
-                                            checked={this.state.saveCard}
-                                            onChange={() => this.setState({ saveCard: !this.state.saveCard })}
-                                            label="Save Card" />
                                     </div>
                                 </fieldset>
                             </div>
