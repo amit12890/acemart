@@ -40,7 +40,9 @@ const Header = props => {
 
     const { loading, data } = useQuery(TOP_HEADERS_GQL)
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
+    console.log("🚀 ~ file: header.js ~ line 43 ~ topHeader1Content", topHeader1Content)
     const topHeader2Content = get(data, "topHeader2.items[0].content", "")
+    console.log("🚀 ~ file: header.js ~ line 45 ~ topHeader2Content", topHeader2Content)
 
     const classes = useStyle(defaultClasses, props.classes)
     const rootClass = isSearchOpen ? classes.open : classes.closed;
