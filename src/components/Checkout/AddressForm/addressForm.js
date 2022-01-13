@@ -149,6 +149,7 @@ const CheckoutAddressForm = props => {
                         type="text"
                         className="input-text required-entry"
                         value={firstname}
+                        labelClasses={[classes.customLabel, classes.customLabel1].join(" ")}
                         onChange={(e) => setFirstname(e.target.value)}
                         name="firstname"
                         htmlFor="firstname"
