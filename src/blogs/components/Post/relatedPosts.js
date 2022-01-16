@@ -15,7 +15,7 @@ const RelatedPosts = (props) => {
                     {
                         relatedPosts.map(({post_id, title, post_url, featured_image}) => (
                             <div key={post_id} className={classes.postItem}>
-                                {
+                                {/* {
                                     featured_image !== 'false' &&
                                         <div className={classes.imageContainer}>
                                             <Link className={classes.imageWrapper} to={new URL(post_url).pathname}>
@@ -25,7 +25,7 @@ const RelatedPosts = (props) => {
                                                 />
                                             </Link>
                                         </div>
-                                }
+                                } */}
                                 <div className={classes.blockInfo}>
                                     <h3 className={classes.postTitle}>
                                         <Link className={classes.postItemName} to={new URL(post_url).pathname}>{title}</Link>

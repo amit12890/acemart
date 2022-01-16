@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Pagination from '@magento/venia-ui/lib/components/Pagination';
+import Pagination from '../../../venia/components/Pagination';
 import {FormattedMessage} from 'react-intl';
 
 import classes from './postList.css';
