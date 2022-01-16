@@ -24,6 +24,7 @@ import { replaceSpecialChars } from '../../app.utils';
 import { useWishlistSession } from '../../data/appState/appState.hook';
 import { loginPage } from '../../url.utils';
 import { useHistory } from 'react-router-dom';
+import AddToCart from '../../venia/components/CartPage/addToCart';
 
 
 const CompareListPage = (props) => {
@@ -203,12 +204,25 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
                 />
             </div>
             <div className={classes.actionWrapper}>
-                <Button disabled={false} priority="high" type="submit">
-                    <FormattedMessage
-                        id={'productFullDetail.cartAction'}
-                        defaultMessage={'Add to Cart'}
-                    />
-                </Button>
+                <AddToCart
+                    sku={item.sku}
+                    Child={() => (
+                        <Button priority="high" type="submit">
+                            <FormattedMessage
+                                id={'productFullDetail.cartAction'}
+                                defaultMessage={'Add to Cart'}
+                            />
+                        </Button>
+                    )}
+                    Loader={() => (
+                        <Button disabled priority="high" type="submit">
+                            <FormattedMessage
+                                id={'productFullDetail.cartAction'}
+                                defaultMessage={'Add to Cart'}
+                            />
+                        </Button>
+                    )}
+                />
                 <div className={classes.actionsContainer} onClick={openWishlistPopup}>
                     <i className={classes.iconWrapper}>
                         <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
