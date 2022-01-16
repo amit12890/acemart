@@ -22,9 +22,10 @@ import WishlistPopup from '../WishList/wishlistPopup';
 import RichText from '../../venia/components/RichText';
 import { replaceSpecialChars } from '../../app.utils';
 import { useWishlistSession } from '../../data/appState/appState.hook';
-import { loginPage } from '../../url.utils';
+import { comingSoonImage, loginPage } from '../../url.utils';
 import { useHistory } from 'react-router-dom';
 import AddToCart from '../../venia/components/CartPage/addToCart';
+import Image from '../../venia/components/Image';
 
 
 const CompareListPage = (props) => {
@@ -175,6 +176,7 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
     url = url ? "/" + url : "#";
 
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
+    const [imageUrl, setImageUrl] = useState(get(item, 'image.url', ""));
 
     const openWishlistPopup = useCallback(() => {
         if(isSignedIn) {
@@ -192,7 +194,13 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
     return (
         <div className={classes.productInfo}>
             <a href={url}>
-                <img src={get(item, 'image.url', "")} className={classes.itemThumbnail} />
+                <Image alt={item.name}
+                    classes={{
+                        image: classes.itemThumbnail,
+                    }}
+                    src={imageUrl}
+                    onError={(e) => setImageUrl(comingSoonImage())}
+                />
                 <div className={classes.name}>
                     <RichText content={item.name} />
                 </div>

@@ -134,6 +134,7 @@ tbody tr:nth-child(even) td:nth-child(even) {
 }
 
 .itemThumbnail {
+    position: unset;
     max-width: 200px;
 }
 
