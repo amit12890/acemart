@@ -3,9 +3,10 @@ import { gql } from '@apollo/client';
 export const GET_QUESTION_ANSWER = gql`
 query getQuestionAnswer(
     $pageSize: Int
-    $currentPage: Int
+    $queCurrentPage: Int
+    $ansCurrentPage: Int
 ) {
-    customerQuestions(currentPage:$currentPage, pageSize:$pageSize) {
+    customerQuestions(currentPage:$queCurrentPage, pageSize:$pageSize) {
         items {
             answers
             content
@@ -19,7 +20,7 @@ query getQuestionAnswer(
         total_count
         total_pages
     }
-    customerAnswer(currentPage:$currentPage, pageSize:$pageSize) {
+    customerAnswer(currentPage:$ansCurrentPage, pageSize:$pageSize) {
         items {
             content            
             created_datetime

@@ -8,17 +8,29 @@ import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/Loadi
 import { format } from 'date-fns';
 import QaPerPage from './questionAnswerPerPage';
 import { size } from 'lodash';
+import Pagination from '../../venia/components/Pagination';
+import { useIntl } from 'react-intl';
+import { Title, Meta } from '@magento/venia-ui/lib/components/Head';
 
 export default () => {
     const classes = useStyle(defaultClasses)
+    const { formatMessage } = useIntl();
+
+    const talonProps = useMyQuestionAnswer();
     const {
         questions,
         answers,
         loading,
         error,
         pageSize,
-        setPageSize
-    } = useMyQuestionAnswer()
+        setPageSize,
+        quePage,
+        queTotalPage,
+        ansPage,
+        ansTotalPage,
+        setQuePage,
+        setAnsPage,
+    } = talonProps
 
     if (loading) {
         return (
@@ -50,6 +62,11 @@ export default () => {
     return (
 
         <div className={classes.root}>
+            <Title>{formatMessage({ id: "questionAnsPage.title" })}</Title>
+            <Meta
+                name="description"
+                content={formatMessage({ id: "landingPage.description" })}
+            />
             <div className={classes.pageTitleWrapper}>
                 <h1 className={classes.title}>
                     My Question/Answer
@@ -113,16 +130,15 @@ export default () => {
                             )
                         })}
                     </ul>
-                    {/* <div className={classes.actionToolbar}>
-                        <div className={classes.primary}>
-                            <Button
-                                classes={{ root_lowPriority: classes.loadMoreButton }}
-                                priority="low"
-                            >
-                                Load More
-                            </Button>
-                        </div>
-                    </div> */}
+                    <section className={classes.pagination}>
+                        <Pagination
+                            pageControl={{
+                                currentPage: quePage,
+                                setPage: setQuePage,
+                                totalPages: queTotalPage
+                            }}
+                        />
+                    </section>
                 </div>
             </div>
 
@@ -182,6 +198,15 @@ export default () => {
                             )
                         })}
                     </ul>
+                    <section className={classes.pagination}>
+                        <Pagination
+                            pageControl={{
+                                currentPage: ansPage,
+                                setPage: setAnsPage,
+                                totalPages: ansTotalPage
+                            }}
+                        />
+                    </section>
               </div>
             </div>
 
