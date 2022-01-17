@@ -8,7 +8,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 
 import RichText from '../RichText';
-import Image from '../Image';
+import {default as VeniaImage} from '../Image';
 import RatingMini from '../../../@amasty/components/Rating/rating_mini';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
@@ -38,7 +38,7 @@ const IMAGE_WIDTHS = new Map()
 const ItemPlaceholder = ({ classes }) => (
     <div className={classes.root_pending}>
         <div className={classes.images_pending}>
-            <Image
+            <VeniaImage
                 alt="Placeholder for gallery item image"
                 classes={{
                     image: classes.image_pending,
@@ -58,7 +58,6 @@ export default function Item(props) {
     const { addProductToWishlistSession } = useWishlistSession()
     const history = useHistory()
 
-    console.log("🚀 ~ file: item.js ~ line 62 ~ Item ~ props.item", props.item)
     if (!props.item) {
         return <ItemPlaceholder classes={classes} />;
     }
@@ -118,7 +117,7 @@ export default function Item(props) {
         <div className={classes.root}>
             <div className={classes.itemImageContainer} onClick={handleTracker}>
                 <Link to={productLink} className={classes.images}>
-                    <Image
+                    <VeniaImage
                         alt={name}
                         classes={{
                             image: classes.image,
