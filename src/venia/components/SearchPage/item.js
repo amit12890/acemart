@@ -18,7 +18,7 @@ import { useWishlistSession } from '../../../data/appState/appState.hook'
 
 import productLabelImage from '../../../assets/labelSprite.png';
 import defaultClasses from './item.css';
-import { loginPage } from '../../../url.utils';
+import { apiGetSearchTracker, loginPage } from '../../../url.utils';
 import { replaceSpecialChars } from '../../../app.utils';
 
 const style = {
@@ -58,6 +58,7 @@ export default function Item(props) {
     const { addProductToWishlistSession } = useWishlistSession()
     const history = useHistory()
 
+    console.log("🚀 ~ file: item.js ~ line 62 ~ Item ~ props.item", props.item)
     if (!props.item) {
         return <ItemPlaceholder classes={classes} />;
     }
@@ -76,7 +77,9 @@ export default function Item(props) {
         uid,
         mage2_id,
         mpn,
-        brand
+        brand,
+        intellisuggestData,
+        intellisuggestSignature,
     } = props.item;
     const productLink = baseless_url ? `/${baseless_url}` : '#';
     const productName = replaceSpecialChars(`${brand} ${mpn} ${name}`);
@@ -98,9 +101,22 @@ export default function Item(props) {
         setShowWishlistPopup(false);
     }, []);
 
+    const handleTracker = () => {
+        const escapeFn = encodeURIComponent || escape; 
+  
+        if(document.images) {
+            const imgTag = new Image;
+            const productUrl = escapeFn(productLink);
+            const docReferer = escapeFn(document.referrer)
+            imgTag.src= apiGetSearchTracker(
+                intellisuggestData, intellisuggestSignature, productUrl, docReferer
+            )
+        }
+    }
+
     return (
         <div className={classes.root}>
-            <div className={classes.itemImageContainer}>
+            <div className={classes.itemImageContainer} onClick={handleTracker}>
                 <Link to={productLink} className={classes.images}>
                     <Image
                         alt={name}
