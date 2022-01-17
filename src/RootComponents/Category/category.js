@@ -5,9 +5,11 @@ import { useStyle } from '../../venia/classify';
 
 import CategoryContent from './categoryContent';
 import defaultClasses from './category.css';
-import { Meta } from '@magento/venia-ui/lib/components/Head';
+import { Meta, Title } from '@magento/venia-ui/lib/components/Head';
 import { GET_PAGE_SIZE } from './category.gql';
 import ErrorView from '../../venia/components/ErrorView';
+import { get } from 'lodash';
+import { replaceSpecialChars } from '../../app.utils';
 
 const Category = props => {
     const { id } = props;
@@ -41,9 +43,13 @@ const Category = props => {
         }
     }
 
+    const categoryMetaTitle = get(categoryData, 'category.meta_title', '');
+
     return (
         <Fragment>
-            <Meta name="description" content={metaDescription} />
+            <Title>{replaceSpecialChars(categoryMetaTitle)}</Title>
+            <Meta name="title" content={replaceSpecialChars(categoryMetaTitle)} />
+            <Meta name="description" content={replaceSpecialChars(metaDescription)} />
             <CategoryContent
                 categoryId={id}
                 classes={classes}
