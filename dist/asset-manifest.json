@@ -1,20 +1,20 @@
 {
-  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.1c9cb66401131542d188.js",
-  "RootCmp_CMS_PAGE__default.js": "/RootCmp_CMS_PAGE__default.626f9584ddaadfb0e0f9.js",
-  "RootCmp_PRODUCT__default.js": "/RootCmp_PRODUCT__default.e3515efb2dc56b101f04.js",
+  "RootCmp_CATEGORY__default.js": "/RootCmp_CATEGORY__default.474fc2875eb551ab0151.js",
+  "RootCmp_CMS_PAGE__default.js": "/RootCmp_CMS_PAGE__default.7789e0d9f8edb9dc0b0c.js",
+  "RootCmp_PRODUCT__default.js": "/RootCmp_PRODUCT__default.4407d6654da09163a1bc.js",
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
   "bad.png": "/bad-r1m.png",
   "balloons.png": "/balloons-miQ.png",
   "bulk-savings.png": "/bulk-savings-mhz.png",
-  "client.js": "/client.d5aa3e47fbc0aa95b1fa.js",
+  "client.js": "/client.2009a23c3fea839a808c.js",
   "comments.svg": "/comments-boz.svg",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
     "client": {
       "js": [
-        "/runtime.9a4e81a9f35fccdcb332.js",
+        "/runtime.877cbc1441ae9606c391.js",
         "/vendors.a87f96e923f30e49b177.js",
-        "/client.d5aa3e47fbc0aa95b1fa.js"
+        "/client.2009a23c3fea839a808c.js"
       ]
     }
   },
@@ -34,7 +34,7 @@
   "noProductsFound.png": "/noProductsFound-e9n.png",
   "online-price.png": "/online-price-8Hp.png",
   "pinterest.svg": "/pinterest-m58.svg",
-  "runtime.js": "/runtime.9a4e81a9f35fccdcb332.js",
+  "runtime.js": "/runtime.877cbc1441ae9606c391.js",
   "sale.png": "/sale-vv6.png",
   "search-icon-white.svg": "/search-icon-white-b38.svg",
   "small_warning.png": "/small_warning-6Ej.png",
@@ -48,23 +48,23 @@
   "vendors~RootCmp_SEARCH__default.js": "/vendors~RootCmp_SEARCH__default.227c99999f6052745e1d.js",
   "bundles": {
     "load": [
-      "/runtime.9a4e81a9f35fccdcb332.js",
+      "/runtime.877cbc1441ae9606c391.js",
       "/vendors.a87f96e923f30e49b177.js",
-      "/client.d5aa3e47fbc0aa95b1fa.js"
+      "/client.2009a23c3fea839a808c.js"
     ],
     "prefetch": [
-      "/RootCmp_CATEGORY__default.1c9cb66401131542d188.js",
-      "/RootCmp_CMS_PAGE__default.626f9584ddaadfb0e0f9.js",
-      "/RootCmp_PRODUCT__default.e3515efb2dc56b101f04.js"
+      "/RootCmp_CATEGORY__default.474fc2875eb551ab0151.js",
+      "/RootCmp_CMS_PAGE__default.7789e0d9f8edb9dc0b0c.js",
+      "/RootCmp_PRODUCT__default.4407d6654da09163a1bc.js"
     ]
   },
   "js": {
-    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.1c9cb66401131542d188.js",
-    "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.626f9584ddaadfb0e0f9.js",
-    "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.e3515efb2dc56b101f04.js",
-    "client": "/client.d5aa3e47fbc0aa95b1fa.js",
+    "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.474fc2875eb551ab0151.js",
+    "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.7789e0d9f8edb9dc0b0c.js",
+    "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.4407d6654da09163a1bc.js",
+    "client": "/client.2009a23c3fea839a808c.js",
     "i18n-en_US": "/i18n-en_US.c7a5e042e7ca61dd3f5a.js",
-    "runtime": "/runtime.9a4e81a9f35fccdcb332.js",
+    "runtime": "/runtime.877cbc1441ae9606c391.js",
     "vendors": "/vendors.a87f96e923f30e49b177.js",
     "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.51fa2b23ac197b2a1853.js",
     "vendors~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CMS_PAGE__default.2b27f39dbe6353f66f00.js",
