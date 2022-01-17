@@ -18,5 +18,6 @@
     "questionAnsPage.title": "My Questions/Answers",
     "landingPage.title": "Ace Mart Restaurant Supply",
     "landingPage.description": "Ace Mart Restaurant Supply has a large inventory of in-stock restaurant equipment and supplies available at wholesale prices. Shop online or in-store today.",
-    "searchPage.searchTermText": "Search Results for <highlight>{term}</highlight>"
+    "searchPage.searchTermText": "Search Results for <highlight>{term}</highlight>",
+    "Resources": "Resources"
 }

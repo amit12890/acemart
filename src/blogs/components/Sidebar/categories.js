@@ -28,7 +28,7 @@ const Categories = (props) => {
     const listToTree = (list) => {
         const map = {};
         const roots = [];
-        const treeDepth = categoriesMaxDepth > 0 ? categoriesMaxDepth : 1;
+        const treeDepth = 1;
         list.map(v => ({...v, children: null}))
         for (let i = 0; i < list.length; i += 1) {
             map[list[i].category_id] = i; // initialize the map
@@ -56,7 +56,7 @@ const Categories = (props) => {
                 <strong><FormattedMessage id={'Categories'} /></strong>
             </div>
             <ul id="accordion-2" className={classes.accordion}>
-                <CategoryTree children={listToTree(clonedArray)} showPostsCount={showPostsCount} />
+                <CategoryTree classes={classes} children={listToTree(clonedArray)} showPostsCount={showPostsCount} />
             </ul>
         </div>
     )
@@ -65,7 +65,7 @@ const Categories = (props) => {
 const CategoryTree = (props) => {
     const { children, showPostsCount } = props;
     return children.map(({category_id, category_url, title, children, posts_count}) => (
-        <li key={category_id}>
+        <li className={props.classes.blueLink} key={category_id}>
             <Link to={new URL(category_url).pathname}>{title}</Link>
             {showPostsCount === 1 && <span> ({posts_count})</span>}
             {children && <ul><CategoryTree children={children} showPostsCount={showPostsCount} /></ul>}

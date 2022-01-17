@@ -11,26 +11,16 @@ const RelatedPosts = (props) => {
                 <div className={classes.blockTitle}>
                     <strong><FormattedMessage id={'Related Posts'} /></strong>
                 </div>
-                <div className={classes.postList}>
+                <div className={classes.relatedPostList}>
                     {
                         relatedPosts.map(({post_id, title, post_url, featured_image}) => (
-                            <div key={post_id} className={classes.postItem}>
-                                {/* {
-                                    featured_image !== 'false' &&
-                                        <div className={classes.imageContainer}>
-                                            <Link className={classes.imageWrapper} to={new URL(post_url).pathname}>
-                                                <span
-                                                    className={`${classes.bgImg} ${classes.animationTypeZoom}`}
-                                                    style={{backgroundImage: `url(${featured_image})`}}
-                                                />
-                                            </Link>
-                                        </div>
-                                } */}
-                                <div className={classes.blockInfo}>
-                                    <h3 className={classes.postTitle}>
-                                        <Link className={classes.postItemName} to={new URL(post_url).pathname}>{title}</Link>
-                                    </h3>
-                                </div>
+                            <div className={classes.relatedPostBlock}>
+                                <Link key={post_id} 
+                                    className={classes.postItemName}
+                                    to={new URL(post_url).pathname}
+                                >
+                                    {title}
+                                </Link>
                             </div>
                         ))
                     }

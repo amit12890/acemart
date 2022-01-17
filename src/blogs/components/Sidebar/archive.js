@@ -9,6 +9,7 @@ import sidebarOperations from './sidebar.gql';
 
 import { usePermalinkSettings } from '../../hooks/usePermalinkSettings';
 import { toMoment } from '../../utils/toMoment';
+import { format } from 'date-fns';
 
 const Archive = (props) => {
     const { formatDate } = props;
@@ -47,15 +48,17 @@ const Archive = (props) => {
             <div className={classes.blockTitle}>
                 <strong><FormattedMessage id={'Archive'} /></strong>
             </div>
-            {
-                getPublishDate().map((date, index) => (
-                    <div key={index}>
-                        <Link className={classes.archiveItemLink} to={blogArchiveRoute(date)}>
-                            {/* <Moment format={toMoment(formatDate ? formatDate : 'F Y')}>{date}</Moment> */}
-                        </Link>
-                    </div>
-                ))
-            }
+            <div className={classes.blockWrapper}>
+                {
+                    getPublishDate().map((date, index) => (
+                        <div key={index} className={[classes.blueLink, classes.archiveBlueLink].join(" ")}>
+                            <Link to={blogArchiveRoute(date)}>
+                                <div>{format(new Date(date), "MMMM yyyy")}</div>
+                            </Link>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     )
 }
