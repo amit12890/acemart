@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
 import {FormattedMessage} from 'react-intl';
 
 import classes from './sidebar.css';
@@ -52,7 +51,7 @@ const Archive = (props) => {
                 getPublishDate().map((date, index) => (
                     <div key={index}>
                         <Link className={classes.archiveItemLink} to={blogArchiveRoute(date)}>
-                            <Moment format={toMoment(formatDate ? formatDate : 'F Y')}>{date}</Moment>
+                            {/* <Moment format={toMoment(formatDate ? formatDate : 'F Y')}>{date}</Moment> */}
                         </Link>
                     </div>
                 ))
