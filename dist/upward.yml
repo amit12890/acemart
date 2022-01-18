@@ -116,7 +116,6 @@ veniaSecurityHeaders:
       engine: mustache
       provide:
         backend: env.MAGENTO_BACKEND_URL
-        pageTypeNonce: veniaPageTypeNonce.nonce
       template:
         resolver: conditional
         when:
@@ -124,23 +123,11 @@ veniaSecurityHeaders:
             pattern: development
             use:
               inline: ''
-          - matches: env.SCRIPT_NAME
-            pattern: .*\.php$
-            use:
-              inline: >-
-                script-src http: https: {{ backend }}{{#pageTypeNonce}}
-                'nonce-{{ pageTypeNonce }}'{{/pageTypeNonce}}; style-src 'self'
-                blob: https: 'unsafe-inline' {{ backend }}; img-src data: http:
-                https:; object-src 'none'; base-uri 'none'; child-src 'self';
-                font-src 'self' fonts.gstatic.com; frame-src
-                assets.braintreegateway.com *.youtube.com *.youtu.be *.vimeo.com
         default:
           inline: >-
             script-src http: https: {{ backend }}; style-src 'self' blob: https:
             'unsafe-inline' {{ backend }}; img-src data: http: https:;
-            object-src 'none'; base-uri 'none'; child-src 'self'; font-src
-            'self' fonts.gstatic.com; frame-src assets.braintreegateway.com
-            *.youtube.com *.youtu.be *.vimeo.com
+            object-src 'none'; base-uri 'none';
     strict-transport-security:
       inline: max-age=31536000
     x-content-type-options:
