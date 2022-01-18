@@ -45,7 +45,7 @@ class CardForm extends React.Component {
         let cc_type;
         if (cardType === 'mastercard') {
             cc_type = "MC"
-        } else if (cardType === 'mastercard') {
+        } else if (cardType === 'visa') {
             cc_type = "VI"
         } else if (cardType === 'amex') {
             cc_type = 'AE'
@@ -54,6 +54,7 @@ class CardForm extends React.Component {
         } else {
             cc_type = cardType
         }
+        console.log("🚀 ~ file: cardForm.js ~ line 56 ~ CardForm ~ cardType", cardType)
         console.log({
             cc_number: this.state.cardNumber,
             cc_type,

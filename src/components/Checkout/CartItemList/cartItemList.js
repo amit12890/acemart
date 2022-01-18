@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './cartItemList.css'
 
+import { replaceSpecialChars } from '../../../app.utils'
+
 import { get, size } from 'lodash'
 
 
