@@ -130,7 +130,7 @@ export default function Item(props) {
                 </Link>
             </div>
             <div className={classes.itemDetails}>
-                <div className={classes.nameContainer}>
+                <div className={classes.nameContainer} onClick={handleTracker}>
                     <Link
                         to={productLink}
                         className={classes.name}
@@ -140,7 +140,7 @@ export default function Item(props) {
                 </div>
                 <div className={classes.sku}>{sku}</div>
                 {showReviewBlock && (
-                    <div>
+                    <div onClick={handleTracker}>
                         <RatingMini
                             percent={rating}
                             value={Number(num_reviews)}
@@ -203,7 +203,7 @@ export default function Item(props) {
                     </div>
                 ) : null}
                 <div className={classes.productActions}>
-                    <div className={classes.viewMore}>
+                    <div className={classes.viewMore} onClick={handleTracker}>
                         <Link
                             className={classes.viewmoreAction}
                             to={productLink}>
