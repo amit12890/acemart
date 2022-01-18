@@ -41,7 +41,7 @@ export default connect(store => {
                                         </div>
                                         <div className={classes.productItemDetails}>
                                             <div className={classes.productName}>
-                                                {get(item, "product.name", '')}
+                                                {replaceSpecialChars(get(item, "product.name", ''))}
                                             </div>
                                             <div className={classes.priceBox}>
                                                 <span className={classes.price}>

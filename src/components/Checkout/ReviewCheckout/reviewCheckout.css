@@ -51,12 +51,20 @@
     flex-direction: column;
 }
 
-.shippingMethod :first-child {
+.shippingMethod {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     font-size: 1rem;
     font-weight: bold;
 }
 
-.shippingMethod :last-child {
+.paymentMethod :first-child {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.paymentMethod :last-child {
     font-size: 0.8rem;
 }
 

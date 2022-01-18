@@ -10,7 +10,7 @@ export default ({ currencyCode, subTotal, tax, grandTotal }) => {
     return (
         <div className={classes.totalPriceBlock}>
             <div className={classes.field}>
-                <label>SubTotal:</label>
+                <label>Subtotal:</label>
                 <div>
                     <Price
                         currencyCode={currencyCode}
