@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { toMoment } from '../../utils/toMoment';
 import { useBlogConfig } from '../../hooks/useBlogConfig';
+import { format } from 'date-fns';
 
-const Date = props => {
+
+const DateComponent = props => {
     const { publish_time, postDate } = props;
 
     const defaultObject = {
@@ -14,12 +15,12 @@ const Date = props => {
     const { design, getData } = useBlogConfig();
 
     if (design) {
-        const { publicationDateIsEnabled, formatDate } = getData(design, defaultObject);
+        const { publicationDateIsEnabled } = getData(design, defaultObject);
 
         if (publish_time && publicationDateIsEnabled) {
             return (
                 <span className={postDate}>
-                    {/* <Moment format={toMoment(formatDate)}>{publish_time}</Moment> */}
+                    {format(new Date(publish_time), "MMM dd, yyyy")}
                 </span>
             )
         }
@@ -28,4 +29,4 @@ const Date = props => {
     return null;
 }
 
-export default Date;
+export default DateComponent;

@@ -8,7 +8,6 @@ import classes from './sidebar.css';
 import sidebarOperations from './sidebar.gql';
 
 import { usePermalinkSettings } from '../../hooks/usePermalinkSettings';
-import { toMoment } from '../../utils/toMoment';
 import { format } from 'date-fns';
 
 const Archive = (props) => {

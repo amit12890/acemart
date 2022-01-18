@@ -10,6 +10,7 @@ import Replies from './replies';
 import SubmitComment from './submitComment';
 import AuthSidebarTrigger from '../../AuthSidebarTrigger';
 import { toMoment } from '../../../utils/toMoment';
+import { format } from 'date-fns';
 
 const MagefanComments = (props) => {
     const { postId, classes, commentsCount, setCommentsCount } = props;
@@ -216,7 +217,7 @@ const MagefanComments = (props) => {
                                     <div className={classes.pInfo}>
                                         <div className={classes.pName}>{author_nickname}</div>
                                         <div className={classes.publishDate}>
-                                            {/* <Moment format={toMoment(formatDate ? formatDate : 'M d, Y H:i')}>{creation_time}</Moment> */}
+                                            {format(new Date(creation_time), "MMM dd, yyyy hh:mm")}
                                         </div>
                                     </div>
                                     <div className={classes.pText}>{text}</div>
@@ -230,7 +231,7 @@ const MagefanComments = (props) => {
                                         setReplies={setReplies}
                                         addCommentToPostHandler={addCommentToPostHandler}
                                         guestComments={guestComments}
-                                        formatDate={formatDate ? formatDate : 'M d, Y H:i'}
+                                        formatDate={formatDate ? formatDate : 'MMM dd, yyyy hh:mm'}
                                         privacyPolicy={privacyPolicy}
                                         replyStatus={replyStatus}
                                         statusMessage={statusMessage}
