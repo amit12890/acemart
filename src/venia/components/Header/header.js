@@ -215,7 +215,7 @@ const Header = props => {
                             <div className={classes.csContent}>
                                 <span className={classes.csLabel}>Customer Service</span>
                                 <Link
-                                    to={resourceUrl('/')}
+                                    to={resourceUrl('tel:8888988079')}
                                     className={classes.csAction}
                                 >
                                     <strong>888-898-8079</strong>

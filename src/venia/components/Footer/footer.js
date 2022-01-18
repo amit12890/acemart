@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
@@ -33,21 +33,21 @@ const Footer = props => {
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     const handleReturnClick = useCallback(() => {
         const ele = document.getElementById('return_policy/');
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     const handleSecurityClick = useCallback(() => {
         const ele = document.getElementById('security/');
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     return (
         <footer className={classes.root}>
@@ -147,9 +147,9 @@ const Footer = props => {
                     <div className={[classes.contentBlock, classes.blockMiddle].join(" ")}>
                         <div className={classes.blockLeft}>
                             <div className={classes.footerBox}>
-                                {/* {size(footerCol1) > 0 && (
+                                {size(footerCol1) > 0 && (
                                     <RichContent html={footerCol1} />
-                                )} */}
+                                )}
                                 <h3 className={classes.groupTitle}>Customer Center</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>

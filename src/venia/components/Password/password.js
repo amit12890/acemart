@@ -50,7 +50,11 @@ const Password = props => {
                 type={fieldType}
                 validate={validate}
                 onBlur={handleBlur}
+                classes={{
+                    after: classes.searchControl
+                }}
                 {...otherProps}
+
             />
         </Field>
     );
