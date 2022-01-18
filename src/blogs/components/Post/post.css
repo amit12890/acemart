@@ -372,14 +372,13 @@
        line-height: 1.4;
    }
 }
+
 .breadcrumbs {
-   margin-top: 1.5rem;
+   margin-bottom: 1.5rem;
+   font-size: 0.875rem;
 }
 .breadcrumbs a {
-   color: #006bb4 !important;
-}
-.breadcrumbs a:hover {
-   color: #4db2ec !important;
+   color: #000 !important;
 }
 @media (max-width: 767px) {
     .breadcrumbs {
