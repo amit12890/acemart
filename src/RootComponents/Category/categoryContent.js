@@ -50,6 +50,7 @@ const CategoryContent = props => {
         totalCount,
         totalPagesFromData
     } = talonProps;
+        console.log("🚀 ~ file: categoryContent.js ~ line 53 ~ totalCount", totalCount)
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -92,12 +93,20 @@ const CategoryContent = props => {
     const startPageNumber = (pageSize * (pageControl.currentPage - 1)) + 1;
     const endPageNumber = (startPageNumber + pageSize) - 1;
     const categoryResultsHeading =
-        totalCount > 0 ? (
-            <div>
-                Items {startPageNumber} - {endPageNumber} of{' '}
-                {totalCount}
-            </div>
-        ) : null;
+        totalCount > 0
+        ? totalCount < endPageNumber
+            ? (
+                <div>
+                    {totalCount} Items
+                </div>
+            )
+            :
+            (
+                <div>
+                    Items {startPageNumber} - {endPageNumber} of{' '}
+                    {totalCount}
+                </div>
+            ) : null;
 
     const categoryDescriptionElement = categoryDescription ? (
         <RichContent html={categoryDescription} />
