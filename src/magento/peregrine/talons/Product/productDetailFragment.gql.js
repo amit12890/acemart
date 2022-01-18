@@ -4,6 +4,7 @@ export const ProductDetailsFragment = gql`
     fragment ProductDetailsFragment on ProductInterface {
         __typename
         id
+        meta_title
         meta_description
         name
         brand

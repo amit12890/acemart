@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import { Helmet } from 'react-helmet';
 
-import { Meta, Title } from '@magento/venia-ui/lib/components/Head';
+import { Meta, Title, Link } from '@magento/venia-ui/lib/components/Head';
 
 const BlogMetaTags = (props) => {
     const {
@@ -27,9 +26,7 @@ const BlogMetaTags = (props) => {
                     <Meta name="robots" content="NOINDEX,NOFOLLOW" /> :
                     <Meta name="robots" content={robots ? robots : "INDEX,FOLLOW"} />
             }
-            <Helmet>
-                {isCanonical(type) && <link rel="canonical" href={canonicalUrl} />}
-            </Helmet>
+            {isCanonical(type) ? <Link rel="canonical" href={canonicalUrl} /> : null}
         </Fragment>
     )
 }

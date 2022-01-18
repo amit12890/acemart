@@ -1,5 +1,4 @@
 import React from 'react';
-import Moment from 'react-moment';
 
 import { toMoment } from '../../utils/toMoment';
 import { useBlogConfig } from '../../hooks/useBlogConfig';
@@ -20,7 +19,7 @@ const Date = props => {
         if (publish_time && publicationDateIsEnabled) {
             return (
                 <span className={postDate}>
-                    <Moment format={toMoment(formatDate)}>{publish_time}</Moment>
+                    {/* <Moment format={toMoment(formatDate)}>{publish_time}</Moment> */}
                 </span>
             )
         }

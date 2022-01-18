@@ -1,14 +1,12 @@
 .block {
-    margin-bottom: 40px;
-    border: 1px solid rgb(var(--border-color-base));
+    margin-bottom: 20px;
     padding: 15px;
+    background-color: rgb(var(--color-white));
 }
 
 .blockTitle {
     font-size: 1.3rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    
 }
 
 
@@ -22,7 +20,7 @@
 }
 
  .field {
-    margin: 0 0 30px 30px;
+    margin: 0 0 15px 15px;
     display: flex;
     flex-direction: column;
     flex-basis: 30.333%;
@@ -109,8 +107,20 @@
     flex-basis: 100%;
 }
 
+.primaryAction {
+
+}
+
+.primaryAction button {
+    margin-right: 15px;
+}
+
 .actionToolbar .primary {
- margin-top: 30px;
+ margin-top: 15px;
+}
+
+.sameAsShipping {
+    margin-bottom: 15px;
 }
 
 .secondaryButton {

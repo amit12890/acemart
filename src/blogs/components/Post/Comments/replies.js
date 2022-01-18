@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import {FormattedMessage} from 'react-intl';
 
@@ -90,7 +89,7 @@ const Replies = (props) => {
                                 <div className={classes.pInfo}>
                                     <div className={classes.pName}>{author_nickname}</div>
                                     <div className={classes.publishDate}>
-                                        <Moment format={toMoment(formatDate)}>{creation_time}</Moment>
+                                        {/* <Moment format={toMoment(formatDate)}>{creation_time}</Moment> */}
                                     </div>
                                 </div>
                                 <div className={classes.pText}>{text}</div>

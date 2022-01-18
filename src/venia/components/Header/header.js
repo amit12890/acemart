@@ -40,9 +40,7 @@ const Header = props => {
 
     const { loading, data } = useQuery(TOP_HEADERS_GQL)
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
-    console.log("🚀 ~ file: header.js ~ line 43 ~ topHeader1Content", topHeader1Content)
     const topHeader2Content = get(data, "topHeader2.items[0].content", "")
-    console.log("🚀 ~ file: header.js ~ line 45 ~ topHeader2Content", topHeader2Content)
 
     const classes = useStyle(defaultClasses, props.classes)
     const rootClass = isSearchOpen ? classes.open : classes.closed;
@@ -59,7 +57,7 @@ const Header = props => {
         <Fragment>
             <header className={rootClass}>
                 {size(topHeader1Content) > 0 && (
-                    <div className={classes.myFirtClass}>
+                    <div className={classes.topPromotion}>
                         <RichContent
                             classes={{ root: classes.test }}
                             html={topHeader1Content} />
@@ -69,7 +67,7 @@ const Header = props => {
                     <RichContent html={topHeader2Content} />
                 )}
                 {/** This is top NoticeBar */}
-                <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
+                {/* <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
                     <div className={[classes.panelBody, classes.pageTop].join(" ")}>
                         <p>
                             <Link
@@ -87,7 +85,7 @@ const Header = props => {
                             </Link>
                         </p>
                     </div>
-                </div>
+                </div> */}
                 {/** This is top CMSMenuBar */}
                 <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.topMenuContainer].join(" ")}>

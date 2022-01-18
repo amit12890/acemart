@@ -2,11 +2,13 @@ import React, { useCallback } from 'react';
 import { func, shape, string } from 'prop-types';
 import Price from '../Price';
 import { useStyle } from '../../classify';
+import { Link } from 'react-router-dom';
 
 import { replaceSpecialChars } from '../../../app.utils';
 
-import Image from '../Image';
+import {default as VeniaImage} from '../Image';
 import defaultClasses from './suggestedProducts.css';
+import { apiGetSearchTracker } from '../../../url.utils';
 
 const IMAGE_WIDTH = 75;
 const IMAGE_HEIGHT = 75;
@@ -23,24 +25,33 @@ const SuggestedProduct = props => {
         baseless_url,
         brand,
         mpn,
-        defaultCurrency
+        defaultCurrency,
+        intellisuggestData,
+        intellisuggestSignature,
     } = props;
+    const productLink = baseless_url ? `/${baseless_url}` : '#';
 
-    const handleClick = useCallback(() => {
-        if (typeof onNavigate === 'function') {
-            onNavigate();
+    const handleTracker = () => {
+        const escapeFn = encodeURIComponent || escape; 
+  
+        if(document.images) {
+            const imgTag = new Image;
+            const productUrl = escapeFn(productLink);
+            const docReferer = escapeFn(document.referrer)
+            imgTag.src = apiGetSearchTracker(
+                intellisuggestData, intellisuggestSignature, productUrl, docReferer
+            )
         }
-    }, [onNavigate]);
+    }
 
     return (
-        <div className={classes.itemInfo}>
-            <a
+        <div className={classes.itemInfo} onClick={handleTracker}>
+            <Link
                 className={classes.root}
-                href={'/' + baseless_url}
-                onClick={handleClick}
+                to={productLink}
             >
                 <div className={classes.imageWrapper}>
-                    <Image
+                    <VeniaImage
                         alt={name}
                         classes={{
                             image: classes.thumbnail,
@@ -57,7 +68,7 @@ const SuggestedProduct = props => {
                     <Price currencyCode={defaultCurrency} value={price} />
                     <span className={classes.unit}>{uom}</span>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };

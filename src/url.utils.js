@@ -56,6 +56,9 @@ export const apiGetAutocompleteSearchResult = (query, resultsPerPage = "4") =>
 export const apiGetSearchResult = (queryString) =>
     `https://${SITE_ID}.a.searchspring.io/api/search/search.json?${queryString}`
 
+export const apiGetSearchTracker = (data, signature, productUrl, docReferer) =>
+    `https://${SITE_ID}.a.searchspring.io/api/track/track.json?d=${data}&s=${signature}&u=${productUrl}&r=${docReferer}`
+
 /** Footer Other Urls */
 export const customerServiceUrl = () => '/customer-service';
 export const helpCenterUrl = () =>

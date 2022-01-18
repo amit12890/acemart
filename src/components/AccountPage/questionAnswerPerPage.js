@@ -20,6 +20,7 @@ const qaPerPage = props => {
     const handleItemClick = useCallback(
         pageNumber => () => {
             pageSizeSelect(pageNumber)
+            setExpanded(false)
         },
         [setExpanded]
     );

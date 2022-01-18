@@ -40,7 +40,7 @@ const RecentPosts = (props) => {
                     {
                         posts.map(({post_id, post_url, title, featured_image, publish_time}) => (
                             <div key={post_id} className={classes.postItem}>
-                                {
+                                {/* {
                                     featured_image !== 'false' &&
                                         <div className={classes.imageContainer}>
                                             <Link className={classes.imageWrapper} to={new URL(post_url).pathname}>
@@ -50,14 +50,14 @@ const RecentPosts = (props) => {
                                             />
                                             </Link>
                                         </div>
-                                }
+                                } */}
                                 <div className={classes.blockInfo}>
-                                    <h3 className={classes.postItemName}>
+                                    <h3 className={[classes.blueLink, classes.postItemBlueLink].join(" ")}>
                                         <Link className={classes.postItemNameLink} to={new URL(post_url).pathname}>{title}</Link>
                                     </h3>
-                                    <div className={classes.blockDate}>
+                                    {/* <div className={classes.blockDate}>
                                         <Date publish_time={publish_time} />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         ))

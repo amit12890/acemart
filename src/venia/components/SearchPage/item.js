@@ -8,7 +8,7 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import { UNCONSTRAINED_SIZE_KEY } from '@magento/peregrine/lib/talons/Image/useImage';
 
 import RichText from '../RichText';
-import Image from '../Image';
+import {default as VeniaImage} from '../Image';
 import RatingMini from '../../../@amasty/components/Rating/rating_mini';
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
@@ -18,7 +18,7 @@ import { useWishlistSession } from '../../../data/appState/appState.hook'
 
 import productLabelImage from '../../../assets/labelSprite.png';
 import defaultClasses from './item.css';
-import { loginPage } from '../../../url.utils';
+import { apiGetSearchTracker, loginPage } from '../../../url.utils';
 import { replaceSpecialChars } from '../../../app.utils';
 
 const style = {
@@ -38,7 +38,7 @@ const IMAGE_WIDTHS = new Map()
 const ItemPlaceholder = ({ classes }) => (
     <div className={classes.root_pending}>
         <div className={classes.images_pending}>
-            <Image
+            <VeniaImage
                 alt="Placeholder for gallery item image"
                 classes={{
                     image: classes.image_pending,
@@ -76,7 +76,9 @@ export default function Item(props) {
         uid,
         mage2_id,
         mpn,
-        brand
+        brand,
+        intellisuggestData,
+        intellisuggestSignature,
     } = props.item;
     const productLink = baseless_url ? `/${baseless_url}` : '#';
     const productName = replaceSpecialChars(`${brand} ${mpn} ${name}`);
@@ -98,11 +100,24 @@ export default function Item(props) {
         setShowWishlistPopup(false);
     }, []);
 
+    const handleTracker = () => {
+        const escapeFn = encodeURIComponent || escape; 
+  
+        if(document.images) {
+            const imgTag = new Image;
+            const productUrl = escapeFn(productLink);
+            const docReferer = escapeFn(document.referrer)
+            imgTag.src= apiGetSearchTracker(
+                intellisuggestData, intellisuggestSignature, productUrl, docReferer
+            )
+        }
+    }
+
     return (
         <div className={classes.root}>
-            <div className={classes.itemImageContainer}>
+            <div className={classes.itemImageContainer} onClick={handleTracker}>
                 <Link to={productLink} className={classes.images}>
-                    <Image
+                    <VeniaImage
                         alt={name}
                         classes={{
                             image: classes.image,
@@ -115,7 +130,7 @@ export default function Item(props) {
                 </Link>
             </div>
             <div className={classes.itemDetails}>
-                <div className={classes.nameContainer}>
+                <div className={classes.nameContainer} onClick={handleTracker}>
                     <Link
                         to={productLink}
                         className={classes.name}
@@ -125,7 +140,7 @@ export default function Item(props) {
                 </div>
                 <div className={classes.sku}>{sku}</div>
                 {showReviewBlock && (
-                    <div>
+                    <div onClick={handleTracker}>
                         <RatingMini
                             percent={rating}
                             value={Number(num_reviews)}
@@ -188,7 +203,7 @@ export default function Item(props) {
                     </div>
                 ) : null}
                 <div className={classes.productActions}>
-                    <div className={classes.viewMore}>
+                    <div className={classes.viewMore} onClick={handleTracker}>
                         <Link
                             className={classes.viewmoreAction}
                             to={productLink}>

@@ -5,7 +5,10 @@
     /* The summary grid item spans the entire right column. */
     grid-template-areas:
         'items summary';
-        padding: 20px 0;
+        max-width: var(--venia-global-maxWidth);
+        margin: 0 auto;
+        padding-left: var(--layout-indent-width);
+        padding-right: var(--layout-indent-width);
 }
 
 .container {

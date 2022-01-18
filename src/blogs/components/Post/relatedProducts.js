@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
 import postOperations from './products.gql';
+import GalleryGrid from '../../../venia/components/GalleryGrid';
 
 const RelatedProducts = (props) => {
     const { relatedProducts, classes } = props;
@@ -32,7 +33,8 @@ const RelatedProducts = (props) => {
                     <strong>Related Products</strong>
                 </div>
                 <div className={classes.productList}>
-                    {
+                    <GalleryGrid items={products}/>
+                    {/* {
                         products.map(({id, name, url_key, url_suffix, image: {url}, price_range: {minimum_price: {regular_price}}}) => (
                             <div key={id} className={classes.productItem}>
                                 <div className={classes.imageContainer}>
@@ -48,7 +50,7 @@ const RelatedProducts = (props) => {
                                 </div>
                             </div>
                         ))
-                    }
+                    } */}
                 </div>
             </div>
         )

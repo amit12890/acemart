@@ -21,7 +21,7 @@ const SearchBar = () => {
     return (
         <div className={classes.blogSearch}>
             <div className={classes.blockTitle}>
-                <strong>Search The Blog</strong>
+                <strong>Search</strong>
             </div>
             <div className={classes.blockContent}>
                 <div className={`${classes.field} ${classes.search}`}>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import Moment from 'react-moment';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import {FormattedMessage} from 'react-intl';
 
@@ -217,7 +216,7 @@ const MagefanComments = (props) => {
                                     <div className={classes.pInfo}>
                                         <div className={classes.pName}>{author_nickname}</div>
                                         <div className={classes.publishDate}>
-                                            <Moment format={toMoment(formatDate ? formatDate : 'M d, Y H:i')}>{creation_time}</Moment>
+                                            {/* <Moment format={toMoment(formatDate ? formatDate : 'M d, Y H:i')}>{creation_time}</Moment> */}
                                         </div>
                                     </div>
                                     <div className={classes.pText}>{text}</div>

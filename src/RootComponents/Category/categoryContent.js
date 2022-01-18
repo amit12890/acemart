@@ -5,7 +5,6 @@ import { useCategoryContent } from './data';
 import { useStyle } from '../../venia/classify';
 import Breadcrumbs from '../../venia/components/Breadcrumbs';
 import Gallery from '../../venia/components/Gallery';
-import { Title } from '@magento/venia-ui/lib/components/Head';
 import Pagination from '../../venia/components/Pagination';
 import ProductSort from '../../venia/components/ProductSort';
 import RichContent from '../../venia/components/RichContent';
@@ -141,12 +140,9 @@ const CategoryContent = props => {
         totalPagesFromData
     ]);
 
-    const categoryMetaTitle = get(props, 'data.category.meta_title', '');
-
     return (
         <Fragment>
             <Breadcrumbs categoryId={categoryId} />
-            <Title>{categoryMetaTitle}</Title>
             <div className={classes.root}>
                 <div className={classes.contentWrapper}>
                     <div className={classes.sidebar}>

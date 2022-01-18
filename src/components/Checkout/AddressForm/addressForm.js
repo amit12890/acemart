@@ -149,7 +149,8 @@ const CheckoutAddressForm = props => {
                         type="text"
                         className="input-text required-entry"
                         value={firstname}
-                        labelClasses={[classes.customLabel, classes.customLabel1].join(" ")}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => setFirstname(e.target.value)}
                         name="firstname"
                         htmlFor="firstname"
@@ -161,6 +162,8 @@ const CheckoutAddressForm = props => {
                         type="text"
                         className="input-text required-entry"
                         value={lastname}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => setLastname(e.target.value)}
                         name="lastname"
                         htmlFor="lastname"
@@ -172,6 +175,8 @@ const CheckoutAddressForm = props => {
                         type="text"
                         className="input-text required-entry"
                         value={mobile}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => setMobile(e.target.value)}
                         name="mobile"
                         htmlFor="mobile"
@@ -184,21 +189,25 @@ const CheckoutAddressForm = props => {
                     */}
 
                     <TextInput
-                        containerClass={[classes.field, classes.street, classes.line1].join(" ")}
+                        containerClass={[classes.field, classes.street, classes.streetLine1].join(" ")}
                         label="Street"
                         type="text"
                         className="input-text required-entry"
                         value={street[0]}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => changeStreet(e.target.value, 0)}
                         name="street[0]"
                         htmlFor="street[0]"
                         errorMessage={get(errors, "street[0]", '')} />
 
                     <TextInput
-                        containerClass={[classes.field, classes.street, classes.line1].join(" ")}
+                        containerClass={[classes.field, classes.street, classes.streetLine2].join(" ")}
                         type="text"
                         className="input-text required-entry"
                         value={street[1]}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => changeStreet(e.target.value, 1)}
                         name="street[1]"
                         htmlFor="street[1]"
@@ -210,9 +219,12 @@ const CheckoutAddressForm = props => {
                         type="text"
                         className="input-text required-entry"
                         value={city}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => setCity(e.target.value)}
                         name="city"
                         htmlFor="city"
+                        labelClass={classes.label}
                         errorMessage={get(errors, "city", '')} />
 
                     {/* 
@@ -225,6 +237,7 @@ const CheckoutAddressForm = props => {
                         label="Country"
                         containerClass={[classes.field, classes.country].join(" ")}
                         labelClass={classes.label}
+                        controlClasses={classes.control}
                         dropdownClass={classes.select}
                         initialValues={{ ...country }}
                         options={countryData}
@@ -245,6 +258,7 @@ const CheckoutAddressForm = props => {
                             label="Region"
                             containerClass={[classes.field, classes.state].join(" ")}
                             labelClass={classes.label}
+                            controlClasses={classes.control}
                             dropdownClass={classes.select}
                             initialValues={region}
                             options={availableRegions}
@@ -261,6 +275,8 @@ const CheckoutAddressForm = props => {
                             type="text"
                             className="input-text required-entry"
                             value={get(region, "name", '')}
+                            labelClasses={classes.fieldLabel}
+                            controlClasses={classes.control}
                             onChange={(e) => setRegion({
                                 id: 0,
                                 code: e.target.value,
@@ -284,16 +300,20 @@ const CheckoutAddressForm = props => {
                         type="text"
                         className="input-text required-entry"
                         value={zip}
+                        labelClasses={classes.fieldLabel}
+                        controlClasses={classes.control}
                         onChange={(e) => setZip(e.target.value)}
                         name="zip"
                         htmlFor="zip"
                         errorMessage={get(errors, "zip", '')} />
 
                     {isUserLoggedIn &&
-                        <Checkbox
-                            checked={saveInAddressBook}
-                            onChange={() => setSaveInAddressBook(!saveInAddressBook)}
-                            label="Save in Address Book" />
+                        <div className={classes.field}>
+                            <Checkbox
+                                checked={saveInAddressBook}
+                                onChange={() => setSaveInAddressBook(!saveInAddressBook)}
+                                label="Save in Address Book" />
+                        </div>
                     }
                 </fieldset>
 
@@ -308,8 +328,8 @@ const CheckoutAddressForm = props => {
                         )}
                     </div>
                     {isUserLoggedIn &&
-                        <div className={classes.secondary} style={{ marginLeft: '1rem' }}>
-                            <button className={classes.action} onClick={toggleForm}><span>Cancel</span></button>
+                        <div className={classes.secondary}>
+                            <button className={[classes.action, classes.cancel].join(" ")} onClick={toggleForm}><span>Cancel</span></button>
                         </div>
                     }
                 </div>
