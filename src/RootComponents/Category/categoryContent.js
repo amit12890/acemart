@@ -5,7 +5,6 @@ import { useCategoryContent } from './data';
 import { useStyle } from '../../venia/classify';
 import Breadcrumbs from '../../venia/components/Breadcrumbs';
 import Gallery from '../../venia/components/Gallery';
-import { Title } from '@magento/venia-ui/lib/components/Head';
 import Pagination from '../../venia/components/Pagination';
 import ProductSort from '../../venia/components/ProductSort';
 import RichContent from '../../venia/components/RichContent';
@@ -51,6 +50,7 @@ const CategoryContent = props => {
         totalCount,
         totalPagesFromData
     } = talonProps;
+        console.log("🚀 ~ file: categoryContent.js ~ line 53 ~ totalCount", totalCount)
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -93,12 +93,20 @@ const CategoryContent = props => {
     const startPageNumber = (pageSize * (pageControl.currentPage - 1)) + 1;
     const endPageNumber = (startPageNumber + pageSize) - 1;
     const categoryResultsHeading =
-        totalCount > 0 ? (
-            <div>
-                Items {startPageNumber} - {endPageNumber} of{' '}
-                {totalCount}
-            </div>
-        ) : null;
+        totalCount > 0
+        ? totalCount < endPageNumber
+            ? (
+                <div>
+                    {totalCount} Items
+                </div>
+            )
+            :
+            (
+                <div>
+                    Items {startPageNumber} - {endPageNumber} of{' '}
+                    {totalCount}
+                </div>
+            ) : null;
 
     const categoryDescriptionElement = categoryDescription ? (
         <RichContent html={categoryDescription} />
@@ -141,12 +149,9 @@ const CategoryContent = props => {
         totalPagesFromData
     ]);
 
-    const categoryMetaTitle = get(props, 'data.category.meta_title', '');
-
     return (
         <Fragment>
             <Breadcrumbs categoryId={categoryId} />
-            <Title>{categoryMetaTitle}</Title>
             <div className={classes.root}>
                 <div className={classes.contentWrapper}>
                     <div className={classes.sidebar}>

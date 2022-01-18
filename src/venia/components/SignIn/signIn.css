@@ -27,9 +27,17 @@
 }
 
 .modal_active {
-    visibility: visible;
     composes: modal;
+    visibility: visible;
     opacity: 0.9;
+}
+
+.modal_no_popup {
+    composes: modal;
+    visibility: visible;
+    opacity: 0.9;
+    position: relative !important;
+    background-color: inherit !important;
 }
 
 .buttonsContainer {

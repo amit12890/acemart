@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './cartItemList.css'
 
+import { replaceSpecialChars } from '../../../app.utils'
+
 import { get, size } from 'lodash'
 
 
@@ -41,7 +43,7 @@ export default connect(store => {
                                         </div>
                                         <div className={classes.productItemDetails}>
                                             <div className={classes.productName}>
-                                                {get(item, "product.name", '')}
+                                                {replaceSpecialChars(get(item, "product.name", ''))}
                                             </div>
                                             <div className={classes.priceBox}>
                                                 <span className={classes.price}>

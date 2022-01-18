@@ -9,7 +9,7 @@ import gql from '../checkout.gql'
 import { updateCheckoutField } from '../checkout.action'
 import { get, has, size } from 'lodash'
 import { usePlaceOrder } from './checkout.hook'
-import { HOST_URL } from '../../../url.utils'
+import { FRONT_END_HOST_URL, HOST_URL } from '../../../url.utils'
 
 const {
     setPaymentMethodMutation,
@@ -82,8 +82,14 @@ export const usePayPal = () => {
     })
 
     const handleGeneratePayPalToken = useCallback(() => {
-        const returnUrl = `http://0.0.0.0:10000/checkout/success`
-        const cancelUrl = `http://0.0.0.0:10000/checkout`
+        let url
+        if (process.env.NODE_ENV === 'development') {
+            url = "http://0.0.0.0:10000"
+        } else {
+            url = FRONT_END_HOST_URL
+        }
+        const returnUrl = `${url}/checkout/success`
+        const cancelUrl = `${url}/checkout`
         setPaymentMethod({
             variables: {
                 cartId,

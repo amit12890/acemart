@@ -36,12 +36,10 @@
 */
 /* Bootstrap */
  .container {
-     width: 100%;
-     padding-right: 15px;
-    padding-left: 15px;
-     margin-right: auto;
+    width: 100%;
+    margin-right: auto;
     margin-left: auto;
-     max-width: 1140px;
+    padding: 20px 0;
 }
  .columns {
      display: -ms-flexbox;
@@ -120,12 +118,25 @@
     transform: scale3d(1.1,1.1,1);
      -webkit-transform: scale3d(1.1,1.1,1);
 }
- .pageTitleWrapper .pageTitle {
-    font-size: 35px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    margin-top: 1rem;
+.pageTitleWrapper .pageTitle {
+    display: inline-block;
+    position: relative;
+    color: #006;
+    font: 700 24px/1.35 sans-serif;
+    margin-bottom: 25px;
+    margin-top: 0;
 }
+
+.pageTitleWrapper .pageTitle::after {
+    height: 3px;
+    width: 100%;
+    content: "";
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    background: #727171;
+}
+
  .postHolder {
     margin-bottom: 40px;
     /*padding: 20px;

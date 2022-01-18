@@ -52,7 +52,7 @@ const RecentPosts = (props) => {
                                         </div>
                                 } */}
                                 <div className={classes.blockInfo}>
-                                    <h3 className={classes.postItemName}>
+                                    <h3 className={[classes.blueLink, classes.postItemBlueLink].join(" ")}>
                                         <Link className={classes.postItemNameLink} to={new URL(post_url).pathname}>{title}</Link>
                                     </h3>
                                     {/* <div className={classes.blockDate}>

@@ -11,6 +11,7 @@ import CartSummary from '../CartSummary'
 import defaultClasses from './reviewCheckout.css'
 import LoadingButton from '../../LoadingButton'
 import SplitOrder from '../../SplitOrder'
+import Price from '../../../venia/components/Price'
 
 
 const paypal_client = {
@@ -70,8 +71,12 @@ export default connect((store) => {
                         <p>Shipping Method</p>
                     </div>
                     <div className={[classes.contentBlock, classes.shippingMethod].join(" ")}>
-                        <p>{get(selected_shipping_method, "carrier_title", "")}</p>
                         <p>{get(selected_shipping_method, "method_title", "")}</p>
+                        <div>
+                            <Price
+                                currencyCode={get(selected_shipping_method, "amount.currency", "USD")}
+                                value={get(selected_shipping_method, "amount.value", "")} />
+                        </div>
                     </div>
                 </div>
                 {/* billing address */}

@@ -36,7 +36,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
     }, [checkoutSuccessFetching, data])
 
     const incrementId = get(data, "increment_id", "")
-    const pickupDate = get(data, "pickup_datetime", "")
+    const pickupDate = get(data, "pickup_datetime", null)
     console.log("🚀 ~ file: checkoutOrder.js ~ line 40 ~ React.memo ~ pickupDate", pickupDate)
     const billingInfo = get(data, "billing_address", {})
     const shippingInfo = get(data, "shipping_address", {})
@@ -58,7 +58,9 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
             <div className={classes.panelHeader}>
                 <div className={classes.panelLeft}>
                     <div className={classes.orderNumber}><strong>Order Number: </strong>{incrementId}</div>
-                    <div className={classes.estimateddate}><strong>Estimated Pickup date: </strong>{pickupDate}</div>
+                    {!!pickupDate && (
+                        <div className={classes.estimateddate}><strong>Estimated Pickup date: </strong>{pickupDate}</div>
+                    )}
                 </div>
                 <div className={classes.panelRight}>
                     <div className={classes.barcodeWrapper}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Disqus from 'disqus-react';
+import { DiscussionEmbed } from 'disqus-react';
 
 import { useBlogConfig } from '../../../hooks/useBlogConfig';
 
@@ -15,7 +15,7 @@ const DisqusComments = (props) => {
     }
 
     return (
-        <Disqus.DiscussionEmbed
+        <DiscussionEmbed
             shortname={disqusShortname}
             config={disqusConfig}
         />

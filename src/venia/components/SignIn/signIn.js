@@ -21,6 +21,7 @@ import defaultClasses from './signIn.css';
 
 
 const SignIn = props => {
+    const { isPopup } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const { setDefaultUsername, showCreateAccount, showForgotPassword } = props;
 
@@ -43,7 +44,7 @@ const SignIn = props => {
 
     if (isBusy) {
         return (
-            <div className={classes.modal_active}>
+            <div className={isPopup ? classes.modal_active : classes.modal_no_popup}>
                 <LoadingIndicator>
                     <FormattedMessage
                         id={'signIn.loadingText'}
@@ -58,10 +59,10 @@ const SignIn = props => {
         root: classes.forgotPasswordButton
     };
 
-    const root_class = props.isPopup ?
+    const root_class = isPopup ?
         classes.root_left_align : classes.root;
 
-    const password_classes = props.isPopup ?
+    const password_classes = isPopup ?
         {
             label: classes.label_left_align,
             input: classes.input_borderPassword
@@ -69,10 +70,10 @@ const SignIn = props => {
         : { label: classes.password_label };
 
     const label_class = {
-        label: props.isPopup
+        label: isPopup
             ? classes.label_left_align : classes.label
     }
-    const input_class = props.isPopup ?
+    const input_class = isPopup ?
         { input: classes.input_border } : {}
 
     return (

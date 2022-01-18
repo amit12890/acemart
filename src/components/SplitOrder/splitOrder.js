@@ -86,7 +86,7 @@ export default ({ data, disableWarnings = false }) => {
                                 Qty
                             </div>
                             <div className={classes.headerTitleCell}>
-                                Sub Total
+                                Subtotal
                             </div>
                         </div>
                     </div>

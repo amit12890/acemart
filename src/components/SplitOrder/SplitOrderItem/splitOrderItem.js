@@ -50,7 +50,7 @@ export default ({ item, isLast }) => {
                         currencyCode={currencyCode}
                         value={price} />
                 </div>
-                <div className={classes.priceBlockCell}>Qty: {qty}</div>
+                <div className={classes.priceBlockCell}>{qty}</div>
                 <div className={classes.priceBlockCell}>
                     <Price
                         currencyCode={currencyCode}
