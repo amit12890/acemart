@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
@@ -20,7 +20,7 @@ const Footer = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useFooter();
 
-    const { data, loading } = useQuery(GET_FOOTER_GQL)
+    const { data, loading } = useQuery(GET_FOOTER_GQL, { fetchPolicy: 'cache-and-network' })
     const footerCol1 = get(data, "footerColumn1.items[0].content", "")
     const footerCol2 = get(data, "footerColumn2.items[0].content", "")
     const footerCol3 = get(data, "footerColumn3.items[0].content", "")
@@ -33,21 +33,21 @@ const Footer = props => {
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     const handleReturnClick = useCallback(() => {
         const ele = document.getElementById('return_policy/');
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     const handleSecurityClick = useCallback(() => {
         const ele = document.getElementById('security/');
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     return (
         <footer className={classes.root}>
