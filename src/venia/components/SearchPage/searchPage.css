@@ -119,6 +119,23 @@
     position: static;
 }
 
+.noResultText {
+    display: flex;
+    align-items: center;
+    background: #fdf0d5;
+    color: #6f4400;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.35;
+    padding: 8px 16px;
+    margin-bottom: 1rem;
+    font-family: sans-serif;
+}
+
+.noResultText span {
+    padding-left: 8px;
+}
+
 
 @media (min-width: 1024px) {
 

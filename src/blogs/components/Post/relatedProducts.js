@@ -37,26 +37,27 @@ const RelatedProducts = props => {
             products: { items: products }
         } = data;
 
-        if(products.length) {
-            return (
-                <div className={classes.related} ref={productContainerRef}>
-                    <div className={classes.blockTitle}>
-                        <strong>Related Products</strong>
-                    </div>
-                    <div className={classes.productList}>
-                        {productContainerRef.current ? (
+        return (
+            <div className={classes.related} ref={productContainerRef}>
+                {(productContainerRef.current && products.length) ?
+                    <>
+                        <div className={classes.blockTitle}>
+                            <strong>Related Products</strong>
+                        </div>
+                        <div className={classes.productList}>
                             <RelatedProductSlider
                                 data={products}
                                 containerWidth={
                                     productContainerRef.current.offsetWidth
                                 }
                             />
-                        ) : null}
-                    </div>
-                </div>
-            );
-        }
-        return null;
+                        </div>
+                    </>
+                    :
+                    null
+                }
+            </div>
+        );
     }
 
     return null;

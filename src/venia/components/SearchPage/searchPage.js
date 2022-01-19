@@ -1,6 +1,7 @@
 import React, { Fragment, Suspense, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { shape, string } from 'prop-types';
+import { AlertTriangle } from 'react-feather';
 
 import { useSearchPage } from '../../../magento/peregrine/talons/SearchPage/useSearchPage';
 
@@ -97,6 +98,12 @@ const SearchPage = props => {
             return (
                 <div className={classes.noResultWrapper}>
 
+                    <div className={classes.noResultText}>
+                        <AlertTriangle />
+                        <span>
+                            Sorry no results found for "{searchTerm}"
+                        </span>
+                    </div>
                     {didYouMean ? (
                         <div className={classes.didYouMean}>
                             Did you mean: <Link to={`${searchPage()}?q=${didYouMean.query}`}><RichText content={didYouMean.highlighted} /></Link>?
@@ -183,9 +190,13 @@ const SearchPage = props => {
                 </div>
             </div>
             <div className={classes.contentWrapper}>
-                <div className={classes.sidebar}>
-                    {maybeSidebar}
-                </div>
+                {maybeSidebar ?
+                    <div className={classes.sidebar}>
+                        {maybeSidebar}
+                    </div>
+                    :
+                    null
+                }
 
                 <div className={classes.searchContent}>
                     <div className={classes.searchBannerWrapper}>
