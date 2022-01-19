@@ -54,6 +54,9 @@
 }
 
 .shippingMethod {
+    padding: 15px;
+    background-color: rgb(var(--color-white));
+    margin-bottom: 15px;
 
 }
 

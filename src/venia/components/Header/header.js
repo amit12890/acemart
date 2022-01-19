@@ -49,15 +49,19 @@ const Header = props => {
                 {size(topHeader1Content) > 0 && (
                     <div className={classes.topPromotion}>
                         <RichContent
-                            classes={{ root: classes.test }}
+                            classes={{ root: classes.pageTopPromotion }}
                             html={topHeader1Content} />
                     </div>
                 )}
                 {size(topHeader2Content) > 0 && (
-                    <RichContent html={topHeader2Content} />
+                    <div className={classes.topMenuWrapper}>
+                        <RichContent
+                            classes={{ root: classes.headerLinks }}
+                            html={topHeader2Content} />
+                    </div>
                 )}
                 {/** This is top CMSMenuBar */}
-                <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
+                {/* <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.topMenuContainer].join(" ")}>
                         <div className={[classes.menuItem, classes.leftMenu].join(" ")}>
                             <ul>
@@ -161,7 +165,7 @@ const Header = props => {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
                 {/** This is top ToolBar with search and other functions */}
                 <div className={[classes.panelWrapper, classes.toolbarWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>

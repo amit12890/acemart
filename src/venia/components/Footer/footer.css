@@ -154,11 +154,12 @@ h4:hover {
 .footerBox:first-child {
     margin-left: 0;
 }
+
 .groupTitle {
     font-size: 18px;
     text-transform: uppercase;
     font-weight: var(--font-weight-regular);
-    color: rgb(var(--color-white));
+    color: rgb(var(--color-white)); 
 }
 .link {
     letter-spacing: .05em;
