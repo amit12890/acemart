@@ -42,6 +42,7 @@ import {
 } from './productQuestions.gql';
 import { partial } from 'lodash-es';
 import RichText from '../../venia/components/RichText';
+import { replaceSpecialChars } from '../../app.utils';
 
 const sortOptions = [
     { value: '1', label: 'Most Recent Questions' },
@@ -431,7 +432,9 @@ const QuestionBlock = ({ questions }) => {
                                                     : `${ansCount} answer`}
                                             </div>
                                             <div className={classes.nickName}>
-                                                by {item.nickname}
+                                                by <RichText content={item.nickname} classes={{
+                                                    root: classes.nickNameRoot
+                                                }} />
                                             </div>
                                             <div className={classes.count}>
                                                 {getDateString(item.date)}
@@ -536,7 +539,7 @@ const QuestionBlock = ({ questions }) => {
                                                               >
                                                                   <RichText
                                                                       content={
-                                                                          ans.content
+                                                                          replaceSpecialChars(ans.content)
                                                                       }
                                                                   />
                                                               </div>
@@ -551,8 +554,9 @@ const QuestionBlock = ({ questions }) => {
                                                                       classes.nickName
                                                                   }
                                                               >
-                                                                  by{' '}
-                                                                  {ans.nickname}
+                                                                by <RichText content={ans.nickname} classes={{
+                                                                    root: classes.nickNameRoot
+                                                                }} />
                                                               </div>
                                                               <div
                                                                   className={
