@@ -148,7 +148,9 @@ const Footer = props => {
                         <div className={classes.blockLeft}>
                             <div className={classes.footerBox}>
                                 {size(footerCol1) > 0 && (
-                                    <RichContent html={footerCol1} />
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol1} />
                                 )}
                                 <h3 className={classes.groupTitle}>Customer Center</h3>
                                 <ul className={classes.groupLinks}>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
-import defaultClasses from '../header/header.css';
+import defaultClasses from '../Header/header.css';
 
 
 export default (props) => {
