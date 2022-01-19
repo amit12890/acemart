@@ -92,8 +92,20 @@ export const useCheckout = () => {
         }
     }, [isDefaultStore])
 
+
+    const fetchCheckout = useCallback(() => {
+        if (isDefaultStore) {
+            console.log("fetching default......")
+            fetchCheckoutDetails()
+        } else {
+            console.log("set pickup store......")
+            setStorePickupAndFetchDetails()
+        }
+    }, [isDefaultStore])
+
     return {
-        isDefaultStore
+        isDefaultStore,
+        fetchCheckout
     }
 }
 

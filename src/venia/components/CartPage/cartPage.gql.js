@@ -30,7 +30,8 @@ export const GET_STORE_CONFIG_DATA = gql`
         storeConfig {
             id
             store_name
-            store_group_name        
+            store_group_name
+            code
         }
     }
 `;

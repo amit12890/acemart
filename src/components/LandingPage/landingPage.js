@@ -19,49 +19,58 @@ import { searchPage } from '../../url.utils';
 
 const toHTML = str => ({ __html: str });
 
-const LandingPage = (props) => {
+const LandingPage = props => {
     const { formatMessage } = useIntl();
-    const history = useHistory()
+    const history = useHistory();
     const classes = useStyle(defaultClasses, props.classes);
-    const { data: landingPageData, loading: dataLoading, error: loadDataError } = useQuery(
-        GET_LANDING_PAGE,
-        {
-            variables: { identifier: "ace-mart-home-page" },
-            fetchPolicy: 'cache-and-network',
-            nextFetchPolicy: 'cache-first'
-        }
-    );
+    const {
+        data: landingPageData,
+        loading: dataLoading,
+        error: loadDataError
+    } = useQuery(GET_LANDING_PAGE, {
+        variables: { identifier: 'ace-mart-home-page' },
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first'
+    });
 
     if (dataLoading) {
         return fullPageLoadingIndicator;
     } else {
-        const html = get(landingPageData, "cmsPage.content", "<div>Content Not Found</div>");
-        // return <div className="wholewrapper" dangerouslySetInnerHTML={toHTML(html)} />;
+        const html = get(
+            landingPageData,
+            'cmsPage.content',
+            '<div>Content Not Found</div>'
+        );
+        const metaTitle = get(landingPageData, 'cmsPage.meta_title', '');
+        const metaDescription = get(
+            landingPageData,
+            'cmsPage.meta_description',
+            ''
+        );
 
         return (
             <div className={classes.homePageWrapper}>
-                <Title>{formatMessage({ id: "landingPage.title" })}</Title>
-                <Meta
-                    name="description"
-                    content={formatMessage({ id: "landingPage.description" })}
-                />
+                <Title>{metaTitle}</Title>
+                <Meta name="description" content={metaDescription} />
                 <RichContent html={html} />
                 <ResourceList
-                    data={get(landingPageData, "blogPosts.items", [])}
-                    onItemClick={(item) => {
+                    data={get(landingPageData, 'blogPosts.items', [])}
+                    onItemClick={item => {
                         // hard replacing url as its blog and may have external website link
-                        window.location.href = get(item, "canonical_url", "")
-                    }} />
+                        window.location.href = get(item, 'canonical_url', '');
+                    }}
+                />
                 <BrandList
-                    data={get(landingPageData, "brand.items", [])}
-                    onItemClick={(brandLabel) => {
+                    data={get(landingPageData, 'brand.items', [])}
+                    onItemClick={brandLabel => {
                         if (brandLabel) {
-                            history.push(`${searchPage()}?q=${brandLabel}`)
+                            history.push(`${searchPage()}?q=${brandLabel}`);
                         }
-                    }} />
+                    }}
+                />
             </div>
-        )
+        );
     }
-}
+};
 
-export default LandingPage
+export default LandingPage;

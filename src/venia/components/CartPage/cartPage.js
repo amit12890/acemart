@@ -31,6 +31,7 @@ import { gql } from '@apollo/client';
 
 
 const DEFAULT_STORE_NAME = "Acemart.com";
+const DEFAULT_STORE_CODE = "default";
 
 const CheckIcon = <Icon size={20} src={Check} />;
 
@@ -148,7 +149,7 @@ const CartPage = props => {
 
     // use is shopping on acemart
     const isShoppingSite =
-        get(data, 'storeConfig.store_name') === DEFAULT_STORE_NAME;
+        get(data, 'storeConfig.code') === DEFAULT_STORE_CODE;
 
     const productListing = hasItems ? (
         <ProductListing

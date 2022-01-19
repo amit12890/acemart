@@ -72,26 +72,18 @@
 .pageTitleWrapper .pageTitle {
    display: inline-block;
    position: relative;
-   color: #006;
-   font: 700 24px/1.35 sans-serif;
    margin-bottom: 25px;
    margin-top: 0;
    padding-bottom: 7px;
+   font-size: var(--fontSize-600);
+   color: rgb(var(--theme-color-primary));
+   font-weight: var(--font-weight-bold);
+   font-family: sans-serif;
 }
 @media (max-width: 767.98px) {
     .pageTitleWrapper .pageTitle {
-       font-size: 20px;
+      font-size: var(--fontSize-600);
    }
-}
-
-.pageTitleWrapper .pageTitle::after {
-   height: 3px;
-   width: 100px;
-   content: "";
-   bottom: 0;
-   position: absolute;
-   left: 0;
-   background: #727171;
 }
 
 /* Category */
