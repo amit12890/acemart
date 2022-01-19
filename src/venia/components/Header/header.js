@@ -38,7 +38,8 @@ const Header = props => {
         searchTriggerRef
     } = useHeader();
 
-    const { loading, data } = useQuery(TOP_HEADERS_GQL)
+    const { loading, data } = useQuery(TOP_HEADERS_GQL, { fetchPolicy: 'cache-and-network' })
+    console.log("🚀 ~ file: header.js ~ line 42 ~ data", data)
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
     const topHeader2Content = get(data, "topHeader2.items[0].content", "")
 
