@@ -70,9 +70,11 @@ export default connect(store => {
                         }
                         {size(appliedTaxes) > 0 &&
                             appliedTaxes.map((tax, index) => {
+                                console.log("🚀 ~ file: cartSummary.js ~ line 73 ~ appliedTaxes.map ~ tax", tax)
+                                const label = tax.__typename === "CartTaxItem" ? "Tax" : tax.label
                                 return (
                                     <div className={classes.orderTotalItems}>
-                                        <div className={classes.mark}>{get(tax, "label", '')}</div>
+                                        <div className={classes.mark}>{label}</div>
                                         <div className={classes.amount}>
                                             <span className={classes.price}>${get(tax, "amount.value", '')}</span>
                                         </div>
@@ -81,7 +83,7 @@ export default connect(store => {
                             })
                         }
 
-                        {size(selectedShippingMethod) > 0 &&
+                        {size(selectedShippingMethod.amount.value) > 0 &&
                             <div className={classes.orderTotalItems}>
                                 <div className={classes.mark}>
                                     <div className={classes.markTitle}>Shipping</div>
