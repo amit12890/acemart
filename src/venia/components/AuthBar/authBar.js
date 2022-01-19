@@ -6,6 +6,7 @@ import { ArrowRight as ArrowRightIcon } from 'react-feather';
 import { useAuthBar } from '@magento/peregrine/lib/talons/AuthBar/useAuthBar';
 
 import { useStyle } from '../../classify';
+import StoreSwitcher from '../Header/storeSwitcher';
 import AccountChip from '@magento/venia-ui/lib/components/AccountChip';
 import Icon from '../Icon';
 import defaultClasses from './authBar.css';
@@ -59,7 +60,12 @@ const AuthBar = props => {
         </button>
     );
 
-    return <div className={classes.root}>{buttonElement}</div>;
+    return (
+        <div className={classes.root}>
+            <StoreSwitcher />
+            {buttonElement}
+        </div>
+    )
 };
 
 export default AuthBar;

@@ -1,5 +1,5 @@
 import React, { Fragment, Suspense, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { shape, string } from 'prop-types';
 
 import { useSearchPage } from '../../../magento/peregrine/talons/SearchPage/useSearchPage';
@@ -9,7 +9,7 @@ import defaultClasses from './searchPage.css';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
-import { Title } from '@magento/venia-ui/lib/components/Head';
+import { Title, Meta } from '@magento/venia-ui/lib/components/Head';
 
 import SearchProducts from './searchProducts';
 
@@ -34,6 +34,8 @@ const POPULAR_SEARCH = [
 const SearchPage = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useSearchPage();
+    const { formatMessage } = useIntl();
+
     const {
         products,
         searchTerm,
@@ -167,6 +169,10 @@ const SearchPage = props => {
     return (
         <div className={classes.root}>
             <Title>Search : {searchTerm}</Title>
+            <Meta
+                name="description"
+                content={formatMessage({ id: "landingPage.description" })}
+            />
             <div className={classes.searchHeaderWrapper}>
                 <div className={classes.searchHeader}>
                     <h1 className={classes.title}>
