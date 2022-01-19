@@ -189,7 +189,18 @@ margin-top: 22px;
 .billingActionToolbar {
     margin-top: 0;
     margin-bottom: 15px;
+    flex-basis: 100%;
 }
+
+.TopActionToolbar .secondary {
+   margin-bottom: 15px;
+
+}
+
+.TopActionToolbar .secondary .action{
+    margin-left: 0;
+}
+
 
 .loadingButton {
     min-width: 15rem;

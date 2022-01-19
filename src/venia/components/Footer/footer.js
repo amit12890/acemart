@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
@@ -20,7 +20,7 @@ const Footer = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useFooter();
 
-    const { data, loading } = useQuery(GET_FOOTER_GQL)
+    const { data, loading } = useQuery(GET_FOOTER_GQL, { fetchPolicy: 'cache-and-network' })
     const footerCol1 = get(data, "footerColumn1.items[0].content", "")
     const footerCol2 = get(data, "footerColumn2.items[0].content", "")
     const footerCol3 = get(data, "footerColumn3.items[0].content", "")
@@ -33,21 +33,21 @@ const Footer = props => {
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     const handleReturnClick = useCallback(() => {
         const ele = document.getElementById('return_policy/');
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     const handleSecurityClick = useCallback(() => {
         const ele = document.getElementById('security/');
         if (ele) {
             ele.scrollIntoView({ behavior: 'smooth' });
         }
-    },[])
+    }, [])
 
     return (
         <footer className={classes.root}>
@@ -147,10 +147,12 @@ const Footer = props => {
                     <div className={[classes.contentBlock, classes.blockMiddle].join(" ")}>
                         <div className={classes.blockLeft}>
                             <div className={classes.footerBox}>
-                                {/* {size(footerCol1) > 0 && (
-                                    <RichContent html={footerCol1} />
-                                )} */}
-                                <h3 className={classes.groupTitle}>Customer Center</h3>
+                                {size(footerCol1) > 0 && (
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol1} />
+                                )}
+                                {/* <h3 className={classes.groupTitle}>Customer Center</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -189,15 +191,17 @@ const Footer = props => {
                                             Shipping Policies
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div className={classes.footerBox}>
-                                {/* {size(footerCol2) > 0 && (
-                                    <RichContent html={footerCol2} />
-                                )} */}
+                                {size(footerCol2) > 0 && (
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol2} />
+                                )}
 
-                                <h3 className={classes.groupTitle}>Company Info</h3>
+                                {/* <h3 className={classes.groupTitle}>Company Info</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -227,14 +231,16 @@ const Footer = props => {
                                             FAQs
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div className={classes.footerBox}>
-                                {/* {size(footerCol3) > 0 && (
-                                    <RichContent html={footerCol3} />
-                                )} */}
-                                <h3 className={classes.groupTitle}>Tools & Services</h3>
+                                {size(footerCol3) > 0 && (
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol3} />
+                                )}
+                                {/* <h3 className={classes.groupTitle}>Tools & Services</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>
                                         <Link
@@ -264,14 +270,16 @@ const Footer = props => {
                                             Commercial Kitchen Design
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div className={classes.footerBox}>
-                                {/* {size(footerCol4) > 0 && (
-                                    <RichContent html={footerCol4} />
-                                )} */}
-                                <h3 className={classes.groupTitle}>Contact Us</h3>
+                                {size(footerCol4) > 0 && (
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol4} />
+                                )}
+                                {/* <h3 className={classes.groupTitle}>Contact Us</h3>
                                 <div className={classes.storeAddress}>
                                     <p>2653 Austin Hwy</p>
                                     <p>San Antonio, TX 78218</p>
@@ -325,7 +333,7 @@ const Footer = props => {
                                             <span>Linkedin</span>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
 
 

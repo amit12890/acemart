@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './cartSummary.css'
 
 import { get, size } from 'lodash'
+import { Accordion, Section } from '../../../venia/components/Accordion';
+import CouponCode from '../../../venia/components/CartPage/PriceAdjustments/CouponCode';
+import LoadingIndicator from '../../../venia/components/LoadingIndicator';
+import { formatMessage } from '@formatjs/intl';
 
 export default connect(store => {
 
@@ -15,6 +19,7 @@ export default connect(store => {
 })(React.memo(({
     shipping_addresses,
     prices,
+    refetchCheckout,
     dispatch
 }) => {
     const classes = useStyle(defaultClasses)
@@ -25,6 +30,20 @@ export default connect(store => {
     return (
         <div className={[classes.block, classes.orderSummary].join(" ")}>
             <div className={classes.blockcontent}>
+                <Accordion canOpenMultiple={true}>
+                    <Section
+                        id={'coupon_code'}
+                        title={"Apply Discount Code"}
+                    >
+                        <Suspense fallback={<LoadingIndicator />}>
+                            <CouponCode
+                                setIsCartUpdating={() => { }}
+                                postSubmit={() => {
+                                    refetchCheckout()
+                                }} />
+                        </Suspense>
+                    </Section>
+                </Accordion>
                 <div id="cart-totals" className={classes.orderTotalWrapper}>
                     <div className={classes.orderTotal}>
                         <div className={classes.orderTotalItems}>
@@ -66,9 +85,6 @@ export default connect(store => {
                             <div className={classes.orderTotalItems}>
                                 <div className={classes.mark}>
                                     <div className={classes.markTitle}>Shipping</div>
-                                    <span className={classes.carrierTitle}>
-                                        {get(selectedShippingMethod, "carrier_title", "")}
-                                    </span> -
                                     <span className={classes.methodTitle}>
                                         {get(selectedShippingMethod, "method_title", "")}</span>
                                 </div>
@@ -94,6 +110,6 @@ export default connect(store => {
 
             </div>
 
-        </div>
+        </div >
     )
 }))

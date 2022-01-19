@@ -131,7 +131,7 @@ const CheckoutAddressForm = props => {
             <div className={classes.formAddressEdit}>
                 <fieldset className={[classes.fieldset, classes.billingFieldset].join(" ")}>
                     {showSameAsButton && (
-                        <div className={[classes.actionToolbar, classes.billingActionToolbar].join(" ")}>
+                        <div className={[classes.actionToolbar, classes.TopActionToolbar, classes.billingActionToolbar].join(" ")}>
                             <div className={classes.secondary}>
                                 <button className={[classes.action, classes.secondary].join(" ")} onClick={onSameAsButtonClick}><span>Same as Shipping Address</span></button>
                             </div>
@@ -145,7 +145,7 @@ const CheckoutAddressForm = props => {
                     */}
                     <TextInput
                         containerClass={[classes.field, classes.firstName].join(" ")}
-                        label="First Name"
+                        label="First Name*"
                         type="text"
                         className="input-text required-entry"
                         value={firstname}
@@ -158,7 +158,7 @@ const CheckoutAddressForm = props => {
 
                     <TextInput
                         containerClass={[classes.field, classes.lastName].join(" ")}
-                        label="Last Name"
+                        label="Last Name*"
                         type="text"
                         className="input-text required-entry"
                         value={lastname}
@@ -171,7 +171,7 @@ const CheckoutAddressForm = props => {
 
                     <TextInput
                         containerClass={[classes.field, classes.telephone].join(" ")}
-                        label="Mobile"
+                        label="Mobile*"
                         type="text"
                         className="input-text required-entry"
                         value={mobile}
@@ -190,7 +190,7 @@ const CheckoutAddressForm = props => {
 
                     <TextInput
                         containerClass={[classes.field, classes.street, classes.streetLine1].join(" ")}
-                        label="Street"
+                        label="Street*"
                         type="text"
                         className="input-text required-entry"
                         value={street[0]}
@@ -199,7 +199,7 @@ const CheckoutAddressForm = props => {
                         onChange={(e) => changeStreet(e.target.value, 0)}
                         name="street[0]"
                         htmlFor="street[0]"
-                        errorMessage={get(errors, "street[0]", '')} />
+                        errorMessage={get(errors, "street", '')} />
 
                     <TextInput
                         containerClass={[classes.field, classes.street, classes.streetLine2].join(" ")}
@@ -210,12 +210,11 @@ const CheckoutAddressForm = props => {
                         controlClasses={classes.control}
                         onChange={(e) => changeStreet(e.target.value, 1)}
                         name="street[1]"
-                        htmlFor="street[1]"
-                        errorMessage={get(errors, "street[1]", '')} />
+                        htmlFor="street[1]" />
 
                     <TextInput
                         containerClass={[classes.field, classes.city].join(" ")}
-                        label="City"
+                        label="City*"
                         type="text"
                         className="input-text required-entry"
                         value={city}
@@ -234,7 +233,7 @@ const CheckoutAddressForm = props => {
                     */}
 
                     <SearchablePicker
-                        label="Country"
+                        label="Country*"
                         containerClass={[classes.field, classes.country].join(" ")}
                         labelClass={classes.label}
                         controlClasses={classes.control}
@@ -255,7 +254,7 @@ const CheckoutAddressForm = props => {
                     {hasCountryRegions ? (
 
                         <SearchablePicker
-                            label="Region"
+                            label="Region*"
                             containerClass={[classes.field, classes.state].join(" ")}
                             labelClass={classes.label}
                             controlClasses={classes.control}
@@ -271,7 +270,7 @@ const CheckoutAddressForm = props => {
                     ) : (
                         <TextInput
                             containerClass={[classes.field, classes.region].join(" ")}
-                            label="Region"
+                            label="Region*"
                             type="text"
                             className="input-text required-entry"
                             value={get(region, "name", '')}
@@ -296,7 +295,7 @@ const CheckoutAddressForm = props => {
 
                     <TextInput
                         containerClass={[classes.field, classes.zip].join(" ")}
-                        label="Zip"
+                        label="Zip*"
                         type="text"
                         className="input-text required-entry"
                         value={zip}
