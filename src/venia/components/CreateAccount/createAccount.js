@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from 'informed';
 import { func, shape, string, bool } from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation, useParams } from 'react-router-dom';
 import zxcvbn from 'zxcvbn';
 
 import { useStyle } from '../../classify';
@@ -28,10 +28,12 @@ import { isValidEmail } from '../../../app.utils';
 
 
 const CreateAccount = props => {
+    const params = useLocation().state
+
     const [passwordScore, setPasswordScore] = useState(null);
 
     const talonProps = useCreateAccount({
-        initialValues: props.initialValues,
+        initialValues: { ...props.initialValues, ...params },
         onSubmit: props.onSubmit,
         onCancel: props.onCancel
     });

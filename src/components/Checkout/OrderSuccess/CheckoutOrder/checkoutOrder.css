@@ -8,6 +8,7 @@
 .panelHeader {
     padding: 0.5rem;
     display: flex;
+    align-items: center;
 }
 
 .panelLeft {
@@ -19,7 +20,8 @@
 }
 
 .orderNumber {
-
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .estimateddate {
@@ -173,8 +175,7 @@
      font-size: var(--fontSize-200);
  }
  .value {
-    flex-basis: 150px; 
+    flex-basis: 110px; 
     text-align: right;
-    font-weight: bold;
     font-size: var(--fontSize-200);
  }
