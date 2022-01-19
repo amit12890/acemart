@@ -5,7 +5,7 @@ import { number, shape, string } from 'prop-types';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import RichContent from '../../venia/components/RichContent';
 import CategoryList from '@magento/venia-ui/lib/components/CategoryList';
-import { Meta, StoreTitle } from '@magento/venia-ui/lib/components/Head';
+import { Meta, Title } from '@magento/venia-ui/lib/components/Head';
 import { useStyle } from '../../venia/classify';
 import { useIntl } from 'react-intl';
 
@@ -59,13 +59,11 @@ const CMSPage = props => {
                 <h1 className={classes.heading}>{content_heading}</h1>
             ) : null;
 
-        const pageTitle = meta_title || title;
-
         if (url_key === 'store-locator') {
             return (
                 <Fragment>
-                    <StoreTitle>{pageTitle}</StoreTitle>
-                    <Meta name="title" content={pageTitle} />
+                    <Title>{meta_title}</Title>
+                    <Meta name="title" content={meta_title} />
                     <Meta name="description" content={meta_description} />
                     <CmsContent />
                 </Fragment>
@@ -73,8 +71,8 @@ const CMSPage = props => {
         }
         return (
             <Fragment>
-                <StoreTitle>{pageTitle}</StoreTitle>
-                <Meta name="title" content={pageTitle} />
+                <Title>{meta_title}</Title>
+                <Meta name="title" content={meta_title} />
                 <Meta name="description" content={meta_description} />
                 {headingElement}
                 <div className={classes.cmswrapper}>
