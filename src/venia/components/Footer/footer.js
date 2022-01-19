@@ -196,7 +196,9 @@ const Footer = props => {
 
                             <div className={classes.footerBox}>
                                 {size(footerCol2) > 0 && (
-                                    <RichContent html={footerCol2} />
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol2} />
                                 )}
 
                                 {/* <h3 className={classes.groupTitle}>Company Info</h3>
@@ -234,7 +236,9 @@ const Footer = props => {
 
                             <div className={classes.footerBox}>
                                 {size(footerCol3) > 0 && (
-                                    <RichContent html={footerCol3} />
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol3} />
                                 )}
                                 {/* <h3 className={classes.groupTitle}>Tools & Services</h3>
                                 <ul className={classes.groupLinks}>
@@ -271,7 +275,9 @@ const Footer = props => {
 
                             <div className={classes.footerBox}>
                                 {size(footerCol4) > 0 && (
-                                    <RichContent html={footerCol4} />
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol4} />
                                 )}
                                 {/* <h3 className={classes.groupTitle}>Contact Us</h3>
                                 <div className={classes.storeAddress}>
