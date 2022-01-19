@@ -10,9 +10,10 @@ import { format } from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { useStyle } from '@magento/venia-ui/lib/classify'
 import defaultClasses from './checkoutOrder.css'
+import { replaceSpecialChars } from '../../../../app.utils'
 
 
-export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange }) => {
+export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange, isDefaultStore }) => {
     const classes = useStyle(propsClasses, defaultClasses)
     const { fetchCheckoutSuccess, data, checkoutSuccessFetching } = useCheckoutSuccess()
     console.log("🚀 ~ file: checkoutOrder.js ~ line 14 ~ data", data)
@@ -58,7 +59,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
             <div className={classes.panelHeader}>
                 <div className={classes.panelLeft}>
                     <div className={classes.orderNumber}><strong>Order Number: </strong>{incrementId}</div>
-                    {!!pickupDate && (
+                    {!!pickupDate && !isDefaultStore && (
                         <div className={classes.estimateddate}><strong>Estimated Pickup date: </strong>{pickupDate}</div>
                     )}
                 </div>
@@ -121,7 +122,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                                 </div>
                             )}
                             <div className={classes.city}>
-                                <span>{get(shippingInfo, "city", "")} {get(shippingInfo, "region", "")},  {get(shippingInfo, "postcode", "")}</span>
+                                <span>{get(shippingInfo, "city", "")}, {get(shippingInfo, "region", "")}  {get(shippingInfo, "postcode", "")}</span>
                             </div>
                             <div className={classes.telephone}>
                                 {get(shippingInfo, "telephone", "")}
@@ -151,7 +152,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         return (
                             <div className={classes.tablebody} key={item.id}>
                                 <div className={classes.productDetails}>
-                                    <div className={classes.productName}>{get(item, "product_name", "")}</div>
+                                    <div className={classes.productName}>{replaceSpecialChars(get(item, "product_name", ""))}</div>
                                     <div className={classes.sku}>{get(item, "product_sku", "")}</div>
                                 </div>
                                 <div className={classes.price}>
@@ -173,7 +174,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                     <div className={classes.tableFooter}>
                         <div className={classes.tableRow}>
                             <div className={classes.mark}>
-                                <span>Subtotal</span>
+                                <span>Subtotal:</span>
                             </div>
                             <div className={classes.value}>
                                 <Price
@@ -183,7 +184,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         </div>
                         <div className={classes.tableRow}>
                             <div className={classes.mark}>
-                                <span>Shipping</span>
+                                <span>Shipping:</span>
                             </div>
                             <div className={classes.value}>
                                 {isFreeShipping ? (
@@ -197,7 +198,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         </div>
                         <div className={classes.tableRow}>
                             <div className={classes.mark}>
-                                <span>Tax</span>
+                                <span>Tax:</span>
                             </div>
                             <div className={classes.value}>
                                 <Price
@@ -207,7 +208,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         </div>
                         <div className={classes.tableRow}>
                             <div className={classes.mark}>
-                                <span>Total</span>
+                                <span>Total:</span>
                             </div>
                             <div className={classes.value}>
                                 <Price
