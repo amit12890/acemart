@@ -11,14 +11,6 @@
     
 }
 
-.open {
-    composes: root;
-}
-
-.closed {
-    composes: root;
-}
-
 .toolbar {
     align-content: center;
     align-items: center;
@@ -330,7 +322,7 @@
 @media (max-width: 1023px) {
 
     .root {
-        display: none;
+        /* display: none; */
     }
 
     .headerNotice,
