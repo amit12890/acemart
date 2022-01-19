@@ -17,7 +17,7 @@ import { myOrderDetailsPage } from '../../../url.utils';
 import { useReorderItems } from "./data/useReorderItems"
 
 const OrderRow = props => {
-    const { order, tab, showDetails } = props;
+    const { order, tab, showDetails, orderNumberClickable = true } = props;
     const { formatMessage } = useIntl();
     const {
         invoices,
@@ -103,9 +103,13 @@ const OrderRow = props => {
                         defaultMessage={'Order #'}
                     />
                 </span>
-                <Link className={classes.orderAction} to={myOrderDetailsPage("view", order.id)}>
+                {orderNumberClickable ?
+                    <Link className={classes.orderAction} to={myOrderDetailsPage("view", order.id)}>
+                        <span className={classes.orderNumber}>{orderNumber}</span>
+                    </Link>
+                    :
                     <span className={classes.orderNumber}>{orderNumber}</span>
-                </Link>
+                }
                 <div className={classes.reorderAction}
                     style={{ cursor: "pointer" }}
                     onClick={handleReorder(orderNumber)}>

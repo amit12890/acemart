@@ -27,7 +27,7 @@ const OrderDetailsPage = () => {
     if (order) {
         return (
             <OrderHistoryContextProvider>
-                <OrderRow order={order} tab={tab} showDetails={true} />
+                <OrderRow order={order} tab={tab} showDetails={true} orderNumberClickable={false} />
                 <div className={classes.actionToolbar}>
                     <Link to={myOrderListPage()}>
                         <Button>Go To Orders</Button>
