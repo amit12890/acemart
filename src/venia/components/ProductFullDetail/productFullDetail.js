@@ -61,6 +61,8 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
     quantity: 'The requested quantity is not available.'
 };
 
+const DEFAULT_STORE_CODE = "default";
+
 const ProductFullDetail = props => {
     const { product } = props;
 
@@ -605,7 +607,7 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
-                                    {(get(storeConfig, "data.storeConfig.store_name") === "Acemart.com" && product.ship_time) ? (
+                                    {(get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && product.ship_time) ? (
                                         <div className={classes.apSectionRow}>
                                             <div className={classes.extraShipInfo}>
                                                 <RichText content={product.ship_time} />
