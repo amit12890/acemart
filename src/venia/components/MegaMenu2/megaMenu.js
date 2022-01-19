@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useMegaMenu } from '@magento/peregrine/lib/talons/MegaMenu/useMegaMenu';
+import { useMegaMenu } from '../../../magento/peregrine/talons/MegaMenu/useMegaMenu';
 import { useStyle } from '../../classify';
 import defaultClasses from './megaMenu.css';
 import MegaMenuItem from './megaMenuItem';
@@ -34,15 +34,15 @@ const MegaMenu = props => {
 
     const items = megaMenuData.children
         ? megaMenuData.children.map(category => {
-              return (
-                  <MegaMenuItem
-                      category={category}
-                      activeCategoryId={activeCategoryId}
-                      mainNavWidth={mainNavWidth}
-                      key={category.id}
-                  />
-              );
-          })
+            return (
+                <MegaMenuItem
+                    category={category}
+                    activeCategoryId={activeCategoryId}
+                    mainNavWidth={mainNavWidth}
+                    key={category.id}
+                />
+            );
+        })
         : null;
 
     return (
