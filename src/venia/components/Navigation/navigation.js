@@ -1,17 +1,19 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { shape, string } from 'prop-types';
 import { useNavigation } from '@magento/peregrine/lib/talons/Navigation/useNavigation';
 
-import { useStyle } from '../../classify';
+import MobResourcesTab from './mobResourcesTab';
 import AuthBar from '../AuthBar';
-import CategoryTree from '@magento/venia-ui/lib/components/CategoryTree';
 import CurrencySwitcher from '../Header/currencySwitcher';
-import StoreSwitcher from '../Header/storeSwitcher';
 import LoadingIndicator from '../LoadingIndicator';
 import NavHeader from './navHeader';
+
+import CategoryTree from '@magento/venia-ui/lib/components/CategoryTree';
+import { useStyle } from '../../classify';
 import defaultClasses from './navigation.css';
 
 const AuthModal = React.lazy(() => import('@magento/venia-ui/lib/components/AuthModal'));
+
 
 const Navigation = props => {
     const {
@@ -30,6 +32,7 @@ const Navigation = props => {
         showSignIn,
         view
     } = useNavigation();
+    const [selectedTab, onTabSelect] = useState(1)
 
     const classes = useStyle(defaultClasses, props.classes);
     const rootClassName = isOpen ? classes.root_open : classes.root;
@@ -55,22 +58,26 @@ const Navigation = props => {
         <aside className={rootClassName}>
             <header className={classes.header}>
                 <NavHeader
+                    onTabSelect={onTabSelect}
                     isTopLevel={isTopLevel}
                     onBack={handleBack}
                     view={view}
                 />
             </header>
-            <div className={bodyClassName}>
-                <CategoryTree
-                    categoryId={categoryId}
-                    onNavigate={handleClose}
-                    setCategoryId={setCategoryId}
-                    updateCategories={catalogActions.updateCategories}
-                />
-            </div>
+            {selectedTab === 1 ?
+                <div className={bodyClassName}>
+                    <CategoryTree
+                        categoryId={categoryId}
+                        onNavigate={handleClose}
+                        setCategoryId={setCategoryId}
+                        updateCategories={catalogActions.updateCategories}
+                    />
+                </div>
+                :
+                <MobResourcesTab />
+            }
             <div className={classes.footer}>
                 <div className={classes.switchers}>
-                    <StoreSwitcher />
                     <CurrencySwitcher />
                 </div>
                 <AuthBar
