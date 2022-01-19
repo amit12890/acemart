@@ -190,9 +190,13 @@ const SearchPage = props => {
                 </div>
             </div>
             <div className={classes.contentWrapper}>
-                <div className={classes.sidebar}>
-                    {maybeSidebar}
-                </div>
+                {maybeSidebar ?
+                    <div className={classes.sidebar}>
+                        {maybeSidebar}
+                    </div>
+                    :
+                    null
+                }
 
                 <div className={classes.searchContent}>
                     <div className={classes.searchBannerWrapper}>
