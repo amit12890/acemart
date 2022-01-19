@@ -25,7 +25,7 @@ import StoreSwitcher from './storeSwitcher';
 import CurrencySwitcher from './currencySwitcher';
 import baloonIcon from '../../../assets/balloons.png';
 import truckIcon from '../../../assets/truckicon.png';
-import MegaMenu from '../MegaMenu2';
+import MegaMenu from '../MegaMenu';
 
 const Header = props => {
     const {
