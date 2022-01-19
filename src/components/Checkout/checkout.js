@@ -52,7 +52,7 @@ export default connect(store => ({
 }) => {
     const history = useHistory()
     const [{ isSignedIn }] = useUserContext()
-    const { isDefaultStore } = useCheckout()
+    const { isDefaultStore, fetchCheckout } = useCheckout()
 
     const {
         customerAddresses,
@@ -72,12 +72,18 @@ export default connect(store => ({
     const [showReviewCheckout, setReviewCheckout] = useState(false)
 
     let isEmailAdded = size(email) > 0
+    console.log("🚀 ~ file: checkout.js ~ line 75 ~ isEmailAdded", isEmailAdded)
     let isShippingAddressSelected = size(shipping_addresses) > 0 && !settingShippingAddress
+    console.log("🚀 ~ file: checkout.js ~ line 76 ~ isShippingAddressSelected", isShippingAddressSelected)
     let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0 && !settingShippingMethod
-
-    let isBillingAddressSelected = size(billing_address) > 0 && !settingBillingAddress
-    let isPaymentMethodSelected = size(selected_payment_method) > 0 && !settingPaymentMethod
+    console.log("🚀 ~ file: checkout.js ~ line 77 ~ isShippingMethodSelected", isShippingMethodSelected)
+    // shipping method and email address add dependancy added
+    let isBillingAddressSelected = size(billing_address) > 0 && !settingBillingAddress && isShippingAddressSelected && isEmailAdded
+    console.log("🚀 ~ file: checkout.js ~ line 79 ~ isBillingAddressSelected", isBillingAddressSelected)
+    let isPaymentMethodSelected = size(selected_payment_method) > 0 && !settingPaymentMethod && isBillingAddressSelected
+    console.log("🚀 ~ file: checkout.js ~ line 80 ~ isPaymentMethodSelected", isPaymentMethodSelected)
     let enablePlaceOrderButton = isShippingAddressSelected && isBillingAddressSelected && isPaymentMethodSelected && isShippingMethodSelected && isEmailAdded
+    console.log("🚀 ~ file: checkout.js ~ line 81 ~ enablePlaceOrderButton", enablePlaceOrderButton)
 
 
     let existBillingAddress = billing_address
@@ -303,7 +309,8 @@ export default connect(store => ({
                         )}
                     </div>
                     <div className={classes.checkoutSidebar} >
-                        <CartSummary />
+                        <CartSummary
+                            refetchCheckout={fetchCheckout} />
                         <CartItemList />
                     </div>
                 </div>

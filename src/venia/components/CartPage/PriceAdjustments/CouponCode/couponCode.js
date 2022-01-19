@@ -4,7 +4,7 @@ import { gql } from '@apollo/client';
 import { AlertCircle as AlertCircleIcon } from 'react-feather';
 import { useToasts } from '@magento/peregrine';
 import { deriveErrorMessage } from '@magento/peregrine/lib/util/deriveErrorMessage';
-import { useCouponCode } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/useCouponCode';
+import { useCouponCode } from '../../../../../magento/peregrine/talons/CartPage/PriceAdjustments/useCouponCode';
 
 import { useStyle } from '../../../../classify';
 
@@ -19,6 +19,7 @@ import { CartPageFragment } from '../../cartPageFragments.gql';
 import { AppliedCouponsFragment } from './couponCodeFragments';
 
 import defaultClasses from './couponCode.css';
+import { size } from 'lodash';
 
 const errorIcon = (
     <Icon
@@ -111,13 +112,24 @@ const CouponCode = props => {
         errors,
         handleApplyCoupon,
         handleRemoveCoupon,
-        removingCoupon
+        removingCoupon,
+        applyCouponCalled,
+        removeCouponCalled
     } = talonProps;
+    console.log("🚀 ~ file: couponCode.js ~ line 119 ~ applyCouponCalled",
+        removeCouponCalled, applyCouponCalled)
     const { formatMessage } = useIntl();
 
     const removeCouponError = deriveErrorMessage([
         errors.get('removeCouponMutation')
     ]);
+
+    useEffect(() => {
+        if (applyCouponCalled || removeCouponCalled) {
+            console.log("coupon code updated....")
+            props.postSubmit()
+        }
+    }, [applyCouponCalled, removeCouponCalled])
 
     useEffect(() => {
         if (removeCouponError) {
@@ -206,10 +218,17 @@ const CouponCode = props => {
                         priority={'normal'}
                         type={'submit'}
                     >
-                        <FormattedMessage
-                            id={'couponCode.apply'}
-                            defaultMessage={'Apply'}
-                        />
+                        {applyingCoupon ? (
+                            <FormattedMessage
+                                id={'couponCode.applying'}
+                                defaultMessage={'Applying'}
+                            />
+                        ) : (
+                            <FormattedMessage
+                                id={'couponCode.apply'}
+                                defaultMessage={'Apply'}
+                            />
+                        )}
                     </Button>
                 </Field>
             </Form>
