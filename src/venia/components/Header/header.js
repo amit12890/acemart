@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from 'react';
+import React, { Fragment } from 'react';
 import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -13,8 +13,6 @@ import { useHeader } from '@magento/peregrine/lib/talons/Header/useHeader';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import Image from '../Image';
 import RichContent from '../RichContent';
-import CmsBlock from '@magento/venia-ui/lib/components/CmsBlock'
-
 
 import { TOP_HEADERS_GQL } from './header.gql';
 import { useStyle } from '../../classify';
@@ -23,9 +21,9 @@ import PageLoadingIndicator from '@magento/venia-ui/lib/components/PageLoadingIn
 import SearchBar from '../SearchBar';
 import StoreSwitcher from './storeSwitcher';
 import CurrencySwitcher from './currencySwitcher';
-import baloonIcon from '../../../assets/balloons.png';
 import truckIcon from '../../../assets/truckicon.png';
 import MegaMenu from '../MegaMenu';
+
 
 const Header = props => {
     const {
@@ -49,11 +47,6 @@ const Header = props => {
         <PageLoadingIndicator />
     ) : null;
 
-
-    // mapping classes with js as pagebuilder not providing css style add
-    // const mapClasses = cssClasses.map((className) => {
-    //     return get(classes, className, className)
-    // })
     return (
         <Fragment>
             <header className={rootClass}>
@@ -67,26 +60,6 @@ const Header = props => {
                 {size(topHeader2Content) > 0 && (
                     <RichContent html={topHeader2Content} />
                 )}
-                {/** This is top NoticeBar */}
-                {/* <div className={[classes.panelWrapper, classes.headerNotice].join(" ")}>
-                    <div className={[classes.panelBody, classes.pageTop].join(" ")}>
-                        <p>
-                            <Link
-                                to={resourceUrl('/careers')}
-                                className={classes.action}
-                            >
-                                <span className={classes.baloonIcon}>
-                                    <Image
-                                        width="20"
-                                        height="22"
-                                        src={baloonIcon}
-
-                                    />
-                                </span> <span>NOW HIRING – CLICK HERE TO JOIN OUR TEAM!</span>
-                            </Link>
-                        </p>
-                    </div>
-                </div> */}
                 {/** This is top CMSMenuBar */}
                 <div className={[classes.panelWrapper, classes.topMenuWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.topMenuContainer].join(" ")}>
