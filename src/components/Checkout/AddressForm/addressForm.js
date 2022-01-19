@@ -131,7 +131,7 @@ const CheckoutAddressForm = props => {
             <div className={classes.formAddressEdit}>
                 <fieldset className={[classes.fieldset, classes.billingFieldset].join(" ")}>
                     {showSameAsButton && (
-                        <div className={[classes.actionToolbar, classes.billingActionToolbar].join(" ")}>
+                        <div className={[classes.actionToolbar, classes.TopActionToolbar, classes.billingActionToolbar].join(" ")}>
                             <div className={classes.secondary}>
                                 <button className={[classes.action, classes.secondary].join(" ")} onClick={onSameAsButtonClick}><span>Same as Shipping Address</span></button>
                             </div>
