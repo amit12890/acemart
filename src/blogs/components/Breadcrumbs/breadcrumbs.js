@@ -5,11 +5,13 @@ import resourceUrl from '@magento/venia-ui/lib/util/makeUrl';
 
 import { useBreadcrumbs } from '../../hooks/useBreadcrumbs';
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
-import defaultClasses from '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.css';
+import defaultClasses from './breadcrumbs.css';
 
 import breadcrumbsOperations from './breadcrumbs.gql';
 
 import { usePermalinkSettings } from '../../hooks/usePermalinkSettings';
+
+const DELIMITER = '>';
 
 /**
  * Breadcrumbs! Generates a sorted display of category links.
@@ -47,7 +49,7 @@ const Breadcrumbs = (props) => {
             if (text !== currentCategory) {
                 return (
                     <Fragment key={text}>
-                        <span className={classes.divider}>/</span>
+                        <span className={classes.divider}>{DELIMITER}</span>
                         <Link className={classes.link} to={resourceUrl(path)}>
                             {text}
                         </Link>
@@ -78,7 +80,7 @@ const Breadcrumbs = (props) => {
 
     const currentPostNode = currentPost ? (
         <Fragment>
-            {currentCategory && <span className={classes.divider}>/</span>}
+            {currentCategory && <span className={classes.divider}>{DELIMITER}</span>}
             <span className={classes.text}>{currentPost}</span>
         </Fragment>
     ) : null;
@@ -113,15 +115,15 @@ const Breadcrumbs = (props) => {
             <Link className={classes.link} to="/">
                 {'Home'}
             </Link>
-            <span className={classes.divider}>/</span>
+            <span className={classes.divider}>{DELIMITER}</span>
             {
                 pathname === blogRoute ?
-                    <span className={classes.currentCategory}>Blog</span> :
+                    <span className={classes.currentCategory}>Resources</span> :
                     <Fragment>
-                        <Link className={classes.link} to={blogRoute}>{'Blog'}</Link>
+                        <Link className={classes.link} to={blogRoute}>{'Resources'}</Link>
                         {links}
                         <Fragment>
-                            <span className={classes.divider}>/</span>
+                            <span className={classes.divider}>{DELIMITER}</span>
                             {currentBreadcrumb()}
                         </Fragment>
                     </Fragment>

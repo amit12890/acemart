@@ -68,12 +68,12 @@ const PostList = props => {
                 isCanonical={isCanonical}
             />
             <main className={classes.container}>
-                {/* <Breadcrumbs
+                <Breadcrumbs
                     id={id}
                     type={type}
                     breadcrumb={breadcrumb}
                     classes={classes}
-                /> */}
+                />
                 <div className={classes.pageTitleWrapper}>
                     {getBlogPageTitle()}
                 </div>

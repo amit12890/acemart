@@ -248,6 +248,10 @@
     text-align: right;
 }
 
+.nickNameRoot {
+    display: inline-block;
+}
+
 .helper {
     margin-left: 10px;
 }

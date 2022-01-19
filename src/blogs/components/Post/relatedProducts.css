@@ -1,0 +1,51 @@
+.resourceSliderWrapper {
+    position: relative;
+}
+
+
+.resourceSliderWrapper
+.slideInner___2mfX9 {
+    display: flex;
+}
+
+.navArrorw {
+    background: rgba(0, 0, 102, 1);
+    border: none;
+    border-radius: 0; 
+    color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0;
+    height: 72px;
+    line-height: 0;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 32px;
+    z-index: 101;
+    justify-content: center;
+}
+
+.previous {
+    left: -32px;
+}
+
+.next {
+    right: -32px;
+    left: auto;
+}
+
+.navArrorw svg {
+    fill: white;
+}
+
+.navArrorw:disabled {
+    opacity: 0.5;
+}
+
+.nameContainer span {
+    color: #006;
+}

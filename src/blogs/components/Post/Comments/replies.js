@@ -6,8 +6,8 @@ import {FormattedMessage} from 'react-intl';
 import classes from './comments.css';
 
 import AuthSidebarTrigger from '../../AuthSidebarTrigger';
-import { toMoment } from '../../../utils/toMoment';
 import SubmitComment from './submitComment';
+import { format } from 'date-fns';
 
 const Replies = (props) => {
     const {
@@ -89,7 +89,7 @@ const Replies = (props) => {
                                 <div className={classes.pInfo}>
                                     <div className={classes.pName}>{author_nickname}</div>
                                     <div className={classes.publishDate}>
-                                        {/* <Moment format={toMoment(formatDate)}>{creation_time}</Moment> */}
+                                        {format(new Date(creation_time), "MMM dd, yyyy hh:mm")}
                                     </div>
                                 </div>
                                 <div className={classes.pText}>{text}</div>

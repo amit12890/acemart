@@ -94,7 +94,7 @@ const PostDetails = (props) => {
                     isCanonical={isCanonical}
                 />
                 <main className={classes.container}>
-                    {/* {breadcrumbs} */}
+                    {breadcrumbs}
                     <div className={classes.columns}>
                         <div className={classes.column}>
                             <div className={classes.pageTitleWrapper}>
