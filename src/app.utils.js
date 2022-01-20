@@ -1,4 +1,5 @@
 import { drop, includes, unescape, get, isObject, sum, mapKeys, size, find } from "lodash"
+import JsBarcode from 'jsbarcode'
 
 
 
@@ -214,12 +215,12 @@ export const isPasswordSame = (value, values, fieldKey) => {
 
 export const isValidEmail = (value) => {
     const isValid = String(value)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-    
-    if(isValid) {
+        .toLowerCase()
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+
+    if (isValid) {
         return SUCCESS
     } else {
         return {
@@ -228,3 +229,13 @@ export const isValidEmail = (value) => {
         };
     }
 };
+
+/**
+ * convert js to barcode image
+ * @param {string} text 
+ */
+export const textToBase64Barcode = (text) => {
+    let canvas = document.createElement("canvas");
+    JsBarcode(canvas, text, { format: "CODE128" });
+    return canvas.toDataURL("image/png");
+}

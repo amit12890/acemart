@@ -39,7 +39,9 @@ export default connect(store => {
                             <CouponCode
                                 setIsCartUpdating={() => { }}
                                 postSubmit={() => {
-                                    refetchCheckout()
+                                    setTimeout(() => {
+                                        refetchCheckout()
+                                    }, 600)
                                 }} />
                         </Suspense>
                     </Section>
@@ -70,7 +72,6 @@ export default connect(store => {
                         }
                         {size(appliedTaxes) > 0 &&
                             appliedTaxes.map((tax, index) => {
-                                console.log("🚀 ~ file: cartSummary.js ~ line 73 ~ appliedTaxes.map ~ tax", tax)
                                 const label = tax.__typename === "CartTaxItem" ? "Tax" : tax.label
                                 return (
                                     <div className={classes.orderTotalItems}>
@@ -83,7 +84,7 @@ export default connect(store => {
                             })
                         }
 
-                        {size(selectedShippingMethod.amount.value) > 0 &&
+                        {size(get(selectedShippingMethod, "amount.value", 0)) > 0 &&
                             <div className={classes.orderTotalItems}>
                                 <div className={classes.mark}>
                                     <div className={classes.markTitle}>Shipping</div>
@@ -112,6 +113,6 @@ export default connect(store => {
 
             </div>
 
-        </div >
+        </div>
     )
 }))

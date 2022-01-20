@@ -71,9 +71,9 @@ const GalleryItem = props => {
 
     const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom, url_rewrites } = item;
 
-    if (size(url_rewrites) === 0) {
-        console.log("url reqrite emoty =>>", sku)
-    }
+    // if (size(url_rewrites) === 0) {
+    //     console.log("url reqrite emoty =>>", sku)
+    // }
     const { url: smallImageURL } = small_image;
     // OLD CODE
     // const productLink = resourceUrl(`/${url_key}${url_suffix || ''}`);

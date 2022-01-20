@@ -362,6 +362,19 @@ query successOrderPage($incrementId:String!) {
 }
 `
 
+export const UPLOAD_BARCODE = gql`
+mutation BarcodeUpload($file:String!,$orderId:String!) {
+	BarcodeUpload(
+		input: {
+			base64_encoded_file: $file,
+            order_id : $orderId
+        }
+    ){
+        url_key
+    }
+}
+`
+
 export default {
     getCountries: GET_COUNTRIES,
     setGuestCartEmail: SET_GUEST_EMAIL,
@@ -379,5 +392,6 @@ export default {
     mergeCartMutation: MERGE_CART_MUTATION,
 
     generatePayPalTokenMutation: PAYPAL_GENERATE_TOKEN,
-    orderSuccessQuery: ORDER_SUCCESS_QUERY
+    orderSuccessQuery: ORDER_SUCCESS_QUERY,
+    uploadBarCodeMutation: UPLOAD_BARCODE
 };

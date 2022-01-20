@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo } from 'react';
-import { shape, string, arrayOf, number } from 'prop-types';
+import { shape, string, arrayOf, number, array } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { Printer } from 'react-feather';
@@ -229,7 +229,8 @@ OrderDetails.propTypes = {
             url: string
         }),
         url_key: string,
-        url_suffix: string
+        url_suffix: string,
+        url_rewrite: array
     }),
     orderData: shape({
         billing_address: shape({
