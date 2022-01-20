@@ -54,7 +54,7 @@ const SearchPage = props => {
         didYouMean
     } = talonProps;
 
-    const hasProducts = !!size(products);
+    const hasProducts = !!size(products) && !searchLoading;
 
     const searchResultsHeading = searchTerm ? (
         <FormattedMessage
