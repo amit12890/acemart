@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { func, shape, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ import {
 import defaultClasses from './accountMenuItems.css';
 
 const AccountMenuItems = props => {
-    const { onSignOut: handleSignOut, signingOut } = props;
+    const { onSignOut: handleSignOut, signingOut, onNavigate } = props;
     const talonProps = useAccountChip({
         queries: {
             getCustomerDetailsQuery: GET_CUSTOMER_DETAILS
@@ -57,9 +57,13 @@ const AccountMenuItems = props => {
 
     const classes = useStyle(defaultClasses, props.classes);
 
+    const handleRedirect = useCallback(() => {
+        if(!!onNavigate) onNavigate();
+    }, [onNavigate])
+
     const menu = menuItems.map(item => {
         return (
-            <Link className={classes.link} key={item.name} to={item.url}>
+            <Link className={classes.link} key={item.name} to={item.url} onClick={handleRedirect}>
                 <FormattedMessage id={item.id} defaultMessage={item.name} />
             </Link>
         );
