@@ -41,7 +41,7 @@ export default connect(store => {
                                 postSubmit={() => {
                                     setTimeout(() => {
                                         refetchCheckout()
-                                    }, 400)
+                                    }, 600)
                                 }} />
                         </Suspense>
                     </Section>

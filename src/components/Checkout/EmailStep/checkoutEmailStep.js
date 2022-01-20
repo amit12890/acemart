@@ -62,17 +62,25 @@ export default connect(store => {
     const [{ cartId }] = useCartContext()
     const [{ isSignedIn }] = useUserContext()
     const { isEmailAvailable, loading: emailValidating, checkEmailAvailable, setGuestEmailOnCart, settingEmail } = useEmailStep()
-    console.log("🚀 ~ file: checkoutEmailStep.js ~ line 65 ~ emailValidating", emailValidating)
+
     const [, { addToast }] = useToasts();
 
     const [email, setEmail] = useState(props.email)
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState(null)
     const [errors, setErrors] = useState({})
 
 
     useEffect(() => {
         setEmail(email);
     }, [props.email])
+
+    useEffect(() => {
+        if (!isEmailAvailable) {
+            setPassword('');
+        } else {
+            setPassword(null)
+        }
+    }, [isEmailAvailable])
 
 
     const debouncedEmailCheck = useCallback(debounce((inputText) => {
@@ -132,7 +140,7 @@ export default connect(store => {
             return
         }
         setErrors({})
-
+        setPassword(null)
         // add email to cart api call
         setGuestEmailOnCart(cartId, email)
     }, [email, cartId])
@@ -195,7 +203,7 @@ export default connect(store => {
                                 htmlFor="checkoutEmail"
                                 errorMessage={get(errors, "email", '')} />
 
-                            {(size(email) > 0 && !isEmailAvailable) &&
+                            {(size(email) > 0 && password !== null) &&
                                 <TextInput
                                     containerClass={[classes.field, classes.password].join(" ")}
                                     label="Password"
@@ -215,6 +223,17 @@ export default connect(store => {
 
 
                             <div className={classes.actionToolbar}>
+                                {password !== null && (
+                                    <div className={[classes.primary, classes.loginButton].join(" ")}>
+                                        <button
+                                            type="submit"
+                                            className={classes.action}
+                                            onClick={loginUser}
+                                            disabled={email === props.email && !isEmailAvailable}>
+                                            <span>Login</span>
+                                        </button>
+                                    </div>
+                                )}
                                 <div className={classes.primary}>
                                     {(emailValidating || settingEmail) ? (
                                         <LoadingButton classes={{ wrapper: classes.loadingButton }} />
@@ -222,9 +241,8 @@ export default connect(store => {
                                         <button
                                             type="submit"
                                             className={classes.action}
-                                            onClick={!isEmailAvailable ? loginUser : addEmailToCart}
-                                            disabled={email === props.email && !isEmailAvailable}>
-                                            <span>{!isEmailAvailable ? "Login" : "Continue"}</span>
+                                            onClick={addEmailToCart}>
+                                            <span>{"Continue"}</span>
                                         </button>
                                     )}
                                 </div>

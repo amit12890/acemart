@@ -63,7 +63,10 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
                 fetched: true,
                 ...restPayload,
                 isMultiShipping,
-                multi_shipping
+                multi_shipping,
+                // reset local payment method as you must have to re set 
+                // payment method to prevent session related bugs
+                selected_payment_method: {}
             }
         }
         case CHECKOUT_FETCH_ERROR: {

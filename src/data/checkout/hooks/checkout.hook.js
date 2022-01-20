@@ -79,11 +79,6 @@ export const useCheckout = () => {
     }, [loading, storePickupNetworkStatus])
 
     useEffect(() => {
-        //TODO REMOVE TEST DATA
-        // dispatch(checkoutFetched({
-        //     ...checkoutData.data.cart
-        // }))
-        // return
         if (isDefaultStore) {
             console.log("fetching default......")
             fetchCheckoutDetails()
