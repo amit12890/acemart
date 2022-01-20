@@ -110,11 +110,15 @@ const WishlistPage = props => {
 
                 {!!selectedWishlist &&
                     <div className={classes.wishlistPageWrapper}>
-                        <EditWishlist key={`${selectedWishlist.multi_wishlist_id}-${selectedWishlist.wishlist_name}`}
-                            refreshWishlist={refreshWishlist}
-                            customerId={get(customerData, 'customer.id', null)}
-                            multi_wishlist_id={selectedWishlist.multi_wishlist_id}
-                            name={selectedWishlist.wishlist_name} />
+                        {selectedWishlist.multi_wishlist_id ?
+                            <EditWishlist key={`${selectedWishlist.multi_wishlist_id}-${selectedWishlist.wishlist_name}`}
+                                refreshWishlist={refreshWishlist}
+                                customerId={get(customerData, 'customer.id', null)}
+                                multi_wishlist_id={selectedWishlist.multi_wishlist_id}
+                                name={selectedWishlist.wishlist_name} />
+                            :
+                            null
+                        }
                         <div className={classes.wishlistGridWrapper}>
                             <ProductListing defaultCurrency={defaultCurrency}
                                 selectedWishlist={selectedWishlist}
