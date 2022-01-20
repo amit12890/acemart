@@ -16,7 +16,6 @@ import { replaceSpecialChars, textToBase64Barcode } from '../../../../app.utils'
 export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange, isDefaultStore }) => {
     const classes = useStyle(propsClasses, defaultClasses)
     const { fetchCheckoutSuccess, data, checkoutSuccessFetching, handleUploadBarCode } = useCheckoutSuccess()
-    console.log("🚀 ~ file: checkoutOrder.js ~ line 14 ~ data", data)
 
     useEffect(() => {
         fetchCheckoutSuccess({
@@ -117,7 +116,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
 
                     <div className={[classes.block, classes.shipping].join(" ")}>
                         <div className={classes.blockTitle}>
-                            Shipping information
+                            {isStorePickup ? "Store Pickup Information" : "Shipping information"}
                         </div>
                         <div className={classes.blockContent}>
                             <div className={classes.name}>
