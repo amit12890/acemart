@@ -56,6 +56,10 @@
     flex: 1 1 25ch;
 }
 
+.storeDataItem.storeDataHours > div{
+    margin-top: 0;
+}
+
 .storeDeliveryOptions {
     padding-left: 15px;
     list-style: disc inside;
@@ -92,6 +96,11 @@
 
 .buttonSmall:focus {
     box-shadow: none;
+}
+
+.buttonSmall.headerStore {
+    line-height: 1.5rem;
+    padding: calc(0.25rem + 1px) 1rem calc(0.25rem + 1px) 1rem;
 }
 
 .addressStreet {
