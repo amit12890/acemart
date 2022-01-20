@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { get, size } from 'lodash'
+import { get, includes, size, toLower } from 'lodash'
 
 import { useCheckoutSuccess } from '../../../../data/checkout/hooks/checkout.hook'
 import BarCode from 'react-barcode'
@@ -10,12 +10,12 @@ import { format } from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { useStyle } from '@magento/venia-ui/lib/classify'
 import defaultClasses from './checkoutOrder.css'
-import { replaceSpecialChars } from '../../../../app.utils'
+import { replaceSpecialChars, textToBase64Barcode } from '../../../../app.utils'
 
 
 export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange, isDefaultStore }) => {
     const classes = useStyle(propsClasses, defaultClasses)
-    const { fetchCheckoutSuccess, data, checkoutSuccessFetching } = useCheckoutSuccess()
+    const { fetchCheckoutSuccess, data, checkoutSuccessFetching, handleUploadBarCode } = useCheckoutSuccess()
     console.log("🚀 ~ file: checkoutOrder.js ~ line 14 ~ data", data)
 
     useEffect(() => {
@@ -36,9 +36,19 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
         }
     }, [checkoutSuccessFetching, data])
 
+    // in ref website storepickup flag added like this
+    const isStorePickup = includes(toLower(get(data, "shipping_method", "")), "storepickup")
     const incrementId = get(data, "increment_id", "")
+
+    // only if its store pick then generate barcode to base64 and upload to server
+    useEffect(() => {
+        if (size(incrementId) > 0 && isStorePickup) {
+            const base64 = textToBase64Barcode(orderNumber)
+            handleUploadBarCode(base64, orderNumber)
+        }
+    }, [incrementId, isStorePickup])
+
     const pickupDate = get(data, "pickup_datetime", null)
-    console.log("🚀 ~ file: checkoutOrder.js ~ line 40 ~ React.memo ~ pickupDate", pickupDate)
     const billingInfo = get(data, "billing_address", {})
     const shippingInfo = get(data, "shipping_address", {})
     const items = get(data, "items", [])
@@ -47,7 +57,6 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
 
     const shipping = get(data, "total.total_shipping.value", 0)
     const isFreeShipping = shipping == 0
-    console.log("🚀 ~ file: checkoutOrder.js ~ line 26 ~ items", items)
 
     if (checkoutSuccessFetching) {
         return (
@@ -59,19 +68,21 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
             <div className={classes.panelHeader}>
                 <div className={classes.panelLeft}>
                     <div className={classes.orderNumber}><strong>Order Number: </strong>{incrementId}</div>
-                    {!!pickupDate && !isDefaultStore && (
+                    {!!pickupDate && isStorePickup && (
                         <div className={classes.estimateddate}><strong>Estimated Pickup date: </strong>{pickupDate}</div>
                     )}
                 </div>
-                <div className={classes.panelRight}>
-                    <div className={classes.barcodeWrapper}>
-                        <BarCode
-                            value={incrementId}
-                            height={30}
-                            width={1}
-                            fontSize={16} />
+                {isStorePickup && (
+                    <div className={classes.panelRight}>
+                        <div className={classes.barcodeWrapper}>
+                            <BarCode
+                                value={incrementId}
+                                height={30}
+                                width={1}
+                                fontSize={16} />
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
 
 

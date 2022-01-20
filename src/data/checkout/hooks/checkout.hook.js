@@ -24,7 +24,8 @@ const {
     setShippingMethodMutation,
     placeOrderMutation,
     createCartMutation,
-    orderSuccessQuery
+    orderSuccessQuery,
+    uploadBarCodeMutation
 } = gql
 
 const { getCustomerAddressesQuery } = addressGql
@@ -302,10 +303,28 @@ export const useCountries = () => {
 
 
 export const useCheckoutSuccess = () => {
-    const [fetchCheckoutSuccess, { loading: checkoutSuccessFetching, data: successData }] = useLazyQuery(orderSuccessQuery)
+    const [fetchCheckoutSuccess, { loading: checkoutSuccessFetching, data: successData }] = useLazyQuery(orderSuccessQuery, {
+        fetchPolicy: 'cache-and-network'
+    })
+
+    const [uploadBarCode, { loading: uploading, called: apiCalled, data }] = useMutation(uploadBarCodeMutation)
+    console.log("🚀 ~ file: checkout.hook.js ~ line 311 ~ useCheckoutSuccess ~ data", data)
+
+    const handleUploadBarCode = useCallback((base64, orderNumber) => {
+        if (!apiCalled && !uploading) {
+            console.log("uploading image....")
+            uploadBarCode({
+                variables: {
+                    file: base64,
+                    orderId: orderNumber
+                }
+            })
+        }
+    }, [apiCalled, uploading])
 
     return {
         fetchCheckoutSuccess,
+        handleUploadBarCode,
         checkoutSuccessFetching,
         data: get(successData, "successOrderPage", {})
     }
