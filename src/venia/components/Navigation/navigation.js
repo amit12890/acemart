@@ -12,7 +12,7 @@ import CategoryTree from '@magento/venia-ui/lib/components/CategoryTree';
 import { useStyle } from '../../classify';
 import defaultClasses from './navigation.css';
 
-const AuthModal = React.lazy(() => import('@magento/venia-ui/lib/components/AuthModal'));
+const AuthModal = React.lazy(() => import('../AuthModal'));
 
 
 const Navigation = props => {
@@ -58,6 +58,7 @@ const Navigation = props => {
         <aside className={rootClassName}>
             <header className={classes.header}>
                 <NavHeader
+                    hasModal={hasModal} // show | hide resources tab
                     onTabSelect={onTabSelect}
                     isTopLevel={isTopLevel}
                     onBack={handleBack}
@@ -74,7 +75,7 @@ const Navigation = props => {
                     />
                 </div>
                 :
-                <MobResourcesTab />
+                <MobResourcesTab onNavigate={handleClose} />
             }
             <div className={classes.footer}>
                 <div className={classes.switchers}>

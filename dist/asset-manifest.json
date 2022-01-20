@@ -5,15 +5,15 @@
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
   "bad.png": "/bad-r1m.png",
   "bulk-savings.png": "/bulk-savings-mhz.png",
-  "client.js": "/client.8f74f280cfd8fdcae741.js",
+  "client.js": "/client.d075ecd5946f36c08c22.js",
   "comments.svg": "/comments-boz.svg",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
     "client": {
       "js": [
-        "/runtime.99611615e3a23eb15e12.js",
+        "/runtime.dfb3083bb8bbbcbb4fe2.js",
         "/vendors.a87f96e923f30e49b177.js",
-        "/client.8f74f280cfd8fdcae741.js"
+        "/client.d075ecd5946f36c08c22.js"
       ]
     }
   },
@@ -33,7 +33,7 @@
   "noProductsFound.png": "/noProductsFound-e9n.png",
   "online-price.png": "/online-price-8Hp.png",
   "pinterest.svg": "/pinterest-m58.svg",
-  "runtime.js": "/runtime.99611615e3a23eb15e12.js",
+  "runtime.js": "/runtime.dfb3083bb8bbbcbb4fe2.js",
   "sale.png": "/sale-vv6.png",
   "search-icon-white.svg": "/search-icon-white-b38.svg",
   "small_warning.png": "/small_warning-6Ej.png",
@@ -47,9 +47,9 @@
   "vendors~RootCmp_SEARCH__default.js": "/vendors~RootCmp_SEARCH__default.998547e34188ecdaca03.js",
   "bundles": {
     "load": [
-      "/runtime.99611615e3a23eb15e12.js",
+      "/runtime.dfb3083bb8bbbcbb4fe2.js",
       "/vendors.a87f96e923f30e49b177.js",
-      "/client.8f74f280cfd8fdcae741.js"
+      "/client.d075ecd5946f36c08c22.js"
     ],
     "prefetch": [
       "/RootCmp_CATEGORY__default.a725b54f3e49e35ab368.js",
@@ -61,9 +61,9 @@
     "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.a725b54f3e49e35ab368.js",
     "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.cc994e1fcf6f7e89a2a5.js",
     "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.4465b09c793f749cd41c.js",
-    "client": "/client.8f74f280cfd8fdcae741.js",
+    "client": "/client.d075ecd5946f36c08c22.js",
     "i18n-en_US": "/i18n-en_US.c4adf4c42de0b4ea5813.js",
-    "runtime": "/runtime.99611615e3a23eb15e12.js",
+    "runtime": "/runtime.dfb3083bb8bbbcbb4fe2.js",
     "vendors": "/vendors.a87f96e923f30e49b177.js",
     "vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default": "/vendors~RootCmp_CATEGORY__default~RootCmp_SEARCH__default.51fa2b23ac197b2a1853.js",
     "vendors~RootCmp_CMS_PAGE__default": "/vendors~RootCmp_CMS_PAGE__default.a76bb79436c57361e16d.js",

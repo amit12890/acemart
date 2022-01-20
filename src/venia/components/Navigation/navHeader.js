@@ -11,7 +11,7 @@ import defaultClasses from './navHeader.css';
 import { useNavigationHeader } from '@magento/peregrine/lib/talons/Navigation/useNavigationHeader';
 
 const NavHeader = props => {
-    const { isTopLevel, onBack, view, onTabSelect } = props;
+    const { isTopLevel, onBack, view, hasModal, onTabSelect } = props;
     const { formatMessage } = useIntl();
 
     const talonProps = useNavigationHeader({
@@ -71,8 +71,13 @@ const NavHeader = props => {
             <h2 key="title" className={classes.title} onClick={() => onTabSelect(1)}>
                 {titleElement}
             </h2>
-            <h2 className={classes.title} onClick={() => onTabSelect(2)}>
-                Resources</h2>
+            {hasModal ? null : (
+                    <h2 className={classes.title} 
+                        onClick={() => onTabSelect(2)}>
+                        Resources
+                    </h2>
+                )
+            }
         </Fragment>
     );
 };

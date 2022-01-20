@@ -7,6 +7,7 @@ import defaultClasses from '../Header/header.css';
 
 
 export default (props) => {
+    const { onNavigate } = props;
     const classes = useStyle(defaultClasses, props.classes)
 
     return (
@@ -16,6 +17,7 @@ export default (props) => {
                     <Link
                         to={resourceUrl('/advantage')}
                         className={classes.action}
+                        onClick={onNavigate}
                     >
                         <i className={classes.iconWrapper}>
                             <svg className={[classes.svgIcon, classes.checkmark].join(" ")} version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
