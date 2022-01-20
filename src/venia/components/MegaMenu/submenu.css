@@ -1,14 +1,17 @@
 .submenu {
-    background-color: rgb(var(--venia-global-color-gray-50));
-    box-shadow: 0 3px rgb(var(--venia-global-color-gray-100));
+    background: #fff;
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 40%);
     display: none;
     flex-wrap: wrap;
     justify-content: space-between;
     left: 0;
     position: absolute;
-    padding: 20px 10px;
+    padding: 0;
     right: 0;
     top: 100%;
+
+
+  
 }
 
 .submenu::before {
@@ -25,7 +28,7 @@
 .submenuItems {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content:flex-start;
     margin-left: auto;
     margin-right: auto;
     max-width: var(--venia-global-maxWidth);

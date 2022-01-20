@@ -1,14 +1,20 @@
 .submenuColumn {
     max-width: 235px;
-    padding: 20px;
+    padding: 10px;
+    flex-basis: 20%;
 }
 
 .heading {
     font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+    color: rgb(var(--theme-color-primary));
 }
 
 .link {
     white-space: nowrap;
+    
 }
 
 .link:hover,
@@ -18,9 +24,11 @@
 }
 
 .submenuChild {
-    margin-top: 21px;
+    max-height: 120px;
+    overflow: hidden;
 }
 
 .submenuChildItem {
-    margin-bottom: 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
 }
