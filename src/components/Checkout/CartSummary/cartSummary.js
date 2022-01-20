@@ -33,16 +33,10 @@ export default connect(store => {
                 <Accordion canOpenMultiple={true}>
                     <Section
                         id={'coupon_code'}
-                        title={"Apply Discount Code"}
-                    >
+                        title={"Apply Discount Code"}>
                         <Suspense fallback={<LoadingIndicator />}>
                             <CouponCode
-                                setIsCartUpdating={() => { }}
-                                postSubmit={() => {
-                                    setTimeout(() => {
-                                        refetchCheckout()
-                                    }, 600)
-                                }} />
+                                setIsCartUpdating={() => { }} />
                         </Suspense>
                     </Section>
                 </Accordion>

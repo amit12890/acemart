@@ -19,7 +19,9 @@ import { CartPageFragment } from '../../cartPageFragments.gql';
 import { AppliedCouponsFragment } from './couponCodeFragments';
 
 import defaultClasses from './couponCode.css';
-import { size } from 'lodash';
+import { get, size } from 'lodash';
+import { useDispatch } from 'react-redux';
+import { updateCheckoutField } from '../../../../../data/checkout/checkout.action';
 
 const errorIcon = (
     <Icon
@@ -94,6 +96,7 @@ const REMOVE_COUPON_MUTATION = gql`
  */
 const CouponCode = props => {
     const classes = useStyle(defaultClasses, props.classes);
+    const dispatch = useDispatch()
 
     const talonProps = useCouponCode({
         setIsCartUpdating: props.setIsCartUpdating,
@@ -103,6 +106,9 @@ const CouponCode = props => {
         },
         queries: {
             getAppliedCouponsQuery: GET_APPLIED_COUPONS
+        },
+        onGQLCompleted: (prices) => {
+            dispatch(updateCheckoutField({ prices }))
         }
     });
     const [, { addToast }] = useToasts();
@@ -112,24 +118,14 @@ const CouponCode = props => {
         errors,
         handleApplyCoupon,
         handleRemoveCoupon,
-        removingCoupon,
-        applyCouponCalled,
-        removeCouponCalled
+        removingCoupon
     } = talonProps;
-    console.log("🚀 ~ file: couponCode.js ~ line 119 ~ applyCouponCalled",
-        removeCouponCalled, applyCouponCalled)
+
     const { formatMessage } = useIntl();
 
     const removeCouponError = deriveErrorMessage([
         errors.get('removeCouponMutation')
     ]);
-
-    useEffect(() => {
-        if (applyCouponCalled || removeCouponCalled) {
-            console.log("coupon code updated....")
-            props.postSubmit()
-        }
-    }, [applyCouponCalled, removeCouponCalled])
 
     useEffect(() => {
         if (removeCouponError) {
@@ -172,10 +168,17 @@ const CouponCode = props => {
                             handleRemoveCoupon(code);
                         }}
                     >
-                        <FormattedMessage
-                            id={'couponCode.removeButton'}
-                            defaultMessage={'Remove'}
-                        />
+                        {removingCoupon ? (
+                            <FormattedMessage
+                                id={'couponCode.removeButton.removing'}
+                                defaultMessage={'Removing'}
+                            />
+                        ) : (
+                            <FormattedMessage
+                                id={'couponCode.removeButton'}
+                                defaultMessage={'Remove'}
+                            />
+                        )}
                     </LinkButton>
                 </Fragment>
             );

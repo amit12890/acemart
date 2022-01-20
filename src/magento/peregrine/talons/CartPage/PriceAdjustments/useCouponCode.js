@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useCartContext } from '@magento/peregrine/lib/context/cart';
+import { get } from 'lodash';
 
 /**
  * This talon contains the logic for a coupon code form component.
@@ -27,7 +28,8 @@ export const useCouponCode = props => {
     const {
         setIsCartUpdating,
         mutations: { applyCouponMutation, removeCouponMutation },
-        queries: { getAppliedCouponsQuery }
+        queries: { getAppliedCouponsQuery },
+        onGQLCompleted
     } = props;
 
     const [{ cartId }] = useCartContext();
@@ -47,7 +49,9 @@ export const useCouponCode = props => {
             error: applyError,
             loading: applyingCoupon
         }
-    ] = useMutation(applyCouponMutation);
+    ] = useMutation(applyCouponMutation, {
+        onCompleted: (data) => onGQLCompleted(get(data, "applyCouponToCart.cart.prices", {}))
+    });
 
     const [
         removeCoupon,
@@ -56,7 +60,9 @@ export const useCouponCode = props => {
             error: removeCouponError,
             loading: removingCoupon
         }
-    ] = useMutation(removeCouponMutation);
+    ] = useMutation(removeCouponMutation, {
+        onCompleted: (data) => onGQLCompleted(get(data, "removeCouponFromCart.cart.prices", {}))
+    });
 
     const handleApplyCoupon = useCallback(
         async ({ couponCode }) => {
