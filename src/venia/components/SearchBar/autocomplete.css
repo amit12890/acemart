@@ -27,7 +27,7 @@
     top: 40px;
     transition-property: opacity, transform, visibility;
     z-index: 2;
-   
+    min-width: 800px;
     width: 100%;
 }
 
