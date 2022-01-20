@@ -46,7 +46,7 @@ const WishlistPopup = props => {
         isMoveAction
     } = props;
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
-    const [selectedWishlist, setSelectedWishlist] = useState(0);
+    const [selectedWishlist, setSelectedWishlist] = useState(new Set([0]));
     const [_, { addToast }] = useToasts();
 
     const { data: customerData, loading: loadingCustomerDetails } = useQuery(
@@ -96,9 +96,14 @@ const WishlistPopup = props => {
 
     const handleSubmit = useCallback(async () => {
         const data = { product_id: productId, qty: productQty };
-        if (!isNil(selectedWishlist)) {
-            await addToWishlist(apiAddToWishlist(selectedWishlist), data);
+        const wishlistIds = [...selectedWishlist]
+        let params = "?"
+
+        for (let index = 0; index < wishlistIds.length; index++) {
+            const id = wishlistIds[index];
+            params = params + `wishlist_id[${index}]=${id}&`
         }
+        await addToWishlist(apiAddToWishlist(params), data);
     }, [selectedWishlist, productId, productQty]);
 
     useEffect(() => {
@@ -115,9 +120,7 @@ const WishlistPopup = props => {
         return (
             <div className={classes.wishlistItemWrapper}>
                 {wishlists.map(wishlist => {
-                    const checked =
-                        !isNil(selectedWishlist) &&
-                        wishlist.multi_wishlist_id === selectedWishlist;
+                    const checked = selectedWishlist.has(wishlist.multi_wishlist_id)
                     return (
                         <div
                             className={classes.wishlistItem}
@@ -128,13 +131,12 @@ const WishlistPopup = props => {
                                     name={wishlist.wishlist_name}
                                     type="checkbox"
                                     checked={checked}
-                                    onChange={() =>
-                                        setSelectedWishlist(
-                                            checked
-                                                ? null
-                                                : wishlist.multi_wishlist_id
-                                        )
-                                    }
+                                    onChange={() => {
+                                        selectedWishlist.has(wishlist.multi_wishlist_id) ?
+                                        selectedWishlist.delete(wishlist.multi_wishlist_id) :
+                                        selectedWishlist.add(wishlist.multi_wishlist_id)
+                                        setSelectedWishlist(new Set(selectedWishlist))
+                                    }}
                                 />
                                 {wishlist.wishlist_name}
                             </label>

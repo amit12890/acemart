@@ -40,8 +40,8 @@ export const searchPage = () => "/catalogsearch/result/";
 
 export const apiGetWishlistData = customerId =>
     `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/getlist/${customerId}`;
-export const apiAddToWishlist = wishlistId =>
-    `${HOST_URL}/rest/V2/wishlist/add?wishlist_id=${wishlistId}`;
+export const apiAddToWishlist = wishlistquery =>
+    `${HOST_URL}/rest/V2/wishlist/add${wishlistquery}`;
 export const apiUpdateProductWishlist = () =>
     `${HOST_URL}/rest/V2/wishlist/update`;
 export const apiShareWishlist = () =>
