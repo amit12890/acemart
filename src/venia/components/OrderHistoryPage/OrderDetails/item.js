@@ -3,7 +3,7 @@ import { shape, string, number, arrayOf } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { useOrderHistoryContext } from '@magento/peregrine/lib/talons/OrderHistoryPage/orderHistoryContext';
-import { isNil } from 'lodash-es';
+import { isNil, get } from 'lodash-es';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Button from '../../Button';
@@ -22,13 +22,14 @@ const Item = props => {
         quantity,
         selected_options,
         sku,
-        thumbnail
+        thumbnail,
+        url_rewrites
     } = props;
     const { currency, value: unitPrice } = product_sale_price;
 
     const orderHistoryState = useOrderHistoryContext();
     const { productURLSuffix } = orderHistoryState;
-    const itemLink = `${product_url_key}${productURLSuffix}`;
+    const itemLink = `/${get(url_rewrites, "0.url", "")}${!!productURLSuffix ? productURLSuffix : ''}`;
     const mappedOptions = useMemo(
         () =>
             selected_options.map(option => ({
