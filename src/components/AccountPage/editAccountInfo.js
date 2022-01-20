@@ -208,7 +208,7 @@ const EditAccountInfo = ({ path }) => {
                         </div>
                         <div className={[classes.fieldWrapper, classes.firstname].join(" ")}>
                             <div className={classes.fieldChoice}>
-                                <label>
+                                <label className={classes.label}>
                                     <input
                                         name="showEmail"
                                         type="checkbox"
@@ -218,7 +218,7 @@ const EditAccountInfo = ({ path }) => {
                                 </label>
                             </div>
                             <div className={[classes.field, classes.choice].join(" ")}>
-                                <label>
+                                <label className={classes.label}>
                                     <input
                                         name="showPassword"
                                         type="checkbox"
