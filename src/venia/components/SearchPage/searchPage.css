@@ -10,6 +10,15 @@
     display: flex;
 }
 
+.iconWrapper {
+    display: inline-flex;
+}
+.svgIcon {
+    fill: currentColor;
+    width: 20px;
+    height: auto;
+}
+
 .noResultWrapper {
     display: flex;
     flex-direction: column;

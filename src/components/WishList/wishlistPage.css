@@ -102,6 +102,8 @@
 }
 
 .actionsToolbarWrapper {
+    display: flex;
+    flex-wrap: wrap;
 
 }
 

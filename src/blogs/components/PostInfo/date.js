@@ -20,7 +20,7 @@ const DateComponent = props => {
         if (publish_time && publicationDateIsEnabled) {
             return (
                 <span className={postDate}>
-                    {format(new Date(publish_time), "MMM dd, yyyy")}
+                    {publish_time}
                 </span>
             )
         }

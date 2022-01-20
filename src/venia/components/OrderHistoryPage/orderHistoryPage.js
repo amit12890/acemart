@@ -167,6 +167,10 @@ const OrderHistoryPage = props => {
                             field="search"
                             id={classes.search}
                             placeholder={SEARCH_PLACE_HOLDER}
+                            classes={{
+                                input: classes.searchTextInput,
+                                before: classes.searchControl
+                            }}
                         />
                         <Button
                             className={classes.searchButton}

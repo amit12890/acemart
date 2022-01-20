@@ -51,7 +51,7 @@
     display: grid;
     gap: 0;
     grid-auto-flow: column;
-    width: 22rem;
+    
 }
 
 .searchButton {
@@ -68,6 +68,42 @@
 .loadMoreButton {
     composes: root_lowPriority from '../Button/button.css';
     justify-self: center;
+}
+
+
+.searchTextInput {
+    border: 2px solid rgb(var(--color-gray-middle2));
+    height: 40px;
+    width: 100%;
+    border-radius: 0;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+
+.searchTextInput:focus,
+.searchTextInput:focus-visible {
+    border-radius: 0;
+    outline: none;
+}
+
+.searchControl {
+    
+    display: none;
+    
+
+}
+
+.searchControl:hover {
+    background-color: rgb(var(--theme-color-primary)); 
+    border-color: rgb(var(--theme-color-primary));
+    color: rgb(var(--color-white));
+}
+
+.searchControl svg{
+    stroke: rgb(var(--color-white));
+    width: 20px;
+    height: auto;
 }
 
 @media (max-width: 960px) {
