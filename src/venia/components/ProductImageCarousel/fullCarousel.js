@@ -37,6 +37,7 @@ const FullCarousel = props => {
     } = props;
 
     const windowSize = useWindowSize();
+    const showArrows = size(sortedImages) > 1;
 
     const bigImageWidth = windowSize.height - 74 - 120;
     const contentHeight = windowSize.height - 74;
@@ -125,7 +126,7 @@ const FullCarousel = props => {
                                 totalSlides={size(sortedImages)}
                                 style={{ height: fullContainerHeight }}
                             >
-                                {size(sortedImages) > 1 && (
+                                {showArrows && (
                                     <button
                                         className={classes.previousButton}
                                         onClick={handlePrevious}
@@ -155,7 +156,7 @@ const FullCarousel = props => {
                                         );
                                     })}
                                 </Slider>
-                                {size(sortedImages) > 1 && (
+                                {showArrows && (
                                     <button
                                         className={classes.nextButton}
                                         onClick={handleNext}
@@ -169,77 +170,83 @@ const FullCarousel = props => {
                                     </button>
                                 )}
                             </CarouselProvider>
-                            <CarouselProvider
-                                className={classes.thumbFullCarouselContainer}
-                                currentSlide={activeItemIndex}
-                                naturalSlideWidth={TBM_IMAGE_WIDTH}
-                                naturalSlideHeight={TBM_IMAGE_WIDTH}
-                                isPlaying={false}
-                                visibleSlides={thumbnailSlidesCount}
-                                totalSlides={size(sortedImages)}
-                            >
-                                {size(sortedImages) > 1 && (
-                                    <ButtonBack
-                                        className={[
-                                            classes.previousButton,
-                                            classes.smallButton
-                                        ].join(' ')}
-                                    >
-                                        <Icon
-                                            classes={chevronClasses}
-                                            src={ChevronLeftIcon}
-                                            size={26}
-                                        />
-                                    </ButtonBack>
-                                )}
-                                <Slider style={{ height: thumbnailContainerHeight }}>
-                                    {sortedImages.map((img, ind) => {
-                                        return (
-                                            <Slide
-                                                index={ind}
-                                                innerClassName={
-                                                    ind === activeItemIndex
-                                                        ? classes.thumbActive
-                                                        : ''
-                                                }
-                                            >
-                                                <Image
-                                                    classes={{
-                                                        image:
-                                                            classes.currentImage,
-                                                        root:
-                                                            classes.imageContainer
-                                                    }}
-                                                    src={img.url}
-                                                    width={'100%'}
-                                                    style={{
-                                                        maxHeight: TBM_IMAGE_WIDTH
-                                                    }}
-                                                    onClick={() => {
-                                                        handleThumbnailClick(
-                                                            ind
-                                                        );
-                                                    }}
-                                                />
-                                            </Slide>
-                                        );
-                                    })}
-                                </Slider>
-                                {size(sortedImages) > 1 && (
-                                    <ButtonNext
-                                        className={[
-                                            classes.nextButton,
-                                            classes.smallButton
-                                        ].join(' ')}
-                                    >
-                                        <Icon
-                                            classes={chevronClasses}
-                                            src={ChevronRightIcon}
-                                            size={26}
-                                        />
-                                    </ButtonNext>
-                                )}
-                            </CarouselProvider>
+                            {showArrows ?
+                                <CarouselProvider
+                                    className={classes.thumbFullCarouselContainer}
+                                    currentSlide={activeItemIndex}
+                                    naturalSlideWidth={TBM_IMAGE_WIDTH}
+                                    naturalSlideHeight={TBM_IMAGE_WIDTH}
+                                    isPlaying={false}
+                                    visibleSlides={thumbnailSlidesCount}
+                                    totalSlides={size(sortedImages)}
+                                >
+                                    {showArrows && (
+                                        <ButtonBack
+                                            className={[
+                                                classes.previousButton,
+                                                classes.smallButton
+                                            ].join(' ')}
+                                        >
+                                            <Icon
+                                                classes={chevronClasses}
+                                                src={ChevronLeftIcon}
+                                                size={26}
+                                            />
+                                        </ButtonBack>
+                                    )}
+                                    <Slider style={{ height: thumbnailContainerHeight }}>
+                                        {sortedImages.map((img, ind) => {
+                                            return (
+                                                <Slide
+                                                    index={ind}
+                                                    innerClassName={
+                                                        ind === activeItemIndex
+                                                            ? classes.thumbActive
+                                                            : ''
+                                                    }
+                                                >
+                                                    <Image
+                                                        classes={{
+                                                            image:
+                                                                classes.currentImage,
+                                                            root:
+                                                                classes.imageContainer
+                                                        }}
+                                                        src={img.url}
+                                                        width={'100%'}
+                                                        style={{
+                                                            maxHeight: TBM_IMAGE_WIDTH
+                                                        }}
+                                                        onClick={() => {
+                                                            handleThumbnailClick(
+                                                                ind
+                                                            );
+                                                        }}
+                                                    />
+                                                </Slide>
+                                            );
+                                        })}
+                                    </Slider>
+                                    {showArrows && (
+                                        <ButtonNext
+                                            className={[
+                                                classes.nextButton,
+                                                classes.smallButton
+                                            ].join(' ')}
+                                        >
+                                            <Icon
+                                                classes={chevronClasses}
+                                                src={ChevronRightIcon}
+                                                size={26}
+                                            />
+                                        </ButtonNext>
+                                    )}
+                                </CarouselProvider>
+                                :
+                                <div className={classes.thumbFullCarouselContainer} style={{
+                                    height: TBM_IMAGE_WIDTH
+                                }}/>
+                            }
                         </div>
                     </div>
                 </div>

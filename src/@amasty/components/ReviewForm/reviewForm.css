@@ -131,6 +131,14 @@
   cursor: pointer;
 }
 
+.reviewFormFileField > span {
+  padding-top: 0.4rem;
+}
+
+.reviewFormFileField label span {
+  padding-left: 0.4rem;
+}
+
 .reviewFormField input,
 .reviewFormField textarea {
   border-radius: 0;

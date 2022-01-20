@@ -28,10 +28,11 @@
 .searchControl:hover {
     background-color: #727171; 
     border-color: #727171;
+    color: rgb(var(--color-white));
 }
 
 .searchControl svg{
-    stroke: currentColor;
+    stroke: rgb(var(--color-white));
     width: 20px;
     height: auto;
 }

@@ -89,6 +89,8 @@ export default function StoreSwitcherPopupContent({
     }
 
     const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
+    const currentStoreConfigFax = get(currentStoreConfig, "store_locator_info.fax", "")
+    const currentStoreConfigPhone = get(currentStoreConfig, "store_locator_info.phone", "")
 
     return (
         <div className={classes.content}>
@@ -108,7 +110,8 @@ export default function StoreSwitcherPopupContent({
                             <li className={classes.storeDataItem}>
                                 <div className={classes.addressStreet}>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
                                 <div className={classes.addressCityZip}>
-                                    <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
+                                    <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>,&nbsp;
+                                    <span>{get(currentStoreConfig, "store_locator_info.state", "")}</span>&nbsp;
                                     <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
                                 </div>
                                 <div className={classes.storeDirection}>
@@ -123,8 +126,8 @@ export default function StoreSwitcherPopupContent({
                                     </a>
                                 </div>
                             </li>
-                            <li className={classes.storeDataItem}>
-                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
+                            <li className={[classes.storeDataItem, classes.storeDataHours].join(" ")}>
+                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} delimiter={": "} />
                             </li>
                         </ul>
                         :
@@ -132,7 +135,8 @@ export default function StoreSwitcherPopupContent({
                             <li className={classes.storeDataItem}>
                                 <div className={classes.addressStreet}>{get(currentStoreConfig, "store_locator_info.street", "")}</div>
                                 <div className={classes.addressCityZip}>
-                                    <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>
+                                    <span>{get(currentStoreConfig, "store_locator_info.city", "")}</span>,&nbsp;
+                                    <span>{get(currentStoreConfig, "store_locator_info.state", "")}</span>&nbsp;
                                     <span>{get(currentStoreConfig, "store_locator_info.zip", "")}</span>
                                 </div>
                                 <div className={classes.storeDirection}>
@@ -147,12 +151,12 @@ export default function StoreSwitcherPopupContent({
                                     </a>
                                 </div>
                             </li>
-                            <li className={classes.storeDataItem}>
-                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} />
+                            <li className={[classes.storeDataItem, classes.storeDataHours].join(" ")}>
+                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} delimiter={": "}/>
                             </li>
                             <li className={classes.storeDataItem}>
-                                <div className={classes.addressPhone}>Phone : {get(currentStoreConfig, "store_locator_info.phone", "")}</div>
-                                <div className={classes.addressPhone}>Fax : {get(currentStoreConfig, "store_locator_info.fax", "")}</div>
+                                <div className={classes.addressPhone}>{currentStoreConfigPhone ? `Phone: ${currentStoreConfigPhone}` : ""}</div>
+                                <div className={classes.addressPhone}>{currentStoreConfigFax ? `Fax: ${currentStoreConfigFax}` : ""}</div>
                             </li>
                         </ul>
                     }
@@ -160,7 +164,7 @@ export default function StoreSwitcherPopupContent({
                 <div className={classes.panelBottomRow}>
                     {currentStoreName !== DEFAULT_STORE_GROUP_STORE_NAME ?
                         <Button
-                            className={classes.buttonSmall}
+                            className={[classes.buttonSmall, classes.headerStore].join(" ")}
                             onClick={handleSwitchStoreClick("default")}>
                             Ship Direct on Acemart.com
                         </Button>
@@ -169,7 +173,7 @@ export default function StoreSwitcherPopupContent({
                     }
                     <Link to={storeLocatorUrl()}>
                         <Button
-                            className={classes.buttonSmall}
+                            className={[classes.buttonSmall, classes.headerStore].join(" ")}
                             onClick={closeStoreLocatorPopup}>
                             View All Store Locations
                         </Button>
@@ -214,7 +218,7 @@ export default function StoreSwitcherPopupContent({
                                     // add active class here
                                     const isActive = group === currentGroupName
                                     return (
-                                        <div key={group} className={classes.areaSwitcher}
+                                        <div key={group} className={[classes.areaSwitcher, isActive ? classes.active : ""].join(" ")}
                                             onClick={() => handleGroupSelect(group)}>
                                             <span>{group}</span>
                                         </div>

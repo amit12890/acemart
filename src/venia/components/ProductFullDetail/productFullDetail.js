@@ -36,6 +36,7 @@ import RatingMini from "../../../@amasty/components/Rating/rating_mini"
 import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
+import UnavailablePopup from "./unavailablePopup"
 import LoadingButton from '../../../components/LoadingButton';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useWishlistSession } from '../../../data/appState/appState.hook';
@@ -78,6 +79,8 @@ const ProductFullDetail = props => {
     const [showStoreLocatorPopup, setStoreLocatorPopup] = useState(false)
     const [showLabelsPopup, setLabelsPopup] = useState(false)
     const [showCaliforniaPopup, setCaliforniaPopup] = useState(false)
+    const [showUnavailablePopup, setUnavailablePopup] = useState(false)
+
     const storeConfig = useQuery(GET_STORE_CONFIG_DATA, { fetchPolicy: "cache-first" });
 
     const reviewRef = useRef(null)
@@ -135,6 +138,14 @@ const ProductFullDetail = props => {
     const closeCaliforniaPopup = useCallback(() => {
         setCaliforniaPopup(false);
     }, [setCaliforniaPopup]);
+
+    const openUnavailablePopup = useCallback(() => {
+        setUnavailablePopup(true);
+    }, [setUnavailablePopup]);
+
+    const closeUnavailablePopup = useCallback(() => {
+        setUnavailablePopup(false);
+    }, [setUnavailablePopup]);
 
     // handlers for Labels popup
     const openLabelsPopup = useCallback(() => {
@@ -281,7 +292,7 @@ const ProductFullDetail = props => {
                     <div
                         className={classes.stockAvailability}
                         style={{ borderBottomWidth: 0 }}>
-                        This item is unavailable for store pickup.&nbsp;
+                        Unavailable for Store Pickup.&nbsp;
                         <span
                             className={classes.clickHere}
                             onClick={(e) => {
@@ -291,6 +302,9 @@ const ProductFullDetail = props => {
                             Click here
                         </span>
                         &nbsp;to ship direct.
+                        <span onClick={openUnavailablePopup}>
+                            Icon here
+                        </span>
                     </div>
                 </div>
             )
@@ -333,6 +347,9 @@ const ProductFullDetail = props => {
                             Click here
                         </span>
                         &nbsp;to ship direct.
+                        <span onClick={openUnavailablePopup}>
+                            Icon here
+                        </span>
                     </div>
                     <div className={classes.apSectionRow}>
                         <div className={classes.stock}>
@@ -937,6 +954,11 @@ const ProductFullDetail = props => {
                 <CaliforniaPopup
                     isPopupVisible={showCaliforniaPopup}
                     closeCaliforniaPopup={closeCaliforniaPopup} />
+            )}
+            {showUnavailablePopup && (
+                <UnavailablePopup
+                    isPopupVisible={showUnavailablePopup}
+                    closeUnavailablePopup={closeUnavailablePopup} />
             )}
         </Fragment>
     );

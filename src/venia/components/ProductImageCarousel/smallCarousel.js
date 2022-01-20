@@ -127,7 +127,7 @@ const SmallCarousel = props => {
                     </button>
                 )}
             </CarouselProvider>
-            {hasImages ? (
+            {(hasImages && showArrows) ? (
                 <CarouselProvider
                     className={classes.thumbCarouselContainer}
                     style={{
