@@ -47,23 +47,23 @@ const OrderRow = props => {
     let derivedStatus;
     if (status === 'Complete') {
         derivedStatus = formatMessage({
-            id: 'orderRow.deliveredText',
-            defaultMessage: 'Delivered'
+            id: 'orderRow.complete',
+            defaultMessage: 'Complete'
         });
     } else if (hasShipment) {
         derivedStatus = formatMessage({
-            id: 'orderRow.shippedText',
-            defaultMessage: 'Shipped'
+            id: 'orderRow.closed',
+            defaultMessage: 'Closed'
         });
     } else if (hasInvoice) {
         derivedStatus = formatMessage({
-            id: 'orderRow.readyToShipText',
-            defaultMessage: 'Ready to ship'
+            id: 'orderRow.processing',
+            defaultMessage: 'Processing'
         });
     } else {
         derivedStatus = formatMessage({
-            id: 'orderRow.processingText',
-            defaultMessage: 'Processing'
+            id: 'orderRow.pending',
+            defaultMessage: 'Pending'
         });
     }
 
