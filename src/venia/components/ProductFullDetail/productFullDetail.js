@@ -89,6 +89,7 @@ const ProductFullDetail = props => {
         errorMessage,
         handleAddToCart,
         isAddToCartDisabled,
+        isAddProductLoading,
         isSupportedProductType,
         mediaGalleryEntries,
         productDetails,
@@ -241,10 +242,17 @@ const ProductFullDetail = props => {
             disabled={isAddToCartDisabled}
             priority="high"
             type="submit">
-            <FormattedMessage
-                id={'productFullDetail.cartAction'}
-                defaultMessage={'Add to Cart'}
-            />
+            {isAddProductLoading ? (
+                <FormattedMessage
+                    id={'productFullDetail.cartAction.adding'}
+                    defaultMessage={'Adding...'}
+                />
+            ) : (
+                <FormattedMessage
+                    id={'productFullDetail.cartAction'}
+                    defaultMessage={'Add to Cart'}
+                />
+            )}
         </Button>
     ) : (
         <div className={classes.unavailableContainer}>
