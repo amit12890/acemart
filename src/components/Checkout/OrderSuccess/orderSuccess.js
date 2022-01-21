@@ -96,7 +96,7 @@ export default connect(store => {
         <div className={classes.root}>
             <StoreTitle>
                 {formatMessage({
-                    id: 'checkoutPage.titleReceipt',
+                    id: 'checkoutPage.checkSuccess',
                     defaultMessage: 'Checkout Success'
                 })}
             </StoreTitle>
