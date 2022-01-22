@@ -13,8 +13,12 @@ import { HOST_URL } from '../../url.utils';
 
 import { useToasts } from '@magento/peregrine';
 
-import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import { 
+    CheckCircle as CheckCircleIcon,
+    AlertCircle as AlertCircleIcon
+} from 'react-feather';
 import Icon from '../../venia/components/Icon';
+import { get } from 'lodash';
 
 const successIcon = (
     <Icon
@@ -24,6 +28,8 @@ const successIcon = (
         }}
     />
 );
+
+const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
 
 const EditWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
@@ -42,8 +48,18 @@ const EditWishlist = props => {
                 dismissable: true,
                 timeout: 3000
             });
+        },
+        onError: (err) => {
+            addToast({
+                type: 'error',
+                icon: ErrorIcon,
+                message: get(err, "data.message", "something went wrong"),
+                dismissable: true,
+                timeout: 3000
+            });
         }
     })
+
     const { callApi: deleteWishlist, loading: loadingDelete } = useApiData({
         url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/delete/${props.multi_wishlist_id}`,
         method: "delete",
@@ -54,6 +70,15 @@ const EditWishlist = props => {
                 type: 'success',
                 icon: successIcon,
                 message: 'Wishlist deleted successfully.',
+                dismissable: true,
+                timeout: 3000
+            });
+        },
+        onError: (err) => {
+            addToast({
+                type: 'error',
+                icon: ErrorIcon,
+                message: get(err, "data.message", "something went wrong"),
                 dismissable: true,
                 timeout: 3000
             });
@@ -71,7 +96,7 @@ const EditWishlist = props => {
             }
         }
         editWishlist(null, postData);
-    }, [props.customerId, loading])
+    }, [props.customerId, props.multi_wishlist_id, loading])
 
     const handleDelete = useCallback(() => {
         if (loadingDelete || loading) return;

@@ -13,8 +13,12 @@ import { HOST_URL } from '../../url.utils';
 
 import { useToasts } from '@magento/peregrine';
 
-import { CheckCircle as CheckCircleIcon } from 'react-feather';
+import {
+    CheckCircle as CheckCircleIcon, 
+    AlertCircle as AlertCircleIcon
+} from 'react-feather';
 import Icon from '../../venia/components/Icon';
+import { get } from 'lodash';
 
 const successIcon = (
     <Icon
@@ -25,6 +29,8 @@ const successIcon = (
     />
 );
 
+const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
+
 const CreateWishlist = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const [_, { addToast }] = useToasts();
@@ -33,12 +39,21 @@ const CreateWishlist = props => {
         url: `${HOST_URL}/rest/V1/bsscommerce/multiwishlist/save`,
         method: "post",
         isLazy: true,
-        onSuccess: () => {
+        onSuccess: (res) => {
             props.refreshWishlist();
             addToast({
                 type: 'success',
                 icon: successIcon,
-                message: 'New wishlist added successfully.',
+                message: `New wishlist ${res.wishlist_name} added successfully.`,
+                dismissable: true,
+                timeout: 3000
+            });
+        },
+        onError: (err) => {
+            addToast({
+                type: 'error',
+                icon: ErrorIcon,
+                message: get(err, "data.message", "something went wrong"),
                 dismissable: true,
                 timeout: 3000
             });

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Axios from 'axios';
 
 import { useUserContext } from '@magento/peregrine/lib/context/user';
-import { size } from 'lodash-es';
+import { size, get } from 'lodash-es';
 
 export const useApiData = ({
     url = '',
@@ -11,7 +11,8 @@ export const useApiData = ({
     data = {},
     isLazy = false,
     useAuth = true,
-    onSuccess = null
+    onSuccess = null,
+    onError = () => {}
 }) => {
     const [{ token }, _] = useUserContext();
     const [loading, setLoading] = useState(!isLazy);
@@ -41,6 +42,7 @@ export const useApiData = ({
             } catch (error) {
                 setError(true);
                 setLoading(false);
+                onError(get(error, "response", {}));
                 console.log('file: data.utils.js ~ line 27 ~ error', error);
             }
         },

@@ -167,6 +167,7 @@ export default WishlistPage;
 
 const ProductListing = props => {
     const { selectedWishlist, wishlists, refreshWishlist, defaultCurrency } = props;
+    const showActions = size(wishlists) > 1
     // { productId, productQty }
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [removingItemId, setRemovingItemId] = useState(null);
@@ -214,6 +215,7 @@ const ProductListing = props => {
                 {itemList.map((item) => {
                     const { product, qty, wishlist_item_id, wishlist_id, product_id } = item
                     const { name, price, small_image, request_path, sku } = product
+                    const productName = replaceSpecialChars(name)
                     return (
                         <div key={wishlist_item_id} className={classes.galleryItem}>
                             <div className={classes.galleryItemInfo}>
@@ -228,7 +230,7 @@ const ProductListing = props => {
                                 <div className={classes.galleryItemDetails}>
                                     <Link to={`/${request_path}`}>
                                         <div className={classes.itemName}>
-                                            {replaceSpecialChars(name)}
+                                            {productName}
                                         </div>
                                     </Link>
                                     <div className={classes.itemPrice}>
@@ -267,18 +269,32 @@ const ProductListing = props => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className={classes.productItemActions}>
-                                        <div className={classes.action} onClick={() => {
-                                            setSelectedProduct({ productId: product_id, productQty: qty });
-                                            setActionType("copy");
-                                        }}>
-                                            <span>Copy</span></div>
-                                        <div className={classes.action} onClick={() => {
-                                            setSelectedProduct({ productId: wishlist_item_id, productQty: qty });
-                                            setActionType("move");
-                                        }}>
-                                            <span>Move</span></div>
-                                    </div>
+                                    {showActions ?
+                                        <div className={classes.productItemActions}>
+                                            <div className={classes.action} onClick={() => {
+                                                setSelectedProduct({ 
+                                                    productId: product_id,
+                                                    productQty: qty,
+                                                    currentWishlistId: selectedWishlist.multi_wishlist_id,
+                                                    productName
+                                                });
+                                                setActionType("copy");
+                                            }}>
+                                                <span>Copy</span></div>
+                                            <div className={classes.action} onClick={() => {
+                                                setSelectedProduct({
+                                                    productId: wishlist_item_id,
+                                                    productQty: qty,
+                                                    currentWishlistId: selectedWishlist.multi_wishlist_id,
+                                                    productName
+                                                });
+                                                setActionType("move");
+                                            }}>
+                                                <span>Move</span></div>
+                                        </div>
+                                        :
+                                        null
+                                    }
                                 </div>
 
                             </div>

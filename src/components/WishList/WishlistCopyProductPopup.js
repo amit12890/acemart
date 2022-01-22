@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useMemo, useState } from 'react';
-import { size } from 'lodash';
+import { size, find } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
@@ -8,29 +8,54 @@ import defaultClasses from './wishlistPopup.css';
 import { useApiData } from '../../data.utils';
 import Button from '../../venia/components/Button';
 import { apiAddToWishlist } from '../../url.utils';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { useToasts } from '@magento/peregrine/lib/Toasts';
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
 
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const WishlistCopyProductPopup = props => {
     const { wishlists, refreshWishlist, closeWishlistPopup, productId, productQty = 1,
-        btnText = "Copy Item" } = props;
-    const [selectedWishlist, setSelectedWishlist] = useState(null);
+        btnText = "Copy Item", currentWishlistId, productName } = props;
+    const [selectedWishlist, setSelectedWishlist] = useState(new Set());
+    const [_, { addToast }] = useToasts();
 
 
     const { callApi: addToWishlist, response: addResponse,
         loading: addToWishlistLoading, error: addToWishlistError } = useApiData({
             method: "post", isLazy: true,
             // refresh wishlist data on success
-            onSuccess: () => { refreshWishlist(); closeWishlistPopup(); }
+            onSuccess: (res) => { 
+                refreshWishlist(); 
+                closeWishlistPopup();
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message: `${productName} has been copied to selected wish list.`,
+                    dismissable: true,
+                    timeout: 3000
+                });
+            }
         })
 
     const handleSubmit = useCallback(async () => {
         const data = { product_id: productId, qty: productQty };
-        if (!!selectedWishlist) {
-            await addToWishlist(
-                apiAddToWishlist(selectedWishlist),
-                data,
-            )
+        const wishlistIds = [...selectedWishlist]
+        let params = "?"
+        for (let index = 0; index < wishlistIds.length; index++) {
+            const id = wishlistIds[index];
+            params = params + `wishlist_id[${index}]=${id}&`
         }
+        await addToWishlist(apiAddToWishlist(params), data);
+
     }, [selectedWishlist, productId, productQty])
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -40,19 +65,30 @@ const WishlistCopyProductPopup = props => {
 
         return (
             <div className={classes.listItemWrapper}>
-                {wishlists.map((wishlist) => (
-                    <div className={classes.listItem} key={wishlist.multi_wishlist_id}>
-                        <label>
-                            <input
-                                name={wishlist.wishlist_name}
-                                type="checkbox"
-                                checked={!!selectedWishlist &&
-                                    wishlist.multi_wishlist_id === selectedWishlist}
-                                onChange={() => setSelectedWishlist(wishlist.multi_wishlist_id)} />
-                            <span className={classes.itemLabel}>{wishlist.wishlist_name}</span>
-                        </label>
-                    </div>
-                ))}
+                {wishlists.map((wishlist) => {
+                    if(wishlist.multi_wishlist_id === currentWishlistId) {
+                        return null
+                    } else {
+                        return (
+                            <div className={classes.listItem} key={wishlist.multi_wishlist_id}>
+                                <label>
+                                    <input
+                                        name={wishlist.wishlist_name}
+                                        type="checkbox"
+                                        checked={selectedWishlist.has(wishlist.multi_wishlist_id)}
+                                        onChange={() => {
+                                            selectedWishlist.has(wishlist.multi_wishlist_id) ?
+                                            selectedWishlist.delete(wishlist.multi_wishlist_id) :
+                                            selectedWishlist.add(wishlist.multi_wishlist_id)
+                                            setSelectedWishlist(new Set(selectedWishlist))
+                                        }}
+                                    />
+                                    <span className={classes.itemLabel}>{wishlist.wishlist_name}</span>
+                                </label>
+                            </div>
+                        )
+                    }
+                })}
 
                 {addToWishlistLoading ?
                     <Button disabled>Loading...</Button>
