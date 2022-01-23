@@ -115,3 +115,33 @@ h5 {
 
 .slSwitcher {
 }
+
+.storeListContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 315px;
+}
+
+.callInfo {
+    margin-top: 8px;
+}
+
+.callInfo strong{
+    width: 80px;
+    display: inline-block;
+}
+
+.callInfo a {
+    display: inline-block;
+    padding: 0 4px;
+    margin-top: 0px;
+}
+
+.storeHours {
+    margin-top: 8px;
+}
+
+.storeHours strong{
+    width: 80px;
+    display: inline-block;
+}
