@@ -288,6 +288,15 @@ query successOrderPage($incrementId:String!) {
         pickup_datetime
         customer_email
         carrier
+        store_information {
+            city
+            hours
+            state
+            store_name
+            street
+            telephone
+            zip
+        }
         payment_methods {
             name            
             additional_data {
