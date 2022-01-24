@@ -11,7 +11,7 @@ import { checkoutReducer } from './data/checkout/checkout.reducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['checkout']
+    whitelist: ['checkout', "compare"]
 }
 // This is the connective layer between the Peregrine store and the
 // venia-concept UI. You can add your own reducers/enhancers here and combine
@@ -31,4 +31,4 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 // export default createStore(rootReducer, rootEnhancer);
 // const rootReducer = combineReducers(reducers);
 
-export default createStore(rootReducer, enhancer);
+export default createStore(persistedReducer, enhancer);
