@@ -36,6 +36,7 @@ export default connect(store => ({
     selected_payment_method: store.checkout.selected_payment_method,
     billing_address: store.checkout.billing_address,
     available_payment_methods: store.checkout.available_payment_methods,
+    pickup_date_time: store.checkout.pickup_date_time,
     paypal: store.checkout.paypal,
     orderNumber: store.checkout.orderNumber
 }))(({
@@ -50,6 +51,7 @@ export default connect(store => ({
     orderNumber,
     login_and_fetching,
     paypal,
+    pickup_date_time,
     dispatch
 }) => {
     const history = useHistory()
@@ -187,7 +189,8 @@ export default connect(store => ({
                         ) : (
                             <StorePickupInfo
                                 enabled={true}
-                                storeInfo={currentStoreConfig} />
+                                storeInfo={currentStoreConfig}
+                                pickupDate={pickup_date_time} />
                         )}
 
                         <ShippingMethodsStep

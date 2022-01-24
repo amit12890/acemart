@@ -32,4 +32,12 @@
     font-weight: bold;
 }
 
+.headerBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+.estimatedDate {
+    color: red;
+}

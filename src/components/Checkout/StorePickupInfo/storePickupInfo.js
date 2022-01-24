@@ -3,12 +3,16 @@ import React from 'react'
 import defaultClasses from './storePickupInfo.css'
 import addressClasses from '../AddressStep/addressStep.css'
 import { useStyle } from '@magento/venia-ui/lib/classify'
-import { get } from 'lodash'
+import { get, size } from 'lodash'
+import { format } from 'date-fns'
 
-export default ({ enabled, storeInfo, showFullInfo = true }) => {
+export default ({ enabled, storeInfo, pickupDate, showFullInfo = true }) => {
 
     const classes = useStyle(addressClasses, defaultClasses)
-
+    let dateInStr = ''
+    if (size(pickupDate) > 0) {
+        dateInStr = format(new Date(pickupDate), "MM/dd/yyyy")
+    }
     if (!enabled) {
         return (
             <div className={classes.block}>
@@ -20,8 +24,13 @@ export default ({ enabled, storeInfo, showFullInfo = true }) => {
     } else {
         return (
             <div className={classes.block}>
-                <div className={classes.blockTitle}>
-                    Store Pickup
+                <div className={classes.headerBlock}>
+                    <div className={classes.blockTitle}>
+                        Store Pickup
+                    </div>
+                    <div className={classes.estimatedDate}>
+                        Estimated Pickup Date: {dateInStr}
+                    </div>
                 </div>
                 <div className={[classes.address, classes.horizontal].join(" ")}>
                     <div className={classes.addressTextWrapper}>
