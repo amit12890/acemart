@@ -42,8 +42,8 @@ const Product = () => {
 
     return (
         <Fragment>
-            <StoreTitle>{replaceSpecialChars(product.meta_title)}</StoreTitle>
-            <Meta name="title" content={replaceSpecialChars(product.meta_title)} />
+            <StoreTitle>{replaceSpecialChars(product.meta_title ? product.meta_title : product.product_name)}</StoreTitle>
+            <Meta name="title" content={replaceSpecialChars(product.meta_title ? product.meta_title : product.product_name)} />
             <Meta name="description" content={replaceSpecialChars(product.meta_description)} />
             <ProductFullDetail product={product} />
         </Fragment>
