@@ -102,3 +102,26 @@
 .horizontalLoader span{
     margin-left: 0.5rem;
 }
+
+.forgotPasswordButtonContainer {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    justify-self: start;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgotPasswordButton {
+    composes: root from '../../../venia/components/LinkButton/linkButton.css'; 
+    padding: 0 0 5px 0 ;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid;
+    font-size: 14px;
+
+}
+
+.forgotPasswordButton:hover {
+    color: var(--link-color-hover);
+}

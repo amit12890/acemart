@@ -25,6 +25,7 @@ import Button from '../../../venia/components/Button';
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 import LoadingButton from '../../LoadingButton'
 import { useHistory } from 'react-router-dom';
+import LinkButton from '../../../venia/components/LinkButton';
 
 
 
@@ -56,8 +57,11 @@ export default connect(store => {
     const history = useHistory()
     const classes = useStyle(defaultClasses)
     const { dispatch } = props
-    const { handleSubmit } = useSignIn({
-        getCartDetailsQuery: GET_CART_DETAILS_QUERY
+    const { handleSubmit, handleForgotPassword } = useSignIn({
+        getCartDetailsQuery: GET_CART_DETAILS_QUERY,
+        showForgotPassword: () => {
+            history.push('/customer/account/forgotpassword/')
+        }
     })
     const emailInputRef = useRef({})
     const [{ cartId }] = useCartContext()
@@ -89,8 +93,6 @@ export default connect(store => {
             if (!emailValidating) {
                 checkEmailAvailable(inputText)
             }
-        } else {
-            setPassword('')
         }
     }, 1000), [emailValidating])
 
@@ -221,12 +223,20 @@ export default connect(store => {
                                             }
                                         }}
                                         errorMessage={get(errors, "password", '')} />
-                                    <div
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            history.push('/customer/account/forgotpassword/')
-                                        }}>
-                                        Forget Password
+
+                                    <div className={classes.forgotPasswordButtonContainer}>
+                                        <LinkButton
+                                            classes={{
+                                                root: classes.forgotPasswordButton
+                                            }}
+                                            type="button"
+                                            onClick={handleForgotPassword}
+                                        >
+                                            <FormattedMessage
+                                                id={'checkout.signIn.forgotPasswordText'}
+                                                defaultMessage={'Forgot Your Password?'}
+                                            />
+                                        </LinkButton>
                                     </div>
                                 </>
                             }
