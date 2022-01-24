@@ -175,6 +175,11 @@ function localIntercept(targets) {
             pattern: "/resources",
             path: require.resolve("./src/blogs/components/Routes")
         });
+        routes.push({
+            name: "Customer Login",
+            pattern: "/loginascustomer/login/index",
+            path: require.resolve("./src/components/LoginAsCustomer")
+        });
         return routes;
     });
 }
