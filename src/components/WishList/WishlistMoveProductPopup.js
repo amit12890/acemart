@@ -8,17 +8,40 @@ import defaultClasses from './wishlistPopup.css';
 import { useApiData } from '../../data.utils';
 import Button from '../../venia/components/Button';
 import { apiUpdateProductWishlist } from '../../url.utils';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { useToasts } from '@magento/peregrine/lib/Toasts';
+import { CheckCircle as CheckCircleIcon } from 'react-feather';
 
+
+const successIcon = (
+    <Icon
+        src={CheckCircleIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const WishlistMoveProductPopup = props => {
     const { wishlists, refreshWishlist, closeWishlistPopup, productId, productQty = 1,
-        btnText = "Move Item" } = props;
+        btnText = "Move Item", currentWishlistId, productName } = props;
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+    const [_, { addToast }] = useToasts();
 
     const { callApi: moveToWishlist, response: moveResponse,
         loading: moveToWishlistLoading, error: moveToWishlistError } = useApiData({
             method: "post", isLazy: true,
-            onSuccess: () => { refreshWishlist(); closeWishlistPopup(); }
+            onSuccess: () => { 
+                refreshWishlist();
+                closeWishlistPopup();
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message: `${productName} has been moved to selected wish list.`,
+                    dismissable: true,
+                    timeout: 3000
+                });
+            }
         })
 
     const handleSubmit = useCallback(async () => {
@@ -46,20 +69,26 @@ const WishlistMoveProductPopup = props => {
 
         return (
             <div className={classes.listItemWrapper}>
-                {wishlists.map((wishlist) => (
-                    <div className={classes.listItem} key={wishlist.multi_wishlist_id}>
-                        <label>
-                            <input
-                                name={wishlist.wishlist_name}
-                                type="checkbox"
-                                checked={!!selectedWishlist &&
-                                    wishlist.multi_wishlist_id === selectedWishlist}
-                                onChange={() => setSelectedWishlist(wishlist.multi_wishlist_id)} />
-                            <span className={classes.itemLabel}>{wishlist.wishlist_name}</span>
+                {wishlists.map((wishlist) => {
+                    if(wishlist.multi_wishlist_id === currentWishlistId) {
+                        return null
+                    } else {
+                        return (
+                            <div className={classes.listItem} key={wishlist.multi_wishlist_id}>
+                                <label>
+                                    <input
+                                        name={wishlist.wishlist_name}
+                                        type="checkbox"
+                                        checked={!!selectedWishlist &&
+                                            wishlist.multi_wishlist_id === selectedWishlist}
+                                        onChange={() => setSelectedWishlist(wishlist.multi_wishlist_id)} />
+                                    <span className={classes.itemLabel}>{wishlist.wishlist_name}</span>
 
-                        </label>
-                    </div>
-                ))}
+                                </label>
+                            </div>
+                        )
+                    }
+                })}
 
                 {moveToWishlistLoading ?
                     <Button disabled>Loading...</Button>

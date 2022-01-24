@@ -5,7 +5,7 @@ import { GET_QUESTION_ANSWER } from './questionAnswer.gql';
 import { useLocation, useHistory } from 'react-router-dom';
 import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
 
-const DEFAULT_PAGE_LIMIT = 1;
+const DEFAULT_PAGE_LIMIT = 10;
 const DEFAULT_PAGE = 1;
 
 export const useMyQuestionAnswer = () => {

@@ -404,9 +404,9 @@ display: flex;
 
 
 
-.mapContainer img {
+/* .mapContainer img {
     position: static;
-}
+} */
 
 .storeListContainer {
     display: flex;
