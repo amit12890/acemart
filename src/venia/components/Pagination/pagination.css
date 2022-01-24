@@ -4,6 +4,16 @@
     gap: 0.25rem;
     grid-auto-columns: minmax(2rem, auto);
     grid-auto-flow: column;
-    justify-content: flex-start;
+    justify-content: center;
     text-align: justify;
+    margin-bottom: 1rem;
+}
+
+
+@media (min-width: 1024px) {
+    .root {
+        justify-content: flex-start;
+        margin-bottom: 0;
+       
+    }
 }

@@ -41,8 +41,8 @@ const NavHeader = props => {
             defaultMessage: 'Sign In'
         }),
         MENU: formatMessage({
-            id: 'navHeader.mainMenuText',
-            defaultMessage: 'Main Menu'
+            id: 'am.navHeader.mainMenuText',
+            defaultMessage: 'Menu'
         })
     };
 
@@ -72,11 +72,11 @@ const NavHeader = props => {
                 {titleElement}
             </h2>
             {hasModal ? null : (
-                    <h2 className={classes.title} 
-                        onClick={() => onTabSelect(2)}>
-                        Resources
-                    </h2>
-                )
+                <h2 className={classes.title}
+                    onClick={() => onTabSelect(2)}>
+                    Resources
+                </h2>
+            )
             }
         </Fragment>
     );

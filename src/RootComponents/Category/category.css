@@ -16,13 +16,14 @@
     position: relative;
     bottom: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     border-top: 1px solid rgb(var(--venia-global-color-border));
     padding-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .paginationItem {
-    flex: 1;
+    flex-basis: 100% ;
 }
 
 .parPageItem {
@@ -60,14 +61,14 @@
 .categoryInfo {
     margin: 1rem 0;
     font-size: 0.875rem;
-    max-width: 75vw;
+    max-width: 75vw; 
 }
 
 .headerButtons {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .subcategoryWrapper {
@@ -137,4 +138,17 @@
         order: 1;
         width: 75%;
     }
+    .pagination {
+        position: relative;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid rgb(var(--venia-global-color-border));
+        padding-top: 1rem;
+    }
+    
+    .paginationItem {
+        flex: 1 ;
+    }
+    
 }

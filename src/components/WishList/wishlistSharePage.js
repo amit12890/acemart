@@ -1,4 +1,4 @@
-import React, { useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'informed';
 
@@ -52,7 +52,7 @@ const WishlistSharePage = props => {
     }, [loading]);
 
     return (
-        <div>
+        <div className={classes.root}>
             <Title>Wish List Sharing</Title>
             <h3>Wish List Sharing</h3>
             <div>share icon</div>

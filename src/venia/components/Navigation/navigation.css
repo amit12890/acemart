@@ -29,7 +29,7 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     left: 0;
-    max-width: 360px;
+    /* max-width: 360px; */
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -47,13 +47,12 @@
 
 .header {
     align-content: center;
-    background-color: rgb(var(--venia-global-color-gray));
-    box-shadow: 0 1px rgb(var(--venia-global-color-border));
+    background-color: rgb(var(--theme-color-primary));
     display: grid;
     grid-auto-columns: 3.5rem;
     grid-auto-flow: column;
     grid-auto-rows: 3.5rem;
-    grid-template-columns: 3.5rem 1fr 3.5rem;
+    grid-template-columns: 3.5rem 1fr 1fr;
     height: 3.5rem;
     position: relative;
     z-index: 1;

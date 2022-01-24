@@ -29,6 +29,8 @@
     
 }
 
+@media (min-width: 1023px) {
+
 .panelBody{
     max-width: var(--venia-global-maxWidth);
     width: 100%;
@@ -53,6 +55,7 @@
 .topMenuContainer .action:hover {
     background-color: rgb(var(--color-gray30));
 }
+
 
 .leftMenu {
     flex-grow: 1; 
@@ -98,6 +101,13 @@
 .store {
     fill: #9dd666;
 }
+
+}
+@media (max-width: 1023px) {
+
+}
+
+
 
 .footerBox {
     text-align: left;
