@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { get, includes, size, toLower } from 'lodash'
+import { find, get, includes, size, toLower } from 'lodash'
 
 import { useCheckoutSuccess } from '../../../../data/checkout/hooks/checkout.hook'
 import BarCode from 'react-barcode'
@@ -15,8 +15,7 @@ import { replaceSpecialChars, textToBase64Barcode } from '../../../../app.utils'
 
 export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange, isDefaultStore }) => {
     const classes = useStyle(propsClasses, defaultClasses)
-    const { fetchCheckoutSuccess, data, checkoutSuccessFetching, handleUploadBarCode } = useCheckoutSuccess()
-    console.log("🚀 ~ file: checkoutOrder.js ~ line 19 ~ React.memo ~ data", data)
+    const { fetchCheckoutSuccess, data, checkoutSuccessFetching, handleUploadBarCode, productData } = useCheckoutSuccess()
 
     useEffect(() => {
         fetchCheckoutSuccess({
@@ -139,26 +138,16 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         </div>
                     </div>
                     {items.map(((item) => {
+                        let moreProductInfo = {}
+                        if (size(productData) > 0) {
+                            moreProductInfo = find(productData, ["sku", item.product_sku])
+                        }
                         return (
-                            <div className={classes.tablebody} key={item.id}>
-                                <div className={classes.productDetails}>
-                                    <div className={classes.productName}>{replaceSpecialChars(get(item, "product_name", ""))}</div>
-                                    <div className={classes.sku}>{get(item, "product_sku", "")}</div>
-                                </div>
-                                <div className={classes.price}>
-                                    <Price
-                                        currencyCode={get(item, "product_sale_price.currency", "USD")}
-                                        value={get(item, "product_sale_price.value", 0)} />
-                                </div>
-                                <div className={classes.qty}>
-                                    {get(item, "quantity_ordered", "1")}
-                                </div>
-                                <div className={classes.subtotal}>
-                                    <Price
-                                        currencyCode={get(item, "product_sale_price.currency", "USD")}
-                                        value={get(item, "product_sale_price.value", 0)} />
-                                </div>
-                            </div>
+                            <ProductItem
+                                moreProductInfo={moreProductInfo}
+                                item={item}
+                                key={item.id}
+                                classes={classes} />
                         )
                     }))}
                     <div className={classes.tableFooter}>
@@ -264,6 +253,36 @@ const StorePickupInformation = ({ store_information, classes }) => {
                 <div className={classes.telephone}>
                     {get(store_information, "telephone", "")}
                 </div>
+            </div>
+        </div>
+    )
+}
+
+const ProductItem = ({ item, moreProductInfo, classes }) => {
+    const thumbnailUrl = get(moreProductInfo, "thumbnail.url", "")
+    return (
+        <div className={classes.tablebody}>
+            {size(thumbnailUrl) > 0 && (
+                <div className={classes.imageWrapper}>
+                    <img src={thumbnailUrl} />
+                </div>
+            )}
+            <div className={classes.productDetails}>
+                <div className={classes.productName}>{replaceSpecialChars(get(item, "product_name", ""))}</div>
+                <div className={classes.sku}>{get(item, "product_sku", "")}</div>
+            </div>
+            <div className={classes.price}>
+                <Price
+                    currencyCode={get(item, "product_sale_price.currency", "USD")}
+                    value={get(item, "product_sale_price.value", 0)} />
+            </div>
+            <div className={classes.qty}>
+                {get(item, "quantity_ordered", "1")}
+            </div>
+            <div className={classes.subtotal}>
+                <Price
+                    currencyCode={get(item, "product_sale_price.currency", "USD")}
+                    value={get(item, "product_sale_price.value", 0)} />
             </div>
         </div>
     )
