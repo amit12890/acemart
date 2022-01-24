@@ -24,6 +24,7 @@ import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action
 import Button from '../../../venia/components/Button';
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 import LoadingButton from '../../LoadingButton'
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -52,7 +53,7 @@ export default connect(store => {
         is_email_available: store.checkout.is_email_available
     }
 })((props) => {
-
+    const history = useHistory()
     const classes = useStyle(defaultClasses)
     const { dispatch } = props
     const { handleSubmit } = useSignIn({
@@ -204,23 +205,31 @@ export default connect(store => {
                                 errorMessage={get(errors, "email", '')} />
 
                             {(size(email) > 0 && password !== null) &&
-                                <TextInput
-                                    containerClass={[classes.field, classes.password].join(" ")}
-                                    label="Password"
-                                    type="password"
-                                    className="input-text"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    name="password"
-                                    htmlFor="password"
-                                    onKeyPress={(e) => {
-                                        if (e.key === 'Enter') {
-                                            loginUser(e)
-                                        }
-                                    }}
-                                    errorMessage={get(errors, "password", '')} />
+                                <>
+                                    <TextInput
+                                        containerClass={[classes.field, classes.password].join(" ")}
+                                        label="Password"
+                                        type="password"
+                                        className="input-text"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        name="password"
+                                        htmlFor="password"
+                                        onKeyPress={(e) => {
+                                            if (e.key === 'Enter') {
+                                                loginUser(e)
+                                            }
+                                        }}
+                                        errorMessage={get(errors, "password", '')} />
+                                    <div
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            history.push('/customer/account/forgotpassword/')
+                                        }}>
+                                        Forget Password
+                                    </div>
+                                </>
                             }
-
 
                             <div className={classes.actionToolbar}>
                                 {password !== null && (
