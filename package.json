@@ -39,6 +39,7 @@
     "pure-react-carousel": "^1.27.6",
     "react-barcode": "^1.4.1",
     "react-feather": "^2.0.9",
+    "react-ga": "^3.3.0",
     "react-google-maps": "^9.4.5",
     "react-google-recaptcha": "^2.1.0",
     "react-map-interaction": "^2.1.0",
