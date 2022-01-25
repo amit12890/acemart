@@ -15,7 +15,7 @@ import ShippingMethodsStep from './ShippingMethodsStep'
 import PaymentListStep from './PaymentListStep'
 
 import defaultClasses from './checkout.css'
-import { get, size } from 'lodash'
+import { get, isMatch, size } from 'lodash'
 import { useCheckoutPayment, usePayPal } from '../../data/checkout/hooks/payment.hook'
 import ReviewCheckout from './ReviewCheckout'
 import CartSummary from './CartSummary'
@@ -23,6 +23,7 @@ import CartItemList from './CartItemList'
 import LoadingIndicator from '../../venia/components/LoadingIndicator'
 import StorePickupInfo from './StorePickupInfo'
 import { useStoreSwitcher } from '../../magento/peregrine/talons/Header/useStoreSwitcher'
+import { MOCKED_ADDRESS } from '../../magento/peregrine/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm'
 
 
 
@@ -75,9 +76,14 @@ export default connect(store => ({
     const classes = useStyle(defaultClasses)
     const [showReviewCheckout, setReviewCheckout] = useState(false)
 
+    /**
+     * when comming from cart page by estimating address it will set firstname, lastname ,city,telephone as its value 
+     */
+    const isMockAddress = isMatch(shipping_addresses[0], MOCKED_ADDRESS)
+    console.log("🚀 ~ file: addressStep.js ~ line 50 ~ isMockAddress", isMockAddress)
     let isEmailAdded = size(email) > 0
-    let isShippingAddressSelected = size(shipping_addresses) > 0 && !settingShippingAddress
-    let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0 && !settingShippingMethod
+    let isShippingAddressSelected = size(shipping_addresses) > 0 && !settingShippingAddress && !isMockAddress
+    let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0 && !settingShippingMethod && isShippingAddressSelected
     // shipping method and email address add dependancy added
     let isBillingAddressSelected = size(billing_address) > 0 && !settingBillingAddress && isShippingAddressSelected && isEmailAdded
     let isPaymentMethodSelected = size(selected_payment_method) > 0 && !settingPaymentMethod && isBillingAddressSelected
@@ -185,7 +191,8 @@ export default connect(store => ({
                                 isUserLoggedIn={isSignedIn}
                                 showSameAsButton={false}
                                 isDefaultStore={isDefaultStore}
-                                setting={settingShippingAddress} />
+                                setting={settingShippingAddress}
+                                isMockAddress={isMockAddress} />
                         ) : (
                             <StorePickupInfo
                                 enabled={true}

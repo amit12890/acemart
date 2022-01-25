@@ -44,7 +44,8 @@
 
 .thumbnailContainer {
     margin-right: 15px;
-    max-width: 85px;
+    width: 85px;
+    height: 85px;
     border: 1px solid rgb(var(--border-color-base));
     padding: 3px;
     display: inline-flex;
@@ -53,7 +54,11 @@
 
 
 .thumbnailContainer img {
-    max-width: 100%;
+    display: flex;
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    overflow: hidden;
 }
 
 .productItemDetails {

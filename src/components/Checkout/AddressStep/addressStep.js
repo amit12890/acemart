@@ -10,8 +10,9 @@ import defaultClasses from './addressStep.css'
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 
 
-import { get, size, find } from 'lodash'
+import { get, size, find, isMatch } from 'lodash'
 import { FormattedMessage } from 'react-intl'
+import { MOCKED_ADDRESS } from '../../../magento/peregrine/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm'
 
 
 
@@ -36,12 +37,15 @@ const AddressStep = props => {
         isShippingStep,
         isUserLoggedIn,
         setting,
+        isMockAddress,
         isDefaultStore
     } = props
+    console.log("🚀 ~ file: addressStep.js ~ line 42 ~ initialValues", initialValues)
     console.log("🚀 ~ file: addressStep.js ~ line 41 ~ data", data)
 
     let initCustomerAddressId = get(initialValues, "customer_address_id", -1)
     let isNewAddress = get(initialValues, "customer_address_id", -1) == null
+
 
     if (initCustomerAddressId == -1) {
         if (isShippingStep) {
@@ -57,14 +61,14 @@ const AddressStep = props => {
     const [selectedAddressId, setAddressId] = useState(initCustomerAddressId)
     console.log("🚀 ~ file: addressStep.js ~ line 57 ~ selectedAddressId", selectedAddressId)
     const [showAddressForm, setFormVisibility] = useState(isNewAddress)
-    const [editMode, setInEditMode] = useState(size(initialValues) === 0)
+    const [editMode, setInEditMode] = useState(size(initialValues) === 0 || isMockAddress)
 
     useEffect(() => {
-        setInEditMode(size(initialValues) === 0)
+        setInEditMode(size(initialValues) === 0 || isMockAddress)
         setAddressId(initCustomerAddressId)
         let isNewAddress = initCustomerAddressId == null
         setFormVisibility(isNewAddress)
-    }, [initialValues, isNewAddress, initCustomerAddressId])
+    }, [initialValues, isNewAddress, initCustomerAddressId, isMockAddress])
 
 
     const changeAddressSelection = (newId) => setAddressId(newId === selectedAddressId ? -1 : newId)
@@ -142,7 +146,13 @@ const AddressStep = props => {
         return (
             <div className={classes.blockContent}>
                 <fieldset className={classes.fieldset}>
-
+                    {showSameAsButton && (
+                        <div className={[classes.actionToolbar, classes.sameAsShipping].join(" ")}>
+                            <div className={classes.secondary}>
+                                <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
+                            </div>
+                        </div>
+                    )}
                     {hasAddresses ?
                         (
                             data.map((address, index) => {
@@ -181,13 +191,6 @@ const AddressStep = props => {
 
                         )
                     }
-                    {showSameAsButton && (
-                        <div className={[classes.actionToolbar, classes.sameAsShipping].join(" ")}>
-                            <div className={classes.secondary}>
-                                <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={sameAddress}><span>Same as Shipping Address</span></button>
-                            </div>
-                        </div>
-                    )}
 
                     <div className={[classes.actionToolbar, classes.primaryAction].join(" ")}>
                         <button className={[classes.action, classes.secondaryButton].join(" ")} onClick={submitForm}>
@@ -198,19 +201,6 @@ const AddressStep = props => {
 
 
                 </fieldset>
-            </div>
-        )
-    }
-
-    /**
-    * render diff UI is email is not presented in cart
-    */
-    if (!enabled) {
-        return (
-            <div className="block block-checkout inactive">
-                <div className="block-title">
-                    {title}
-                </div>
             </div>
         )
     }
@@ -259,6 +249,20 @@ const AddressStep = props => {
         )
     }
 
+    let initialValuesForForm = {}
+    if (isMockAddress) {
+        // reset form values for data
+        initialValuesForForm = {
+            ...initialValues,
+            firstname: '',
+            lastname: '',
+            street: '',
+            city: '',
+            telephone: ''
+        }
+    } else if (get(initialValues, "customer_address_id", null) == null) {
+        initialValuesForForm = initialValues
+    }
 
     return (
         <div className={classes.block}>
@@ -280,7 +284,7 @@ const AddressStep = props => {
                     {showAddressForm || !isUserLoggedIn ? (
                         <AddressForm
                             isUserLoggedIn={isUserLoggedIn}
-                            initialValues={get(initialValues, "customer_address_id", null) == null ? initialValues : {}}
+                            initialValues={initialValuesForForm}
                             setting={setting}
                             isShippingStep={isShippingStep}
                             onSaveAddress={(address) => {

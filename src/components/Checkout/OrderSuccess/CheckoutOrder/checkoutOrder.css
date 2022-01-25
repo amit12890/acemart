@@ -190,3 +190,9 @@
     padding: 0.2rem;
     border-radius: 8px;
 }
+
+.imageWrapper img {
+    display: flex;
+    width: 3rem;
+    object-fit: contain;
+}

@@ -18,7 +18,7 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 export default connect(store => {
     return {
-        order_number: "000024222" || store.checkout.orderNumber,
+        order_number: store.checkout.orderNumber,
         customerEmail: store.checkout.email
     }
 })(React.memo(({
