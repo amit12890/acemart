@@ -33,7 +33,7 @@ h2 {
 
 .panelWrapper {
     margin-bottom: 30px;
-    padding: 30px;
+    padding: 15px;
     border: 1px solid #e9eaec;
 }
 .panelBody {
@@ -96,23 +96,6 @@ display: inline-flex;
 
 }
 
-@media (max-width: 1023px) {
-    .root {
-    }
-
-    .content {
-        /* grid-template-columns: 1fr 1fr; */
-    }
-
-    .addrBlockWrapper {
-        flex-direction: column;
-        gap: 2.5rem;
-    }
-
-    .accountAddressBlock { 
-       
-    }
-}
 
 @media (max-width: 640px) {
     .content {
@@ -178,3 +161,35 @@ display: inline-flex;
     margin-bottom: 10px;
 }
 
+
+@media (max-width: 1023px) {
+    .root {
+    }
+
+    .content {
+        /* grid-template-columns: 1fr 1fr; */
+    }
+
+    .addrBlockWrapper {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .accountAddressBlock { 
+       
+    }
+
+    .additionalAddrBlockWrapper .additionalAddrBlock {
+        grid-template-columns:auto;
+    }
+}
+
+
+@media (min-width: 1024px) {
+
+    .panelWrapper {
+        padding: 30x;
+
+    }
+
+}

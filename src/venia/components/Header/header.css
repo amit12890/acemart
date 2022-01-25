@@ -352,7 +352,7 @@
 
 
     .root {
-        display: none; 
+        /* display: none;  */
     }
 
     .navContainer {
