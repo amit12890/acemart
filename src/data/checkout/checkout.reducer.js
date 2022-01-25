@@ -35,6 +35,7 @@ const INIT_STATE = {
     billing_address: null,
     email: null,
     prices: {},
+    pickup_date_time: null,
 
     selected_payment_method: {},
     available_payment_methods: [],

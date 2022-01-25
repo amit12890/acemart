@@ -1,0 +1,43 @@
+.name {
+    font-weight: var(--font-weight-bold);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.street,
+.region,
+.city,
+.telephone {
+
+}
+
+.horizontal {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1rem;
+}
+
+.addressTextWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.timings {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+}
+.timings span {
+    font-weight: bold;
+}
+
+.headerBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.estimatedDate {
+    color: red;
+}

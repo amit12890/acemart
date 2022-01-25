@@ -16,6 +16,7 @@ import { replaceSpecialChars, textToBase64Barcode } from '../../../../app.utils'
 export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: propsClasses, onEmailChange, isDefaultStore }) => {
     const classes = useStyle(propsClasses, defaultClasses)
     const { fetchCheckoutSuccess, data, checkoutSuccessFetching, handleUploadBarCode } = useCheckoutSuccess()
+    console.log("🚀 ~ file: checkoutOrder.js ~ line 19 ~ React.memo ~ data", data)
 
     useEffect(() => {
         fetchCheckoutSuccess({
@@ -50,8 +51,8 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
     const pickupDate = get(data, "pickup_datetime", null)
     const billingInfo = get(data, "billing_address", {})
     const shippingInfo = get(data, "shipping_address", {})
+    const storeInformation = get(data, "store_information", {})
     const items = get(data, "items", [])
-    const shippingStreet = get(shippingInfo, "street", [])
     const billingStreet = get(billingInfo, "street", [])
 
     const shipping = get(data, "total.total_shipping.value", 0)
@@ -105,7 +106,7 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                                 </div>
                             )}
                             <div className={classes.city}>
-                                <span>{get(billingInfo, "city", "")} {get(billingInfo, "region", "")},  {get(billingInfo, "postcode", "")}</span>
+                                <span>{get(billingInfo, "city", "")}, {get(billingInfo, "region", "")}  {get(billingInfo, "postcode", "")}</span>
                             </div>
                             <div className={classes.telephone}>
                                 {get(billingInfo, "telephone", "")}
@@ -113,32 +114,11 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
                         </div>
                     </div>
 
-
-                    <div className={[classes.block, classes.shipping].join(" ")}>
-                        <div className={classes.blockTitle}>
-                            {isStorePickup ? "Store Pickup Information" : "Shipping information"}
-                        </div>
-                        <div className={classes.blockContent}>
-                            <div className={classes.name}>
-                                {get(shippingInfo, "firstname", "")} {get(shippingInfo, "lastname", "")}
-                            </div>
-                            {size(shippingStreet) === 2 ? (
-                                <div className={classes.street}>
-                                    {shippingStreet.join(", ")}
-                                </div>
-                            ) : (
-                                <div className={classes.street}>
-                                    {get(shippingInfo, "street[0]", '')}
-                                </div>
-                            )}
-                            <div className={classes.city}>
-                                <span>{get(shippingInfo, "city", "")}, {get(shippingInfo, "region", "")}  {get(shippingInfo, "postcode", "")}</span>
-                            </div>
-                            <div className={classes.telephone}>
-                                {get(shippingInfo, "telephone", "")}
-                            </div>
-                        </div>
-                    </div>
+                    {isStorePickup ? (
+                        <StorePickupInformation store_information={storeInformation} classes={classes} />
+                    ) : (
+                        <ShippingInformation shippingInfo={shippingInfo} classes={classes} />
+                    )}
                 </div>
             </div>
             <div className={classes.panelFooter}>
@@ -233,3 +213,58 @@ export default React.memo(({ orderNumber, onCheckoutOrderFetched, classes: props
         </div>
     )
 })
+
+const ShippingInformation = ({ shippingInfo, classes }) => {
+    const shippingStreet = get(shippingInfo, "street", [])
+    return (
+        <div className={[classes.block, classes.shipping].join(" ")}>
+            <div className={classes.blockTitle}>
+                Shipping information
+            </div>
+            <div className={classes.blockContent}>
+                <div className={classes.name}>
+                    {get(shippingInfo, "firstname", "")} {get(shippingInfo, "lastname", "")}
+                </div>
+                {size(shippingStreet) === 2 ? (
+                    <div className={classes.street}>
+                        {shippingStreet.join(", ")}
+                    </div>
+                ) : (
+                    <div className={classes.street}>
+                        {get(shippingInfo, "street[0]", '')}
+                    </div>
+                )}
+                <div className={classes.city}>
+                    <span>{get(shippingInfo, "city", "")}, {get(shippingInfo, "region", "")}  {get(shippingInfo, "postcode", "")}</span>
+                </div>
+                <div className={classes.telephone}>
+                    {get(shippingInfo, "telephone", "")}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const StorePickupInformation = ({ store_information, classes }) => {
+    return (
+        <div className={[classes.block, classes.shipping].join(" ")}>
+            <div className={classes.blockTitle}>
+                Store Pickup information
+            </div>
+            <div className={classes.blockContent}>
+                <div className={classes.name}>
+                    {get(store_information, "store_name", "")}
+                </div>
+                <div className={classes.street}>
+                    {get(store_information, "street", '')}
+                </div>
+                <div className={classes.city}>
+                    <span>{get(store_information, "city", "")}, {get(store_information, "state", "")}  {get(store_information, "postcode", "")}</span>
+                </div>
+                <div className={classes.telephone}>
+                    {get(store_information, "telephone", "")}
+                </div>
+            </div>
+        </div>
+    )
+}

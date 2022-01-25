@@ -24,6 +24,8 @@ import { loginAndFetchingCheckout } from '../../../data/checkout/checkout.action
 import Button from '../../../venia/components/Button';
 import LoadingIndicator from '../../../venia/components/LoadingIndicator'
 import LoadingButton from '../../LoadingButton'
+import { useHistory } from 'react-router-dom';
+import LinkButton from '../../../venia/components/LinkButton';
 
 
 
@@ -52,11 +54,14 @@ export default connect(store => {
         is_email_available: store.checkout.is_email_available
     }
 })((props) => {
-
+    const history = useHistory()
     const classes = useStyle(defaultClasses)
     const { dispatch } = props
-    const { handleSubmit } = useSignIn({
-        getCartDetailsQuery: GET_CART_DETAILS_QUERY
+    const { handleSubmit, handleForgotPassword } = useSignIn({
+        getCartDetailsQuery: GET_CART_DETAILS_QUERY,
+        showForgotPassword: () => {
+            history.push('/customer/account/forgotpassword/')
+        }
     })
     const emailInputRef = useRef({})
     const [{ cartId }] = useCartContext()
@@ -88,8 +93,6 @@ export default connect(store => {
             if (!emailValidating) {
                 checkEmailAvailable(inputText)
             }
-        } else {
-            setPassword('')
         }
     }, 1000), [emailValidating])
 
@@ -204,23 +207,39 @@ export default connect(store => {
                                 errorMessage={get(errors, "email", '')} />
 
                             {(size(email) > 0 && password !== null) &&
-                                <TextInput
-                                    containerClass={[classes.field, classes.password].join(" ")}
-                                    label="Password"
-                                    type="password"
-                                    className="input-text"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    name="password"
-                                    htmlFor="password"
-                                    onKeyPress={(e) => {
-                                        if (e.key === 'Enter') {
-                                            loginUser(e)
-                                        }
-                                    }}
-                                    errorMessage={get(errors, "password", '')} />
-                            }
+                                <>
+                                    <TextInput
+                                        containerClass={[classes.field, classes.password].join(" ")}
+                                        label="Password"
+                                        type="password"
+                                        className="input-text"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        name="password"
+                                        htmlFor="password"
+                                        onKeyPress={(e) => {
+                                            if (e.key === 'Enter') {
+                                                loginUser(e)
+                                            }
+                                        }}
+                                        errorMessage={get(errors, "password", '')} />
 
+                                    <div className={classes.forgotPasswordButtonContainer}>
+                                        <LinkButton
+                                            classes={{
+                                                root: classes.forgotPasswordButton
+                                            }}
+                                            type="button"
+                                            onClick={handleForgotPassword}
+                                        >
+                                            <FormattedMessage
+                                                id={'checkout.signIn.forgotPasswordText'}
+                                                defaultMessage={'Forgot Your Password?'}
+                                            />
+                                        </LinkButton>
+                                    </div>
+                                </>
+                            }
 
                             <div className={classes.actionToolbar}>
                                 {password !== null && (

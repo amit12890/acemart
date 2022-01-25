@@ -21,6 +21,8 @@ import ReviewCheckout from './ReviewCheckout'
 import CartSummary from './CartSummary'
 import CartItemList from './CartItemList'
 import LoadingIndicator from '../../venia/components/LoadingIndicator'
+import StorePickupInfo from './StorePickupInfo'
+import { useStoreSwitcher } from '../../magento/peregrine/talons/Header/useStoreSwitcher'
 
 
 
@@ -34,6 +36,7 @@ export default connect(store => ({
     selected_payment_method: store.checkout.selected_payment_method,
     billing_address: store.checkout.billing_address,
     available_payment_methods: store.checkout.available_payment_methods,
+    pickup_date_time: store.checkout.pickup_date_time,
     paypal: store.checkout.paypal,
     orderNumber: store.checkout.orderNumber
 }))(({
@@ -48,11 +51,12 @@ export default connect(store => ({
     orderNumber,
     login_and_fetching,
     paypal,
+    pickup_date_time,
     dispatch
 }) => {
     const history = useHistory()
     const [{ isSignedIn }] = useUserContext()
-    const { isDefaultStore, fetchCheckout } = useCheckout()
+    const { isDefaultStore, fetchCheckout, currentStoreConfig } = useCheckout()
 
     const {
         customerAddresses,
@@ -84,8 +88,6 @@ export default connect(store => ({
     let initBillinAddress = {}
     if (size(existBillingAddress) > 0) {
         initBillinAddress = existBillingAddress
-    } else if (isDefaultStore) {
-        initBillinAddress = shipping_addresses[0]
     }
 
     useEffect(() => {
@@ -138,51 +140,58 @@ export default connect(store => ({
 
                         <EmailStep enabled={true} />
 
-                        <AddressStep
-                            enabled={isEmailAdded || !isDefaultStore}
-                            data={customerAddresses}
-                            title={isDefaultStore ? "Shipping Address" : "Store Pickup"}
-                            setting={settingShippingAddress}
-                            initialValues={shipping_addresses[0]}
-                            onApplyAddress={(address, isNewAddress = false) => {
-                                if (settingShippingAddress) return
-                                console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
-                                let addressData = null
-                                if (isNewAddress) {
-                                    addressData = [{
-                                        customer_address_id: null,
-                                        address
-                                    }]
-                                } else {
-                                    addressData = [{
-                                        customer_address_id: get(address, "id", '')
-                                    }]
-                                }
+                        {isDefaultStore ? (
+                            <AddressStep
+                                enabled={isEmailAdded}
+                                data={customerAddresses}
+                                title={"Shipping Address"}
+                                setting={settingShippingAddress}
+                                initialValues={shipping_addresses[0]}
+                                onApplyAddress={(address, isNewAddress = false) => {
+                                    if (settingShippingAddress) return
+                                    console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
+                                    let addressData = null
+                                    if (isNewAddress) {
+                                        addressData = [{
+                                            customer_address_id: null,
+                                            address
+                                        }]
+                                    } else {
+                                        addressData = [{
+                                            customer_address_id: get(address, "id", '')
+                                        }]
+                                    }
 
-                                // addres object will pass by default 
-                                // let addressData = [{
-                                //     customer_address_id: get(address, "id", null),
-                                //     address
-                                // }]
-                                setShippingAddressOnCart(addressData)
+                                    // addres object will pass by default 
+                                    // let addressData = [{
+                                    //     customer_address_id: get(address, "id", null),
+                                    //     address
+                                    // }]
+                                    setShippingAddressOnCart(addressData)
 
-                                // set billing and shipping same when default store code is set
-                                if (isDefaultStore) {
-                                    /**
-                                     * during the time of shipping cart saving by default bill address will be saved
-                                     * so by default billing and shipping address will remain same
-                                     */
-                                    setBillingAddressOnCart({
-                                        ...addressData[0],
-                                        same_as_shipping: true
-                                    })
-                                }
-                            }}
-                            isShippingStep={true}
-                            isUserLoggedIn={isSignedIn}
-                            showSameAsButton={false}
-                            isDefaultStore={isDefaultStore}
-                            setting={settingShippingAddress} />
+                                    // set billing and shipping same when default store code is set
+                                    if (isDefaultStore) {
+                                        /**
+                                         * during the time of shipping cart saving by default bill address will be saved
+                                         * so by default billing and shipping address will remain same
+                                         */
+                                        setBillingAddressOnCart({
+                                            ...addressData[0],
+                                            same_as_shipping: true
+                                        })
+                                    }
+                                }}
+                                isShippingStep={true}
+                                isUserLoggedIn={isSignedIn}
+                                showSameAsButton={false}
+                                isDefaultStore={isDefaultStore}
+                                setting={settingShippingAddress} />
+                        ) : (
+                            <StorePickupInfo
+                                enabled={true}
+                                storeInfo={currentStoreConfig}
+                                pickupDate={pickup_date_time} />
+                        )}
 
                         <ShippingMethodsStep
                             enabled={isShippingAddressSelected}

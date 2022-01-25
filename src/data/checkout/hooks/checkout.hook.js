@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useApolloClient, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { get } from 'lodash'
 
-import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher'
+import { useStoreSwitcher } from '../../../magento/peregrine/talons/Header/useStoreSwitcher'
 import { useCartContext } from '@magento/peregrine/lib/context/cart'
 
 import { checkoutFetched, fetchingCheckout, resetCheckout, updateCheckoutField } from '../checkout.action'
@@ -42,7 +42,7 @@ export const useCheckout = () => {
     const [{ cartId }] = useCartContext()
 
     // as based on this checkout graphql will be called
-    const { currentStoreName, availableStores } = useStoreSwitcher()
+    const { currentStoreName, availableStores, currentStoreConfig } = useStoreSwitcher()
     const defaultStoreName = get(availableStores.get('default'), "storeName", "")
     const isDefaultStore = defaultStoreName === currentStoreName
 
@@ -101,6 +101,7 @@ export const useCheckout = () => {
 
     return {
         isDefaultStore,
+        currentStoreConfig,
         fetchCheckout
     }
 }
@@ -303,11 +304,9 @@ export const useCheckoutSuccess = () => {
     })
 
     const [uploadBarCode, { loading: uploading, called: apiCalled, data }] = useMutation(uploadBarCodeMutation)
-    console.log("🚀 ~ file: checkout.hook.js ~ line 311 ~ useCheckoutSuccess ~ data", data)
 
     const handleUploadBarCode = useCallback((base64, orderNumber) => {
         if (!apiCalled && !uploading) {
-            console.log("uploading image....")
             uploadBarCode({
                 variables: {
                     file: base64,

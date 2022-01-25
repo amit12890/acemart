@@ -47,6 +47,7 @@ export const GET_CHECKOUT_DETAILS = gql`
             id
             is_virtual
             total_quantity
+            pickup_date_time
             ...appliedCouponsFragment    
             ...availablePaymentMethodsFragment
             ...billingAddressFragment
@@ -77,7 +78,8 @@ export const SET_STORE_PICKUP_SHIPPING_ADDRESS = gql`
             cart {
                 id
                 is_virtual
-                total_quantity  
+                total_quantity
+                pickup_date_time  
                 ...multiShippingFragment  
                 ...appliedCouponsFragment    
                 ...availablePaymentMethodsFragment
@@ -288,6 +290,15 @@ query successOrderPage($incrementId:String!) {
         pickup_datetime
         customer_email
         carrier
+        store_information {
+            city
+            hours
+            state
+            store_name
+            street
+            telephone
+            zip
+        }
         payment_methods {
             name            
             additional_data {
