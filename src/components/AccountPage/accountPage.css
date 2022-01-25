@@ -1,11 +1,12 @@
 .wrapper {
    display: flex;
-   flex-wrap: wrap;
+   flex-direction: column;
    padding-top: 20px;
    padding-bottom: 20px;
 }
 
 .sidebar_wrapper {
+
 }
 
 .pageTitleWrapper {
@@ -29,7 +30,14 @@
     
 }
 
+
+
 @media (min-width: 1024px) {
+
+    .wrapper {
+        flex-direction: row;
+     }
+
     .sidebar_wrapper {
         width: 22.3%;
         padding-right: 2%;

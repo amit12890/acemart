@@ -306,7 +306,7 @@
     width: 3rem;
 }
 
-@media (min-width: 1024) { 
+@media (min-width: 1024px) { 
 
     .root {
         align-content: start;
@@ -325,6 +325,7 @@
         flex: 0 1 250px;
         text-align: right;
         gap: 1.2rem;
+        padding-left: 0;
     }
 
     .price,
