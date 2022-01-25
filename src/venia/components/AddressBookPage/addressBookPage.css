@@ -96,14 +96,21 @@ display: inline-flex;
 
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     .root {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
     }
 
     .content {
         /* grid-template-columns: 1fr 1fr; */
+    }
+
+    .addrBlockWrapper {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .accountAddressBlock { 
+       
     }
 }
 
@@ -115,7 +122,6 @@ display: inline-flex;
 
 .addrBlockWrapper {
     display: flex;
-    
 }
 
 .defaultAddrBlockWrapper {
@@ -139,7 +145,6 @@ display: inline-flex;
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 2.5rem;
-    
 }
 
 

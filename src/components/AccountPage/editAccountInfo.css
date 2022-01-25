@@ -9,7 +9,7 @@
 
 .panelWrapper {
     margin-bottom: 30px;
-    padding: 30px;
+    padding: 15px;
     border: 1px solid #e9eaec;
 }
 
@@ -137,11 +137,18 @@
     padding-top: 1rem;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1023px) {
     .firstname,
     .lastname,
     .password,
     .newPassword {
         grid-column: 1 / span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .panelWrapper {
+        padding: 30px;
     }
 }

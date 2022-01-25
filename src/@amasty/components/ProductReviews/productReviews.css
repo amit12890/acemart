@@ -257,11 +257,30 @@
 }
 
 @media (min-width: 768px) {
+
+
+
   .showAllBtn {
     margin-left: 0.5rem;
   }
 
   .showAllBtn:before {
     margin-right: 0.5rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .root {
+    border-bottom: none;
+  }
+
+  .reviewFormWrapper {
+    padding: 0;
+  }
+
+  .reviewFormWrapper:after{
+    border-bottom-color: #f6f6f6;
   }
 }

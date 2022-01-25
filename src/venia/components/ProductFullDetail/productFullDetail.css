@@ -4,18 +4,16 @@
 .productViewWrapper {
 display: flex;
 flex-direction: column;
-  
-   
+
 }
 .productViewSection {
     display: flex;
     width: 100%;
     margin-bottom: 40px;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.productViewSection:not(.productView) {
-    flex-direction: column;
-}
 
 .productDescription {
     font-size: var(--fontSize-100);
@@ -29,21 +27,15 @@ flex-direction: column;
 
 .productMedia {
     order: 1;
-    width: 40%;
-    padding: 10px 10px 10px 0;
-
 }
 
 .productInfo {
     order: 2;
-    width: 40%;
-    padding: 10px;
+
 }
 
 .productAction {
     order: 3;
-    width: 20%;
-
 }
 
 .productActionWrapper {
@@ -114,7 +106,7 @@ flex-direction: column;
 
 .attributeWrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .attributeContainer {
@@ -242,7 +234,6 @@ flex-direction: column;
     fill: currentColor;
 }
 
-
 .productReview {
     font-size: var(--fontSize-75);
     cursor: pointer;
@@ -269,8 +260,6 @@ flex-direction: column;
     height: 100%;
     border: 0;
 }
-
-
 
 .paContent {
     display: flex;
@@ -322,17 +311,13 @@ flex-direction: column;
     color: rgb(var(--link-color-hover));
 }
 
-
-
 .shippingInfo {
 
 }
 
 .shippingNote {
     margin-top: 15px;
-
 }
-
 
 .shippingNote h3 {
     text-transform: uppercase;
@@ -366,8 +351,6 @@ flex-direction: column;
     align-items: center;
 }
 
-
-
 .tierQuantity {
     
 }
@@ -376,7 +359,6 @@ flex-direction: column;
     color: rgb(var(--color-black));
     font-size: var(--fontSize-90);
     font-weight: bold;
-
 }
 
 .tierQuantity strong{
@@ -391,7 +373,6 @@ flex-direction: column;
     font-weight: bold;
 }
 
-
 .tierPice .unit {
     font-size: var(--fontSize-90);
     margin: 0 5px;
@@ -399,7 +380,8 @@ flex-direction: column;
 }
 
 .addToLinks {
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -415,7 +397,7 @@ flex-direction: column;
     font-weight: var(--font-weight-regular);
     line-height: 1.25rem;
     max-width: 100%;
-    min-width: 10rem;
+    min-width: 14rem;
     min-height: 2.5rem;
     outline: none;
     padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
@@ -425,17 +407,14 @@ flex-direction: column;
     transition-timing-function: var(--venia-global-anim-standard);
     width: 100%;
     text-decoration: none;
-    
+    white-space: nowrap;
 }
 
 
 .addToLinks .action {
-    margin-top: 10px;
+    margin: 10px;
+}
 
-}
-.addToLinks .action:first-child {
-    margin-top: 0;
-}
 .addToLinks .action  .iconWrapper {
     display: inline-flex;
     padding-right: 25px;
@@ -652,6 +631,52 @@ tbody tr:nth-child(odd) {
         grid-template-rows: repeat(5, min-content) 1fr [fold];
         padding: 2.5rem 1rem;
     }
+
+    .productView {
+        flex-direction: row;
+    }
+    
+    .attributeWrapper {
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .productMedia {
+        width: 40%;
+        padding: 10px 10px 10px 0;
+    }
+    
+    .productInfo {
+        width: 40%;
+        padding: 10px;
+    }
+    
+    .productAction {
+        order: 3;
+        width: 20%;
+    }
+
+    .addToLinks {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .addToLinks .action {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .addToLinks .action:first-child {
+        margin-top: 0;
+    }
+    
+    .addToLinks button{
+        min-width: 10rem;
+    }
+
+
 }
 
 .section {
@@ -672,13 +697,9 @@ tbody tr:nth-child(odd) {
     padding: 1rem 1.5rem;
 }
 
-
-
 .productName {
 
 }
-
-
 
 .productPrice {
     display: block;
@@ -691,8 +712,6 @@ tbody tr:nth-child(odd) {
     margin: 0 auto;
     max-width: 640px;
 }
-
-
 
 .options {
     grid-area: options;
@@ -721,12 +740,6 @@ tbody tr:nth-child(odd) {
     justify-items: center;
 }
 
-
-
-
-
-
-
 .descriptionTitle {
     composes: sectionTitle;
 }
@@ -736,8 +749,6 @@ tbody tr:nth-child(odd) {
     grid-column: 2 / span 1;
     grid-row: fold / span 1;
 }
-
-
 
 .detailsTitle {
     composes: sectionTitle;
