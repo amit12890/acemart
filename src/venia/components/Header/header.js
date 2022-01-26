@@ -170,6 +170,10 @@ const Header = props => {
                 <div className={[classes.panelWrapper, classes.toolbarWrapper].join(" ")}>
                     <div className={[classes.panelBody, classes.toolbarContainer].join(" ")}>
 
+                        <div className={classes.primaryActions}>
+                            <NavTrigger />
+                        </div>
+
                         <div className={classes.logowrapper}>
                             <Link
                                 to={resourceUrl('/')}
@@ -180,6 +184,7 @@ const Header = props => {
                         </div>
 
                         <div className={classes.csContainer}>
+
                             <i className={classes.iconWrapper}>
                                 <svg className={classes.svgIcon} version="1.1" xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37">
                                     <title>phone</title>
@@ -206,9 +211,6 @@ const Header = props => {
                         </div>
 
                         <div className={classes.toolbar}>
-                            <div className={classes.primaryActions}>
-                                <NavTrigger />
-                            </div>
                             {pageLoadingIndicator}
                             <OnlineIndicator
                                 hasBeenOffline={hasBeenOffline}

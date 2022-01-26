@@ -2,9 +2,8 @@
     align-items: center;
     justify-items: center;
     max-width: var(--venia-global-maxWidth);
-    padding: 0 20px;
+    padding: 0 10px;
     width: 100%;
-    max-width: 475px;
 }
 
 .root_open {
@@ -38,4 +37,14 @@
     display: grid;
     position: relative;
     z-index: 1;
+}
+
+@media (min-width: 1024px) {
+
+    .root {
+
+        padding: 0 20px;
+        max-width: 475px;
+    }
+
 }

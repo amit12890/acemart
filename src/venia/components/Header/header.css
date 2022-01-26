@@ -15,6 +15,7 @@
     align-content: center;
     align-items: center;
     display: flex;
+    order: 7;
 }
 
 .pageTopPromotion {
@@ -52,6 +53,7 @@
 }
 
 .primaryActions {
+    order: 1;
     grid-area: primary;
     justify-self: start;
     display: grid;
@@ -69,16 +71,7 @@
     justify-self: end;
 }
 
-@media (min-width: 641px) {
-    .logoContainer {
-        grid-column: 2/ 3;
-        grid-row: 1 / 1;
-    }
 
-    .secondaryActions {
-        column-gap: 1rem;
-    }
-}
 
 .searchFallback {
     display: flex;
@@ -135,6 +128,7 @@
 }
 
 .storeLocationWrapper {
+    order: 6;
     
 }
 
@@ -270,10 +264,12 @@
 }
 
 .logowrapper {
+    order: 3;
     margin-right: 20px;
 }
 
 .csContainer {
+    order: 4;
     display: flex;
     align-items: center;
     color: rgb(var(--theme-color-primary));
@@ -298,6 +294,9 @@
     font-size: var(--fontSize-400);
     line-height: var(--fontSize-400);
 }
+.csPhoneAction {
+
+}
 .csAction:hover {
     color: rgb(var(--text-color));
 }
@@ -307,24 +306,74 @@
     align-items: center;
     display: flex;
     flex-grow: 1;
+    order: 5; 
 }
 
 
 @media (max-width: 1023px) {
 
+    .toolbarContainer {
+      padding:0;
+    }
+
+    .csContainer {
+        order: 1;
+        flex-basis: 100%;
+        background-color: rgb(var(--theme-color-primary));
+        margin-bottom: 10px;
+        justify-content: center;
+        color: rgb(var(--color-white));
+        padding: 5px;
+    }
+
+    .csLabel {
+        display: none;
+    }
+
+    .csAction {
+        font-size: var(--fontSize-700);
+        line-height: var(--fontSize-700);
+    }
+
+    .primaryActions {
+        order: 2;
+    }
+
+    .logowrapper {
+        order: 3;
+    }
+
+    .logo {
+        width: 70px;
+        height: 49px;
+        display: block;
+    }
+
+    .toolbar {
+        order: 4;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .searchBarWrapper {
+        flex-basis: 100%;
+
+    }
+
+    .storeLocationWrapper {
+        display: none;
+    }
+
+
+
     .topMenuWrapper {
         display: none; 
     }
-
     .rightLinks {
         align-items: flex-start;
         flex-direction: column;
         padding:0 1.25rem;
-       
     }
-
-    
-    
     .rightLinks li{
         align-items: center;
         border-bottom: 1px solid rgb(var(--venia-global-color-border));
@@ -349,16 +398,12 @@
     .rightLinks li .action:hover {
         background-color: rgb(var(--color-gray30));
     }
-
-
     .root {
         /* display: none;  */
     }
-
     .navContainer {
         display: none;
     }
-
 }
 
 
@@ -378,7 +423,6 @@
 
 
 @media (min-width: 1024px) {
-
     .logoContainer {
         grid-column: 1 / 2;
         grid-row: 1 / 1;
@@ -387,6 +431,7 @@
     .secondaryActions {
         grid-column: 4 / 5;
         grid-row: 1 / 1;
+        column-gap: 1rem;
     }
 
     .toolbar {
@@ -418,4 +463,5 @@
         color: rgb(var(--color-white));
     }
 }
+
 
