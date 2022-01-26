@@ -334,6 +334,7 @@ query successOrderPage($incrementId:String!) {
             id
             product_name
             product_sku
+            product_url_key
             product_sale_price {
                 currency
                 value

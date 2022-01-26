@@ -11,6 +11,7 @@ import { checkoutFetched, fetchingCheckout, resetCheckout, updateCheckoutField }
 
 import addressGql from '../../../venia/components/AddressBookPage/addressBookPage.gql'
 import gql from '../checkout.gql'
+import orderRowGql from '../../../magento/peregrine/talons/OrderHistoryPage/orderRow.gql'
 import { useUserContext } from '@magento/peregrine/lib/context/user'
 import { clearCartDataFromCache } from '@magento/peregrine/lib/Apollo/clearCartDataFromCache'
 import { removeCart } from '@magento/peregrine/lib/store/actions/cart/asyncActions'
@@ -29,6 +30,7 @@ const {
 } = gql
 
 const { getCustomerAddressesQuery } = addressGql
+const { getProductThumbnailsQuery } = orderRowGql
 
 
 //============================================================================================================================
@@ -299,8 +301,24 @@ export const useCountries = () => {
 
 
 export const useCheckoutSuccess = () => {
+
+
+    const [fetchOrderItemsMoreInfo, { data: productData, loading }] = useLazyQuery(getProductThumbnailsQuery, {
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first'
+    });
+
     const [fetchCheckoutSuccess, { loading: checkoutSuccessFetching, data: successData }] = useLazyQuery(orderSuccessQuery, {
-        fetchPolicy: 'cache-and-network'
+        fetchPolicy: 'cache-and-network',
+        onCompleted: (data) => {
+            const items = get(data, "successOrderPage.items", {})
+            const urlKeys = items.map(item => item.product_url_key).sort()
+            fetchOrderItemsMoreInfo({
+                variables: {
+                    urlKeys
+                }
+            })
+        }
     })
 
     const [uploadBarCode, { loading: uploading, called: apiCalled, data }] = useMutation(uploadBarCodeMutation)
@@ -320,6 +338,7 @@ export const useCheckoutSuccess = () => {
         fetchCheckoutSuccess,
         handleUploadBarCode,
         checkoutSuccessFetching,
-        data: get(successData, "successOrderPage", {})
+        data: get(successData, "successOrderPage", {}),
+        productData: get(productData, "products.items", [])
     }
 }

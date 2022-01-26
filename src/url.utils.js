@@ -4,6 +4,7 @@ export const FRONT_END_HOST_URL = "https://qa-acemart.magedelight.magentoproject
 export const SITE_ID = 'qficp5';
 export const GOOGLE_MAP_API_KEY = 'AIzaSyC2FlOz5QUyReshHY4iG6SvWkW0rDF3scY';
 export const GOOGLE_RECAPTCHA = "6Len7CMeAAAAANQH3IKiYWqcDeEJ4FNO-tHXEz3I"
+export const GOOGLE_ANALYTICS_ID = "UNIQUE-ID"
 
 /** Handle all url routes */
 

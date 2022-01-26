@@ -16,7 +16,7 @@ import defaultClasses from './wishlistPage.css';
 import EditWishlist from './editWishlist';
 import CreateWishlist from './createWishlist';
 import { useApiData } from '../../data.utils';
-import { accountPageUrl, apiGetWishlistData, myWishlistSharePage } from '../../url.utils';
+import { accountPageUrl, apiGetWishlistData, apiUpdateProductWishlist, myWishlistSharePage } from '../../url.utils';
 import WishlistCopyProductPopup from './WishlistCopyProductPopup';
 import WishlistMoveProductPopup from './WishlistMoveProductPopup';
 import { replaceSpecialChars } from "../../app.utils"
@@ -26,12 +26,25 @@ import Button from '../../venia/components/Button';
 import AddToCart from '../../venia/components/CartPage/addToCart';
 import AddAllToCart from '../../venia/components/CartPage/addAllToCart';
 import { GET_STORE_CONFIG_DATA } from '../../magento/peregrine/talons/Header/storeSwitcher.gql';
+import { useToasts } from '@magento/peregrine';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { CheckCircle as CheckIcon } from 'react-feather';
 
+const successIcon = (
+    <Icon
+        src={CheckIcon}
+        attrs={{
+            width: 18
+        }}
+    />
+);
 
 const WishlistPage = props => {
     const { formatMessage } = useIntl();
     const [{ isSignedIn: isUserSignedIn }] = useUserContext();
     const [selectedWishlist, setSelectedWishlist] = useState(null);
+    const [wishlistItemsConfig, setWishlistItemsConfig] = useState(new Map());
+    const [_, { addToast }] = useToasts();
 
     const queryRes = useQuery(GET_STORE_CONFIG_DATA);
     const defaultCurrency = get(queryRes, "data.storeConfig.default_display_currency_code", "");
@@ -51,9 +64,32 @@ const WishlistPage = props => {
         }
     })
 
+    const { callApi: updateWishlist, loading: updateLoading } = useApiData({
+        method: "POST",
+        isLazy: true,
+        onSuccess: (data) => {
+            refreshWishlist()
+            addToast({
+                type: 'success',
+                icon: successIcon,
+                message: 'Products has been updated in your Wish List',
+                dismissable: true,
+                timeout: 3000
+            });
+        }
+    })
+
     const refreshWishlist = useCallback(() => {
         getWishlist(apiGetWishlistData(customerData.customer.id))
     }, [getWishlist, customerData])
+
+    const handleUpdateWishlist = useCallback(() => {
+        let wishlist_item = []
+        for (const value of wishlistItemsConfig.values()) {
+            wishlist_item.push(value)
+        }
+        updateWishlist(apiUpdateProductWishlist(), { wishlist_item })
+    }, [wishlistItemsConfig])
 
     useEffect(() => {
         if (!!customerData)
@@ -82,7 +118,10 @@ const WishlistPage = props => {
                                 ? classes.tabsItem_active : ""
                                 }`}
                             key={wishlist.multi_wishlist_id}
-                            onClick={() => setSelectedWishlist(wishlist)}>
+                            onClick={() => {
+                                setSelectedWishlist(wishlist)
+                                setWishlistItemsConfig(new Set())
+                        }}>
                             <div className={classes.itemSwitch}>
                                 {wishlist.wishlist_name}
                             </div>
@@ -124,11 +163,15 @@ const WishlistPage = props => {
                                 selectedWishlist={selectedWishlist}
                                 wishlists={wishlists}
                                 refreshWishlist={refreshWishlist}
+                                wishlistItemsConfig={wishlistItemsConfig}
+                                setWishlistItemsConfig={setWishlistItemsConfig}
                             />
                         </div>
                         {get(selectedWishlist, 'product.length', 0) ? 
                             <div className={classes.actionsToolbarWrapper}>
-                                <Button priority="low">UPDATE WISH LIST</Button>
+                                <Button priority="low" onClick={handleUpdateWishlist} disabled={updateLoading}>
+                                    {updateLoading ? "Loading..." : "UPDATE WISH LIST"}
+                                </Button>
                                 <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
                                     <Button priority="low">SHARE WISH LIST</Button>
                                 </Link>
@@ -166,7 +209,15 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const { selectedWishlist, wishlists, refreshWishlist, defaultCurrency } = props;
+    const { 
+        selectedWishlist, 
+        wishlists, 
+        refreshWishlist, 
+        defaultCurrency,
+        wishlistItemsConfig,
+        setWishlistItemsConfig
+    } = props;
+
     const showActions = size(wishlists) > 1
     // { productId, productQty }
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -213,7 +264,7 @@ const ProductListing = props => {
             <Mask isActive={!!selectedProduct} />
             <div className={classes.galleryItemsGrid}>
                 {itemList.map((item) => {
-                    const { product, qty, wishlist_item_id, wishlist_id, product_id } = item
+                    const { product, qty, description, wishlist_item_id, wishlist_id, product_id } = item
                     const { name, price, small_image, request_path, sku } = product
                     const productName = replaceSpecialChars(name)
                     return (
@@ -246,10 +297,40 @@ const ProductListing = props => {
                                     </div>
                                     <div className={classes.itemComment}>
                                         <textarea className={classes.textarea}
-                                            placeholder='Comment' />
+                                            defaultValue={description || ""}
+                                            placeholder='Comment'
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                const qtyValue = wishlistItemsConfig.has(wishlist_item_id)
+                                                    ? wishlistItemsConfig.get(wishlist_item_id).qty
+                                                    : qty
+                                                wishlistItemsConfig.set(wishlist_item_id, {
+                                                    "item_id" : wishlist_item_id,
+                                                    "qty": qtyValue,
+                                                    "description": value,
+                                                    "multi_wishlist_id": selectedWishlist.multi_wishlist_id
+                                                })
+                                                setWishlistItemsConfig(wishlistItemsConfig)
+                                            }}
+                                        />
                                     </div>
 
-                                    <AddToCartBlock classes={classes} sku={sku} qty={qty} />
+                                    <AddToCartBlock 
+                                        classes={classes} 
+                                        sku={sku} qty={qty} 
+                                        onQtyChange={(newQty) => {
+                                            const descriptionValue = wishlistItemsConfig.has(wishlist_item_id)
+                                                ? wishlistItemsConfig.get(wishlist_item_id).description
+                                                : description
+                                            wishlistItemsConfig.set(wishlist_item_id, {
+                                                "item_id" : wishlist_item_id,
+                                                "qty": newQty,
+                                                "description": descriptionValue,
+                                                "multi_wishlist_id": selectedWishlist.multi_wishlist_id
+                                            })
+                                            setWishlistItemsConfig(wishlistItemsConfig)
+                                        }}
+                                    />
 
                                     <div className={classes.productItemQuickActions}>
                                         <div className={[classes.action, classes.delete].join(" ")}
@@ -315,7 +396,7 @@ const ProductListing = props => {
     )
 }
 
-const AddToCartBlock = ({ classes, qty, sku }) => {
+const AddToCartBlock = ({ classes, qty, sku, onQtyChange }) => {
     const [value, setValue] = useState(qty)
 
     return (
@@ -326,8 +407,12 @@ const AddToCartBlock = ({ classes, qty, sku }) => {
                     className={classes.qtyValue}
                     type="number"
                     placeholder="Enter quantity"
+                    defaultValue={value}
                     value={value}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => {
+                        setValue(e.target.value)
+                        onQtyChange(e.target.value)
+                    }}
                 />
             </div>
             <AddToCart

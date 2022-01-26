@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { gql } from '@apollo/client';
 import { Form } from 'informed';
 import { func, shape, string } from 'prop-types';
-import { useShippingForm } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm';
+import { useShippingForm } from '../../../../../magento/peregrine/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm';
 
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import Region from '../../../Region';
