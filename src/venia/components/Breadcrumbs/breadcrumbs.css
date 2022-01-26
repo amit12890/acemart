@@ -33,3 +33,13 @@
     composes: text;
     font-weight: var(--font-weight-regular);
 }
+
+
+
+@media (min-width: 767px) {
+   .root {
+        padding-left: var(--layout-indent-width);
+        padding-right: var(--layout-indent-width);
+   }
+}
+

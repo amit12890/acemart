@@ -7,10 +7,6 @@
     flex-wrap: wrap;
 }
 
-.root:first-child {
-    padding-top: 0;
-    border-top: none;
-}
 
 .itemImageContainer {
     order: 1;
@@ -306,13 +302,19 @@
     width: 3rem;
 }
 
-@media (min-width: 1024px) { 
+@media (min-width: 768px) { 
 
     .root {
         align-content: start;
         display: flex;
         gap: 3rem;
     }
+
+    .root:first-child {
+        padding-top: 0;
+        border-top: none;
+    }
+    
     .itemDetails {
         flex: 1;
         order: 2;

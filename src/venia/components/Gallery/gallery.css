@@ -7,15 +7,13 @@
     line-height: 1;
 }
 
-.items {
-    display: grid;
-    grid-area: items;
-    grid-template-columns: repeat(1, 1fr);
-    margin-bottom: 20px;
-}
 
-@media (max-width: 640px) {
+
+@media (min-width: 768px) {
     .items {
-        
+        display: grid;
+        grid-area: items;
+        grid-template-columns: repeat(1, 1fr);
+        margin-bottom: 20px;
     }
 }

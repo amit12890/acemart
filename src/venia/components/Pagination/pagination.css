@@ -10,7 +10,7 @@
 }
 
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .root {
         justify-content: flex-start;
         margin-bottom: 0;

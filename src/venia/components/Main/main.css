@@ -32,7 +32,7 @@
 }
 
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
 
     .page:not(.cms_page) {
         max-width: var(--venia-global-maxWidth);

@@ -27,7 +27,7 @@
     grid-row: fold / span 1;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .details {
         align-self: stretch;
         border-top-width: 1px;

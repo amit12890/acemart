@@ -1,9 +1,25 @@
 .filterButton {
     composes: root_lowPriority from '../../components/Button/button.css';
     min-width: 6.25rem;
+    align-items: center;
+    padding-bottom: 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+    background: rgb(var(--theme-color-primary));
+    justify-content: center;
+    padding: 0;
+    flex-wrap: wrap;
+    width: 50%;
+    color: #ffffff;
+    border: 0;
+    border-right: 1px solid #ffffff;
+    height: 50px;
+    text-transform: capitalize;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 767px) {
     .filterButton {
         display: none;
     }

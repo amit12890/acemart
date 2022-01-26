@@ -74,7 +74,7 @@
 
 
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
 
     .mobileText {
         display: none;
@@ -88,7 +88,7 @@
 }
 
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
     
     .sortText {
         --stroke: var(--theme-color-primary);
@@ -97,7 +97,7 @@
         border-radius: 0;
         border-style: solid;
         border-width: 2px;
-        color: rgb(var(--stroke));
+        color:  rgb(var(--color-white));    
         font-size: var(--fontSize-100);
         font-weight: var(--font-weight-bold);
         line-height: 1.25rem;
@@ -116,6 +116,30 @@
     .sortText:hover {
         background-color: rgb(var(--color-white));
         color: rgb(var(--text-color));
+    }
+
+    .sortButton {
+        margin-left: 0;
+        width: 50%;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        z-index: 9;
+        background: rgb(var(--theme-color-primary));
+        color: #ffffff;
+        border: 0;
+        border-left: 1px solid #ffffff;
+        height: 50px;
+        text-transform: capitalize; 
+    }
+
+    .menu {
+        margin-left: 0;
+        width: 100%;
+        position: fixed;
+        right: 0;
+        bottom: 50px;
+        top: inherit;
     }
 }
 
