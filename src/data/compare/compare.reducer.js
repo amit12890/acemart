@@ -1,4 +1,4 @@
-import { UPDATE_COMPARE_LIST } from "./compare.action"
+import { RESET_COMPARE_LIST, UPDATE_COMPARE_LIST } from "./compare.action"
 
 const INIT_STATE = {
     uid: "",
@@ -13,6 +13,9 @@ export const compareReducer = (state = INIT_STATE, action) => {
                 ...state,
                 ...action.payload
             }
+        }
+        case RESET_COMPARE_LIST: {
+            return INIT_STATE
         }
         default: {
             return state

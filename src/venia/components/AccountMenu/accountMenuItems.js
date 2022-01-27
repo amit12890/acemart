@@ -17,9 +17,13 @@ import {
     myWishlistPage
 } from '../../../url.utils';
 import defaultClasses from './accountMenuItems.css';
+import { useDispatch } from 'react-redux';
+import { resetCompareList } from '../../../data/compare/compare.action';
+import { resetCheckout } from '../../../data/checkout/checkout.action';
 
 const AccountMenuItems = props => {
     const { onSignOut: handleSignOut, signingOut, onNavigate } = props;
+    const dispatch = useDispatch()
     const talonProps = useAccountChip({
         queries: {
             getCustomerDetailsQuery: GET_CUSTOMER_DETAILS
@@ -58,8 +62,14 @@ const AccountMenuItems = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     const handleRedirect = useCallback(() => {
-        if(!!onNavigate) onNavigate();
+        if (!!onNavigate) onNavigate();
     }, [onNavigate])
+
+    const onSignOutPress = useCallback(() => {
+        dispatch(resetCompareList())
+        dispatch(resetCheckout())
+        handleSignOut()
+    }, [])
 
     const menu = menuItems.map(item => {
         return (
@@ -76,7 +86,7 @@ const AccountMenuItems = props => {
             {!!handleSignOut && (
                 <button
                     className={classes.signOut}
-                    onClick={handleSignOut}
+                    onClick={onSignOutPress}
                     type="button"
                 >
                     {signingOut ? (
