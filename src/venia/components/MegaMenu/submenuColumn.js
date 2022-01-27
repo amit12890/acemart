@@ -28,7 +28,7 @@ const SubmenuColumn = props => {
             const childrenItems = categoryItems.map((category, index) => {
                 const { url_path, url_suffix, isActive, name } = category;
                 const categoryUrl = resourceUrl(`/${url_path}${url_suffix || ''}`);
-    
+
                 return (
                     <li key={index} className={classes.submenuChildItem}>
                         <Link
@@ -40,10 +40,10 @@ const SubmenuColumn = props => {
                     </li>
                 );
             });
-            
-            if(showAllBtn) {
+
+            if (showAllBtn) {
                 childrenItems.push((
-                    <li className={[classes.submenuChildItem, classes.viewAll]}>
+                    <li className={[classes.submenuChildItem, classes.viewAll].join(" ")}>
                         <Link
                             className={classes.link}
                             to={topCategoryUrl}
@@ -53,7 +53,7 @@ const SubmenuColumn = props => {
                     </li>
                 ))
             }
-    
+
             return <ul className={classes.submenuChild}>{childrenItems}</ul>;
         }
         return null;

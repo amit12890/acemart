@@ -13,7 +13,7 @@
 }
 
 .link {
-    white-space: nowrap;
+    
     
 }
 
@@ -32,3 +32,14 @@
     margin-bottom: 5px;
     font-size: 14px;
 }
+
+
+.viewAll a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.viewAll a:hover {
+    text-decoration: none;
+}
+
