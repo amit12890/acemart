@@ -247,3 +247,6 @@ export const getReviewText = (count) => {
         return `${count} reviews`
     }
 }
+
+
+export const MOBILE_SCREEN = 1024;
