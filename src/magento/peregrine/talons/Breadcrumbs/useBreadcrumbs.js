@@ -11,6 +11,7 @@ const sortCrumbs = (a, b) => a.category_level > b.category_level;
 
 // Generates the path for the category.
 const getPath = (key, path, suffix) => {
+    return DELIMITER + path + suffix;
     if (path) {
         return DELIMITER + path + DELIMITER + key + suffix;
     } else {

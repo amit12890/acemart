@@ -151,12 +151,6 @@ const AddAnswerBlock = ({ questionId }) => {
                         </div>
                     </Form>
                 </div>
-                {successMessage && (
-                    <div>
-                        <Icon src={CheckIcon} size={20} />
-                        <span>{successMessage}</span>
-                    </div>
-                )}
             </div>
         );
     } else {

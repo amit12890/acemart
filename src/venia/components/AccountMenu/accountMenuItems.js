@@ -21,11 +21,13 @@ import {
     reviewPage
 } from '../../../url.utils';
 import defaultClasses from './accountMenuItems.css';
-import { useWindowSize } from '../../../magento/peregrine/talons/ProductImageCarousel/useWindowSize';
+import { useDispatch } from 'react-redux';
+import { resetCompareList } from '../../../data/compare/compare.action';
+import { resetCheckout } from '../../../data/checkout/checkout.action';
 
 const AccountMenuItems = props => {
     const { onSignOut: handleSignOut, signingOut, onNavigate } = props;
-    const { isMobile } = useWindowSize();
+    const dispatch = useDispatch()
     const talonProps = useAccountChip({
         queries: {
             getCustomerDetailsQuery: GET_CUSTOMER_DETAILS
@@ -40,75 +42,81 @@ const AccountMenuItems = props => {
 
     const menuItems = isMobile
         ? [
-              {
-                  name: 'My Account',
-                  id: 'accountMenu.myAccount',
-                  url: accountPageUrl()
-              },
-              {
-                  name: 'My Orders',
-                  id: 'accountMenu.myOrders',
-                  url: myOrderListPage()
-              },
-              {
-                  name: 'My Wish List',
-                  id: 'accountMenu.myWishlist',
-                  url: myWishlistPage()
-              },
-              {
-                  name: 'Address Book',
-                  id: 'accountMenu.addressBook',
-                  url: addressBookPage()
-              },
-              {
-                  name: 'Account Information',
-                  id: 'accountMenu.accountInformation',
-                  url: editAccountInfo()
-              },
-              {
-                  name: 'My Product Reviews',
-                  id: 'accountMenu.myProductReviews',
-                  url: reviewPage()
-              },
-              {
-                  name: 'Newsletter Subscription',
-                  id: 'accountMenu.newsletterSubscription',
-                  url: newsletterPage()
-              },
-              {
-                  name: 'Questions/Answers',
-                  id: 'accountMenu.questionsAnswers',
-                  url: accountQandAPage()
-              }
-          ]
+            {
+                name: 'My Account',
+                id: 'accountMenu.myAccount',
+                url: accountPageUrl()
+            },
+            {
+                name: 'My Orders',
+                id: 'accountMenu.myOrders',
+                url: myOrderListPage()
+            },
+            {
+                name: 'My Wish List',
+                id: 'accountMenu.myWishlist',
+                url: myWishlistPage()
+            },
+            {
+                name: 'Address Book',
+                id: 'accountMenu.addressBook',
+                url: addressBookPage()
+            },
+            {
+                name: 'Account Information',
+                id: 'accountMenu.accountInformation',
+                url: editAccountInfo()
+            },
+            {
+                name: 'My Product Reviews',
+                id: 'accountMenu.myProductReviews',
+                url: reviewPage()
+            },
+            {
+                name: 'Newsletter Subscription',
+                id: 'accountMenu.newsletterSubscription',
+                url: newsletterPage()
+            },
+            {
+                name: 'Questions/Answers',
+                id: 'accountMenu.questionsAnswers',
+                url: accountQandAPage()
+            }
+        ]
         : [
-              {
-                  name: 'My Account',
-                  id: 'accountMenu.myAccount',
-                  url: accountPageUrl()
-              },
-              {
-                  name: 'Order History',
-                  id: 'accountMenu.orderHistory',
-                  url: myOrderListPage()
-              },
-              {
-                  name: 'Manage Addresses',
-                  id: 'accountMenu.manageAddresses',
-                  url: addressBookPage()
-              },
-              {
-                  name: 'View Wishlists',
-                  id: 'accountMenu.viewWishlists',
-                  url: myWishlistPage()
-              }
-          ];
+            {
+                name: 'My Account',
+                id: 'accountMenu.myAccount',
+                url: accountPageUrl()
+            },
+            {
+                name: 'Order History',
+                id: 'accountMenu.orderHistory',
+                url: myOrderListPage()
+            },
+            {
+                name: 'Manage Addresses',
+                id: 'accountMenu.manageAddresses',
+                url: addressBookPage()
+            },
+            {
+                name: 'View Wishlists',
+                id: 'accountMenu.viewWishlists',
+                url: myWishlistPage()
+            }
+        ];
 
     const classes = useStyle(defaultClasses, props.classes);
 
     const handleRedirect = useCallback(() => {
         if (!!onNavigate) onNavigate();
-    }, [onNavigate]);
+    }, [onNavigate])
+
+    const onSignOutPress = useCallback(() => {
+        dispatch(resetCompareList())
+        dispatch(resetCheckout())
+        handleSignOut()
+    }, [])
 
     const menu = menuItems.map(item => {
         return (
@@ -132,7 +140,7 @@ const AccountMenuItems = props => {
             {!!handleSignOut && (
                 <button
                     className={classes.signOut}
-                    onClick={handleSignOut}
+                    onClick={onSignOutPress}
                     type="button"
                 >
                     {signingOut ? (

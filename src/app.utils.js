@@ -240,5 +240,10 @@ export const textToBase64Barcode = (text) => {
     return canvas.toDataURL("image/png");
 }
 
-// mobile breakpoints
-export const MOBILE_SCREEN = 1024
+export const getReviewText = (count) => {
+    if (count === 1) {
+        return `${count} review`
+    } else {
+        return `${count} reviews`
+    }
+}

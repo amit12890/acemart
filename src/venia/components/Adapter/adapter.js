@@ -7,6 +7,8 @@ import { useAdapter } from './useAdapter';
 import { AppContextProvider } from '@magento/venia-ui/lib/components/App';
 import App from '../App';
 import StoreCodeRoute from '@magento/venia-ui/lib/components/StoreCodeRoute';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from '../../../store';
 
 const Adapter = props => {
     const talonProps = useAdapter(props);
@@ -29,10 +31,12 @@ const Adapter = props => {
     return (
         <ApolloProvider {...apolloProps}>
             <ReduxProvider {...reduxProps}>
-                <BrowserRouter {...routerProps}>
-                    {storeCodeRouteHandler}
-                    <AppContextProvider>{children}</AppContextProvider>
-                </BrowserRouter>
+                <PersistGate loading={null} persistor={persistor}>
+                    <BrowserRouter {...routerProps}>
+                        {storeCodeRouteHandler}
+                        <AppContextProvider>{children}</AppContextProvider>
+                    </BrowserRouter>
+                </PersistGate>
             </ReduxProvider>
         </ApolloProvider>
     );

@@ -81,6 +81,7 @@ export const useCompareList = props => {
                 actionText: "Comparison list",
                 onAction: () => history.push(compareListPage())
             })
+            dispatch(updateCompareFields(get(data, "createCompareList", {})))
         }
     })
 

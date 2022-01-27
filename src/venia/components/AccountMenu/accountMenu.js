@@ -39,6 +39,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
     const handleForgotPassword = useCallback(() => {
         history.push(forgotPasswordPage());
     }, []);
+
     const classes = useStyle(defaultClasses, props.classes);
     const rootClass = accountMenuIsOpen ? classes.root_open : classes.root;
     const contentsClass = accountMenuIsOpen
@@ -49,7 +50,7 @@ const AccountMenu = React.forwardRef((props, ref) => {
 
     switch (view) {
         case 'ACCOUNT': {
-            dropdownContents = <AccountMenuItems onSignOut={handleSignOut} signingOut={signingOut}/>;
+            dropdownContents = <AccountMenuItems onSignOut={handleSignOut} signingOut={signingOut} />;
 
             break;
         }
