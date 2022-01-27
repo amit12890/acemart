@@ -227,13 +227,6 @@ const ReviewForm = props => {
                     </Button>
                 </div>
             </Form>
-
-            {isShowSuccessMessage && (
-                <div className={classes.successMessage}>
-                    <Icon src={CheckIcon} size={20} />
-                    <span>{'You submitted your review for moderation.'}</span>
-                </div>
-            )}
         </div>
     );
 };
