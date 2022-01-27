@@ -64,6 +64,11 @@ const ERROR_FIELD_TO_MESSAGE_MAPPING = {
 
 const DEFAULT_STORE_CODE = "default";
 
+
+const formatCurrency = (text) => {
+    return String(text).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+}
+
 const ProductFullDetail = props => {
     const { product } = props;
 
@@ -833,12 +838,13 @@ const ProductFullDetail = props => {
                                         <td data-th="SKU" className={[classes.col, classes.data].join(" ")}>{productDetails.sku}</td>
                                     </tr>
                                     {additionalInformation.map(info => {
+                                        const value = info.code === "weight" ? formatCurrency(info.value) : info.value
                                         return (
                                             <tr>
                                                 <th scope="row" className={[classes.col, classes.label].join(" ")}>{info.label}</th>
                                                 <td data-th={info.label} className={[classes.col, classes.data].join(" ")}>
                                                     <RichText
-                                                        content={info.value}
+                                                        content={value}
                                                     />
                                                 </td>
                                             </tr>
