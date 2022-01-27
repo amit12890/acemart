@@ -37,6 +37,7 @@ import RelatedPosts from './relatedPosts';
 import ProductQuestions from '../../../components/ProductQuestions';
 import CaliforniaPopup from "./californiaPopup"
 import UnavailablePopup from "./unavailablePopup"
+import StoresOnlyPopup from "./storesOnlyPopup"
 import LoadingButton from '../../../components/LoadingButton';
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useWishlistSession } from '../../../data/appState/appState.hook';
@@ -85,6 +86,7 @@ const ProductFullDetail = props => {
     const [showLabelsPopup, setLabelsPopup] = useState(false)
     const [showCaliforniaPopup, setCaliforniaPopup] = useState(false)
     const [showUnavailablePopup, setUnavailablePopup] = useState(false)
+    const [showStoreOnlyPopup, setStoreOnlyPopup] = useState(false)
 
     const storeConfig = useQuery(GET_STORE_CONFIG_DATA, { fetchPolicy: "cache-first" });
 
@@ -160,6 +162,15 @@ const ProductFullDetail = props => {
     const closeLabelsPopup = useCallback(() => {
         setLabelsPopup(false);
     }, [setLabelsPopup]);
+
+    // handlers for StoreOnly popup
+    const openStoreOnlyPopup = useCallback(() => {
+        setStoreOnlyPopup(true);
+    }, [setStoreOnlyPopup]);
+
+    const closeStoreOnlyPopup = useCallback(() => {
+        setStoreOnlyPopup(false);
+    }, [setStoreOnlyPopup]);
 
     const handleFirstReviewClick = useCallback(() => {
         reviewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -286,12 +297,36 @@ const ProductFullDetail = props => {
 
     const upsellProducts = get(product, 'upsell_products', []);
     const relatedProducts = get(product, 'related_products', []);
+
+    const renderAvailableStoreLabel = useCallback((isSide) => {
+        if(isSide) {
+            return (
+                <div className={classes.stockAvailability} onClick={openStoreOnlyPopup}>
+                    {get(pos_stock_manage, "stock_label", "")}
+                    <span>Help</span>
+                </div>
+            )
+        }
+        return (
+            <div className={classes.piSectionRow}
+                onClick={openStoreOnlyPopup}>
+                <div
+                    className={classes.stockAvailability}
+                    style={{ borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0 }}>
+                    {get(pos_stock_manage, "stock_label", "")}
+                    <span>Help</span>
+                </div>
+            </div>
+        )
+    }, [pos_stock_manage, storeConfig])
     /**
     * render availablity of in grey porttion
     */
     const renderAvailability = useCallback(() => {
         const storeFinalLabel = get(pos_stock_manage, "stock_final_label", "")
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
+        const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
+
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
                 <div className={classes.piSectionRow}>
@@ -314,6 +349,8 @@ const ProductFullDetail = props => {
                     </div>
                 </div>
             )
+        } else if(availableInStoreLabel) {
+            return renderAvailableStoreLabel()
         } else if(sameLabel) {
             return (
                 <div className={classes.piSectionRow}>
@@ -351,6 +388,7 @@ const ProductFullDetail = props => {
      */
     const renderSideAvailability = useCallback(() => {
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
+        const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
 
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
@@ -372,11 +410,18 @@ const ProductFullDetail = props => {
                     </div>
                     <div className={classes.apSectionRow}>
                         <div className={classes.stock}>
-                            <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                            <span className={[
+                                classes.availability, 
+                                classes.instock
+                            ].join(" ")}>
+                                {pos_stock_manage.stock_final_label}
+                            </span>
                         </div>
                     </div>
                 </>
             )
+        } else if(availableInStoreLabel) {
+            return renderAvailableStoreLabel(true)
         } else if(sameLabel) {
             return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
         } else {
@@ -988,6 +1033,11 @@ const ProductFullDetail = props => {
                 <UnavailablePopup
                     isPopupVisible={showUnavailablePopup}
                     closeUnavailablePopup={closeUnavailablePopup} />
+            )}
+            {showStoreOnlyPopup && (
+                <StoresOnlyPopup
+                    isPopupVisible={showStoreOnlyPopup}
+                    onClose={closeStoreOnlyPopup} />
             )}
         </Fragment>
     );

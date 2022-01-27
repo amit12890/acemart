@@ -33,6 +33,7 @@ export const ProductDetailsFragment = gql`
             hide_add_to_cart
             locate_in_store
             stock_label
+            ship_time_label
             stock_final_label
             same_as_stock_label
         }
