@@ -775,6 +775,16 @@ const ProductFullDetail = props => {
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    {product.ship_info ?
+                                        <div>
+                                            {product.ship_info}
+                                        </div>
+                                        : null
+                                    }
+                                    <div>
+
+                                    </div>
 
                                     {product.specsheet && (
                                         <div className={classes.apSectionRow}>
