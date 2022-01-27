@@ -16,7 +16,7 @@ const RatingMini = props => {
                 />
             </div>
             <div className={classes.ratingValue}>
-                {showValue && `${value} ${value > 1 ? 'review' : 'reviews'}`}
+                {showValue && `${value} ${value > 1 ? 'reviews' : 'review'}`}
             </div>
             {!!addReviewLink && (
                 <div className={classes.addReviewLink}>{addReviewLink}</div>
