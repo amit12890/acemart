@@ -23,5 +23,15 @@
     "orderRow.complete": "Complete",
     "orderRow.closed": "Closed",
     "orderRow.processing": "Processing",
-    "orderRow.pending": "Pending"
+    "orderRow.pending": "Pending",
+    "accountMenu.myAccount": "My Account",
+    "accountMenu.myOrders": "My Orders",
+    "accountMenu.orderHistory": "Order History",
+    "accountMenu.myWishlist": "My Wish List",
+    "accountMenu.addressBook": "Address Book",
+    "accountMenu.accountInformation": "Account Information",
+    "accountMenu.myProductReviews": "My Product Reviews",
+    "accountMenu.newsletterSubscription": "Newsletter Subscription",
+    "accountMenu.questionsAnswers": "Questions/Answers"
+    
 }
