@@ -66,6 +66,11 @@ flex-direction: column;
     width: 100%;
     justify-content: center;
 }
+
+.boxToCartSection {
+
+}
+
 .apSectionRow:first-child {
     margin-top: 0;
 }
@@ -268,6 +273,14 @@ flex-direction: column;
 }
 
 .boxToCart {
+
+}
+
+.qtyWrapper {
+
+}
+
+.addToCartWrapper {
 
 }
 .addToCart {
@@ -606,79 +619,6 @@ tbody tr:nth-child(odd) {
     
 }
 
-
-
-/* Related Product Section */
-.relatedProducts {
-
-}
-
-
-
-@media (min-width: 768px) {
-    .root {
-        align-items: start;
-        display: grid;
-        grid-auto-flow: row;
-        grid-template-areas:
-            'images title'
-            'images errors'
-            'images options'
-            'images quantity'
-            'images cart'
-            'images .';
-        grid-template-columns: 1.5625fr 1fr;
-        grid-template-rows: repeat(5, min-content) 1fr [fold];
-        padding: 2.5rem 1rem;
-    }
-
-    .productView {
-        flex-direction: row;
-    }
-    
-    .attributeWrapper {
-        align-items: center;
-        flex-direction: row;
-    }
-
-    .productMedia {
-        width: 40%;
-        padding: 10px 10px 10px 0;
-    }
-    
-    .productInfo {
-        width: 40%;
-        padding: 10px;
-    }
-    
-    .productAction {
-        order: 3;
-        width: 20%;
-    }
-
-    .addToLinks {
-        width: 100%;
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .addToLinks .action {
-        margin-left: 0;
-        margin-right: 0;
-    }
-    
-    .addToLinks .action:first-child {
-        margin-top: 0;
-    }
-    
-    .addToLinks button{
-        min-width: 10rem;
-    }
-
-
-}
-
 .section {
 
 }
@@ -758,7 +698,6 @@ tbody tr:nth-child(odd) {
     composes: root from '../CartPage/ProductListing/quantity.css';
     grid-template-columns: auto 4rem auto;
     justify-content: center;
-    margin-bottom: 10px;
 }
 
 .quantityRoot input {
@@ -779,7 +718,115 @@ tbody tr:nth-child(odd) {
     width: 100%;
 }
 
+/* Related Product Section */
+.relatedProducts {
 
+}
+
+
+/* Mobile Responsive CSS */
+
+
+@media (max-width: 767px) {
+
+    .productViewWrapper {
+        padding-left: var(--layout-indent-width);
+        padding-right: var(--layout-indent-width);
+    } 
+    
+    .boxToCartSection {
+        position: fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        background-color: rgb(var(--color-white));
+        margin:0;
+        padding: 10px; 
+        box-shadow: 2px 2px 10px #000;
+    }
+
+    .boxToCart {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .qtyWrapper {
+    
+    }
+    
+    .addToCartWrapper {
+        margin-left: 10px;
+        
+    }
+
+}
+
+
+@media (min-width: 768px) {
+    .root {
+        align-items: start;
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-areas:
+            'images title'
+            'images errors'
+            'images options'
+            'images quantity'
+            'images cart'
+            'images .';
+        grid-template-columns: 1.5625fr 1fr;
+        grid-template-rows: repeat(5, min-content) 1fr [fold];
+        padding: 2.5rem 1rem;
+    }
+
+    .productView {
+        flex-direction: row;
+    }
+    
+    .attributeWrapper {
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .productMedia {
+        width: 40%;
+        padding: 10px 10px 10px 0;
+    }
+    
+    .productInfo {
+        width: 40%;
+        padding: 10px;
+    }
+    
+    .productAction {
+        order: 3;
+        width: 20%;
+    }
+
+    .addToLinks {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .addToLinks .action {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .addToLinks .action:first-child {
+        margin-top: 0;
+    }
+    
+    .addToLinks button{
+        min-width: 10rem;
+    }
+
+    .quantityRoot {
+        margin-bottom: 10px;
+    }
+}
 
 
 @media print { 
