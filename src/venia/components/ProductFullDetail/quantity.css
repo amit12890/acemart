@@ -77,3 +77,13 @@
     text-align: center;
 
 }
+
+
+@media (max-width: 767px) {
+    .root {
+
+        grid-template-columns: 1fr 3rem 1fr;
+        grid-column-gap: 0.25rem;
+        
+    }
+}
