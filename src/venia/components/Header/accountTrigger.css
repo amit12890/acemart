@@ -30,7 +30,7 @@
     color: rgb(var(--theme-color-primary));
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
     .root {
         display: none;
     }

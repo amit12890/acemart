@@ -112,7 +112,7 @@ display: flex;
 
 @media (max-width: 640px) {
     .root {
-        padding: 1rem;
+        
     }
 
     .confirmDeleteContainer {

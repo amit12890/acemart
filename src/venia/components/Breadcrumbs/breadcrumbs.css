@@ -3,11 +3,14 @@
     /* Show ellipses when overflowing. */
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
     margin-bottom: 10px;
     padding: 10px 0;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    padding-left: var(--layout-indent-width);
+    padding-right: var(--layout-indent-width);
 }
 
 .text {
@@ -32,3 +35,13 @@
     composes: text;
     font-weight: var(--font-weight-regular);
 }
+
+
+
+@media (min-width: 768px) {
+   .root {
+        padding-left: 0;
+        padding-right: 0;
+   }
+}
+

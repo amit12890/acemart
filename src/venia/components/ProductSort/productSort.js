@@ -76,19 +76,19 @@ const ProductSort = props => {
 
     return (
         <div ref={elementRef} className={classes.root}>
-            <span className={classes.sortText}>
-                <FormattedMessage
-                    id={'productSort.sortByButton'}
-                    defaultMessage={'Sort by'}
-                />
-            </span>
+
             <Button
                 priority={'low'}
                 classes={{
                     root_lowPriority: classes.sortButton
                 }}
                 onClick={handleSortClick}
-            >
+            >            <span className={classes.sortText}>
+                    <FormattedMessage
+                        id={'productSort.sortByButton'}
+                        defaultMessage={'Sort by'}
+                    />
+                </span>
                 <span className={classes.desktopText}>
                     <span className={classes.sortText}>
                         {currentSort.sortText}

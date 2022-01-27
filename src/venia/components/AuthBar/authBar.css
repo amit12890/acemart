@@ -3,9 +3,9 @@
     background-color: white;
     box-shadow: 0 -1px rgb(var(--venia-global-color-border));
     display: grid;
-    gap: 0.75rem;
-    grid-auto-flow: column;
-    height: 4rem;
+    gap: 0.5rem;
+    grid-auto-flow: row;
+    height: 8rem;
 }
 
 .contents {
@@ -19,4 +19,9 @@
 
 .signIn {
     composes: root from '../LinkButton/linkButton.css';
+}
+
+
+@media (max-width: 767px) {
+
 }

@@ -168,6 +168,16 @@
     --layout-indent-width: 15px;
     --venia-global-header-minHeight: 5rem;
 
+    --screen-xxs: 320px;
+    --screen-xs: 480px;
+    --screen-s: 640px;
+    --screen-m: 768px;
+    --screen-l: 1024px;
+    --screen-xl: 1440px;
+
+    
+
+
 }
 
 @media (max-width: 960px) {

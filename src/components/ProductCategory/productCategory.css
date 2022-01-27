@@ -10,12 +10,10 @@
 .subcatListItem {
     display: flex;
     justify-content: start;
-    width: calc(100%/7);
+    width: calc(100%/2);
     margin-bottom: 20px;
     flex-direction: column;
     align-items: center;
-    
-
 }
 .catImageWrapper {
     margin-bottom: 10px;
@@ -34,4 +32,29 @@
 
 .subcatItemInfo {
 
+}
+
+
+@media (min-width: 640px) {
+    .subcatListItem {
+        width: calc(100%/3);
+    }
+}
+
+
+@media (min-width: 768px) {
+    .subcatListItem {
+        width: calc(100%/5);
+    }
+}
+
+@media (min-width: 1024px) {
+    .subcatListItem {
+        width: calc(100%/6);
+    }
+}
+@media (min-width: 1200px) {
+    .subcatListItem {
+        width: calc(100%/7);
+    }
 }

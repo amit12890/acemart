@@ -29,12 +29,14 @@ import CompareListBlock from '../CompareListPage/compareListBlock';
 import WishlistBlock from '../WishList/wishlistBlock';
 import ReviewPage from "./myReviewPage";
 import QuestionAnswerPage from './questionAnswerPage';
+import { useWindowSize } from '../../magento/peregrine/talons/ProductImageCarousel/useWindowSize';
 
 
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
     const path = useLocation().pathname;
     const [{ isSignedIn }] = useUserContext();
+    const { isMobile } = useWindowSize();
 
     if (!isSignedIn) {
         return <Redirect to="/" />;
@@ -43,7 +45,7 @@ const AccountPage = (props) => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.sidebar_wrapper}>
-                <AccountSideBar activeUrl={path} />
+                {isMobile ? null : <AccountSideBar activeUrl={path} />}
                 <CompareListBlock />
                 <WishlistBlock />
             </div>

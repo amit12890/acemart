@@ -1,19 +1,12 @@
 .root {
     align-content: start;
     display: flex;
-    gap: 3rem;
-    border-top: 1px solid rgb(var(--border-color-light));
-    padding:30px 0;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
-.root:first-child {
-    padding-top: 0;
-    border-top: none;
-}
 
 .itemImageContainer {
-    order: 1;
-    flex: 0 1 250px;
 }
 
 .images {
@@ -34,6 +27,7 @@
     transition-timing-function: ease-out;
     visibility: visible;
     width: 100%;
+    height: auto;
 }
 
 .imagePlaceholder {
@@ -42,27 +36,23 @@
 }
 
 .itemDetails {
-    flex: 1;
-    order: 2;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 0.5rem;
 }
 
 .itemActions { 
-    order: 3;
-    flex: 0 1 250px;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    text-align: right;
-    gap: 1.2rem;
+    text-align: left;
+    gap: 0.5rem;
 
 }
 
 .actionsContainer {
     gap: 1rem;
     display: flex;
-    justify-content: space-between;
 }
 
 .actionsContainer:empty {
@@ -89,7 +79,6 @@
     line-height: var(--fontSize-800);
     color: rgb(var(--product-price-color));
     display: flex;
-    justify-content: flex-end;
 }
 
 .currency {
@@ -111,12 +100,15 @@
 
 }
 
+.piSectionRow {
+
+}
+
 .finance {
     font-size: var(--fontSize-100);
     display: flex;
     align-items: center;
     color: rgb(var(--color-green10));  
-    justify-content: flex-end;
 }
 
 
@@ -124,6 +116,10 @@
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+}
+
+.viewMore {
+
 }
 
 .viewmoreAction {
@@ -143,7 +139,7 @@
 .productOptions {
     font-size: var(--fontSize-100);
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     line-height: normal;
     margin-top: 10px;
 }
@@ -179,7 +175,6 @@
 .labelWrapper {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
 }
 
 .labelItem {
@@ -232,6 +227,11 @@
     flex-grow: 1;
     padding: 9px 6px;
     cursor: pointer;
+    max-width: 140px; 
+}
+
+.addToCompare {
+
 }
 
 
@@ -304,6 +304,143 @@
     composes: price;
     background-color: rgb(var(--venia-global-color-gray));
     width: 3rem;
+}
+
+@media (max-width: 767px) { 
+    .root {
+        background-color: #fff;
+        width: calc(50% - 5px); 
+        padding: 10px;
+        position: relative;
+    }
+
+    .itemImageContainer {
+        width: 100%;
+        position: relative;
+        padding: 20px;
+    }
+
+    .sku,
+    .productInner {
+        display: none;
+    }
+
+    .nameContainer {
+        text-align: center;
+        height: 55px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+    .name {
+        font-size: var(--fontSize-200);
+        
+    }
+
+    .price,
+    .labelWrapper,
+    .finance  {
+        justify-content: center; 
+    }
+
+    .price {
+        font-size: var(--fontSize-200);
+        line-height: var(--fontSize-200);
+    }
+
+    .currency {
+        font-size: .75rem;
+        margin-top: -3px;
+    }
+
+    .piSectionRow {
+       order: 5;
+    }
+
+    .productActions {
+        text-align: center;
+    }
+
+    .viewMore {
+        display: none;
+    }
+
+    .actionsContainer {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    .addTo {
+        padding: 0;
+        border: none;
+    }
+    
+    .addToLabel,
+    .addToCompare {
+        display: none;
+    }
+
+    .iconWrapper {
+        display: flex;
+    }
+
+    .iconWrapper .svgIcon {
+        width: 23px;
+        height: auto;
+        fill: rgb(var(--color-gray-light10)); 
+    }
+    
+}
+
+@media (min-width: 768px) { 
+
+    .root {
+        align-content: start;
+        display: flex;
+        gap: 3rem;
+        border-top: 1px solid rgb(var(--border-color-light));
+        padding:30px 0;
+    }
+
+    .root:first-child {
+        padding-top: 0;
+        border-top: none;
+    }
+    
+    .itemDetails {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .itemActions { 
+        flex: 0 1 250px;
+        text-align: right;
+        gap: 1.2rem;
+        padding-left: 0;
+    }
+
+
+    .price,
+    .finance,
+    .labelWrapper {
+        justify-content: flex-end;
+    }
+    .itemImageContainer {
+        flex: 0 1 250px;
+    }
+    .productOptions {
+        flex-wrap: nowrap;
+    }
+
+    .actionsContainer {
+        justify-content: space-between;
+    }
+
+    .addTo {
+        max-width: auto; 
+    }
 }
 
 
