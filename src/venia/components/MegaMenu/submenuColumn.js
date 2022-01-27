@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'react-feather'
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import { useStyle } from '../../classify';
 import defaultClasses from './submenuColumn.css';
 import PropTypes from 'prop-types';
+import { size } from 'lodash';
+
+const MENU_LIMIT = 6
 
 /**
  * The SubmenuColumn component displays columns with categories in submenu
@@ -11,37 +15,53 @@ import PropTypes from 'prop-types';
  * @param {MegaMenuCategory} props.category
  */
 const SubmenuColumn = props => {
-    const { category } = props;
+    const { category, mainMenuUrl } = props;
     const classes = useStyle(defaultClasses, props.classes);
-
-    const categoryUrl = resourceUrl(
-        `/${category.url_path}${category.url_suffix || ''}`
+    const topCategoryUrl = resourceUrl(
+        `/${category.canonical_url}${category.url_suffix || ''}`
     );
-    let children = null;
 
-    if (category.children.length) {
-        const childrenItems = category.children.map((category, index) => {
-            const { url_path, url_suffix, isActive, name } = category;
-            const categoryUrl = resourceUrl(`/${url_path}${url_suffix || ''}`);
-
-            return (
-                <li key={index} className={classes.submenuChildItem}>
-                    <Link
-                        className={isActive ? classes.linkActive : classes.link}
-                        to={categoryUrl}
-                    >
-                        {name}
-                    </Link>
-                </li>
-            );
-        });
-
-        children = <ul className={classes.submenuChild}>{childrenItems}</ul>;
-    }
+    let children = useMemo(() => {
+        if (category && category.children && category.children.length) {
+            const showAllBtn = size(category.children) > 6
+            const categoryItems = category.children ? category.children.splice(0, MENU_LIMIT) : []
+            const childrenItems = categoryItems.map((category, index) => {
+                const { url_path, url_suffix, isActive, name } = category;
+                const categoryUrl = resourceUrl(`/${url_path}${url_suffix || ''}`);
+    
+                return (
+                    <li key={index} className={classes.submenuChildItem}>
+                        <Link
+                            className={isActive ? classes.linkActive : classes.link}
+                            to={categoryUrl}
+                        >
+                            {name}
+                        </Link>
+                    </li>
+                );
+            });
+            
+            if(showAllBtn) {
+                childrenItems.push((
+                    <li className={[classes.submenuChildItem, classes.viewAll]}>
+                        <Link
+                            className={classes.link}
+                            to={topCategoryUrl}
+                        >
+                            View All
+                        </Link>
+                    </li>
+                ))
+            }
+    
+            return <ul className={classes.submenuChild}>{childrenItems}</ul>;
+        }
+        return null;
+    }, [category, topCategoryUrl]);
 
     return (
         <div className={classes.submenuColumn}>
-            <Link className={classes.link} to={categoryUrl}>
+            <Link className={classes.link} to={topCategoryUrl}>
                 <h3 className={classes.heading}>{category.name}</h3>
             </Link>
             {children}
