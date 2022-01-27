@@ -131,7 +131,7 @@ export const useSearchPage = (props = {}) => {
             const keyName = `filter.${field}`;
             const newValue = selectedFilter.value;
 
-            if (field === 'stickers' || field === 'ss_hierarchy') {
+            if (field === 'ss_hierarchy') {
                 // single filter can active
                 if (selectedFilter.active) {
                     nextParams.delete(keyName);

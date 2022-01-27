@@ -15,13 +15,14 @@ import iconEmail from '../../assets/email.svg';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './sharePopup.css';
 
-import { HOST_URL } from '../../url.utils';
+import { FRONT_END_HOST_URL } from '../../url.utils';
 
 
 const SharePopup = props => {
     const { closeSharePopup, productId, isPopupVisible } = props;
     const { pathname } = useLocation();
     const classes = useStyle(defaultClasses, props.classes);
+    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`
 
     return (
         <Portal>
@@ -55,7 +56,7 @@ const SharePopup = props => {
                             <div className={classes.shareButtons}>
                                 <div className={classes.shareItemWraper}>
                                     <div className={classes.shareItem}>
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${HOST_URL}${pathname}&quote=Ace%20Mart%20Restauant%20Supply`}
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${pdpUrl}&quote=Ace%20Mart%20Restauant%20Supply`}
                                         target="_blank"
                                         title="Share on Facebook"
                                         className={classes.shareLink}>
@@ -69,7 +70,7 @@ const SharePopup = props => {
 
                                     <div className={classes.shareItem}>
                                         <a 
-                                            href={`https://twitter.com/intent/tweet?source=${HOST_URL}${pathname}&text=Ace%20Mart%20Restauant%20Supply:%20http%3A%2F%2Fwww.acemart.com`}
+                                            href={`https://twitter.com/intent/tweet?source=${pdpUrl}&text=Ace%20Mart%20Restauant%20Supply:%20http%3A%2F%2Fwww.acemart.com`}
                                             target="_blank" 
                                             title="Tweet"
                                             className={classes.shareLink}
@@ -84,7 +85,7 @@ const SharePopup = props => {
 
                                     <div className={classes.shareItem}>
                                         <a 
-                                            href={`http://pinterest.com/pin/create/button/?url=${HOST_URL}${pathname}&description=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply`}
+                                            href={`http://pinterest.com/pin/create/button/?url=${pdpUrl}&description=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply`}
                                             target="_blank"
                                             title="Pin it"
                                             className={classes.shareLink}
@@ -99,7 +100,7 @@ const SharePopup = props => {
 
                                     <div className={classes.shareItem}>
                                         <a 
-                                            href={`http://www.linkedin.com/shareArticle?mini=true&url=${HOST_URL}${pathname}&title=Ace%20Mart%20Restauant%20Supply&summary=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply&source=http%3A%2F%2Fwww.acemart.com`}
+                                            href={`http://www.linkedin.com/shareArticle?mini=true&url=${pdpUrl}&title=Ace%20Mart%20Restauant%20Supply&summary=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply&source=http%3A%2F%2Fwww.acemart.com`}
                                             target="_blank"
                                             title="Share on LinkedIn"
                                             className={classes.shareLink}
@@ -114,7 +115,7 @@ const SharePopup = props => {
 
                                     <div className={classes.shareItem}>
                                         <a
-                                            href={`mailto:?subject=Ace%20Mart%20Restauant%20Supply&body=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply:${HOST_URL}${pathname}`}
+                                            href={`mailto:?subject=Ace%20Mart%20Restauant%20Supply&body=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply:${pdpUrl}`}
                                             target="_blank"
                                             title="Send email"
                                             className={classes.shareLink}

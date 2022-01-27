@@ -205,12 +205,6 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                         </div>
                     </Form>
                 </div>
-                {successMessage && (
-                    <div className={classes.successMessage}>
-                        <Icon src={CheckIcon} size={20} />
-                        <span>{successMessage}</span>
-                    </div>
-                )}
             </div>
         );
     } else {
