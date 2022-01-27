@@ -239,3 +239,6 @@ export const textToBase64Barcode = (text) => {
     JsBarcode(canvas, text, { format: "CODE128" });
     return canvas.toDataURL("image/png");
 }
+
+// mobile breakpoints
+export const MOBILE_SCREEN = 1024

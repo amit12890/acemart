@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { MOBILE_SCREEN } from '../../../../app.utils';
 
 export function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
     const [windowSize, setWindowSize] = useState({
         width: undefined,
-        height: undefined
+        height: undefined,
+        isMobile: window.innerWidth <= MOBILE_SCREEN
     });
     useEffect(() => {
         // Handler to call on window resize
@@ -12,7 +14,8 @@ export function useWindowSize() {
             // Set window width/height to state
             setWindowSize({
                 width: window.innerWidth,
-                height: window.innerHeight
+                height: window.innerHeight,
+                isMobile: window.innerWidth <= MOBILE_SCREEN
             });
         }
         // Add event listener
