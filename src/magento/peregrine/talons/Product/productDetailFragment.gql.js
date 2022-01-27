@@ -34,6 +34,7 @@ export const ProductDetailsFragment = gql`
             locate_in_store
             stock_label
             stock_final_label
+            same_as_stock_label
         }
         categories {
             id

@@ -291,6 +291,7 @@ const ProductFullDetail = props => {
     */
     const renderAvailability = useCallback(() => {
         const storeFinalLabel = get(pos_stock_manage, "stock_final_label", "")
+        const sameLabel = get(pos_stock_manage, "same_as_stock_label")
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
                 <div className={classes.piSectionRow}>
@@ -313,7 +314,18 @@ const ProductFullDetail = props => {
                     </div>
                 </div>
             )
-        } else if (size(storeFinalLabel) > 0) {
+        } else if(sameLabel) {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div
+                        className={classes.stockAvailability}
+                        style={{ borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0 }}>
+                        {get(pos_stock_manage, "stock_label", "")}
+                    </div>
+                </div>
+            )
+        }
+        else if (size(storeFinalLabel) > 0) {
             return (
                 <div className={classes.piSectionRow}>
                     <div className={classes.instock}>
@@ -338,6 +350,8 @@ const ProductFullDetail = props => {
      * render availablity of store pickup in side gray portion
      */
     const renderSideAvailability = useCallback(() => {
+        const sameLabel = get(pos_stock_manage, "same_as_stock_label")
+
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
                 <>
@@ -363,12 +377,11 @@ const ProductFullDetail = props => {
                     </div>
                 </>
             )
+        } else if(sameLabel) {
+            return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
         } else {
             return (
                 <>
-                    {!!pos_stock_manage.stock_label &&
-                        <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
-                    }
                     {/* Product Stock Avialability */}
                     {!!pos_stock_manage.stock_final_label &&
                         <div className={classes.apSectionRow}>
