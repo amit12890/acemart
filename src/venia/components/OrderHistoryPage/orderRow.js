@@ -18,6 +18,7 @@ import { useReorderItems } from "./data/useReorderItems"
 
 const OrderRow = props => {
     const { order, tab, showDetails, orderNumberClickable = true } = props;
+    console.log("🚀 ~ file: orderRow.js ~ line 21 ~ order", order)
     const { formatMessage } = useIntl();
     const {
         invoices,
@@ -104,7 +105,7 @@ const OrderRow = props => {
                     />
                 </span>
                 {orderNumberClickable ?
-                    <Link className={classes.orderAction} to={myOrderDetailsPage("view", order.id)}>
+                    <Link className={classes.orderAction} to={myOrderDetailsPage("view", order.number)}>
                         <span className={classes.orderNumber}>{orderNumber}</span>
                     </Link>
                     :
