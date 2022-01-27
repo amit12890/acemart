@@ -143,8 +143,8 @@ const ProductStoreLocatorPopup = props => {
             ['store_group_name', 'store_sort_order'], ['desc', 'asc']
         )
     }
-    const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
 
+    const selectedMapImage = get(groupStoreList, "0.store_locator_info.map", mapImage)
     return (
         <div className={classes.content}>
             <div className={classes.heading}>
@@ -174,7 +174,7 @@ const ProductStoreLocatorPopup = props => {
                     <div className={`${classes.tabsItem} ${classes.tabStock} ${popupState === 3 ? classes.active : ''}`}>
                         <a className={classes.itemSwitch} onClick={() => handleNavigationClick(3)}>
                             <div className={classes.switchContent}>
-                                {!!selectedStore ?
+                                {(!!selectedStore && selectedStore.store_locator_info.qty > 0) ?
                                     <>
                                         <span className={classes.tabLabel}>In Stock</span>
                                         <span className={classes.tabValue}>{selectedStore.store_locator_info.qty}</span>
@@ -221,7 +221,9 @@ const ProductStoreLocatorPopup = props => {
                                     <div className={classes.storeListItemWrapper}>
                                         {groupStoreList.map((store, sInd) => {
                                             const { id, store_name, store_locator_info } = store;
-                                            const { street, city, state, zip, qty } = store_locator_info;
+                                            const { street, city, state, zip, qty, stock_status } = store_locator_info;
+
+                                            const isOutOfStock = stock_status === 'out_of_stock'
                                             return (
                                                 <div key={id} className={classes.listItem}
                                                     onClick={() => handleStoreSelect(store)}>
@@ -235,11 +237,16 @@ const ProductStoreLocatorPopup = props => {
                                                             <p>{street}</p>
                                                             <p>{city}, {state} {zip}</p>
                                                         </div>
-                                                        <div className={classes.stockInfo}>
-                                                            <span className={classes.stockLabel}>Qty.</span>
-                                                            <strong className={classes.stockvalue}>{qty || "Out of Stock"}</strong>
-                                                        </div>
-
+                                                        {isOutOfStock ? (
+                                                            <div className={classes.stockInfo}>
+                                                                <strong className={classes.stockvalue}>Out of Stock</strong>
+                                                            </div>
+                                                        ) : (
+                                                            <div className={classes.stockInfo}>
+                                                                <span className={classes.stockLabel}>Qty.</span>
+                                                                <strong className={classes.stockvalue}>{qty}</strong>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             )
@@ -254,7 +261,7 @@ const ProductStoreLocatorPopup = props => {
                     {popupState === 3 &&
                         <div className={[classes.tabsItemContent, classes.tabContentStock].join(" ")}>
                             <div className={[classes.instructions, classes.stockInfo].join(" ")}>
-                                {selectedStore.store_locator_info.qty ?
+                                {selectedStore.store_locator_info.qty > 0 ?
                                     <p className={classes.qtyInfo}><strong>
                                         <span>{selectedStore.store_locator_info.qty}</span> in stock at this Location</strong></p>
                                     :

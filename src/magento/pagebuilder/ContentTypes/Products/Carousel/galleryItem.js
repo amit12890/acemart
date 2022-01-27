@@ -14,7 +14,8 @@ import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 import { drop, includes, camelCase, size, filter, orderBy, get } from 'lodash'
-import { replaceSpecialChars } from '../../../../../app.utils';
+import { getReviewText, replaceSpecialChars } from '../../../../../app.utils';
+import RatingMini from '../../../../../@amasty/components/Rating/rating_mini';
 
 
 const style = {
@@ -69,7 +70,7 @@ const GalleryItem = props => {
         return <ItemPlaceholder classes={classes} />;
     }
 
-    const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom, url_rewrites } = item;
+    const { name, price, sku, productLabel, small_image, url_key, url_suffix, uom, url_rewrites, rating_summary, review_count } = item;
 
     // if (size(url_rewrites) === 0) {
     //     console.log("url reqrite emoty =>>", sku)
@@ -143,7 +144,23 @@ const GalleryItem = props => {
                     })}
                 </div>
             }
-
+            {(rating_summary > 0 || review_count > 0) && (
+                <div className={classes.ratingContainer}>
+                    {rating_summary > 0 && (
+                        <div>
+                            <RatingMini
+                                percent={rating_summary}
+                                value={5}
+                                showValue={false} />
+                        </div>
+                    )}
+                    {review_count > 0 && (
+                        <div className={classes.review}>
+                            {getReviewText(review_count)}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

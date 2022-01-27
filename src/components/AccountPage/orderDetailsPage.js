@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import OrderHistoryContextProvider from '@magento/peregrine/lib/talons/OrderHistoryPage/orderHistoryContext';
@@ -17,13 +17,19 @@ const OrderDetailsPage = () => {
     const talonProps = useOrderHistoryPage();
     const {
         isLoadingWithoutData,
+        handleSubmit,
         orders,
     } = talonProps;
+
+    useEffect(() => {
+        handleSubmit({ search: orderId })
+    }, [orderId])
+
+    const order = useMemo(() => find(orders, ["number", orderId]), [orders, orderId]);
 
     if (isLoadingWithoutData) {
         return fullPageLoadingIndicator;
     }
-    const order = useMemo(() => find(orders, ["id", orderId]), [orders, orderId]);
     if (order) {
         return (
             <OrderHistoryContextProvider>

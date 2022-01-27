@@ -644,16 +644,21 @@ const ProductFullDetail = props => {
                                     {renderSideAvailability()}
 
                                     {!pos_stock_manage.hide_add_to_cart &&
-                                        <div className={classes.apSectionRow}>
+                                        <div className={[classes.apSectionRow, classes.boxToCartSection].join(" ")}>
                                             <div className={classes.boxToCart}>
-                                                <QuantityFields
-                                                    classes={{
-                                                        root: classes.quantityRoot
-                                                    }}
-                                                    min={1}
-                                                    message={errors.get('quantity')}
-                                                />
-                                                {cartActionContent}
+                                                <div className={classes.qtyWrapper}>
+
+                                                    <QuantityFields
+                                                        classes={{
+                                                            root: classes.quantityRoot
+                                                        }}
+                                                        min={1}
+                                                        message={errors.get('quantity')}
+                                                    />
+                                                </div>
+                                                <div className={classes.addToCartWrapper}>
+                                                    {cartActionContent}
+                                                </div>
                                             </div>
                                         </div>
                                     }

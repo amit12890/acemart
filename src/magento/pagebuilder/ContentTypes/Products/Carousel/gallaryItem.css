@@ -86,66 +86,6 @@
     margin-top: 10px;
 }
 
-/* .labelItem {
-    background-image: var(--productLabel);
-    background-repeat: no-repeat;
-    width: 45px;
-    height: 45px;
-    background-size: 190px;
-    margin-left: 5px;
-}
-
-.labelItem:first-child {
-    margin-left: 0;
-}
-
-.labelItem  span {
-    font-size: 0;
-}
-
-
-.storePickup {
-    background-position: -6px -6px;
-}
-
-.onSale {
-    background-position: -140px -75px;
-    
-}
-
-.freeShipping {
-    background-position: -140px ​-10px;
-   
-}
-.onlinePrice {
-    background-position: -75px -75px;
-   
-}
-
-.bulkSavings {
-    background-position: -10px -75px;
-}
-
-.newItem {
-    background-position: -75px ​-10px;
-}
-.newItems {
-    background-position: -75px -10px;
-}
-
-
-.disallowPickupatstore {
-    background-position: -10px -10px;
-}
-
-.allowStorePickup {
-    background-position: -10px -10px;
-}
-
-.blackFriday {
-    background-position: -10px -10px;
-} */
-
 
 .labelItem {
     background-image: var(--productLabel);
@@ -217,4 +157,20 @@
     composes: price;
     background-color: rgb(var(--venia-global-color-gray));
     width: 3rem;
+}
+
+.ratingContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.ratingSummary {
+    margin-right: 0.5rem;
+}
+
+.review {
+    
 }

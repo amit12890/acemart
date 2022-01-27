@@ -260,7 +260,7 @@ const GalleryItem = props => {
                             </div>
                         </div>
 
-                        <div className={classes.addTo}>
+                        <div className={[classes.addTo, classes.addToCompare].join(" ")}>
 
                             <AddItemsToCompareList
                                 itemId={itemId}

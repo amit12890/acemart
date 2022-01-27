@@ -335,7 +335,7 @@ h4:hover {
 }
 
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
 
     .root {
         display: none;

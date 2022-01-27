@@ -239,3 +239,11 @@ export const textToBase64Barcode = (text) => {
     JsBarcode(canvas, text, { format: "CODE128" });
     return canvas.toDataURL("image/png");
 }
+
+export const getReviewText = (count) => {
+    if (count === 1) {
+        return `${count} review`
+    } else {
+        return `${count} reviews`
+    }
+}

@@ -4,18 +4,16 @@
 .productViewWrapper {
 display: flex;
 flex-direction: column;
-  
-   
+
 }
 .productViewSection {
     display: flex;
     width: 100%;
     margin-bottom: 40px;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.productViewSection:not(.productView) {
-    flex-direction: column;
-}
 
 .productDescription {
     font-size: var(--fontSize-100);
@@ -29,21 +27,15 @@ flex-direction: column;
 
 .productMedia {
     order: 1;
-    width: 40%;
-    padding: 10px 10px 10px 0;
-
 }
 
 .productInfo {
     order: 2;
-    width: 40%;
-    padding: 10px;
+
 }
 
 .productAction {
     order: 3;
-    width: 20%;
-
 }
 
 .productActionWrapper {
@@ -74,6 +66,11 @@ flex-direction: column;
     width: 100%;
     justify-content: center;
 }
+
+.boxToCartSection {
+
+}
+
 .apSectionRow:first-child {
     margin-top: 0;
 }
@@ -114,7 +111,7 @@ flex-direction: column;
 
 .attributeWrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .attributeContainer {
@@ -242,7 +239,6 @@ flex-direction: column;
     fill: currentColor;
 }
 
-
 .productReview {
     font-size: var(--fontSize-75);
     cursor: pointer;
@@ -270,8 +266,6 @@ flex-direction: column;
     border: 0;
 }
 
-
-
 .paContent {
     display: flex;
     flex-direction: column;
@@ -279,6 +273,14 @@ flex-direction: column;
 }
 
 .boxToCart {
+
+}
+
+.qtyWrapper {
+
+}
+
+.addToCartWrapper {
 
 }
 .addToCart {
@@ -322,17 +324,13 @@ flex-direction: column;
     color: rgb(var(--link-color-hover));
 }
 
-
-
 .shippingInfo {
 
 }
 
 .shippingNote {
     margin-top: 15px;
-
 }
-
 
 .shippingNote h3 {
     text-transform: uppercase;
@@ -366,8 +364,6 @@ flex-direction: column;
     align-items: center;
 }
 
-
-
 .tierQuantity {
     
 }
@@ -376,7 +372,6 @@ flex-direction: column;
     color: rgb(var(--color-black));
     font-size: var(--fontSize-90);
     font-weight: bold;
-
 }
 
 .tierQuantity strong{
@@ -391,7 +386,6 @@ flex-direction: column;
     font-weight: bold;
 }
 
-
 .tierPice .unit {
     font-size: var(--fontSize-90);
     margin: 0 5px;
@@ -399,7 +393,8 @@ flex-direction: column;
 }
 
 .addToLinks {
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -415,7 +410,7 @@ flex-direction: column;
     font-weight: var(--font-weight-regular);
     line-height: 1.25rem;
     max-width: 100%;
-    min-width: 10rem;
+    min-width: 14rem;
     min-height: 2.5rem;
     outline: none;
     padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
@@ -425,17 +420,14 @@ flex-direction: column;
     transition-timing-function: var(--venia-global-anim-standard);
     width: 100%;
     text-decoration: none;
-    
+    white-space: nowrap;
 }
 
 
 .addToLinks .action {
-    margin-top: 10px;
+    margin: 10px;
+}
 
-}
-.addToLinks .action:first-child {
-    margin-top: 0;
-}
 .addToLinks .action  .iconWrapper {
     display: inline-flex;
     padding-right: 25px;
@@ -627,33 +619,6 @@ tbody tr:nth-child(odd) {
     
 }
 
-
-
-/* Related Product Section */
-.relatedProducts {
-
-}
-
-
-
-@media (min-width: 1024px) {
-    .root {
-        align-items: start;
-        display: grid;
-        grid-auto-flow: row;
-        grid-template-areas:
-            'images title'
-            'images errors'
-            'images options'
-            'images quantity'
-            'images cart'
-            'images .';
-        grid-template-columns: 1.5625fr 1fr;
-        grid-template-rows: repeat(5, min-content) 1fr [fold];
-        padding: 2.5rem 1rem;
-    }
-}
-
 .section {
 
 }
@@ -672,13 +637,9 @@ tbody tr:nth-child(odd) {
     padding: 1rem 1.5rem;
 }
 
-
-
 .productName {
 
 }
-
-
 
 .productPrice {
     display: block;
@@ -691,8 +652,6 @@ tbody tr:nth-child(odd) {
     margin: 0 auto;
     max-width: 640px;
 }
-
-
 
 .options {
     grid-area: options;
@@ -721,12 +680,6 @@ tbody tr:nth-child(odd) {
     justify-items: center;
 }
 
-
-
-
-
-
-
 .descriptionTitle {
     composes: sectionTitle;
 }
@@ -737,8 +690,6 @@ tbody tr:nth-child(odd) {
     grid-row: fold / span 1;
 }
 
-
-
 .detailsTitle {
     composes: sectionTitle;
 }
@@ -747,7 +698,6 @@ tbody tr:nth-child(odd) {
     composes: root from '../CartPage/ProductListing/quantity.css';
     grid-template-columns: auto 4rem auto;
     justify-content: center;
-    margin-bottom: 10px;
 }
 
 .quantityRoot input {
@@ -768,7 +718,118 @@ tbody tr:nth-child(odd) {
     width: 100%;
 }
 
+/* Related Product Section */
+.relatedProducts {
 
+}
+
+
+/* Mobile Responsive CSS */
+
+
+@media (max-width: 767px) {
+
+    .productViewWrapper {
+        padding-left: var(--layout-indent-width);
+        padding-right: var(--layout-indent-width);
+    } 
+    
+    .boxToCartSection {
+        position: fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        background-color: rgb(var(--color-white));
+        margin:0;
+        padding: 10px 5px; 
+        box-shadow: 2px 2px 10px #000;
+        z-index: 103;
+
+    }
+
+    .boxToCart {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .qtyWrapper {
+    
+    }
+    
+    .addToCartWrapper {
+        margin-left: 5px;
+        
+    }
+
+}
+
+
+@media (min-width: 768px) {
+    .root {
+        align-items: start;
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-areas:
+            'images title'
+            'images errors'
+            'images options'
+            'images quantity'
+            'images cart'
+            'images .';
+        grid-template-columns: 1.5625fr 1fr;
+        grid-template-rows: repeat(5, min-content) 1fr [fold];
+        padding: 2.5rem 1rem;
+    }
+
+    .productView {
+        flex-direction: row;
+    }
+    
+    .attributeWrapper {
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .productMedia {
+        width: 40%;
+        padding: 10px 10px 10px 0;
+    }
+    
+    .productInfo {
+        width: 40%;
+        padding: 10px;
+    }
+    
+    .productAction {
+        order: 3;
+        width: 20%;
+    }
+
+    .addToLinks {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .addToLinks .action {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .addToLinks .action:first-child {
+        margin-top: 0;
+    }
+    
+    .addToLinks button{
+        min-width: 10rem;
+    }
+
+    .quantityRoot {
+        margin-bottom: 10px;
+    }
+}
 
 
 @media print { 
