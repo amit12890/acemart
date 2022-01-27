@@ -218,3 +218,19 @@
     background-color: rgb(var(--venia-global-color-gray));
     width: 3rem;
 }
+
+.ratingContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.ratingSummary {
+    margin-right: 0.5rem;
+}
+
+.review {
+    
+}

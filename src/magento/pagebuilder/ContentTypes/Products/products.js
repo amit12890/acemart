@@ -288,6 +288,8 @@ export const GET_PRODUCTS_BY_SKU = gql`
                     }
                     __typename
                   }
+                review_count
+                rating_summary
                 productLabel {
                     items {
                         labelname
