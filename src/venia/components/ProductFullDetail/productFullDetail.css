@@ -762,6 +762,11 @@ tbody tr:nth-child(odd) {
         
     }
 
+    .productName {
+        line-height: normal;
+        font-size: var(--fontSize-300); 
+    }
+
 }
 
 
