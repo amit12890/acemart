@@ -7,7 +7,25 @@
     line-height: 1;
 }
 
+@media (max-width: 767px) {
 
+    .root {
+        background-color: rgb(var(--color-gray-light10));
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .items {
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: 10px;
+        row-gap: 10px;
+        padding: 10px 0;
+    }
+
+  
+
+}
 
 @media (min-width: 768px) {
     .items {

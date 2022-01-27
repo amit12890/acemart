@@ -2,15 +2,11 @@
     align-content: start;
     display: flex;
     gap: 0.5rem;
-    border-top: 1px solid rgb(var(--border-color-light));
-    padding:30px 0;
     flex-wrap: wrap;
 }
 
 
 .itemImageContainer {
-    order: 1;
-    flex: 0 1 120px;
 }
 
 .images {
@@ -40,21 +36,17 @@
 }
 
 .itemDetails {
-    flex: 1 0 auto;
-    order: 2;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .itemActions { 
-    order: 3;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     text-align: left;
     gap: 0.5rem;
-    padding-left: 120px; 
 
 }
 
@@ -105,6 +97,10 @@
     content: "/";
     margin-right: 5px;
 
+
+}
+
+.piSectionRow {
 
 }
 
@@ -230,6 +226,10 @@
     max-width: 140px; 
 }
 
+.addToCompare {
+
+}
+
 
 .addToWarapper {
     font-size: var(--fontSize-90);
@@ -302,12 +302,81 @@
     width: 3rem;
 }
 
+@media (max-width: 767px) { 
+    .root {
+        background-color: #fff;
+        width: calc(50% - 5px); 
+        padding: 10px;
+        position: relative;
+    }
+
+    .itemImageContainer {
+        width: 100%;
+        position: relative;
+    }
+
+    .sku,
+    .productInner {
+        display: none;
+    }
+
+    .nameContainer {
+        text-align: center;
+    }
+    .name {
+        font-size: var(--fontSize-100);
+    }
+
+    .price,
+    .labelWrapper,
+    .finance  {
+        justify-content: center; 
+    }
+
+    .piSectionRow {
+       order: 5;
+    }
+
+    .productActions {
+        text-align: center;
+    }
+
+    .actionsContainer {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    .addTo {
+        padding: 0;
+        border: none;
+    }
+    
+    .addToLabel,
+    .addToCompare {
+        display: none;
+    }
+
+    .iconWrapper {
+        display: flex;
+    }
+
+    .svgIcon {
+        width: 23px;
+        height: auto;
+        fill:
+    }
+    
+}
+
 @media (min-width: 768px) { 
 
     .root {
         align-content: start;
         display: flex;
         gap: 3rem;
+        border-top: 1px solid rgb(var(--border-color-light));
+        padding:30px 0;
     }
 
     .root:first-child {
@@ -317,7 +386,6 @@
     
     .itemDetails {
         flex: 1;
-        order: 2;
         display: flex;
         flex-direction: column;
         gap: 1.2rem;
@@ -336,7 +404,6 @@
         justify-content: flex-end;
     }
     .itemImageContainer {
-        order: 1;
         flex: 0 1 250px;
     }
     .productOptions {
