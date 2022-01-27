@@ -27,7 +27,6 @@
     top: 40px;
     transition-property: opacity, transform, visibility;
     z-index: 2;
-    min-width: 800px;
     width: 100%;
 }
 
@@ -74,5 +73,12 @@
 @media (max-width: 767px) {
     .root {
         max-width: 800px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .root {
+        min-width: 800px;
+        
     }
 }
