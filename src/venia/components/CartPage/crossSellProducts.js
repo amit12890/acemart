@@ -23,13 +23,9 @@ const CrossSellProducts = ({ isLoading, items }) => {
         if (items.length) {
             for (let itemInd = 0; itemInd < items.length; itemInd++) {
                 const currItem = items[itemInd];
-                const skuList = filter(
-                    get(currItem, 'product.product_links', []),
-                    ['link_type', 'crosssell']
-                );
+                const skuList = map(get(currItem, "product.crosssell_products", []), "sku")
                 upsellProducts = concat(
-                    upsellProducts,
-                    map(skuList, 'linked_product_sku')
+                    upsellProducts, skuList
                 );
             }
         }
