@@ -16,6 +16,7 @@ import StockStatusMessage from '../../../venia/components/StockStatusMessage';
 import ProductList from './ProductList';
 import defaultClasses from './miniCart.css';
 import operations from './miniCart.gql';
+import { checkOutOfStockItem } from '../../../app.utils'
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
@@ -59,7 +60,11 @@ const MiniCart = React.forwardRef((props, ref) => {
     const priceClassName = loading ? classes.price_loading : classes.price;
 
     const isCartEmpty = !(productList && productList.length);
+    console.log("🚀 ~ file: miniCart.js ~ line 62 ~ MiniCart ~ productList", productList)
 
+    const hasOutOfStockItem = checkOutOfStockItem(productList || [])
+    console.log("🚀 ~ file: miniCart.js ~ line 66 ~ MiniCart ~ hasOutOfStockItem", hasOutOfStockItem)
+    const disableCheckoutButton = loading || isCartEmpty || hasOutOfStockItem
     const [, { addToast }] = useToasts();
 
     useEffect(() => {
@@ -150,8 +155,8 @@ const MiniCart = React.forwardRef((props, ref) => {
                     <Button
                         onClick={handleProceedToCheckout}
                         priority="high"
-                        className={classes.checkoutButton}
-                        disabled={loading || isCartEmpty}
+                        className={[classes.checkoutButton, disableCheckoutButton && classes.disabledButton].join(" ")}
+                        disabled={disableCheckoutButton}
                     >
                         <Icon
                             size={16}

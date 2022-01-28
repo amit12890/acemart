@@ -40,7 +40,7 @@ const GET_PRICE_SUMMARY = gql`
  * import PriceSummary from "@magento/venia-ui/lib/components/CartPage/PriceSummary";
  */
 const PriceSummary = props => {
-    const { isUpdating } = props;
+    const { isUpdating, hasOutOfStockItem } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = usePriceSummary({
         queries: {
@@ -97,7 +97,7 @@ const PriceSummary = props => {
     const proceedToCheckoutButton = isCart ? (
         <div className={classes.checkoutButton_container}>
             <Button
-                disabled={isPriceUpdating}
+                disabled={isPriceUpdating || hasOutOfStockItem}
                 priority={'high'}
                 onClick={handleProceedToCheckout}
             >
