@@ -18,7 +18,7 @@ const SubmenuColumn = props => {
     const { category, mainMenuUrl } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const topCategoryUrl = resourceUrl(
-        `/${category.canonical_url}${category.url_suffix || ''}`
+        `/${category.url_path}${category.url_suffix || ''}`
     );
 
     let children = useMemo(() => {

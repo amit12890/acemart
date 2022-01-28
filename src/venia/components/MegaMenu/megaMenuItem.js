@@ -17,7 +17,7 @@ const MegaMenuItem = props => {
     const { activeCategoryId, category, mainNavWidth } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const categoryUrl = resourceUrl(
-        `/${category.canonical_url}${category.url_suffix || ''}`
+        `/${category.url_path}${category.url_suffix || ''}`
     );
 
     const children = category.children.length ? (
@@ -51,7 +51,7 @@ MegaMenuItem.propTypes = {
         name: PropTypes.string.isRequired,
         path: PropTypes.array.isRequired,
         position: PropTypes.number.isRequired,
-        canonical_url: PropTypes.string.isRequired,
+        url_path: PropTypes.string.isRequired,
         url_suffix: PropTypes.string
     }).isRequired,
     activeCategoryId: PropTypes.number,
