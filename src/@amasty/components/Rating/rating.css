@@ -39,3 +39,17 @@
 .addReviewLink:hover {
   text-decoration: none;
 }
+
+
+@media (max-width: 767px) { 
+
+  .root {
+    justify-content: center;
+  }
+
+  .addReviewLink,
+  .ratingValue {
+    display: none;
+  }
+
+}

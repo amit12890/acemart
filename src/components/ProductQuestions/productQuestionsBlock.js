@@ -134,7 +134,7 @@ const QuestionBlock = ({ questions }) => {
         }
         // sort by Most Recent Questions
         pQueList = sortBy(pQueList, [
-            function(d) {
+            function (d) {
                 return Number(d.date);
             }
         ]);
@@ -202,42 +202,42 @@ const QuestionBlock = ({ questions }) => {
             switch (sortAttribute.value) {
                 case '1': // sort by Most Recent Questions
                     sortedQuestions = sortBy(queData.questions, [
-                        function(d) {
+                        function (d) {
                             return Number(d.date);
                         }
                     ]);
                     break;
                 case '2': // Sort by Oldest questions
                     sortedQuestions = sortBy(queData.questions, [
-                        function(d) {
+                        function (d) {
                             return Number(d.date) * -1;
                         }
                     ]);
                     break;
                 case '3': // Questions With The Most Helpful Answers
                     sortedQuestions = sortBy(queData.questions, [
-                        function(d) {
+                        function (d) {
                             return d.ansUpvoteCount * -1;
                         }
                     ]);
                     break;
                 case '4': // Questions With Most Recent Answers
                     sortedQuestions = sortBy(queData.questions, [
-                        function(d) {
+                        function (d) {
                             return d.ansMostRecentDate;
                         }
                     ]);
                     break;
                 case '5': // Questions With  Oldest Answers
                     sortedQuestions = sortBy(queData.questions, [
-                        function(d) {
+                        function (d) {
                             return d.ansOldestDate * -1;
                         }
                     ]);
                     break;
                 case '6': // Questions With Most Answers
                     sortedQuestions = sortBy(queData.questions, [
-                        function(d) {
+                        function (d) {
                             return d.ansCount * -1;
                         }
                     ]);
@@ -503,153 +503,153 @@ const QuestionBlock = ({ questions }) => {
                                         </div>
                                     </div>
                                     <div className={classes.answer}>
-                                        <AddAnswer questionId={item.id} 
+                                        <AddAnswer questionId={item.id}
                                             wrapperClass={classes.actionToolbar}
                                             ansContent={!!ansCount
                                                 ? item.answer.map(ans => {
-                                                        const onAnsUpvoteSuccess = partial(
-                                                            onAnswerVoteSuccess,
-                                                            item.id,
-                                                            ans.id,
-                                                            'good'
-                                                        );
-                                                        const onAnsDownvoteSuccess = partial(
-                                                            onAnswerVoteSuccess,
-                                                            item.id,
-                                                            ans.id,
-                                                            'bad'
-                                                        );
-                                                        return (
+                                                    const onAnsUpvoteSuccess = partial(
+                                                        onAnswerVoteSuccess,
+                                                        item.id,
+                                                        ans.id,
+                                                        'good'
+                                                    );
+                                                    const onAnsDownvoteSuccess = partial(
+                                                        onAnswerVoteSuccess,
+                                                        item.id,
+                                                        ans.id,
+                                                        'bad'
+                                                    );
+                                                    return (
+                                                        <div
+                                                            key={ans.id}
+                                                            className={
+                                                                classes.anslistItemWrapper
+                                                            }
+                                                        >
                                                             <div
-                                                                key={ans.id}
                                                                 className={
-                                                                    classes.anslistItemWrapper
+                                                                    classes.answerListItem
                                                                 }
                                                             >
                                                                 <div
                                                                     className={
-                                                                        classes.answerListItem
+                                                                        classes.listContent
                                                                     }
                                                                 >
-                                                                    <div
-                                                                        className={
-                                                                            classes.listContent
+                                                                    <RichText
+                                                                        content={
+                                                                            replaceSpecialChars(ans.content)
                                                                         }
-                                                                    >
-                                                                        <RichText
-                                                                            content={
-                                                                                replaceSpecialChars(ans.content)
-                                                                            }
-                                                                        />
-                                                                    </div>
+                                                                    />
                                                                 </div>
+                                                            </div>
+                                                            <div
+                                                                className={
+                                                                    classes.answerListHelper
+                                                                }
+                                                            >
                                                                 <div
                                                                     className={
-                                                                        classes.answerListHelper
+                                                                        classes.nickName
                                                                     }
                                                                 >
-                                                                    <div
-                                                                        className={
-                                                                            classes.nickName
-                                                                        }
-                                                                    >
                                                                     by <RichText content={ans.nickname} classes={{
                                                                         root: classes.nickNameRoot
                                                                     }} />
-                                                                    </div>
-                                                                    <div
-                                                                        className={
-                                                                            classes.count
+                                                                </div>
+                                                                <div
+                                                                    className={
+                                                                        classes.count
+                                                                    }
+                                                                >
+                                                                    {getDateString(
+                                                                        ans.date
+                                                                    )}
+                                                                </div>
+                                                                <div
+                                                                    className={[
+                                                                        classes.helper,
+                                                                        classes.plus
+                                                                    ].join(' ')}
+                                                                >
+                                                                    <PlusBlock
+                                                                        count={
+                                                                            ans.good
                                                                         }
-                                                                    >
-                                                                        {getDateString(
-                                                                            ans.date
-                                                                        )}
-                                                                    </div>
-                                                                    <div
-                                                                        className={[
-                                                                            classes.helper,
-                                                                            classes.plus
-                                                                        ].join(' ')}
-                                                                    >
-                                                                        <PlusBlock
-                                                                            count={
-                                                                                ans.good
-                                                                            }
-                                                                            queryType="answerRatingPlus"
-                                                                            onSuccess={
-                                                                                onAnsUpvoteSuccess
-                                                                            }
-                                                                            mutation={
-                                                                                answerRatingPlusMutation
-                                                                            }
-                                                                            variables={{
-                                                                                ans_id:
-                                                                                    ans.id
-                                                                            }}
-                                                                            history={
-                                                                                history
-                                                                            }
-                                                                            isSignedIn={
-                                                                                isSignedIn
-                                                                            }
-                                                                        />
-                                                                    </div>
-                                                                    <div
-                                                                        className={[
-                                                                            classes.helper,
-                                                                            classes.minus
-                                                                        ].join(' ')}
-                                                                    >
-                                                                        <MinusBlock
-                                                                            count={
-                                                                                ans.bad
-                                                                            }
-                                                                            queryType="answerRatingMinus"
-                                                                            onSuccess={
-                                                                                onAnsDownvoteSuccess
-                                                                            }
-                                                                            mutation={
-                                                                                answerRatingMinusMutation
-                                                                            }
-                                                                            variables={{
-                                                                                ans_id:
-                                                                                    ans.id
-                                                                            }}
-                                                                            history={
-                                                                                history
-                                                                            }
-                                                                            isSignedIn={
-                                                                                isSignedIn
-                                                                            }
-                                                                        />
-                                                                    </div>
-                                                                    <div
-                                                                        className={[
-                                                                            classes.helper,
-                                                                            classes.reportBlock
-                                                                        ].join(' ')}
-                                                                    >
-                                                                        <ReportBlock
-                                                                            mutation={
-                                                                                reportAnswerMutation
-                                                                            }
-                                                                            variables={{
-                                                                                ans_id:
-                                                                                    ans.id
-                                                                            }}
-                                                                            history={
-                                                                                history
-                                                                            }
-                                                                            isSignedIn={
-                                                                                isSignedIn
-                                                                            }
-                                                                        />
-                                                                    </div>
+                                                                        queryType="answerRatingPlus"
+                                                                        onSuccess={
+                                                                            onAnsUpvoteSuccess
+                                                                        }
+                                                                        mutation={
+                                                                            answerRatingPlusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id:
+                                                                                ans.id
+                                                                        }}
+                                                                        history={
+                                                                            history
+                                                                        }
+                                                                        isSignedIn={
+                                                                            isSignedIn
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className={[
+                                                                        classes.helper,
+                                                                        classes.minus
+                                                                    ].join(' ')}
+                                                                >
+                                                                    <MinusBlock
+                                                                        count={
+                                                                            ans.bad
+                                                                        }
+                                                                        queryType="answerRatingMinus"
+                                                                        onSuccess={
+                                                                            onAnsDownvoteSuccess
+                                                                        }
+                                                                        mutation={
+                                                                            answerRatingMinusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id:
+                                                                                ans.id
+                                                                        }}
+                                                                        history={
+                                                                            history
+                                                                        }
+                                                                        isSignedIn={
+                                                                            isSignedIn
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className={[
+                                                                        classes.helper,
+                                                                        classes.reportBlock
+                                                                    ].join(' ')}
+                                                                >
+                                                                    <ReportBlock
+                                                                        mutation={
+                                                                            reportAnswerMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id:
+                                                                                ans.id
+                                                                        }}
+                                                                        history={
+                                                                            history
+                                                                        }
+                                                                        isSignedIn={
+                                                                            isSignedIn
+                                                                        }
+                                                                    />
                                                                 </div>
                                                             </div>
-                                                        );
-                                                    })
+                                                        </div>
+                                                    );
+                                                })
                                                 : null
                                             }
                                         />
@@ -689,7 +689,7 @@ const ProductQuestionsBlockWrapper = ({ productId }) => {
                         websiteId: storeConfig.website_id
                     }
                 });
-            } catch (error) {}
+            } catch (error) { }
         }
     }, [data]);
     if (loading || error) return null;

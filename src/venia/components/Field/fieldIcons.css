@@ -5,6 +5,7 @@
     grid-template-columns: auto 1fr auto;
     height: 2.5rem;
     width: 100%;
+    position: relative;
 }
 
 .input {
@@ -17,8 +18,6 @@
 .input > input {
     padding-left: calc(1.875rem * var(--iconsBefore) + 0.625rem);
     padding-right: calc(1.875rem * var(--iconsAfter) + 0.625rem);
-
-    
 }
 
 .beforeClass,
@@ -43,8 +42,13 @@
 
 .afterClass {
     grid-area: after;
+    position: absolute;
+    right: 0;
 }
 
 .beforeClass svg {
     stroke: rgb(var(--color-gray-darken0));
 }
+
+
+

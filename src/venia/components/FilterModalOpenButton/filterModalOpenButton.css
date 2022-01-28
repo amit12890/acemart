@@ -16,10 +16,10 @@
     border: 0;
     border-right: 1px solid #ffffff;
     height: 50px;
-    text-transform: capitalize;
+    text-transform: uppercase;
 }
 
-@media (min-width: 767px) {
+@media (min-width: 768px) {
     .filterButton {
         display: none;
     }
