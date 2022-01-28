@@ -30,6 +30,7 @@ export const useReviewForm = props => {
     const [, { toggleDrawer }] = useAppContext();
     const [tmpImgPath, setTmpImgPath] = useState([]);
     const [isShowSuccessMessage, setIsShowSuccessMessage] = useState(false);
+    const [isCaptchaRequired, setCaptcha] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [_, { addToast }] = useToasts();
     const recaptchaRef = useRef()
@@ -44,10 +45,12 @@ export const useReviewForm = props => {
                 dismissable: true,
                 timeout: 3000
             });
+            setCaptcha(false)
         }
     });
 
     const initialValues = useMemo(() => {
+        setCaptcha(false)
         const { firstname, lastname } = currentUser;
         const nickname =
             firstname && lastname ? [firstname, lastname].join(' ') : '';
@@ -77,8 +80,10 @@ export const useReviewForm = props => {
     const handleSubmit = useCallback(
         async formValues => {
             const recaptchaValue = recaptchaRef.current.getValue();
-            console.log("🚀 ~ file: useReviewForm.js ~ line 80 ~ recaptchaValue", recaptchaValue)
-
+            if(!recaptchaValue) {
+                setCaptcha(true)
+                return
+            }
             setIsSubmitting(true);
 
             delete formValues.review_images;
@@ -130,6 +135,10 @@ export const useReviewForm = props => {
     );
 
     const handleSubmitFailure = useCallback(errors => {
+        const recaptchaValue = recaptchaRef.current.getValue();
+        if(!recaptchaValue) {
+            setCaptcha(true)
+        }
         const errorFields = Object.keys(errors);
         if (!Array.isArray(errorFields) || !errorFields.length) {
             return null;
@@ -156,6 +165,7 @@ export const useReviewForm = props => {
         isShowSuccessMessage,
         handleSubmitFailure,
         formApi,
-        recaptchaRef
+        recaptchaRef,
+        isCaptchaRequired
     };
 };
