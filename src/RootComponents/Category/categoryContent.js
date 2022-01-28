@@ -50,7 +50,6 @@ const CategoryContent = props => {
         totalCount,
         totalPagesFromData
     } = talonProps;
-        console.log("🚀 ~ file: categoryContent.js ~ line 53 ~ totalCount", totalCount)
 
     const classes = useStyle(defaultClasses, props.classes);
 
