@@ -24,10 +24,12 @@ import defaultClasses from './accountMenuItems.css';
 import { useDispatch } from 'react-redux';
 import { resetCompareList } from '../../../data/compare/compare.action';
 import { resetCheckout } from '../../../data/checkout/checkout.action';
+import { useWindowSize } from '../../../magento/peregrine/talons/ProductImageCarousel/useWindowSize';
 
 const AccountMenuItems = props => {
     const { onSignOut: handleSignOut, signingOut, onNavigate } = props;
     const dispatch = useDispatch()
+    const { isMobile } = useWindowSize();
     const talonProps = useAccountChip({
         queries: {
             getCustomerDetailsQuery: GET_CUSTOMER_DETAILS
