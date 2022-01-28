@@ -46,8 +46,9 @@
     line-height: normal;
 }
 .sortButton:hover {
-    background-color: rgb(var(--color-white));;
+    background-color: transparent;
     color: rgb(var(--text-color));
+    border-color: transparent;
 }
 
 .sortButton svg {
