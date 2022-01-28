@@ -56,7 +56,7 @@ const AddAnswerBlock = ({ questionId }) => {
                 answer: formValues.answer,
                 newsletter: formValues.newsletter ? 1 : 0,
                 // required string
-                newsletter_email: (isSignedIn ? 
+                newsletter_email: (isSignedIn ?
                     currentUser.email : formValues.newsletter_email) || "",
                 // need purpose
                 status: 4
@@ -94,22 +94,30 @@ const AddAnswerBlock = ({ questionId }) => {
                         onSubmit={handleSubmit}
                     >
                         <div className={classes.qaFieldWrapper}>
-                            <Field label="Nickname">
+                            <Field
+                                label="Nickname"
+                                showStar
+                            >
                                 <TextInput
                                     field="nickname_answer"
                                     type="text"
                                     validate={isRequired}
                                     validateOnBlur
+
                                 />
                             </Field>
                         </div>
                         <div className={classes.qaFieldWrapper}>
-                            <Field label="Your Answer">
+                            <Field
+                                label="Your Answer"
+                                showStar
+                            >
                                 <TextInput
                                     field="answer"
                                     type="text"
                                     validate={isRequired}
                                     validateOnBlur
+
                                 />
                             </Field>
                         </div>

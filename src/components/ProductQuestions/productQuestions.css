@@ -220,6 +220,9 @@
 
 .listContent {
     flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
 }
 
 .listContent .svgIcon {
@@ -230,7 +233,7 @@
 
 .listContent .iconWrapper {
     display: inline-flex;
-    margin-right: 10px;
+    margin: 3px  10px 0 0;
 }
 
 .count {
