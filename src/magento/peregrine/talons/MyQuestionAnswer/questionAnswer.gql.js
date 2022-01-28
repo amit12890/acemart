@@ -37,3 +37,24 @@ query getQuestionAnswer(
 }
 `;
 
+
+export const GET_PRODUCTS_BY_SKU = gql`
+    query getProductsBySku($skus: [String]) {
+        products(filter: { sku: { in: $skus } }) {
+            items {
+                id
+                name
+                sku
+                url_rewrites {
+                    url
+                    parameters {
+                        name
+                        value
+                        __typename
+                    }
+                    __typename
+                }
+            }
+        }
+    }
+`;
