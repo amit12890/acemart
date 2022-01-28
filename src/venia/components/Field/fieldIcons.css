@@ -21,8 +21,8 @@
     
 }
 
-.before,
-.after {
+.beforeClass,
+.afterClass {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -32,19 +32,19 @@
     z-index: 1;
 }
 
-.before:empty,
-.after:empty {
+.beforeClass:empty,
+.afterClass:empty {
     display: none;
 }
 
-.before {
+.beforeClass {
     grid-area: before;
 }
 
-.after {
+.afterClass {
     grid-area: after;
 }
 
-.before svg {
+.beforeClass svg {
     stroke: rgb(var(--color-gray-darken0));
 }
