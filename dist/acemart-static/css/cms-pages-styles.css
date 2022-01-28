@@ -29,6 +29,8 @@
     
 }
 
+@media (min-width: 768px) {
+
 .panelBody{
     max-width: var(--venia-global-maxWidth);
     width: 100%;
@@ -54,10 +56,11 @@
     background-color: rgb(var(--color-gray30));
 }
 
+
 .leftMenu {
     flex-grow: 1; 
     margin-right: 20px;
-    text-align: left;
+    text-align: left; 
 }
 
 .leftMenu .iconWrapper{
@@ -98,6 +101,13 @@
 .store {
     fill: #9dd666;
 }
+
+}
+@media (max-width: 767px) {
+
+}
+
+
 
 .footerBox {
     text-align: left;

@@ -58,7 +58,8 @@ const ReviewForm = props => {
         isShowSuccessMessage,
         handleSubmitFailure,
         formApi,
-        recaptchaRef
+        recaptchaRef,
+        isCaptchaRequired
     } = useReviewForm({ productId, ratings });
 
     const { handleUpload, loading } = useUpload({ setTmpImgPath, formApi });
@@ -162,6 +163,11 @@ const ReviewForm = props => {
                         ref={recaptchaRef}
                         sitekey={GOOGLE_RECAPTCHA}
                     />
+                    {isCaptchaRequired ?
+                        <div>This is a required field.</div>
+                        :
+                        null
+                    }
                 </div>
 
                 {isProsConsEnabled && (

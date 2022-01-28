@@ -20,12 +20,8 @@ export const ProductListingFragment = gql`
                       value
                     }
                 }
-                product_links {
-                    link_type
-                    linked_product_sku
-                    linked_product_type
-                    position
-                    sku
+                crosssell_products {
+                    uid sku
                 }
                 thumbnail {
                     url

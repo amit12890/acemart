@@ -176,7 +176,7 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
     url = url ? "/" + url : "#";
 
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
-    const [imageUrl, setImageUrl] = useState(get(item, 'image.url', ""));
+    const [imageUrl, setImageUrl] = useState(get(item, 'small_image.url', ""));
 
     const openWishlistPopup = useCallback(() => {
         if(isSignedIn) {

@@ -27,7 +27,7 @@ const successIcon = (
     />
 );
 
-const AddAnswerBlock = ({ questionId }) => {
+const AddAnswerBlock = ({ questionId, ansContent, wrapperClass }) => {
     const [{ currentUser, isSignedIn }] = useUserContext();
     const [_, { addToast }] = useToasts();
 
@@ -85,87 +85,89 @@ const AddAnswerBlock = ({ questionId }) => {
 
     if (showForm) {
         return (
-            <div className={classes.askQuestionWrapper}>
-                <div className={classes.subTitle}>Ans this question</div>
-                <div className={classes.formWrapper}>
-                    <Form
-                        id="add-question-form"
-                        className="add-question-form"
-                        onSubmit={handleSubmit}
-                    >
-                        <div className={classes.qaFieldWrapper}>
-                            <Field
-                                label="Nickname"
-                                showStar
+            <>
+                {ansContent}
+                <div className={wrapperClass}>
+                    <div className={classes.askQuestionWrapper}>
+                        <div className={classes.subTitle}>Answer this Question</div>
+                        <div className={classes.formWrapper}>
+                            <Form
+                                id="add-question-form"
+                                className="add-question-form"
+                                onSubmit={handleSubmit}
                             >
-                                <TextInput
-                                    field="nickname_answer"
-                                    type="text"
-                                    validate={isRequired}
-                                    validateOnBlur
-
-                                />
-                            </Field>
+                                <div className={classes.qaFieldWrapper}>
+                                    <Field label="Nickname *">
+                                        <TextInput
+                                            field="nickname_answer"
+                                            type="text"
+                                            validate={isRequired}
+                                            validateOnBlur
+                                        />
+                                    </Field>
+                                </div>
+                                <div className={classes.qaFieldWrapper}>
+                                    <Field label="Your Answer *">
+                                        <TextInput
+                                            field="answer"
+                                            type="text"
+                                            validate={isRequired}
+                                            validateOnBlur
+                                        />
+                                    </Field>
+                                </div>
+                                <div className={classes.qaFieldWrapper}>
+                                    <Checkbox
+                                        field="newsletter"
+                                        label="Sign Up for Newsletter"
+                                        validateOnBlur
+                                    />
+                                </div>
+                                <Relevant when={({ values }) => {
+                                    return (values.newsletter && !isSignedIn)
+                                }}>
+                                    <div className={classes.qaFieldWrapper}>
+                                        <TextInput
+                                            field="newsletter_email"
+                                            type="email"
+                                            autoComplete="email"
+                                            placeholder="Please, enter email"
+                                            validate={isRequired}
+                                        />
+                                    </div>
+                                </Relevant>
+                                <div className={classes.actionToolbar}>
+                                    <Button
+                                        disabled={loading}
+                                        type="submit"
+                                        priority="high"
+                                    >
+                                        ANSWER THIS QUESTION
+                                    </Button>
+                                    <Button
+                                        disabled={false}
+                                        priority="high"
+                                        onClick={() => setShowForm(false)}
+                                    >
+                                        CANCEL
+                                    </Button>
+                                </div>
+                            </Form>
                         </div>
-                        <div className={classes.qaFieldWrapper}>
-                            <Field
-                                label="Your Answer"
-                                showStar
-                            >
-                                <TextInput
-                                    field="answer"
-                                    type="text"
-                                    validate={isRequired}
-                                    validateOnBlur
-
-                                />
-                            </Field>
-                        </div>
-                        <div className={classes.qaFieldWrapper}>
-                            <Checkbox
-                                field="newsletter"
-                                label="Sign Up for Newsletter"
-                                validateOnBlur
-                            />
-                        </div>
-                        <Relevant when={({ values }) => {
-                            return (values.newsletter && !isSignedIn)
-                        }}>
-                            <div className={classes.qaFieldWrapper}>
-                                <TextInput
-                                    field="newsletter_email"
-                                    type="email"
-                                    autoComplete="email"
-                                    placeholder="Please, enter email"
-                                    validate={isRequired}
-                                />
-                            </div>
-                        </Relevant>
-                        <div className={classes.actionToolbar}>
-                            <Button
-                                disabled={loading}
-                                type="submit"
-                                priority="high"
-                            >
-                                ANSWER THIS QUESTION
-                            </Button>
-                            <Button
-                                disabled={false}
-                                priority="high"
-                                onClick={() => setShowForm(false)}
-                            >
-                                CANCEL
-                            </Button>
-                        </div>
-                    </Form>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     } else {
         return (
-            <Button onClick={() => setShowForm(true)}>
-                ANSWER THIS QUESTION
-            </Button>
+            <>
+                <div className={wrapperClass}>
+                    <Button onClick={() => setShowForm(true)}>
+                        ANSWER THIS QUESTION
+                    </Button>
+                </div>
+                {ansContent}
+            </>
         );
     }
 };

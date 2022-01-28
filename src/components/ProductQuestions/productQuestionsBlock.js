@@ -503,157 +503,156 @@ const QuestionBlock = ({ questions }) => {
                                         </div>
                                     </div>
                                     <div className={classes.answer}>
-
-                                        {!!ansCount
-                                            ? item.answer.map(ans => {
-                                                const onAnsUpvoteSuccess = partial(
-                                                    onAnswerVoteSuccess,
-                                                    item.id,
-                                                    ans.id,
-                                                    'good'
-                                                );
-                                                const onAnsDownvoteSuccess = partial(
-                                                    onAnswerVoteSuccess,
-                                                    item.id,
-                                                    ans.id,
-                                                    'bad'
-                                                );
-                                                return (
-                                                    <div
-                                                        key={ans.id}
-                                                        className={
-                                                            classes.anslistItemWrapper
-                                                        }
-                                                    >
+                                        <AddAnswer questionId={item.id}
+                                            wrapperClass={classes.actionToolbar}
+                                            ansContent={!!ansCount
+                                                ? item.answer.map(ans => {
+                                                    const onAnsUpvoteSuccess = partial(
+                                                        onAnswerVoteSuccess,
+                                                        item.id,
+                                                        ans.id,
+                                                        'good'
+                                                    );
+                                                    const onAnsDownvoteSuccess = partial(
+                                                        onAnswerVoteSuccess,
+                                                        item.id,
+                                                        ans.id,
+                                                        'bad'
+                                                    );
+                                                    return (
                                                         <div
+                                                            key={ans.id}
                                                             className={
-                                                                classes.answerListItem
+                                                                classes.anslistItemWrapper
                                                             }
                                                         >
                                                             <div
                                                                 className={
-                                                                    classes.listContent
+                                                                    classes.answerListItem
                                                                 }
                                                             >
-                                                                <RichText
-                                                                    content={
-                                                                        replaceSpecialChars(ans.content)
+                                                                <div
+                                                                    className={
+                                                                        classes.listContent
                                                                     }
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                classes.answerListHelper
-                                                            }
-                                                        >
-                                                            <div
-                                                                className={
-                                                                    classes.nickName
-                                                                }
-                                                            >
-                                                                by <RichText content={ans.nickname} classes={{
-                                                                    root: classes.nickNameRoot
-                                                                }} />
+                                                                >
+                                                                    <RichText
+                                                                        content={
+                                                                            replaceSpecialChars(ans.content)
+                                                                        }
+                                                                    />
+                                                                </div>
                                                             </div>
                                                             <div
                                                                 className={
-                                                                    classes.count
+                                                                    classes.answerListHelper
                                                                 }
                                                             >
-                                                                {getDateString(
-                                                                    ans.date
-                                                                )}
-                                                            </div>
-                                                            <div
-                                                                className={[
-                                                                    classes.helper,
-                                                                    classes.plus
-                                                                ].join(' ')}
-                                                            >
-                                                                <PlusBlock
-                                                                    count={
-                                                                        ans.good
+                                                                <div
+                                                                    className={
+                                                                        classes.nickName
                                                                     }
-                                                                    queryType="answerRatingPlus"
-                                                                    onSuccess={
-                                                                        onAnsUpvoteSuccess
+                                                                >
+                                                                    by <RichText content={ans.nickname} classes={{
+                                                                        root: classes.nickNameRoot
+                                                                    }} />
+                                                                </div>
+                                                                <div
+                                                                    className={
+                                                                        classes.count
                                                                     }
-                                                                    mutation={
-                                                                        answerRatingPlusMutation
-                                                                    }
-                                                                    variables={{
-                                                                        ans_id:
-                                                                            ans.id
-                                                                    }}
-                                                                    history={
-                                                                        history
-                                                                    }
-                                                                    isSignedIn={
-                                                                        isSignedIn
-                                                                    }
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                className={[
-                                                                    classes.helper,
-                                                                    classes.minus
-                                                                ].join(' ')}
-                                                            >
-                                                                <MinusBlock
-                                                                    count={
-                                                                        ans.bad
-                                                                    }
-                                                                    queryType="answerRatingMinus"
-                                                                    onSuccess={
-                                                                        onAnsDownvoteSuccess
-                                                                    }
-                                                                    mutation={
-                                                                        answerRatingMinusMutation
-                                                                    }
-                                                                    variables={{
-                                                                        ans_id:
-                                                                            ans.id
-                                                                    }}
-                                                                    history={
-                                                                        history
-                                                                    }
-                                                                    isSignedIn={
-                                                                        isSignedIn
-                                                                    }
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                className={[
-                                                                    classes.helper,
-                                                                    classes.reportBlock
-                                                                ].join(' ')}
-                                                            >
-                                                                <ReportBlock
-                                                                    mutation={
-                                                                        reportAnswerMutation
-                                                                    }
-                                                                    variables={{
-                                                                        ans_id:
-                                                                            ans.id
-                                                                    }}
-                                                                    history={
-                                                                        history
-                                                                    }
-                                                                    isSignedIn={
-                                                                        isSignedIn
-                                                                    }
-                                                                />
+                                                                >
+                                                                    {getDateString(
+                                                                        ans.date
+                                                                    )}
+                                                                </div>
+                                                                <div
+                                                                    className={[
+                                                                        classes.helper,
+                                                                        classes.plus
+                                                                    ].join(' ')}
+                                                                >
+                                                                    <PlusBlock
+                                                                        count={
+                                                                            ans.good
+                                                                        }
+                                                                        queryType="answerRatingPlus"
+                                                                        onSuccess={
+                                                                            onAnsUpvoteSuccess
+                                                                        }
+                                                                        mutation={
+                                                                            answerRatingPlusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id:
+                                                                                ans.id
+                                                                        }}
+                                                                        history={
+                                                                            history
+                                                                        }
+                                                                        isSignedIn={
+                                                                            isSignedIn
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className={[
+                                                                        classes.helper,
+                                                                        classes.minus
+                                                                    ].join(' ')}
+                                                                >
+                                                                    <MinusBlock
+                                                                        count={
+                                                                            ans.bad
+                                                                        }
+                                                                        queryType="answerRatingMinus"
+                                                                        onSuccess={
+                                                                            onAnsDownvoteSuccess
+                                                                        }
+                                                                        mutation={
+                                                                            answerRatingMinusMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id:
+                                                                                ans.id
+                                                                        }}
+                                                                        history={
+                                                                            history
+                                                                        }
+                                                                        isSignedIn={
+                                                                            isSignedIn
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    className={[
+                                                                        classes.helper,
+                                                                        classes.reportBlock
+                                                                    ].join(' ')}
+                                                                >
+                                                                    <ReportBlock
+                                                                        mutation={
+                                                                            reportAnswerMutation
+                                                                        }
+                                                                        variables={{
+                                                                            ans_id:
+                                                                                ans.id
+                                                                        }}
+                                                                        history={
+                                                                            history
+                                                                        }
+                                                                        isSignedIn={
+                                                                            isSignedIn
+                                                                        }
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                );
-                                            })
-                                            : null}
-
-                                        <div className={classes.actionToolbar}>
-                                            <AddAnswer questionId={item.id} />
-                                        </div>
+                                                    );
+                                                })
+                                                : null
+                                            }
+                                        />
                                     </div>
                                 </div>
                             </div>
