@@ -80,12 +80,35 @@ flex-direction: column;
 }
 
 .stockAvailability {
-    font-size: var(--fontSize-100);
+    font-size: 12px;
     line-height: var(--fontSize-100);
     font-weight: bold;
-    border-bottom: 1px solid rgb(var(--color-black));
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.stockRow .stockAvailability {
+    justify-content: flex-start;
+    font-size: var(--fontSize-100);
+}
+
+.storeShippingInfo {
+    font-size: var(--fontSize-100);
+    color: rgb(var(--theme-color-primary-alt));
+}
+
+.helpWrapper {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.iconHelp {
+    width: 15px;
+    height: auto;
+    fill: rgb(var(--theme-color-primary-alt));
 }
 
 .clickHere {
@@ -328,6 +351,16 @@ flex-direction: column;
 
 }
 
+.shippingInfo p,
+.data p {
+    margin: 0;
+    color: rgb(var(--color-red10));
+    font-weight: bold;
+}
+
+
+
+
 .shippingNote {
     margin-top: 15px;
 }
@@ -460,6 +493,10 @@ flex-direction: column;
     font-size: var(--fontSize-100);
     line-height: 1rem;
     color: rgb(var(--theme-color-primary-alt));
+}
+
+.extraShipInfo p {
+    margin: 5px 0;
 }
 
 .specSheet {

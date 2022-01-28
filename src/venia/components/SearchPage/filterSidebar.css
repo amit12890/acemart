@@ -28,3 +28,18 @@
 .list123 {
     
 }
+
+.activeState i {
+    position: relative;
+}
+
+.activeState i:after {
+    content: '';
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    outline: auto;
+}

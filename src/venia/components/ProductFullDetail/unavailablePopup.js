@@ -44,7 +44,7 @@ export default function UnavailablePopup(props) {
                                 pickup?
                             </div>
                             <div className={classes.contentContainer}>
-                                <div className={classes.propContent}>
+                                <div className={[classes.stockAvailablityPopup, classes.stockAvailablityPopup].join(" ")}>
                                     <p>
                                         Special order items that are
                                         drop-shipped from the factory directly
@@ -73,13 +73,13 @@ export default function UnavailablePopup(props) {
                                     <p>
                                         For additional information or to place
                                         an order over the phone, please contact
-                                        Customer Service at 1-888-898-8079. Our
+                                        Customer Service at<strong className={classes.linkBlue}> 1-888-898-8079</strong>. Our
                                         representatives are available to assist
-                                        you Monday through Friday 7:30am -
-                                        5:30pm CST. Thanks for being an Ace Mart
+                                        you Monday through Friday <strong className={classes.linkRed}>7:30am -
+                                            5:30pm</strong> CST. Thanks for being an Ace Mart
                                         customer!
                                     </p>
-                                    <p>Customer Service 1-888-898-8079</p>
+                                    <p><strong className={classes.linkBlue}>Customer Service 1-888-898-8079</strong></p>
                                 </div>
                             </div>
                         </div>

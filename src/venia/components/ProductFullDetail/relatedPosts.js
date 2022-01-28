@@ -38,6 +38,7 @@ const RelatedPosts = props => {
                             data={items}
                             onItemClick={() => { }}
                             showTitle={false}
+                            className={classes.test}
                         />
                     </div>
 

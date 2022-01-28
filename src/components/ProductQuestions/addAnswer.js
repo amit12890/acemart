@@ -97,7 +97,10 @@ const AddAnswerBlock = ({ questionId, ansContent, wrapperClass }) => {
                                 onSubmit={handleSubmit}
                             >
                                 <div className={classes.qaFieldWrapper}>
-                                    <Field label="Nickname *">
+                                    <Field
+                                        label="Nickname"
+                                        showStar
+                                    >
                                         <TextInput
                                             field="nickname_answer"
                                             type="text"
@@ -107,7 +110,10 @@ const AddAnswerBlock = ({ questionId, ansContent, wrapperClass }) => {
                                     </Field>
                                 </div>
                                 <div className={classes.qaFieldWrapper}>
-                                    <Field label="Your Answer *">
+                                    <Field
+                                        label="Your Answer"
+                                        showStar
+                                    >
                                         <TextInput
                                             field="answer"
                                             type="text"

@@ -2,7 +2,7 @@ import React from 'react';
 import { array } from 'prop-types';
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './productReviews.css';
-import Pagination from '@magento/venia-ui/lib/components/Pagination';
+import Pagination from '../../../venia/components/Pagination';
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import Review from './review';
 import Toolbar from './toolbar';
