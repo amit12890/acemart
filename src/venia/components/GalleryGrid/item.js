@@ -16,6 +16,10 @@ import { get } from 'lodash'
 import AddItemsToCompareList from '../../../components/CompareListPage/addItemsToCompareList';
 import WishlistPopup from '../../../components/WishList/wishlistPopup';
 import AddToCart from '../CartPage/addToCart';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
+import { useWishlistSession } from '../../../data/appState/appState.hook';
+import { useHistory } from 'react-router-dom';
+import { loginPage } from '../../../url.utils';
 
 const style = {
     '--productLabel': `url("${productLabel}")`,
@@ -65,10 +69,19 @@ const GalleryItem = props => {
         props
     );
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
+    const [{ isSignedIn }] = useUserContext()
+    const { addProductToWishlistSession } = useWishlistSession()
+    const history = useHistory()
 
     const openWishlistPopup = useCallback(() => {
-        setShowWishlistPopup(true)
-    }, [setShowWishlistPopup])
+        if (isSignedIn) {
+            setShowWishlistPopup(true)
+        } else {
+            history.push(loginPage())
+            addProductToWishlistSession(item)
+        }
+    }, [setShowWishlistPopup, isSignedIn, item, addProductToWishlistSession]);
+
     const closeWishlistPopup = useCallback(() => {
         setShowWishlistPopup(false)
     }, [setShowWishlistPopup])
