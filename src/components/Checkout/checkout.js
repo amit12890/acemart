@@ -104,12 +104,16 @@ export default connect(store => ({
 
     if (fetching || login_and_fetching) {
         return (
-            <LoadingIndicator>
-                <FormattedMessage
-                    id={'checkout.loading'}
-                    defaultMessage={'Fetching Checkout...'}
-                />
-            </LoadingIndicator>
+            <div className={classes.root}>
+                <div className={classes.mainContent}>
+                    <LoadingIndicator>
+                        <FormattedMessage
+                            id={'checkout.loading'}
+                            defaultMessage={'Fetching Checkout...'}
+                        />
+                    </LoadingIndicator>
+                </div>
+            </div>
         )
     }
 
