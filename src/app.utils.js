@@ -247,3 +247,6 @@ export const getReviewText = (count) => {
         return `${count} reviews`
     }
 }
+
+// breakpoints
+export const MOBILE_SCREEN = 1024

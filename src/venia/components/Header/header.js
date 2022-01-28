@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -23,6 +23,9 @@ import StoreSwitcher from './storeSwitcher';
 import CurrencySwitcher from './currencySwitcher';
 import truckIcon from '../../../assets/truckicon.png';
 import MegaMenu from '../MegaMenu';
+import { useWindowSize } from '../../../magento/peregrine/talons/ProductImageCarousel/useWindowSize';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideMobileSearch, showMobileSearch } from '../../../data/appState/appState.action';
 
 
 const Header = props => {
@@ -33,6 +36,23 @@ const Header = props => {
         isSearchOpen,
         searchRef,
     } = useHeader();
+    const { isMobile } = useWindowSize();
+    const dispatch = useDispatch()
+    const isShowMobileSearch = useSelector(state => state.appState.showMobileSearch)
+
+    useEffect(() => {
+        if(!isMobile) {
+            dispatch(hideMobileSearch());
+        }
+    }, [isMobile])
+
+    const handleSearchClick = useCallback(() => {
+        if(isShowMobileSearch) {
+            dispatch(hideMobileSearch())
+        } else {
+            dispatch(showMobileSearch())
+        }
+    }, [isShowMobileSearch])
 
     const { loading, data } = useQuery(TOP_HEADERS_GQL, { fetchPolicy: 'cache-and-network' })
     const topHeader1Content = get(data, "topHeader1.items[0].content", "")
@@ -198,9 +218,18 @@ const Header = props => {
                                 </a>
                             </div>
                         </div>
-                        <div className={classes.searchBarWrapper}>
-                            <SearchBar isOpen={isSearchOpen} ref={searchRef} />
-                        </div>
+                        {isMobile ?
+                            isShowMobileSearch ? (
+                                <div className={classes.searchBarWrapper}>
+                                    <SearchBar isOpen={isSearchOpen} ref={searchRef} />
+                                </div>
+                            ) : null
+                            : (
+                                <div className={classes.searchBarWrapper}>
+                                    <SearchBar isOpen={isSearchOpen} ref={searchRef} />
+                                </div>
+                            )
+                        }
                         <div className={classes.storeLocationWrapper}>
                             <div className={classes.switchersContainer}>
                                 <div className={classes.switchers}>
@@ -211,12 +240,19 @@ const Header = props => {
                         </div>
 
                         <div className={classes.toolbar}>
+                            {isMobile ?
+                                <div className={classes.secondaryActions}
+                                    onClick={handleSearchClick}>
+                                    SI
+                                </div>
+                                :
+                                null
+                            }
                             {pageLoadingIndicator}
                             <OnlineIndicator
                                 hasBeenOffline={hasBeenOffline}
                                 isOnline={isOnline}
                             />
-
 
                             <div className={classes.secondaryActions}>
                                 <AccountTrigger />
