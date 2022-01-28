@@ -6,7 +6,7 @@ import Button from '../../venia/components/Button';
 import { apiShareWishlist, myWishlistPage } from '../../url.utils';
 import { useStyle } from '../../venia/classify';
 import Field from '../../venia/components/Field';
-import TextArea from '@magento/venia-ui/lib/components/TextArea';
+import TextArea from '../../venia/components/TextArea';
 import { isRequired } from '@magento/venia-ui/lib/util/formValidators';
 import { Title } from '@magento/venia-ui/lib/components/Head';
 import { useToasts } from '@magento/peregrine';

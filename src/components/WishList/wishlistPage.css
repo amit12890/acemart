@@ -24,12 +24,13 @@
     grid-column: 1 / span 4;
     grid-row: 2;
     display: flex;
-    border-bottom: 1px solid rgb(var(--border-color-base));
+    flex-wrap: wrap;
     
 }
 
 .tabsItem {
     cursor: pointer;
+    padding: 5px;
 }
 
 .tabsItem_active {
@@ -50,22 +51,23 @@
 }
 
 .itemSwitch {
-    line-height: 40px;
-    font-size: 1rem;
     color: #6d6d6d;
     text-decoration: none;
     background: #f6f6f6;
     border: 1px solid rgb(var(--border-color-base));
-    border-bottom: none;
-    height: 40px;
-    padding: 1px 35px 1px 35px;
+    padding: 5px 20px;
     display: block;
-    margin: 0 -1px 0 0;
+    border-radius: 15px;
+    font-size: 14px;
 }
+
+.itemSwitch:hover {
+    background-color: rgb(var(--color-white));
+}
+
 .tabsItem.active   {
     background-color: rgb(var(--color-white));
     font-weight: bold;
-    margin-bottom: -2px;
 }
 
 .tabsItem.active .itemSwitch  {
@@ -81,7 +83,7 @@
 }
 
 .wishlistGridWrapper {
-    padding: 3rem 0;
+    padding: 0 0;
 
 }
 
@@ -104,11 +106,18 @@
 .actionsToolbarWrapper {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 3rem;
 
+}
+
+.backActionToolbar {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .actionsToolbarWrapper button {
     margin-right: 10px;
+    text-transform: none;
 }
 
 
@@ -130,7 +139,7 @@
 }
 
 .confirmButton {
-    background-color: red;
+    
 }
 
 .emptyWishlist {
@@ -178,10 +187,13 @@
     grid-area: main;
     min-height: 250px;
     display: grid;
+    align-items: center;
 }
 
 .galleryItemImage img {
-    max-width: 100%;
+    max-width: 200px;
+    max-height: 200px;
+
 
 }
 
