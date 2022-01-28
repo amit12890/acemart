@@ -16,11 +16,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { size } from 'lodash-es';
 import { checkoutFetched, checkoutFetchError, loginAndFetchCheckoutComplete, updateCheckoutField } from '../../../../data/checkout/checkout.action';
 import { get } from 'lodash';
+import { useWishlistSession } from '../../../../data/appState/appState.hook';
 
 const { mergeCartMutation } = gql
 
 export const useSignIn = props => {
     const dispatch = useDispatch()
+    const { addProductToWishlist } = useWishlistSession()
+
     const {
         getCartDetailsQuery,
         setDefaultUsername,
@@ -122,6 +125,7 @@ export const useSignIn = props => {
                 // Ensure old stores are updated with any new data.
                 getUserDetails({ fetchUserDetails });
                 getCartDetails({ fetchCartId, fetchCartDetails });
+                addProductToWishlist(token)
             } catch (error) {
                 if (process.env.NODE_ENV !== 'production') {
                     console.error(error);
