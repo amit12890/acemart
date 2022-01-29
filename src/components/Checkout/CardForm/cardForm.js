@@ -35,11 +35,14 @@ class CardForm extends React.Component {
         cardType: '',
         cvv: '',
         expiry: '',
-        cardName: ''
+        cardName: '',
+        cartNameError: ''
     }
 
     submit = (e, cardType) => {
         e.preventDefault()
+
+        this.setState({ cartNameError: '' })
         const expArr = this.state.expiry.split(" / ")
 
         let cc_type;
@@ -76,15 +79,20 @@ class CardForm extends React.Component {
 
     handleInput = (identifier, e) => {
         e.preventDefault()
-        this.setState({ [identifier]: e.target.value })
+        this.setState({
+            [identifier]: e.target.value
+        })
     }
 
     render = () => {
         const { classes } = this.props
+        const isCardNameError = size(this.state.cartNameError) > 0
+
         return (
             <PaymentInputsContainer>
                 {({ meta, getCardImageProps, getCardNumberProps, getExpiryDateProps, getCVCProps }) => {
                     const { erroredInputs, touchedInputs } = meta;
+                    const isCardNumberError = touchedInputs.cardNumber && erroredInputs.cardNumber
                     return (
                         <div className={classes.cardBlock}>
                             <div className={classes.cardContent}>
@@ -95,18 +103,28 @@ class CardForm extends React.Component {
                                                 name="cardName"
                                                 value={this.state.cardName}
                                                 placeholder="Card Name"
-                                                onChange={(e) => this.handleInput("cardName", e)}
-                                                className={classes.input} />
+                                                onChange={(e) => {
+                                                    if (isCardNameError) {
+                                                        this.setState({ cardNameError: '' })
+                                                    }
+                                                    this.handleInput("cardName", e)
+                                                }}
+                                                className={[classes.input, isCardNameError && classes.errorBorder].join(" ")} />
+                                            {isCardNameError && (
+                                                <div className={classes.mageError}>
+                                                    {this.state.cartNameError}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     <div className={classes.cardField}>
-                                        <div className={classes.cardIcon}>
+                                        <div className={[classes.cardIcon, isCardNameError && classes.iconErrorMargin].join(" ")}>
                                             <svg {...getCardImageProps({ images })} width={'3rem'} height={'2.5rem'} />
                                         </div>
                                         <CardInput
                                             cardProps={{ ...getCardNumberProps({ onChange: (e) => this.handleInput("cardNumber", e) }) }}
                                             value={this.state.cardNumber}
-                                            error={touchedInputs.cardNumber && erroredInputs.cardNumber}
+                                            error={isCardNumberError}
                                             classes={{ ...classes, inputMargin: classes.leftMargin }} />
                                     </div>
                                     <div className={classes.cardField}>
@@ -133,7 +151,12 @@ class CardForm extends React.Component {
                                             type="submit"
                                             className={classes.action}
                                             onClick={(e) => {
+                                                if (size(this.state.cardName) === 0) {
+                                                    this.setState({ cartNameError: 'Card Name is Required' })
+                                                    return
+                                                }
                                                 const hasErrors = size(compact(values(erroredInputs))) > 0
+
                                                 if (!hasErrors) {
                                                     this.submit(e, get(meta, "cardType.type", {}))
                                                 }
@@ -146,7 +169,7 @@ class CardForm extends React.Component {
                                 <div className={classes.primary}>
                                     <button
                                         className={[classes.action, classes.secondaryButton].join(" ")}
-                                        onClick={this.props.toggleCardForm}
+                                        onClick={this.props.onCancel}
                                         disabled={false}>
                                         <span>Cancel</span>
                                     </button>

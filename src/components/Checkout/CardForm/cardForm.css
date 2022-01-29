@@ -9,7 +9,7 @@
 .cardField {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 1rem;
 }
 
@@ -27,6 +27,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.iconErrorMargin {
+    /* margin-bottom: 1.5rem; */
 }
 
 .input {

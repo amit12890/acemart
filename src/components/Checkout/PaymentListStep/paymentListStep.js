@@ -28,6 +28,7 @@ const PaymentListStep = props => {
         initialValues,
         isDefaultStore,
         isMultiShipping,
+        resetPaymentSelection,
         loading
     } = props
 
@@ -135,7 +136,13 @@ const PaymentListStep = props => {
                                     md_firstdata: cardInfo
                                 })
                             }}
-                            toggleCardForm={toggleCardForm} />
+                            toggleCardForm={toggleCardForm}
+                            onCancel={() => {
+                                console.log("here")
+                                setSelectedPaymentCode('')
+                                resetPaymentSelection()
+                                toggleCardForm()
+                            }} />
                     ) : (
                         <fieldset className={classes.fieldset}>
                             {filteredData.map(renderItem)}

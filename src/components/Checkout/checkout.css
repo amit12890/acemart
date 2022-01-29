@@ -92,3 +92,7 @@
     transition-duration: 128ms;
     --stroke:  var(--theme-color-primary-alt);
 }
+
+.deliveryMessage {
+    color: red;
+}
