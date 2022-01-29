@@ -56,7 +56,7 @@ const FilterSidebar = props => {
                     </span>
                     <div className={[
                         classes.labelWrapper,
-                        classes.parentActive
+                        // classes.parentActive
                     ].join(" ")}>
                         {values && values.length
                             ? values.map(item => {
@@ -65,7 +65,7 @@ const FilterSidebar = props => {
                                     <div
                                         key={item.value}
                                         className={[
-                                            classes.labelItem, 
+                                            classes.labelItem,
                                             Boolean(active) ? classes.activeState : ""
                                         ].join(" ")}
                                         onClick={setFilter(
@@ -155,6 +155,22 @@ const FilterBlock = props => {
                             );
                         })}
                     </ul>
+                    <ul className={[classes.categoryItems]}>
+                        <li key={label} className={[classes.categoryItem, classes.level01].join(" ")}>
+                            Level 1
+                        </li>
+                        <li key={label} className={[classes.categoryItem, classes.level02].join(" ")}>
+                            Level 2
+                        </li>
+                        <li key={label} className={[classes.categoryItem, classes.level03].join(" ")}>
+                            Level 3
+                        </li>
+                        <li key={label} className={[classes.categoryItem, classes.level04].join(" ")}>
+                            Level 4
+                        </li>
+
+                    </ul>
+
                 </Form>
             )}
             {values && values.length ? (

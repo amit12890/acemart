@@ -10,6 +10,29 @@
     
 }
 
+.level01 {
+    background-color: red;
+    margin-left: 10px;
+}
+
+.level02 {
+    background-color: green;
+    margin-left: 20px;
+}
+
+
+.level03 {
+    background-color: blue;
+    margin-left: 30px;
+}
+
+
+.level04 {
+    background-color: orange;
+    margin-left: 40px;
+}
+
+
 .staticHeader {
 
 }
@@ -29,18 +52,18 @@
     
 }
 
-.labelItemSize {
+/* .labelItemSize {
     width: 30px !important;
     height: 30px !important;
     border: 2px solid #ccc;
     border-radius: 50%;
-}
+} */
 
-.parentActive i {
+.activeState i {
     position: relative;
 }
 
-.parentActive .activeState i:after {
+.activeState i:after {
     content: '';
     width: 26px;
     height: 26px;
