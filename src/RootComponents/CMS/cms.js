@@ -1,13 +1,14 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useIntl } from 'react-intl';
 
+import { size } from 'lodash';
 import { number, shape, string } from 'prop-types';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import RichContent from '../../venia/components/RichContent';
 import CategoryList from '@magento/venia-ui/lib/components/CategoryList';
 import { Meta, Title } from '@magento/venia-ui/lib/components/Head';
 import { useStyle } from '../../venia/classify';
-import { useIntl } from 'react-intl';
 
 import defaultClasses from './cms.css';
 import { updateAppState } from '../../data/appState/appState.action';
@@ -39,6 +40,14 @@ const CMSPage = props => {
             dispatch(updateAppState({ isCMS: false }));
         };
     }, []);
+
+    useLayoutEffect(() => {
+        const scriptList = document.getElementsByClassName('reactScript');
+        for (let index = 0; index < size(scriptList); index++) {
+            const script = scriptList[index].innerHTML;
+            window.eval(script);
+        }
+    })
 
     if (shouldShowLoadingIndicator) {
         return fullPageLoadingIndicator;
