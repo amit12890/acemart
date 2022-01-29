@@ -29,11 +29,11 @@
     
 }
 
-.activeState i {
+.parentActive i {
     position: relative;
 }
 
-.activeState i:after {
+.parentActive .activeState i:after {
     content: '';
     width: 26px;
     height: 26px;

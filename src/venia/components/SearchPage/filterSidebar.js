@@ -54,14 +54,20 @@ const FilterSidebar = props => {
                     <span className={classes.header}>
                         <span className={classes.name}>Features</span>
                     </span>
-                    <div className={[classes.labelWrapper, classes.activeState]}>
+                    <div className={[
+                        classes.labelWrapper,
+                        classes.parentActive
+                    ].join(" ")}>
                         {values && values.length
                             ? values.map(item => {
                                 const { active, value, label, count } = item;
                                 return (
                                     <div
                                         key={item.value}
-                                        className={[classes.labelItem, classes.activeState].join(" ")}
+                                        className={[
+                                            classes.labelItem, 
+                                            Boolean(active) ? classes.activeState : ""
+                                        ].join(" ")}
                                         onClick={setFilter(
                                             field,
                                             item,
