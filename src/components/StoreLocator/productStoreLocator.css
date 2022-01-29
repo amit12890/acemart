@@ -601,10 +601,31 @@ color: rgb(var(--color-red10));
     flex: 1 1;
 }
 
+.storeAddressWrapper .myStore {
+    display: flex;
+    align-items: center;
+    color: rgb(var(--theme-color-primary));
+    font-weight: bold;
+}
+
+.storeAddressWrapper .myStore .iconCheckbox {
+    display: inline-flex;
+    margin-right: 10px;
+
+}
+
+.storeAddressWrapper .myStore .selectStoreIcon {
+    width: 16px;
+    height: auto;
+    fill: currentColor; 
+
+}
+
 .shopStore {
     margin-bottom: 10px;
     display: flex;
 }
+
 
 .shopStore span{
     --stroke: var(--theme-color-primary);
