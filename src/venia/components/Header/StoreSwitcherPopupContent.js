@@ -152,7 +152,7 @@ export default function StoreSwitcherPopupContent({
                                 </div>
                             </li>
                             <li className={[classes.storeDataItem, classes.storeDataHours].join(" ")}>
-                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} delimiter={": "}/>
+                                <StoreHours hours={currentStoreConfig.store_locator_info.hours} delimiter={": "} />
                             </li>
                             <li className={classes.storeDataItem}>
                                 <div className={classes.addressPhone}>{currentStoreConfigPhone ? `Phone: ${currentStoreConfigPhone}` : ""}</div>
@@ -276,7 +276,15 @@ export default function StoreSwitcherPopupContent({
                                                             <StoreHours hours={store.store_locator_info.hours} />
                                                         </div>
                                                         {isActive ?
-                                                            <div>MY STORE</div>
+                                                            <div className={classes.myStore}>
+                                                                <i className={classes.iconWrapper, classes.iconCheckbox}>
+                                                                    <svg className={[classes.svgIcon, classes.selectStoreIcon].join(" ")} xmlns="http://www.w3.org/2000/svg" width="27" height="32" viewBox="0 0 27 32">
+                                                                        <title>checkbox-checked</title>
+                                                                        <path d="M12.219 23.469l10.969-10.938q0.344-0.344 0.344-0.813t-0.344-0.813l-1.813-1.813q-0.344-0.344-0.813-0.344t-0.781 0.344l-8.344 8.344-3.781-3.781q-0.344-0.344-0.813-0.344t-0.781 0.344l-1.844 1.813q-0.313 0.344-0.313 0.813t0.313 0.813l6.406 6.375q0.344 0.344 0.813 0.344t0.781-0.344v0zM27.438 7.719v17.125q0 2.156-1.516 3.656t-3.641 1.5h-17.125q-2.156 0-3.656-1.5t-1.5-3.656v-17.125q0-2.125 1.5-3.641t3.656-1.516h17.125q2.125 0 3.641 1.516t1.516 3.641z"></path>
+                                                                    </svg>
+                                                                </i>
+                                                                <span>My Store</span>
+                                                            </div>
                                                             :
                                                             <Button
                                                                 className={classes.shophere}
