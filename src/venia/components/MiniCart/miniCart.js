@@ -60,10 +60,8 @@ const MiniCart = React.forwardRef((props, ref) => {
     const priceClassName = loading ? classes.price_loading : classes.price;
 
     const isCartEmpty = !(productList && productList.length);
-    console.log("🚀 ~ file: miniCart.js ~ line 62 ~ MiniCart ~ productList", productList)
 
     const hasOutOfStockItem = checkOutOfStockItem(productList || [])
-    console.log("🚀 ~ file: miniCart.js ~ line 66 ~ MiniCart ~ hasOutOfStockItem", hasOutOfStockItem)
     const disableCheckoutButton = loading || isCartEmpty || hasOutOfStockItem
     const [, { addToast }] = useToasts();
 
