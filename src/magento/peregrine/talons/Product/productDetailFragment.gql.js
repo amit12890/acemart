@@ -16,6 +16,7 @@ export const ProductDetailsFragment = gql`
         specsheet
         ship_info
         only_x_left_in_stock
+        stock_status
         rating_summary
         review_count
         ship_time
