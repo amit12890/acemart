@@ -75,9 +75,10 @@ const FilterSidebar = props => {
                                         )}
                                     >
                                         <i
-                                            className={
+                                            className={[
+                                                classes.labelItemSize,
                                                 classes[camelCase(value)]
-                                            }
+                                            ].join(" ")}
                                             style={style}
                                         />
                                         <span className={classes.filterLabel}>

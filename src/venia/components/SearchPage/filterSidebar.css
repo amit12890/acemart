@@ -29,6 +29,13 @@
     
 }
 
+.labelItemSize {
+    width: 30px !important;
+    height: 30px !important;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+}
+
 .parentActive i {
     position: relative;
 }
