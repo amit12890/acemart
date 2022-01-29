@@ -158,13 +158,13 @@ const ReviewForm = props => {
                     </Field>
                 </div>
 
-                <div className={classes.field}>
+                <div className={[classes.field, classes.recaptchaField].join(" ")}>
                     <ReCAPTCHA
                         ref={recaptchaRef}
                         sitekey={GOOGLE_RECAPTCHA}
                     />
                     {isCaptchaRequired ?
-                        <div>This is a required field.</div>
+                        <div className={classes.errorMessage}>This is a required field.</div>
                         :
                         null
                     }

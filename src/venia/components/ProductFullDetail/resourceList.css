@@ -47,8 +47,6 @@
 
 .resouresImage {
     display: block;
-    padding: 0 5px;
-  
 }
 
 .resouresImageContainer {
@@ -78,6 +76,7 @@
     width: 100%;
     padding: 20px;
     bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     color: #fff;
@@ -86,15 +85,15 @@
 }
 
 .resouresDetails h4 {
-    font-size: var(--fontSize-100);
+    font-size: 20px;
     color: rgb(var(--color-white));
-    border-bottom: 1px solid rgb(var(--color-white));
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px black;
+
 }
 .resouresDetails h4:hover {
-    font-style: italic;
+    
  }
 
 .resouresDetails p {

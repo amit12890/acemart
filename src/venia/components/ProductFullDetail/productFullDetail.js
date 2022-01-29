@@ -459,7 +459,7 @@ const ProductFullDetail = props => {
         } else if (sameLabel) {
             return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
         } else {
-            if(outOfStock) {
+            if (outOfStock) {
                 return (
                     <div className={classes.apSectionRow}>
                         <div className={classes.stock}>
