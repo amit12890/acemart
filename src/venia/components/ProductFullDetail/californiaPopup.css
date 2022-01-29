@@ -124,3 +124,20 @@ h5 {
     margin-bottom: 10px;
     font-weight: bold;
 }
+
+.stockAvailablityPopup {
+    font-size: var(--fontSize-100);
+    line-height: 20px;
+}
+
+.stockAvailablityPopup p {
+    margin-bottom: 10px;
+}
+
+.linkBlue{
+    color: #006;
+}
+
+.linkRed{
+    color: #C00;
+}

@@ -126,9 +126,15 @@
 
 .reviewFormFileField {
   border: 1px solid #ccc;
-  display: inline-block;
+  display: flex;
   padding: 6px 12px;
   cursor: pointer;
+  background-color: rgb(var(--color-white));
+  flex-direction: column;
+}
+
+.reviewFormFileField input {
+  padding: 0;
 }
 
 .reviewFormFileField > span {

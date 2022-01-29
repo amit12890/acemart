@@ -44,19 +44,24 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                 dismissable: true,
                 timeout: 3000
             });
+            setCaptcha(false)
         }
     });
 
     const classes = useStyle(defaultClasses);
     const [showForm, setShowForm] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
+    const [isCaptchaRequired, setCaptcha] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const recaptchaRef = useRef()
 
     const handleSubmit = useCallback(
         async formValues => {
             const recaptchaValue = recaptchaRef.current.getValue();
-            console.log("🚀 ~ file: addQuestion.js ~ line 59 ~ AddQuestionBlock ~ recaptchaValue", recaptchaValue)
+            if(!recaptchaValue) {
+                setCaptcha(true)
+                return
+            }
             const variables = {
                 product_id: productId,
                 nickname_question: formValues.nickname_question,
@@ -93,10 +98,19 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                 setTimeoutId(id);
             } catch (error) {
                 setSuccessMessage('');
+                setCaptcha(false)
             }
         },
         [productId, isSignedIn, currentUser, timeoutId]
     );
+
+    const handleSubmitFailure = useCallback(errors => {
+        const recaptchaValue = recaptchaRef.current.getValue();
+        if(!recaptchaValue) {
+            setCaptcha(true)
+            return
+        }
+    }, [])
 
     if (showForm) {
         const email = isSignedIn ? currentUser.email : '';
@@ -110,6 +124,7 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                         id="add-question-form"
                         className="add-question-form"
                         onSubmit={handleSubmit}
+                        onSubmitFailure={handleSubmitFailure}
                     >
                         <div className={classes.qaFieldWrapper}>
                             <Field label="Nickname">
@@ -186,6 +201,11 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                                 ref={recaptchaRef}
                                 sitekey={GOOGLE_RECAPTCHA}
                             />
+                            {isCaptchaRequired ?
+                                <div>This is a required field.</div>
+                                :
+                                null
+                            }
                         </div>
                         <div className={classes.actionToolbar}>
                             <Button

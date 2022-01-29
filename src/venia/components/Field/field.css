@@ -16,6 +16,7 @@
     padding: 0;
     margin-bottom: 5px;
     font-weight: var(--font-weight-bold);
+    text-align: left;
 }
 .required {
     color: rgb(var(--color-red10));
@@ -24,7 +25,7 @@
 
 
 .input {
-    background: rgb(--color-white);
+    background: rgb(var(--color-white));
     border: 1px solid rgb(var(--border-color-base));
     border-radius: 0;
     color: rgb(var(--text-color));

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useStyle } from '../../classify';
-import { camelCase, startCase, get, find } from 'lodash';
+import { camelCase, startCase, get, find, size } from 'lodash';
 
 import productLabel from '../../../assets/labelSprite.png';
 import Checkbox from '../Checkbox';
@@ -31,7 +31,8 @@ const FilterSidebar = props => {
     const filtersList = useMemo(() => {
         return filters.map(filter => {
             const { field, label, type, facet_active, values } = filter;
-            if (field !== 'stickers') {
+            const isShow = size(values)
+            if (field !== 'stickers' && isShow) {
                 return (
                     <FilterBlock
                         {...filter}
@@ -53,14 +54,20 @@ const FilterSidebar = props => {
                     <span className={classes.header}>
                         <span className={classes.name}>Features</span>
                     </span>
-                    <div className={classes.labelWrapper}>
+                    <div className={[
+                        classes.labelWrapper,
+                        classes.parentActive
+                    ].join(" ")}>
                         {values && values.length
                             ? values.map(item => {
                                 const { active, value, label, count } = item;
                                 return (
                                     <div
                                         key={item.value}
-                                        className={classes.labelItem}
+                                        className={[
+                                            classes.labelItem, 
+                                            Boolean(active) ? classes.activeState : ""
+                                        ].join(" ")}
                                         onClick={setFilter(
                                             field,
                                             item,
@@ -68,9 +75,10 @@ const FilterSidebar = props => {
                                         )}
                                     >
                                         <i
-                                            className={
+                                            className={[
+                                                classes.labelItemSize,
                                                 classes[camelCase(value)]
-                                            }
+                                            ].join(" ")}
                                             style={style}
                                         />
                                         <span className={classes.filterLabel}>

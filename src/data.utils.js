@@ -12,7 +12,7 @@ export const useApiData = ({
     isLazy = false,
     useAuth = true,
     onSuccess = null,
-    onError = () => {}
+    onError = () => {},
 }) => {
     const [{ token }, _] = useUserContext();
     const [loading, setLoading] = useState(!isLazy);
@@ -20,7 +20,7 @@ export const useApiData = ({
     const [error, setError] = useState(false);
 
     const callApi = useCallback(
-        async (cbUrl = null, data = {}) => {
+        async (cbUrl = null, data = {}, overrideToken = "") => {
             setLoading(true);
             try {
                 let requestHeaders = { ...headers };
@@ -29,6 +29,9 @@ export const useApiData = ({
                     requestHeaders['authorization'] = token
                         ? `Bearer ${token}`
                         : '';
+                }
+                if(overrideToken) {
+                    requestHeaders['authorization'] = `Bearer ${overrideToken}`
                 }
                 const response = await Axios({
                     method,

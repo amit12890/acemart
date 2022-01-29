@@ -233,13 +233,9 @@
     */
 }
 /* Read More */
- .postList .postReadMore {
-    display: none;
-}
  .postReadMore .postRead {
     display: inline-block;
-    color: #fff;
-    background-color: #4db2ec;
+    color: black;
     font-size: 13px;
     font-weight: 500;
     line-height: 1;

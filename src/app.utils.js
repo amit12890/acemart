@@ -259,3 +259,5 @@ export const checkOutOfStockItem = (cartItems) => {
 
     return !!isOutOfStock;
 }
+
+export const MOBILE_SCREEN = 1024;

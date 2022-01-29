@@ -250,9 +250,10 @@ export default function StoreSwitcherPopupContent({
                                                     currentStoreName === DEFAULT_STORE_GROUP_STORE_NAME
                                                 )
                                             )
+                                            const activeStyle = isActive ? { background: "#ddd" } : {}
 
                                             return (
-                                                <div key={id} className={classes.listItem}>
+                                                <div key={id} className={classes.listItem} style={activeStyle}>
                                                     <div className={classes.listLabel}>
                                                         <span>
                                                             {String.fromCharCode(65 + sInd)}

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import { get } from 'lodash';
 
-import ResourceList from '../../../components/LandingPage/ResourceList';
+import ResourceList from './resourceList';
 import defaultClasses from './relatedPosts.css';
 import { GET_PRODUCT_RELATED_POSTS } from './relatedPosts.gql';
 import { useStyle } from '../../classify';
@@ -38,6 +38,7 @@ const RelatedPosts = props => {
                             data={items}
                             onItemClick={() => { }}
                             showTitle={false}
+                            className={classes.test}
                         />
                     </div>
 

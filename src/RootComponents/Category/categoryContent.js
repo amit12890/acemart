@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useMemo, useCallback } from 'react';
+import React, { Fragment, Suspense, useMemo, useCallback, useRef } from 'react';
 import { array, number, shape, string } from 'prop-types';
 import { useCategoryContent } from './data';
 
@@ -36,6 +36,7 @@ const CategoryContent = props => {
     } = props;
     const [currentSort] = sortProps;
 
+    const listRef = useRef();
     const talonProps = useCategoryContent({
         categoryId,
         data,
@@ -50,7 +51,6 @@ const CategoryContent = props => {
         totalCount,
         totalPagesFromData
     } = talonProps;
-        console.log("🚀 ~ file: categoryContent.js ~ line 53 ~ totalCount", totalCount)
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -63,8 +63,11 @@ const CategoryContent = props => {
             const params = new URLSearchParams(search);
             params.set('product_list_limit', pageNumber);
             history.push({ pathname, search: params.toString() });
+            if(listRef && listRef.current) {
+                listRef.current.scrollIntoView({behavior: "smooth"})
+            }
         },
-        [search, pathname, history]
+        [search, pathname, history, listRef]
     );
 
     // If there are no products we can hide the sort button.
@@ -167,11 +170,12 @@ const CategoryContent = props => {
                             <div className={classes.categoryDescription}>
                                 {categoryDescriptionElement}
                             </div>
-                            <div className={classes.subcategoryWrapper}>
+                            <div className={classes.subcategoryWrapper} >
                                 <ProductCategory
                                     data={get(data, 'category.children', [])}
                                 />
                             </div>
+                            <div ref={listRef}/>
                         </div>
 
                         <div className={classes.heading}>

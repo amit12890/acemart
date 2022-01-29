@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { addToWishlistSession } from "./appState.action"
 
 import { useApiData } from "../../data.utils"
 import { apiAddToWishlist } from "../../url.utils"
-import { get } from "lodash-es"
+import { size } from "lodash-es"
 
 /**
  * session will only use for guest user
@@ -25,23 +25,7 @@ export const useWishlistSession = () => {
         isLazy: true,
         onSuccess: () => {
             // navigate to wishlist page
-            console.log("added to wishlist....")
-        }
-    })
-
-    const { callApi: getWishlist } = useApiData({
-        isLazy: true,
-        onSuccess: (data) => {
-            console.log("🚀 ~ file: appState.hook.js ~ line 34 ~ useWishlistSession ~ data", data)
-            const defaultWishlist = data[0]
-            const reqData = {
-                product_id: get(wishlist_session_item, "product_id", ""),
-                qty: get(wishlist_session_item, "qty", 1)
-            }
-            addToWishlist(
-                apiAddToWishlist(defaultWishlist),
-                reqData
-            )
+            console.log("product added to wishlist....")
         }
     })
 
@@ -50,9 +34,14 @@ export const useWishlistSession = () => {
         dispatch(addToWishlistSession(productItem))
     }, [])
 
-    const addProductToWishlist = useCallback(async () => {
-        getWishlist()
-    }, [addToWishlist, defaultWishlist])
+    const addProductToWishlist = useCallback(async (token) => {
+        if(size(wishlist_session_item)) {
+            console.log("product adding to wishlist....")
+            const data = { product_id: wishlist_session_item.id, qty: 1 };
+            await addToWishlist(apiAddToWishlist(""), data, token);
+        }
+
+    }, [defaultWishlist])
 
     return {
         addProductToWishlistSession,
