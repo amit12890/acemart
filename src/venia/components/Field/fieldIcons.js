@@ -9,7 +9,6 @@ const FieldIcons = props => {
     const { after, before, children } = props;
 
     const classes = useStyle(defaultClasses, props.classes);
-    console.log("🚀 ~ file: .js ~ linefieldIcons 11 ~ classes", classes.after)
 
     const style = {
         '--iconsBefore': before ? 1 : 0,

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
 
@@ -41,16 +41,13 @@ const CMSPage = props => {
         };
     }, []);
 
-    useEffect(() => {
-        if (hasContent) {
-            const scriptList = document.getElementsByClassName('reactScript');
-            console.log("🚀 ~ file: cms.js ~ line 47 ~ useEffect ~ scriptList", scriptList)
-            for (let index = 0; index < size(scriptList); index++) {
-                const script = scriptList[index].innerHTML;
-                window.eval(script);
-            }
+    useLayoutEffect(() => {
+        const scriptList = document.getElementsByClassName('reactScript');
+        for (let index = 0; index < size(scriptList); index++) {
+            const script = scriptList[index].innerHTML;
+            window.eval(script);
         }
-    }, [hasContent])
+    })
 
     if (shouldShowLoadingIndicator) {
         return fullPageLoadingIndicator;
