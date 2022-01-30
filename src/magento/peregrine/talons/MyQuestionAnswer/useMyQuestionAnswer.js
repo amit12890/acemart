@@ -114,7 +114,7 @@ export const useMyQuestionAnswer = () => {
     return {
         questions,
         answers,
-        loading,
+        loading: loading || productLoading,
         error,
         setPageSize: setPageSizeHandler,
         pageSize: Number(limit),
