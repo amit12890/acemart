@@ -137,7 +137,10 @@ const FilterSidebar = props => {
                         const isSelected = blockState && blockState.has(item);
                         return (
                             <div
-                                className={classes.labelItem}
+                                className={[
+                                    classes.labelItem,
+                                    Boolean(isSelected) ? classes.activeState : ""
+                                ].join(" ")}
                                 onClick={handleStaticApplyFilter(group, item)}
                             >
                                 <i

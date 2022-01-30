@@ -31,7 +31,7 @@ const FilterSidebar = props => {
     const filtersList = useMemo(() => {
         return filters.map(filter => {
             const { field, label, type, facet_active, values } = filter;
-            const isShow = size(values)
+            const isShow = size(values) || (field === "ss_hierarchy" && size(categoryFiltered))
             if (field !== 'stickers' && isShow) {
                 return (
                     <FilterBlock
@@ -139,7 +139,12 @@ const FilterBlock = props => {
                             const checkField = categoryFiltered.values[ind];
                             const value = categoryFiltered.values[ind - 1];
                             return (
-                                <li key={label} className={classes.categoryItem}>
+                                <li key={label} 
+                                    className={[
+                                        classes.categoryItem,
+                                        classes[`level0${ind+1}`]
+                                    ].join(" ")}
+                                >
                                     <Checkbox
                                         classes={filterDefaultClass}
                                         field={checkField}
@@ -154,21 +159,6 @@ const FilterBlock = props => {
                                 </li>
                             );
                         })}
-                    </ul>
-                    <ul className={[classes.categoryItems]}>
-                        <li key={label} className={[classes.categoryItem, classes.level01].join(" ")}>
-                            Level 1
-                        </li>
-                        <li key={label} className={[classes.categoryItem, classes.level02].join(" ")}>
-                            Level 2
-                        </li>
-                        <li key={label} className={[classes.categoryItem, classes.level03].join(" ")}>
-                            Level 3
-                        </li>
-                        <li key={label} className={[classes.categoryItem, classes.level04].join(" ")}>
-                            Level 4
-                        </li>
-
                     </ul>
 
                 </Form>
