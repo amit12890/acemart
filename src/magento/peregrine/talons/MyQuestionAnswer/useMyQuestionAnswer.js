@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect, useMemo } from "react"
 import { useQuery, useLazyQuery } from '@apollo/client';
-import { concat, get, size, map, find } from 'lodash';
+import { concat, get, size, map, find, set } from 'lodash';
 import { GET_QUESTION_ANSWER, GET_PRODUCTS_BY_SKU } from './questionAnswer.gql';
 import { useLocation, useHistory } from 'react-router-dom';
 import { getSearchParam } from '@magento/peregrine/lib/hooks/useSearchParam';
@@ -65,18 +65,18 @@ export const useMyQuestionAnswer = () => {
     }, [history, pathname, search])
 
     const questions = useMemo(() => {
-        let questionList = get(data, "customerQuestions.items", [])
-        questionList = size(questionList) ? questionList : []
+        const questionMainList = get(data, "customerQuestions.items", [])
+        let questionList = size(questionMainList) ? [...questionMainList] : []
 
         if(questionList.length && products && products.products) {
             const productList = get(products, "products.items", [])
             if(productList.length) {
                 for (let index = 0; index < questionList.length; index++) {
                     const que = questionList[index];
-                    const relatedProduct = find(productList, ["id", que.product_id])
+                    const relatedProduct = find(productList, ["sku", que.sku])
                     if(relatedProduct) {
                         questionList[index] = {
-                            ...questionList[index],
+                            ...que,
                             url_rewrites: relatedProduct.url_rewrites
                         }
                     }
@@ -88,18 +88,18 @@ export const useMyQuestionAnswer = () => {
     const queTotalPage = get(data, "customerQuestions.total_pages", 1)
 
     const answers = useMemo(() => {
-        let answerList = get(data, "customerAnswer.items", [])
-        answerList = size(answerList) ? answerList : []
+        const answerMainList = get(data, "customerAnswer.items", [])
+        let answerList = size(answerMainList) ? [...answerMainList] : []
 
         if(answerList.length && products && products.products) {
             const productList = get(products, "products.items", [])
             if(productList.length) {
                 for (let index = 0; index < answerList.length; index++) {
-                    const que = answerList[index];
-                    const relatedProduct = find(productList, ["id", que.product_id])
+                    const ans = answerList[index];
+                    const relatedProduct = find(productList, ["sku", ans.sku])
                     if(relatedProduct) {
                         answerList[index] = {
-                            ...answerList[index],
+                            ...ans,
                             url_rewrites: relatedProduct.url_rewrites
                         }
                     }
