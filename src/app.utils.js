@@ -248,5 +248,16 @@ export const getReviewText = (count) => {
     }
 }
 
+export const checkOutOfStockItem = (cartItems) => {
+    if (size(cartItems) === 0) return false
+    const isOutOfStock = cartItems.find(cartItem => {
+        const { product } = cartItem;
+        const { stock_status: stockStatus } = product;
+
+        return stockStatus === 'OUT_OF_STOCK';
+    });
+
+    return !!isOutOfStock;
+}
 
 export const MOBILE_SCREEN = 1024;

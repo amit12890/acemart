@@ -8,8 +8,8 @@ import { useStyle } from '../../venia/classify';
 import defaultClasses from './productCategory.css';
 import { comingSoonImage } from '../../url.utils';
 
-const getUrlPath = (path, key) => {
-    return '/' + path + '/' + key;
+const getUrlPath = (path, url_suffix) => {
+    return '/' + path + url_suffix;
 };
 /**
  * render product categories based data size
@@ -23,7 +23,7 @@ export default ({ data }) => {
             const image = get(item, 'image', '');
             return (
                 <Link
-                    to={getUrlPath(item.url_path, item.url_key)}
+                    to={getUrlPath(item.url_path, item.url_suffix)}
                     className={defaultClasses.subcatListItem}
                 >
                     <div className={classes.catImageWrapper}>

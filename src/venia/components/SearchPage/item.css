@@ -34,6 +34,9 @@
     transition-timing-function: ease-out;
     visibility: visible;
     width: 100%;
+    height: auto;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .imagePlaceholder {

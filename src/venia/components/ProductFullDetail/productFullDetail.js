@@ -340,6 +340,7 @@ const ProductFullDetail = props => {
         const storeFinalLabel = get(pos_stock_manage, "stock_final_label", "")
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
         const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
+        const outOfStock = !!get(pos_stock_manage, "hide_add_to_cart")
 
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
@@ -389,6 +390,14 @@ const ProductFullDetail = props => {
                     </div>
                 </div>
             )
+        } else if (outOfStock) {
+            return (
+                <div className={classes.piSectionRow}>
+                    <div className={classes.instock}>
+                        {get(pos_stock_manage, "stock_label", "")}
+                    </div>
+                </div>
+            )
         } else {
             return (
                 <div className={[classes.piSectionRow, classes.stockRow].join(" ")}>
@@ -408,6 +417,7 @@ const ProductFullDetail = props => {
     const renderSideAvailability = useCallback(() => {
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
         const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
+        const outOfStock = !!get(pos_stock_manage, "hide_add_to_cart")
 
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
@@ -449,10 +459,21 @@ const ProductFullDetail = props => {
         } else if (sameLabel) {
             return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
         } else {
+            if (outOfStock) {
+                return (
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>
+                                {pos_stock_manage.stock_label}
+                            </span>
+                        </div>
+                    </div>
+                )
+            }
             return (
                 <>
                     {/* Product Stock Avialability */}
-                    {!!pos_stock_manage.stock_final_label &&
+                    {(!!pos_stock_manage.stock_final_label || outOfStock) &&
                         <div className={classes.apSectionRow}>
                             <div className={classes.stock}>
                                 <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>

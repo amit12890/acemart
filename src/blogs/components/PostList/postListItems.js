@@ -19,25 +19,32 @@ const PostListItems = (props) => {
                             <Link className={classes.imageWrapper} to={new URL(post_url).pathname}>
                                 <span
                                     className={`${classes.bgImg} ${classes.animationTypeZoom}`}
-                                    style={{backgroundImage: `url(${featured_image})`}}
+                                    style={{ backgroundImage: `url(${featured_image})` }}
                                 />
                             </Link>
-                            <Categories categories={categories} postCategory={classes.postCategory} />
+
                         </div>
                     </div>
-                    <div className={classes.postInfo}>
-                        <div className={classes.postTitleWrap}>
-                            <h3>
+                    <div className={classes.postInfoPanel}>
+                        <div className={classes.postHeader}>
+                            <h3 className={classes.postTitle}>
                                 <Link to={new URL(post_url).pathname}>{title}</Link>
                             </h3>
-                        </div>
-                        <div className={classes.postDataWrap}>
-                            <Author author={author} />
                             <Date publish_time={publish_time} postDate={classes.postDate} />
                         </div>
-                        <div className={classes.postDescription} dangerouslySetInnerHTML={{__html: short_filtered_content}} />
-                        <div className={classes.postReadMore}>
-                            <Link className={classes.postRead + " btn-white"} to={new URL(post_url).pathname}>Read more »</Link>
+                        <div className={classes.postInfo}>
+                            <div className={classes.postAuthor}>
+                                <span className={classes.label}>Posted by</span>
+                                <Author author={author} />
+                            </div>
+                            <div className={classes.postCategory}>
+                                <span className={classes.label}>Categories</span>
+                                <Categories categories={categories} postCategory={classes.postCategoryWrapper} />
+                            </div>
+                            <div className={classes.postDescription} dangerouslySetInnerHTML={{ __html: short_filtered_content }} />
+                            <div className={classes.postReadMore}>
+                                <Link className={classes.postRead + " btn-white"} to={new URL(post_url).pathname}>Read more »</Link>
+                            </div>
                         </div>
                     </div>
                 </div>

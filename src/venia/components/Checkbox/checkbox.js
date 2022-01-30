@@ -42,7 +42,7 @@ const Checkbox = props => {
 
     const iconClass = `${classes.icon} ${
         props.group === 'color_group' || props.group === 'color'
-            ? `${classes.swatch} ${classes[`swatch-${kebabCase(props.title)}`]}`
+            ? `${classes.swatch} ${classes[`swatch-${kebabCase(props.title)}`]} ${fieldValue ? classes.colorActive : ""}`
             : ''
     }`;
     return (

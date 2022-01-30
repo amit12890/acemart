@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import { get } from 'lodash';
 
-import ResourceList from '../../../components/LandingPage/ResourceList';
+import ResourceList from './resourceList';
 import defaultClasses from './relatedPosts.css';
 import { GET_PRODUCT_RELATED_POSTS } from './relatedPosts.gql';
 import { useStyle } from '../../classify';
@@ -36,7 +36,10 @@ const RelatedPosts = props => {
                     <div className={classes.sectionContent}>
                         <ResourceList
                             data={items}
-                            onItemClick={() => { }}
+                            onItemClick={(item) => {
+                                // hard replacing url as its blog and may have external website link
+                                window.location.href = get(item, 'post_url', '');
+                            }}
                             showTitle={false}
                             className={classes.test}
                         />

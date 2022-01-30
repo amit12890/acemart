@@ -24,8 +24,10 @@ import LoadingIndicator from '../../venia/components/LoadingIndicator'
 import StorePickupInfo from './StorePickupInfo'
 import { useStoreSwitcher } from '../../magento/peregrine/talons/Header/useStoreSwitcher'
 import { MOCKED_ADDRESS } from '../../magento/peregrine/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm'
+import { updateCheckoutField } from '../../data/checkout/checkout.action'
 
 
+const deliveryMessage = "Please note: due to high volume, carriers are currently experiencing extended transmit time delays. Please allow an additional 2-3 days for delivery. Store pickup options are not affected by this transit delay"
 
 export default connect(store => ({
     fetching: store.checkout.fetching,
@@ -295,8 +297,14 @@ export default connect(store => ({
                             }}
                             isDefaultStore={isDefaultStore}
                             loading={settingPaymentMethod}
-                            isMultiShipping={isMultiShipping} />
+                            isMultiShipping={isMultiShipping}
+                            resetPaymentSelection={() => {
+                                dispatch(updateCheckoutField({ selected_payment_method: {} }))
+                            }} />
 
+                        <div className={classes.deliveryMessage}>
+                            {deliveryMessage}
+                        </div>
                         {enablePlaceOrderButton && (
                             <div className={classes.primaryButtonWrapper}>
                                 <div onClick={() => {

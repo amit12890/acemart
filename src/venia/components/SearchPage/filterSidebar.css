@@ -7,8 +7,25 @@
 }
 
 .categoryItem {
-    
+    margin-bottom: 0.75rem;
 }
+
+.level01 {
+    margin-left: 0px;
+}
+
+.level02 {
+    margin-left: 1.3rem;
+}
+
+.level03 {
+    margin-left: 2.6rem;
+}
+
+.level04 {
+    margin-left: 3.9rem;
+}
+
 
 .staticHeader {
 
@@ -28,6 +45,13 @@
 .list123 {
     
 }
+
+/* .labelItemSize {
+    width: 30px !important;
+    height: 30px !important;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+} */
 
 .activeState i {
     position: relative;

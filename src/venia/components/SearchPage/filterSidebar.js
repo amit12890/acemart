@@ -31,7 +31,7 @@ const FilterSidebar = props => {
     const filtersList = useMemo(() => {
         return filters.map(filter => {
             const { field, label, type, facet_active, values } = filter;
-            const isShow = size(values)
+            const isShow = size(values) || (field === "ss_hierarchy" && size(categoryFiltered))
             if (field !== 'stickers' && isShow) {
                 return (
                     <FilterBlock
@@ -54,14 +54,20 @@ const FilterSidebar = props => {
                     <span className={classes.header}>
                         <span className={classes.name}>Features</span>
                     </span>
-                    <div className={[classes.labelWrapper, classes.activeState]}>
+                    <div className={[
+                        classes.labelWrapper,
+                        // classes.parentActive
+                    ].join(" ")}>
                         {values && values.length
                             ? values.map(item => {
                                 const { active, value, label, count } = item;
                                 return (
                                     <div
                                         key={item.value}
-                                        className={[classes.labelItem, classes.activeState].join(" ")}
+                                        className={[
+                                            classes.labelItem,
+                                            Boolean(active) ? classes.activeState : ""
+                                        ].join(" ")}
                                         onClick={setFilter(
                                             field,
                                             item,
@@ -69,9 +75,10 @@ const FilterSidebar = props => {
                                         )}
                                     >
                                         <i
-                                            className={
+                                            className={[
+                                                classes.labelItemSize,
                                                 classes[camelCase(value)]
-                                            }
+                                            ].join(" ")}
                                             style={style}
                                         />
                                         <span className={classes.filterLabel}>
@@ -132,7 +139,12 @@ const FilterBlock = props => {
                             const checkField = categoryFiltered.values[ind];
                             const value = categoryFiltered.values[ind - 1];
                             return (
-                                <li key={label} className={classes.categoryItem}>
+                                <li key={label} 
+                                    className={[
+                                        classes.categoryItem,
+                                        classes[`level0${ind+1}`]
+                                    ].join(" ")}
+                                >
                                     <Checkbox
                                         classes={filterDefaultClass}
                                         field={checkField}
@@ -148,6 +160,7 @@ const FilterBlock = props => {
                             );
                         })}
                     </ul>
+
                 </Form>
             )}
             {values && values.length ? (

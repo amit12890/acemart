@@ -40,7 +40,8 @@ const reducer = (state, action) => {
         case 'toggle item': {
             const { group, item } = payload;
             const nextState = new Map(state);
-            const nextSet = new Set(state.get(group));
+            // const nextSet = new Set(state.get(group));
+            const nextSet = group === "category_id" ? new Set() : new Set(state.get(group));
 
             if (nextSet.has(item)) {
                 nextSet.delete(item);
