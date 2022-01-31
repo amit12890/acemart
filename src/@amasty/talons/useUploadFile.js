@@ -41,12 +41,12 @@ export const useUpload = props => {
     headers: {
       "Content-Type": "application/json"
     },
-    // onError: (err) => {
-    //   console.log("🚀 ~ file: useUploadFile.js ~ line 42 ~ err", err)
-    // },
-    // onSuccess: (res) => {
-    //   console.log("🚀 ~ file: useUploadFile.js ~ line 48 ~ res", res)
-    // }
+    onError: (err) => {
+      console.log("🚀 ~ file: err", err)
+    },
+    onSuccess: (res) => {
+      setTmpImgPath(res.temporary_name)
+    }
   })
 
   const handleUpload = useCallback(
@@ -73,10 +73,11 @@ export const useUpload = props => {
           const { setError, setValue, validateField } = formApi || {};
 
           try {
-            const paths = result.map(r => r.temporary_name);
+            // const paths = result.map(r => r.temporary_name);
             validateField(field);
-            setTmpImgPath(paths);
+            // setTmpImgPath(paths);
           } catch (e) {
+            console.log("🚀 ~ file: useUploadFile.js ~ line 80 ~ e", e)
             setError(field, 'An error occurred while upload the image');
             setValue(field, null);
           }
