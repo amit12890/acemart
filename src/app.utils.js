@@ -260,4 +260,14 @@ export const checkOutOfStockItem = (cartItems) => {
     return !!isOutOfStock;
 }
 
+export const getPriceDetails = (priceRange) => {
+    const finalPrice = get(priceRange, "minimum_price.final_price.value", 0)
+    const finalPriceCurrency = get(priceRange, "minimum_price.final_price.currency", "")
+    const regularPrice = get(priceRange, "minimum_price.regular_price.value", 0)
+    const specialPriceDiff = Math.abs(finalPrice - regularPrice)
+    const isSpecial = !!specialPriceDiff
+
+    return { price: finalPrice, isSpecial, currency: finalPriceCurrency }
+}
+
 export const MOBILE_SCREEN = 1024;

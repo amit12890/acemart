@@ -23,7 +23,7 @@ import LoadingButtonSmall from '../../../components/LoadingButtonSmall'
 import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { loginPage } from '../../../url.utils';
 import { useWishlistSession } from '../../../data/appState/appState.hook'
-import { replaceSpecialChars } from '../../../app.utils';
+import { replaceSpecialChars, getPriceDetails } from '../../../app.utils';
 
 const style = {
     '--productLabel': `url("${productLabelImage}")`,
@@ -98,7 +98,7 @@ const GalleryItem = props => {
 
     const { id: itemId, name, price, small_image,
         url_suffix, url_rewrites,
-        productLabel
+        productLabel, price_range
     } = item;
     const { url: smallImageURL } = small_image;
 
@@ -110,8 +110,7 @@ const GalleryItem = props => {
         return resultLabels
     }, [productLabel.items])
 
-    const productPrice = get(price, "regularPrice.amount.value")
-    const productCurrency = get(price, "regularPrice.amount.currency")
+    const priceDetails = useMemo(() => getPriceDetails(price_range), [price_range])
 
     const moreInformation = get(
         item,
@@ -189,10 +188,14 @@ const GalleryItem = props => {
             </div>
             <div className={classes.itemActions}>
 
-                <div className={classes.price}>
+                <div className={[
+                    classes.price, 
+                    priceDetails.isSpecial ? classes.specialPrice : ""
+                    ].join(" ")}
+                >
                     <Price
-                        value={productPrice}
-                        currencyCode={productCurrency}
+                        value={priceDetails.price}
+                        currencyCode={priceDetails.currency}
                         classes={{
                             currency: classes.currency
                         }}
@@ -200,7 +203,7 @@ const GalleryItem = props => {
                     <span className={classes.unit}>{get(item, "uom", "")}</span>
                 </div>
                 {/* Finance Offer */}
-                {productPrice > 500 && (
+                {priceDetails.price > 500 && (
                     <div className={classes.piSectionRow}>
                         <div className={classes.finance}>
                             <Link
@@ -209,8 +212,8 @@ const GalleryItem = props => {
                                 <strong>
                                     {'Finance for as low as '}
                                     <Price
-                                        currencyCode={productCurrency}
-                                        value={productPrice / 39.5}
+                                        currencyCode={priceDetails.currency}
+                                        value={priceDetails.price / 39.5}
                                     />
                                     /month
                                 </strong>
