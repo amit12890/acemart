@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/client';
 import { get, size } from 'lodash-es';
 
 import Logo from '../Logo';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { Search as SearchIcon } from 'react-feather';
 import AccountTrigger from './accountTrigger';
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
@@ -41,13 +43,13 @@ const Header = props => {
     const isShowMobileSearch = useSelector(state => state.appState.showMobileSearch)
 
     useEffect(() => {
-        if(!isMobile) {
+        if (!isMobile) {
             dispatch(hideMobileSearch());
         }
     }, [isMobile])
 
     const handleSearchClick = useCallback(() => {
-        if(isShowMobileSearch) {
+        if (isShowMobileSearch) {
             dispatch(hideMobileSearch())
         } else {
             dispatch(showMobileSearch())
@@ -243,7 +245,12 @@ const Header = props => {
                             {isMobile ?
                                 <div className={classes.secondaryActions}
                                     onClick={handleSearchClick}>
-                                    SI
+                                    <span className={classes.mobileSearchIcon}>
+                                        <Icon
+                                            src={SearchIcon}
+                                            size={32}
+                                        />
+                                    </span>
                                 </div>
                                 :
                                 null
@@ -268,7 +275,7 @@ const Header = props => {
                     <MegaMenu />
                 </div>
             </div>
-        </Fragment>
+        </Fragment >
     );
 };
 

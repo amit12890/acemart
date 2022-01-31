@@ -369,6 +369,9 @@
         display: none;
     }
 
+    .mobileSearchIcon {
+        margin-right: 10px;
+    }
 
 
     .topMenuWrapper {
@@ -404,7 +407,7 @@
         background-color: rgb(var(--color-gray30));
     }
     .root {
-        /* display: none;  */
+        margin-bottom: 20px;
     }
     .navContainer {
         display: none;

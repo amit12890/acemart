@@ -270,4 +270,5 @@ export const getPriceDetails = (priceRange) => {
     return { price: finalPrice, isSpecial, currency: finalPriceCurrency }
 }
 
+// breakpoints
 export const MOBILE_SCREEN = 1024;
