@@ -1,18 +1,53 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { ChevronDown as ArrowDown } from 'react-feather';
 import { useFieldApi, useFieldState } from 'informed';
 import { get } from 'lodash';
 
-import Button from '../../Button';
-import Icon from '../../Icon';
-
 import { useStyle } from '../../../classify';
-import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
-import { useQuantity } from '../../../../magento/peregrine/talons/CartPage/useQuantity';
 
 import defaultClasses from './qtyDropdown.css';
-import { Form, Select, useFormApi } from 'informed';
+import { Select } from 'informed';
+
+
+export const SimpleQtyDropdown = ({ incrementQty, maxAvailableQty, initialValue, onChange }) => {
+    const classes = useStyle(defaultClasses);
+    const [selectedQty, setSelctedQty] = useState(initialValue)
+
+    useEffect(() => {
+        setSelctedQty(initialValue)
+    }, [initialValue])
+
+
+    const qtyItems = [];
+    for (let i = incrementQty; i <= maxAvailableQty; i = i + incrementQty) {
+        qtyItems.push(i);
+    }
+
+    const sortElements = useMemo(() => {
+        return qtyItems.map(qty => {
+            return (
+                <option value={qty} key={qty}>{qty}</option>
+            );
+        });
+    }, [qtyItems]);
+
+    return (
+        <div className={classes.root}>
+            <select
+                name="quantity"
+                value={selectedQty}
+                initialValue={initialValue}
+                onChange={(e) => {
+                    e.preventDefault()
+                    setSelctedQty(e.target.value)
+                    onChange(e.target.value)
+                }}
+                className={classes.qtySelect}>
+                {sortElements}
+            </select>
+        </div>
+    );
+}
 
 const QtyDropdown = props => {
     const {

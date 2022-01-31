@@ -1,1 +1,1 @@
-export { default } from './qtyDropdown'
+export { default, SimpleQtyDropdown } from './qtyDropdown'

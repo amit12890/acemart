@@ -23,6 +23,7 @@ import WishlistPopup from '../../../../components/WishList/wishlistPopup';
 import RichText from '../../RichText';
 import Button from '../../Button';
 import { replaceSpecialChars } from '../../../../app.utils';
+import { SimpleQtyDropdown } from '../../ProductFullDetail/QtyDropdown';
 
 const IMAGE_SIZE = 100;
 
@@ -60,7 +61,7 @@ const Product = props => {
         unitPrice,
         urlSuffix,
     } = product;
-    
+
     const { ship_time, sku, url_rewrites } = item.product
 
     const classes = useStyle(defaultClasses, props.classes);
@@ -91,6 +92,10 @@ const Product = props => {
                 defaultMessage: 'Out-of-stock'
             })
             : '';
+
+    const qtyIncrement = get(item, "product.qty_increments", 0)
+    const availableInStockQty = get(item, "product.only_x_left_in_stock", 0)
+    const isIncrementalQty = qtyIncrement > 0
 
     return (
         <>
@@ -131,12 +136,19 @@ const Product = props => {
                                 </div>
                             }
                             <div className={classes.quantity}>
-                                <Quantity
-                                    itemId={item.id}
-                                    initialValue={quantity}
-                                    onChange={handleUpdateItemQuantity}
-                                />
-
+                                {isIncrementalQty ? (
+                                    <SimpleQtyDropdown
+                                        incrementQty={qtyIncrement}
+                                        maxAvailableQty={availableInStockQty}
+                                        initialValue={quantity}
+                                        onChange={handleUpdateItemQuantity} />
+                                ) : (
+                                    <Quantity
+                                        itemId={item.id}
+                                        initialValue={quantity}
+                                        onChange={handleUpdateItemQuantity}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className={classes.rightBlock}>

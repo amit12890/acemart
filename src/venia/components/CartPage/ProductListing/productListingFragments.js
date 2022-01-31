@@ -29,6 +29,8 @@ export const ProductListingFragment = gql`
                 small_image {
                     url
                 }
+                only_x_left_in_stock
+                qty_increments
                 stock_status
                 ... on ConfigurableProduct {
                     variants {
