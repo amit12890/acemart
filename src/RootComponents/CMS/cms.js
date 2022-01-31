@@ -45,7 +45,7 @@ const CMSPage = props => {
         const scriptList = document.getElementsByClassName('reactScript');
         for (let index = 0; index < size(scriptList); index++) {
             const script = scriptList[index].innerHTML;
-            // window.secu(script);
+            // window.eval(script);
         }
     })
 
