@@ -701,3 +701,44 @@ color: rgb(var(--color-red10));
 .storeNotes p {
     margin-bottom: 15px;
 }
+
+
+
+@media (max-width: 767px) {
+
+    .root {
+        align-items: flex-start;
+    }
+
+    .contentWrapper {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .scrollable {
+        max-height: calc(100vh - 0px);
+    }
+
+    .panelBottomRow {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .selectStoreWrapper {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .areas {
+        margin-top: 10px;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .areaSwitcher { 
+
+        max-width: 100%;
+    }
+}
