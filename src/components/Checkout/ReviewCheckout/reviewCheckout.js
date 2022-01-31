@@ -7,6 +7,7 @@ import { useStyle } from '../../../venia/classify'
 import AddressListItem from '../AddressListItem'
 import CartItemList from '../CartItemList'
 import CartSummary from '../CartSummary'
+import StorePickupInfo from '../StorePickupInfo'
 
 import defaultClasses from './reviewCheckout.css'
 import LoadingButton from '../../LoadingButton'
@@ -40,6 +41,7 @@ export default connect((store) => {
     setPaymentMethodOnCart,
     paypalClientId,
     prices,
+    storeInfo,
     isMultiShipping,
     multiShipping,
     placingOrder,
@@ -57,14 +59,29 @@ export default connect((store) => {
                     <SplitOrder data={multiShipping} disableWarnings={true} />
                 )}
                 {/* Shipping address */}
-                <div className={classes.block}>
-                    <div className={classes.header}>
-                        <p>{isDefaultStore ? "Shipping address" : "Pickup From"}</p>
+                {!isDefaultStore ? (
+                    <div className={classes.block}>
+                        <div className={[classes.header, classes.storePickupHeader].join(" ")}>
+                            <p>Pickup From</p>
+                        </div>
+                        <StorePickupInfo
+                            enabled={true}
+                            storeInfo={storeInfo}
+                            pickupDate=''
+                            showFullInfo={false}
+                            showTitle={false}
+                            classes={{ block: classes.storePickupBlock }} />
                     </div>
-                    <div className={classes.contentBlock}>
-                        <AddressListItem address={shipping_addresses[0]} containerClass="address" />
+                ) : (
+                    <div className={classes.block}>
+                        <div className={classes.header}>
+                            <p>Shipping address</p>
+                        </div>
+                        <div className={classes.contentBlock}>
+                            <AddressListItem address={shipping_addresses[0]} containerClass="address" />
+                        </div>
                     </div>
-                </div>
+                )}
                 {/* Shipping method */}
                 <div className={classes.block}>
                     <div className={classes.header}>

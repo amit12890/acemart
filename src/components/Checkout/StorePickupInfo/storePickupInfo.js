@@ -6,12 +6,13 @@ import { useStyle } from '@magento/venia-ui/lib/classify'
 import { get, size } from 'lodash'
 import { format } from 'date-fns'
 
-export default ({ enabled, storeInfo, pickupDate, showFullInfo = true }) => {
+export default ({ enabled, storeInfo, pickupDate, showFullInfo = true, showTitle = true, classes: paramClasses = {} }) => {
 
-    const classes = useStyle(addressClasses, defaultClasses)
+    const classes = useStyle(addressClasses, defaultClasses, paramClasses)
     let dateInStr = ''
-    if (size(pickupDate) > 0) {
-        dateInStr = format(new Date(pickupDate), "MM/dd/yyyy")
+    const hasPickupDate = size(pickupDate) > 0
+    if (hasPickupDate) {
+        dateInStr = format(new Date(pickupDate), "MM/dd/yyyy eeee")
     }
     if (!enabled) {
         return (
@@ -24,14 +25,18 @@ export default ({ enabled, storeInfo, pickupDate, showFullInfo = true }) => {
     } else {
         return (
             <div className={classes.block}>
-                <div className={classes.headerBlock}>
-                    <div className={classes.blockTitle}>
-                        Store Pickup
+                {showTitle && (
+                    <div className={classes.headerBlock}>
+                        <div className={classes.blockTitle}>
+                            Store Pickup
+                        </div>
+                        {hasPickupDate && (
+                            <div className={classes.estimatedDate}>
+                                Estimated Pickup Date: {dateInStr}
+                            </div>
+                        )}
                     </div>
-                    <div className={classes.estimatedDate}>
-                        Estimated Pickup Date: {dateInStr}
-                    </div>
-                </div>
+                )}
                 <div className={[classes.address, classes.horizontal].join(" ")}>
                     <div className={classes.addressTextWrapper}>
                         <p className={classes.name}>{get(storeInfo, "store_name", '')}</p>
