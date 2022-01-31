@@ -108,9 +108,6 @@ export default connect(store => {
        */
     const loginUser = useCallback((e) => {
         e.preventDefault()
-        console.log(
-            "===========> hrere"
-        )
         let errorInCheck = {}
         let data = { "email": email, "password": password }
         let emailValidErrStr = validateEmail(data.email)
@@ -121,13 +118,11 @@ export default connect(store => {
         if (size(password) === 0) {
             errorInCheck = { ...errorInCheck, password: passwordValidErrStr }
         }
-        console.log("🚀 ~ file: checkoutEmailStep.js ~ line 112 ~ loginUser ~ errorInCheck", errorInCheck)
         if (size(errorInCheck) > 0) {
             setErrors(errorInCheck)
             return
         }
         setErrors({})
-        console.log("doing login.....")
         dispatch(loginAndFetchingCheckout())
         handleSubmit({ email, password })
 

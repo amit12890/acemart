@@ -13,7 +13,6 @@ import Price from '../../../venia/components/Price'
  *      SplitOrder
  */
 export default ({ item, isLast }) => {
-    console.log("🚀 ~ file: splitOrderItem.js ~ line 16 ~ isLast", item)
     const classes = useStyle(defaultClasses)
     const productName = get(item, "product.product_name", "")
     const productImage = get(item, "product.small_image.url", "")

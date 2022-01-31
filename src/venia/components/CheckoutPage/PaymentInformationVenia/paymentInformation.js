@@ -47,7 +47,6 @@ const PaymentInformation = props => {
         selectedPaymentMethod,
         updatePaymentSelection
     } = talonProps;
-    console.log("🚀 ~ file: paymentInformation.js ~ line 50 ~ selectedPaymentMethod", selectedPaymentMethod)
 
     useEffect(() => {
         if (selectedPaymentMethod === 'cashondelivery') {

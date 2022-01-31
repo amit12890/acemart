@@ -12,7 +12,7 @@ export const useApiData = ({
     isLazy = false,
     useAuth = true,
     onSuccess = null,
-    onError = () => {},
+    onError = () => { },
 }) => {
     const [{ token }, _] = useUserContext();
     const [loading, setLoading] = useState(!isLazy);
@@ -30,7 +30,7 @@ export const useApiData = ({
                         ? `Bearer ${token}`
                         : '';
                 }
-                if(overrideToken) {
+                if (overrideToken) {
                     requestHeaders['authorization'] = `Bearer ${overrideToken}`
                 }
                 const response = await Axios({
@@ -46,7 +46,7 @@ export const useApiData = ({
                 setError(true);
                 setLoading(false);
                 onError(get(error, "response", {}));
-                console.log('file: data.utils.js ~ line 27 ~ error', error);
+                // console.log('file: data.utils.js ~ line 27 ~ error', error);
             }
         },
         [url, onSuccess, token]

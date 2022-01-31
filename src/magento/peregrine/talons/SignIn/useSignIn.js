@@ -69,7 +69,6 @@ export const useSignIn = props => {
     const [mergeCarts] = useMutation(mergeCartMutation, {
         onCompleted: (data) => {
             const cart = get(data, "mergeCarts", {})
-            console.log("🚀 ~ file: useSignIn.js ~ line 69 ~ cart", cart)
             dispatch(loginAndFetchCheckoutComplete({ ...cart }))
         },
         onError: () => {
@@ -88,7 +87,6 @@ export const useSignIn = props => {
             try {
                 // Get source cart id (guest cart id).
                 const sourceCartId = cartId;
-                console.log("🚀 ~ file: useSignIn.js ~ line 66 ~ sourceCartId", sourceCartId)
 
                 // Sign in and set the token.
                 const signInResponse = await signIn({
@@ -112,7 +110,6 @@ export const useSignIn = props => {
                     fetchCartId
                 });
                 const destinationCartId = await retrieveCartId();
-                console.log("🚀 ~ file: useSignIn.js ~ line 90 ~ destinationCartId", destinationCartId)
 
                 // Merge the guest cart into the customer cart.
                 await mergeCarts({

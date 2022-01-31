@@ -16,16 +16,15 @@ export default function ReportBlock(props) {
     const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
-        if(!props.isSignedIn) {
+        if (!props.isSignedIn) {
             props.history.push(loginPage())
         }
         try {
             const { data } = await updateReport({
                 variables: props.variables
             });
-            console.log('ggwp data', data);
         } catch (error) {
-            console.log('ggwp ReportBlock error', error);
+            // console.log('ggwp ReportBlock error', error);
         }
     }, [updateReport, props.variables, props.history, props.isSignedIn]);
 

@@ -82,7 +82,7 @@ export default connect(store => ({
      * when comming from cart page by estimating address it will set firstname, lastname ,city,telephone as its value 
      */
     const isMockAddress = isMatch(shipping_addresses[0], MOCKED_ADDRESS)
-    console.log("🚀 ~ file: addressStep.js ~ line 50 ~ isMockAddress", isMockAddress)
+
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0 && !settingShippingAddress && !isMockAddress
     let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0 && !settingShippingMethod && isShippingAddressSelected
@@ -162,7 +162,7 @@ export default connect(store => ({
                                 initialValues={shipping_addresses[0]}
                                 onApplyAddress={(address, isNewAddress = false) => {
                                     if (settingShippingAddress) return
-                                    console.log("🚀 ~ file: checkout.js ~ line 147 ~ address", address)
+
                                     let addressData = null
                                     if (isNewAddress) {
                                         addressData = [{
@@ -213,7 +213,6 @@ export default connect(store => ({
                             data={get(shipping_addresses[0], "available_shipping_methods", [])}
                             initialValues={get(shipping_addresses[0], "selected_shipping_method", {})}
                             onItemClick={(shippingMethod) => {
-                                console.log("🚀 ~ file: checkout.js ~ line 162 ~ shippingMethod", shippingMethod)
                                 setShippingMethodOnCart([
                                     {
                                         carrier_code: get(shippingMethod, "carrier_code", ''),
@@ -245,7 +244,6 @@ export default connect(store => ({
                                         same_as_shipping: isDefaultStore && get(address, "id", 0) === get(selectedShippingAddress, "id", 0)
                                     }
                                 }
-                                console.log("🚀 ~ file: checkout.js ~ line 169 ~ variables", variables)
                                 setBillingAddressOnCart(variables)
                             }}
                             isUserLoggedIn={isSignedIn}

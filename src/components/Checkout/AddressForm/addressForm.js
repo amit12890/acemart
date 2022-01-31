@@ -28,7 +28,6 @@ const CheckoutAddressForm = props => {
      *      AddressStep
      */
     const { isUserLoggedIn, initialValues, onSaveAddress, setting, isShippingStep, toggleForm, onSameAsButtonClick, showSameAsButton } = props
-    console.log("🚀 ~ file: addressForm.js ~ line 31 ~ setting", setting)
 
     const { countries: countryData } = useCountries()
 

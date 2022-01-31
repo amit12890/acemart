@@ -511,10 +511,8 @@ const ProductFullDetail = props => {
 
 
     const qtyIncrement = get(product, "qty_increments", 0)
-    console.log("🚀 ~ file: productFullDetail.js ~ line 490 ~ qtyIncrement", qtyIncrement)
     const isIncrementalQty = qtyIncrement > 0
     const inStockQty = get(product, "only_x_left_in_stock", 0)
-    console.log("🚀 ~ file: productFullDetail.js ~ line 493 ~ inStockQty", inStockQty)
     return (
         <Fragment>
             {breadcrumbs}

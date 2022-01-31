@@ -87,7 +87,7 @@ const Item = props => {
             <Button
                 onClick={() => {
                     // TODO will be implemented in PWA-979
-                    console.log('Buying Again');
+                    // console.log('Buying Again');
                 }}
                 className={classes.buyAgainButton}
             >

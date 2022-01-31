@@ -10,94 +10,93 @@ const MAX_SIZE = 7340032; // ~7mb
 
 
 const getBase64 = file => {
-  const reader = new FileReader();
+    const reader = new FileReader();
 
-  return new Promise(resolve => {
-    reader.onload = ev => {
-      const result = {
-        fileContent: {
-          base64_encoded_data: ev.target.result.replace(
-            /^data:image\/[a-z]+;base64,/,
-            ''
-          ),
-          name_with_extension: file.name
-        }
-      };
+    return new Promise(resolve => {
+        reader.onload = ev => {
+            const result = {
+                fileContent: {
+                    base64_encoded_data: ev.target.result.replace(
+                        /^data:image\/[a-z]+;base64,/,
+                        ''
+                    ),
+                    name_with_extension: file.name
+                }
+            };
 
-      resolve(result);
-    };
-    reader.readAsDataURL(file);
-  }).catch(error => log(error));
+            resolve(result);
+        };
+        reader.readAsDataURL(file);
+    }).catch(error => log(error));
 };
 
 export const useUpload = props => {
-  const { setTmpImgPath, formApi } = props;
-  const [loading, setLoading] = useState(false);
+    const { setTmpImgPath, formApi } = props;
+    const [loading, setLoading] = useState(false);
 
-  const { callApi } = useApiData({
-    url: UPLOAD_API,
-    method: "post",
-    isLazy: true,
-    headers: {
-      "Content-Type": "application/json"
-    },
-    onError: (err) => {
-      console.log("🚀 ~ file: err", err)
-    },
-    onSuccess: (res) => {
-      setTmpImgPath(res.temporary_name)
-    }
-  })
-
-  const handleUpload = useCallback(
-    async e => {
-      const { files } = e.target;
-      const promises = [];
-
-      if (files) {
-        setLoading(true);
-        for (let i = 0; i < files.length; i++) {
-          if (files[i].size < MAX_SIZE) {
-            promises.push(
-              getBase64(files[i]).then(({fileContent}) => {
-                callApi(null, {fileContent})
-              })
-            );
-          }
+    const { callApi } = useApiData({
+        url: UPLOAD_API,
+        method: "post",
+        isLazy: true,
+        headers: {
+            "Content-Type": "application/json"
+        },
+        onError: (err) => {
+            // console.log("🚀 ~ file: err", err)
+        },
+        onSuccess: (res) => {
+            setTmpImgPath(res.temporary_name)
         }
+    })
 
-        const result = await Promise.all(promises);
+    const handleUpload = useCallback(
+        async e => {
+            const { files } = e.target;
+            const promises = [];
 
-        if (Array.isArray(result) && result.length) {
-          const field = 'review_images';
-          const { setError, setValue, validateField } = formApi || {};
+            if (files) {
+                setLoading(true);
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].size < MAX_SIZE) {
+                        promises.push(
+                            getBase64(files[i]).then(({ fileContent }) => {
+                                callApi(null, { fileContent })
+                            })
+                        );
+                    }
+                }
 
-          try {
-            // const paths = result.map(r => r.temporary_name);
-            validateField(field);
-            // setTmpImgPath(paths);
-          } catch (e) {
-            console.log("🚀 ~ file: useUploadFile.js ~ line 80 ~ e", e)
-            setError(field, 'An error occurred while upload the image');
-            setValue(field, null);
-          }
-        }
+                const result = await Promise.all(promises);
 
-        setLoading(false);
-      }
-    },
-    [setLoading, setTmpImgPath, formApi]
-  );
+                if (Array.isArray(result) && result.length) {
+                    const field = 'review_images';
+                    const { setError, setValue, validateField } = formApi || {};
 
-  const clearValue = useCallback(() => {
-    const field = 'review_images';
-    const { setError, setValue, validateField } = formApi || {};
-    setValue(field, null);
-  }, [formApi])
+                    try {
+                        // const paths = result.map(r => r.temporary_name);
+                        validateField(field);
+                        // setTmpImgPath(paths);
+                    } catch (e) {
+                        setError(field, 'An error occurred while upload the image');
+                        setValue(field, null);
+                    }
+                }
 
-  return {
-    handleUpload,
-    loading,
-    clearValue
-  };
+                setLoading(false);
+            }
+        },
+        [setLoading, setTmpImgPath, formApi]
+    );
+
+    const clearValue = useCallback(() => {
+        const field = 'review_images';
+        const { setError, setValue, validateField } = formApi || {};
+        setValue(field, null);
+    }, [formApi])
+
+    return {
+        handleUpload,
+        loading,
+        clearValue
+    };
 };
