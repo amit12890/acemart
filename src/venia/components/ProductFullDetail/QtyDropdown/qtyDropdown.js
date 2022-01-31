@@ -16,132 +16,57 @@ import { Form, Select, useFormApi } from 'informed';
 
 const QtyDropdown = props => {
     const {
-        initialValue,
-        itemId,
-        label,
-        min,
-        onChange,
-        message,
         incrementQty,
         maxAvailableQty
     } = props;
+
     const classes = useStyle(defaultClasses);
-
-    const { elementRef, expanded, setExpanded } = useDropdown();
+    // const { elementRef, expanded, setExpanded } = useDropdown();
     const fieldApi = useFieldApi('quantity');
-
-    const talonProps = useQuantity({
-        initialValue: incrementQty,
-        min,
-        onChange
-    });
-
-    const { setQty, handleBlur, quantity } = talonProps;
+    const { value: quantity } = useFieldState('quantity');
 
     const qtyItems = [];
     for (let i = incrementQty; i <= maxAvailableQty; i = i + incrementQty) {
         qtyItems.push(i);
     }
-    // console.log("🚀 ~ file: qtyDropdown.js ~ line 9 ~ qtyItems", qtyItems)
-
-    const handleClick = useCallback(() => {
-        setExpanded(!expanded);
-    }, [expanded]);
 
     const handleItemClick = useCallback(
         newQty => {
-            setQty(newQty);
-            setExpanded(false);
             fieldApi.setValue(newQty);
         },
         [fieldApi]
     );
 
-    const sortElements = useCallback(() => {
-        // should be not render item in collapsed mode.
-        if (!expanded) {
-            return null;
-        }
-
-        const itemElements = qtyItems.map(qty => {
+    const sortElements = useMemo(() => {
+        return qtyItems.map(qty => {
             return (
-                <li key={qty} className={classes.menuItem}>
-                    <button
-                        className={classes.root}
-                        onClick={e => {
-                            e.preventDefault();
-                            handleItemClick(qty);
-                        }}
-                    >
-                        <span className={classes.content}>
-                            <span className={classes.text}>{qty}</span>
-                        </span>
-                    </button>
-                </li>
+                <option value={qty} key={qty}>{qty}</option>
             );
         });
-
-        return (
-            <div className={classes.menu}>
-                <ul>{itemElements}</ul>
-            </div>
-        );
-    }, [expanded, qtyItems]);
+    }, [qtyItems]);
 
     return (
-        <div ref={elementRef} className={classes.root}>
-            <Button
-                priority={'low'}
-                classes={{
-                    root_lowPriority: classes.sortButton
+        <div className={classes.root}>
+            <Select
+                field="quantity"
+                name="quantity"
+                value={quantity}
+                initialValue={incrementQty}
+                onChange={(e) => {
+                    e.preventDefault()
+                    handleItemClick(e.target.value)
                 }}
-                onClick={handleClick}
-            >
-                <span className={classes.desktopText}>
-                    <span className={classes.pageText}>{quantity}</span>
-                    <Select
-                        field="quantity"
-                        name="quantity"
-                        label=""
-                        initialValue={props.min}
-                        style={{ display: 'none' }}
-                    />
-                    <Icon
-                        src={ArrowDown}
-                        classes={{
-                            root: classes.desktopIconWrapper,
-                            icon: classes.desktopIcon
-                        }}
-                    />
-                </span>
-            </Button>
-            {sortElements()}
+                className={classes.qtySelect}>
+                {sortElements}
+            </Select>
         </div>
     );
-};
-
-const Quantity = props => {
-    return (
-        <Form
-            initialValues={{
-                quantity: props.initialValue
-            }}
-        >
-            <QtyDropdown {...props} />
-        </Form>
-    );
-};
-
-Quantity.defaultProps = {
-    initialValue: 1,
-    label: 'Quantity',
-    onChange: () => {}
 };
 
 QtyDropdown.defaultProps = {
     min: 0,
     initialValue: 1,
-    onChange: () => {}
+    onChange: () => { }
 };
 
 export default QtyDropdown;
