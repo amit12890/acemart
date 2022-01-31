@@ -44,6 +44,7 @@ import { useWishlistSession } from '../../../data/appState/appState.hook';
 import { toLower } from 'lodash-es';
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 import { GET_STORE_CONFIG_DATA } from '../../../magento/peregrine/talons/Header/storeSwitcher.gql';
+import { getPriceDetails } from '../../../app.utils';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -74,7 +75,8 @@ const ProductFullDetail = props => {
     const { product } = props;
 
     const { id, pos_stock_manage,
-        mpn, uom, productLabel, media_gallery
+        mpn, uom, productLabel, media_gallery,
+        price_range
     } = product;
 
     const history = useHistory()
@@ -209,6 +211,8 @@ const ProductFullDetail = props => {
         'price_tiers',
         []
     );
+
+    const priceDetails = useMemo(() => getPriceDetails(price_range), [price_range])
 
     // Fill a map with field/section -> error.
     const errors = new Map();
@@ -538,10 +542,14 @@ const ProductFullDetail = props => {
 
                         {/* Product Price */}
                         <div className={classes.piSectionRow}>
-                            <div className={classes.priceBox}>
+                            <div className={[
+                                classes.priceBox, 
+                                priceDetails.isSpecial ? classes.specialPrice : ""
+                                ].join(" ")}
+                            >
                                 <Price
-                                    currencyCode={productDetails.price.currency}
-                                    value={productDetails.price.value}
+                                    currencyCode={priceDetails.currency}
+                                    value={priceDetails.price}
                                     classes={{
                                         currency: classes.currency,
                                         decimal: classes.decimal,
@@ -579,7 +587,7 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Finance Offer */}
-                        {productDetails.price.value > 500 && (
+                        {priceDetails.price > 500 && (
                             <div className={classes.piSectionRow}>
                                 <div className={classes.finance}>
                                     <i className={classes.iconWrapper}>
@@ -598,10 +606,10 @@ const ProductFullDetail = props => {
                                         {'Finance for as low as '}
                                         <Price
                                             currencyCode={
-                                                productDetails.price.currency
+                                                priceDetails.currency
                                             }
                                             value={
-                                                productDetails.price.value /
+                                                priceDetails.price /
                                                 39.5
                                             }
                                         />
@@ -673,12 +681,15 @@ const ProductFullDetail = props => {
                                 {/* Add to cart form */}
                                 <div className={classes.paContent}>
                                     <div className={classes.apSectionRow}>
-                                        <div className={classes.priceBox}>
+                                        <div className={[
+                                            classes.priceBox, 
+                                            priceDetails.isSpecial ? classes.specialPrice : ""
+                                            ].join(" ")}>
                                             <Price
                                                 currencyCode={
-                                                    productDetails.price.currency
+                                                    priceDetails.currency
                                                 }
-                                                value={productDetails.price.value}
+                                                value={priceDetails.price}
                                             />
                                             <span className={classes.unit}>
                                                 / {product.uom}
