@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import Fuse from 'fuse.js';
-import { get, size, range, sortBy, cloneDeep } from 'lodash';
+import { get, size, range, sortBy, cloneDeep, debounce } from 'lodash';
 import { useHistory } from 'react-router-dom';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
@@ -55,11 +55,13 @@ const sortOptions = [
 
 const ProductQuestionsBlock = ({ productId, allowSubscribingQuestion }) => {
     const classes = useStyle(defaultClasses);
+    const [showMessage, setMessage] = useState(true)
 
     const {
         data: questionsData,
         loading: questionsDataLoading,
-        error: questionsDataError
+        error: questionsDataError,
+        refetch
     } = useQuery(getProductQuestions, {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first',
@@ -68,25 +70,23 @@ const ProductQuestionsBlock = ({ productId, allowSubscribingQuestion }) => {
         }
     });
 
-    let content;
-    if (questionsDataLoading) {
-        content = <div>Loading...</div>;
-    } else if (!!questionsDataError) {
-        content = <div>An Error Occured while loading questions data...</div>;
-    } else {
-        const hasItems = get(questionsData, 'questions.items.length');
-        if (hasItems) {
-            content = (
-                <QuestionBlock questions={questionsData.questions.items} />
-            );
-        } else {
-            content = <div>Be the first one to ask question.</div>;
-        }
-    }
-
+    const hasItems = get(questionsData, 'questions.items.length');
     return (
         <div className={classes.qaWrapper}>
-            <div className={classes.qaContainer}>{content}</div>
+            <div className={classes.qaContainer}>
+                <QuestionBlock 
+                    questions={hasItems ? questionsData.questions.items : []} 
+                    productId={productId}
+                    refetch={(data) => {
+                        setMessage(false)
+                        refetch(data)
+                    }}
+                    hasItems={hasItems}
+                    loading={questionsDataLoading}
+                    error={questionsDataError}
+                    renderInitial={showMessage ? <div>Be the first one to ask question.</div> : null}
+                />
+            </div>
             <AddQuestion
                 productId={productId}
                 allowSubscribingQuestion={allowSubscribingQuestion}
@@ -95,7 +95,10 @@ const ProductQuestionsBlock = ({ productId, allowSubscribingQuestion }) => {
     );
 };
 
-const QuestionBlock = ({ questions }) => {
+const QuestionBlock = ({
+    questions, refetch, productId, 
+    hasItems, loading, error, renderInitial
+}) => {
     const { elementRef, expanded, setExpanded } = useDropdown();
 
     const classes = useStyle(defaultClasses);
@@ -167,9 +170,28 @@ const QuestionBlock = ({ questions }) => {
         setExpandBtnState(expBtnState => !expBtnState);
     }, [queData, setExpandedQuestions, expandBtnState, setExpandBtnState]);
 
+    const handleSearchChange = useCallback((e) => {
+        const value = e.target.value
+        setSearchToken(value);
+        if (value.length > 2) {
+            // debounce(() => {
+            //     console.log("am i called ?")
+            //     refetch({
+            //         productId,
+            //         filter: { search: value }
+            //     })
+            // }, 1000)
+            refetch({
+                productId,
+                filter: { search: value }
+            })
+        }
+    }, [productId])
+
     const handleResetSearch = useCallback(() => {
         setSearchToken('');
-    }, []);
+        refetch({ productId, filter: undefined })
+    }, [productId]);
 
     // expand or collapse on click
     const handleSortClick = () => {
@@ -249,13 +271,13 @@ const QuestionBlock = ({ questions }) => {
     );
 
     const searchedQuestions = useMemo(() => {
-        let result;
-        if (searchToken.length > 2) {
-            result = fuseSearch.current.search(searchToken);
-            return result.map(d => d.item);
-        } else {
-            return queData.questions;
-        }
+        // let result;
+        // if (searchToken.length > 2) {
+        //     result = fuseSearch.current.search(searchToken);
+        //     return result.map(d => d.item);
+        // } else {
+        // }
+        return queData.questions;
     }, [searchToken, queData]);
 
     const sortElements = useMemo(() => {
@@ -283,9 +305,18 @@ const QuestionBlock = ({ questions }) => {
         );
     }, [expanded, handleItemClick]);
 
+    if(loading && !searchToken) {
+        return <div>Loading...</div>
+    } else if(error) {
+        return <div>An Error Occured while loading questions data...</div>
+    } else if(!hasItems && renderInitial) {
+        return renderInitial
+    }
+
     return (
         <div className={classes.qaContent}>
             <div className={classes.qaPanelBody}>
+
                 <div className={classes.panelHeader}>
                     <div className={classes.qaSearchWrapper}>
                         <label
@@ -301,7 +332,7 @@ const QuestionBlock = ({ questions }) => {
                                 type="text"
                                 placeholder="Search Phrase"
                                 value={searchToken}
-                                onChange={e => setSearchToken(e.target.value)}
+                                onChange={handleSearchChange}
                             />
                             <Button
                                 className={classes.resetButton}
@@ -659,6 +690,11 @@ const QuestionBlock = ({ questions }) => {
                         </div>
                     );
                 })}
+                {!hasItems && searchToken ?
+                    <div>Sorry, nothing found for {searchToken}</div>
+                    :
+                    null
+                }
             </div>
         </div>
     );
@@ -701,7 +737,7 @@ const ProductQuestionsBlockWrapper = ({ productId }) => {
     );
 
     if (loading || confLoading) {
-        return <div>Loading</div>;
+        return <div>Loading...</div>;
     } else if (size(error)) {
         return <div>Failed to fetch store configuration</div>;
     } else if (size(confError)) {

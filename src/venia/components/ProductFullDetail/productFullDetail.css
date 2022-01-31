@@ -169,9 +169,14 @@ flex-direction: column;
     padding: 0px 5px; 
 
 }
+
 .priceBox {
     color:rgb(var(--product-price-color));
     font-size:var(--fontSize-800)
+}
+
+.priceBox.specialPrice {
+    color: rgb(var(--product-special-price-color));
 }
 
 .unit {
