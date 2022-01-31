@@ -7,10 +7,17 @@ import { useMyQuestionAnswer } from '../../magento/peregrine/talons/MyQuestionAn
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import { format } from 'date-fns';
 import QaPerPage from './questionAnswerPerPage';
-import { size } from 'lodash';
+import { size, get } from 'lodash';
 import Pagination from '../../venia/components/Pagination';
 import { useIntl } from 'react-intl';
 import { Title, Meta } from '@magento/venia-ui/lib/components/Head';
+import { Link } from 'react-router-dom';
+
+const getLink = (urlObj) => {
+    let url = get(urlObj, "0.url");
+    url = url ? "/" + url : "#";
+    return url
+}
 
 export default () => {
     const classes = useStyle(defaultClasses)
@@ -85,6 +92,7 @@ export default () => {
                             </div>
                             <ul className={classes.qalistItems}>
                                 {questions.map((que) => {
+                                    const url = getLink(que.url_rewrites)
                                     const statusText = que.status === "4" 
                                         ? "Pending": que.status === "5" 
                                         ? `${que.answers} ${que.answers > 1 ? "Answers" : "Answer"}`: ""
@@ -104,9 +112,9 @@ export default () => {
                                                     Product Name
                                                 </span>
                                                 <span className={classes.value}>
-                                                    <a className={classes.action} href="#">
+                                                    <Link className={classes.action} to={url}>
                                                         {que.product_name}
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </div>
 
@@ -126,7 +134,9 @@ export default () => {
                                                     <span className={classes.replyAnswer}>
                                                         {statusText}
                                                     </span>
-                                                    <a className={classes.action} href="#">View Details</a>
+                                                    <Link className={classes.action} to={url}>
+                                                        View Details
+                                                    </Link>
                                                 </span>
                                             </div>
 
@@ -168,6 +178,7 @@ export default () => {
                             </div>
                             <ul className={classes.qalistItems}>
                                 {answers.map((ans) => {
+                                    const url = getLink(ans.url_rewrites)
                                     return (
                                         <li className={[classes.item, classes.itemAnswer].join(" ")} key={ans.id}>
                                             <div className={[classes.stackedCell, classes.postedon].join(" ")}>
@@ -184,9 +195,9 @@ export default () => {
                                                     Product Name
                                                 </span>
                                                 <span className={classes.value}>
-                                                    <a className={classes.action} href="#">
+                                                    <Link className={classes.action} to={url}>
                                                         {ans.product_name}
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </div>
 
@@ -208,7 +219,9 @@ export default () => {
                                                     Status
                                                 </span>
                                                 <span className={classes.value}>
-                                                    <a className={classes.action} href="#">View Details</a>
+                                                    <Link className={classes.action} to={url}>
+                                                        View Details
+                                                    </Link>
                                                 </span>
                                             </div>
 

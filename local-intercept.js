@@ -101,7 +101,7 @@ function localIntercept(targets) {
             name: "WishList Sharing",
             pattern: "/wishlist/index/share/mwishlist_id/:wishlist_id/",
             exact: true,
-            path: require.resolve("./src/components/WishList/wishlistSharePage")
+            path: require.resolve("./src/components/AccountPage")
         });
         routes.push({
             name: "Newsletter Subscription",

@@ -7,8 +7,25 @@
 }
 
 .categoryItem {
-    
+    margin-bottom: 0.75rem;
 }
+
+.level01 {
+    margin-left: 0px;
+}
+
+.level02 {
+    margin-left: 1.3rem;
+}
+
+.level03 {
+    margin-left: 2.6rem;
+}
+
+.level04 {
+    margin-left: 3.9rem;
+}
+
 
 .staticHeader {
 
@@ -29,18 +46,18 @@
     
 }
 
-.labelItemSize {
+/* .labelItemSize {
     width: 30px !important;
     height: 30px !important;
     border: 2px solid #ccc;
     border-radius: 50%;
-}
+} */
 
-.parentActive i {
+.activeState i {
     position: relative;
 }
 
-.parentActive .activeState i:after {
+.activeState i:after {
     content: '';
     width: 26px;
     height: 26px;

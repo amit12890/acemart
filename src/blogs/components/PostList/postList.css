@@ -131,10 +131,9 @@
 
  .postHolder {
     margin-bottom: 40px;
-    /*padding: 20px;
-    */
-    border-radius: 0;
-    color: #222222;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 20px;
+    
 }
 /* Post List */
  .postList {
@@ -143,13 +142,11 @@
     list-style: none;
     padding-left: 0
 }
- .postList .postItem.postHolder {
-    padding: 0 15px 0 0;
-    margin-bottom: 30px;
-}
+
  .postList .postContainer {
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
 }
 /* Bread Crumbs */
  .breadcrumbs {
@@ -166,10 +163,8 @@
 }
 /* Post Image */
  .postList .postImage {
-    -ms-flex: 0 0 30%;
-    flex: 0 0 30%;
-    width: 30%;
     order: 0;
+    margin-bottom: 1rem;
 }
  .postList .imageContainer {
     position: relative;
@@ -195,111 +190,97 @@
     vertical-align: middle;
 }
 /* Post Info */
- .postList .postInfo {
-    padding: 0 0 0 25px;
-    width: 100%;
+ .postInfoPanel {
+
 }
+
+.postInfoPanel a {
+    color: rgb(var(--theme-color-primary));
+}
+
+.postInfoPanel a:hover {
+    color: rgb(var(--text-color));
+}
+
+
+
 /* Post Title */
- .postList .postInfo .postTitleWrap {
-    margin-bottom: .5rem;
-}
- .postList .postInfo .postTitleWrap h3 {
-    margin: 0;
-}
- .postList .postInfo .postTitleWrap h3 a {
-    font-size: 20px;
-    line-height: 25px;
-    font-weight: 500;
-}
-/* Post Data */
- .postList .postInfo .postDataWrap {
-    font-size: 11px;
-    font-family: sans-serif;
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 1rem;
 }
- .postList .postInfo .postDataWrap a {
-    font-weight: 600;
+
+.postTitle {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    line-height: normal;
+    text-transform: none;
 }
- .postList .postInfo .postDate {
-    font-size: 11px;
-    color: #bbbbbb;
+
+.postTitle a {
+    color: rgb(var(--theme-color-primary));
 }
-/* Post Description */
- .postList .postDescription {
-    color: #7d7d7d;
-    line-height: 21px;
-    font-size: 13px;
-    /*margin-bottom: 1.5rem;
-    */
+
+.postDate {
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(var(--color-black));
+    flex-basis: 25%;
+    text-align: right;
 }
-/* Read More */
- .postReadMore .postRead {
-    display: inline-block;
-    color: black;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1;
-    padding: 10px 15px;
+
+/* Post Data */
+
+.postInfo {
+    
 }
- .postReadMore .postRead:hover {
-    color: #fff;
-    background: #222222;
+
+
+.postInfo .label {
+
 }
- @media (max-width: 1200px) {
-     .postList .postReadMore {
-        display: none;
-    }
+
+.postInfo .label:after {
+    content:  ":" ;
+    margin-right: 10px;
 }
- @media (max-width: 767px) {
-     .postReadMore a.postRead {
-        display: none;
-    }
+
+.postAuthor {
+    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
 }
-/* Post Category */
- .postList .postImage .postCategory {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: block;
-    font-size: 0;
-    line-height: 1;
+
+.postCategory {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
- .postList .postImage .postCategory a {
-    display: inline-block;
-    margin: 5px 5px 0 0;
-    padding: 5px 10px;
-    background: #000;
-    color: #fff !important;
-    font-size: 11px;
-    line-height: 12px;
-    font-weight: 500;
-    text-decoration: none;
-    text-transform: uppercase;
+
+.postCategoryWrapper a:after { 
+    content:  "," ;
+    margin-right: 10px; 
 }
- .postList .postImage .postCategory a:hover {
-    background: #4db2ec;
+
+.postCategoryWrapper a:last-child:after { 
+    content:  "" ;
+    margin-right: 0; 
 }
- @media (max-width: 767px) {
-     .postList .postImage .postCategory {
-        display: none;
-    }
-     .postList .postInfo {
-        padding: 0 0 0 15px;
-    }
-     .postList .postDescription {
-        display: none;
-    }
-     .postReadMore a.postRead {
-        display: none;
-    }
+
+.postDescription {
+    font-size: 14px;
+    margin-bottom: 1rem;
 }
- @media (max-width: 640px) {
-     .postList .postInfo .postTitleWrap h3 a {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 1.4;
-        display: inline-block;
-    }
+
+.postReadMore {
+    font-size: 18px;
 }
-/* Toolbar */
+
+.postReadMore a{
+    
+}
+
  

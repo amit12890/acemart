@@ -71,7 +71,7 @@ export default ({ data, onItemClick, showTitle = true }) => {
                                                 </div>
                                                 <div className={classes.resouresDetails}>
                                                     <h4>{item.title}</h4>
-                                                    <div className={classes.shortDescription}><RichText content={item.short_filtered_content} /></div>
+                                                    {/* <div className={classes.shortDescription}><RichText content={item.short_filtered_content} /></div> */}
                                                 </div>
                                             </div>
                                         </Slide>

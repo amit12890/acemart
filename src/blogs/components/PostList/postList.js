@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Pagination from '../../../venia/components/Pagination';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import classes from './postList.css';
 
@@ -38,11 +38,11 @@ const PostList = props => {
 
     const getBlogPageTitle = () => {
         if (blogPageTitle) {
-            const {title, content} = blogPageTitle;
+            const { title, content } = blogPageTitle;
             return (
                 <Fragment>
                     <h1 className={classes.pageTitle}>{title}</h1>
-                    {content && <span dangerouslySetInnerHTML={{__html: content}} />}
+                    {content && <span dangerouslySetInnerHTML={{ __html: content }} />}
                 </Fragment>
             )
         } else {
@@ -85,11 +85,11 @@ const PostList = props => {
                                 <Fragment>
                                     <div className={classes.postListWrapper}>
                                         <ol className={classes.postList}>
-                                            <PostListItems posts={posts}/>
+                                            <PostListItems posts={posts} />
                                         </ol>
                                     </div>
                                     <div className="toolbar toolbar-blog-posts">
-                                        {totalPages > 1 && <Pagination pageControl={pageControl}/>}
+                                        {totalPages > 1 && <Pagination pageControl={pageControl} />}
                                     </div>
                                 </Fragment>
                         }
