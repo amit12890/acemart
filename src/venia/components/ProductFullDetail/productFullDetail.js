@@ -717,13 +717,11 @@ const ProductFullDetail = props => {
                                             <div className={classes.boxToCart}>
                                                 <div className={classes.qtyWrapper}>
                                                     {isIncrementalQty ? (
-                                                        <div>
-                                                            <QtyDropdown
-                                                                min={qtyIncrement}
-                                                                incrementQty={qtyIncrement}
-                                                                maxAvailableQty={inStockQty}
-                                                                message={errors.get('quantity')} />
-                                                        </div>
+                                                        <QtyDropdown
+                                                            min={qtyIncrement}
+                                                            incrementQty={qtyIncrement}
+                                                            maxAvailableQty={inStockQty}
+                                                            message={errors.get('quantity')} />
                                                     ) : (
                                                         <QuantityFields
                                                             classes={{

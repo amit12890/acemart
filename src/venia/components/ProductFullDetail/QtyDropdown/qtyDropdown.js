@@ -1,24 +1,34 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react';
 
 import { ChevronDown as ArrowDown } from 'react-feather';
-import { useField, useFieldState } from 'informed'
+import { useFieldApi, useFieldState } from 'informed';
 import { get } from 'lodash';
 
 import Button from '../../Button';
 import Icon from '../../Icon';
 
-import { useStyle } from '../../../classify'
+import { useStyle } from '../../../classify';
 import { useDropdown } from '@magento/peregrine/lib/hooks/useDropdown';
 import { useQuantity } from '../../../../magento/peregrine/talons/CartPage/useQuantity';
 
-import defaultClasses from './qtyDropdown.css'
-import { Form } from 'informed';
+import defaultClasses from './qtyDropdown.css';
+import { Form, Select, useFormApi } from 'informed';
 
-const QtyDropdown = (props) => {
-    const { initialValue, itemId, label, min, onChange, message, incrementQty, maxAvailableQty } = props;
+const QtyDropdown = props => {
+    const {
+        initialValue,
+        itemId,
+        label,
+        min,
+        onChange,
+        message,
+        incrementQty,
+        maxAvailableQty
+    } = props;
     const classes = useStyle(defaultClasses);
 
-    const { elementRef, expanded, setExpanded } = useDropdown()
+    const { elementRef, expanded, setExpanded } = useDropdown();
+    const fieldApi = useFieldApi('quantity');
 
     const talonProps = useQuantity({
         initialValue: incrementQty,
@@ -26,26 +36,26 @@ const QtyDropdown = (props) => {
         onChange
     });
 
-    const {
-        setQty,
-        handleBlur,
-        quantity
-    } = talonProps;
+    const { setQty, handleBlur, quantity } = talonProps;
 
     const qtyItems = [];
     for (let i = incrementQty; i <= maxAvailableQty; i = i + incrementQty) {
-        qtyItems.push(i)
+        qtyItems.push(i);
     }
-    console.log("🚀 ~ file: qtyDropdown.js ~ line 9 ~ qtyItems", qtyItems)
+    // console.log("🚀 ~ file: qtyDropdown.js ~ line 9 ~ qtyItems", qtyItems)
 
     const handleClick = useCallback(() => {
-        setExpanded(!expanded)
-    }, [expanded])
+        setExpanded(!expanded);
+    }, [expanded]);
 
-    const handleItemClick = useCallback((newQty) => {
-        setQty(newQty)
-        setExpanded(false)
-    }, [])
+    const handleItemClick = useCallback(
+        newQty => {
+            setQty(newQty);
+            setExpanded(false);
+            fieldApi.setValue(newQty);
+        },
+        [fieldApi]
+    );
 
     const sortElements = useCallback(() => {
         // should be not render item in collapsed mode.
@@ -58,17 +68,14 @@ const QtyDropdown = (props) => {
                 <li key={qty} className={classes.menuItem}>
                     <button
                         className={classes.root}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            handleItemClick(qty)
+                        onClick={e => {
+                            e.preventDefault();
+                            handleItemClick(qty);
                         }}
                     >
                         <span className={classes.content}>
-                            <span className={classes.text}>
-                                {qty}
-                            </span>
+                            <span className={classes.text}>{qty}</span>
                         </span>
-
                     </button>
                 </li>
             );
@@ -91,9 +98,14 @@ const QtyDropdown = (props) => {
                 onClick={handleClick}
             >
                 <span className={classes.desktopText}>
-                    <span className={classes.pageText} field="quantity">
-                        {quantity}
-                    </span>
+                    <span className={classes.pageText}>{quantity}</span>
+                    <Select
+                        field="quantity"
+                        name="quantity"
+                        label=""
+                        initialValue={props.min}
+                        style={{ display: 'none' }}
+                    />
                     <Icon
                         src={ArrowDown}
                         classes={{
@@ -105,8 +117,8 @@ const QtyDropdown = (props) => {
             </Button>
             {sortElements()}
         </div>
-    )
-}
+    );
+};
 
 const Quantity = props => {
     return (
@@ -120,18 +132,16 @@ const Quantity = props => {
     );
 };
 
-
 Quantity.defaultProps = {
     initialValue: 1,
     label: 'Quantity',
-    onChange: () => { }
+    onChange: () => {}
 };
 
 QtyDropdown.defaultProps = {
     min: 0,
     initialValue: 1,
-    onChange: () => { }
+    onChange: () => {}
 };
 
-
-export default Quantity;
+export default QtyDropdown;

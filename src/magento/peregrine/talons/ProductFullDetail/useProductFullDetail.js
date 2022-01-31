@@ -358,8 +358,7 @@ export const useProductFullDetail = props => {
     const handleAddToCart = useCallback(
         async formValues => {
             const { quantity } = formValues;
-            console.log("🚀 ~ file: useProductFullDetail.js ~ line 361 ~ quantity", quantity)
-
+            console.log("🚀 ~ file: useProductFullDetail.js ~ line 361 ~ quantity", quantity, formValues)
             /*
                 @deprecated in favor of general addProductsToCart mutation. Will support until the next MAJOR.
              */
