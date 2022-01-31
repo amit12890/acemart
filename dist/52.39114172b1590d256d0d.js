@@ -1,5 +1,5 @@
 /*!
- * @version 85173af6-dev
+ * @version 336051b6-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[52],{"1b3y":function(n,t,e){(t=n.exports=e("JPst")(!1)).push([n.i,".productOptions-options-2ou {\n    font-size: 13px;\n    grid-area: options;\n    line-height: 1.5;\n    margin-top: 0.25rem;\n    max-height: 54px;\n    overflow-y: auto;\n}\n\n.productOptions-optionLabel-2TQ {\n    display: grid;\n    grid-auto-flow: column;\n    grid-auto-columns: max-content;\n}\n\n.productOptions-optionValue-26K {\n    margin-left: 0.25rem;\n}\n",""]),t.locals={options:"productOptions-options-2ou",optionLabel:"productOptions-optionLabel-2TQ",optionValue:"productOptions-optionValue-26K"}},"5g99":function(n,t,e){"use strict"
