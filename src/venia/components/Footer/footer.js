@@ -36,7 +36,7 @@ const Footer = props => {
 
             for (let index = 0; index < size(scriptList); index++) {
                 const script = scriptList[index].innerHTML;
-                window.eval(script);
+                // window.eval(script);
             }
         }
     }, [networkStatus])
