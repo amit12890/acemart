@@ -423,6 +423,9 @@ const ProductFullDetail = props => {
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
         const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
         const outOfStock = !!get(pos_stock_manage, "hide_add_to_cart")
+        const showWarehouseLabel = 
+            get(storeConfig, "data.storeConfig.code") !== DEFAULT_STORE_CODE && 
+            Boolean(pos_stock_manage.warehouse_qty)
 
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
@@ -463,6 +466,22 @@ const ProductFullDetail = props => {
             return renderAvailableStoreLabel(true)
         } else if (sameLabel) {
             return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
+        } else if (showWarehouseLabel) {
+            return (
+                <>
+                    <div className={[classes.piSectionRow, classes.stockRow].join(" ")}>
+                        <div
+                            className={classes.stockAvailability} >
+                            {get(pos_stock_manage, "stock_label", "")}
+                        </div>
+                    </div>
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                        </div>
+                    </div>
+                </>
+            )
         } else {
             if (outOfStock) {
                 return (

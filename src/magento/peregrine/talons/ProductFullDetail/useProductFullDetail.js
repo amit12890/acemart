@@ -17,7 +17,7 @@ import {
     CheckCircle as CheckIcon,
     AlertCircle as AlertCircleIcon
 } from 'react-feather';
-import { get, size } from "lodash"
+import { get, size, find } from "lodash"
 
 const INITIAL_OPTION_CODES = new Map();
 const INITIAL_OPTION_SELECTIONS = new Map();
@@ -268,8 +268,10 @@ export const useProductFullDetail = props => {
         { error: errorAddingProductToCart, loading: isAddProductLoading }
     ] = useMutation(operations.addProductToCartMutation, {
         onCompleted: data => {
+            const matchedProduct = find(data.addProductsToCart.cart.items, ["product.id", product.id])
+            const matchedProductOutOfStock = get(matchedProduct, "product.stock_status", "") === "OUT_OF_STOCK"
             const user_errors = get(data, 'addProductsToCart.user_errors');
-            if (size(user_errors)) {
+            if (size(user_errors) && matchedProductOutOfStock) {
                 for (let index = 0; index < user_errors.length; index++) {
                     const error = user_errors[index];
                     addToast({
