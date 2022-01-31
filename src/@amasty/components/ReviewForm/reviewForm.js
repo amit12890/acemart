@@ -86,18 +86,18 @@ const ReviewForm = props => {
     const ratingInputs =
         Array.isArray(ratings) && ratings.length
             ? ratings.map(r => (
-                  <Field
-                      key={r.rating_id}
-                      label={r.rating_code}
-                      required={true}
-                  >
-                      <RatingInput
-                          options={r.rating_options}
-                          validate={isRequired}
-                          field={snakeCase(r.rating_code)}
-                      />
-                  </Field>
-              ))
+                <Field
+                    key={r.rating_id}
+                    label={r.rating_code}
+                    required={true}
+                >
+                    <RatingInput
+                        options={r.rating_options}
+                        validate={isRequired}
+                        field={snakeCase(r.rating_code)}
+                    />
+                </Field>
+            ))
             : null;
 
     return (
@@ -219,9 +219,8 @@ const ReviewForm = props => {
 
                 {isAllowImages && (
                     <div
-                        className={`${classes.field} ${
-                            isImagesRequired ? classes.required : ''
-                        }`}
+                        className={`${classes.field} ${isImagesRequired ? classes.required : ''
+                            }`}
                     >
                         <Field
                             label="Upload Product Images"
@@ -239,11 +238,13 @@ const ReviewForm = props => {
                                 accept="image/*"
                             />
                         </Field>
-                        <Icon
-                            src={XIcon}
-                            size={14}
-                            onClick={clearValue}
-                        />
+                        <div className={classes.fileCancel}>
+                            <Icon
+                                src={XIcon}
+                                size={14}
+                                onClick={clearValue}
+                            />
+                        </div>
                     </div>
                 )}
 

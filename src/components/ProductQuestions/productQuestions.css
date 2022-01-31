@@ -345,6 +345,16 @@
     margin-bottom: 15px;
 }
 
+.errorMessage {
+    color: rgb(var(--venia-global-color-error));
+    font-weight: var(--venia-global-fontWeight-semibold);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1rem;
+    padding: 0.625rem 0.125rem 0.125rem;
+  }
+  
+
 .formWrapper .actionToolbar {
     text-align: left;
 }
