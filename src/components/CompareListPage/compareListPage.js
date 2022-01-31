@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { get, size } from 'lodash-es';
+import { get, size, takeRight } from 'lodash-es';
 import { FormattedMessage } from 'react-intl';
 
 import Price from '../../venia/components/Price';
@@ -166,7 +166,7 @@ const CompareListPage = (props) => {
 export default connect(store => {
     return {
         uid: store.compare.uid,
-        items: store.compare.items,
+        items: takeRight(store.compare.items, 4),
         item_count: store.compare.item_count
     }
 })(CompareListPage)
@@ -176,7 +176,7 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
     url = url ? "/" + url : "#";
 
     const [showWishlistPopup, setShowWishlistPopup] = useState(false);
-    const [imageUrl, setImageUrl] = useState(get(item, 'image.url', ""));
+    const [imageUrl, setImageUrl] = useState(get(item, 'small_image.url', ""));
 
     const openWishlistPopup = useCallback(() => {
         if(isSignedIn) {

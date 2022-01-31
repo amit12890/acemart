@@ -28,6 +28,8 @@
     visibility: visible;
     width: 100%;
     height: auto;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .imagePlaceholder {
@@ -79,6 +81,9 @@
     line-height: var(--fontSize-800);
     color: rgb(var(--product-price-color));
     display: flex;
+}
+.price.specialPrice {
+    color: rgb(var(--product-special-price-color));
 }
 
 .currency {
@@ -306,6 +311,8 @@
     width: 3rem;
 }
 
+
+
 @media (max-width: 767px) { 
     .root {
         background-color: #fff;
@@ -326,8 +333,6 @@
     }
 
     .nameContainer {
-        text-align: center;
-        height: 55px;
         overflow: hidden;
         margin-bottom: 5px;
     }
@@ -339,7 +344,7 @@
     .price,
     .labelWrapper,
     .finance  {
-        justify-content: center; 
+        
     }
 
     .price {
@@ -397,9 +402,9 @@
     .root {
         align-content: start;
         display: flex;
-        gap: 3rem;
+        gap: 2rem;
         border-top: 1px solid rgb(var(--border-color-light));
-        padding:30px 0;
+        padding:30px 0 10px;
     }
 
     .root:first-child {
@@ -428,7 +433,7 @@
         justify-content: flex-end;
     }
     .itemImageContainer {
-        flex: 0 1 250px;
+        flex: 0 1 200px;
     }
     .productOptions {
         flex-wrap: nowrap;

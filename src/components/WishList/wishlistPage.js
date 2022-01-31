@@ -121,7 +121,7 @@ const WishlistPage = props => {
                             onClick={() => {
                                 setSelectedWishlist(wishlist)
                                 setWishlistItemsConfig(new Set())
-                        }}>
+                            }}>
                             <div className={classes.itemSwitch}>
                                 {wishlist.wishlist_name}
                             </div>
@@ -167,13 +167,13 @@ const WishlistPage = props => {
                                 setWishlistItemsConfig={setWishlistItemsConfig}
                             />
                         </div>
-                        {get(selectedWishlist, 'product.length', 0) ? 
+                        {get(selectedWishlist, 'product.length', 0) ?
                             <div className={classes.actionsToolbarWrapper}>
                                 <Button priority="low" onClick={handleUpdateWishlist} disabled={updateLoading}>
-                                    {updateLoading ? "Loading..." : "UPDATE WISH LIST"}
+                                    {updateLoading ? "Loading..." : "Update Wish List"}
                                 </Button>
                                 <Link to={myWishlistSharePage(selectedWishlist.multi_wishlist_id)}>
-                                    <Button priority="low">SHARE WISH LIST</Button>
+                                    <Button priority="low">Share Wish List</Button>
                                 </Link>
                                 <AddAllToCartWrapper selectedWishlist={selectedWishlist} />
                             </div>
@@ -196,7 +196,7 @@ const WishlistPage = props => {
                 </h1>
             </div>
             {content}
-            <div>
+            <div className={classes.backActionToolbar}>
                 <Link to={accountPageUrl()}>
                     <Button>BACK</Button>
                 </Link>
@@ -209,10 +209,10 @@ export default WishlistPage;
 
 
 const ProductListing = props => {
-    const { 
-        selectedWishlist, 
-        wishlists, 
-        refreshWishlist, 
+    const {
+        selectedWishlist,
+        wishlists,
+        refreshWishlist,
         defaultCurrency,
         wishlistItemsConfig,
         setWishlistItemsConfig
@@ -305,7 +305,7 @@ const ProductListing = props => {
                                                     ? wishlistItemsConfig.get(wishlist_item_id).qty
                                                     : qty
                                                 wishlistItemsConfig.set(wishlist_item_id, {
-                                                    "item_id" : wishlist_item_id,
+                                                    "item_id": wishlist_item_id,
                                                     "qty": qtyValue,
                                                     "description": value,
                                                     "multi_wishlist_id": selectedWishlist.multi_wishlist_id
@@ -315,15 +315,15 @@ const ProductListing = props => {
                                         />
                                     </div>
 
-                                    <AddToCartBlock 
-                                        classes={classes} 
-                                        sku={sku} qty={qty} 
+                                    <AddToCartBlock
+                                        classes={classes}
+                                        sku={sku} qty={qty}
                                         onQtyChange={(newQty) => {
                                             const descriptionValue = wishlistItemsConfig.has(wishlist_item_id)
                                                 ? wishlistItemsConfig.get(wishlist_item_id).description
                                                 : description
                                             wishlistItemsConfig.set(wishlist_item_id, {
-                                                "item_id" : wishlist_item_id,
+                                                "item_id": wishlist_item_id,
                                                 "qty": newQty,
                                                 "description": descriptionValue,
                                                 "multi_wishlist_id": selectedWishlist.multi_wishlist_id
@@ -353,7 +353,7 @@ const ProductListing = props => {
                                     {showActions ?
                                         <div className={classes.productItemActions}>
                                             <div className={classes.action} onClick={() => {
-                                                setSelectedProduct({ 
+                                                setSelectedProduct({
                                                     productId: product_id,
                                                     productQty: qty,
                                                     currentWishlistId: selectedWishlist.multi_wishlist_id,
@@ -432,7 +432,7 @@ const AddToCartBlock = ({ classes, qty, sku, onQtyChange }) => {
                         disabled
                     >
                         Add to Cart
-                </Button>}
+                    </Button>}
             />
         </div>
     )
@@ -441,7 +441,7 @@ const AddToCartBlock = ({ classes, qty, sku, onQtyChange }) => {
 const AddAllToCartWrapper = props => {
     const { selectedWishlist } = props
     const products = get(selectedWishlist, 'product', [])
-    
+
     const cartItems = useMemo(() => {
         return map(products, (data) => ({
             sku: data.product.sku,
@@ -449,16 +449,16 @@ const AddAllToCartWrapper = props => {
         }))
     }, [products])
 
-    if(cartItems.length) {
+    if (cartItems.length) {
         return (
-            <AddAllToCart 
+            <AddAllToCart
                 cartItems={cartItems}
-                Child={()=>
+                Child={() =>
                     <Button
                         priority="low"
                         type="submit"
                     >
-                        ADD ALL TO CART
+                        Add All to Cart
                     </Button>
                 }
                 Loader={() =>
@@ -466,7 +466,7 @@ const AddAllToCartWrapper = props => {
                         priority="low"
                         disabled
                     >
-                        ADD ALL TO CART
+                        Add All to Cart
                     </Button>
                 }
             />

@@ -30,5 +30,12 @@ query cmsBlocks{
         title
         }
     }
+    footerColumn1Accordion:cmsBlocks(identifiers: "footer-column-1-accordion"){
+        items {
+        content
+        identifier
+        title
+        }
+    }
 }
 `

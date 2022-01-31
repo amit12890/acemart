@@ -23,6 +23,9 @@
     padding: 0 10px;
     align-items: center;
     cursor: pointer;
+    top:0;
+    bottom:0;
+    right: -1px;
 }
 
 .searchControl:hover {

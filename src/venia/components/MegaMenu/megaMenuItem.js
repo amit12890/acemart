@@ -17,15 +17,14 @@ import { searchPage } from '../../../url.utils';
 const MegaMenuItem = props => {
     const { activeCategoryId, category, mainNavWidth } = props;
     const classes = useStyle(defaultClasses, props.classes);
-    const categoryUrl =
-        category.canonical_url === 'specials'
-            ? resourceUrl(`${searchPage()}?q=${category.canonical_url}`)
-            : resourceUrl(
-                `/${category.canonical_url}${category.url_suffix || ''}`
-            );
+    const categoryUrl = category.url_path === 'specials'
+        ? resourceUrl(`${searchPage()}?q=${category.url_path}`)
+        : resourceUrl(
+            `/${category.url_path}${category.url_suffix || ''}`
+        );
 
     const children = category.children.length ? (
-        <Submenu items={category.children} mainNavWidth={mainNavWidth} />
+        <Submenu items={category.children} mainNavWidth={mainNavWidth} mainMenuUrl={categoryUrl} />
     ) : null;
     const isActive = category.id === activeCategoryId;
 
@@ -55,7 +54,7 @@ MegaMenuItem.propTypes = {
         name: PropTypes.string.isRequired,
         path: PropTypes.array.isRequired,
         position: PropTypes.number.isRequired,
-        url_path: PropTypes.string,
+        url_path: PropTypes.string.isRequired,
         url_suffix: PropTypes.string
     }).isRequired,
     activeCategoryId: PropTypes.number,

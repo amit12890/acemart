@@ -16,6 +16,7 @@ export const ProductDetailsFragment = gql`
         specsheet
         ship_info
         only_x_left_in_stock
+        stock_status
         rating_summary
         review_count
         ship_time
@@ -45,6 +46,36 @@ export const ProductDetailsFragment = gql`
         }
         description {
             html
+        }
+        price_range {    
+            maximum_price {
+                final_price {
+                    currency
+                    value
+                }
+                regular_price {
+                    currency
+                    value
+                }
+                discount {
+                    amount_off
+                    percent_off
+                }
+            }
+            minimum_price {
+                final_price {
+                    currency
+                    value
+                }
+                regular_price {
+                    currency
+                    value
+                }
+                discount {
+                    amount_off
+                    percent_off
+                }
+            }
         }
         price {
             regularPrice {

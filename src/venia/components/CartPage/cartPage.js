@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Check, AlertCircle as AlertCircleIcon } from 'react-feather';
 import { useCartPage } from '@magento/peregrine/lib/talons/CartPage/useCartPage';
@@ -28,6 +28,7 @@ import {
 } from './cartPage.gql';
 import { ProductListingFragment } from './ProductListing/productListingFragments';
 import { gql } from '@apollo/client';
+import { checkOutOfStockItem } from '../../../app.utils';
 
 
 const DEFAULT_STORE_NAME = "Acemart.com";
@@ -119,6 +120,7 @@ const CartPage = props => {
     });
 
     const classes = useStyle(defaultClasses, props.classes);
+
     const { formatMessage } = useIntl();
 
     useEffect(() => {
@@ -126,6 +128,8 @@ const CartPage = props => {
             addToast({ ...wishlistSuccessProps, icon: CheckIcon });
         }
     }, [addToast, wishlistSuccessProps]);
+
+    const hasOutOfStockItem = checkOutOfStockItem(cartItems || [])
 
     const handleRemoveCart = useCallback(async () => {
         try {
@@ -188,7 +192,7 @@ const CartPage = props => {
     ) : null;
 
     const priceSummary = hasItems ? (
-        <PriceSummary isUpdating={isCartUpdating} />
+        <PriceSummary isUpdating={isCartUpdating} hasOutOfStockItem={hasOutOfStockItem} />
     ) : null;
 
     return (

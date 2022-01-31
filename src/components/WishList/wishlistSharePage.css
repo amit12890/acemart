@@ -1,3 +1,153 @@
 .root {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+ }
+
+.pageTitleWrapper {
+
+}
+
+
+.title {
+    justify-self: center;
+    background-color: #f5f5f5;
+    margin-bottom: 30px;
+    padding: 15px 30px;
+    font-size: var(--fontSize-700);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.shareWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.iconWrapper {
+    margin-right: 20px;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    background-color: rgb(var(--theme-color-primary-alt));
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+}
+
+.svgIcon {
+    width: 20px;
+    height: auto;
+    fill: #fff;
+}
+
+.shareFormWrapper {
+
+}
+
+
+.fieldset {
+    border: 0;
+    margin: 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 450px;
+    gap: 1.2rem;
+}
+
+.actionToolbar {
+    margin-top: 20px;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.actionToolbar {
+    display: flex;
+
+}
+
+.primary {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke)); 
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+}
+
+.mrRight {
+    margin-right: 10px;
+}
+
+.primary:hover,
+.action:hover {
+    background-color: rgb(var(--color-white));
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.primary:focus,
+.action:focus {
+    box-shadow: none;
+}
+
+.action {
+    --stroke: var(--theme-color-primary);
+    background: rgb(var(--stroke));;
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    color: rgb(var(--color-white));
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+    display: inline-flex;
+}
+
+.iconBackWrapper {
+    display: inline-flex;
     
+}
+
+.iconBackWrapper .svgIcon {
+    margin-right: 10px;
+    width: 16px;
+    height: auto;
+    fill: currentColor;
 }

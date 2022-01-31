@@ -66,7 +66,7 @@ export const useCmsPage = props => {
             cmsPage.content.length > 0 &&
             !cmsPage.content.includes('CMS homepage content goes here.')
         )
-        if(hash && hasContent) {
+        if (hash && hasContent) {
             const timeout = 800;
             if (hash === '#ship_policy/') {
                 setTimeout(() => {

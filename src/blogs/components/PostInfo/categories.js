@@ -8,7 +8,7 @@ const Categories = props => {
         return (
             <div className={postCategory}>
                 {
-                    categories.map(({category_id, title, category_url}) =>
+                    categories.map(({ category_id, title, category_url }) =>
                         <Link key={category_id} className="category-name" to={new URL(category_url).pathname} title={title}>{title}</Link>
                     )
                 }
