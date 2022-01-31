@@ -133,7 +133,8 @@ export default connect(store => ({
                     }
                 }}
                 setPaymentMethodOnCart={setPaymentMethodOnCart}
-                placingOrder={placingOrder} />
+                placingOrder={placingOrder}
+                storeInfo={currentStoreConfig} />
         )
     }
 
