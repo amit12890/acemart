@@ -82,6 +82,9 @@
     color: rgb(var(--product-price-color));
     display: flex;
 }
+.price.specialPrice {
+    color: rgb(var(--product-special-price-color));
+}
 
 .currency {
     font-size: 1rem;

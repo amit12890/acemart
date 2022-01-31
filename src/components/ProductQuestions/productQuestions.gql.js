@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const getProductQuestions = gql`
-query getProductQuestions($productId: String) {
-    questions (product_id: $productId) {
+query getProductQuestions($productId: String, $filter: QuestionFilterInput) {
+    questions (product_id: $productId, filter: $filter) {
         items {
             id
             nickname
