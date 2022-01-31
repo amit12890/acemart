@@ -58,7 +58,7 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
     const handleSubmit = useCallback(
         async formValues => {
             const recaptchaValue = recaptchaRef.current.getValue();
-            if(!recaptchaValue) {
+            if (!recaptchaValue) {
                 setCaptcha(true)
                 return
             }
@@ -106,7 +106,7 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
 
     const handleSubmitFailure = useCallback(errors => {
         const recaptchaValue = recaptchaRef.current.getValue();
-        if(!recaptchaValue) {
+        if (!recaptchaValue) {
             setCaptcha(true)
             return
         }
@@ -202,7 +202,7 @@ const AddQuestionBlock = ({ productId, allowSubscribingQuestion }) => {
                                 sitekey={GOOGLE_RECAPTCHA}
                             />
                             {isCaptchaRequired ?
-                                <div>This is a required field.</div>
+                                <div className={classes.errorMessage}>This is a required field.</div>
                                 :
                                 null
                             }

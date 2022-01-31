@@ -129,11 +129,9 @@
     font-family: sans-serif;
 }
 
- .postHolder {
-    margin-bottom: 40px;
-    border: 1px solid rgb(var(--border-color-base));
-    padding: 20px;
-    
+.postHolder {
+    margin-bottom: 20px;
+     border-bottom: 1px solid rgb(var(--border-color-base));
 }
 /* Post List */
  .postList {
@@ -144,10 +142,10 @@
 }
 
  .postList .postContainer {
-    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    gap: 1.5rem;
 }
+
 /* Bread Crumbs */
  .breadcrumbs {
     margin-bottom: 1.5rem;
@@ -156,15 +154,15 @@
  .breadcrumbs a {
     color: #000 !important;
 }
- @media (max-width: 767px) {
-     .breadcrumbs {
-        display: none;
-    }
-}
+
 /* Post Image */
  .postList .postImage {
     order: 0;
     margin-bottom: 1rem;
+    flex-basis: 35%;
+    border: 1px solid rgb(var(--border-color-base));
+    padding: 5px; 
+    flex-shrink: 0;
 }
  .postList .imageContainer {
     position: relative;
@@ -191,7 +189,7 @@
 }
 /* Post Info */
  .postInfoPanel {
-
+    
 }
 
 .postInfoPanel a {
@@ -209,13 +207,14 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1rem;
+    margin-bottom: 5px;
+    flex-direction: column;
 }
 
 .postTitle {
     font-size: 28px;
     font-weight: bold;
-    margin: 0;
+    margin: 0 0 8px 0;
     line-height: normal;
     text-transform: none;
 }
@@ -252,12 +251,13 @@
     font-size: 18px;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 5px;
 }
 
 .postCategory {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 1rem;
+    margin-bottom: 5px;
 }
 
 .postCategoryWrapper a:after { 
@@ -272,7 +272,7 @@
 
 .postDescription {
     font-size: 14px;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
 }
 
 .postReadMore {
