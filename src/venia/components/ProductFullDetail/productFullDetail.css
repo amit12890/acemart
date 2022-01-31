@@ -95,6 +95,17 @@ flex-direction: column;
     font-size: var(--fontSize-100);
 }
 
+.incrementalQtyInfo {
+    font-size: 13px;
+    line-height: var(--fontSize-100);
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .storeShippingInfo {
     font-size: var(--fontSize-100);
     color: rgb(var(--theme-color-primary-alt));

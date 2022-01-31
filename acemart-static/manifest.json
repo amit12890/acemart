@@ -5,7 +5,7 @@
     "theme_color": "#1F39FF",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "Shop the look",
+    "description": "Restaurant Supply",
     "icons": [
         {
             "src": "/acemart-static/icons/amfavicon.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         },
         {
-            "src": "/acemart-static/icons/amfavicon.png",
+            "src": "/acemart-static/icons/amfavicon_192.png",
             "sizes": "192x192",
             "type": "image/png"
         },

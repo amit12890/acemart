@@ -27,6 +27,8 @@ export const ProductDetailsFragment = gql`
                 currency
             }
         }
+        only_x_left_in_stock
+        qty_increments
         pos_stock_manage {
             availability
             warehouse_qty
