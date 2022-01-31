@@ -79,7 +79,6 @@ export const usePaymentInformation = props => {
         skip: !cartId,
         variables: { cartId }
     });
-    console.log("🚀 ~ file: usePaymentInformation.js ~ line 82 ~ paymentInformationData", paymentInformationData)
 
     const [
         setFreePaymentMethod,

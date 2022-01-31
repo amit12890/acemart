@@ -8,7 +8,7 @@ import { get } from 'lodash-es';
 import { loginPage } from '../../url.utils';
 
 
-export default function MinusBlock({queryType, mutation, variables, count, onSuccess, history, isSignedIn}) {
+export default function MinusBlock({ queryType, mutation, variables, count, onSuccess, history, isSignedIn }) {
     const [updateMinus, { loading }] = useMutation(mutation, {
         fetchPolicy: 'no-cache'
     });
@@ -16,18 +16,18 @@ export default function MinusBlock({queryType, mutation, variables, count, onSuc
     const classes = useStyle(defaultClasses);
 
     const handleClick = useCallback(async () => {
-        if(!isSignedIn) {
+        if (!isSignedIn) {
             history.push(loginPage())
         }
         try {
             const { data } = await updateMinus({
                 variables: variables
             });
-            if (get(data ,`${queryType}.success`, false)) {
-                onSuccess(get(data ,`${queryType}.count`, 0))
+            if (get(data, `${queryType}.success`, false)) {
+                onSuccess(get(data, `${queryType}.count`, 0))
             }
         } catch (error) {
-            console.log('Error during down vote', error);
+            // console.log('Error during down vote', error);
         }
     }, [updateMinus, variables, isSignedIn, history]);
 

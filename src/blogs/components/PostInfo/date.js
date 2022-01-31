@@ -6,7 +6,6 @@ import { format, parse } from 'date-fns';
 
 const DateComponent = props => {
     const { publish_time, postDate } = props;
-    console.log("🚀 ~ file: date.js ~ line 9 ~ publish_time", publish_time)
 
     const defaultObject = {
         publicationDateIsEnabled: 1,

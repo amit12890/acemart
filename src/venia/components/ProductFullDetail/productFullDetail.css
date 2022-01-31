@@ -95,6 +95,17 @@ flex-direction: column;
     font-size: var(--fontSize-100);
 }
 
+.incrementalQtyInfo {
+    font-size: 13px;
+    line-height: var(--fontSize-100);
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .storeShippingInfo {
     font-size: var(--fontSize-100);
     color: rgb(var(--theme-color-primary-alt));
@@ -436,6 +447,10 @@ flex-direction: column;
     justify-content: center;
 }
 
+.addLinkLabel {
+
+}
+
 .addToLinks button{
     --stroke: var(--theme-color-primary-alt);
     background: rgb(var(--stroke));
@@ -475,7 +490,6 @@ flex-direction: column;
     width: 14px;
     height: auto;
     fill: currentColor;
-
 }
 
 .addToLinks .action.toWishList {
@@ -802,6 +816,48 @@ tbody tr:nth-child(odd) {
     .addToCartWrapper {
         margin-left: 5px;
         
+    }
+
+    .productName {
+        line-height: normal;
+        font-size: var(--fontSize-300); 
+    }
+
+    .productView {
+        position: relative;
+    }
+
+    .addToLinks {
+        position: absolute;
+        top: 0;
+        right:0;
+        flex-direction: column;
+    }
+
+
+    .addLinkLabel {
+        display: none;
+    }
+    
+    .addToLinks button{
+
+        min-width: 40px;
+        min-height: 40px;
+        padding: 5px; 
+        
+    }
+
+    .addToLinks .action {
+        margin: 5px;
+    }
+    
+    .addToLinks .action  .iconWrapper {
+        padding-right: 0;
+    }
+    
+    .addToLinks .action .svgIcon {
+        width: 20px;
+
     }
 
 }

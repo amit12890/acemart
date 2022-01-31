@@ -50,7 +50,6 @@ export default connect(store => {
 
     useEffect(() => {
         if (size(paypal_response.payerId) > 0 && size(orderNumbers) === 0) {
-            console.log("setting payment on cart....")
             setPaymentMethodOnCart({
                 code: "paypal_express",
                 paypal_express: {

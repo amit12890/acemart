@@ -40,8 +40,6 @@ const AddressStep = props => {
         isMockAddress,
         isDefaultStore
     } = props
-    console.log("🚀 ~ file: addressStep.js ~ line 42 ~ initialValues", initialValues)
-    console.log("🚀 ~ file: addressStep.js ~ line 41 ~ data", data)
 
     let initCustomerAddressId = get(initialValues, "customer_address_id", -1)
     let isNewAddress = get(initialValues, "customer_address_id", -1) == null
@@ -59,7 +57,7 @@ const AddressStep = props => {
 
 
     const [selectedAddressId, setAddressId] = useState(initCustomerAddressId)
-    console.log("🚀 ~ file: addressStep.js ~ line 57 ~ selectedAddressId", selectedAddressId)
+
     const [showAddressForm, setFormVisibility] = useState(isNewAddress)
     const [editMode, setInEditMode] = useState(size(initialValues) === 0 || isMockAddress)
 
@@ -164,7 +162,6 @@ const AddressStep = props => {
                                         onClick={(e) => {
                                             e.preventDefault()
                                             changeAddressSelection(address.id)
-                                            console.log("🚀 ~ file: addressStep.js ~ line 154 ~ data.map ~ address.id", address.id)
                                         }}>
                                         <div className={classes.control}>
                                             <div className={classes.deliveryAddressDetails}>
@@ -288,7 +285,6 @@ const AddressStep = props => {
                             setting={setting}
                             isShippingStep={isShippingStep}
                             onSaveAddress={(address) => {
-                                console.log("=====> this is called")
                                 toggleEditMode(false)
                                 onApplyAddress(address, true)
                                 setFormVisibility(false)

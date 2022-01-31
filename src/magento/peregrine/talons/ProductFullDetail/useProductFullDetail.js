@@ -360,7 +360,6 @@ export const useProductFullDetail = props => {
     const handleAddToCart = useCallback(
         async formValues => {
             const { quantity } = formValues;
-
             /*
                 @deprecated in favor of general addProductsToCart mutation. Will support until the next MAJOR.
              */

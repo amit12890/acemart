@@ -25,12 +25,10 @@ export const useCheckoutPayment = () => {
 
     const [setPaymentMethod, { loading: settingPaymentMethod }] = useMutation(setPaymentMethodMutation, {
         onCompleted: (data) => {
-            console.log("-----------[log]------------", "payment method set successfully", data)
             let selected_payment_method = get(data, "setPaymentMethodOnCart.cart.selected_payment_method", {})
             let shipping_addresses = get(data, "setPaymentMethodOnCart.cart.shipping_addresses", {})
             dispatch(updateCheckoutField({ selected_payment_method, shipping_addresses }))
             if (hasToken) {
-                console.log("placing order.....")
                 placeOrder()
             }
         }
@@ -43,14 +41,8 @@ export const useCheckoutPayment = () => {
      * @param {*} handlers => { onCompleted , onError }
      */
     const setPaymentMethodOnCart = useCallback((selectedPaymentMethod) => {
-        console.log("🚀 ~ file: payment.hook.js ~ line 44 ~ setPaymentMethodOnCart ~ selectedPaymentMethod", selectedPaymentMethod)
         if (settingPaymentMethod) return
-        console.log("variable", {
-            input: {
-                cart_id: cartId,
-                payment_method: selectedPaymentMethod
-            }
-        })
+
         setToken(size(get(selectedPaymentMethod, "paypal_express.token", "")) > 0)
         setPaymentMethod({
             variables: {

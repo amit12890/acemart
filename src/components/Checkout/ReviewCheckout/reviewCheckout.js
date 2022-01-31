@@ -47,7 +47,6 @@ export default connect((store) => {
     placingOrder,
     dispatch
 }) => {
-    console.log("🚀 ~ file: reviewCheckout.js ~ line 47 ~ connect ~ selected_payment_method", selected_payment_method)
     const classes = useStyle(defaultClasses)
 
     const selected_shipping_method = get(shipping_addresses[0], "selected_shipping_method", [])

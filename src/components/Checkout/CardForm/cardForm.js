@@ -57,15 +57,6 @@ class CardForm extends React.Component {
         } else {
             cc_type = cardType
         }
-        console.log("🚀 ~ file: cardForm.js ~ line 56 ~ CardForm ~ cardType", cardType)
-        console.log({
-            cc_number: this.state.cardNumber,
-            cc_type,
-            cc_cid: this.state.cvv,
-            expiration: expArr[0].trim(),
-            expiration_yr: expArr[1].trim(),
-            transarmor_id: "new"
-        })
         this.props.onSave({
             cc_number: this.state.cardNumber.replace(/ /g, ''),
             cc_type,

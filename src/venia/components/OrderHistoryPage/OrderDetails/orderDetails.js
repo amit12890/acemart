@@ -192,7 +192,7 @@ const OrderDetails = props => {
                     priority="high"
                     onClick={() => {
                         // TODO will be implemented in PWA-978
-                        console.log('Printing Receipt');
+                        // console.log('Printing Receipt');
                     }}
                 >
                     <Icon src={Printer} />

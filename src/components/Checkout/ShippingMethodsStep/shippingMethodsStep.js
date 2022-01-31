@@ -28,11 +28,9 @@ const ShippingMethodStep = props => {
         isDefaultStore,
         loading
     } = props
-    console.log("🚀 ~ file: shippingMethodsStep.js ~ line 30 ~ data", data)
 
 
     const renderItem = useCallback((item, index) => {
-        console.log("🚀 ~ file: shippingMethodsStep.js ~ line 35 ~ renderItem ~ item", item)
         let isActive = get(item, "method_code", '') === get(initialValues, "method_code", '')
         const hasAmount = get(item, "amount.value", 0) > 0
         return (

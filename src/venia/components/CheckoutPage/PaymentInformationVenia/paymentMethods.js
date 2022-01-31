@@ -37,7 +37,6 @@ const PaymentMethods = props => {
         initialSelectedMethod,
         isLoading,
     } = talonProps;
-    console.log("🚀 ~ file: paymentMethods.js ~ line 37 ~ availablePaymentMethods", currentSelectedPaymentMethod, initialSelectedMethod)
 
     if (isLoading) {
         return null;

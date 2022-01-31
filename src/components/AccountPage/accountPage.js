@@ -37,7 +37,7 @@ import { useWindowSize } from '../../magento/peregrine/talons/ProductImageCarous
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
     const path = useLocation().pathname;
-    console.log("🚀 ~ file: accountPage.js ~ line 40 ~ AccountPage ~ path", path)
+
     const [{ isSignedIn }] = useUserContext();
     const { isMobile } = useWindowSize();
 

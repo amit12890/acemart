@@ -28,8 +28,8 @@ import { useWindowSize } from '../../../magento/peregrine/talons/ProductImageCar
 
 const AccountMenuItems = props => {
     const { onSignOut: handleSignOut, signingOut, onNavigate } = props;
+    const { isMobile } = useWindowSize()
     const dispatch = useDispatch()
-    const { isMobile } = useWindowSize();
     const talonProps = useAccountChip({
         queries: {
             getCustomerDetailsQuery: GET_CUSTOMER_DETAILS

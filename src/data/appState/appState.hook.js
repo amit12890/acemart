@@ -25,7 +25,7 @@ export const useWishlistSession = () => {
         isLazy: true,
         onSuccess: () => {
             // navigate to wishlist page
-            console.log("product added to wishlist....")
+            // console.log("product added to wishlist....")
         }
     })
 
@@ -35,8 +35,7 @@ export const useWishlistSession = () => {
     }, [])
 
     const addProductToWishlist = useCallback(async (token) => {
-        if(size(wishlist_session_item)) {
-            console.log("product adding to wishlist....")
+        if (size(wishlist_session_item)) {
             const data = { product_id: wishlist_session_item.id, qty: 1 };
             await addToWishlist(apiAddToWishlist(""), data, token);
         }

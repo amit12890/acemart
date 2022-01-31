@@ -19,7 +19,6 @@ const bottom_label = "Multishipping checkout with PayPal is currently not suppor
 export default ({ data, disableWarnings = false }) => {
     const classes = useStyle(defaultClasses)
     const bops = get(data, "bops", {})
-    console.log("🚀 ~ file: splitOrder.js ~ line 21 ~ bops", bops)
     const bopsCurrencyCode = get(bops, "currency_code", "")
     const bopsSubtotal = get(bops, "sub_total", "")
     const bopsTax = get(bops, "tax", "")

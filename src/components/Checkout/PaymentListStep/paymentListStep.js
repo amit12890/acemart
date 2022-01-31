@@ -138,7 +138,6 @@ const PaymentListStep = props => {
                             }}
                             toggleCardForm={toggleCardForm}
                             onCancel={() => {
-                                console.log("here")
                                 setSelectedPaymentCode('')
                                 resetPaymentSelection()
                                 toggleCardForm()

@@ -1,0 +1,21 @@
+.root {
+    position: relative;
+    font-size: .875rem;
+}
+
+.qtySelect {
+    background-color: rgb(var(--color-white));
+    min-height: 32px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    border-radius: 0;
+    border-width: 1px;
+    border-color: rgb(var(--border-color-light));
+    font-weight: var(--venia-global-fontWeight-normal);
+    outline: none;
+    min-width: 8rem;
+    text-align: center;
+    margin-bottom: 16px;
+    color: rgb(var(--text-color));
+}
+

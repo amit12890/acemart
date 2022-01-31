@@ -56,7 +56,6 @@ export const useCheckout = () => {
         },
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
-            console.log("🚀 ~ file: checkout.hook.js ~ line 31 ~ useCheckout ~ data", data)
             const checkoutData = get(data, "cart", {})
             dispatch(checkoutFetched(checkoutData))
         }
@@ -69,7 +68,6 @@ export const useCheckout = () => {
             cartId
         },
         onCompleted: (data) => {
-            console.log("🚀 ~ file: checkout.hook.js ~ line 50 ~ useCheckout ~ data", data)
             dispatch(checkoutFetched(get(data, "setStorePickupShippingAddressesOnCart.cart", {})))
         }
     })
@@ -82,10 +80,8 @@ export const useCheckout = () => {
 
     useEffect(() => {
         if (isDefaultStore) {
-            console.log("fetching default......")
             fetchCheckoutDetails()
         } else {
-            console.log("set pickup store......")
             setStorePickupAndFetchDetails()
         }
     }, [isDefaultStore])
@@ -93,10 +89,8 @@ export const useCheckout = () => {
 
     const fetchCheckout = useCallback(() => {
         if (isDefaultStore) {
-            console.log("fetching default......")
             fetchCheckoutDetails()
         } else {
-            console.log("set pickup store......")
             setStorePickupAndFetchDetails()
         }
     }, [isDefaultStore])
@@ -134,7 +128,6 @@ export const useCheckoutAddresses = () => {
 
     const [setShippingAddress, { loading: settingShippingAddress }] = useMutation(setShippingAddressMutation, {
         onCompleted: (data) => {
-            // console.log("-----------[log]------------", "shipping address set successfully", data)
             let shipping_addresses = get(data, "setShippingAddressesOnCart.cart.shipping_addresses", [])
             dispatch(updateCheckoutField({ shipping_addresses }))
         }
@@ -143,7 +136,6 @@ export const useCheckoutAddresses = () => {
 
     const [setBillingAddress, { loading: settingBillingAddress }] = useMutation(setBillingAddressMutation, {
         onCompleted: (data) => {
-            // console.log("-----------[log]------------", "billing address set successfully", data)
             let billing_address = get(data, "setBillingAddressOnCart.cart.billing_address", {})
             let shipping_addresses = get(data, "setBillingAddressOnCart.cart.shipping_addresses", {})
             dispatch(updateCheckoutField({ billing_address, shipping_addresses }))
@@ -153,14 +145,6 @@ export const useCheckoutAddresses = () => {
 
     const setShippingAddressOnCart = useCallback((address) => {
         if (!settingShippingAddress) {
-            console.log("setShippingAddressOnCart", {
-                variables: {
-                    input: {
-                        cart_id: cartId,
-                        shipping_addresses: address
-                    }
-                }
-            })
             setShippingAddress({
                 variables: {
                     input: {
@@ -179,12 +163,6 @@ export const useCheckoutAddresses = () => {
      * @param {*} handlers => { onCompleted , onError }
      */
     const setBillingAddressOnCart = useCallback((address) => {
-        console.log("variable", {
-            input: {
-                cart_id: cartId,
-                billing_address: address
-            }
-        })
         if (!settingBillingAddress) {
             setBillingAddress({
                 variables: {
@@ -220,7 +198,6 @@ export const useShippingMethods = () => {
 
     const [setShippingMethod, { loading: settingShippingMethod }] = useMutation(setShippingMethodMutation, {
         onCompleted: (data) => {
-            console.log("-----------[log]------------", "shipping method set successfully", data)
             let shipping_addresses = get(data, "setShippingMethodsOnCart.cart.shipping_addresses", [])
             dispatch(updateCheckoutField({ shipping_addresses }))
         }
@@ -238,7 +215,6 @@ export const useShippingMethods = () => {
                     shipping_methods: shippingMethods
                 }
             }
-            console.log("variable", data)
             setShippingMethod({
                 variables: data
             })
@@ -268,7 +244,6 @@ export const usePlaceOrder = () => {
 
     const [orderPlace, { loading: placingOrder, data }] = useMutation(placeOrderMutation, {
         onCompleted: async (data) => {
-            console.log("-----------[log]------------", "order placed successfully", data)
             let orderNumber = get(data, "placeOrder.order.order_number", 0)
             dispatch(updateCheckoutField({ orderNumber }))
             await removeCart();
