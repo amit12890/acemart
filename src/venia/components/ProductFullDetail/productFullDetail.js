@@ -44,6 +44,7 @@ import { useWishlistSession } from '../../../data/appState/appState.hook';
 import { toLower } from 'lodash-es';
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 import { GET_STORE_CONFIG_DATA } from '../../../magento/peregrine/talons/Header/storeSwitcher.gql';
+import QtyDropdown from './QtyDropdown';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -459,7 +460,7 @@ const ProductFullDetail = props => {
         } else if (sameLabel) {
             return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
         } else {
-            if(outOfStock) {
+            if (outOfStock) {
                 return (
                     <div className={classes.apSectionRow}>
                         <div className={classes.stock}>
@@ -485,6 +486,12 @@ const ProductFullDetail = props => {
         }
     }, [pos_stock_manage])
 
+
+    const qtyIncrement = get(product, "qty_increments", 0)
+    console.log("🚀 ~ file: productFullDetail.js ~ line 490 ~ qtyIncrement", qtyIncrement)
+    const isIncrementalQty = qtyIncrement > 0
+    const inStockQty = get(product, "only_x_left_in_stock", 0)
+    console.log("🚀 ~ file: productFullDetail.js ~ line 493 ~ inStockQty", inStockQty)
     return (
         <Fragment>
             {breadcrumbs}
@@ -688,18 +695,33 @@ const ProductFullDetail = props => {
 
                                     {renderSideAvailability()}
 
+                                    {isIncrementalQty && (
+                                        <div className={classes.incrementalQtyInfo}>
+                                            Available to buy in increments of {qtyIncrement}
+                                        </div>
+                                    )}
+
                                     {!pos_stock_manage.hide_add_to_cart &&
                                         <div className={[classes.apSectionRow, classes.boxToCartSection].join(" ")}>
                                             <div className={classes.boxToCart}>
                                                 <div className={classes.qtyWrapper}>
-
-                                                    <QuantityFields
-                                                        classes={{
-                                                            root: classes.quantityRoot
-                                                        }}
-                                                        min={1}
-                                                        message={errors.get('quantity')}
-                                                    />
+                                                    {isIncrementalQty ? (
+                                                        <div>
+                                                            <QtyDropdown
+                                                                min={qtyIncrement}
+                                                                incrementQty={qtyIncrement}
+                                                                maxAvailableQty={inStockQty}
+                                                                message={errors.get('quantity')} />
+                                                        </div>
+                                                    ) : (
+                                                        <QuantityFields
+                                                            classes={{
+                                                                root: classes.quantityRoot
+                                                            }}
+                                                            min={1}
+                                                            message={errors.get('quantity')}
+                                                        />
+                                                    )}
                                                 </div>
                                                 <div className={classes.addToCartWrapper}>
                                                     {cartActionContent}
