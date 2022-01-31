@@ -89,11 +89,13 @@ export default connect((store) => {
                     </div>
                     <div className={[classes.contentBlock, classes.shippingMethod].join(" ")}>
                         <p>{get(selected_shipping_method, "method_title", "")}</p>
-                        <div>
-                            <Price
-                                currencyCode={get(selected_shipping_method, "amount.currency", "USD")}
-                                value={get(selected_shipping_method, "amount.value", "")} />
-                        </div>
+                        {!isDefaultStore && (
+                            <div>
+                                <Price
+                                    currencyCode={get(selected_shipping_method, "amount.currency", "USD")}
+                                    value={get(selected_shipping_method, "amount.value", "")} />
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/* billing address */}
