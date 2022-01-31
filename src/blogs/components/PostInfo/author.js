@@ -13,7 +13,7 @@ const Author = props => {
 
         if (author && authorInfo) {
             const { author_url, name } = author;
-            const { publicationDateIsEnabled } = getData(design, {publicationDateIsEnabled: 1})
+            const { publicationDateIsEnabled } = getData(design, { publicationDateIsEnabled: 1 })
 
             return (
                 <span>
@@ -21,7 +21,7 @@ const Author = props => {
                         displayAuthorPosts ?
                             <Link to={new URL(author_url).pathname} title={name}>{name}</Link> : name
                     }
-                        {publicationDateIsEnabled ? <span> - </span> : ''}
+                    {publicationDateIsEnabled ? <span> - </span> : ''}
                 </span>
             )
         }

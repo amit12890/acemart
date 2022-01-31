@@ -12,6 +12,7 @@ import {
     myOrderDetailsPage,
     myOrderListPage,
     myWishlistPage,
+    myWishlistSharePage,
     newsletterPage,
     reviewPage,
     accountQandAPage
@@ -24,6 +25,7 @@ import AddressBookPage from '../../venia/components/AddressBookPage/addressBookP
 import OrderHistoryPage from '../../venia/components/OrderHistoryPage/orderHistoryPage';
 import AccountInformation from './accountInformation';
 import WishlistPage from '../WishList';
+import WishlistSharePage from '../WishList/wishlistSharePage';
 import OrderDetailsPage from './orderDetailsPage';
 import CompareListBlock from '../CompareListPage/compareListBlock';
 import WishlistBlock from '../WishList/wishlistBlock';
@@ -35,6 +37,7 @@ import { useWindowSize } from '../../magento/peregrine/talons/ProductImageCarous
 const AccountPage = (props) => {
     const classes = useStyle(defaultClasses, props.classes);
     const path = useLocation().pathname;
+    console.log("🚀 ~ file: accountPage.js ~ line 40 ~ AccountPage ~ path", path)
     const [{ isSignedIn }] = useUserContext();
     const { isMobile } = useWindowSize();
 
@@ -53,6 +56,9 @@ const AccountPage = (props) => {
                 <Switch>
                     <Route exact path={accountPageUrl()}>
                         <AccountInformation />
+                    </Route>
+                    <Route path={myWishlistSharePage()}>
+                        <WishlistSharePage />
                     </Route>
                     <Route exact path={myWishlistPage()}>
                         <WishlistPage />

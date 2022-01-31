@@ -3,6 +3,7 @@ import { RestApi } from '@magento/peregrine';
 const { request } = RestApi.Magento2;
 
 import { HOST_URL } from "../../url.utils"
+import { useApiData } from '../../data.utils';
 
 const UPLOAD_API = `${HOST_URL}/rest/all/V1/amasty_advanced_review/uploadImage`;
 const MAX_SIZE = 7340032; // ~7mb
@@ -33,6 +34,21 @@ export const useUpload = props => {
   const { setTmpImgPath, formApi } = props;
   const [loading, setLoading] = useState(false);
 
+  const { callApi } = useApiData({
+    url: UPLOAD_API,
+    method: "post",
+    isLazy: true,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    onError: (err) => {
+      console.log("🚀 ~ file: err", err)
+    },
+    onSuccess: (res) => {
+      setTmpImgPath(res.temporary_name)
+    }
+  })
+
   const handleUpload = useCallback(
     async e => {
       const { files } = e.target;
@@ -43,12 +59,9 @@ export const useUpload = props => {
         for (let i = 0; i < files.length; i++) {
           if (files[i].size < MAX_SIZE) {
             promises.push(
-              getBase64(files[i]).then(({fileContent}) =>
-                request(UPLOAD_API, {
-                  method: 'POST',
-                  body: JSON.stringify(fileContent)
-                }).catch(error => console.log(error))
-              )
+              getBase64(files[i]).then(({fileContent}) => {
+                callApi(null, {fileContent})
+              })
             );
           }
         }
@@ -60,10 +73,11 @@ export const useUpload = props => {
           const { setError, setValue, validateField } = formApi || {};
 
           try {
-            const paths = result.map(r => r.temporary_name);
+            // const paths = result.map(r => r.temporary_name);
             validateField(field);
-            setTmpImgPath(paths);
+            // setTmpImgPath(paths);
           } catch (e) {
+            console.log("🚀 ~ file: useUploadFile.js ~ line 80 ~ e", e)
             setError(field, 'An error occurred while upload the image');
             setValue(field, null);
           }
@@ -75,8 +89,15 @@ export const useUpload = props => {
     [setLoading, setTmpImgPath, formApi]
   );
 
+  const clearValue = useCallback(() => {
+    const field = 'review_images';
+    const { setError, setValue, validateField } = formApi || {};
+    setValue(field, null);
+  }, [formApi])
+
   return {
     handleUpload,
-    loading
+    loading,
+    clearValue
   };
 };

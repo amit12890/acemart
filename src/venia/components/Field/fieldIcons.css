@@ -5,6 +5,7 @@
     grid-template-columns: auto 1fr auto;
     height: 2.5rem;
     width: 100%;
+    position: relative;
 }
 
 .input {
@@ -17,12 +18,10 @@
 .input > input {
     padding-left: calc(1.875rem * var(--iconsBefore) + 0.625rem);
     padding-right: calc(1.875rem * var(--iconsAfter) + 0.625rem);
-
-    
 }
 
-.before,
-.after {
+.beforeClass,
+.afterClass {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -32,19 +31,24 @@
     z-index: 1;
 }
 
-.before:empty,
-.after:empty {
+.beforeClass:empty,
+.afterClass:empty {
     display: none;
 }
 
-.before {
+.beforeClass {
     grid-area: before;
 }
 
-.after {
+.afterClass {
     grid-area: after;
+    position: absolute;
+    right: 0;
 }
 
-.before svg {
+.beforeClass svg {
     stroke: rgb(var(--color-gray-darken0));
 }
+
+
+

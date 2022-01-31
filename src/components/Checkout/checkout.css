@@ -1,7 +1,7 @@
 .root {
     display: flex;
     flex-direction: row;
-    padding:2rem 0;
+    padding: 0;
     
 }
 
@@ -91,4 +91,9 @@
 .primaryButton:active {
     transition-duration: 128ms;
     --stroke:  var(--theme-color-primary-alt);
+}
+
+.deliveryMessage {
+    color: red;
+    margin-bottom: 20px;
 }

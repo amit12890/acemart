@@ -1,8 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { useFooter } from '@magento/peregrine/lib/talons/Footer/useFooter';
+
+import { get, size } from 'lodash-es';
 
 import { useStyle } from '../../classify';
 import Image from '../Image';
@@ -13,18 +15,31 @@ import NewsletterSubscriptionInput from '../../../components/AccountPage/newslet
 import { useQuery } from '@apollo/client';
 import { GET_FOOTER_GQL } from './footer.gql';
 import RichContent from '../RichContent';
-import { get, size } from 'lodash-es';
 
 
 const Footer = props => {
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = useFooter();
 
-    const { data, loading } = useQuery(GET_FOOTER_GQL, { fetchPolicy: 'cache-and-network' })
+    const { data, loading, networkStatus } = useQuery(GET_FOOTER_GQL, { fetchPolicy: 'cache-and-network' })
+
     const footerCol1 = get(data, "footerColumn1.items[0].content", "")
+    const footerCol1Acc = get(data, "footerColumn1Accordion.items[0].content", "")
+
     const footerCol2 = get(data, "footerColumn2.items[0].content", "")
     const footerCol3 = get(data, "footerColumn3.items[0].content", "")
     const footerCol4 = get(data, "footerColumn4.items[0].content", "")
+
+    useEffect(() => {
+        if (networkStatus === 7) {
+            const scriptList = document.getElementsByClassName('reactScript');
+
+            for (let index = 0; index < size(scriptList); index++) {
+                const script = scriptList[index].innerHTML;
+                // window.eval(script);
+            }
+        }
+    }, [networkStatus])
 
     const { copyrightText } = talonProps;
 
@@ -147,11 +162,16 @@ const Footer = props => {
                     <div className={[classes.contentBlock, classes.blockMiddle].join(" ")}>
                         <div className={classes.blockLeft}>
                             <div className={classes.footerBox}>
-                                {size(footerCol1) > 0 && (
+                                {size(footerCol1Acc) > 0 && (
+                                    <RichContent
+                                        classes={{ root: classes.footerContent }}
+                                        html={footerCol1Acc} />
+                                )}
+                                {/* {size(footerCol1) > 0 && (
                                     <RichContent
                                         classes={{ root: classes.footerContent }}
                                         html={footerCol1} />
-                                )}
+                                )} */}
                                 {/* <h3 className={classes.groupTitle}>Customer Center</h3>
                                 <ul className={classes.groupLinks}>
                                     <li className={classes.link}>

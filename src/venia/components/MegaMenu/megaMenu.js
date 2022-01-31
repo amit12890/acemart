@@ -34,15 +34,15 @@ const MegaMenu = props => {
 
     const items = megaMenuData.children
         ? megaMenuData.children.map(category => {
-            return (
-                <MegaMenuItem
-                    category={category}
-                    activeCategoryId={activeCategoryId}
-                    mainNavWidth={mainNavWidth}
-                    key={category.id}
-                />
-            );
-        })
+              return (
+                  <MegaMenuItem
+                      category={category}
+                      activeCategoryId={activeCategoryId}
+                      mainNavWidth={mainNavWidth}
+                      key={category.id}
+                  />
+              );
+          })
         : null;
 
     return (

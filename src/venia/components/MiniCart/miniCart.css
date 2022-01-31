@@ -196,6 +196,12 @@
 }
 
 
+.disabledButton {
+    background-color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+
 @media (min-width: 768px) {
     
     .root {

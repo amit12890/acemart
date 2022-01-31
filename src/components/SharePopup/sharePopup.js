@@ -17,12 +17,74 @@ import defaultClasses from './sharePopup.css';
 
 import { FRONT_END_HOST_URL } from '../../url.utils';
 
+function objectToGetParams(object) {
+    const params = Object.entries(object)
+        .filter(([, value]) => value !== undefined && value !== null)
+        .map(
+            ([key, value]) =>
+                `${encodeURIComponent(key)}=${encodeURIComponent(
+                    String(value)
+                )}`
+        );
+
+    return params.length > 0 ? `?${params.join('&')}` : '';
+}
+
+const facebookLink = pathname => {
+    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
+
+    return (
+        'https://www.facebook.com/sharer/sharer.php' +
+        objectToGetParams({
+            u: pdpUrl,
+            quote: 'Ace Mart Restauant Supply'
+        })
+    );
+};
+
+const twitterLink = pathname => {
+    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
+    return (
+        'https://twitter.com/share' +
+        objectToGetParams({
+            url: pdpUrl,
+            text: 'Ace Mart Restauant Supply'
+        })
+    );
+};
+
+function linkedinLink(pathname) {
+    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
+
+    return (
+        'https://linkedin.com/shareArticle' +
+        objectToGetParams({
+            url: pdpUrl,
+            mini: 'true',
+            title: 'Ace Mart Restauant Supply',
+            summary: "Come check out Ace Mart Restaurant Supply",
+            source: FRONT_END_HOST_URL
+        })
+    );
+}
+
+function pinterestLink(pathname) {
+    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
+
+    return (
+        'https://pinterest.com/pin/create/button/' +
+        objectToGetParams({
+            url: pdpUrl,
+            description: "Come check out Ace Mart Restaurant Supply",
+        })
+    );
+}
 
 const SharePopup = props => {
     const { closeSharePopup, productId, isPopupVisible } = props;
     const { pathname } = useLocation();
     const classes = useStyle(defaultClasses, props.classes);
-    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`
+    const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
 
     return (
         <Portal>
@@ -56,10 +118,12 @@ const SharePopup = props => {
                             <div className={classes.shareButtons}>
                                 <div className={classes.shareItemWraper}>
                                     <div className={classes.shareItem}>
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${pdpUrl}&quote=Ace%20Mart%20Restauant%20Supply`}
-                                        target="_blank"
-                                        title="Share on Facebook"
-                                        className={classes.shareLink}>
+                                        <a
+                                            href={facebookLink(pathname)}
+                                            target="_blank"
+                                            title="Share on Facebook"
+                                            className={classes.shareLink}
+                                        >
                                             <Image
                                                 src={iconFacebook}
                                                 width="25"
@@ -69,9 +133,9 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a 
-                                            href={`https://twitter.com/intent/tweet?source=${pdpUrl}&text=Ace%20Mart%20Restauant%20Supply:%20http%3A%2F%2Fwww.acemart.com`}
-                                            target="_blank" 
+                                        <a
+                                            href={twitterLink(pathname)}
+                                            target="_blank"
                                             title="Tweet"
                                             className={classes.shareLink}
                                         >
@@ -84,8 +148,8 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a 
-                                            href={`http://pinterest.com/pin/create/button/?url=${pdpUrl}&description=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply`}
+                                        <a
+                                            href={pinterestLink(pathname)}
                                             target="_blank"
                                             title="Pin it"
                                             className={classes.shareLink}
@@ -99,8 +163,8 @@ const SharePopup = props => {
                                     </div>
 
                                     <div className={classes.shareItem}>
-                                        <a 
-                                            href={`http://www.linkedin.com/shareArticle?mini=true&url=${pdpUrl}&title=Ace%20Mart%20Restauant%20Supply&summary=Come%20check%20out%20Ace%20Mart%20Restaurant%20Supply&source=http%3A%2F%2Fwww.acemart.com`}
+                                        <a
+                                            href={linkedinLink(pathname)}
                                             target="_blank"
                                             title="Share on LinkedIn"
                                             className={classes.shareLink}
@@ -120,17 +184,12 @@ const SharePopup = props => {
                                             title="Send email"
                                             className={classes.shareLink}
                                         >
-                                            <Image
-                                                src={iconEmail}
-                                                width="25"
-                                            />
+                                            <Image src={iconEmail} width="25" />
                                             <span>Email This Information</span>
                                         </a>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

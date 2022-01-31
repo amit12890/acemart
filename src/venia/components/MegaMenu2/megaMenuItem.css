@@ -1,0 +1,42 @@
+.megaMenuItem {
+    position: relative;
+    
+}
+
+.megaMenuLink {
+    color: rgb(var(--color-white));
+    align-items: center;
+    display: inline-flex;
+    min-height: 50px;
+    padding: 12px 20px;
+    text-transform: uppercase;
+}
+.megaMenuLink:hover {
+    text-decoration: none;
+}
+
+.megaMenuLinkActive {
+    composes: megaMenuLink;
+    text-decoration: none;
+}
+
+.megaMenuItem:hover > div,
+.megaMenuItem:focus > div {
+    top: 100%;
+    display: flex;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -moz-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    visibility: inherit;
+}
+
+.megaMenuItem:hover .megaMenuLink,
+.megaMenuItem:focus .megaMenuLink {
+    text-decoration: none;
+    background-color: rgb(116 116 116);
+}

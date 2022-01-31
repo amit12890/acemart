@@ -28,6 +28,13 @@
   display: flex;
 }
 
+
+.recaptchaField {
+  display: flex;
+  flex-direction: column;
+
+}
+
 .field > div {
 
 }
@@ -110,7 +117,12 @@
 }
 
 .reviewFormField {
+  display: flex;
   
+}
+
+.reviewFormFileField {
+
 }
 
 .reviewFormFileField input {
@@ -126,9 +138,15 @@
 
 .reviewFormFileField {
   border: 1px solid #ccc;
-  display: inline-block;
+  display: flex;
   padding: 6px 12px;
   cursor: pointer;
+  background-color: rgb(var(--color-white));
+  flex-direction: column;
+}
+
+.reviewFormFileField input {
+  padding: 0;
 }
 
 .reviewFormFileField > span {
@@ -149,6 +167,29 @@
 .reviewFormField input:focus,
 .reviewFormField textarea:focus {
   box-shadow: none;
+}
+
+.fileCancel {
+  display: flex;
+}
+
+.fileCancel svg {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  padding: 5px;
+  fill: #000;
+  background: #ccc;
+  margin-left: 10px;
+}
+
+.errorMessage {
+  color: rgb(var(--venia-global-color-error));
+  font-weight: var(--venia-global-fontWeight-semibold);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1rem;
+  padding: 0.625rem 0.125rem 0.125rem;
 }
 
 .fieldCheckbox {

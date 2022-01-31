@@ -25,6 +25,9 @@ export const UserCompareListFragment = gql`
                 description { html }
                 short_description { html }
                 image { url label }
+                small_image {
+                    url
+                }
                 url_rewrites {
                     url
                     parameters {

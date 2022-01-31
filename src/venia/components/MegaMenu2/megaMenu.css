@@ -1,0 +1,13 @@
+.megaMenu {
+
+}
+
+@media (min-width: 1024px) {
+    .megaMenu {
+        display: flex;
+        justify-content: space-between;
+        max-width: var(--venia-global-maxWidth);
+        width: 100%;
+        text-align: left;
+    }
+}

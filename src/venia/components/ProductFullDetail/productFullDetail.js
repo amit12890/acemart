@@ -44,6 +44,7 @@ import { useWishlistSession } from '../../../data/appState/appState.hook';
 import { toLower } from 'lodash-es';
 import { useStoreSwitcher } from '@magento/peregrine/lib/talons/Header/useStoreSwitcher';
 import { GET_STORE_CONFIG_DATA } from '../../../magento/peregrine/talons/Header/storeSwitcher.gql';
+import { getPriceDetails } from '../../../app.utils';
 
 const style = {
     '--productLabel': `url("${productLabel}")`
@@ -74,7 +75,8 @@ const ProductFullDetail = props => {
     const { product } = props;
 
     const { id, pos_stock_manage,
-        mpn, uom, productLabel, media_gallery
+        mpn, uom, productLabel, media_gallery,
+        price_range
     } = product;
 
     const history = useHistory()
@@ -210,6 +212,8 @@ const ProductFullDetail = props => {
         []
     );
 
+    const priceDetails = useMemo(() => getPriceDetails(price_range), [price_range])
+
     // Fill a map with field/section -> error.
     const errors = new Map();
     if (errorMessage) {
@@ -299,22 +303,36 @@ const ProductFullDetail = props => {
     const relatedProducts = get(product, 'related_products', []);
 
     const renderAvailableStoreLabel = useCallback((isSide) => {
-        if(isSide) {
+        if (isSide) {
             return (
                 <div className={classes.stockAvailability} onClick={openStoreOnlyPopup}>
                     {get(pos_stock_manage, "stock_label", "")}
-                    <span>Help</span>
+                    <span className={classes.helpWrapper}>
+                        <i className={classes.iconWrapper}>
+                            <svg className={[classes.svgIcon, classes.iconHelp].join(" ")} xmlns="http://www.w3.org/2000/svg" width="27" height="32" viewBox="0 0 27 32">
+                                <title>help-01</title>
+                                <path d="M16 24.844v-3.406q0-0.25-0.172-0.422t-0.391-0.172h-3.438q-0.25 0-0.406 0.172t-0.156 0.422v3.406q0 0.25 0.156 0.422t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.422v0zM20.563 12.844q0-1.219-0.563-2.25-0.594-1.063-1.531-1.828t-2.094-1.203q-1.156-0.406-2.313-0.406-2.188 0-3.828 0.938t-2.797 2.844q-0.125 0.188-0.078 0.406t0.234 0.344l2.344 1.781q0.063 0.063 0.156 0.094t0.188 0.031q0.125 0 0.25-0.063t0.188-0.156q0.656-0.813 0.969-1.141t0.594-0.516q0.219-0.156 0.625-0.281t0.906-0.125q0.844 0 1.516 0.453t0.672 1.047q0 0.719-0.375 1.125t-1.188 0.781q-0.969 0.438-1.984 1.453t-1.016 2.328v0.656q0 0.219 0.156 0.391t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.391v0q0-0.313 0.359-0.859t0.984-0.922q1.031-0.563 2.125-1.516t1.094-3.016v0zM27.438 16.281q0 2.844-1.094 5.344-1.063 2.5-2.922 4.359t-4.359 2.922q-2.5 1.094-5.344 1.094t-5.344-1.094q-2.5-1.063-4.359-2.922t-2.953-4.359q-1.063-2.5-1.063-5.344t1.063-5.344q1.094-2.5 2.953-4.359t4.359-2.922q2.5-1.094 5.344-1.094t5.344 1.094q2.5 1.063 4.359 2.922t2.922 4.359q1.094 2.5 1.094 5.344z"></path>
+                            </svg>
+                        </i>
+                    </span>
                 </div>
             )
         }
         return (
-            <div className={classes.piSectionRow}
+            <div className={[classes.piSectionRow, classes.stockRow].join(" ")}
                 onClick={openStoreOnlyPopup}>
                 <div
                     className={classes.stockAvailability}
                     style={{ borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0 }}>
                     {get(pos_stock_manage, "stock_label", "")}
-                    <span>Help</span>
+                    <span className={classes.helpWrapper}>
+                        <i className={classes.iconWrapper}>
+                            <svg className={[classes.svgIcon, classes.iconHelp].join(" ")} xmlns="http://www.w3.org/2000/svg" width="27" height="32" viewBox="0 0 27 32">
+                                <title>help-01</title>
+                                <path d="M16 24.844v-3.406q0-0.25-0.172-0.422t-0.391-0.172h-3.438q-0.25 0-0.406 0.172t-0.156 0.422v3.406q0 0.25 0.156 0.422t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.422v0zM20.563 12.844q0-1.219-0.563-2.25-0.594-1.063-1.531-1.828t-2.094-1.203q-1.156-0.406-2.313-0.406-2.188 0-3.828 0.938t-2.797 2.844q-0.125 0.188-0.078 0.406t0.234 0.344l2.344 1.781q0.063 0.063 0.156 0.094t0.188 0.031q0.125 0 0.25-0.063t0.188-0.156q0.656-0.813 0.969-1.141t0.594-0.516q0.219-0.156 0.625-0.281t0.906-0.125q0.844 0 1.516 0.453t0.672 1.047q0 0.719-0.375 1.125t-1.188 0.781q-0.969 0.438-1.984 1.453t-1.016 2.328v0.656q0 0.219 0.156 0.391t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.391v0q0-0.313 0.359-0.859t0.984-0.922q1.031-0.563 2.125-1.516t1.094-3.016v0zM27.438 16.281q0 2.844-1.094 5.344-1.063 2.5-2.922 4.359t-4.359 2.922q-2.5 1.094-5.344 1.094t-5.344-1.094q-2.5-1.063-4.359-2.922t-2.953-4.359q-1.063-2.5-1.063-5.344t1.063-5.344q1.094-2.5 2.953-4.359t4.359-2.922q2.5-1.094 5.344-1.094t5.344 1.094q2.5 1.063 4.359 2.922t2.922 4.359q1.094 2.5 1.094 5.344z"></path>
+                            </svg>
+                        </i>
+                    </span>
                 </div>
             </div>
         )
@@ -326,10 +344,11 @@ const ProductFullDetail = props => {
         const storeFinalLabel = get(pos_stock_manage, "stock_final_label", "")
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
         const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
+        const outOfStock = !!get(pos_stock_manage, "hide_add_to_cart")
 
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
-                <div className={classes.piSectionRow}>
+                <div className={[classes.piSectionRow, classes.stockRow].join(" ")}>
                     <div
                         className={classes.stockAvailability}
                         style={{ borderBottomWidth: 0 }}>
@@ -343,17 +362,22 @@ const ProductFullDetail = props => {
                             Click here
                         </span>
                         &nbsp;to ship direct.
-                        <span onClick={openUnavailablePopup}>
-                            Icon here
+                        <span className={classes.helpWrapper} onClick={openUnavailablePopup}>
+                            <i className={classes.iconWrapper}>
+                                <svg className={[classes.svgIcon, classes.iconHelp].join(" ")} xmlns="http://www.w3.org/2000/svg" width="27" height="32" viewBox="0 0 27 32">
+                                    <title>help-01</title>
+                                    <path d="M16 24.844v-3.406q0-0.25-0.172-0.422t-0.391-0.172h-3.438q-0.25 0-0.406 0.172t-0.156 0.422v3.406q0 0.25 0.156 0.422t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.422v0zM20.563 12.844q0-1.219-0.563-2.25-0.594-1.063-1.531-1.828t-2.094-1.203q-1.156-0.406-2.313-0.406-2.188 0-3.828 0.938t-2.797 2.844q-0.125 0.188-0.078 0.406t0.234 0.344l2.344 1.781q0.063 0.063 0.156 0.094t0.188 0.031q0.125 0 0.25-0.063t0.188-0.156q0.656-0.813 0.969-1.141t0.594-0.516q0.219-0.156 0.625-0.281t0.906-0.125q0.844 0 1.516 0.453t0.672 1.047q0 0.719-0.375 1.125t-1.188 0.781q-0.969 0.438-1.984 1.453t-1.016 2.328v0.656q0 0.219 0.156 0.391t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.391v0q0-0.313 0.359-0.859t0.984-0.922q1.031-0.563 2.125-1.516t1.094-3.016v0zM27.438 16.281q0 2.844-1.094 5.344-1.063 2.5-2.922 4.359t-4.359 2.922q-2.5 1.094-5.344 1.094t-5.344-1.094q-2.5-1.063-4.359-2.922t-2.953-4.359q-1.063-2.5-1.063-5.344t1.063-5.344q1.094-2.5 2.953-4.359t4.359-2.922q2.5-1.094 5.344-1.094t5.344 1.094q2.5 1.063 4.359 2.922t2.922 4.359q1.094 2.5 1.094 5.344z"></path>
+                                </svg>
+                            </i>
                         </span>
                     </div>
                 </div>
             )
-        } else if(availableInStoreLabel) {
+        } else if (availableInStoreLabel) {
             return renderAvailableStoreLabel()
-        } else if(sameLabel) {
+        } else if (sameLabel) {
             return (
-                <div className={classes.piSectionRow}>
+                <div className={[classes.piSectionRow, classes.stockRow].join(" ")}>
                     <div
                         className={classes.stockAvailability}
                         style={{ borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0 }}>
@@ -370,9 +394,17 @@ const ProductFullDetail = props => {
                     </div>
                 </div>
             )
-        } else {
+        } else if (outOfStock) {
             return (
                 <div className={classes.piSectionRow}>
+                    <div className={classes.instock}>
+                        {get(pos_stock_manage, "stock_label", "")}
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className={[classes.piSectionRow, classes.stockRow].join(" ")}>
                     <div
                         className={classes.stockAvailability}
                         style={{ borderBottomWidth: 0 }}>
@@ -389,6 +421,10 @@ const ProductFullDetail = props => {
     const renderSideAvailability = useCallback(() => {
         const sameLabel = get(pos_stock_manage, "same_as_stock_label")
         const availableInStoreLabel = pos_stock_manage.availability === 7 && get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && sameLabel
+        const outOfStock = !!get(pos_stock_manage, "hide_add_to_cart")
+        const showWarehouseLabel = 
+            get(storeConfig, "data.storeConfig.code") !== DEFAULT_STORE_CODE && 
+            Boolean(pos_stock_manage.warehouse_qty)
 
         if (toLower(pos_stock_manage.stock_label) === "unavailable") {
             return (
@@ -404,14 +440,19 @@ const ProductFullDetail = props => {
                             Click here
                         </span>
                         &nbsp;to ship direct.
-                        <span onClick={openUnavailablePopup}>
-                            Icon here
+                        <span className={classes.helpWrapper} onClick={openUnavailablePopup}>
+                            <i className={classes.iconWrapper}>
+                                <svg className={[classes.svgIcon, classes.iconHelp].join(" ")} xmlns="http://www.w3.org/2000/svg" width="27" height="32" viewBox="0 0 27 32">
+                                    <title>help-01</title>
+                                    <path d="M16 24.844v-3.406q0-0.25-0.172-0.422t-0.391-0.172h-3.438q-0.25 0-0.406 0.172t-0.156 0.422v3.406q0 0.25 0.156 0.422t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.422v0zM20.563 12.844q0-1.219-0.563-2.25-0.594-1.063-1.531-1.828t-2.094-1.203q-1.156-0.406-2.313-0.406-2.188 0-3.828 0.938t-2.797 2.844q-0.125 0.188-0.078 0.406t0.234 0.344l2.344 1.781q0.063 0.063 0.156 0.094t0.188 0.031q0.125 0 0.25-0.063t0.188-0.156q0.656-0.813 0.969-1.141t0.594-0.516q0.219-0.156 0.625-0.281t0.906-0.125q0.844 0 1.516 0.453t0.672 1.047q0 0.719-0.375 1.125t-1.188 0.781q-0.969 0.438-1.984 1.453t-1.016 2.328v0.656q0 0.219 0.156 0.391t0.406 0.172h3.438q0.219 0 0.391-0.172t0.172-0.391v0q0-0.313 0.359-0.859t0.984-0.922q1.031-0.563 2.125-1.516t1.094-3.016v0zM27.438 16.281q0 2.844-1.094 5.344-1.063 2.5-2.922 4.359t-4.359 2.922q-2.5 1.094-5.344 1.094t-5.344-1.094q-2.5-1.063-4.359-2.922t-2.953-4.359q-1.063-2.5-1.063-5.344t1.063-5.344q1.094-2.5 2.953-4.359t4.359-2.922q2.5-1.094 5.344-1.094t5.344 1.094q2.5 1.063 4.359 2.922t2.922 4.359q1.094 2.5 1.094 5.344z"></path>
+                                </svg>
+                            </i>
                         </span>
                     </div>
                     <div className={classes.apSectionRow}>
                         <div className={classes.stock}>
                             <span className={[
-                                classes.availability, 
+                                classes.availability,
                                 classes.instock
                             ].join(" ")}>
                                 {pos_stock_manage.stock_final_label}
@@ -420,15 +461,42 @@ const ProductFullDetail = props => {
                     </div>
                 </>
             )
-        } else if(availableInStoreLabel) {
+        } else if (availableInStoreLabel) {
             return renderAvailableStoreLabel(true)
-        } else if(sameLabel) {
+        } else if (sameLabel) {
             return <div className={classes.stockAvailability}>{pos_stock_manage.stock_label}</div>
+        } else if (showWarehouseLabel) {
+            return (
+                <>
+                    <div className={[classes.piSectionRow, classes.stockRow].join(" ")}>
+                        <div
+                            className={classes.stockAvailability} >
+                            {get(pos_stock_manage, "stock_label", "")}
+                        </div>
+                    </div>
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
+                        </div>
+                    </div>
+                </>
+            )
         } else {
+            if (outOfStock) {
+                return (
+                    <div className={classes.apSectionRow}>
+                        <div className={classes.stock}>
+                            <span className={[classes.availability, classes.instock].join(" ")}>
+                                {pos_stock_manage.stock_label}
+                            </span>
+                        </div>
+                    </div>
+                )
+            }
             return (
                 <>
                     {/* Product Stock Avialability */}
-                    {!!pos_stock_manage.stock_final_label &&
+                    {(!!pos_stock_manage.stock_final_label || outOfStock) &&
                         <div className={classes.apSectionRow}>
                             <div className={classes.stock}>
                                 <span className={[classes.availability, classes.instock].join(" ")}>{pos_stock_manage.stock_final_label}</span>
@@ -493,10 +561,14 @@ const ProductFullDetail = props => {
 
                         {/* Product Price */}
                         <div className={classes.piSectionRow}>
-                            <div className={classes.priceBox}>
+                            <div className={[
+                                classes.priceBox, 
+                                priceDetails.isSpecial ? classes.specialPrice : ""
+                                ].join(" ")}
+                            >
                                 <Price
-                                    currencyCode={productDetails.price.currency}
-                                    value={productDetails.price.value}
+                                    currencyCode={priceDetails.currency}
+                                    value={priceDetails.price}
                                     classes={{
                                         currency: classes.currency,
                                         decimal: classes.decimal,
@@ -534,7 +606,7 @@ const ProductFullDetail = props => {
                         </div>
 
                         {/* Finance Offer */}
-                        {productDetails.price.value > 500 && (
+                        {priceDetails.price > 500 && (
                             <div className={classes.piSectionRow}>
                                 <div className={classes.finance}>
                                     <i className={classes.iconWrapper}>
@@ -553,10 +625,10 @@ const ProductFullDetail = props => {
                                         {'Finance for as low as '}
                                         <Price
                                             currencyCode={
-                                                productDetails.price.currency
+                                                priceDetails.currency
                                             }
                                             value={
-                                                productDetails.price.value /
+                                                priceDetails.price /
                                                 39.5
                                             }
                                         />
@@ -628,12 +700,15 @@ const ProductFullDetail = props => {
                                 {/* Add to cart form */}
                                 <div className={classes.paContent}>
                                     <div className={classes.apSectionRow}>
-                                        <div className={classes.priceBox}>
+                                        <div className={[
+                                            classes.priceBox, 
+                                            priceDetails.isSpecial ? classes.specialPrice : ""
+                                            ].join(" ")}>
                                             <Price
                                                 currencyCode={
-                                                    productDetails.price.currency
+                                                    priceDetails.currency
                                                 }
-                                                value={productDetails.price.value}
+                                                value={priceDetails.price}
                                             />
                                             <span className={classes.unit}>
                                                 / {product.uom}
@@ -700,13 +775,13 @@ const ProductFullDetail = props => {
                                         </div>
                                     </div>
 
-                                    {(get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && product.ship_time) ? (
+                                    {/* {(get(storeConfig, "data.storeConfig.code") === DEFAULT_STORE_CODE && product.ship_time) ? (
                                         <div className={classes.apSectionRow}>
                                             <div className={classes.extraShipInfo}>
                                                 <RichText content={product.ship_time} />
                                             </div>
                                         </div>
-                                    ) : null}
+                                    ) : null} */}
 
                                     {/* Product Shipping Infor */}
                                     <div className={classes.apSectionRow}>
@@ -825,9 +900,9 @@ const ProductFullDetail = props => {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     {product.ship_info ?
-                                        <div>
+                                        <div className={classes.storeShippingInfo}>
                                             {product.ship_info}
                                         </div>
                                         : null

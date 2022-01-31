@@ -159,15 +159,14 @@
     width: 100%;
     z-index: 10;
     display: flex;
-
-    
 }
 
 .navSection {
     width: 100%;
     display: flex;
     justify-content: center;
-
+    padding-left: var(--layout-indent-width);
+    padding-right: var(--layout-indent-width);
 }
 
 .panelWrapper {

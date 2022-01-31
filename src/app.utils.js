@@ -248,5 +248,28 @@ export const getReviewText = (count) => {
     }
 }
 
+
+export const checkOutOfStockItem = (cartItems) => {
+    if (size(cartItems) === 0) return false
+    const isOutOfStock = cartItems.find(cartItem => {
+        const { product } = cartItem;
+        const { stock_status: stockStatus } = product;
+
+        return stockStatus === 'OUT_OF_STOCK';
+    });
+
+    return !!isOutOfStock;
+}
+
+export const getPriceDetails = (priceRange) => {
+    const finalPrice = get(priceRange, "minimum_price.final_price.value", 0)
+    const finalPriceCurrency = get(priceRange, "minimum_price.final_price.currency", "")
+    const regularPrice = get(priceRange, "minimum_price.regular_price.value", 0)
+    const specialPriceDiff = Math.abs(finalPrice - regularPrice)
+    const isSpecial = !!specialPriceDiff
+
+    return { price: finalPrice, isSpecial, currency: finalPriceCurrency }
+}
+
 // breakpoints
-export const MOBILE_SCREEN = 1024
+export const MOBILE_SCREEN = 1024;

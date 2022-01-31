@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useBlogConfig } from '../../hooks/useBlogConfig';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 
 const DateComponent = props => {
     const { publish_time, postDate } = props;
+    console.log("🚀 ~ file: date.js ~ line 9 ~ publish_time", publish_time)
 
     const defaultObject = {
         publicationDateIsEnabled: 1,
@@ -20,7 +21,7 @@ const DateComponent = props => {
         if (publish_time && publicationDateIsEnabled) {
             return (
                 <span className={postDate}>
-                    {publish_time}
+                    {format(parse(publish_time, "yyyy-MM-dd HH:mm:ss", new Date()), "MMM dd yyyy")}
                 </span>
             )
         }
