@@ -141,7 +141,7 @@ veniaSecurityHeaders:
                           inline: ''
                 default:
                     inline: >-
-                        script-src http: https: {{ backend }}; style-src 'self' blob: https:
+                        style-src 'self' blob: https:
                         'unsafe-inline' {{ backend }}; img-src data: http: https:;
                         object-src 'none'; base-uri 'none';
         strict-transport-security:
