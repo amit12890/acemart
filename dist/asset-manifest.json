@@ -5,7 +5,7 @@
   "VeniaLogo.svg": "/VeniaLogo-n77.svg",
   "bad.png": "/bad-r1m.png",
   "bulk-savings.png": "/bulk-savings-mhz.png",
-  "client.js": "/client.16c9f2c80e5a0219b6b1.js",
+  "client.js": "/client.bea88c8e4bec734cf779.js",
   "comments.svg": "/comments-boz.svg",
   "email.svg": "/email-oKJ.svg",
   "entrypoints": {
@@ -13,7 +13,7 @@
       "js": [
         "/runtime.794612e6c57e0c9a4ce7.js",
         "/vendors.a87f96e923f30e49b177.js",
-        "/client.16c9f2c80e5a0219b6b1.js"
+        "/client.bea88c8e4bec734cf779.js"
       ]
     }
   },
@@ -49,7 +49,7 @@
     "load": [
       "/runtime.794612e6c57e0c9a4ce7.js",
       "/vendors.a87f96e923f30e49b177.js",
-      "/client.16c9f2c80e5a0219b6b1.js"
+      "/client.bea88c8e4bec734cf779.js"
     ],
     "prefetch": [
       "/RootCmp_CATEGORY__default.84789298c67573b330a2.js",
@@ -61,7 +61,7 @@
     "RootCmp_CATEGORY__default": "/RootCmp_CATEGORY__default.84789298c67573b330a2.js",
     "RootCmp_CMS_PAGE__default": "/RootCmp_CMS_PAGE__default.c172439b9893a6cfe54a.js",
     "RootCmp_PRODUCT__default": "/RootCmp_PRODUCT__default.d42f821e63bced49d693.js",
-    "client": "/client.16c9f2c80e5a0219b6b1.js",
+    "client": "/client.bea88c8e4bec734cf779.js",
     "i18n-en_US": "/i18n-en_US.f9a913ab23e5fe3ab5a7.js",
     "runtime": "/runtime.794612e6c57e0c9a4ce7.js",
     "vendors": "/vendors.a87f96e923f30e49b177.js",
