@@ -126,7 +126,7 @@ veniaSecurityHeaders:
         default:
           inline: >-
             style-src 'self' blob: https: 'unsafe-inline' {{ backend }}; img-src
-            data: http: https:; object-src 'none'; base-uri 'none';
+            data: http: https:; object-src 'none';
     strict-transport-security:
       inline: max-age=31536000
     x-content-type-options:
