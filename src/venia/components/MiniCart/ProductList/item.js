@@ -59,7 +59,7 @@ const Item = props => {
 
     if (isDelete) {
         return (
-            <div className={classes.content}>
+            <div className={[classes.content, classes.contentDelete].join(" ")}>
                 <div className={classes.text}>
                     Are you sure you would like to remove this item from the
                     shopping cart?
