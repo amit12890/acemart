@@ -15,7 +15,7 @@ import iconEmail from '../../assets/email.svg';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './sharePopup.css';
 
-import { comingSoonImage, FRONT_END_HOST_URL } from '../../url.utils';
+import { logoUrl, FRONT_END_HOST_URL } from '../../url.utils';
 
 function objectToGetParams(object) {
     const params = Object.entries(object)
@@ -75,7 +75,7 @@ function pinterestLink(pathname, image) {
         'https://pinterest.com/pin/create/button/' +
         objectToGetParams({
             url: pdpUrl,
-            media: image ? image : comingSoonImage(),
+            media: image ? image : logoUrl(),
             description: "Come check out Ace Mart Restaurant Supply",
         })
     );
