@@ -79,7 +79,7 @@ export const cdsUrl = () => '/cds';
 
 /** Other Urls */
 export const productSpecsheetUrl = specsheet =>
-    `${HOST_URL}/pub/media/specsheets/${specsheet}.pdf`;
+    `${FRONT_END_HOST_URL}/pub/media/specsheets/${specsheet}.pdf`;
 export const productSpecsheetLogoUrl = () =>
     `${HOST_URL}/pub/media/attribute/pdf-logo32px.svg.png`;
 
