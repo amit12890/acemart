@@ -387,6 +387,24 @@ mutation BarcodeUpload($file:String!,$orderId:String!) {
 }
 `
 
+export const SET_SHIPPING_FEES_APPLY_MUTATION = gql`
+mutation setShippingFeesOnCart($cartId:String!,$id:Int,$options:String){
+    setShippingFeesOnCart(input: {
+      cart_id: $cartId
+      fees_data: {
+          id: $id
+          options: $options
+      }
+    }) {
+      cart {
+        id
+        ...priceSummaryFragment
+      }
+    }
+  }
+${PriceSummaryFragment}
+`
+
 export default {
     getCountries: GET_COUNTRIES,
     setGuestCartEmail: SET_GUEST_EMAIL,
@@ -399,7 +417,10 @@ export default {
     emailAvailableCheckQuery: EMAIL_EXIST_GQL,
     setShippingAddressMutation: SET_SHIPPING_ADDRESS_GQL,
     setBillingAddressMutation: SET_BILLING_ADDRESS_GQL,
+
     setShippingMethodMutation: SET_SHIPPING_METHOD_ON_CART,
+    setShippingFeesMutation: SET_SHIPPING_FEES_APPLY_MUTATION,
+
     setPaymentMethodMutation: SET_PAYMENT_METHOD_ON_CART,
     mergeCartMutation: MERGE_CART_MUTATION,
 

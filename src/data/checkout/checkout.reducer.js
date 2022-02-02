@@ -39,6 +39,7 @@ const INIT_STATE = {
 
     selected_payment_method: {},
     available_payment_methods: [],
+    selected_shipping_fees: {},
     // token , paypal_urls
     paypal: {},
 
@@ -56,8 +57,13 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
             }
         }
         case CHECKOUT_FETCHED: {
-            const { multi_shipping, ...restPayload } = action.payload
+            const { multi_shipping, prices, ...restPayload } = action.payload
             const isMultiShipping = size(get(multi_shipping, "boss", '')) > 0
+
+            const existing_fees_options = get(state, "selected_shipping_fees.options", [])
+            const selected_shipping_fees_options = get(prices, "multifees.selected_fees", existing_fees_options)
+            const selected_shipping_fees = { ...state.selected_shipping_fees, options: selected_shipping_fees_options }
+            console.log("🚀 ~ file: checkout.reducer.js ~ line 79 ~ checkoutReducer ~ selected_shipping_fees", selected_shipping_fees)
             return {
                 ...state,
                 fetching: false,
@@ -65,6 +71,8 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
                 ...restPayload,
                 isMultiShipping,
                 multi_shipping,
+                prices,
+                selected_shipping_fees,
                 // reset local payment method as you must have to re set 
                 // payment method to prevent session related bugs
                 selected_payment_method: {}
@@ -81,6 +89,17 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 ...action.payload
+            }
+        }
+        case UPDATE_CHECKOUT_PRICES: {
+            const { prices } = action.payload
+            const existing_fees_options = get(state, "selected_shipping_fees.options", [])
+            const selected_shipping_fees_options = get(prices, "multifees.selected_fees", existing_fees_options)
+            const selected_shipping_fees = { ...state.selected_shipping_fees, options: selected_shipping_fees_options }
+            console.log("🚀 ~ file: checkout.reducer.js ~ line 103 ~ checkoutReducer ~ selected_shipping_fees", selected_shipping_fees)
+            return {
+                prices,
+                selected_shipping_fees
             }
         }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, func, string } from 'prop-types'
+import { bool, func, shape, string } from 'prop-types'
 
 import defaultClasses from './checkbox.css'
 import { useStyle } from '../../venia/classify'
@@ -7,10 +7,10 @@ import { useStyle } from '../../venia/classify'
 
 
 const Checkbox = props => {
-    const { checked, onChange, label } = props
-    const classes = useStyle(defaultClasses)
+    const { checked, onChange, label, classes: paramClasses } = props
+    const classes = useStyle(defaultClasses, paramClasses)
     return (
-        <div className={classes.checkbox} onClick={onChange}>
+        <div className={[classes.checkbox, classes.checkboxBlock].join(" ")} onClick={onChange}>
             {
                 checked ? (
                     <svg className="checkbox checked" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -35,7 +35,14 @@ const Checkbox = props => {
 Checkbox.propTypes = {
     checked: bool.isRequired,
     onChange: func.isRequired,
-    label: string.isRequired
+    label: string.isRequired,
+    classes: shape({
+        checkboxBlock: string
+    })
+}
+
+Checkbox.defaultProps = {
+    classes: {}
 }
 
 export default Checkbox

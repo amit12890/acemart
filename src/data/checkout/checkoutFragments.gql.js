@@ -218,6 +218,22 @@ export const ProductListingFragment = gql`
 export const PriceSummaryFragment = gql`
     fragment priceSummaryFragment on Cart {
         prices{
+            multifees{
+                label
+                amount {
+                    currency
+                    value
+                }
+                selected_fees {
+                    option_id
+                    title
+                    amount {
+                        currency
+                        value
+                    }
+                }     
+                __typename
+            }
         applied_taxes {
             amount {
                     currency
@@ -265,6 +281,23 @@ export const SelectedPaymentMethodFragment = gql`
 export const ShippingAddressesFragment = gql`
     fragment shippingAddressesFragment on Cart{
         shipping_addresses{
+            shipping_fees {
+                fee_id
+                input_type
+                required
+                title
+                description
+                options {
+                    fee_option_id
+                    price {
+                        currency
+                        value 
+                    }
+                    title
+                    position
+                    is_default
+                }
+            }
         available_shipping_methods {
             amount {
                     currency
@@ -391,6 +424,23 @@ fragment shippingAddressItemFragment on ShippingCartAddress {
     country {
         code
         label
+    }
+    shipping_fees {
+        fee_id
+        input_type
+        required
+        title
+        description
+        options {
+            fee_option_id
+            price {
+                currency
+                value 
+            }
+            title
+            position
+            is_default
+        }
     }
     available_shipping_methods {
         amount {

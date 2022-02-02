@@ -25,6 +25,7 @@ import StorePickupInfo from './StorePickupInfo'
 import { useStoreSwitcher } from '../../magento/peregrine/talons/Header/useStoreSwitcher'
 import { MOCKED_ADDRESS } from '../../magento/peregrine/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm'
 import { updateCheckoutField } from '../../data/checkout/checkout.action'
+import ShippingFees from './ShippingFees'
 
 
 const deliveryMessage = "Please note: due to high volume, carriers are currently experiencing extended transmit time delays. Please allow an additional 2-3 days for delivery. Store pickup options are not affected by this transit delay"
@@ -40,6 +41,7 @@ export default connect(store => ({
     billing_address: store.checkout.billing_address,
     available_payment_methods: store.checkout.available_payment_methods,
     pickup_date_time: store.checkout.pickup_date_time,
+    selected_shipping_fees: store.checkout.selected_shipping_fees,
     paypal: store.checkout.paypal,
     orderNumber: store.checkout.orderNumber
 }))(({
@@ -55,6 +57,7 @@ export default connect(store => ({
     login_and_fetching,
     paypal,
     pickup_date_time,
+    selected_shipping_fees,
     dispatch
 }) => {
     const history = useHistory()
@@ -83,11 +86,15 @@ export default connect(store => ({
      */
     const isMockAddress = isMatch(shipping_addresses[0], MOCKED_ADDRESS)
 
+    const shippingFees = get(shipping_addresses, "0.shipping_fees.0", [])
+    const hasShippingFees = size(shippingFees) > 0
+    //if shipping fess edsti then its requried
+    const isShippingFeesSelected = hasShippingFees ? size(selected_shipping_fees) > 0 : true
     let isEmailAdded = size(email) > 0
     let isShippingAddressSelected = size(shipping_addresses) > 0 && !settingShippingAddress && !isMockAddress
     let isShippingMethodSelected = size(get(shipping_addresses[0], "selected_shipping_method.method_title", '')) > 0 && !settingShippingMethod && isShippingAddressSelected
     // shipping method and email address add dependancy added
-    let isBillingAddressSelected = size(billing_address) > 0 && !settingBillingAddress && isShippingAddressSelected && isEmailAdded
+    let isBillingAddressSelected = size(billing_address) > 0 && !settingBillingAddress && isShippingAddressSelected && isEmailAdded && isShippingFeesSelected
     let isPaymentMethodSelected = size(selected_payment_method) > 0 && !settingPaymentMethod && isBillingAddressSelected
     let enablePlaceOrderButton = isShippingAddressSelected && isBillingAddressSelected && isPaymentMethodSelected && isShippingMethodSelected && isEmailAdded
 
@@ -223,6 +230,14 @@ export default connect(store => ({
                             isDefaultStore={isDefaultStore}
                             loading={settingShippingMethod} />
 
+                        {hasShippingFees && (
+                            <ShippingFees
+                                data={shippingFees}
+                                onApplyPress={(selectedShippingFees) => {
+                                    dispatch(updateCheckoutField({ selected_shipping_fees: selectedShippingFees }))
+                                }}
+                                appliedShippingFees={selected_shipping_fees} />
+                        )}
                         <AddressStep
                             enabled={isShippingMethodSelected}
                             data={customerAddresses}
