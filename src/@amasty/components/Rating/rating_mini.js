@@ -2,9 +2,10 @@ import React from 'react';
 import { number } from 'prop-types';
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import defaultClasses from './rating.css';
+import { Link } from 'react-router-dom';
 
 const RatingMini = props => {
-    const { percent, value, addReviewLink, showValue = true } = props;
+    const { percent, value, addReviewLink, showValue = true, productLink } = props;
     const classes = mergeClasses(defaultClasses, props.classes);
 
     return (
@@ -15,9 +16,15 @@ const RatingMini = props => {
                     className={classes.starsFilled}
                 />
             </div>
-            <div className={classes.ratingValue}>
-                {showValue && `${value} ${value > 1 ? 'reviews' : 'review'}`}
-            </div>
+            {!!productLink ?
+                <Link className={[classes.ratingValue, classes.ratingValueHover].join(" ")} to={productLink}>
+                    {showValue && `${value} ${value > 1 ? 'reviews' : 'review'}`}
+                </Link>
+                :
+                <div className={classes.ratingValue}>
+                    {showValue && `${value} ${value > 1 ? 'reviews' : 'review'}`}
+                </div>
+            }
             {!!addReviewLink && (
                 <div className={classes.addReviewLink}>{addReviewLink}</div>
             )}
