@@ -232,6 +232,7 @@ const ReviewForm = props => {
                         >
                             <UploadInput
                                 // multiple
+                                id="review_images"
                                 field="review_images"
                                 validate={
                                     isImagesRequired ? isRequired : undefined

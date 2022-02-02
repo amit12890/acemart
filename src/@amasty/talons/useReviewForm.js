@@ -101,10 +101,9 @@ export const useReviewForm = props => {
                 productId,
                 ...formValues,
                 ratings: JSON.stringify(ratingsObj),
-                tmp_images_path: Array.isArray(tmpImgPath) ? tmpImgPath: [tmpImgPath],
+                tmpImgPath: Array.isArray(tmpImgPath) ? tmpImgPath: [tmpImgPath],
                 gdpr: has(formValues, 'gdpr') ? formValues.gdpr : false
             };
-            console.log("🚀 ~ file: useReviewForm.js ~ line 102 ~ variables", variables)
 
             try {
                 const { data } = await addReview({ variables });
@@ -115,6 +114,8 @@ export const useReviewForm = props => {
                     formApi.reset();
                     setTmpImgPath([]);
                     handleShowMessage();
+                    recaptchaRef.current.reset();
+                    document.getElementById("review_images").value = "";
                 }
 
                 setIsSubmitting(false);
