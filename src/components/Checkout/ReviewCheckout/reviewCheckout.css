@@ -71,6 +71,21 @@
     font-weight: bold;
 }
 
+.shippingFees {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight:normal;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.feesPrice {
+    font-weight: bold;
+}
+
 .paymentMethod :first-child {
     font-size: 1rem;
     font-weight: bold;

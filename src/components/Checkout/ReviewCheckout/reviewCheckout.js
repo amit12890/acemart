@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 
-import { get } from 'lodash'
+import { get, size } from 'lodash'
 
 import { useStyle } from '../../../venia/classify'
 import AddressListItem from '../AddressListItem'
@@ -22,12 +22,15 @@ const paypal_client = {
 
 
 export default connect((store) => {
+    const shippingFees = get(store.checkout.shipping_addresses, "0.shipping_fees.0", [])
     return {
         shipping_addresses: store.checkout.shipping_addresses,
         billing_address: store.checkout.billing_address,
         multiShipping: store.checkout.multi_shipping,
         selected_payment_method: store.checkout.selected_payment_method,
         prices: store.checkout.prices,
+        shippingFees,
+        hasShippingFees: size(shippingFees) > 0,
         paypalClientId: get(store.checkout, "paypal.token", ""),
         isMultiShipping: store.checkout.isMultiShipping,
     }
@@ -41,6 +44,8 @@ export default connect((store) => {
     setPaymentMethodOnCart,
     paypalClientId,
     prices,
+    shippingFees,
+    hasShippingFees,
     storeInfo,
     isMultiShipping,
     multiShipping,
@@ -51,6 +56,9 @@ export default connect((store) => {
 
     const selected_shipping_method = get(shipping_addresses[0], "selected_shipping_method", [])
     const showPaypalExpressButton = get(selected_payment_method, "code", '') === 'paypal_express'
+    const selectedMultiFeesOptions = get(prices, "multifees.selected_fees", [])
+    const multiFeesTitle = get(shippingFees, "title", "")
+    console.log("🚀 ~ file: reviewCheckout.js ~ line 60 ~ connect ~ selectedMultiFeesOptions", selectedMultiFeesOptions)
     return (
         <div className={classes.page}>
             <div className={classes.container}>
@@ -97,6 +105,27 @@ export default connect((store) => {
                         )}
                     </div>
                 </div>
+                {/* Shipping Fees */}
+                {hasShippingFees && (
+                    <div className={classes.block}>
+                        <div className={classes.header}>
+                            <p>{multiFeesTitle}</p>
+                        </div>
+                        {selectedMultiFeesOptions.map((option) => {
+                            return (
+                                <div className={[classes.contentBlock, classes.shippingFees].join(" ")}>
+                                    <p>{get(option, "title", "")}</p>
+                                    <div className={classes.feesPrice}>
+                                        <Price
+                                            currencyCode={get(option, "amount.currency", "USD")}
+                                            value={get(option, "amount.value", "")} />
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
+
                 {/* billing address */}
                 <div className={classes.block}>
                     <div className={classes.header}>

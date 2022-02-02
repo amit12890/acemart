@@ -6,7 +6,8 @@ import {
     UPDATE_CHECKOUT_FIELD,
     ACTION_LOADING,
     ACTION_COMPLETE,
-    RESET_CHCEKOUT
+    RESET_CHCEKOUT,
+    UPDATE_CHECKOUT_PRICES
 } from "./checkout.action"
 
 
@@ -62,7 +63,8 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
 
             const existing_fees_options = get(state, "selected_shipping_fees.options", [])
             const selected_shipping_fees_options = get(prices, "multifees.selected_fees", existing_fees_options)
-            const selected_shipping_fees = { ...state.selected_shipping_fees, options: selected_shipping_fees_options }
+            const formated_fees = selected_shipping_fees_options.map((fee) => fee.option_id)
+            const selected_shipping_fees = { ...state.selected_shipping_fees, options: formated_fees }
             console.log("🚀 ~ file: checkout.reducer.js ~ line 79 ~ checkoutReducer ~ selected_shipping_fees", selected_shipping_fees)
             return {
                 ...state,
@@ -95,7 +97,8 @@ export const checkoutReducer = (state = INIT_STATE, action) => {
             const { prices } = action.payload
             const existing_fees_options = get(state, "selected_shipping_fees.options", [])
             const selected_shipping_fees_options = get(prices, "multifees.selected_fees", existing_fees_options)
-            const selected_shipping_fees = { ...state.selected_shipping_fees, options: selected_shipping_fees_options }
+            const formated_fees = selected_shipping_fees_options.map((fee) => fee.option_id)
+            const selected_shipping_fees = { ...state.selected_shipping_fees, options: formated_fees }
             console.log("🚀 ~ file: checkout.reducer.js ~ line 103 ~ checkoutReducer ~ selected_shipping_fees", selected_shipping_fees)
             return {
                 prices,

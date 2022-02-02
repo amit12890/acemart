@@ -216,24 +216,24 @@ export const ProductListingFragment = gql`
 `
 
 export const PriceSummaryFragment = gql`
-    fragment priceSummaryFragment on Cart {
-        prices{
-            multifees{
-                label
+fragment priceSummaryFragment on Cart {
+    prices{
+        multifees{
+            label
+            amount {
+                currency
+                value
+            }
+            selected_fees {
+                option_id
+                title
                 amount {
                     currency
                     value
                 }
-                selected_fees {
-                    option_id
-                    title
-                    amount {
-                        currency
-                        value
-                    }
-                }     
-                __typename
-            }
+            }     
+            __typename
+        }
         applied_taxes {
             amount {
                     currency

@@ -58,6 +58,7 @@ export const useCheckout = () => {
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
             const checkoutData = get(data, "cart", {})
+            console.log("🚀 ~ file: checkout.hook.js ~ line 61 ~ useCheckout ~ checkoutData", checkoutData)
             dispatch(checkoutFetched(checkoutData))
         }
     })
@@ -235,7 +236,6 @@ export const useShippingFees = () => {
 
     const [setShippingFees, { loading: settingShippingFees }] = useMutation(setShippingFeesMutation, {
         onCompleted: (data) => {
-            console.log("🚀 ~ file: checkout.hook.js ~ line 238 ~ useShippingFees ~ data", data)
             let cart = get(data, "setShippingFeesOnCart.cart", {})
             dispatch(updateCheckoutField({ ...cart }))
         }

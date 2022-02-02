@@ -4,6 +4,7 @@ export const CHECKOUT_FETCHING = 'CHECKOUT_FETCHING'
 export const CHECKOUT_FETCHED = 'CHECKOUT_FETCHED'
 export const CHECKOUT_FETCH_ERROR = 'CHECKOUT_FETCH_ERROR'
 export const UPDATE_CHECKOUT_FIELD = 'UPDATE_CHECKOUT_FIELD'
+export const UPDATE_CHECKOUT_PRICES = 'UPDATE_CHECKOUT_PRICES'
 
 export const ACTION_LOADING = 'ACTION_LOADING'
 export const ACTION_COMPLETE = 'ACTION_COMPLETE'
@@ -51,6 +52,11 @@ export const loginAndFetchCheckoutComplete = (payload = {}) => ({
  */
 export const updateCheckoutField = (payload) => ({
     type: UPDATE_CHECKOUT_FIELD,
+    payload
+})
+
+export const updateCheckoutPrices = (payload) => ({
+    type: UPDATE_CHECKOUT_PRICES,
     payload
 })
 
