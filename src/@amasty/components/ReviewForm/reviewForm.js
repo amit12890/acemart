@@ -62,7 +62,7 @@ const ReviewForm = props => {
         isCaptchaRequired
     } = useReviewForm({ productId, ratings });
 
-    const { handleUpload, loading, clearValue } = useUpload({ setTmpImgPath, formApi });
+    const { handleUpload, loading } = useUpload({ setTmpImgPath, formApi });
 
     if (!isReady) {
         return null;
@@ -224,7 +224,10 @@ const ReviewForm = props => {
                     >
                         <Field
                             label="Upload Product Images"
-                            classes={{ root: classes.reviewFormFileField }}
+                            classes={{ 
+                                root: classes.reviewFormFileField,
+                                fileCancel: classes.fileCancel
+                            }}
                             optional={!isImagesRequired}
                         >
                             <UploadInput
@@ -238,13 +241,6 @@ const ReviewForm = props => {
                                 accept="image/*"
                             />
                         </Field>
-                        <div className={classes.fileCancel}>
-                            <Icon
-                                src={XIcon}
-                                size={14}
-                                onClick={clearValue}
-                            />
-                        </div>
                     </div>
                 )}
 

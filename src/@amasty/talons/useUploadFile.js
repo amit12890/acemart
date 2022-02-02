@@ -88,15 +88,8 @@ export const useUpload = props => {
         [setLoading, setTmpImgPath, formApi]
     );
 
-    const clearValue = useCallback(() => {
-        const field = 'review_images';
-        const { setError, setValue, validateField } = formApi || {};
-        setValue(field, null);
-    }, [formApi])
-
     return {
         handleUpload,
         loading,
-        clearValue
     };
 };
