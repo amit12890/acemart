@@ -26,7 +26,8 @@ const {
     placeOrderMutation,
     createCartMutation,
     orderSuccessQuery,
-    uploadBarCodeMutation
+    uploadBarCodeMutation,
+    setShippingFeesMutation
 } = gql
 
 const { getCustomerAddressesQuery } = addressGql
@@ -57,6 +58,7 @@ export const useCheckout = () => {
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
             const checkoutData = get(data, "cart", {})
+            console.log("🚀 ~ file: checkout.hook.js ~ line 61 ~ useCheckout ~ checkoutData", checkoutData)
             dispatch(checkoutFetched(checkoutData))
         }
     })
@@ -224,6 +226,34 @@ export const useShippingMethods = () => {
     return {
         setShippingMethodOnCart,
         settingShippingMethod
+    }
+}
+
+export const useShippingFees = () => {
+    const dispatch = useDispatch()
+
+    const [{ cartId }] = useCartContext()
+
+    const [setShippingFees, { loading: settingShippingFees }] = useMutation(setShippingFeesMutation, {
+        onCompleted: (data) => {
+            let cart = get(data, "setShippingFeesOnCart.cart", {})
+            dispatch(updateCheckoutField({ ...cart }))
+        }
+    })
+
+    const handleShippingFees = useCallback((id, options) => {
+        if (!settingShippingFees) {
+            setShippingFees({
+                variables: {
+                    cartId, id, options
+                }
+            })
+        }
+    }, [settingShippingFees, cartId])
+
+    return {
+        handleShippingFees,
+        settingShippingFees
     }
 }
 

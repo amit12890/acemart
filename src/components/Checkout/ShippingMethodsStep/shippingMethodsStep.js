@@ -198,7 +198,7 @@ const ShippingMethodStep = props => {
                     <>
                         <div className={[classes.block, classes.shippingMethodBlock].join(" ")}>
                             <div className={classes.blockTitle}>
-                                <strong> {title}</strong>
+                                <strong>{title}</strong>
                             </div>
                             <div className={classes.blockcontent}>
                                 <div className={classes.paymentMethods}>
@@ -210,7 +210,6 @@ const ShippingMethodStep = props => {
                         </div>
                     </>
                 )}
-
             </div>
         )
     }

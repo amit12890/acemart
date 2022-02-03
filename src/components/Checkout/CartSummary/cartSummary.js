@@ -26,6 +26,7 @@ export default connect(store => {
     let discounts = get(prices, "discounts", [])
     let appliedTaxes = get(prices, "applied_taxes", [])
     let selectedShippingMethod = get(shipping_addresses[0], "selected_shipping_method", {})
+    const multiFees = get(prices, "multifees", {})
 
     return (
         <>
@@ -80,7 +81,14 @@ export default connect(store => {
                                     )
                                 })
                             }
-
+                            {size(multiFees) > 0 && (
+                                <div className={classes.orderTotalItems}>
+                                    <div className={classes.mark}>{get(multiFees, "label", "")}</div>
+                                    <div className={classes.amount}>
+                                        <span className={classes.price}>${get(multiFees, "amount.value", '')}</span>
+                                    </div>
+                                </div>
+                            )}
                             {size(get(selectedShippingMethod, "amount.value", 0)) > 0 &&
                                 <div className={classes.orderTotalItems}>
                                     <div className={classes.mark}>

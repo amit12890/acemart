@@ -269,9 +269,18 @@ export const useProductFullDetail = props => {
     ] = useMutation(operations.addProductToCartMutation, {
         onCompleted: data => {
             const matchedProduct = find(data.addProductsToCart.cart.items, ["product.id", product.id])
-            const matchedProductOutOfStock = get(matchedProduct, "product.stock_status", "") === "OUT_OF_STOCK"
+            const matchedProductInStock = get(matchedProduct, "product.stock_status", "") === "IN_STOCK"
             const user_errors = get(data, 'addProductsToCart.user_errors');
-            if (size(user_errors) && matchedProductOutOfStock) {
+            if (matchedProductInStock) {
+                addToast({
+                    type: 'success',
+                    icon: successIcon,
+                    message:
+                        product.product_name + ' successfully added into cart.',
+                    dismissable: true,
+                    timeout: 3000
+                });
+            } else if (size(user_errors)) {
                 for (let index = 0; index < user_errors.length; index++) {
                     const error = user_errors[index];
                     addToast({
@@ -282,15 +291,6 @@ export const useProductFullDetail = props => {
                         timeout: 3000
                     });
                 }
-            } else {
-                addToast({
-                    type: 'success',
-                    icon: successIcon,
-                    message:
-                        product.product_name + ' successfully added into cart.',
-                    dismissable: true,
-                    timeout: 3000
-                });
             }
         }
     });

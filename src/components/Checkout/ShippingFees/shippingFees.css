@@ -1,0 +1,103 @@
+.block {
+    margin-bottom: 20px;
+    background-color: white;
+    padding:1rem;
+}
+
+.blockTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.description {
+    font-size: 0.9rem;
+}
+
+.blockcontent {
+    margin-top: 15px;
+}
+
+.itemBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.titleWrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    margin-left: 1rem;
+    font-size: 14px;
+}
+
+.iconWrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1.5;
+}
+
+.title {
+}
+
+.checkbox svg{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: grey;
+}
+
+.primary {
+    margin-top: 1rem;
+}
+
+.action {
+    --stroke: var(--theme-color-primary);
+    background-color: rgb(var(--stroke));
+    color: rgb(var(--color-white));
+    border-color: rgb(var(--stroke));
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
+    font-size: var(--fontSize-100);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    max-width: 100%;
+    min-width: 10rem;
+    min-height: 2.5rem;
+    outline: none;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    text-transform: uppercase;
+    transition-duration: 256ms;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: var(--venia-global-anim-standard);
+}
+
+.action:hover {
+    background-color: var(--color-white);
+    color: rgb(var(--stroke));
+    border-color: rgb(var(--stroke));
+}
+
+.action:focus {
+    box-shadow: none;
+}
+
+.action:active {
+    transition-duration: 128ms;
+    --stroke: var(--theme-color-primary);
+}
+
+.loadingButton {
+    min-width: 10rem;
+    padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
+    min-height: 2.5rem;
+}
+
+.mageError {
+    font-size: var(--fontSize-75);
+    color: rgb(var(--color-error));
+    padding: 4px 0;
+}
