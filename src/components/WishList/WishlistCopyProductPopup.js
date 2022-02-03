@@ -24,7 +24,7 @@ const successIcon = (
 
 const WishlistCopyProductPopup = props => {
     const { wishlists, refreshWishlist, closeWishlistPopup, productId, productQty = 1,
-        btnText = "Copy Item", currentWishlistId, productName } = props;
+        btnText = "Copy Item", currentWishlistId, productName, description } = props;
     const [selectedWishlist, setSelectedWishlist] = useState(new Set());
     const [_, { addToast }] = useToasts();
 
@@ -47,7 +47,7 @@ const WishlistCopyProductPopup = props => {
         })
 
     const handleSubmit = useCallback(async () => {
-        const data = { product_id: productId, qty: productQty };
+        const data = { product_id: productId, qty: productQty, description };
         const wishlistIds = [...selectedWishlist]
         let params = "?"
         for (let index = 0; index < wishlistIds.length; index++) {
@@ -56,7 +56,7 @@ const WishlistCopyProductPopup = props => {
         }
         await addToWishlist(apiAddToWishlist(params), data);
 
-    }, [selectedWishlist, productId, productQty])
+    }, [selectedWishlist, productId, productQty, description])
 
     const classes = useStyle(defaultClasses, props.classes);
     const wishlistTabs = useMemo(() => {

@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useMemo, useState } from 'react';
-import { size } from 'lodash';
+import { size, isNull } from 'lodash';
 
 import { useStyle } from '../../venia/classify';
 import { Portal } from '@magento/venia-ui/lib/components/Portal';
@@ -24,7 +24,7 @@ const successIcon = (
 
 const WishlistMoveProductPopup = props => {
     const { wishlists, refreshWishlist, closeWishlistPopup, productId, productQty = 1,
-        btnText = "Move Item", currentWishlistId, productName } = props;
+        btnText = "Move Item", currentWishlistId, productName, description } = props;
     const [selectedWishlist, setSelectedWishlist] = useState(null);
     const [_, { addToast }] = useToasts();
 
@@ -45,13 +45,14 @@ const WishlistMoveProductPopup = props => {
         })
 
     const handleSubmit = useCallback(async () => {
-        if (!!selectedWishlist) {
+        if (!isNull(selectedWishlist)) {
             const data = {
                 "wishlist_item": {
                     "0": {
                         "item_id": productId,
                         "qty": productQty,
-                        "multi_wishlist_id": selectedWishlist
+                        "multi_wishlist_id": selectedWishlist,
+                        description
                     }
                 }
             }
@@ -60,7 +61,7 @@ const WishlistMoveProductPopup = props => {
                 data,
             )
         }
-    }, [selectedWishlist, productId, productQty])
+    }, [selectedWishlist, productId, productQty, description])
 
     const classes = useStyle(defaultClasses, props.classes);
     const wishlistTabs = useMemo(() => {
@@ -79,7 +80,7 @@ const WishlistMoveProductPopup = props => {
                                     <input
                                         name={wishlist.wishlist_name}
                                         type="checkbox"
-                                        checked={!!selectedWishlist &&
+                                        checked={!isNull(selectedWishlist) &&
                                             wishlist.multi_wishlist_id === selectedWishlist}
                                         onChange={() => setSelectedWishlist(wishlist.multi_wishlist_id)} />
                                     <span className={classes.itemLabel}>{wishlist.wishlist_name}</span>

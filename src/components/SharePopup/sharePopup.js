@@ -15,7 +15,7 @@ import iconEmail from '../../assets/email.svg';
 import { useStyle } from '../../venia/classify';
 import defaultClasses from './sharePopup.css';
 
-import { FRONT_END_HOST_URL } from '../../url.utils';
+import { logoUrl, FRONT_END_HOST_URL } from '../../url.utils';
 
 function objectToGetParams(object) {
     const params = Object.entries(object)
@@ -68,20 +68,21 @@ function linkedinLink(pathname) {
     );
 }
 
-function pinterestLink(pathname) {
+function pinterestLink(pathname, image) {
     const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
 
     return (
         'https://pinterest.com/pin/create/button/' +
         objectToGetParams({
             url: pdpUrl,
+            media: image ? image : logoUrl(),
             description: "Come check out Ace Mart Restaurant Supply",
         })
     );
 }
 
 const SharePopup = props => {
-    const { closeSharePopup, productId, isPopupVisible } = props;
+    const { closeSharePopup, productId, isPopupVisible, productMainImageUrl } = props;
     const { pathname } = useLocation();
     const classes = useStyle(defaultClasses, props.classes);
     const pdpUrl = `${FRONT_END_HOST_URL}${pathname}`;
@@ -149,7 +150,7 @@ const SharePopup = props => {
 
                                     <div className={classes.shareItem}>
                                         <a
-                                            href={pinterestLink(pathname)}
+                                            href={pinterestLink(pathname, productMainImageUrl)}
                                             target="_blank"
                                             title="Pin it"
                                             className={classes.shareLink}

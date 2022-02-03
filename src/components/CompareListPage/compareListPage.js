@@ -20,12 +20,13 @@ import { useUserContext } from '@magento/peregrine/lib/context/user';
 import { useCompareList } from './useCompareList';
 import WishlistPopup from '../WishList/wishlistPopup';
 import RichText from '../../venia/components/RichText';
-import { replaceSpecialChars } from '../../app.utils';
+import { getPriceDetails, replaceSpecialChars } from '../../app.utils';
 import { useWishlistSession } from '../../data/appState/appState.hook';
 import { comingSoonImage, loginPage } from '../../url.utils';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AddToCart from '../../venia/components/CartPage/addToCart';
 import Image from '../../venia/components/Image';
+import RatingMini from '../../@amasty/components/Rating/rating_mini';
 
 
 const CompareListPage = (props) => {
@@ -191,9 +192,11 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
         setShowWishlistPopup(false);
     }, [setShowWishlistPopup]);
 
+    const priceDetails = getPriceDetails(item.price_range)
+
     return (
         <div className={classes.productInfo}>
-            <a href={url}>
+            <Link to={url}>
                 <Image alt={item.name}
                     classes={{
                         image: classes.itemThumbnail,
@@ -204,12 +207,28 @@ const Header = ({classes, item, isSignedIn, history, addProductToWishlistSession
                 <div className={classes.name}>
                     <RichText content={item.name} />
                 </div>
-            </a>
-            <div className={classes.price}>
-                <Price
-                    value={get(item, "price.regularPrice.amount.value")}
-                    currencyCode={get(item, "price.regularPrice.amount.currency")}
-                />
+            </Link>
+            <div className={classes.priceWrapper}>
+                <div className={[
+                    classes.price, 
+                    priceDetails.isSpecial ? classes.specialPrice : ""
+                ].join(" ")}>
+                    <Price
+                        value={priceDetails.price}
+                        currencyCode={priceDetails.currency}
+                    />
+                </div>
+                {!!(item.review_count) ?
+                    <div className={classes.rateWrapper}>
+                        <RatingMini
+                            percent={item.rating_summary}
+                            value={item.review_count}
+                            productLink={url}
+                        />
+                    </div>
+                    :
+                    null
+                }
             </div>
             <div className={classes.actionWrapper}>
                 <AddToCart

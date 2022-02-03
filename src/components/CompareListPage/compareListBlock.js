@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { get, map, size } from 'lodash-es';
+import { get, map, size, takeRight } from 'lodash-es';
 
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import RemoveItemFromCompareList from './removeItemFromCompareList';
@@ -93,7 +93,7 @@ const CompareListBlock = (props) => {
 export default connect(store => {
     return {
         uid: store.compare.uid,
-        items: store.compare.items,
+        items: takeRight(store.compare.items, 4),
         item_count: store.compare.item_count
     }
 })(CompareListBlock)

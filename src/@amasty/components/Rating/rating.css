@@ -28,12 +28,15 @@
   font-size: var(--fontSize-75);
 }
 
+/* .ratingValueHover:hover {
+  text-decoration: underline;
+} */
+
 .addReviewLink {
   margin-left: 10px;
   color: rgb(var(--theme-color-primary-alt));
   text-decoration: underline;
   text-transform: capitalize;
-
 }
 
 .addReviewLink:hover {

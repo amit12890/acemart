@@ -45,7 +45,12 @@ const CMSPage = props => {
         const scriptList = document.getElementsByClassName('reactScript');
         for (let index = 0; index < size(scriptList); index++) {
             const script = scriptList[index].innerHTML;
-            // window.eval(script);
+            console.log("🚀 ~ file: cms.js ~ line 48 ~ useLayoutEffect ~ script", script)
+            try {
+                window.eval(script)
+            } catch (error) {
+                console.log("🚀 ~ file: cms.js ~ line 53 ~ useLayoutEffect ~ error", error)
+            }
         }
     })
 

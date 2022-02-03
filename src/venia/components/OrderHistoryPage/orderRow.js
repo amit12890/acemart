@@ -142,7 +142,7 @@ const OrderRow = props => {
             </div>
             <div className={classes.orderStatusContainer}>
                 <span className={classes.orderStatusBadge}>
-                    {derivedStatus}
+                    {status}
                 </span>
                 {/* <OrderProgressBar status={derivedStatus} /> */}
             </div>

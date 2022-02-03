@@ -14,7 +14,7 @@ import Image from '../../../../../venia/components/Image';
 import defaultClasses from './gallaryItem.css';
 import WishlistGalleryButton from '@magento/venia-ui/lib/components/Wishlist/AddToListButton';
 import { drop, includes, camelCase, size, filter, orderBy, get } from 'lodash'
-import { getReviewText, replaceSpecialChars } from '../../../../../app.utils';
+import { getPriceDetails, getReviewText, replaceSpecialChars } from '../../../../../app.utils';
 import RatingMini from '../../../../../@amasty/components/Rating/rating_mini';
 
 
@@ -91,6 +91,8 @@ const GalleryItem = props => {
         <WishlistGalleryButton {...wishlistButtonProps} />
     ) : null;
 
+    const priceDetails = getPriceDetails(item.price_range)
+
     return (
         <div className={classes.root}>
             <div className={classes.itemImageContainer}>
@@ -125,8 +127,8 @@ const GalleryItem = props => {
 
             <div className={[classes.price, "price-div"].join(" ")}>
                 <Price
-                    value={price.regularPrice.amount.value}
-                    currencyCode={price.regularPrice.amount.currency}
+                    value={priceDetails.price}
+                    currencyCode={priceDetails.currency}
                 />
                 <span className={classes.unit}>{uom}</span>
             </div>

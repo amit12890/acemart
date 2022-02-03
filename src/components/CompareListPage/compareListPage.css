@@ -150,7 +150,9 @@ tbody tr:nth-child(even) td:nth-child(even) {
     margin-bottom: 10px;
     color: rgb(var(--product-price-color));
 }
-
+.price.specialPrice {
+    color: rgb(var(--product-special-price-color));
+}
 
 .message {
     margin: 0 0 10px;
@@ -206,4 +208,12 @@ tbody tr:nth-child(even) td:nth-child(even) {
     }
 
 
+}
+
+.rateWrapper {
+    margin-left: 6px;
+    margin-bottom: 10px;
+}
+.priceWrapper {
+    display: flex;
 }

@@ -101,9 +101,10 @@ export const useReviewForm = props => {
                 productId,
                 ...formValues,
                 ratings: JSON.stringify(ratingsObj),
-                tmp_images_path: tmpImgPath,
+                tmpImgPath: Array.isArray(tmpImgPath) ? tmpImgPath: [tmpImgPath],
                 gdpr: has(formValues, 'gdpr') ? formValues.gdpr : false
             };
+
             try {
                 const { data } = await addReview({ variables });
                 const { addAdvReview } = data || {};
@@ -113,6 +114,8 @@ export const useReviewForm = props => {
                     formApi.reset();
                     setTmpImgPath([]);
                     handleShowMessage();
+                    recaptchaRef.current.reset();
+                    document.getElementById("review_images").value = "";
                 }
 
                 setIsSubmitting(false);

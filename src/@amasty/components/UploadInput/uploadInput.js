@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import defaultClasses from '@magento/venia-ui/lib/components/TextInput/textInput.css';
 import classify from '@magento/venia-ui/lib/classify';
 import { FieldIcons, Message } from '@magento/venia-ui/lib/components/Field';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import { X as XIcon } from 'react-feather';
 
 const UploadInput = props => {
   const {
@@ -57,7 +59,18 @@ const UploadInput = props => {
           }}
         />
       </FieldIcons>
-      {/* <Message fieldState={fieldState}>{message}</Message> */}
+      <div className={classes.fileCancel} 
+        onClick={() => {
+          setValue(null)
+          if(forwardedRef && forwardedRef.current) {
+            forwardedRef.current.value = "";
+          }
+        }}>
+          <Icon
+              src={XIcon}
+              size={14}
+          />
+      </div>
     </Fragment>
   );
 };

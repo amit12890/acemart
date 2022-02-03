@@ -153,6 +153,7 @@ const GalleryItem = props => {
                         <RatingMini
                             percent={item.rating_summary}
                             value={item.review_count}
+                            productLink={productLink}
                             addReviewLink={
                                 <Link to={productLink} onClick={handleLinkClick}>
                                     <span>add your review</span>

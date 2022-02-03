@@ -1,5 +1,5 @@
 /*!
- * @version 85173af6-dev
+ * @version 018b32f8-dev
  * 
  */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[15],{"+Dsj":function(e,n,t){(n=e.exports=t("JPst")(!1)).push([e.i,".image-root-3xt {\n    /*\n     * For customization, we provide an empty root.\n     * These styles will be applied to the image container.\n     */\n}\n\n.image-container-t_c {\n    position: relative;\n}\n\n.image-image-Q9a {\n    /*\n     * For customization, we provide an empty image class. \n     * These styles will be applied directly to the image itself.\n     */\n}\n\n.image-loaded-tFW {\n    position: absolute;\n    top: 0;\n    left: 0;\n    visibility: visible;\n}\n\n.image-notLoaded-gw4 {\n    visibility: hidden;\n}\n\n.image-placeholder-58e {\n    background-color: rgb(var(--venia-global-color-gray));\n    position: relative;\n    top: 0;\n    left: 0;\n}\n\n.image-placeholder_layoutOnly-1mt {\n    background-color: unset;\n}\n",""]),n.locals={root:"image-root-3xt",container:"image-container-t_c",image:"image-image-Q9a",loaded:"image-loaded-tFW",notLoaded:"image-notLoaded-gw4 image-loaded-tFW",placeholder:"image-placeholder-58e",placeholder_layoutOnly:"image-placeholder_layoutOnly-1mt image-placeholder-58e"}},"+sVj":function(e,n,t){"use strict"

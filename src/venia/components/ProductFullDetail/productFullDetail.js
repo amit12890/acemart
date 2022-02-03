@@ -79,6 +79,7 @@ const ProductFullDetail = props => {
         mpn, uom, productLabel, media_gallery,
         price_range
     } = product;
+    const productMainImageUrl = get(media_gallery, "0.url")
 
     const history = useHistory()
     const [{ isSignedIn }] = useUserContext()
@@ -1108,6 +1109,7 @@ const ProductFullDetail = props => {
                     isPopupVisible={showSharePopup}
                     productId={product.id}
                     closeSharePopup={closeSharePopup}
+                    productMainImageUrl={productMainImageUrl}
                 />
             )}
             {showLabelsPopup && (
